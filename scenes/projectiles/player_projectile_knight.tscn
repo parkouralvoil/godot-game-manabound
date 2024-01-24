@@ -1,0 +1,41 @@
+[gd_scene load_steps=7 format=3 uid="uid://6tyc5k2a2frk"]
+
+[ext_resource type="Texture2D" uid="uid://b2gagvgpvrjud" path="res://assets/sprite_other/All_Fire_Bullet_Pixel_16x16_00.png" id="1_1odwk"]
+[ext_resource type="Script" path="res://scenes/projectiles/player_projectile_knight.gd" id="1_yy47n"]
+[ext_resource type="Script" path="res://scripts/entity_components/HurtboxComponent.gd" id="2_s5eyp"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6qwh4"]
+atlas = ExtResource("1_1odwk")
+region = Rect2(268, 214, 8, 5)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qvy5v"]
+radius = 2.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fnklv"]
+radius = 3.16228
+
+[node name="projectile_knight" type="CharacterBody2D"]
+collision_layer = 0
+script = ExtResource("1_yy47n")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_6qwh4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(2, 0)
+shape = SubResource("CircleShape2D_qvy5v")
+
+[node name="HitboxComponent" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 0
+monitoring = false
+script = ExtResource("2_s5eyp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+position = Vector2(1, 0)
+shape = SubResource("CircleShape2D_fnklv")
+
+[node name="Timer_lifespan" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="Timer_lifespan" to="." method="_on_timer_lifespan_timeout"]
