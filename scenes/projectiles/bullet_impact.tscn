@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://ccfj5qan8stdb"]
+
+[ext_resource type="Texture2D" uid="uid://b2gagvgpvrjud" path="res://assets/sprite_other/All_Fire_Bullet_Pixel_16x16_00.png" id="1_gkmv7"]
+[ext_resource type="Script" path="res://scenes/projectiles/bullet_impact.gd" id="1_lqv4n"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_85oqo"]
+atlas = ExtResource("1_gkmv7")
+region = Rect2(180, 148, 8, 8)
+
+[node name="BulletImpact" type="Sprite2D"]
+texture = SubResource("AtlasTexture_85oqo")
+script = ExtResource("1_lqv4n")
+
+[node name="lifespan" type="Timer" parent="."]
+wait_time = 0.25
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="lifespan" to="." method="_on_lifespan_timeout"]

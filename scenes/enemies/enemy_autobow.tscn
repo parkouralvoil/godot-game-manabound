@@ -1,0 +1,93 @@
+[gd_scene load_steps=12 format=3 uid="uid://cg2ravjhx4yud"]
+
+[ext_resource type="Script" path="res://scenes/enemies/enemy_autobow.gd" id="1_7v7ie"]
+[ext_resource type="Texture2D" uid="uid://b5uv1u6y5momf" path="res://assets/sprite_enemies/bsf autobow.png" id="1_fyovm"]
+[ext_resource type="Script" path="res://scripts/entity_components/HurtboxComponent.gd" id="2_52e5o"]
+[ext_resource type="Script" path="res://scenes/enemies/autobow_ammo.gd" id="3_8d36t"]
+[ext_resource type="Script" path="res://scripts/entity_components/AttackComponent.gd" id="4_mpw4d"]
+[ext_resource type="Script" path="res://scenes/UI/Label_HP.gd" id="5_75x1m"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dpic6"]
+atlas = ExtResource("1_fyovm")
+region = Rect2(4, 36, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w0hsw"]
+atlas = ExtResource("1_fyovm")
+region = Rect2(15, 13, 18, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_14l55"]
+atlas = ExtResource("1_fyovm")
+region = Rect2(40, 39, 2, 2)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_dlwob"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ppbf0"]
+
+[node name="enemy_autobow" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("1_7v7ie")
+
+[node name="Sprite2D_pivot" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_dpic6")
+
+[node name="Sprite2D_main" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_w0hsw")
+
+[node name="ammo_container" type="Node2D" parent="." node_paths=PackedStringArray("entity")]
+script = ExtResource("3_8d36t")
+entity = NodePath("..")
+
+[node name="Sprite2D_ammo1" type="Sprite2D" parent="ammo_container"]
+texture = SubResource("AtlasTexture_14l55")
+
+[node name="Sprite2D_ammo2" type="Sprite2D" parent="ammo_container"]
+position = Vector2(0, -3)
+texture = SubResource("AtlasTexture_14l55")
+
+[node name="Sprite2D_ammo3" type="Sprite2D" parent="ammo_container"]
+position = Vector2(0, -6)
+texture = SubResource("AtlasTexture_14l55")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_dlwob")
+
+[node name="HurtboxComponent" type="Area2D" parent="." node_paths=PackedStringArray("entity")]
+collision_layer = 8
+collision_mask = 0
+monitoring = false
+script = ExtResource("2_52e5o")
+entity = NodePath("..")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
+shape = SubResource("CircleShape2D_ppbf0")
+debug_color = Color(0.901961, 0.282353, 0.337255, 0.419608)
+
+[node name="AttackComponent" type="Node2D" parent="." node_paths=PackedStringArray("entity")]
+script = ExtResource("4_mpw4d")
+entity = NodePath("..")
+
+[node name="firerate" type="Timer" parent="AttackComponent"]
+wait_time = 0.15
+one_shot = true
+
+[node name="reload" type="Timer" parent="AttackComponent"]
+one_shot = true
+
+[node name="before_first_shot" type="Timer" parent="AttackComponent"]
+wait_time = 0.4
+one_shot = true
+
+[node name="Label_HP" type="Label" parent="." node_paths=PackedStringArray("entity")]
+offset_left = -16.0
+offset_top = 12.0
+offset_right = -15.0
+offset_bottom = 35.0
+scale = Vector2(0.3, 0.3)
+script = ExtResource("5_75x1m")
+entity = NodePath("..")
+
+[connection signal="area_entered" from="HurtboxComponent" to="HurtboxComponent" method="_on_area_entered"]
+[connection signal="timeout" from="AttackComponent/firerate" to="AttackComponent" method="_on_firerate_timeout"]
+[connection signal="timeout" from="AttackComponent/reload" to="AttackComponent" method="_on_reload_timeout"]
+[connection signal="timeout" from="AttackComponent/before_first_shot" to="AttackComponent" method="_on_before_first_shot_timeout"]

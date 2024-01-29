@@ -28,11 +28,16 @@ func Physics_Update(_delta):
 	if !p:
 		return
 	
-	if Input.is_action_pressed("space"): #prepare to boost
+	if Input.is_action_just_pressed("space") and !p.is_firing: #prepare to boost
 		state_transition.emit(self, "PlayerMove")
 	
-	if !p.is_on_floor():
+	if !p.is_on_floor() and !p.is_firing:
 		p.velocity.y += p.gravity * _delta
+	elif p.is_firing:
+		if p.auto_aim:
+			p.velocity.y -= p.gravity * 0.5 * _delta
+		else:
+			p.velocity = Vector2.ZERO
 	
 	horizontal_deaccel(_delta)
 	p.move_and_slide()
@@ -45,9 +50,9 @@ func flip_sprite():
 		p.anim_sprite.scale.x = -1
 
 func play_anim():
-	if p.velocity == Vector2.ZERO and p.anim_sprite.animation != "idle":
+	if p.velocity == Vector2.ZERO and p.anim_sprite.animation != "idle" and p.is_on_floor():
 		p.anim_sprite.play("idle")
-	elif abs(p.velocity.x) >= 1 and p.anim_sprite.animation != "air":
+	elif (abs(p.velocity.x) >= 1 or !p.is_on_floor()) and p.anim_sprite.animation != "air":
 		p.anim_sprite.play("air")
 
 func horizontal_deaccel(_delta):

@@ -22,6 +22,8 @@ func Update(_delta):
 	if !p:
 		return
 	#if p.velocity != Vector2.ZERO:
+	if p.is_firing:
+		state_transition.emit(self, "PlayerIdle")
 	
 	flip_sprite()
 	play_anim()
@@ -29,11 +31,12 @@ func Update(_delta):
 func Physics_Update(_delta):
 	if !p:
 		return
-	p.velocity = slow_speed * p.aim_direction
+	p.velocity = slow_speed * p.move_direction
 	
 	if Input.is_action_just_released("space"): #boost away
-		p.velocity = boost_speed * p.aim_direction
-		await get_tree().create_timer(0.1)
+		p.velocity = boost_speed * p.move_direction
+		state_transition.emit(self, "PlayerIdle")
+	elif Input.is_action_just_pressed("right_click"): # to cancel
 		state_transition.emit(self, "PlayerIdle")
 	
 	p.move_and_slide()
