@@ -19,9 +19,6 @@ var jump_speed: float = -200
 var default_gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity")
 var gravity: float = default_gravity
 
-var air_speed: float = 210
-var air_deaccel: float = 60
-var airboost_speed: float = 300
 
 #logic
 var airboost_ready: bool = false # ready's when jump release

@@ -4,7 +4,7 @@ extends CharacterBody2D
 # rn the entity stores the Vision and Health component, cuz they seem fairly simple rn
 # BUT ideally i turn these into components, and connect them to eachother with export
 
-var bulletSFX_scene := load("res://scenes/projectiles/bullet_impact.tscn") # i shuold rename this
+var explosionSFX_scene := load("res://scenes/projectiles/bullet_impact.tscn") # i shuold rename this
 var enemy_dead_texture: AtlasTexture = load("res://resources/enemy_dead.tres")
 
 @onready var sprite_main: Sprite2D = $Sprite2D_main
@@ -38,7 +38,7 @@ func take_damage(damage: float):
 		queue_free()
 
 func make_impact():
-	var impact: Sprite2D = bulletSFX_scene.instantiate()
+	var impact: Sprite2D = explosionSFX_scene.instantiate()
 	impact.global_position = global_position
 	impact.texture = enemy_dead_texture
 	impact.decay_rate = 10

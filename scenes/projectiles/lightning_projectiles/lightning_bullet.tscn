@@ -1,21 +1,22 @@
-[gd_scene load_steps=5 format=3 uid="uid://oi2y57fiqpdo"]
+[gd_scene load_steps=5 format=3 uid="uid://bf05bt5n34ymh"]
 
-[ext_resource type="Script" path="res://scenes/projectiles/Bullet.gd" id="1_7x5i2"]
-[ext_resource type="Texture2D" uid="uid://b2gagvgpvrjud" path="res://assets/sprite_other/All_Fire_Bullet_Pixel_16x16_00.png" id="2_dj2jv"]
+[ext_resource type="Script" path="res://scenes/projectiles/lightning_projectiles/lightning_bullet.gd" id="1_esm8t"]
+[ext_resource type="Texture2D" uid="uid://b2gagvgpvrjud" path="res://assets/sprite_other/All_Fire_Bullet_Pixel_16x16_00.png" id="2_c2ca6"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ggs10"]
-atlas = ExtResource("2_dj2jv")
-region = Rect2(268, 214, 8, 5)
+atlas = ExtResource("2_c2ca6")
+region = Rect2(274, 181, 14, 7)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5d8ra"]
 radius = 2.0
 
-[node name="Bullet" type="Area2D"]
+[node name="Lightning_bullet" type="Area2D"]
 collision_layer = 0
-script = ExtResource("1_7x5i2")
+script = ExtResource("1_esm8t")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-modulate = Color(0.74902, 0.247059, 0.247059, 1)
+modulate = Color(0.968627, 1, 0, 1)
+scale = Vector2(2, 2)
 texture = SubResource("AtlasTexture_ggs10")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

@@ -18,7 +18,8 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-EnemyAiManager="*res://scripts/enemy_AI_manager.gd"
+EnemyAiManager="*res://scripts/autoloads/enemy_AI_manager.gd"
+PlayerStuffManager="*res://scripts/autoloads/player_stuff_manager.gd"
 
 [display]
 
@@ -83,6 +84,7 @@ tab={
 2d_physics/layer_4="enemy_hurtbox"
 2d_physics/layer_5="player_projectile_hitbox"
 2d_physics/layer_6="enemy_projectile_hitbox"
+2d_physics/layer_7="moving_entity_collision"
 
 [physics]
 

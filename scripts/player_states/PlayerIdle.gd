@@ -34,8 +34,8 @@ func Physics_Update(_delta):
 	if !p.is_on_floor() and !p.is_firing:
 		p.velocity.y += p.gravity * _delta
 	elif p.is_firing:
-		if p.auto_aim:
-			p.velocity.y -= p.gravity * 0.5 * _delta
+		if p.auto_aim and p.selected_target != null:
+			p.velocity.y -= p.gravity * 0.3 * _delta
 		else:
 			p.velocity = Vector2.ZERO
 	

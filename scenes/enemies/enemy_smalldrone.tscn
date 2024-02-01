@@ -1,0 +1,78 @@
+[gd_scene load_steps=8 format=3 uid="uid://wb7yfjqhq458"]
+
+[ext_resource type="Script" path="res://scenes/enemies/enemy_smalldrone.gd" id="1_0q3x6"]
+[ext_resource type="Texture2D" uid="uid://c5yynjtnoolo2" path="res://assets/sprite_enemies/smalldrone.png" id="2_4y6fh"]
+[ext_resource type="Script" path="res://scripts/entity_components/HurtboxComponent.gd" id="3_st8q1"]
+[ext_resource type="Script" path="res://scripts/entity_components/AttackComponent_Drone.gd" id="4_hxyqy"]
+[ext_resource type="Script" path="res://scenes/UI/Label_HP.gd" id="5_p70bs"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6cq2t"]
+radius = 4.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xcfmu"]
+radius = 6.0
+
+[node name="enemy_smalldrone" type="CharacterBody2D"]
+collision_layer = 64
+collision_mask = 65
+motion_mode = 1
+wall_min_slide_angle = 0.0
+script = ExtResource("1_0q3x6")
+
+[node name="Sprite2D_main" type="Sprite2D" parent="."]
+scale = Vector2(2, 2)
+texture = ExtResource("2_4y6fh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_6cq2t")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+target_desired_distance = 150.0
+path_max_distance = 300.0
+path_postprocessing = 1
+avoidance_enabled = true
+radius = 8.0
+neighbor_distance = 400.0
+max_neighbors = 9
+debug_enabled = true
+
+[node name="updatePath" type="Timer" parent="."]
+wait_time = 0.2
+autostart = true
+
+[node name="HurtboxComponent" type="Area2D" parent="." node_paths=PackedStringArray("entity")]
+collision_layer = 8
+collision_mask = 0
+monitoring = false
+script = ExtResource("3_st8q1")
+entity = NodePath("..")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
+shape = SubResource("CircleShape2D_xcfmu")
+debug_color = Color(0.839216, 0.372549, 0.25098, 0.419608)
+
+[node name="AttackComponent" type="Node2D" parent="." node_paths=PackedStringArray("entity")]
+script = ExtResource("4_hxyqy")
+entity = NodePath("..")
+
+[node name="projectile_origin" type="Marker2D" parent="AttackComponent"]
+position = Vector2(0.5, 2)
+
+[node name="firerate" type="Timer" parent="AttackComponent"]
+one_shot = true
+
+[node name="Raycast_toPlayer" type="RayCast2D" parent="."]
+
+[node name="Label_HP" type="Label" parent="." node_paths=PackedStringArray("entity")]
+visible = false
+offset_left = -16.0
+offset_top = 12.0
+offset_right = -15.0
+offset_bottom = 35.0
+scale = Vector2(0.3, 0.3)
+script = ExtResource("5_p70bs")
+entity = NodePath("..")
+
+[connection signal="velocity_computed" from="NavigationAgent2D" to="." method="_on_navigation_agent_2d_velocity_computed"]
+[connection signal="timeout" from="updatePath" to="." method="_on_updatePath_timeout"]
+[connection signal="timeout" from="AttackComponent/firerate" to="AttackComponent" method="_on_firerate_timeout"]

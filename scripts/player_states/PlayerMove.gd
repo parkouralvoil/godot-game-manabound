@@ -33,7 +33,7 @@ func Physics_Update(_delta):
 		return
 	p.velocity = slow_speed * p.move_direction
 	
-	if Input.is_action_just_released("space"): #boost away
+	if !Input.is_action_pressed("space"): #boost away
 		p.velocity = boost_speed * p.move_direction
 		state_transition.emit(self, "PlayerIdle")
 	elif Input.is_action_just_pressed("right_click"): # to cancel
