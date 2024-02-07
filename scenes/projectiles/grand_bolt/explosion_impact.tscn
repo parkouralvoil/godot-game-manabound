@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://uihs4pvtr027"]
+
+[ext_resource type="Script" path="res://scenes/projectiles/grand_bolt/explosion_impact.gd" id="1_j3uu6"]
+[ext_resource type="Texture2D" uid="uid://b2gagvgpvrjud" path="res://assets/sprite_other/All_Fire_Bullet_Pixel_16x16_00.png" id="2_dtg7b"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nhxun"]
+atlas = ExtResource("2_dtg7b")
+region = Rect2(257, 65, 14, 14)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6ec0u"]
+radius = 27.0185
+
+[node name="ExplosionImpact" type="Area2D"]
+collision_layer = 0
+collision_mask = 8
+monitorable = false
+script = ExtResource("1_j3uu6")
+
+[node name="lifespan" type="Timer" parent="."]
+wait_time = 0.15
+one_shot = true
+autostart = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.909804, 0.560784, 0.490196, 0.823529)
+rotation = 1.5708
+scale = Vector2(4, 4)
+texture = SubResource("AtlasTexture_nhxun")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_6ec0u")
+debug_color = Color(0.478431, 0.572549, 0.376471, 0.419608)
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="timeout" from="lifespan" to="." method="_on_lifespan_timeout"]

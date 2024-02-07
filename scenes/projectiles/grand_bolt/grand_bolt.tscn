@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://j2b61v541lds"]
+
+[ext_resource type="Script" path="res://scenes/projectiles/grand_bolt/grand_bolt.gd" id="1_bjpop"]
+[ext_resource type="Texture2D" uid="uid://b2gagvgpvrjud" path="res://assets/sprite_other/All_Fire_Bullet_Pixel_16x16_00.png" id="2_c20d1"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ggs10"]
+atlas = ExtResource("2_c20d1")
+region = Rect2(601, 328, 21, 16)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5d8ra"]
+radius = 9.0
+
+[node name="grand_bolt" type="Area2D"]
+collision_layer = 0
+script = ExtResource("1_bjpop")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.968627, 1, 0, 1)
+scale = Vector2(1.5, 1.5)
+texture = SubResource("AtlasTexture_ggs10")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(8, 0)
+shape = SubResource("CircleShape2D_5d8ra")
+debug_color = Color(0.945098, 0.196078, 0.345098, 0.419608)
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

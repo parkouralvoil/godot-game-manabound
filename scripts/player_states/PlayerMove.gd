@@ -5,7 +5,7 @@ class_name PlayerMove
 # can acivate shield
 @export var p: Player
 var mouse_position: Vector2 = Vector2.ZERO
-var boost_speed: float = 300
+var boost_speed: float = 350
 var slow_speed: float = 20
 
 func Enter():
@@ -13,6 +13,7 @@ func Enter():
 		return
 	p.gravity = 0
 	p.direction_indicator.show()
+	p.current_state = p.States.MOVE
 
 func Exit():
 	if !p:
@@ -34,10 +35,10 @@ func Physics_Update(_delta):
 	p.velocity = slow_speed * p.move_direction
 	
 	if !Input.is_action_pressed("space"): #boost away
-		p.velocity = boost_speed * p.move_direction
+		p.velocity = boost_speed * p.mouse_direction
 		state_transition.emit(self, "PlayerIdle")
-	elif Input.is_action_just_pressed("right_click"): # to cancel
-		state_transition.emit(self, "PlayerIdle")
+	elif Input.is_action_pressed("right_click"): # to cancel
+		state_transition.emit(self, "PlayerStance")
 	
 	p.move_and_slide()
 

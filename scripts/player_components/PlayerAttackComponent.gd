@@ -8,9 +8,12 @@ var burst_counter: int = 0
 @onready var t_firerate: Timer = $firerate
 
 var bullet_speed: float = 400
+var can_shoot: bool = true
 
 func _process(delta):
-	if Input.is_action_pressed("left_click") and p.ammo_component.ammo > 0:
+	can_shoot = p.current_state != p.States.STANCE
+	
+	if Input.is_action_pressed("left_click") and p.ammo_component.ammo > 0 and can_shoot:
 		p.is_firing = true
 		sprite_look_at_aim()
 		if t_firerate.is_stopped():
@@ -18,14 +21,14 @@ func _process(delta):
 			t_firerate.start()
 			p.velocity = Vector2.ZERO
 		
-	elif !Input.is_action_pressed("left_click") or t_firerate.is_stopped():
+	elif !Input.is_action_pressed("left_click") or t_firerate.is_stopped() or !can_shoot:
 		p.is_firing = false
 		burst_counter = 0
 
 func shoot(projectile: PackedScene):
 	var pro_instance := projectile.instantiate()
 	var direction = p.aim_direction
-	p.camera_shake()
+	p.camera_shake(1)
 	p.ammo_component.ammo -= 1
 	if pro_instance:
 		pro_instance.global_position = self.global_position

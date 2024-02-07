@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://t2e45srpirha"]
+[gd_scene load_steps=14 format=3 uid="uid://t2e45srpirha"]
 
 [ext_resource type="TileSet" uid="uid://bq4bd7di0pjwo" path="res://resources/tilemaps/blue_scifi.tres" id="1_hgvqm"]
 [ext_resource type="PackedScene" uid="uid://c35wulwk6e3b4" path="res://scenes/characters/player.tscn" id="2_w3cth"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" path="res://scenes/UI/Camera2D_player.gd" id="7_pa82x"]
 [ext_resource type="Script" path="res://scenes/UI/Label_Ammo.gd" id="7_ur1f6"]
 [ext_resource type="Script" path="res://scenes/UI/Label_AutoAim.gd" id="8_ltigh"]
+[ext_resource type="Script" path="res://scenes/UI/Label_Charge.gd" id="9_txpmr"]
 [ext_resource type="Script" path="res://scenes/UI/currency_counter.gd" id="11_a2nx8"]
 
 [node name="test_level" type="Node2D"]
@@ -58,6 +59,18 @@ position = Vector2(-11, 1351)
 [node name="enemy_autobow" parent="EnemyHolder" instance=ExtResource("3_q1x0f")]
 position = Vector2(264, -233)
 
+[node name="enemy_autobow2" parent="EnemyHolder" instance=ExtResource("3_q1x0f")]
+position = Vector2(292, -257)
+
+[node name="enemy_autobow3" parent="EnemyHolder" instance=ExtResource("3_q1x0f")]
+position = Vector2(322, -281)
+
+[node name="enemy_autobow4" parent="EnemyHolder" instance=ExtResource("3_q1x0f")]
+position = Vector2(346, -307)
+
+[node name="enemy_autobow5" parent="EnemyHolder" instance=ExtResource("3_q1x0f")]
+position = Vector2(368, -323)
+
 [node name="enemy_dronefactory" parent="EnemyHolder" instance=ExtResource("5_vwkg7")]
 position = Vector2(162, -140)
 
@@ -83,13 +96,13 @@ text = "aa"
 script = ExtResource("7_ur1f6")
 p = NodePath("..")
 
-[node name="Label_AutoAim" type="Label" parent="Player" node_paths=PackedStringArray("p")]
+[node name="Label_Charge" type="Label" parent="Player" node_paths=PackedStringArray("p")]
 offset_left = -36.0
 offset_top = 42.0
 offset_right = 4.0
 offset_bottom = 65.0
 text = "aa"
-script = ExtResource("8_ltigh")
+script = ExtResource("9_txpmr")
 p = NodePath("..")
 
 [node name="Camera2D_player" type="Camera2D" parent="Player"]
@@ -118,11 +131,25 @@ scale = Vector2(3, 3)
 text = "aaa"
 script = ExtResource("6_3cy1a")
 
-[node name="Label_Currency" type="Label" parent="CanvasLayer/UI"]
+[node name="Label_AutoAim" type="Label" parent="CanvasLayer/UI" node_paths=PackedStringArray("p")]
 layout_mode = 0
-offset_top = 100.0
+offset_top = 62.0
+offset_right = 40.0
+offset_bottom = 85.0
+scale = Vector2(2, 2)
+text = "aa"
+script = ExtResource("8_ltigh")
+p = NodePath("../../../Player")
+
+[node name="Label_Currency" type="Label" parent="CanvasLayer/UI"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = 610.0
 offset_right = 28.0
-offset_bottom = 123.0
+offset_bottom = 633.0
+grow_vertical = 0
 scale = Vector2(2, 2)
 text = "aaa"
 script = ExtResource("11_a2nx8")

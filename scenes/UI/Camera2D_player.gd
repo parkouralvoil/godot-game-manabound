@@ -24,8 +24,8 @@ func _ready() -> void:
 	# Period affects how quickly the noise changes values
 	noise.frequency = 0.5
 
-func apply_noise_shake() -> void:
-	shake_strength = NOISE_SHAKE_STRENGTH
+func apply_noise_shake(strength: int) -> void: # 1 for weakest (60), 3 for strongest (180)
+	shake_strength = NOISE_SHAKE_STRENGTH * strength
 
 func _process(delta: float) -> void:
 	# Fade out the intensity over time

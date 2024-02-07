@@ -11,6 +11,7 @@ func Enter():
 		return
 	p.gravity = p.default_gravity
 	p.direction_indicator.hide()
+	p.current_state = p.States.IDLE
 
 func Exit():
 	if !p:
@@ -30,6 +31,8 @@ func Physics_Update(_delta):
 	
 	if Input.is_action_just_pressed("space") and !p.is_firing: #prepare to boost
 		state_transition.emit(self, "PlayerMove")
+	if Input.is_action_pressed("right_click"):
+		state_transition.emit(self, "PlayerStance")
 	
 	if !p.is_on_floor() and !p.is_firing:
 		p.velocity.y += p.gravity * _delta

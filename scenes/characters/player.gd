@@ -8,6 +8,7 @@ class_name Player
 @export var camera: Camera2D
 @export var ammo_component: Node2D
 @export var target_lock_component: Area2D
+@export var ultimate: Node2D
 
 # input variables
 var x_movement: float = 0
@@ -26,6 +27,8 @@ var airboost_input: bool = false
 
 var aim_direction: Vector2 = Vector2.ZERO #radians
 var move_direction: Vector2 = Vector2.ZERO #radians
+var mouse_direction: Vector2 = Vector2.ZERO
+var dist_to_mouse: Vector2 = Vector2.ZERO
 
 var is_firing: bool = false
 
@@ -37,13 +40,27 @@ var health: float = max_health
 var auto_aim: bool = true
 var selected_target: Area2D = null
 
+# states for easier communication
+enum States {
+	IDLE,
+	MOVE,
+	STANCE
+}
+var current_state: States = States.IDLE
+
 func _process(delta):
 	EnemyAiManager.player_position = global_position
-	move_direction = Vector2.ZERO.direction_to(get_global_mouse_position() - self.global_position).normalized()
+	dist_to_mouse = get_global_mouse_position() - self.global_position
+	# for airboost
+	mouse_direction = Vector2.ZERO.direction_to(dist_to_mouse).normalized()
+	
+	# for slow hover
+	move_direction = mouse_direction if dist_to_mouse.length() > 40 else Vector2.ZERO
+	
 	if auto_aim and selected_target != null:
 		aim_direction = Vector2.ZERO.direction_to(selected_target.global_position - self.global_position).normalized()
 	else:
-		aim_direction = move_direction
+		aim_direction = mouse_direction
 	
 	#arm rotation
 	if is_firing:
@@ -63,6 +80,6 @@ func take_damage(damage: float):
 	else:
 		health = 0
 
-func camera_shake():
+func camera_shake(strength: int):
 	if camera:
-		camera.apply_noise_shake()
+		camera.apply_noise_shake(strength)

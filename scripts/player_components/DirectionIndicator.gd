@@ -4,3 +4,9 @@ extends Sprite2D
 
 func _physics_process(delta):
 	self.rotation = (get_global_mouse_position() - p.global_position).angle() + (PI/4)
+	if p.current_state == p.States.STANCE:
+		if self_modulate != Color(1, 0.2, 0.2):
+			self_modulate = Color(1, 0.2, 0.2)
+	else:
+		if self_modulate != Color(1, 1, 1):
+			self_modulate = Color(1, 1, 1)

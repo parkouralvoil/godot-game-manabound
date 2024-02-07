@@ -1,16 +1,21 @@
-[gd_scene load_steps=25 format=3 uid="uid://c35wulwk6e3b4"]
+[gd_scene load_steps=30 format=3 uid="uid://c35wulwk6e3b4"]
 
 [ext_resource type="Script" path="res://scenes/characters/player.gd" id="1_1gu75"]
 [ext_resource type="Script" path="res://scripts/player_components/PlayerAttackComponent.gd" id="2_3w6lg"]
 [ext_resource type="Script" path="res://scripts/entity_components/HurtboxComponent.gd" id="2_68tq4"]
 [ext_resource type="Script" path="res://scripts/StateMachine.gd" id="2_dps1t"]
 [ext_resource type="Texture2D" uid="uid://bm71lln6lsmlc" path="res://assets/sprite_characters/knight_spritesheet.png" id="2_heryt"]
-[ext_resource type="Texture2D" uid="uid://df4r12vpxwua7" path="res://assets/sprite_other/DashDirectionIndicator.png" id="2_mciek"]
 [ext_resource type="Script" path="res://scripts/player_components/DirectionIndicator.gd" id="3_h0ap5"]
 [ext_resource type="Script" path="res://scripts/player_components/AmmoComponent.gd" id="3_jfjwh"]
+[ext_resource type="Script" path="res://scenes/skill_tree/knight_stree/AbilityManager.gd" id="4_m0yet"]
 [ext_resource type="Script" path="res://scripts/player_components/TargetLockComponent.gd" id="5_fjj5y"]
+[ext_resource type="Script" path="res://scripts/player_components/PlayerUltimateComponent.gd" id="5_mwbnk"]
 [ext_resource type="Script" path="res://scripts/player_states/PlayerIdle.gd" id="6_bimax"]
+[ext_resource type="PackedScene" uid="uid://csxjnretvvtdj" path="res://scenes/skill_tree/knight_stree/knight_skill_tree.tscn" id="6_wpxny"]
+[ext_resource type="Texture2D" uid="uid://df4r12vpxwua7" path="res://assets/sprite_UI/DashDirectionIndicator.png" id="7_bfhbc"]
 [ext_resource type="Script" path="res://scripts/player_states/PlayerMove.gd" id="7_fakih"]
+[ext_resource type="Texture2D" uid="uid://dy3hkciev768l" path="res://assets/sprite_UI/red_circle.png" id="9_ppy8i"]
+[ext_resource type="Script" path="res://scripts/player_states/PlayerStance.gd" id="12_nt3wa"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yy4pc"]
 size = Vector2(9, 17)
@@ -104,65 +109,87 @@ region = Rect2(96, 96, 32, 32)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_c2x3k"]
 size = Vector2(12, 20)
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("anim_sprite", "arm_sprite", "direction_indicator", "ammo_component")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("anim_sprite", "arm_sprite", "direction_indicator", "ammo_component", "target_lock_component", "ultimate")]
 collision_layer = 2
 script = ExtResource("1_1gu75")
 anim_sprite = NodePath("AnimatedSprite2D")
 arm_sprite = NodePath("AnimatedSprite2D/Sprite2D_arm")
 direction_indicator = NodePath("DirectionIndicator")
-ammo_component = NodePath("AmmoComponent")
+ammo_component = NodePath("Ammo")
+target_lock_component = NodePath("TargetLock")
+ultimate = NodePath("AbilityManager/Ultimate")
 
-[node name="HurtboxComponent" type="Area2D" parent="." node_paths=PackedStringArray("entity")]
+[node name="Hurtbox" type="Area2D" parent="." node_paths=PackedStringArray("entity")]
 collision_layer = 4
 collision_mask = 0
 monitoring = false
 script = ExtResource("2_68tq4")
 entity = NodePath("..")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 position = Vector2(-1.5, 3.5)
 shape = SubResource("RectangleShape2D_yy4pc")
 debug_color = Color(0.894118, 0.309804, 0.172549, 0.419608)
 
-[node name="AmmoComponent" type="Node2D" parent="." node_paths=PackedStringArray("p")]
+[node name="Ammo" type="Node2D" parent="." node_paths=PackedStringArray("p")]
 script = ExtResource("3_jfjwh")
 p = NodePath("..")
 
-[node name="ammo_regen" type="Timer" parent="AmmoComponent"]
+[node name="ammo_regen" type="Timer" parent="Ammo"]
 wait_time = 0.4
 one_shot = true
 
-[node name="AttackComponent" type="Node2D" parent="." node_paths=PackedStringArray("p")]
-script = ExtResource("2_3w6lg")
-p = NodePath("..")
+[node name="ult_regen" type="Timer" parent="Ammo"]
+wait_time = 4.0
+one_shot = true
 
-[node name="move_cd" type="Timer" parent="AttackComponent"]
+[node name="AbilityManager" type="Node2D" parent="."]
+script = ExtResource("4_m0yet")
+
+[node name="Attack" type="Node2D" parent="AbilityManager" node_paths=PackedStringArray("p")]
+script = ExtResource("2_3w6lg")
+p = NodePath("../..")
+
+[node name="move_cd" type="Timer" parent="AbilityManager/Attack"]
 wait_time = 0.12
 one_shot = true
 
-[node name="firerate" type="Timer" parent="AttackComponent"]
+[node name="firerate" type="Timer" parent="AbilityManager/Attack"]
 wait_time = 0.15
 one_shot = true
 
-[node name="TargetLockComponent" type="Area2D" parent="." node_paths=PackedStringArray("p")]
+[node name="Ultimate" type="Node2D" parent="AbilityManager" node_paths=PackedStringArray("p")]
+script = ExtResource("5_mwbnk")
+p = NodePath("../..")
+
+[node name="cooldown" type="Timer" parent="AbilityManager/Ultimate"]
+
+[node name="SkillTree" parent="AbilityManager" instance=ExtResource("6_wpxny")]
+
+[node name="TargetLock" type="Area2D" parent="." node_paths=PackedStringArray("p")]
 collision_layer = 0
 collision_mask = 8
 monitorable = false
 script = ExtResource("5_fjj5y")
 p = NodePath("..")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="TargetLockComponent"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TargetLock"]
 shape = SubResource("CircleShape2D_6tau6")
 debug_color = Color(0.415686, 0.603922, 0.164706, 0.419608)
 
-[node name="update_target" type="Timer" parent="TargetLockComponent"]
+[node name="update_target" type="Timer" parent="TargetLock"]
 wait_time = 0.2
 one_shot = true
 
 [node name="DirectionIndicator" type="Sprite2D" parent="." node_paths=PackedStringArray("p")]
-texture = ExtResource("2_mciek")
+texture = ExtResource("7_bfhbc")
 script = ExtResource("3_h0ap5")
 p = NodePath("..")
+
+[node name="circle" type="Sprite2D" parent="DirectionIndicator"]
+modulate = Color(0, 0.211765, 0.117647, 0.509804)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("9_ppy8i")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_22hb7")
@@ -189,8 +216,13 @@ p = NodePath("../..")
 script = ExtResource("7_fakih")
 p = NodePath("../..")
 
-[node name="PlayerStance" type="Node" parent="FSM"]
+[node name="PlayerStance" type="Node" parent="FSM" node_paths=PackedStringArray("p")]
+script = ExtResource("12_nt3wa")
+p = NodePath("../..")
 
-[connection signal="timeout" from="AmmoComponent/ammo_regen" to="AmmoComponent" method="_on_ammo_regen_timeout"]
-[connection signal="area_entered" from="TargetLockComponent" to="TargetLockComponent" method="_on_area_entered"]
-[connection signal="timeout" from="TargetLockComponent/update_target" to="TargetLockComponent" method="_on_update_target_timeout"]
+[connection signal="timeout" from="Ammo/ammo_regen" to="Ammo" method="_on_ammo_regen_timeout"]
+[connection signal="timeout" from="Ammo/ult_regen" to="Ammo" method="_on_ult_regen_timeout"]
+[connection signal="area_entered" from="TargetLock" to="TargetLock" method="_on_area_entered"]
+[connection signal="timeout" from="TargetLock/update_target" to="TargetLock" method="_on_update_target_timeout"]
+
+[editable path="AbilityManager/SkillTree"]

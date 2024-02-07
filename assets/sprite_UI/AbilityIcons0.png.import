@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://df4r12vpxwua7"
-path="res://.godot/imported/DashDirectionIndicator.png-a51fc55e7039d06796061571555343b5.ctex"
+uid="uid://h46xv64l4n2u"
+path="res://.godot/imported/AbilityIcons0.png-31dba6544aa1a7b4320ff9e5f15eb420.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprite_other/DashDirectionIndicator.png"
-dest_files=["res://.godot/imported/DashDirectionIndicator.png-a51fc55e7039d06796061571555343b5.ctex"]
+source_file="res://assets/sprite_UI/AbilityIcons0.png"
+dest_files=["res://.godot/imported/AbilityIcons0.png-31dba6544aa1a7b4320ff9e5f15eb420.ctex"]
 
 [params]
 
