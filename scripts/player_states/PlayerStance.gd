@@ -13,7 +13,7 @@ func Enter():
 		return
 	p.gravity = 0
 	p.direction_indicator.show()
-	p.current_state = p.States.STANCE
+	PlayerInfo.current_state = PlayerInfo.States.STANCE
 
 func Exit():
 	if !p:

@@ -19,7 +19,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 EnemyAiManager="*res://scripts/autoloads/enemy_AI_manager.gd"
-PlayerStuffManager="*res://scripts/autoloads/player_stuff_manager.gd"
+PlayerInfo="*res://scripts/autoloads/player_info.gd"
 
 [display]
 
@@ -78,6 +78,11 @@ tab={
 shop_key={
 "deadzone": 0.5,
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":66,"key_label":0,"unicode":98,"echo":false,"script":null)
+]
+}
+cheat_menu={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":67,"key_label":0,"unicode":99,"echo":false,"script":null)
 ]
 }
 

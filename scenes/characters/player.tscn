@@ -11,7 +11,7 @@
 [ext_resource type="Script" path="res://scripts/player_components/TargetLockComponent.gd" id="5_fjj5y"]
 [ext_resource type="Script" path="res://scripts/player_components/PlayerUltimateComponent.gd" id="5_mwbnk"]
 [ext_resource type="Script" path="res://scripts/player_states/PlayerIdle.gd" id="6_bimax"]
-[ext_resource type="PackedScene" uid="uid://csxjnretvvtdj" path="res://scenes/skill_tree/knight_stree/knight_skill_tree.tscn" id="6_wpxny"]
+[ext_resource type="PackedScene" uid="uid://csxjnretvvtdj" path="res://scenes/skill_tree/knight_stree/knight_stree.tscn" id="6_wpxny"]
 [ext_resource type="Texture2D" uid="uid://df4r12vpxwua7" path="res://assets/sprite_UI/DashDirectionIndicator.png" id="7_bfhbc"]
 [ext_resource type="Script" path="res://scripts/player_states/PlayerMove.gd" id="7_fakih"]
 [ext_resource type="Texture2D" uid="uid://dy3hkciev768l" path="res://assets/sprite_UI/red_circle.png" id="9_ppy8i"]
@@ -109,15 +109,14 @@ region = Rect2(96, 96, 32, 32)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_c2x3k"]
 size = Vector2(12, 20)
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("anim_sprite", "arm_sprite", "direction_indicator", "ammo_component", "target_lock_component", "ultimate")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("anim_sprite", "arm_sprite", "direction_indicator", "target_lock_component", "char_manager")]
 collision_layer = 2
 script = ExtResource("1_1gu75")
 anim_sprite = NodePath("AnimatedSprite2D")
 arm_sprite = NodePath("AnimatedSprite2D/Sprite2D_arm")
 direction_indicator = NodePath("DirectionIndicator")
-ammo_component = NodePath("Ammo")
 target_lock_component = NodePath("TargetLock")
-ultimate = NodePath("AbilityManager/Ultimate")
+char_manager = NodePath("CharacterManager")
 
 [node name="Hurtbox" type="Area2D" parent="." node_paths=PackedStringArray("entity")]
 collision_layer = 4
@@ -131,40 +130,33 @@ position = Vector2(-1.5, 3.5)
 shape = SubResource("RectangleShape2D_yy4pc")
 debug_color = Color(0.894118, 0.309804, 0.172549, 0.419608)
 
-[node name="Ammo" type="Node2D" parent="." node_paths=PackedStringArray("p")]
-script = ExtResource("3_jfjwh")
-p = NodePath("..")
-
-[node name="ammo_regen" type="Timer" parent="Ammo"]
-wait_time = 0.4
-one_shot = true
-
-[node name="ult_regen" type="Timer" parent="Ammo"]
-wait_time = 4.0
-one_shot = true
-
-[node name="AbilityManager" type="Node2D" parent="."]
+[node name="CharacterManager" type="Node2D" parent="."]
 script = ExtResource("4_m0yet")
 
-[node name="Attack" type="Node2D" parent="AbilityManager" node_paths=PackedStringArray("p")]
+[node name="BasicAttack" type="Node2D" parent="CharacterManager"]
 script = ExtResource("2_3w6lg")
-p = NodePath("../..")
 
-[node name="move_cd" type="Timer" parent="AbilityManager/Attack"]
+[node name="move_cd" type="Timer" parent="CharacterManager/BasicAttack"]
 wait_time = 0.12
 one_shot = true
 
-[node name="firerate" type="Timer" parent="AbilityManager/Attack"]
+[node name="firerate" type="Timer" parent="CharacterManager/BasicAttack"]
 wait_time = 0.15
 one_shot = true
 
-[node name="Ultimate" type="Node2D" parent="AbilityManager" node_paths=PackedStringArray("p")]
+[node name="Ultimate" type="Node2D" parent="CharacterManager"]
 script = ExtResource("5_mwbnk")
-p = NodePath("../..")
 
-[node name="cooldown" type="Timer" parent="AbilityManager/Ultimate"]
+[node name="cooldown" type="Timer" parent="CharacterManager/Ultimate"]
 
-[node name="SkillTree" parent="AbilityManager" instance=ExtResource("6_wpxny")]
+[node name="Ammo_component" type="Node2D" parent="CharacterManager"]
+script = ExtResource("3_jfjwh")
+
+[node name="ammo_regen" type="Timer" parent="CharacterManager/Ammo_component"]
+wait_time = 0.4
+one_shot = true
+
+[node name="SkillTree" parent="CharacterManager" instance=ExtResource("6_wpxny")]
 
 [node name="TargetLock" type="Area2D" parent="." node_paths=PackedStringArray("p")]
 collision_layer = 0
@@ -220,9 +212,8 @@ p = NodePath("../..")
 script = ExtResource("12_nt3wa")
 p = NodePath("../..")
 
-[connection signal="timeout" from="Ammo/ammo_regen" to="Ammo" method="_on_ammo_regen_timeout"]
-[connection signal="timeout" from="Ammo/ult_regen" to="Ammo" method="_on_ult_regen_timeout"]
+[connection signal="timeout" from="CharacterManager/Ammo_component/ammo_regen" to="CharacterManager/Ammo_component" method="_on_ammo_regen_timeout"]
 [connection signal="area_entered" from="TargetLock" to="TargetLock" method="_on_area_entered"]
 [connection signal="timeout" from="TargetLock/update_target" to="TargetLock" method="_on_update_target_timeout"]
 
-[editable path="AbilityManager/SkillTree"]
+[editable path="CharacterManager/SkillTree"]

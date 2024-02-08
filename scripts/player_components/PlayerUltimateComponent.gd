@@ -8,24 +8,18 @@ var GrandBoltScene: PackedScene = load("res://scenes/projectiles/grand_bolt/gran
 # 2nd charge: piercing bullet, disappears on wall collision
 # we can just have the explosion impact be "shockwave dealing minor dmg and additional lightning elem proc"
 
-@export var p: Player
-
 @onready var t_cd: Timer = $cooldown
+@onready var AM: AbilityManager = get_parent()
 
 var bullet_speed: float = 600
-
-var max_charge: float = 100
-var charge: float = 0
-
-var charge_rate: float = 75
 
 var charge_tier: int = 0
 
 func _process(delta):
-	if p.current_state == p.States.STANCE:
+	if PlayerInfo.current_state == PlayerInfo.States.STANCE:
 		raise_charge(delta)
-		sprite_look_at_aim()
-	elif charge != 0:
+		AM.sprite_look_at(PlayerInfo.mouse_direction)
+	elif AM.charge != 0:
 		spend_charge()
 
 func shoot(projectile: PackedScene, direction: Vector2):
@@ -50,28 +44,22 @@ func shoot(projectile: PackedScene, direction: Vector2):
 		print(projectile)
 
 func raise_charge(delta):
-	charge = min(max_charge, charge + charge_rate * delta)
-	if charge == max_charge:
+	AM.charge = min(AM.max_charge, AM.charge + AM.charge_rate * delta)
+	if AM.charge == AM.max_charge:
 		charge_tier = 2
-	elif charge >= max_charge/2:
+	elif AM.charge >= AM.max_charge/2:
 		charge_tier = 1
 
 func spend_charge():
-	p.camera_shake(charge_tier * 2)
+	AM.apply_player_cam_shake(charge_tier * 2)
 	match charge_tier:
 		0:
 			pass
 		1:
-			shoot(GrandBoltScene, p.mouse_direction)
+			shoot(GrandBoltScene, PlayerInfo.mouse_direction)
 		_:
-			shoot(GrandBoltScene, p.mouse_direction)
-			shoot(GrandBoltScene, p.mouse_direction.rotated(PI/10) )
-			shoot(GrandBoltScene, p.mouse_direction.rotated(-PI/10) )
-	charge = 0
+			shoot(GrandBoltScene, PlayerInfo.mouse_direction)
+			shoot(GrandBoltScene, PlayerInfo.mouse_direction.rotated(PI/10) )
+			shoot(GrandBoltScene, PlayerInfo.mouse_direction.rotated(-PI/10) )
+	AM.charge = 0
 	charge_tier = 0
-
-func sprite_look_at_aim():
-	if p.mouse_direction.x > 0:
-		p.anim_sprite.scale.x = 1
-	else:
-		p.anim_sprite.scale.x = -1

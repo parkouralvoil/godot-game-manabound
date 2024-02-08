@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://csxjnretvvtdj"]
+[gd_scene load_steps=9 format=3 uid="uid://csxjnretvvtdj"]
 
-[ext_resource type="PackedScene" uid="uid://c70mm6f8inx8d" path="res://scenes/skill_tree/skill_button.tscn" id="1_na4n0"]
+[ext_resource type="Script" path="res://scenes/skill_tree/knight_stree/knight_stree.gd" id="1_yrn6k"]
+[ext_resource type="PackedScene" uid="uid://c70mm6f8inx8d" path="res://scenes/skill_tree/skill_button.tscn" id="2_lkft4"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_e6lhl"]
 load_path = "res://.godot/imported/AbilityIcons0.png-31dba6544aa1a7b4320ff9e5f15eb420.ctex"
@@ -23,7 +24,12 @@ load_path = "res://.godot/imported/AbilityIcons0.png-31dba6544aa1a7b4320ff9e5f15
 atlas = SubResource("CompressedTexture2D_ihnym")
 region = Rect2(112, 80, 16, 16)
 
-[node name="SkillTree" type="CanvasLayer"]
+[node name="SkillTree" type="CanvasLayer" node_paths=PackedStringArray("skill_a1", "skill_a2", "skill_b1", "skill_b2")]
+script = ExtResource("1_yrn6k")
+skill_a1 = NodePath("Control/SkillButton_root/Skill_A1")
+skill_a2 = NodePath("Control/SkillButton_root/Skill_A1/Skill_A2")
+skill_b1 = NodePath("Control/SkillButton_root/Skill_B1")
+skill_b2 = NodePath("Control/SkillButton_root/Skill_B1/Skill_B2")
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
@@ -41,7 +47,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="SkillButton_root" parent="Control" instance=ExtResource("1_na4n0")]
+[node name="SkillButton_root" parent="Control" instance=ExtResource("2_lkft4")]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -56,14 +62,14 @@ grow_horizontal = 2
 grow_vertical = 2
 root = true
 
-[node name="SkillButton" parent="Control/SkillButton_root" instance=ExtResource("1_na4n0")]
+[node name="Skill_A1" parent="Control/SkillButton_root" instance=ExtResource("2_lkft4")]
 layout_mode = 0
 offset_left = -175.0
 offset_top = 63.0
 offset_right = -115.0
 offset_bottom = 123.0
 
-[node name="SkillButton" parent="Control/SkillButton_root/SkillButton" instance=ExtResource("1_na4n0")]
+[node name="Skill_A2" parent="Control/SkillButton_root/Skill_A1" instance=ExtResource("2_lkft4")]
 layout_mode = 0
 offset_left = -198.0
 offset_top = 39.0
@@ -71,7 +77,7 @@ offset_right = -138.0
 offset_bottom = 99.0
 texture_normal = SubResource("AtlasTexture_qilty")
 
-[node name="SkillButton2" parent="Control/SkillButton_root" instance=ExtResource("1_na4n0")]
+[node name="Skill_B1" parent="Control/SkillButton_root" instance=ExtResource("2_lkft4")]
 layout_mode = 0
 offset_left = 188.0
 offset_top = 67.0
@@ -79,7 +85,7 @@ offset_right = 248.0
 offset_bottom = 127.0
 texture_normal = SubResource("AtlasTexture_f074p")
 
-[node name="SkillButton" parent="Control/SkillButton_root/SkillButton2" instance=ExtResource("1_na4n0")]
+[node name="Skill_B2" parent="Control/SkillButton_root/Skill_B1" instance=ExtResource("2_lkft4")]
 layout_mode = 0
 offset_left = 183.0
 offset_top = 61.0

@@ -13,7 +13,7 @@ func Enter():
 		return
 	p.gravity = 0
 	p.direction_indicator.show()
-	p.current_state = p.States.MOVE
+	PlayerInfo.current_state = PlayerInfo.States.MOVE
 
 func Exit():
 	if !p:
@@ -23,7 +23,7 @@ func Update(_delta):
 	if !p:
 		return
 	#if p.velocity != Vector2.ZERO:
-	if p.is_firing:
+	if PlayerInfo.basic_attacking:
 		state_transition.emit(self, "PlayerIdle")
 	
 	flip_sprite()

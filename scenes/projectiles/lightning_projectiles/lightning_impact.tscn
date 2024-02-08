@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://bedeaxq6naegu"]
 
-[ext_resource type="Texture2D" uid="uid://b2gagvgpvrjud" path="res://assets/sprite_other/All_Fire_Bullet_Pixel_16x16_00.png" id="1_lnjx8"]
+[ext_resource type="Texture2D" uid="uid://b2gagvgpvrjud" path="res://assets/sprite_projectiles/bullet_pixel_BrightRed.png" id="1_lnjx8"]
 [ext_resource type="Script" path="res://scenes/projectiles/lightning_projectiles/lightning_impact.gd" id="2_pwg23"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nhxun"]

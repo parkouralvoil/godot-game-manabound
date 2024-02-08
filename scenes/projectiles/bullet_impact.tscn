@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://ccfj5qan8stdb"]
 
-[ext_resource type="Texture2D" uid="uid://b2gagvgpvrjud" path="res://assets/sprite_other/All_Fire_Bullet_Pixel_16x16_00.png" id="1_gkmv7"]
+[ext_resource type="Texture2D" uid="uid://b2gagvgpvrjud" path="res://assets/sprite_projectiles/bullet_pixel_BrightRed.png" id="1_gkmv7"]
 [ext_resource type="Script" path="res://scenes/projectiles/bullet_impact.gd" id="1_lqv4n"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_85oqo"]

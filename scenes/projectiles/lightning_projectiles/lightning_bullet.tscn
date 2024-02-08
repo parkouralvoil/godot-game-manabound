@@ -1,10 +1,10 @@
 [gd_scene load_steps=5 format=3 uid="uid://bf05bt5n34ymh"]
 
 [ext_resource type="Script" path="res://scenes/projectiles/lightning_projectiles/lightning_bullet.gd" id="1_esm8t"]
-[ext_resource type="Texture2D" uid="uid://b2gagvgpvrjud" path="res://assets/sprite_other/All_Fire_Bullet_Pixel_16x16_00.png" id="2_c2ca6"]
+[ext_resource type="Texture2D" uid="uid://brgsvft0urgcs" path="res://assets/sprite_projectiles/bullet_pixel_Red.png" id="2_ghbbd"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ggs10"]
-atlas = ExtResource("2_c2ca6")
+atlas = ExtResource("2_ghbbd")
 region = Rect2(274, 181, 14, 7)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5d8ra"]

@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://uihs4pvtr027"]
 
 [ext_resource type="Script" path="res://scenes/projectiles/grand_bolt/explosion_impact.gd" id="1_j3uu6"]
-[ext_resource type="Texture2D" uid="uid://b2gagvgpvrjud" path="res://assets/sprite_other/All_Fire_Bullet_Pixel_16x16_00.png" id="2_dtg7b"]
+[ext_resource type="Texture2D" uid="uid://b2gagvgpvrjud" path="res://assets/sprite_projectiles/bullet_pixel_BrightRed.png" id="2_dtg7b"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nhxun"]
 atlas = ExtResource("2_dtg7b")

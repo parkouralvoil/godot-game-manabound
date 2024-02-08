@@ -1,10 +1,10 @@
 [gd_scene load_steps=5 format=3 uid="uid://oi2y57fiqpdo"]
 
 [ext_resource type="Script" path="res://scenes/projectiles/Bullet.gd" id="1_7x5i2"]
-[ext_resource type="Texture2D" uid="uid://b2gagvgpvrjud" path="res://assets/sprite_other/All_Fire_Bullet_Pixel_16x16_00.png" id="2_dj2jv"]
+[ext_resource type="Texture2D" uid="uid://brgsvft0urgcs" path="res://assets/sprite_projectiles/bullet_pixel_Red.png" id="2_d0epb"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ggs10"]
-atlas = ExtResource("2_dj2jv")
+atlas = ExtResource("2_d0epb")
 region = Rect2(268, 214, 8, 5)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5d8ra"]
@@ -15,7 +15,6 @@ collision_layer = 0
 script = ExtResource("1_7x5i2")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-modulate = Color(0.74902, 0.247059, 0.247059, 1)
 texture = SubResource("AtlasTexture_ggs10")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
