@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=3 uid="uid://despujxox3cs7"]
+
+[ext_resource type="Script" path="res://scenes/skill_tree/knight_stree/AbilityManager.gd" id="1_ybgjx"]
+[ext_resource type="Script" path="res://scripts/player_components/PlayerAttackComponent.gd" id="2_s3yl3"]
+[ext_resource type="Script" path="res://scripts/player_components/PlayerUltimateComponent.gd" id="3_fd845"]
+[ext_resource type="Script" path="res://scripts/player_components/AmmoComponent.gd" id="4_hfht8"]
+[ext_resource type="PackedScene" uid="uid://csxjnretvvtdj" path="res://scenes/skill_tree/knight_stree/knight_stree.tscn" id="5_0jp1e"]
+
+[node name="AbilityManager_Knight" type="Node2D"]
+script = ExtResource("1_ybgjx")
+
+[node name="BasicAttack" type="Node2D" parent="."]
+script = ExtResource("2_s3yl3")
+
+[node name="move_cd" type="Timer" parent="BasicAttack"]
+wait_time = 0.12
+one_shot = true
+
+[node name="firerate" type="Timer" parent="BasicAttack"]
+wait_time = 0.15
+one_shot = true
+
+[node name="Ultimate" type="Node2D" parent="."]
+script = ExtResource("3_fd845")
+
+[node name="cooldown" type="Timer" parent="Ultimate"]
+
+[node name="Ammo_component" type="Node2D" parent="."]
+script = ExtResource("4_hfht8")
+
+[node name="ammo_regen" type="Timer" parent="Ammo_component"]
+wait_time = 0.4
+one_shot = true
+
+[node name="SkillTree" parent="." instance=ExtResource("5_0jp1e")]
+
+[connection signal="timeout" from="Ammo_component/ammo_regen" to="Ammo_component" method="_on_ammo_regen_timeout"]
+
+[editable path="SkillTree"]

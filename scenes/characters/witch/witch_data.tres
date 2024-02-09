@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="CharacterResource" load_steps=5 format=3 uid="uid://c85jly26hwn1j"]
+
+[ext_resource type="PackedScene" uid="uid://despujxox3cs7" path="res://scenes/characters/knight/ability_manager_knight.tscn" id="1_ajs4g"]
+[ext_resource type="Script" path="res://scenes/characters/CharacterResource.gd" id="2_hj1xo"]
+[ext_resource type="SpriteFrames" uid="uid://dsg0xmjs2wxlj" path="res://scenes/characters/witch/witch_spriteframes.tres" id="3_i8k7l"]
+[ext_resource type="Texture2D" uid="uid://kdh26376nd2g" path="res://scenes/characters/witch/witch_arm.tres" id="3_j0wk4"]
+
+[resource]
+script = ExtResource("2_hj1xo")
+Ability_manager = ExtResource("1_ajs4g")
+spriteframes = ExtResource("3_i8k7l")
+sprite_arm = ExtResource("3_j0wk4")

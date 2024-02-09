@@ -17,6 +17,9 @@ func _ready():
 func _process(delta):
 	can_shoot = PlayerInfo.current_state != PlayerInfo.States.STANCE
 	
+	if !AM.enabled:
+		return
+	
 	if Input.is_action_pressed("left_click") and AM.ammo > 0 and can_shoot:
 		PlayerInfo.basic_attacking = true
 		AM.sprite_look_at(PlayerInfo.aim_direction)
@@ -42,6 +45,7 @@ func shoot(projectile: PackedScene):
 		pro_instance.rotation = direction.angle()
 		pro_instance.set_collision_mask_value(4, true)
 		get_tree().root.add_child(pro_instance)
+		print(pro_instance)
 	elif pro_instance == null:
 		print(projectile)
 

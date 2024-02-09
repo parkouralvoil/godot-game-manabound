@@ -1,0 +1,82 @@
+[gd_resource type="SpriteFrames" load_steps=10 format=3 uid="uid://dsg0xmjs2wxlj"]
+
+[ext_resource type="Texture2D" uid="uid://ug68u46641al" path="res://assets/sprite_characters/witch_spritesheet.png" id="1_atuhd"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5mnja"]
+atlas = ExtResource("1_atuhd")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xrwn5"]
+atlas = ExtResource("1_atuhd")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_my4aj"]
+atlas = ExtResource("1_atuhd")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ta4qg"]
+atlas = ExtResource("1_atuhd")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_saeoc"]
+atlas = ExtResource("1_atuhd")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bf0hb"]
+atlas = ExtResource("1_atuhd")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hm7jw"]
+atlas = ExtResource("1_atuhd")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_168oc"]
+atlas = ExtResource("1_atuhd")
+region = Rect2(32, 32, 32, 32)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5mnja")
+}],
+"loop": true,
+"name": &"air",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xrwn5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_my4aj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ta4qg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_saeoc")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bf0hb")
+}],
+"loop": true,
+"name": &"stance",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hm7jw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_168oc")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]

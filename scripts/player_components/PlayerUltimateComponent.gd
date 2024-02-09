@@ -16,6 +16,9 @@ var bullet_speed: float = 600
 var charge_tier: int = 0
 
 func _process(delta):
+	if !AM.enabled:
+		return
+		
 	if PlayerInfo.current_state == PlayerInfo.States.STANCE:
 		raise_charge(delta)
 		AM.sprite_look_at(PlayerInfo.mouse_direction)

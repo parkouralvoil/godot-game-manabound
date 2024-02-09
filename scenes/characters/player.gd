@@ -8,7 +8,7 @@ class_name Player
 @export var camera: Camera2D
 @export var target_lock_component: Area2D
 
-@export var char_manager: AbilityManager
+@export var char_manager: CharacterManager
 
 # input variables
 var x_movement: float = 0
@@ -61,12 +61,9 @@ func _process(delta):
 		
 	if Input.is_action_just_pressed("tab"):
 		auto_aim = !auto_aim
-
+# cuz each character have their healths in AM
 func take_damage(damage: float):
-	if char_manager.health - damage > 0:
-		char_manager.health -= damage
-	else:
-		char_manager.health = 0
+	char_manager.take_damage(damage)
 
 func camera_shake(strength: int):
 	if camera:

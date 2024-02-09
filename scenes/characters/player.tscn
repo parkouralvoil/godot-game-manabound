@@ -1,19 +1,18 @@
-[gd_scene load_steps=30 format=3 uid="uid://c35wulwk6e3b4"]
+[gd_scene load_steps=20 format=3 uid="uid://c35wulwk6e3b4"]
 
 [ext_resource type="Script" path="res://scenes/characters/player.gd" id="1_1gu75"]
-[ext_resource type="Script" path="res://scripts/player_components/PlayerAttackComponent.gd" id="2_3w6lg"]
 [ext_resource type="Script" path="res://scripts/entity_components/HurtboxComponent.gd" id="2_68tq4"]
 [ext_resource type="Script" path="res://scripts/StateMachine.gd" id="2_dps1t"]
 [ext_resource type="Texture2D" uid="uid://bm71lln6lsmlc" path="res://assets/sprite_characters/knight_spritesheet.png" id="2_heryt"]
 [ext_resource type="Script" path="res://scripts/player_components/DirectionIndicator.gd" id="3_h0ap5"]
-[ext_resource type="Script" path="res://scripts/player_components/AmmoComponent.gd" id="3_jfjwh"]
-[ext_resource type="Script" path="res://scenes/skill_tree/knight_stree/AbilityManager.gd" id="4_m0yet"]
+[ext_resource type="Script" path="res://scripts/player_components/CharacterManager.gd" id="3_s6ypn"]
+[ext_resource type="Resource" uid="uid://bt57r35hpevcb" path="res://scenes/characters/knight/knight_data.tres" id="4_uvswd"]
 [ext_resource type="Script" path="res://scripts/player_components/TargetLockComponent.gd" id="5_fjj5y"]
-[ext_resource type="Script" path="res://scripts/player_components/PlayerUltimateComponent.gd" id="5_mwbnk"]
+[ext_resource type="Resource" uid="uid://c85jly26hwn1j" path="res://scenes/characters/witch/witch_data.tres" id="5_u8jvn"]
 [ext_resource type="Script" path="res://scripts/player_states/PlayerIdle.gd" id="6_bimax"]
-[ext_resource type="PackedScene" uid="uid://csxjnretvvtdj" path="res://scenes/skill_tree/knight_stree/knight_stree.tscn" id="6_wpxny"]
 [ext_resource type="Texture2D" uid="uid://df4r12vpxwua7" path="res://assets/sprite_UI/DashDirectionIndicator.png" id="7_bfhbc"]
 [ext_resource type="Script" path="res://scripts/player_states/PlayerMove.gd" id="7_fakih"]
+[ext_resource type="SpriteFrames" uid="uid://n8tavxox3kua" path="res://scenes/characters/knight/knight_spriteframes.tres" id="9_34dkv"]
 [ext_resource type="Texture2D" uid="uid://dy3hkciev768l" path="res://assets/sprite_UI/red_circle.png" id="9_ppy8i"]
 [ext_resource type="Script" path="res://scripts/player_states/PlayerStance.gd" id="12_nt3wa"]
 
@@ -22,85 +21,6 @@ size = Vector2(9, 17)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_6tau6"]
 radius = 201.04
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_skuxk"]
-atlas = ExtResource("2_heryt")
-region = Rect2(0, 64, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_x0yad"]
-atlas = ExtResource("2_heryt")
-region = Rect2(0, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_dpbs3"]
-atlas = ExtResource("2_heryt")
-region = Rect2(32, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_d6faa"]
-atlas = ExtResource("2_heryt")
-region = Rect2(64, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ywuqk"]
-atlas = ExtResource("2_heryt")
-region = Rect2(96, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_sckjg"]
-atlas = ExtResource("2_heryt")
-region = Rect2(0, 96, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_3bq4l"]
-atlas = ExtResource("2_heryt")
-region = Rect2(0, 32, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_f5g6s"]
-atlas = ExtResource("2_heryt")
-region = Rect2(32, 32, 32, 32)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_22hb7"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_skuxk")
-}],
-"loop": true,
-"name": &"air",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_x0yad")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_dpbs3")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_d6faa")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ywuqk")
-}],
-"loop": true,
-"name": &"idle",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_sckjg")
-}],
-"loop": true,
-"name": &"stance",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_3bq4l")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_f5g6s")
-}],
-"loop": true,
-"name": &"walk",
-"speed": 5.0
-}]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_16aye"]
 atlas = ExtResource("2_heryt")
@@ -131,32 +51,9 @@ shape = SubResource("RectangleShape2D_yy4pc")
 debug_color = Color(0.894118, 0.309804, 0.172549, 0.419608)
 
 [node name="CharacterManager" type="Node2D" parent="."]
-script = ExtResource("4_m0yet")
-
-[node name="BasicAttack" type="Node2D" parent="CharacterManager"]
-script = ExtResource("2_3w6lg")
-
-[node name="move_cd" type="Timer" parent="CharacterManager/BasicAttack"]
-wait_time = 0.12
-one_shot = true
-
-[node name="firerate" type="Timer" parent="CharacterManager/BasicAttack"]
-wait_time = 0.15
-one_shot = true
-
-[node name="Ultimate" type="Node2D" parent="CharacterManager"]
-script = ExtResource("5_mwbnk")
-
-[node name="cooldown" type="Timer" parent="CharacterManager/Ultimate"]
-
-[node name="Ammo_component" type="Node2D" parent="CharacterManager"]
-script = ExtResource("3_jfjwh")
-
-[node name="ammo_regen" type="Timer" parent="CharacterManager/Ammo_component"]
-wait_time = 0.4
-one_shot = true
-
-[node name="SkillTree" parent="CharacterManager" instance=ExtResource("6_wpxny")]
+script = ExtResource("3_s6ypn")
+knight_resource = ExtResource("4_uvswd")
+witch_resource = ExtResource("5_u8jvn")
 
 [node name="TargetLock" type="Area2D" parent="." node_paths=PackedStringArray("p")]
 collision_layer = 0
@@ -184,7 +81,7 @@ scale = Vector2(0.1, 0.1)
 texture = ExtResource("9_ppy8i")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-sprite_frames = SubResource("SpriteFrames_22hb7")
+sprite_frames = ExtResource("9_34dkv")
 animation = &"stance"
 
 [node name="Sprite2D_arm" type="Sprite2D" parent="AnimatedSprite2D"]
@@ -212,8 +109,5 @@ p = NodePath("../..")
 script = ExtResource("12_nt3wa")
 p = NodePath("../..")
 
-[connection signal="timeout" from="CharacterManager/Ammo_component/ammo_regen" to="CharacterManager/Ammo_component" method="_on_ammo_regen_timeout"]
 [connection signal="area_entered" from="TargetLock" to="TargetLock" method="_on_area_entered"]
 [connection signal="timeout" from="TargetLock/update_target" to="TargetLock" method="_on_update_target_timeout"]
-
-[editable path="CharacterManager/SkillTree"]

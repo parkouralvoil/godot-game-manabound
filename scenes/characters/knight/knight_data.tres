@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="CharacterResource" load_steps=5 format=3 uid="uid://bt57r35hpevcb"]
+
+[ext_resource type="PackedScene" uid="uid://despujxox3cs7" path="res://scenes/characters/knight/ability_manager_knight.tscn" id="1_5bhbx"]
+[ext_resource type="Script" path="res://scenes/characters/CharacterResource.gd" id="1_7nvx5"]
+[ext_resource type="SpriteFrames" uid="uid://n8tavxox3kua" path="res://scenes/characters/knight/knight_spriteframes.tres" id="3_alhoc"]
+[ext_resource type="Texture2D" uid="uid://3jkuw6bwhk01" path="res://scenes/characters/knight/knight_arm.tres" id="3_sbg5v"]
+
+[resource]
+script = ExtResource("1_7nvx5")
+Ability_manager = ExtResource("1_5bhbx")
+spriteframes = ExtResource("3_alhoc")
+sprite_arm = ExtResource("3_sbg5v")
