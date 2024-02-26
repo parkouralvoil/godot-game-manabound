@@ -13,20 +13,28 @@ config_version=5
 config/name="New-tower-bullet-hell"
 run/main_scene="res://scenes/levels/test_level.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
-run/max_fps=60
 config/icon="res://icon.svg"
 
 [autoload]
 
 EnemyAiManager="*res://scripts/autoloads/enemy_AI_manager.gd"
 PlayerInfo="*res://scripts/autoloads/player_info.gd"
+CombatManager="*res://scripts/autoloads/combat_manager.gd"
+
+[debug]
+
+gdscript/warnings/untyped_declaration=1
+gdscript/warnings/unsafe_property_access=1
 
 [display]
 
-window/size/viewport_width=1366
-window/size/viewport_height=768
-window/stretch/mode="viewport"
-window/stretch/aspect="keep_width"
+window/size/viewport_width=500
+window/size/viewport_height=490
+window/size/window_width_override=1500
+window/size/window_height_override=980
+window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
+window/stretch/scale_mode="integer"
 
 [input]
 
@@ -118,5 +126,7 @@ cheat_menu={
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
-renderer/rendering_method="gl_compatibility"
+renderer/rendering_method="mobile"
 renderer/rendering_method.mobile="gl_compatibility"
+environment/glow/upscale_mode=0
+environment/defaults/default_clear_color=Color(0, 0, 0, 1)

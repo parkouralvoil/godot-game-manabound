@@ -1,0 +1,7 @@
+[gd_resource type="AtlasTexture" load_steps=2 format=3 uid="uid://dhs0tcgsbwnqp"]
+
+[ext_resource type="Texture2D" uid="uid://ug68u46641al" path="res://assets/sprite_characters/witch_spritesheet.png" id="1_igy1b"]
+
+[resource]
+atlas = ExtResource("1_igy1b")
+region = Rect2(9, 3, 13, 15)

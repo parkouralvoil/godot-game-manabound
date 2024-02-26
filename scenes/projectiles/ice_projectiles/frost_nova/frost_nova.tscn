@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://bmykt4bk5s1bk"]
+
+[ext_resource type="Script" path="res://scenes/projectiles/ice_projectiles/frost_nova/frost_nova.gd" id="1_dxavq"]
+[ext_resource type="PackedScene" uid="uid://5f6ajry7qgrd" path="res://scenes/projectiles/ice_projectiles/frost_nova/frost_nova_impact.tscn" id="2_gmbiq"]
+[ext_resource type="Texture2D" uid="uid://c36f5r6cnvwpu" path="res://assets/sprite_projectiles/bullet_pixel_Blue.png" id="3_x0rvr"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0x76w"]
+atlas = ExtResource("3_x0rvr")
+region = Rect2(304, 96, 16, 16)
+
+[node name="FrostNova" type="Marker2D"]
+script = ExtResource("1_dxavq")
+bullet_impact = ExtResource("2_gmbiq")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.745098, 0.74902, 0.733333, 0.286275)
+z_index = -1
+scale = Vector2(13, 13)
+texture = SubResource("AtlasTexture_0x76w")
+
+[node name="spawn_cd" type="Timer" parent="."]
+wait_time = 0.3
+autostart = true
+
+[node name="Marker2D_just to guide" type="Marker2D" parent="."]
+position = Vector2(84, 0)
+
+[connection signal="timeout" from="spawn_cd" to="." method="_on_spawn_cd_timeout"]

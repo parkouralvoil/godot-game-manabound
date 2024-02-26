@@ -5,21 +5,24 @@ class_name PlayerMove
 # can acivate shield
 @export var p: Player
 var mouse_position: Vector2 = Vector2.ZERO
-var boost_speed: float = 350
+var boost_speed: float = 400
 var slow_speed: float = 20
 
-func Enter():
+var boost_afterimages: int = 5
+
+func Enter() -> void:
 	if !p:
 		return
 	p.gravity = 0
 	p.direction_indicator.show()
+	p.direction_indicator.circle.show()
 	PlayerInfo.current_state = PlayerInfo.States.MOVE
 
-func Exit():
+func Exit() -> void:
 	if !p:
 		return
 
-func Update(_delta):
+func Update(_delta: float) -> void:
 	if !p:
 		return
 	#if p.velocity != Vector2.ZERO:
@@ -29,25 +32,26 @@ func Update(_delta):
 	flip_sprite()
 	play_anim()
 
-func Physics_Update(_delta):
+func Physics_Update(_delta: float) -> void:
 	if !p:
 		return
 	p.velocity = slow_speed * p.move_direction
 	
 	if !Input.is_action_pressed("space"): #boost away
 		p.velocity = boost_speed * p.mouse_direction
+		p.afterimage_comp.afterimages = boost_afterimages
 		state_transition.emit(self, "PlayerIdle")
-	elif Input.is_action_pressed("right_click"): # to cancel
+	elif Input.is_action_pressed("right_click") and PlayerInfo.can_charge: # to cancel
 		state_transition.emit(self, "PlayerStance")
 	
 	p.move_and_slide()
 
-func flip_sprite():
+func flip_sprite() -> void:
 	if p.velocity.x >= 1:
 		p.anim_sprite.scale.x = 1
 	elif p.velocity.x <= -1:
 		p.anim_sprite.scale.x = -1
 
-func play_anim():
+func play_anim() -> void:
 	if p.anim_sprite.animation != "air":
 		p.anim_sprite.play("air")

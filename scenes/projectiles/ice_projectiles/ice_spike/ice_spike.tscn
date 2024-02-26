@@ -1,0 +1,28 @@
+[gd_scene load_steps=6 format=3 uid="uid://b8740u5oqxn7d"]
+
+[ext_resource type="Script" path="res://scenes/projectiles/ice_projectiles/ice_spike/ice_spike.gd" id="1_d2aqn"]
+[ext_resource type="PackedScene" uid="uid://c3324msmfjdrb" path="res://scenes/projectiles/ice_projectiles/ice_spike/ice_spike_bullet_impact.tscn" id="2_dbhtr"]
+[ext_resource type="Texture2D" uid="uid://c36f5r6cnvwpu" path="res://assets/sprite_projectiles/bullet_pixel_Blue.png" id="2_pmx4p"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ggs10"]
+atlas = ExtResource("2_pmx4p")
+region = Rect2(327, 261, 24, 7)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5d8ra"]
+radius = 2.0
+
+[node name="ice_spike" type="Area2D"]
+collision_layer = 0
+script = ExtResource("1_d2aqn")
+bullet_impact = ExtResource("2_dbhtr")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_ggs10")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, 0)
+shape = SubResource("CircleShape2D_5d8ra")
+debug_color = Color(0.945098, 0.196078, 0.345098, 0.419608)
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

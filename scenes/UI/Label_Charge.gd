@@ -5,8 +5,17 @@ extends Label
 var format_string: String = "Charge: %s/%s"
 var actual_string: String = "aa"
 
-func _process(delta):
-	if p:
-		actual_string = format_string % [snapped(PlayerInfo.displayed_charge, 10), PlayerInfo.displayed_max_charge]
-		text = actual_string
-		scale = Vector2(0.5, 0.5)
+func _process(_delta: float) -> void:
+	if !p:
+		return
+	
+	actual_string = format_string % [snapped(PlayerInfo.displayed_charge, 1), PlayerInfo.displayed_max_charge]
+	text = actual_string
+	if PlayerInfo.displayed_charge >= 100:
+		modulate = Color(1, 0.2, 0.2)
+	elif PlayerInfo.displayed_charge >= 50:
+		modulate = Color(1, 1, 0.2)
+	elif PlayerInfo.displayed_charge >= 1:
+		modulate = Color(1, 1, 1, 0.8)
+	else:
+		modulate = Color(0.6, 0.6, 0.6, 0.8)

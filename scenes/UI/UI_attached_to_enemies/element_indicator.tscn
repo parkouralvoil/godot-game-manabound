@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://c1mef3esxg5jh"]
+
+[ext_resource type="Texture2D" uid="uid://ggeqdf7h0gk0" path="res://resources/lightning.tres" id="1_gngqs"]
+[ext_resource type="Script" path="res://scenes/UI/UI_attached_to_enemies/element_indicator.gd" id="2_u754f"]
+[ext_resource type="Texture2D" uid="uid://dxxhf06kwwpun" path="res://resources/ice.tres" id="3_w3y0v"]
+
+[node name="element_indicator" type="Sprite2D"]
+modulate = Color(0.95, 0.95, 0.95, 1)
+position = Vector2(-7, 24)
+texture = ExtResource("1_gngqs")
+script = ExtResource("2_u754f")
+lightning = ExtResource("1_gngqs")
+ice = ExtResource("3_w3y0v")

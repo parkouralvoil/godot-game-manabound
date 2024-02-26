@@ -3,14 +3,14 @@ class_name State
 
 signal state_transition
 
-func Enter():
+func Enter() -> void:
 	pass
 
-func Exit():
+func Exit() -> void:
 	pass
 
-func Update(_delta):
+func Update(_delta: float) -> void:
 	pass
 
-func Physics_Update(_delta):
+func Physics_Update(_delta: float) -> void:
 	pass

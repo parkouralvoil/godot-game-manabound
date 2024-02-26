@@ -1,0 +1,48 @@
+[gd_scene load_steps=7 format=3 uid="uid://dg7x1tbggfxgc"]
+
+[ext_resource type="Script" path="res://scripts/entity_components/DebuffComponent_enemy.gd" id="1_shu2q"]
+
+[sub_resource type="Gradient" id="Gradient_s8em6"]
+offsets = PackedFloat32Array(0, 0.40625, 1)
+colors = PackedColorArray(0.282, 0.906, 1.5, 1, 0.373, 0.451, 1.2, 0.647, 0.407843, 0.345098, 0.537255, 0.266667)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_kt4nn"]
+gradient = SubResource("Gradient_s8em6")
+
+[sub_resource type="Curve" id="Curve_l0ul7"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.984127, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_qqyoo"]
+curve = SubResource("Curve_l0ul7")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_jrdbj"]
+particle_flag_disable_z = true
+angle_max = 90.0
+spread = 180.0
+initial_velocity_min = 200.0
+initial_velocity_max = 200.0
+gravity = Vector3(0, 100, 0)
+scale_min = 3.0
+scale_max = 4.0
+scale_curve = SubResource("CurveTexture_qqyoo")
+color_ramp = SubResource("GradientTexture1D_kt4nn")
+turbulence_enabled = true
+turbulence_noise_scale = 4.0
+
+[node name="DebuffComponent" type="Node2D"]
+script = ExtResource("1_shu2q")
+
+[node name="GPUParticles2D_supercond" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 30
+process_material = SubResource("ParticleProcessMaterial_jrdbj")
+lifetime = 0.7
+one_shot = true
+explosiveness = 1.0
+
+[node name="superconduct" type="Timer" parent="."]
+wait_time = 8.0
+one_shot = true
+
+[connection signal="timeout" from="superconduct" to="." method="_on_superconduct_timeout"]

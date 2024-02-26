@@ -1,0 +1,91 @@
+[gd_scene load_steps=14 format=3 uid="uid://wb7yfjqhq458"]
+
+[ext_resource type="Script" path="res://scenes/enemies/mobile_enemies/drone_small/enemy_smalldrone.gd" id="1_0q3x6"]
+[ext_resource type="PackedScene" uid="uid://ccfj5qan8stdb" path="res://scenes/projectiles/bullet_impact.tscn" id="2_4bo0d"]
+[ext_resource type="Texture2D" uid="uid://c5yynjtnoolo2" path="res://assets/sprite_enemies/smalldrone.png" id="2_4y6fh"]
+[ext_resource type="Texture2D" uid="uid://mnqy6onwpiay" path="res://resources/enemy_dead.tres" id="3_qkuvi"]
+[ext_resource type="Script" path="res://scripts/entity_components/HurtboxComponent_enemy.gd" id="3_st8q1"]
+[ext_resource type="Script" path="res://scripts/entity_components/attack_components_specific/AttackComponent_Drone.gd" id="4_nuqg1"]
+[ext_resource type="Script" path="res://scripts/entity_components/HealthComponent_enemy.gd" id="5_xemy2"]
+[ext_resource type="PackedScene" uid="uid://rdeieo07v8gt" path="res://scenes/UI/UI_attached_to_enemies/label_dmg_num.tscn" id="6_8b0xp"]
+[ext_resource type="PackedScene" uid="uid://dlecin0ht7e7l" path="res://scenes/UI/UI_attached_to_enemies/healthbar.tscn" id="6_wmuqc"]
+[ext_resource type="PackedScene" uid="uid://c1mef3esxg5jh" path="res://scenes/UI/UI_attached_to_enemies/element_indicator.tscn" id="10_3a38x"]
+[ext_resource type="PackedScene" uid="uid://dg7x1tbggfxgc" path="res://scripts/entity_components/debuff_component.tscn" id="11_pxr5a"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6cq2t"]
+radius = 4.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xcfmu"]
+radius = 6.0
+
+[node name="enemy_smalldrone" type="CharacterBody2D"]
+collision_layer = 64
+collision_mask = 65
+motion_mode = 1
+wall_min_slide_angle = 0.0
+script = ExtResource("1_0q3x6")
+bullet_impact_scene = ExtResource("2_4bo0d")
+enemy_dead_texture = ExtResource("3_qkuvi")
+impact_scale = Vector2(0.5, 0.5)
+max_health = 5.0
+default_reload_time = 4.0
+
+[node name="Sprite2D_main" type="Sprite2D" parent="."]
+scale = Vector2(2, 2)
+texture = ExtResource("2_4y6fh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_6cq2t")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+target_desired_distance = 150.0
+path_max_distance = 300.0
+path_postprocessing = 1
+avoidance_enabled = true
+radius = 8.0
+neighbor_distance = 400.0
+max_neighbors = 9
+
+[node name="updatePath" type="Timer" parent="."]
+wait_time = 0.2
+autostart = true
+
+[node name="HurtboxComponent" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 0
+monitoring = false
+script = ExtResource("3_st8q1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
+shape = SubResource("CircleShape2D_xcfmu")
+debug_color = Color(0.839216, 0.372549, 0.25098, 0.419608)
+
+[node name="AttackComponent" type="Node2D" parent="."]
+script = ExtResource("4_nuqg1")
+
+[node name="projectile_origin" type="Marker2D" parent="AttackComponent"]
+position = Vector2(0.5, 2)
+
+[node name="firerate" type="Timer" parent="AttackComponent"]
+one_shot = true
+
+[node name="Raycast_toPlayer" type="RayCast2D" parent="."]
+
+[node name="HealthComponent" type="Node2D" parent="."]
+script = ExtResource("5_xemy2")
+damage_number = ExtResource("6_8b0xp")
+
+[node name="Healthbar" parent="HealthComponent" instance=ExtResource("6_wmuqc")]
+offset_left = -5.0
+offset_top = 7.0
+offset_right = 5.0
+offset_bottom = 12.0
+
+[node name="element_indicator" parent="HealthComponent" instance=ExtResource("10_3a38x")]
+position = Vector2(-12, 12)
+
+[node name="DebuffComponent" parent="." instance=ExtResource("11_pxr5a")]
+
+[connection signal="velocity_computed" from="NavigationAgent2D" to="." method="_on_navigation_agent_2d_velocity_computed"]
+[connection signal="timeout" from="updatePath" to="." method="_on_updatePath_timeout"]
+[connection signal="timeout" from="AttackComponent/firerate" to="AttackComponent" method="_on_firerate_timeout"]

@@ -8,8 +8,8 @@ extends Camera2D
 # Multiplier for lerping the shake strength to zero
 @export var SHAKE_DECAY_RATE: float = 5.0
 
-@onready var rand = RandomNumberGenerator.new()
-@onready var noise = FastNoiseLite.new()
+@onready var rand: RandomNumberGenerator = RandomNumberGenerator.new()
+@onready var noise: FastNoiseLite = FastNoiseLite.new()
 
 # Used to keep track of where we are in the noise
 # so that we can smoothly move through it

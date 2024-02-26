@@ -6,7 +6,7 @@ class_name StateMachine
 var states : Dictionary = {}
 var current_state : State
 
-func _ready():
+func _ready() -> void:
 	for child in get_children():
 		if child is State:
 			states[child.name.to_lower()] = child
@@ -16,19 +16,19 @@ func _ready():
 		initial_state.Enter()
 		current_state = initial_state
 
-func _process(delta):
+func _process(delta: float) -> void:
 	if current_state:
 		current_state.Update(delta)
 
-func _physics_process(delta):
+func _physics_process(delta: float) -> void:
 	if current_state:
 		current_state.Physics_Update(delta)
 
-func change_state(state, new_state_name):
+func change_state(state: State, new_state_name: String) -> void:
 	if state != current_state:
 		return
 	
-	var new_state = states.get(new_state_name.to_lower())
+	var new_state: Variant = states.get(new_state_name.to_lower()) # type variant cuz dictionary sux
 	if !new_state:
 		return
 	

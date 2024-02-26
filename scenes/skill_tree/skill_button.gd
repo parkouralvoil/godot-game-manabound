@@ -13,7 +13,7 @@ var level: int = 0:
 		level = value
 		label.text = str(level) + "/3"
 
-func _ready():
+func _ready() -> void:
 	if root:
 		size = Vector2.ZERO
 		panel.hide()
@@ -29,14 +29,14 @@ func _ready():
 		line_2D.add_point(global_position + size/2)
 		line_2D.add_point(get_parent().global_position + size/2)
 
-func _on_pressed():
+func _on_pressed() -> void:
 	level = min(level+1, 3)
 	panel.show_behind_parent = true
 	enable_child_buttons()
 
-func enable_child_buttons():
+func enable_child_buttons() -> void:
 	line_2D.default_color = Color(1, 1, 0.25)
-	var skills = get_children()
+	var skills: Array[Node] = get_children()
 	for skill in skills:
 		if skill is SkillNode and level >= 1:
 			skill.disabled = false

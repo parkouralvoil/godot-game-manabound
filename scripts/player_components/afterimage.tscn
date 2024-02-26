@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://c6sl5r1r7eng1"]
+
+[ext_resource type="Texture2D" uid="uid://k11ouf4r01us" path="res://icon.svg" id="1_irea1"]
+[ext_resource type="Script" path="res://scripts/player_components/afterimage.gd" id="1_omqkk"]
+
+[node name="Afterimage" type="Sprite2D"]
+show_behind_parent = true
+texture = ExtResource("1_irea1")
+script = ExtResource("1_omqkk")
