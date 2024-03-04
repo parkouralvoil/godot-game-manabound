@@ -17,7 +17,7 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	_update_target()
 
-func _update_target():
+func _update_target() -> void:
 	if has_overlapping_areas() and (t_update.is_stopped() or closest_target == null):
 		#print("rah" + str(get_overlapping_areas() ) )
 		for enemy in get_overlapping_areas():

@@ -1,7 +1,9 @@
 extends Node2D
-class_name AbilityManager
+class_name Character
 
-@onready var skill_tree: CanvasLayer = $SkillTree
+@onready var skill_tree: SkillTree = $AbilityManager/SkillTree
+
+# i want the AM to remain universal, the components are the ones who play around with eachother
 @onready var CM: CharacterManager = get_parent()
 
 var enabled: bool = false # managed by char manager
@@ -10,23 +12,24 @@ var enabled: bool = false # managed by char manager
 var health: float = max_health :
 	set(value):
 		health = _on_health_change(value)
-	get:
-		return health
 
 # basic atk
-@export var max_ammo: int = 9
+@export var max_ammo: int = 9 :
+	set(value):
+		max_ammo = _on_max_ammo_change(value)
 var ammo: int = max_ammo :
 	set(value):
 		ammo = _on_ammo_change(value)
-	get:
-		return ammo
 
 # ultimate
-@export var max_charge: float = 100
+var max_charge: float = 50 : 
+	set(value):
+		max_charge = _on_max_charge_change(value)
 var charge: float
 
 @export var charge_rate: float = 60
-# EXPORT VARS, SO CHANGE THEM IN THE EDITOR!!!!
+# EXPORT VARS,
+	#but eventually they'll be managed solely by Ability Manager
 
 func _ready() -> void:
 	skill_tree.hide()
@@ -40,14 +43,26 @@ func _process(_delta: float) -> void:
 			skill_tree.hide()
 		return
 	
-	if Input.is_action_just_pressed("shop_key"):
-		skill_tree.visible = !skill_tree.visible
+	if Input.is_action_just_pressed("shop_key") and !skill_tree.visible:
+		skill_tree.show()
+		get_tree().paused = true
+			
 	PlayerInfo.displayed_charge = charge
+
+func _on_max_ammo_change(new_max_ammo: int) -> int:
+	if enabled:
+		PlayerInfo.on_max_ammo_changed.emit(new_max_ammo)
+	return new_max_ammo #NOTE
 
 func _on_ammo_change(new_ammo: int) -> int:
 	if enabled:
 		PlayerInfo.on_ammo_changed.emit(new_ammo)
 	return new_ammo #NOTE
+
+func _on_max_charge_change(new_max_charge: int) -> int:
+	if enabled:
+		PlayerInfo.on_max_charge_changed.emit(new_max_charge)
+	return new_max_charge #NOTE
 
 func _on_health_change(new_health: float) -> float:
 	if enabled:
@@ -58,9 +73,14 @@ func update_player_info() -> void:
 	# make sure that nothing changed
 	PlayerInfo.on_ammo_changed.emit(ammo)
 	PlayerInfo.on_health_changed.emit(health)
-	PlayerInfo.on_max_changed.emit(max_ammo, max_health, max_charge)
-
+	PlayerInfo.on_max_ammo_changed.emit(max_ammo)
+	PlayerInfo.on_max_health_changed.emit(max_health)
+	PlayerInfo.on_max_charge_changed.emit(max_charge)
+	
 #region Transfer: (AM) > CM > Player
+# i can remove this needless "intermediarry" transfer with signals, but then that'd mean that
+# other entities could connect to use those signals,
+# at the same time tho, this already works so why bother to change it?
 func set_player_velocity(velocity: Vector2) -> void:
 	if CM:
 		CM.set_player_velocity(velocity)

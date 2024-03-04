@@ -31,8 +31,7 @@ var basic_attacking: bool = false # replaces "is_firing"
 var can_charge: bool = true # for passive charge chars to set it false
 var charging: bool = false # for ult
 
-# set by enemies
-var mana_orbs: int
+var mana_orbs: int = 0
 
 # set by player
 var aim_direction: Vector2
@@ -48,7 +47,12 @@ var displayed_max_health: float
 
 signal on_ammo_changed # ammo only
 signal on_health_changed # hp only
-signal on_max_changed # max ammo,hp,charge
+signal on_max_ammo_changed 
+signal on_max_health_changed
+signal on_max_charge_changed
+
+# store references to previou ability managers (reset to null once like exit game or smthg)
+
 
 # NO NEED for target lock var, aim_direction already handles it
 
@@ -56,7 +60,11 @@ func _ready() -> void:
 	mana_orbs = 0
 	on_ammo_changed.connect(_update_ammo)
 	on_health_changed.connect(_update_health)
-	on_max_changed.connect(_update_max)
+	on_max_ammo_changed.connect(_update_max_ammo)
+	on_max_health_changed.connect(_update_max_health)
+	on_max_charge_changed.connect(_update_max_charge)
+	
+	process_mode = Node.PROCESS_MODE_ALWAYS
 
 func _process(_delta: float) -> void:
 	match current_charge_type:
@@ -76,7 +84,15 @@ func _update_ammo(ammo: int) -> void:
 func _update_health(health: int) -> void:
 	PlayerInfo.displayed_health = health
 
-func _update_max(max_ammo: int, max_health: float, max_charge: float) -> void:
-	PlayerInfo.displayed_max_charge = max_charge
-	PlayerInfo.displayed_max_health = max_health
+func _update_max_ammo(max_ammo: int) -> void:
 	PlayerInfo.displayed_max_ammo = max_ammo
+
+func _update_max_health(max_health: int) -> void:
+	PlayerInfo.displayed_max_health = max_health
+
+func _update_max_charge(max_charge: float) -> void:
+	PlayerInfo.displayed_max_charge = max_charge
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("cheat_menu"):
+		mana_orbs += 10000

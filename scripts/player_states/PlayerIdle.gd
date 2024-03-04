@@ -11,6 +11,7 @@ func Enter() -> void:
 		return
 	p.gravity = p.default_gravity
 	p.direction_indicator.hide()
+	p.circle_indicator.hide()
 	PlayerInfo.current_state = PlayerInfo.States.IDLE
 
 func Exit() -> void:

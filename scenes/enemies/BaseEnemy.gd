@@ -41,20 +41,13 @@ func _ready() -> void:
 	assert(enemy_dead_texture, "missing ref")
 	
 	# to give leeway for char when they first enter
-	process_mode = Node.PROCESS_MODE_WHEN_PAUSED
+	process_mode = Node.PROCESS_MODE_DISABLED
 	await get_tree().create_timer(2).timeout
 	process_mode = Node.PROCESS_MODE_INHERIT
 
 func take_damage(damage: float, element: CombatManager.Elements) -> void:
 	if health_component:
 		health_component.damage_received(damage, element)
-		return
-		
-	if health - damage > 0:
-		health -= damage
-	else:
-		make_impact()
-		queue_free()
 
 func make_impact() -> void:
 	var imp_instance: BulletImpact = bullet_impact_scene.instantiate()

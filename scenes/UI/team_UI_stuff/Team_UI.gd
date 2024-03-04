@@ -14,6 +14,6 @@ func _ready() -> void:
 	assert(p, "missing player")
 	char_manager = p.char_manager
 	for i in range(2):
-		var character := char_manager.selected_char[i]
-		var AM := char_manager.saved_AMs[i]
+		var character := char_manager.selected_char_resource[i]
+		var AM := char_manager.stored_chars[i]
 		char_box[i].initialize_info(character, AM, i + 1)

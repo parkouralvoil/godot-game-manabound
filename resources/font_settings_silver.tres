@@ -3,4 +3,7 @@
 [ext_resource type="FontFile" uid="uid://c41yv1d1anklx" path="res://assets/Silver.ttf" id="1_6dgo8"]
 
 [resource]
+line_spacing = -3.0
 font = ExtResource("1_6dgo8")
+font_size = 14
+font_color = Color(0.9, 0.9, 0.9, 0.9)

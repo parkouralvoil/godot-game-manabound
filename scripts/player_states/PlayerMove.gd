@@ -15,7 +15,7 @@ func Enter() -> void:
 		return
 	p.gravity = 0
 	p.direction_indicator.show()
-	p.direction_indicator.circle.show()
+	p.circle_indicator.show()
 	PlayerInfo.current_state = PlayerInfo.States.MOVE
 
 func Exit() -> void:

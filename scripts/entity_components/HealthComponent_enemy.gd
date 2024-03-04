@@ -28,6 +28,7 @@ func damage_received(damage: float, new_elem: CombatManager.Elements) -> void:
 				if new_elem != CombatManager.Elements.NONE && new_elem != element_initial:
 					apply_reaction(new_elem)
 	else:
+		PlayerInfo.mana_orbs += e.max_health
 		e.make_impact()
 		e.queue_free()
 

@@ -1,23 +1,23 @@
 [gd_scene load_steps=26 format=3 uid="uid://c35wulwk6e3b4"]
 
-[ext_resource type="Script" path="res://scenes/characters/player.gd" id="1_1gu75"]
-[ext_resource type="Script" path="res://scripts/StateMachine.gd" id="2_dps1t"]
-[ext_resource type="Texture2D" uid="uid://bm71lln6lsmlc" path="res://assets/sprite_characters/knight_spritesheet.png" id="2_heryt"]
-[ext_resource type="Script" path="res://scripts/player_components/HurtboxComponent_player.gd" id="2_ktnwc"]
-[ext_resource type="Script" path="res://scripts/player_components/PlayerHit.gd" id="2_vntb5"]
-[ext_resource type="Script" path="res://scripts/player_components/AfterimageComponent.gd" id="3_g0yet"]
-[ext_resource type="Script" path="res://scripts/player_components/DirectionIndicator.gd" id="3_h0ap5"]
-[ext_resource type="Script" path="res://scripts/player_components/CharacterManager.gd" id="3_s6ypn"]
-[ext_resource type="Resource" uid="uid://bt57r35hpevcb" path="res://scenes/characters/knight/knight_data.tres" id="4_uvswd"]
-[ext_resource type="PackedScene" uid="uid://c6sl5r1r7eng1" path="res://scripts/player_components/afterimage.tscn" id="5_6l10e"]
-[ext_resource type="Script" path="res://scripts/player_components/TargetLockComponent.gd" id="5_fjj5y"]
-[ext_resource type="Resource" uid="uid://c85jly26hwn1j" path="res://scenes/characters/witch/witch_data.tres" id="5_u8jvn"]
-[ext_resource type="Script" path="res://scripts/player_states/PlayerIdle.gd" id="6_bimax"]
-[ext_resource type="Texture2D" uid="uid://df4r12vpxwua7" path="res://assets/sprite_UI/DashDirectionIndicator.png" id="7_bfhbc"]
-[ext_resource type="Script" path="res://scripts/player_states/PlayerMove.gd" id="7_fakih"]
-[ext_resource type="SpriteFrames" uid="uid://n8tavxox3kua" path="res://scenes/characters/knight/knight_spriteframes.tres" id="9_34dkv"]
-[ext_resource type="Texture2D" uid="uid://dy3hkciev768l" path="res://assets/sprite_UI/red_circle.png" id="9_ppy8i"]
-[ext_resource type="Script" path="res://scripts/player_states/PlayerStance.gd" id="12_nt3wa"]
+[ext_resource type="Script" path="res://scenes/player.gd" id="1_ob8fa"]
+[ext_resource type="Script" path="res://scripts/player_components/HurtboxComponent_player.gd" id="2_w8hq5"]
+[ext_resource type="Script" path="res://scripts/player_components/PlayerHit.gd" id="3_lry20"]
+[ext_resource type="Script" path="res://scripts/player_components/AfterimageComponent.gd" id="4_ppq5l"]
+[ext_resource type="PackedScene" uid="uid://c6sl5r1r7eng1" path="res://scripts/player_components/afterimage.tscn" id="5_hni55"]
+[ext_resource type="Script" path="res://scripts/player_components/CharacterManager.gd" id="6_g8flh"]
+[ext_resource type="Resource" uid="uid://bt57r35hpevcb" path="res://characters/knight/knight_char_data.tres" id="7_0jpgg"]
+[ext_resource type="Resource" uid="uid://c85jly26hwn1j" path="res://characters/witch/witch_data.tres" id="8_bowyj"]
+[ext_resource type="Script" path="res://scripts/player_components/TargetLockComponent.gd" id="9_616gv"]
+[ext_resource type="Texture2D" uid="uid://df4r12vpxwua7" path="res://assets/sprite_UI/DashDirectionIndicator.png" id="10_pcbep"]
+[ext_resource type="Script" path="res://scripts/player_components/DirectionIndicator.gd" id="11_vqh4r"]
+[ext_resource type="Texture2D" uid="uid://dy3hkciev768l" path="res://assets/sprite_UI/red_circle.png" id="12_i87yh"]
+[ext_resource type="SpriteFrames" uid="uid://n8tavxox3kua" path="res://characters/knight/knight_spriteframes.tres" id="13_7cy21"]
+[ext_resource type="Texture2D" uid="uid://bm71lln6lsmlc" path="res://assets/sprite_characters/knight_spritesheet.png" id="14_7yw6f"]
+[ext_resource type="Script" path="res://scripts/StateMachine.gd" id="15_mooub"]
+[ext_resource type="Script" path="res://scripts/player_states/PlayerIdle.gd" id="16_01hcy"]
+[ext_resource type="Script" path="res://scripts/player_states/PlayerMove.gd" id="17_btrsq"]
+[ext_resource type="Script" path="res://scripts/player_states/PlayerStance.gd" id="18_f66as"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yy4pc"]
 size = Vector2(9, 17)
@@ -33,8 +33,8 @@ curve = SubResource("Curve_0j5ej")
 particle_flag_disable_z = true
 angle_max = 180.0
 spread = 180.0
-initial_velocity_min = 300.0
-initial_velocity_max = 350.0
+initial_velocity_min = 400.0
+initial_velocity_max = 500.0
 gravity = Vector3(0, 0, 0)
 scale_min = 4.0
 scale_max = 7.0
@@ -44,16 +44,17 @@ scale_curve = SubResource("CurveTexture_gh1r7")
 radius = 201.04
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_16aye"]
-atlas = ExtResource("2_heryt")
+atlas = ExtResource("14_7yw6f")
 region = Rect2(96, 96, 32, 32)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_c2x3k"]
 size = Vector2(8, 19)
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("direction_indicator", "target_lock_component", "player_hit_comp", "afterimage_comp")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("direction_indicator", "circle_indicator", "target_lock_component", "player_hit_comp", "afterimage_comp")]
 collision_layer = 2
-script = ExtResource("1_1gu75")
+script = ExtResource("1_ob8fa")
 direction_indicator = NodePath("DirectionIndicator")
+circle_indicator = NodePath("circle")
 target_lock_component = NodePath("TargetLock")
 player_hit_comp = NodePath("PlayerHit")
 afterimage_comp = NodePath("AfterimageSpawner")
@@ -62,7 +63,7 @@ afterimage_comp = NodePath("AfterimageSpawner")
 collision_layer = 4
 collision_mask = 0
 monitoring = false
-script = ExtResource("2_ktnwc")
+script = ExtResource("2_w8hq5")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 position = Vector2(-1.5, 3.5)
@@ -70,7 +71,7 @@ shape = SubResource("RectangleShape2D_yy4pc")
 debug_color = Color(0.894118, 0.309804, 0.172549, 0.419608)
 
 [node name="PlayerHit" type="Node2D" parent="."]
-script = ExtResource("2_vntb5")
+script = ExtResource("3_lry20")
 
 [node name="iframe_cd" type="Timer" parent="PlayerHit"]
 wait_time = 0.2
@@ -80,18 +81,18 @@ one_shot = true
 emitting = false
 amount = 30
 process_material = SubResource("ParticleProcessMaterial_ia00x")
-lifetime = 0.4
+lifetime = 0.3
 one_shot = true
 explosiveness = 1.0
 
 [node name="AfterimageSpawner" type="Node2D" parent="."]
-script = ExtResource("3_g0yet")
-afterimage_scene = ExtResource("5_6l10e")
+script = ExtResource("4_ppq5l")
+afterimage_scene = ExtResource("5_hni55")
 
 [node name="CharacterManager" type="Node2D" parent="."]
-script = ExtResource("3_s6ypn")
-knight_resource = ExtResource("4_uvswd")
-witch_resource = ExtResource("5_u8jvn")
+script = ExtResource("6_g8flh")
+knight_resource = ExtResource("7_0jpgg")
+witch_resource = ExtResource("8_bowyj")
 
 [node name="change_char_cd" type="Timer" parent="CharacterManager"]
 wait_time = 0.7
@@ -101,7 +102,7 @@ one_shot = true
 collision_layer = 0
 collision_mask = 8
 monitorable = false
-script = ExtResource("5_fjj5y")
+script = ExtResource("9_616gv")
 p = NodePath("..")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TargetLock"]
@@ -115,17 +116,17 @@ autostart = true
 
 [node name="DirectionIndicator" type="Sprite2D" parent="." node_paths=PackedStringArray("p")]
 modulate = Color(0.9, 0.9, 0.9, 1)
-texture = ExtResource("7_bfhbc")
-script = ExtResource("3_h0ap5")
+texture = ExtResource("10_pcbep")
+script = ExtResource("11_vqh4r")
 p = NodePath("..")
 
-[node name="circle" type="Sprite2D" parent="DirectionIndicator"]
+[node name="circle" type="Sprite2D" parent="."]
 modulate = Color(0, 0.211765, 0.117647, 0.509804)
 scale = Vector2(0.1, 0.1)
-texture = ExtResource("9_ppy8i")
+texture = ExtResource("12_i87yh")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-sprite_frames = ExtResource("9_34dkv")
+sprite_frames = ExtResource("13_7cy21")
 animation = &"stance"
 
 [node name="Sprite2D_arm" type="Sprite2D" parent="AnimatedSprite2D"]
@@ -138,19 +139,19 @@ position = Vector2(-1, 3.5)
 shape = SubResource("RectangleShape2D_c2x3k")
 
 [node name="FSM" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
-script = ExtResource("2_dps1t")
+script = ExtResource("15_mooub")
 initial_state = NodePath("PlayerIdle")
 
 [node name="PlayerIdle" type="Node" parent="FSM" node_paths=PackedStringArray("p")]
-script = ExtResource("6_bimax")
+script = ExtResource("16_01hcy")
 p = NodePath("../..")
 
 [node name="PlayerMove" type="Node" parent="FSM" node_paths=PackedStringArray("p")]
-script = ExtResource("7_fakih")
+script = ExtResource("17_btrsq")
 p = NodePath("../..")
 
 [node name="PlayerStance" type="Node" parent="FSM" node_paths=PackedStringArray("p")]
-script = ExtResource("12_nt3wa")
+script = ExtResource("18_f66as")
 p = NodePath("../..")
 
 [connection signal="timeout" from="PlayerHit/iframe_cd" to="PlayerHit" method="_on_iframe_cd_timeout"]

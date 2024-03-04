@@ -9,7 +9,7 @@ var red_transparent: Color = Color(1, 0.5, 0.5, 0.1)
 var green_faded: Color = Color(0.4, 1.4, 0.4, 0.5)
 var green_transparent: Color = Color(0, 0.8, 0, 0.1)
 
-func _ready():
+func _ready() -> void:
 	var tween := create_tween()
 	tween.tween_property(self, "modulate", green_transparent, 0.5).from(green_faded)
 	await tween.finished

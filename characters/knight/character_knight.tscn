@@ -1,0 +1,45 @@
+[gd_scene load_steps=10 format=3 uid="uid://despujxox3cs7"]
+
+[ext_resource type="Script" path="res://characters/CharacterClass.gd" id="1_2hkjo"]
+[ext_resource type="Script" path="res://characters/knight/scripts/knight_AbilityManager.gd" id="2_e4ef6"]
+[ext_resource type="PackedScene" uid="uid://csxjnretvvtdj" path="res://scenes/skill_tree/stree_knight.tscn" id="3_bfk4m"]
+[ext_resource type="Script" path="res://characters/knight/scripts/knight_AttackComponent.gd" id="4_k4d5v"]
+[ext_resource type="PackedScene" uid="uid://oi2y57fiqpdo" path="res://scenes/projectiles/bullet.tscn" id="5_wb6a2"]
+[ext_resource type="PackedScene" uid="uid://bf05bt5n34ymh" path="res://scenes/projectiles/lightning_projectiles/lightning_bullet/lightning_bullet.tscn" id="6_oe7nv"]
+[ext_resource type="Script" path="res://characters/knight/scripts/knight_UltimateComponent_knight.gd" id="7_hkru2"]
+[ext_resource type="PackedScene" uid="uid://j2b61v541lds" path="res://scenes/projectiles/lightning_projectiles/grand_bolt/grand_bolt.tscn" id="8_3k3pf"]
+[ext_resource type="Script" path="res://characters/knight/scripts/knight_AmmoComponent.gd" id="9_1ohy4"]
+
+[node name="character_knight" type="Node2D"]
+script = ExtResource("1_2hkjo")
+max_health = 9.0
+charge_rate = 70.0
+
+[node name="AbilityManager" type="Node2D" parent="."]
+script = ExtResource("2_e4ef6")
+
+[node name="SkillTree" parent="AbilityManager" instance=ExtResource("3_bfk4m")]
+
+[node name="BasicAttack" type="Node2D" parent="AbilityManager"]
+script = ExtResource("4_k4d5v")
+BasicBoltScene = ExtResource("5_wb6a2")
+LightningBoltScene = ExtResource("6_oe7nv")
+
+[node name="firerate" type="Timer" parent="AbilityManager/BasicAttack"]
+wait_time = 0.15
+one_shot = true
+
+[node name="recoil" type="Timer" parent="AbilityManager/BasicAttack"]
+wait_time = 0.16
+one_shot = true
+
+[node name="Ultimate" type="Node2D" parent="AbilityManager"]
+script = ExtResource("7_hkru2")
+GrandBoltScene = ExtResource("8_3k3pf")
+
+[node name="Ammo" type="Node2D" parent="AbilityManager"]
+script = ExtResource("9_1ohy4")
+
+[node name="ammo_regen" type="Timer" parent="AbilityManager/Ammo"]
+wait_time = 0.4
+one_shot = true

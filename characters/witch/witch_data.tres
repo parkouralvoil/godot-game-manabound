@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="CharacterResource" load_steps=6 format=3 uid="uid://c85jly26hwn1j"]
+
+[ext_resource type="PackedScene" uid="uid://dkyhb7voldou1" path="res://characters/witch/character_witch.tscn" id="1_ynoo3"]
+[ext_resource type="Script" path="res://characters/CharacterResource.gd" id="2_6p1mb"]
+[ext_resource type="Texture2D" uid="uid://kdh26376nd2g" path="res://characters/witch/witch_arm.tres" id="3_elrf0"]
+[ext_resource type="Texture2D" uid="uid://dhs0tcgsbwnqp" path="res://characters/witch/witch_portrait.tres" id="4_mn6l5"]
+[ext_resource type="SpriteFrames" uid="uid://dsg0xmjs2wxlj" path="res://characters/witch/witch_spriteframes.tres" id="5_3sa7r"]
+
+[resource]
+script = ExtResource("2_6p1mb")
+character_scene = ExtResource("1_ynoo3")
+spriteframes = ExtResource("5_3sa7r")
+sprite_arm = ExtResource("3_elrf0")
+sprite_portrait = ExtResource("4_mn6l5")
+char_name = "Witch"

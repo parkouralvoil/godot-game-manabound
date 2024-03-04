@@ -8,7 +8,7 @@ var color_visible: Color = Color(1, 1, 1, 1)
 func _ready() -> void:
 	modulate = color_transparent
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	pass
 
 func display_blood() -> void: # called by player thru export

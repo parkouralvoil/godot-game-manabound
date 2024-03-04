@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="AM_resource" load_steps=2 format=3 uid="uid://d0d4ghgk6rs2p"]
+
+[ext_resource type="Script" path="res://characters/AM_resource.gd" id="1_4gxov"]
+
+[resource]
+script = ExtResource("1_4gxov")
+bullet_speed = 400
+base_dmg_projectile_1 = 5
+base_dmg_projectile_2 = 0
+max_distance = 300
+scale_dmg_projectile_1 = 0
+scale_dmg_projectile_2 = 5
+ult_bullet_speed = 600
+ult_dmg_tier1 = 20
+ult_dmg_tier2 = 25
+ult_max_distance = 1000
+scale_ult_dmg_tier1 = 20
+scale_ult_dmg_tier2 = 25
+scale_stat = 2
+scale_charge_rate = 25
+char_name = "knight"

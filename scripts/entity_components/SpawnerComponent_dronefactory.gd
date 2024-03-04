@@ -11,7 +11,7 @@ class_name SpawnerComponent
 func _ready() -> void:
 	assert(smalldrone_scene, "i forgot to export?")
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	t_spawn.wait_time = e.reload_time
 
 func spawn(drone: PackedScene, pos: Vector2) -> void:

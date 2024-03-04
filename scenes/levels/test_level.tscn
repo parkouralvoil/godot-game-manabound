@@ -1,23 +1,11 @@
-[gd_scene load_steps=20 format=3 uid="uid://t2e45srpirha"]
+[gd_scene load_steps=8 format=3 uid="uid://t2e45srpirha"]
 
 [ext_resource type="TileSet" uid="uid://bq4bd7di0pjwo" path="res://resources/tilemaps/blue_scifi.tres" id="1_hgvqm"]
-[ext_resource type="PackedScene" uid="uid://c35wulwk6e3b4" path="res://scenes/characters/player.tscn" id="2_w3cth"]
 [ext_resource type="PackedScene" uid="uid://d23s3ceqy66ry" path="res://scenes/levels/test_parallax.tscn" id="3_6smy2"]
 [ext_resource type="Texture2D" uid="uid://c6a2s8k867nfu" path="res://assets/background/black square.png" id="4_u72xy"]
 [ext_resource type="PackedScene" uid="uid://c7kau2srmy78i" path="res://scenes/enemies/stationary_enemies/dronefactory_small/enemy_dronefactory.tscn" id="5_vwkg7"]
 [ext_resource type="PackedScene" uid="uid://cg2ravjhx4yud" path="res://scenes/enemies/stationary_enemies/autobow/enemy_autobow.tscn" id="5_wr50s"]
-[ext_resource type="Script" path="res://scenes/UI/fps_counter.gd" id="6_3cy1a"]
-[ext_resource type="Script" path="res://scenes/UI/Label_HP.gd" id="6_qixgj"]
-[ext_resource type="LabelSettings" uid="uid://crxqvqu7eeoj8" path="res://resources/font_settings_silver.tres" id="7_3c14h"]
-[ext_resource type="Script" path="res://scenes/UI/Camera2D_player.gd" id="7_pa82x"]
-[ext_resource type="Script" path="res://scenes/UI/Label_Ammo.gd" id="7_ur1f6"]
-[ext_resource type="Script" path="res://scenes/UI/Label_AutoAim.gd" id="8_ltigh"]
-[ext_resource type="Script" path="res://scenes/UI/Label_Charge.gd" id="9_txpmr"]
-[ext_resource type="Script" path="res://scenes/UI/team_UI_stuff/Team_UI.gd" id="10_wkf7o"]
-[ext_resource type="Script" path="res://scenes/UI/currency_counter.gd" id="11_a2nx8"]
-[ext_resource type="PackedScene" uid="uid://cdc6lfjuxxbia" path="res://scenes/UI/team_UI_stuff/panel_char..tscn" id="11_pgc4q"]
-[ext_resource type="Texture2D" uid="uid://duidexikehj1a" path="res://assets/sprite_UI/damage overlay.png" id="16_4kqs7"]
-[ext_resource type="Script" path="res://scenes/UI/blood_overlay.gd" id="17_upcnr"]
+[ext_resource type="PackedScene" uid="uid://c7qwpthsv6838" path="res://scenes/holder_scenes/player_holder.tscn" id="6_khwf5"]
 
 [sub_resource type="Environment" id="Environment_83uss"]
 background_mode = 3
@@ -95,121 +83,7 @@ position = Vector2(317, -257)
 [node name="enemy_autobow5" parent="EnemyHolder" instance=ExtResource("5_wr50s")]
 position = Vector2(480, -507)
 
-[node name="Player" parent="." node_paths=PackedStringArray("camera", "blood_overlay") instance=ExtResource("2_w3cth")]
-position = Vector2(371, -83)
-camera = NodePath("Camera2D_player")
-blood_overlay = NodePath("../CanvasLayer/TextureRect")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Player"]
-offset_left = 5.0
-offset_top = 14.0
-offset_right = 168.0
-offset_bottom = 63.0
-theme_override_constants/separation = -3
-
-[node name="Label_HP" type="Label" parent="Player/VBoxContainer" node_paths=PackedStringArray("entity")]
-modulate = Color(1, 1, 1, 0.788235)
-layout_mode = 2
-text = "aaa"
-label_settings = ExtResource("7_3c14h")
-script = ExtResource("6_qixgj")
-entity = NodePath("../..")
-
-[node name="Label_Ammo" type="Label" parent="Player/VBoxContainer" node_paths=PackedStringArray("p")]
-modulate = Color(1, 1, 1, 0.8)
-layout_mode = 2
-text = "aa"
-label_settings = ExtResource("7_3c14h")
-script = ExtResource("7_ur1f6")
-p = NodePath("../..")
-
-[node name="Label_Charge" type="Label" parent="Player/VBoxContainer" node_paths=PackedStringArray("p")]
-modulate = Color(1, 1, 1, 0.788235)
-layout_mode = 2
-text = "aa"
-label_settings = ExtResource("7_3c14h")
-script = ExtResource("9_txpmr")
-p = NodePath("../..")
-
-[node name="Camera2D_player" type="Camera2D" parent="Player"]
-position_smoothing_enabled = true
-position_smoothing_speed = 10.0
-editor_draw_limits = true
-editor_draw_drag_margin = true
-script = ExtResource("7_pa82x")
-NOISE_SHAKE_SPEED = 6.0
-NOISE_SHAKE_STRENGTH = 3.0
-
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="Team_UI" type="Control" parent="CanvasLayer" node_paths=PackedStringArray("p")]
-layout_mode = 3
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -98.0
-offset_bottom = 142.0
-grow_horizontal = 0
-script = ExtResource("10_wkf7o")
-p = NodePath("../../Player")
-
-[node name="Panel_Char1" parent="CanvasLayer/Team_UI" instance=ExtResource("11_pgc4q")]
-layout_mode = 0
-offset_left = -21.0
-offset_right = 91.0
-
-[node name="Panel_Char2" parent="CanvasLayer/Team_UI" instance=ExtResource("11_pgc4q")]
-layout_mode = 0
-offset_left = -21.0
-offset_top = 73.0
-offset_right = 91.0
-offset_bottom = 140.0
-
-[node name="UI" type="Control" parent="CanvasLayer"]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="Label_FPS" type="Label" parent="CanvasLayer/UI"]
-layout_mode = 0
-offset_right = 28.0
-offset_bottom = 23.0
-scale = Vector2(3, 3)
-text = "aaa"
-script = ExtResource("6_3cy1a")
-
-[node name="Label_AutoAim" type="Label" parent="CanvasLayer/UI" node_paths=PackedStringArray("p")]
-layout_mode = 0
-offset_top = 62.0
-offset_right = 40.0
-offset_bottom = 85.0
-scale = Vector2(2, 2)
-text = "aa"
-script = ExtResource("8_ltigh")
-p = NodePath("../../../Player")
-
-[node name="Label_Currency" type="Label" parent="CanvasLayer/UI"]
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_top = 610.0
-offset_right = 28.0
-offset_bottom = 633.0
-grow_vertical = 0
-scale = Vector2(2, 2)
-text = "aaa"
-script = ExtResource("11_a2nx8")
-
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("16_4kqs7")
-script = ExtResource("17_upcnr")
+[node name="PlayerHolder" parent="." instance=ExtResource("6_khwf5")]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_83uss")

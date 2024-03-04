@@ -2,7 +2,7 @@ extends Label
 
 @export var p: Player
 
-var format_string: String = "Charge: %s/%s"
+var format_string: String = "Charge: %d/%d"
 var actual_string: String = "aa"
 
 func _process(_delta: float) -> void:

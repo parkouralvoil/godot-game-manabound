@@ -9,5 +9,9 @@ class_name HurtboxComponent
 
 # (FOR BULLETS) if bullet from player: set mask/layer to look for enemies
 
+
+func _ready() -> void:
+	process_mode = Node.PROCESS_MODE_PAUSABLE
+
 func hurtbox_hit(damage: float, element: CombatManager.Elements) -> void:
 	entity.take_damage(damage, element)

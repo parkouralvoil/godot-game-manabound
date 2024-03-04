@@ -1,0 +1,41 @@
+[gd_scene load_steps=8 format=3 uid="uid://dkyhb7voldou1"]
+
+[ext_resource type="Script" path="res://characters/CharacterClass.gd" id="1_j0poo"]
+[ext_resource type="PackedScene" uid="uid://ckfsbsh4qe3us" path="res://scenes/skill_tree/stree_witch.tscn" id="2_rrqxe"]
+[ext_resource type="Script" path="res://characters/witch/scripts/witch_AttackComponent.gd" id="3_b0vy3"]
+[ext_resource type="PackedScene" uid="uid://b8740u5oqxn7d" path="res://scenes/projectiles/ice_projectiles/ice_spike/ice_spike.tscn" id="4_uiwjc"]
+[ext_resource type="Script" path="res://characters/witch/scripts/witch_UltimateComponent.gd" id="5_wu24y"]
+[ext_resource type="PackedScene" uid="uid://bmykt4bk5s1bk" path="res://scenes/projectiles/ice_projectiles/frost_nova/frost_nova.tscn" id="6_473fd"]
+[ext_resource type="Script" path="res://characters/witch/scripts/witch_AmmoComponent.gd" id="7_jgtmk"]
+
+[node name="character_Witch" type="Node2D"]
+script = ExtResource("1_j0poo")
+max_health = 6.0
+max_ammo = 5
+charge_rate = 6.0
+
+[node name="AbilityManager" type="Node2D" parent="."]
+
+[node name="SkillTree" parent="AbilityManager" instance=ExtResource("2_rrqxe")]
+
+[node name="BasicAttack" type="Node2D" parent="AbilityManager"]
+script = ExtResource("3_b0vy3")
+IceSpikeScene = ExtResource("4_uiwjc")
+
+[node name="firerate" type="Timer" parent="AbilityManager/BasicAttack"]
+wait_time = 0.3
+one_shot = true
+
+[node name="recoil" type="Timer" parent="AbilityManager/BasicAttack"]
+wait_time = 0.15
+one_shot = true
+
+[node name="Ultimate" type="Node2D" parent="AbilityManager"]
+script = ExtResource("5_wu24y")
+FrostNovaScene = ExtResource("6_473fd")
+
+[node name="Ammo_component" type="Node2D" parent="AbilityManager"]
+script = ExtResource("7_jgtmk")
+
+[node name="ammo_regen" type="Timer" parent="AbilityManager/Ammo_component"]
+one_shot = true

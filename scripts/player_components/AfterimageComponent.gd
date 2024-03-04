@@ -10,7 +10,7 @@ extends Node2D
 
 var afterimages: int = 0
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if afterimages <= 0:
 		return
 	

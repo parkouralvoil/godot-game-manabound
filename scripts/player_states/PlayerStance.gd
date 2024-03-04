@@ -14,16 +14,17 @@ func Enter() -> void:
 	p.gravity = 0
 	if PlayerInfo.current_charge_type == PlayerInfo.ChargeTypes.BURST:
 		p.direction_indicator.show()
-		p.direction_indicator.circle.show()
+		p.circle_indicator.show()
 	else:
 		p.direction_indicator.show()
-		p.direction_indicator.circle.hide()
+		p.circle_indicator.show()
 	PlayerInfo.current_state = PlayerInfo.States.STANCE
 
 func Exit() -> void:
 	if !p:
 		return
 	p.velocity = recoil_speed * -p.move_direction
+	p.circle_indicator.position = Vector2(0, 0)
 
 func Update(_delta: float) -> void:
 	if !p:
@@ -40,6 +41,9 @@ func Physics_Update(_delta: float) -> void:
 		p.velocity = slow_speed * -p.move_direction
 	else:
 		p.velocity = Vector2.ZERO
+	
+	if PlayerInfo.current_charge_type == PlayerInfo.ChargeTypes.PASSIVE:
+		p.circle_indicator.position = p.dist_to_mouse
 	
 	if !Input.is_action_pressed("right_click"):
 		state_transition.emit(self, "PlayerIdle")

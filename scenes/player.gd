@@ -5,6 +5,7 @@ class_name Player
 @onready var anim_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var arm_sprite: Sprite2D = $AnimatedSprite2D/Sprite2D_arm
 @export var direction_indicator: Sprite2D #= $DirectionIndicator
+@export var circle_indicator: Sprite2D
 @export var target_lock_component: Area2D #= $TargetLock
 @export var player_hit_comp: Node2D
 @export var afterimage_comp: Node2D
