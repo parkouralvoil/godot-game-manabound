@@ -1,70 +1,61 @@
-[gd_scene load_steps=21 format=3 uid="uid://ckfsbsh4qe3us"]
+[gd_scene load_steps=19 format=3 uid="uid://ckfsbsh4qe3us"]
 
 [ext_resource type="Script" path="res://scenes/skill_tree/stree_code.gd" id="1_kwfv6"]
 [ext_resource type="PackedScene" uid="uid://c70mm6f8inx8d" path="res://scenes/skill_tree/skill_button.tscn" id="2_8m8yx"]
-[ext_resource type="Script" path="res://scenes/skill_tree/skill_info_displayer.gd" id="3_3i1h1"]
+[ext_resource type="PackedScene" uid="uid://ynd4jyc4neao" path="res://scenes/skill_tree/skill_info.tscn" id="3_klpk0"]
 [ext_resource type="Texture2D" uid="uid://h46xv64l4n2u" path="res://assets/sprite_UI/AbilityIcons0.png" id="4_t83wc"]
-[ext_resource type="FontFile" uid="uid://c41yv1d1anklx" path="res://assets/Silver.ttf" id="5_o7jo0"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_i2wqc"]
 load_path = "res://.godot/imported/AbilityIcons0.png-31dba6544aa1a7b4320ff9e5f15eb420.ctex"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_m1ibe"]
 atlas = SubResource("CompressedTexture2D_i2wqc")
-region = Rect2(80, 64, 16, 16)
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x3dv8"]
+atlas = ExtResource("4_t83wc")
+region = Rect2(64, 16, 16, 16)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_nenue"]
 load_path = "res://.godot/imported/AbilityIcons0.png-31dba6544aa1a7b4320ff9e5f15eb420.ctex"
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_3f2ow"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_t4twu"]
 atlas = SubResource("CompressedTexture2D_nenue")
-region = Rect2(64, 64, 16, 16)
+region = Rect2(48, 112, 16, 16)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_e6lhl"]
 load_path = "res://.godot/imported/AbilityIcons0.png-31dba6544aa1a7b4320ff9e5f15eb420.ctex"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qilty"]
 atlas = SubResource("CompressedTexture2D_e6lhl")
-region = Rect2(0, 32, 16, 16)
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_muvfh"]
+atlas = ExtResource("4_t83wc")
+region = Rect2(96, 16, 16, 16)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_6kvqv"]
 load_path = "res://.godot/imported/AbilityIcons0.png-31dba6544aa1a7b4320ff9e5f15eb420.ctex"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_u4vf3"]
 atlas = SubResource("CompressedTexture2D_6kvqv")
-region = Rect2(80, 32, 16, 16)
+region = Rect2(113, 16, 15, 15)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_73dt2"]
 load_path = "res://.godot/imported/AbilityIcons0.png-31dba6544aa1a7b4320ff9e5f15eb420.ctex"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3u2ni"]
 atlas = SubResource("CompressedTexture2D_73dt2")
-region = Rect2(112, 32, 16, 16)
+region = Rect2(64, 112, 16, 16)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ihnym"]
 load_path = "res://.godot/imported/AbilityIcons0.png-31dba6544aa1a7b4320ff9e5f15eb420.ctex"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_n02fn"]
 atlas = SubResource("CompressedTexture2D_ihnym")
-region = Rect2(80, 96, 16, 16)
+region = Rect2(80, 16, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_fq4m3"]
-atlas = ExtResource("4_t83wc")
-region = Rect2(80, 32, 16, 16)
-
-[sub_resource type="LabelSettings" id="LabelSettings_6qwsr"]
-line_spacing = -10.0
-font = ExtResource("5_o7jo0")
-font_size = 25
-font_color = Color(0.9, 0.9, 0.9, 0.9)
-
-[sub_resource type="LabelSettings" id="LabelSettings_4pwr8"]
-line_spacing = -8.0
-font = ExtResource("5_o7jo0")
-font_size = 19
-font_color = Color(0.9, 0.9, 0.9, 0.9)
-
-[node name="SkillTree" type="CanvasLayer"]
+[node name="SkillTree_witch" type="CanvasLayer"]
 process_mode = 2
 script = ExtResource("1_kwfv6")
 
@@ -78,7 +69,7 @@ grow_vertical = 2
 mouse_filter = 1
 
 [node name="Panel" type="Panel" parent="Control"]
-modulate = Color(0.854902, 0.737255, 0.576471, 1)
+modulate = Color(0.219608, 0.156863, 0.137255, 1)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -102,10 +93,10 @@ metadata/_edit_use_anchors_ = true
 [node name="Root" parent="Control" instance=ExtResource("2_8m8yx")]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.688
-anchor_top = 0.165306
-anchor_right = 0.768
-anchor_bottom = 0.246939
+anchor_left = 0.63125
+anchor_top = 0.0604167
+anchor_right = 0.71125
+anchor_bottom = 0.14205
 offset_right = 0.0
 offset_bottom = 0.0
 grow_horizontal = 2
@@ -120,131 +111,101 @@ Originated from the City of Light, these lightning knights serve as the stewards
 Element: Lightning"
 metadata/_edit_use_anchors_ = true
 
-[node name="BasicAtk_1" parent="Control/Root" groups=["skillnode_BasicAtk"] instance=ExtResource("2_8m8yx")]
+[node name="BasicAtk_root" parent="Control/Root" groups=["skillnode_BasicAtk"] instance=ExtResource("2_8m8yx")]
+layout_mode = 0
+offset_left = -30.0
+offset_top = 82.0
+offset_right = 20.0
+offset_bottom = 132.0
+texture_normal = SubResource("AtlasTexture_x3dv8")
+root = true
+
+[node name="BasicAtk_1" parent="Control/Root/BasicAtk_root" groups=["skillnode_BasicAtk"] instance=ExtResource("2_8m8yx")]
 layout_mode = 0
 offset_left = -80.0
 offset_top = 60.0
 offset_right = -40.0
 offset_bottom = 100.0
-texture_normal = SubResource("AtlasTexture_3f2ow")
-default_cost = 150
-skill_name = "More ammo"
+texture_normal = SubResource("AtlasTexture_t4twu")
+default_cost = 200
+skill_name = "Faster "
 skill_desc = "Increase max ammo count by 3.
 
 Each level further increases max ammo by 2."
 
-[node name="BasicAtk_2a" parent="Control/Root/BasicAtk_1" groups=["skillnode_BasicAtk"] instance=ExtResource("2_8m8yx")]
+[node name="BasicAtk_2" parent="Control/Root/BasicAtk_root/BasicAtk_1" groups=["skillnode_BasicAtk"] instance=ExtResource("2_8m8yx")]
 layout_mode = 0
 offset_left = -60.0
 offset_top = 110.0
 offset_right = -20.0
 offset_bottom = 150.0
 texture_normal = SubResource("AtlasTexture_qilty")
-default_cost = 500
+default_cost = 400
 skill_name = "Burst shot"
 skill_desc = "Every 3rd shot deals more damage.
 
 Each upgrade increases damage of 3rd shot by 2."
 
-[node name="BasicAtk_2b" parent="Control/Root/BasicAtk_1" groups=["skillnode_BasicAtk"] instance=ExtResource("2_8m8yx")]
+[node name="BasicAtk_3" parent="Control/Root/BasicAtk_root/BasicAtk_1/BasicAtk_2" groups=["skillnode_BasicAtk"] instance=ExtResource("2_8m8yx")]
 layout_mode = 0
-offset_left = 60.0
-offset_top = 110.0
-offset_right = 100.0
-offset_bottom = 150.0
-default_cost = 750
+offset_left = 120.0
+offset_right = 160.0
+offset_bottom = 40.0
+default_cost = 900
 max_level = 1
 skill_name = "Doubleshot"
 skill_desc = "Every shot now fires 2 bullets, ammo is unaffected.
 
 Also works with Burst shot."
 
-[node name="Ult_1" parent="Control/Root" groups=["skillnode_Ult"] instance=ExtResource("2_8m8yx")]
+[node name="Ult_root" parent="Control/Root" groups=["skillnode_Ult"] instance=ExtResource("2_8m8yx")]
 layout_mode = 0
 offset_left = 80.0
 offset_top = 60.0
-offset_right = 120.0
-offset_bottom = 100.0
+offset_right = 130.0
+offset_bottom = 110.0
+texture_normal = SubResource("AtlasTexture_muvfh")
+root = true
+
+[node name="Ult_1" parent="Control/Root/Ult_root" groups=["skillnode_Ult"] instance=ExtResource("2_8m8yx")]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 73.0
+offset_right = 43.0
+offset_bottom = 113.0
 texture_normal = SubResource("AtlasTexture_u4vf3")
-default_cost = 200
+default_cost = 250
 skill_name = "Piercing Bolt"
 skill_desc = "Adds a 2nd charge tier with increased projectile size and  piercing.
 
 Each level  increases damage of 2nd charge shot by 10."
 
-[node name="Ult_2" parent="Control/Root/Ult_1" groups=["skillnode_Ult"] instance=ExtResource("2_8m8yx")]
+[node name="Ult_2" parent="Control/Root/Ult_root/Ult_1" groups=["skillnode_Ult"] instance=ExtResource("2_8m8yx")]
 layout_mode = 0
 offset_top = 110.0
 offset_bottom = 150.0
 texture_normal = SubResource("AtlasTexture_3u2ni")
-default_cost = 500
-max_level = 1
+default_cost = 400
 skill_name = "Missile volley"
 skill_desc = "Bonus Effect: Charged shots fire a volley of homing missiles. 
 
 Higher charge tiers fire more missiles."
 
-[node name="Ult_3" parent="Control/Root/Ult_1/Ult_2" groups=["skillnode_Ult"] instance=ExtResource("2_8m8yx")]
+[node name="Ult_3" parent="Control/Root/Ult_root/Ult_1/Ult_2" groups=["skillnode_Ult"] instance=ExtResource("2_8m8yx")]
 layout_mode = 0
 offset_top = 110.0
 offset_right = 40.0
 offset_bottom = 150.0
 texture_normal = SubResource("AtlasTexture_n02fn")
-default_cost = 650
+flip_h = true
+default_cost = 900
+max_level = 1
 skill_name = "Faster charge rate"
 skill_desc = "Charge rate increased.
 
 Each level further increases charge rate."
 
-[node name="Skill_Info" type="Control" parent="Control"]
-layout_mode = 2
-anchors_preset = 0
-anchor_left = 0.142
-anchor_top = 0.240816
-anchor_right = 0.44
-anchor_bottom = 0.834694
-script = ExtResource("3_3i1h1")
-metadata/_edit_use_anchors_ = true
-
-[node name="ColorRect" type="ColorRect" parent="Control/Skill_Info"]
-layout_mode = 0
-offset_left = -10.0
-offset_top = -5.0
-offset_right = 160.0
-offset_bottom = 279.0
-color = Color(0.12549, 0.160784, 0.192157, 0.596078)
-
-[node name="Sprite2D" type="Sprite2D" parent="Control/Skill_Info"]
-position = Vector2(76, 39)
-scale = Vector2(4, 4)
-texture = SubResource("AtlasTexture_fq4m3")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Control/Skill_Info"]
-layout_mode = 0
-offset_left = 8.0
-offset_top = 72.0
-offset_right = 148.0
-offset_bottom = 154.0
-theme_override_constants/separation = 20
-
-[node name="Label_name" type="Label" parent="Control/Skill_Info/VBoxContainer"]
-custom_minimum_size = Vector2(120, 0)
-layout_mode = 2
-text = "Skill Name is Skill"
-label_settings = SubResource("LabelSettings_6qwsr")
-autowrap_mode = 3
-
-[node name="Label_desc" type="Label" parent="Control/Skill_Info/VBoxContainer"]
-custom_minimum_size = Vector2(140, 0)
-layout_mode = 2
-text = "afaefsefaesffaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
-label_settings = SubResource("LabelSettings_4pwr8")
-autowrap_mode = 3
-
-[node name="Line2D" type="Line2D" parent="Control/Skill_Info"]
-position = Vector2(13, 111)
-points = PackedVector2Array(0, 0, 130, 0)
-width = 2.0
-default_color = Color(0.47451, 0.486275, 0.533333, 1)
+[node name="Skill_Info" parent="Control" instance=ExtResource("3_klpk0")]
+layout_mode = 1
 
 [connection signal="button_down" from="Control/ExitButton" to="." method="_on_exit_button_button_down"]

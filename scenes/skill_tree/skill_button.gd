@@ -41,6 +41,7 @@ func _ready() -> void:
 	
 	update_lvl_and_cost()
 	update_lines() 
+	fix_child_nodes_positions()
 
 func update_lines() -> void:
 	if get_parent() is SkillNode:
@@ -51,11 +52,11 @@ func _on_pressed() -> void:
 	var stree: SkillTree = owner
 	if stree:
 		stree.selected_node = self
+
+func attempt_buy() -> void:
 	if root:
 		return
-	
-	var parent_node: SkillNode = get_parent()
-	if PlayerInfo.mana_orbs >= cost and parent_node.level > 0 and level < max_level:
+	if see_if_can_buy():
 		PlayerInfo.mana_orbs -= cost
 		level = min(level+1, max_level)
 		cost = default_cost + (default_cost/2 * level)
@@ -64,6 +65,13 @@ func _on_pressed() -> void:
 		panel.hide()
 		line_2D.default_color = Color(1, 1, 0.25)
 		#enable_child_buttons()
+
+func see_if_can_buy() -> bool:
+	var parent_node: SkillNode = get_parent()
+	if PlayerInfo.mana_orbs >= cost and parent_node.level > 0 and level < max_level:
+		return true
+	else:
+		return false
 
 func update_lvl_and_cost() -> void:
 	label_lvl.text = "Level: %d/%d" % [level, max_level]
@@ -77,3 +85,17 @@ func update_lvl_and_cost() -> void:
 	#for skill in skills:
 		#if skill is SkillNode and level >= 1:
 			#skill.disabled = false
+
+func fix_child_nodes_positions() -> void:
+	var node_array: Array[SkillNode] = []
+	var initial_x: float = -50
+	if root: initial_x = -100
+	
+	for node in get_children():
+		if node is SkillNode:
+			node_array.append(node)
+	
+	var pos_x: float = initial_x * (node_array.size() - 1)
+	
+	for i in range(node_array.size()):
+		node_array[i].position = Vector2(pos_x + (initial_x*-2*i), 85)

@@ -1,4 +1,5 @@
 extends Node2D
+class_name Witch_UltimateComponent
 
 @export var FrostNovaScene: PackedScene
 
@@ -9,8 +10,6 @@ extends Node2D
 # we can just have the explosion impact be "shockwave dealing minor dmg and additional lightning elem proc"
 
 @onready var character: Character = owner
-
-var bullet_speed: float = 600
 
 func _process(delta: float) -> void:
 	raise_charge(delta)

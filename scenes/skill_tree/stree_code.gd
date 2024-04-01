@@ -45,8 +45,8 @@ func _on_exit_button_button_down() -> void:
 	unpause()
 
 func unpause() -> void:
-	var parent: Node2D = get_parent()
-	if parent.has_method("skill_tree_update"):
-		parent.skill_tree_update()
+	var parent := get_parent()
+	if parent.has_method("stats_update"):
+		parent.stats_update()
 	hide()
 	get_tree().paused = false

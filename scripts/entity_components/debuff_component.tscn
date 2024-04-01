@@ -40,6 +40,8 @@ process_material = SubResource("ParticleProcessMaterial_jrdbj")
 lifetime = 0.7
 one_shot = true
 explosiveness = 1.0
+fixed_fps = 0
+interpolate = false
 
 [node name="superconduct" type="Timer" parent="."]
 wait_time = 8.0

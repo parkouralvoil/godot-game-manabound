@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://dkyhb7voldou1"]
+[gd_scene load_steps=9 format=3 uid="uid://dkyhb7voldou1"]
 
 [ext_resource type="Script" path="res://characters/CharacterClass.gd" id="1_j0poo"]
 [ext_resource type="PackedScene" uid="uid://ckfsbsh4qe3us" path="res://scenes/skill_tree/stree_witch.tscn" id="2_rrqxe"]
+[ext_resource type="Script" path="res://characters/witch/scripts/witch_AbilityManager.gd" id="2_xnkl8"]
 [ext_resource type="Script" path="res://characters/witch/scripts/witch_AttackComponent.gd" id="3_b0vy3"]
 [ext_resource type="PackedScene" uid="uid://b8740u5oqxn7d" path="res://scenes/projectiles/ice_projectiles/ice_spike/ice_spike.tscn" id="4_uiwjc"]
 [ext_resource type="Script" path="res://characters/witch/scripts/witch_UltimateComponent.gd" id="5_wu24y"]
@@ -10,11 +11,12 @@
 
 [node name="character_Witch" type="Node2D"]
 script = ExtResource("1_j0poo")
-max_health = 6.0
+max_health = 4.0
 max_ammo = 5
-charge_rate = 6.0
+fire_rate = 3.0
 
 [node name="AbilityManager" type="Node2D" parent="."]
+script = ExtResource("2_xnkl8")
 
 [node name="SkillTree" parent="AbilityManager" instance=ExtResource("2_rrqxe")]
 
@@ -23,19 +25,19 @@ script = ExtResource("3_b0vy3")
 IceSpikeScene = ExtResource("4_uiwjc")
 
 [node name="firerate" type="Timer" parent="AbilityManager/BasicAttack"]
-wait_time = 0.3
+wait_time = 0.2
 one_shot = true
 
 [node name="recoil" type="Timer" parent="AbilityManager/BasicAttack"]
-wait_time = 0.15
+wait_time = 0.2
 one_shot = true
 
 [node name="Ultimate" type="Node2D" parent="AbilityManager"]
 script = ExtResource("5_wu24y")
 FrostNovaScene = ExtResource("6_473fd")
 
-[node name="Ammo_component" type="Node2D" parent="AbilityManager"]
+[node name="Ammo" type="Node2D" parent="AbilityManager"]
 script = ExtResource("7_jgtmk")
 
-[node name="ammo_regen" type="Timer" parent="AbilityManager/Ammo_component"]
+[node name="ammo_regen" type="Timer" parent="AbilityManager/Ammo"]
 one_shot = true

@@ -11,26 +11,26 @@ class_name BaseEnemy
 @onready var sprite_main: Sprite2D = $Sprite2D_main
 
 signal health_changed(new_health: float)
+signal reload_time_changed(new_reload_time: float)
+
+# debuff vars:
+var debuff_by_superconduct: bool = false
 
 @export var max_health: float = 50.0
 var health: float = max_health :
 	set(value):
-		health = _on_health_change(value)
-	get:
-		return health
+		health = value
+		health_changed.emit(health)
 
 @export var default_reload_time: float = 5.0
 var reload_time: float = default_reload_time :
 	set(value):
 		reload_time = value
-	get:
-		return reload_time
+		reload_time_changed.emit(reload_time)
+		
 
 var bullet_color: Color = Color(1, 0.4, 0)
 
-func _on_health_change(new_health: float) -> float:
-	emit_signal("health_changed", new_health)
-	return new_health
 
 func _ready() -> void:
 	assert(debuff_component, "missing")
@@ -59,3 +59,4 @@ func make_impact() -> void:
 
 func superconduct() -> void:
 	debuff_component.receive_superconduct()
+	debuff_by_superconduct = true

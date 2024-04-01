@@ -17,7 +17,7 @@ class_name DamageImpact
 @export var element: CombatManager.Elements
 
 @onready var sprite: Sprite2D = $Sprite2D
-@onready var t_lifespan: Timer = $lifespan
+@onready var t_lifespan: Timer = $hitbox_lifespan
 
 func _ready() -> void:
 	self.connect("area_entered", _on_area_entered)

@@ -40,7 +40,7 @@ var auto_aim: bool = true
 var selected_target: Area2D = null
 
 func _process(_delta: float) -> void:
-	EnemyAiManager.player_position = global_position
+	EnemyAiManager.player_position = global_position # this seems too slow?
 	dist_to_mouse = get_global_mouse_position() - self.global_position
 	# for airboost
 	mouse_direction = Vector2.ZERO.direction_to(dist_to_mouse).normalized()

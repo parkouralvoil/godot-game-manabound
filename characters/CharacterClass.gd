@@ -2,12 +2,14 @@ extends Node2D
 class_name Character
 
 @onready var skill_tree: SkillTree = $AbilityManager/SkillTree
+@onready var AM := $AbilityManager
 
 # i want the AM to remain universal, the components are the ones who play around with eachother
 @onready var CM: CharacterManager = get_parent()
 
 var enabled: bool = false # managed by char manager
 
+@export_category("Initial Values")
 @export var max_health: float = 50.0
 var health: float = max_health :
 	set(value):
@@ -22,20 +24,26 @@ var ammo: int = max_ammo :
 		ammo = _on_ammo_change(value)
 
 # ultimate
-var max_charge: float = 50 : 
+var max_charge: int = 50 : 
 	set(value):
 		max_charge = _on_max_charge_change(value)
 var charge: float
 
-@export var charge_rate: float = 60
-# EXPORT VARS,
-	#but eventually they'll be managed solely by Ability Manager
+var charge_rate: float = 0
+@export var base_atk: int = 10
+var atk: int
+
+@export var fire_rate: float = 50
 
 func _ready() -> void:
 	skill_tree.hide()
 	health = max_health
 	ammo = max_ammo
 	charge = 0
+	atk = base_atk
+	if AM.has_method("stats_update"):
+		AM.stats_update()
+		AM.desc_update()
 
 func _process(_delta: float) -> void:
 	if !enabled:
@@ -46,7 +54,7 @@ func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("shop_key") and !skill_tree.visible:
 		skill_tree.show()
 		get_tree().paused = true
-			
+	
 	PlayerInfo.displayed_charge = charge
 
 func _on_max_ammo_change(new_max_ammo: int) -> int:

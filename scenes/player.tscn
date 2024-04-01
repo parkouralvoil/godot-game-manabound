@@ -84,6 +84,8 @@ process_material = SubResource("ParticleProcessMaterial_ia00x")
 lifetime = 0.3
 one_shot = true
 explosiveness = 1.0
+fixed_fps = 100
+interpolate = false
 
 [node name="AfterimageSpawner" type="Node2D" parent="."]
 script = ExtResource("4_ppq5l")

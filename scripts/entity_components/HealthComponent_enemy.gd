@@ -15,7 +15,7 @@ func _ready() -> void:
 
 func damage_received(damage: float, new_elem: CombatManager.Elements) -> void:
 	if damage > 0:
-		spawn_dmg_number(str(damage), Color(1, 1, 1))
+		spawn_dmg_number(str(round(damage)), CombatManager.params[new_elem])
 	
 	if e.health - damage > 0:
 		e.health -= damage
@@ -33,13 +33,18 @@ func damage_received(damage: float, new_elem: CombatManager.Elements) -> void:
 		e.queue_free()
 
 func spawn_dmg_number(effect: String, color: Color) -> void:
-	var pos_variance: Vector2 = Vector2(rng.randf_range(-7, 7),
-		rng.randf_range(-7, 7) )
+	var pos_variance: Vector2
 	var label_inst: Label = damage_number.instantiate()
+	
+	if effect.is_valid_int():
+		pos_variance = Vector2(rng.randf_range(-10, 10), rng.randf_range(-5, 5) )
+	else:
+		pos_variance = Vector2(-30,-20)
+		label_inst.speed = -20
+	
 	label_inst.global_position = self.global_position + pos_variance
 	label_inst.text = effect
 	label_inst.modulate = color
-	label_inst.z_index = 1
 	get_tree().root.call_deferred("add_child", label_inst)
 
 func apply_reaction(new_elem: CombatManager.Elements) -> void:
@@ -50,14 +55,14 @@ func apply_reaction(new_elem: CombatManager.Elements) -> void:
 			match new_elem:
 				CombatManager.Elements.ICE:
 					e.superconduct()
-					spawn_dmg_number("Superconduct", Color(0.5, 0.5, 1))
+					spawn_dmg_number("Superconduct", CombatManager.params["superconduct"])
 				_:
 					pass
 		CombatManager.Elements.ICE:
 			match new_elem:
 				CombatManager.Elements.LIGHTNING:
 					e.superconduct()
-					spawn_dmg_number("Superconduct", Color(0.5, 0.5, 1))
+					spawn_dmg_number("Superconduct", CombatManager.params["superconduct"])
 				_:
 					pass
 		_:

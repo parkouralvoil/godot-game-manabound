@@ -25,8 +25,8 @@ func _process(_delta: float) -> void:
 		spawn(afterimage_scene, p.arm_sprite.texture)
 
 
-func spawn(afterimg: PackedScene, texture: Texture) -> void:
-	var img_instance: Sprite2D = afterimage_scene.instantiate()
+func spawn(scene: PackedScene, texture: Texture) -> void:
+	var img_instance: Sprite2D = scene.instantiate()
 	
 	img_instance.scale.x = p.anim_sprite.scale.x
 	img_instance.global_position = p.global_position

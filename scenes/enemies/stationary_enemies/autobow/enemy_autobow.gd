@@ -16,4 +16,5 @@ func _physics_process(_delta: float) -> void:
 	can_fire = (target_pos - global_position).length() < vision_range
 	
 	if can_fire:
-		aim_direction = Vector2.ZERO.direction_to(target_pos - self.global_position).normalized()
+		aim_direction = Vector2.ZERO.direction_to(target_pos 
+			- self.global_position).normalized()

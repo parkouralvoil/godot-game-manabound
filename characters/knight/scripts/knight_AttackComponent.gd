@@ -67,10 +67,13 @@ func basic_atk() -> void:
 	else:
 		shoot(p_scene, 0)
 	
-	if AM.level_basicAtk_burst > 0:
+	if AM.level_basicAtk_upgrade > 0:
 		burst_counter = (burst_counter + 1) % 3
 	else:
 		burst_counter = 0
 	
-	t_firerate.wait_time = 0.15
-	t_recoil.wait_time = t_firerate.wait_time + 0.05
+	t_firerate.wait_time = 1 / character.fire_rate
+	if t_firerate.wait_time > 0.2: # semi
+		t_recoil.wait_time = 0.15
+	else: # auto
+		t_recoil.wait_time = 0.2

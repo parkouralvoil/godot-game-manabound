@@ -10,13 +10,20 @@ var ProjectileScene: PackedScene = load("res://scenes/projectiles/bullet.tscn")
 @onready var rng := RandomNumberGenerator.new()
 
 var last_aim_direction: Vector2 = Vector2.ZERO
+var reload_reset: bool = false # only reverts back to false after superconduct clear
 
 func _ready() -> void:
-	t_reload.wait_time = e.reload_time
+	e.reload_time_changed.connect(update_reload)
 
 func _process(_delta: float) -> void:
-	t_reload.wait_time = e.reload_time	
-	if e.can_fire and e.ammo == e.max_ammo and t_firerate.is_stopped() and t_first_shot.is_stopped():
+	if e.debuff_by_superconduct and !reload_reset:
+		t_reload.start()
+		e.ammo = 0
+	
+	if (e.can_fire 
+	and e.ammo == e.max_ammo 
+	and t_firerate.is_stopped() 
+	and t_first_shot.is_stopped()):
 		e.sprite_main.rotation = (e.aim_direction as Vector2).angle() - PI/2
 		last_aim_direction = e.aim_direction
 		t_first_shot.start()
@@ -50,6 +57,12 @@ func burst_shoot() -> void:
 	#shoot(ProjectileScene, last_aim_direction.rotated(PI/16) )
 	#shoot(ProjectileScene, last_aim_direction.rotated(-PI/16) )
 
+func update_reload(new_reload: float) -> void:
+	t_reload.wait_time = new_reload
+	if !reload_reset:
+		reload_reset = true
+	elif t_reload.wait_time == e.default_reload_time:
+		reload_reset = false
 
 func _on_reload_timeout() -> void:
 	e.ammo = e.max_ammo

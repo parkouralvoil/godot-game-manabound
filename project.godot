@@ -30,10 +30,10 @@ gdscript/warnings/unsafe_property_access=1
 
 [display]
 
-window/size/viewport_width=500
-window/size/viewport_height=490
-window/size/window_width_override=1500
-window/size/window_height_override=980
+window/size/viewport_width=640
+window/size/viewport_height=480
+window/size/window_width_override=1280
+window/size/window_height_override=960
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 window/stretch/scale_mode="integer"
@@ -128,7 +128,7 @@ interact={
 
 [physics]
 
-2d/default_gravity=600.0
+2d/default_gravity=700.0
 
 [rendering]
 

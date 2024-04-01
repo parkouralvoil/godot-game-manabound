@@ -68,8 +68,11 @@ script = ExtResource("6_i76j2")
 damage_number = ExtResource("7_ltlpe")
 
 [node name="Healthbar" parent="HealthComponent" instance=ExtResource("8_10t5y")]
+min_value = 3.0
 
 [node name="element_indicator" parent="HealthComponent" instance=ExtResource("9_dqxqo")]
+
+[node name="DebuffComponent" parent="." instance=ExtResource("12_t06qs")]
 
 [node name="HurtboxComponent" type="Area2D" parent="."]
 collision_layer = 8
@@ -94,8 +97,6 @@ one_shot = true
 [node name="before_first_shot" type="Timer" parent="AttackComponent"]
 wait_time = 0.4
 one_shot = true
-
-[node name="DebuffComponent" parent="." instance=ExtResource("12_t06qs")]
 
 [connection signal="timeout" from="AttackComponent/firerate" to="AttackComponent" method="_on_firerate_timeout"]
 [connection signal="timeout" from="AttackComponent/reload" to="AttackComponent" method="_on_reload_timeout"]

@@ -21,12 +21,15 @@ var color_sc: Color = Color(0.8, 0.5, 1)
 func receive_superconduct() -> void:
 	var tween: Tween = create_tween()
 	particles.restart()
+	e.debuff_by_superconduct = true
+	e.take_damage(10, CombatManager.Elements.NONE)
 	e.reload_time = e.default_reload_time * 2
 	
-	tween.tween_property(e.sprite_main, "modulate", Color(1, 1, 1), 7).from(color_sc)
+	tween.tween_property(e.sprite_main, "modulate", Color(1, 1, 1), 10).from(color_sc)
 	
 	t_superconduct.start()
 
 func _on_superconduct_timeout() -> void:
 	e.reload_time = e.default_reload_time
 	e.sprite_main.modulate = Color(1, 1, 1)
+	e.debuff_by_superconduct = false

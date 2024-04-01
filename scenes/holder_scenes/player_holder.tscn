@@ -1,9 +1,9 @@
 [gd_scene load_steps=14 format=3 uid="uid://c7qwpthsv6838"]
 
 [ext_resource type="PackedScene" uid="uid://c35wulwk6e3b4" path="res://scenes/player.tscn" id="1_ymobu"]
-[ext_resource type="LabelSettings" uid="uid://crxqvqu7eeoj8" path="res://resources/font_settings_silver.tres" id="2_x8m30"]
 [ext_resource type="Script" path="res://scenes/UI/Label_HP.gd" id="3_s7bg0"]
 [ext_resource type="Script" path="res://scenes/UI/Label_Ammo.gd" id="4_4dkkb"]
+[ext_resource type="LabelSettings" uid="uid://buthhqor0rds0" path="res://resources/font_settings/font_system_desc.tres" id="4_54xf7"]
 [ext_resource type="Script" path="res://scenes/UI/Label_Charge.gd" id="5_d4n2q"]
 [ext_resource type="Script" path="res://scenes/UI/Camera2D_player.gd" id="6_ckbg4"]
 [ext_resource type="Script" path="res://scenes/UI/team_UI_stuff/Team_UI.gd" id="7_o7yj4"]
@@ -26,13 +26,13 @@ offset_left = 5.0
 offset_top = 14.0
 offset_right = 168.0
 offset_bottom = 63.0
-theme_override_constants/separation = -3
+theme_override_constants/separation = 1
 
 [node name="Label_HP" type="Label" parent="Player/VBoxContainer" node_paths=PackedStringArray("entity")]
 modulate = Color(1, 1, 1, 0.788235)
 layout_mode = 2
 text = "aaa"
-label_settings = ExtResource("2_x8m30")
+label_settings = ExtResource("4_54xf7")
 script = ExtResource("3_s7bg0")
 entity = NodePath("../..")
 
@@ -40,7 +40,7 @@ entity = NodePath("../..")
 modulate = Color(1, 1, 1, 0.8)
 layout_mode = 2
 text = "aa"
-label_settings = ExtResource("2_x8m30")
+label_settings = ExtResource("4_54xf7")
 script = ExtResource("4_4dkkb")
 p = NodePath("../..")
 
@@ -48,7 +48,7 @@ p = NodePath("../..")
 modulate = Color(1, 1, 1, 0.788235)
 layout_mode = 2
 text = "aa"
-label_settings = ExtResource("2_x8m30")
+label_settings = ExtResource("4_54xf7")
 script = ExtResource("5_d4n2q")
 p = NodePath("../..")
 
@@ -80,7 +80,7 @@ offset_right = 28.0
 offset_bottom = 23.0
 scale = Vector2(3, 3)
 text = "aaa"
-label_settings = ExtResource("2_x8m30")
+label_settings = ExtResource("4_54xf7")
 script = ExtResource("9_bkpbr")
 
 [node name="Label_AutoAim" type="Label" parent="Layer_2/UI" node_paths=PackedStringArray("p")]
@@ -90,7 +90,7 @@ offset_right = 40.0
 offset_bottom = 71.0
 scale = Vector2(2, 2)
 text = "aa"
-label_settings = ExtResource("2_x8m30")
+label_settings = ExtResource("4_54xf7")
 script = ExtResource("10_kyqis")
 p = NodePath("../../../Player")
 
@@ -105,7 +105,7 @@ offset_bottom = 62.0
 grow_vertical = 0
 scale = Vector2(2, 2)
 text = "aaa"
-label_settings = ExtResource("2_x8m30")
+label_settings = ExtResource("4_54xf7")
 script = ExtResource("11_x60wv")
 
 [node name="Layer_1" type="CanvasLayer" parent="."]

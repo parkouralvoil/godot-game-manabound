@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://c3324msmfjdrb"]
+[gd_scene load_steps=7 format=3 uid="uid://c3324msmfjdrb"]
 
 [ext_resource type="Texture2D" uid="uid://c36f5r6cnvwpu" path="res://assets/sprite_projectiles/bullet_pixel_Blue.png" id="1_7fri1"]
 [ext_resource type="Script" path="res://scenes/projectiles/ice_projectiles/ice_spike/ice_spike_bullet_impact.gd" id="1_aqovs"]
@@ -7,8 +7,16 @@
 atlas = ExtResource("1_7fri1")
 region = Rect2(256, 288, 16, 16)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_poq1p"]
+atlas = ExtResource("1_7fri1")
+region = Rect2(242, 290, 12, 12)
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_o2l5i"]
 radius = 34.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ullak"]
+atlas = ExtResource("1_7fri1")
+region = Rect2(240, 288, 16, 16)
 
 [node name="ice_spike_impact" type="Area2D"]
 collision_layer = 0
@@ -18,14 +26,23 @@ script = ExtResource("1_aqovs")
 damage = 3.0
 element = 2
 
-[node name="lifespan" type="Timer" parent="."]
-wait_time = 0.25
+[node name="hitbox_lifespan" type="Timer" parent="."]
+wait_time = 0.1
 one_shot = true
 autostart = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(4, 4)
+scale = Vector2(3, 3)
 texture = SubResource("AtlasTexture_84s6o")
+
+[node name="Sprite2D_start_explosion" type="Sprite2D" parent="Sprite2D"]
+scale = Vector2(0.6, 0.6)
+texture = SubResource("AtlasTexture_poq1p")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_o2l5i")
+
+[node name="Sprite2D_second_icicle" type="Sprite2D" parent="."]
+visible = false
+scale = Vector2(6, 6)
+texture = SubResource("AtlasTexture_ullak")

@@ -2,11 +2,11 @@
 
 [ext_resource type="Texture2D" uid="uid://h46xv64l4n2u" path="res://assets/sprite_UI/AbilityIcons0.png" id="1_hms1h"]
 [ext_resource type="Script" path="res://scenes/skill_tree/skill_button.gd" id="2_3vrfc"]
-[ext_resource type="LabelSettings" uid="uid://crxqvqu7eeoj8" path="res://resources/font_settings_silver.tres" id="3_0ne1u"]
+[ext_resource type="LabelSettings" uid="uid://buthhqor0rds0" path="res://resources/font_settings/font_system_desc.tres" id="3_34ajg"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_y0w4i"]
 atlas = ExtResource("1_hms1h")
-region = Rect2(16, 64, 16, 16)
+region = Rect2(80, 16, 16, 16)
 
 [node name="SkillButton" type="TextureButton"]
 offset_right = 50.0
@@ -35,17 +35,17 @@ offset_top = 1.0
 offset_right = 47.0
 offset_bottom = 38.0
 grow_vertical = 0
-theme_override_constants/separation = -5
+theme_override_constants/separation = 1
 
 [node name="Label_lvl" type="Label" parent="VBox"]
 layout_mode = 2
 text = "Lvl: 0/3"
-label_settings = ExtResource("3_0ne1u")
+label_settings = ExtResource("3_34ajg")
 
 [node name="Label_cost" type="Label" parent="VBox"]
 layout_mode = 2
 text = "Cost: 100"
-label_settings = ExtResource("3_0ne1u")
+label_settings = ExtResource("3_34ajg")
 
 [node name="Line2D" type="Line2D" parent="."]
 top_level = true

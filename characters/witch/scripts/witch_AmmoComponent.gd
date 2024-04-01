@@ -1,4 +1,5 @@
 extends Node2D
+class_name Witch_AmmoComponent
 
 @onready var character: Character = owner
 @onready var t_ammo_regen: Timer = $ammo_regen

@@ -2,6 +2,7 @@ extends Node2D
 class_name Knight_UltimateComponent
 
 @export var GrandBoltScene: PackedScene
+@export var HomingMissileScene: PackedScene
 
 @onready var character: Character = owner
 @onready var AM: Knight_AbilityManager = get_parent()
@@ -36,8 +37,7 @@ func shoot(bullet: PackedScene, direction: Vector2) -> void:
 			bul_instance.scale = Vector2(1, 1)
 			bul_instance.speed = AM.ult_bullet_speed
 			bul_instance.piercing = true
-			bul_instance.damage = AM.ult_damage_tier2 + 1
-			print(AM.ult_damage_tier2 + 1)
+			bul_instance.damage = AM.ult_damage_tier2
 		_:
 			bul_instance.scale = Vector2(0.5, 0.5)
 			bul_instance.speed = AM.ult_bullet_speed * 2 # since scale makes this move slower
@@ -60,7 +60,30 @@ func spend_charge() -> void:
 			pass
 		1:
 			shoot(GrandBoltScene, PlayerInfo.mouse_direction)
+			if AM.skill_ult_missile:
+				shoot_missile(3)
 		_:
 			shoot(GrandBoltScene, PlayerInfo.mouse_direction)
+			if AM.skill_ult_missile:
+				shoot_missile(6)
 	character.charge = 0
 	charge_tier = 0
+
+func shoot_missile(num_of_missiles: int) -> void:
+	assert(HomingMissileScene, "missing export")
+	var angle: float = 2*PI/num_of_missiles
+	
+	for i in range(num_of_missiles):
+		var direction: Vector2 = Vector2(0, -1).rotated(angle * i)
+		direction = direction.normalized()
+		var missile_inst: Bullet = HomingMissileScene.instantiate()
+		missile_inst.global_position = self.global_position
+		
+		missile_inst.direction = direction
+		missile_inst.rotation = direction.angle()
+		missile_inst.set_collision_mask_value(4, true)
+		missile_inst.max_distance = AM.max_distance * 3
+		missile_inst.damage = AM.damage_basic_bolt
+		missile_inst.speed = AM.bullet_speed * 0.4
+		#missile_inst.rotation_speed = 10
+		get_tree().root.add_child(missile_inst)
