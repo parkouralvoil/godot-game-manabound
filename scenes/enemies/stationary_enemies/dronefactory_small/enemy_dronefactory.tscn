@@ -1,17 +1,14 @@
-[gd_scene load_steps=15 format=3 uid="uid://c7kau2srmy78i"]
+[gd_scene load_steps=12 format=3 uid="uid://c7kau2srmy78i"]
 
 [ext_resource type="Script" path="res://scripts/entity_components/SpawnerComponent_dronefactory.gd" id="1_bovej"]
 [ext_resource type="Script" path="res://scenes/enemies/stationary_enemies/dronefactory_small/enemy_dronefactory.gd" id="1_os3qv"]
 [ext_resource type="Texture2D" uid="uid://dc5x12svgwuv7" path="res://assets/sprite_enemies/drone_factory.png" id="2_3fh6q"]
-[ext_resource type="PackedScene" uid="uid://ccfj5qan8stdb" path="res://scenes/projectiles/bullet_impact.tscn" id="2_p64pg"]
+[ext_resource type="PackedScene" uid="uid://ccfj5qan8stdb" path="res://projectiles/bullet_impact.tscn" id="2_p64pg"]
 [ext_resource type="Texture2D" uid="uid://mnqy6onwpiay" path="res://resources/enemy_dead.tres" id="3_djpu2"]
 [ext_resource type="Script" path="res://scripts/entity_components/HurtboxComponent_enemy.gd" id="4_njlba"]
 [ext_resource type="PackedScene" uid="uid://wb7yfjqhq458" path="res://scenes/enemies/mobile_enemies/drone_small/enemy_smalldrone.tscn" id="5_glrca"]
-[ext_resource type="Script" path="res://scripts/entity_components/HealthComponent_enemy.gd" id="8_3dilk"]
-[ext_resource type="PackedScene" uid="uid://rdeieo07v8gt" path="res://scenes/UI/UI_attached_to_enemies/label_dmg_num.tscn" id="9_hrtwv"]
-[ext_resource type="PackedScene" uid="uid://dlecin0ht7e7l" path="res://scenes/UI/UI_attached_to_enemies/healthbar.tscn" id="10_cko8u"]
-[ext_resource type="PackedScene" uid="uid://c1mef3esxg5jh" path="res://scenes/UI/UI_attached_to_enemies/element_indicator.tscn" id="11_omrer"]
-[ext_resource type="PackedScene" uid="uid://dg7x1tbggfxgc" path="res://scripts/entity_components/debuff_component.tscn" id="12_nj5u2"]
+[ext_resource type="PackedScene" uid="uid://bx54isqpe5u3x" path="res://scenes/enemies/enemies_components/health_component.tscn" id="8_jll3m"]
+[ext_resource type="Resource" uid="uid://dcu6q2sy4u3fj" path="res://resources/debuff_resource/crystalized.tres" id="9_a5fm8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bfqw3"]
 size = Vector2(22, 15)
@@ -59,17 +56,7 @@ position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_gdgdi")
 debug_color = Color(0.694118, 0.47451, 0.4, 0.419608)
 
-[node name="HealthComponent" type="Node2D" parent="."]
-script = ExtResource("8_3dilk")
-damage_number = ExtResource("9_hrtwv")
-
-[node name="Healthbar" parent="HealthComponent" instance=ExtResource("10_cko8u")]
-offset_left = -16.0
-offset_right = 16.0
-
-[node name="element_indicator" parent="HealthComponent" instance=ExtResource("11_omrer")]
-position = Vector2(-10, 23)
-
-[node name="DebuffComponent" parent="." instance=ExtResource("12_nj5u2")]
+[node name="HealthComponent" parent="." instance=ExtResource("8_jll3m")]
+crystalize_effect = ExtResource("9_a5fm8")
 
 [connection signal="timeout" from="SpawnerComponent/spawn_timer" to="SpawnerComponent" method="_on_spawn_timer_timeout"]

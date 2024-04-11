@@ -1,6 +1,6 @@
 extends ProgressBar
 
-@onready var e: BaseEnemy = owner
+@onready var e: BaseEnemy = owner.get_parent()
 
 
 func _ready() -> void:

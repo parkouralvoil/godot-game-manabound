@@ -1,0 +1,67 @@
+[gd_scene load_steps=12 format=3 uid="uid://dvuibymoxfgrl"]
+
+[ext_resource type="Script" path="res://scenes/enemies/stationary_enemies/laser_crystal/enemy_laser_crystal.gd" id="1_5ysu6"]
+[ext_resource type="PackedScene" uid="uid://ccfj5qan8stdb" path="res://projectiles/bullet_impact.tscn" id="2_3hu74"]
+[ext_resource type="Texture2D" uid="uid://cibbdxug5cih7" path="res://assets/sprite_enemies/bsf crystal.png" id="2_2864i"]
+[ext_resource type="Texture2D" uid="uid://mnqy6onwpiay" path="res://resources/enemy_dead.tres" id="3_h2x0x"]
+[ext_resource type="Script" path="res://scenes/enemies/stationary_enemies/laser_crystal/AttackComponent_laser_crystal.gd" id="5_fvndy"]
+[ext_resource type="PackedScene" uid="uid://bx54isqpe5u3x" path="res://scenes/enemies/enemies_components/health_component.tscn" id="5_ixnv0"]
+[ext_resource type="Script" path="res://scripts/entity_components/HurtboxComponent_enemy.gd" id="6_hya6t"]
+[ext_resource type="PackedScene" uid="uid://bmke88h6lebel" path="res://projectiles/lasers/red_laser.tscn" id="8_fhqp7"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w0hsw"]
+atlas = ExtResource("2_2864i")
+region = Rect2(15, 13, 18, 22)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_dlwob"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ppbf0"]
+radius = 9.0
+
+[node name="enemy_laser_crystal" type="CharacterBody2D"]
+z_index = 1
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("1_5ysu6")
+bullet_impact_scene = ExtResource("2_3hu74")
+enemy_dead_texture = ExtResource("3_h2x0x")
+max_health = 60.0
+default_reload_time = 3.0
+
+[node name="Sprite2D_main" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_w0hsw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_dlwob")
+
+[node name="HealthComponent" parent="." instance=ExtResource("5_ixnv0")]
+
+[node name="HurtboxComponent" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 0
+monitoring = false
+script = ExtResource("6_hya6t")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
+shape = SubResource("CircleShape2D_ppbf0")
+debug_color = Color(0.901961, 0.282353, 0.337255, 0.419608)
+
+[node name="AttackComponent" type="Node2D" parent="."]
+show_behind_parent = true
+script = ExtResource("5_fvndy")
+
+[node name="reload" type="Timer" parent="AttackComponent"]
+wait_time = 3.0
+one_shot = true
+
+[node name="laser_duration" type="Timer" parent="AttackComponent"]
+wait_time = 5.5
+one_shot = true
+
+[node name="red_laser" parent="AttackComponent" instance=ExtResource("8_fhqp7")]
+show_behind_parent = true
+
+[node name="red_laser2" parent="AttackComponent" instance=ExtResource("8_fhqp7")]
+
+[connection signal="timeout" from="AttackComponent/reload" to="AttackComponent" method="_on_reload_timeout"]
+[connection signal="timeout" from="AttackComponent/laser_duration" to="AttackComponent" method="_on_laser_duration_timeout"]

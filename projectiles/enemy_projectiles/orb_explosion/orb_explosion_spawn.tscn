@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://bokmrko2cf2sb"]
+
+[ext_resource type="Script" path="res://projectiles/enemy_projectiles/orb_explosion/orb_explosion_spawn.gd" id="1_1h2lx"]
+[ext_resource type="Texture2D" uid="uid://bcybqbge3j75o" path="res://assets/sprite_projectiles/explosion_indicator/blue_circle.png" id="1_ewikn"]
+[ext_resource type="Texture2D" uid="uid://bya3c6rgtudej" path="res://assets/sprite_projectiles/explosion_indicator/red_circle.png" id="2_bacff"]
+
+[node name="orb_explosion_spawn" type="Node2D"]
+script = ExtResource("1_1h2lx")
+
+[node name="blue_circle" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.72549)
+z_index = -1
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("1_ewikn")
+
+[node name="red_circle" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.72549)
+z_index = -1
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("2_bacff")

@@ -13,11 +13,19 @@ var max_speed: float = 70
 var engage_speed: float = 0
 var speed: float = max_speed
 
+
 func _ready() -> void:
+	assert(health_component, "missing")
 	health = max_health
+	reload_time = default_reload_time
 	assert(bullet_impact_scene, "missing ref")
 	assert(enemy_dead_texture, "missing ref")
+	EnemyAiManager.enemies_alive += 1
+	
+	default_color = sprite_main.modulate
+	
 	nav_agent.max_speed = max_speed
+
 
 func _physics_process(delta: float) -> void:
 	# movement and vision

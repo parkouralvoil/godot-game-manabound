@@ -35,6 +35,7 @@ var atk: int
 
 @export var fire_rate: float = 50
 
+
 func _ready() -> void:
 	skill_tree.hide()
 	health = max_health
@@ -45,37 +46,44 @@ func _ready() -> void:
 		AM.stats_update()
 		AM.desc_update()
 
+
 func _process(_delta: float) -> void:
 	if !enabled:
 		if skill_tree.visible:
 			skill_tree.hide()
 		return
-	
+
+
 	if Input.is_action_just_pressed("shop_key") and !skill_tree.visible:
 		skill_tree.show()
 		get_tree().paused = true
 	
 	PlayerInfo.displayed_charge = charge
 
+
 func _on_max_ammo_change(new_max_ammo: int) -> int:
 	if enabled:
 		PlayerInfo.on_max_ammo_changed.emit(new_max_ammo)
 	return new_max_ammo #NOTE
+
 
 func _on_ammo_change(new_ammo: int) -> int:
 	if enabled:
 		PlayerInfo.on_ammo_changed.emit(new_ammo)
 	return new_ammo #NOTE
 
+
 func _on_max_charge_change(new_max_charge: int) -> int:
 	if enabled:
 		PlayerInfo.on_max_charge_changed.emit(new_max_charge)
 	return new_max_charge #NOTE
 
+
 func _on_health_change(new_health: float) -> float:
 	if enabled:
 		PlayerInfo.on_health_changed.emit(new_health)
 	return new_health # NOTE
+
 
 func update_player_info() -> void:
 	# make sure that nothing changed
@@ -84,7 +92,8 @@ func update_player_info() -> void:
 	PlayerInfo.on_max_ammo_changed.emit(max_ammo)
 	PlayerInfo.on_max_health_changed.emit(max_health)
 	PlayerInfo.on_max_charge_changed.emit(max_charge)
-	
+
+
 #region Transfer: (AM) > CM > Player
 # i can remove this needless "intermediarry" transfer with signals, but then that'd mean that
 # other entities could connect to use those signals,
@@ -93,9 +102,11 @@ func set_player_velocity(velocity: Vector2) -> void:
 	if CM:
 		CM.set_player_velocity(velocity)
 
+
 func apply_player_cam_shake(strength: int) -> void:
 	if CM:
 		CM.apply_player_cam_shake(strength)
+
 
 func sprite_look_at(direction: Vector2) -> void:
 	if CM:

@@ -14,7 +14,7 @@ func _process(_delta: float) -> void:
 	if afterimages <= 0:
 		return
 	
-	var curr_anim := p.anim_sprite.animation
+	var curr_anim: StringName = p.anim_sprite.animation
 	var curr_frame := p.anim_sprite.get_frame()
 	var spriteframes := p.anim_sprite.sprite_frames
 	curr_texture = spriteframes.get_frame_texture(curr_anim, curr_frame)
@@ -32,6 +32,6 @@ func spawn(scene: PackedScene, texture: Texture) -> void:
 	img_instance.global_position = p.global_position
 	img_instance.texture = texture
 	
-	var level_node := p.get_parent()
+	var level_node := get_tree().root
 	level_node.call_deferred("add_child", img_instance)
 

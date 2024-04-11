@@ -9,6 +9,7 @@ font = SubResource("SystemFont_f1sw8")
 font_size = 10
 
 [node name="Label_dmg_num" type="Label"]
+z_index = 5
 texture_filter = 1
 offset_right = 40.0
 offset_bottom = 45.0

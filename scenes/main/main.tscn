@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://bfigo4q6at8d8"]
+
+[ext_resource type="Script" path="res://scenes/main/main.gd" id="1_fwn4r"]
+[ext_resource type="PackedScene" uid="uid://dvekt06510ha5" path="res://scenes/levels/blue_city/city_warehouse.tscn" id="2_iyfwt"]
+[ext_resource type="PackedScene" uid="uid://quvfsmagt2h1" path="res://scenes/levels/PlayerCamera.tscn" id="3_b3eh2"]
+[ext_resource type="PackedScene" uid="uid://c7qwpthsv6838" path="res://scenes/holder_scenes/player_holder.tscn" id="4_p316a"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_fwn4r")
+
+[node name="city_warehouse" parent="." instance=ExtResource("2_iyfwt")]
+
+[node name="PlayerCamera" parent="." instance=ExtResource("3_b3eh2")]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="PlayerCamera"]
+
+[node name="ColorRect" type="ColorRect" parent="PlayerCamera/CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="PlayerHolder" parent="." instance=ExtResource("4_p316a")]

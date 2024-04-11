@@ -13,5 +13,8 @@ class_name HurtboxComponent
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_PAUSABLE
 
-func hurtbox_hit(damage: float, element: CombatManager.Elements) -> void:
+func hit(damage: float, element: CombatManager.Elements) -> void:
 	entity.take_damage(damage, element)
+
+func apply_debuff(debuff: CombatManager.Debuffs) -> void:
+	entity.take_debuff(debuff)

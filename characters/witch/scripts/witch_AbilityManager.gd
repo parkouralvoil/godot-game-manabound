@@ -12,23 +12,23 @@ var base_percent_frost_spear: float = 80
 var base_percent_1st_icicle: float = 30
 var base_percent_2nd_icicle: float = 20
 
-@export_category("basic atk: Scale")
+@export_category("basic atk: Scale") # ALL SCALES EVERYWHERE ARE PERCENTAGES 
 var scale_percent_1st_icicle: float = 15
 var scale_percent_2nd_icicle: float = 10
 
 @export_category("ult: Base")
-var base_ult_percent: float = 100
-var base_ult_explosions: int = 30 
+var base_ult_percent: float = 70
+var base_ult_explosions: int = 15
 var base_ult_size: float = 1
 
 @export_category("ult: Scaling")
-var scale_ult_explosions: int = 5
-var scale_ult_size: float = 0.25 # adds to scale
+var scale_ult_explosions: int = 3
+var scale_ult_size: float = 25 # adds to scale
 
 @export_category("Stats")
 # each char only has a specific upgrade for one stat, to ease building
-var base_stat: float = 3
-var scale_stat: float = 0.25 # PERCENTAGE
+var base_stat: float = 1
+var scale_stat: float = 0.1 # PERCENTAGE
 var base_charge_rate: float = 6 # for witch, her charge rate remains da same
 
 var explosion_num: int = base_ult_explosions
@@ -37,12 +37,13 @@ var explosion_scale: float = base_ult_size
 var frost_spike_dmg: float = 0
 var first_icicle_dmg: float = 0
 var second_icicle_dmg: float = 0
-var icicle_size_increase: float = 1.5 # by default, it has no scaling
+
+var frost_storm_dmg: float = 0
 
 var level_basicAtk_firerate: int = 0:
 	set(lvl):
 		level_basicAtk_firerate = lvl
-		character.fire_rate = base_stat + (
+		Ammo.t_ammo_regen.wait_time = base_stat - (
 				base_stat * scale_stat * lvl)
 
 var level_basicAtk_second_icicle: int = 0:
@@ -63,7 +64,7 @@ var level_ult_size: int = 0:
 	set(lvl):
 		level_ult_size = lvl
 		explosion_scale = base_ult_size + (
-				scale_ult_size * lvl)
+				scale_ult_size/100.0 * lvl)
 
 var skill_ult_crystalize: bool = false
 var skill_basicAtk_crystalize: bool = false
@@ -79,6 +80,9 @@ func stats_update() -> void:
 	second_icicle_dmg = compute(base_percent_2nd_icicle, 
 			scale_percent_2nd_icicle,
 			level_basicAtk_second_icicle,)
+	frost_storm_dmg = compute(base_ult_percent,
+			0,
+			0)
 	
 	character.charge_rate = base_charge_rate
 	level_basicAtk_firerate = skill_tree.BasicAtk_array[1].level
@@ -112,7 +116,7 @@ func desc_update() -> void:
 	
 	skill_tree.BasicAtk_array[2].skill_name = data.pop_front()
 	skill_tree.BasicAtk_array[2].skill_desc = data.pop_front() % (
-			[base_percent_2nd_icicle, scale_percent_2nd_icicle]
+			[base_percent_2nd_icicle, scale_percent_1st_icicle, scale_percent_2nd_icicle]
 	)
 	
 	skill_tree.BasicAtk_array[3].skill_name = data.pop_front()
@@ -139,7 +143,7 @@ func desc_update() -> void:
 
 
 func get_txt_info() -> Array:
-	var file := FileAccess.open("res://characters/blue_city_character_skill_info - skill description.csv"
+	var file := FileAccess.open("res://csv_files/blue_city_character_skill_info - skill description.csv"
 			, FileAccess.READ)
 	var data_set: Array = Array(file.get_csv_line())
 	
@@ -153,7 +157,7 @@ func get_txt_info() -> Array:
 	return data_set
 
 
-func compute(base: float, scaling: float, lvl: int) -> int:
+func compute(base: float, scaling: float, lvl: int) -> float:
 	var raw_output: float = character.atk * (base + scaling * max(0, lvl - 1))
 	
 	return raw_output/100.0

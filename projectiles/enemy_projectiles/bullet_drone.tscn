@@ -1,0 +1,28 @@
+[gd_scene load_steps=6 format=3 uid="uid://bw8ro1y5k2f67"]
+
+[ext_resource type="Script" path="res://projectiles/Bullet.gd" id="1_soaco"]
+[ext_resource type="PackedScene" uid="uid://ccfj5qan8stdb" path="res://projectiles/bullet_impact.tscn" id="2_br1dk"]
+[ext_resource type="Texture2D" uid="uid://brgsvft0urgcs" path="res://assets/sprite_projectiles/bullet_pixel_Red.png" id="3_ev7uy"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ggs10"]
+atlas = ExtResource("3_ev7uy")
+region = Rect2(181, 85, 7, 7)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5d8ra"]
+radius = 3.0
+
+[node name="Bullet" type="Area2D"]
+collision_layer = 0
+script = ExtResource("1_soaco")
+bullet_impact = ExtResource("2_br1dk")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1.3, 1.3, 1.3, 1)
+texture = SubResource("AtlasTexture_ggs10")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_5d8ra")
+debug_color = Color(0.945098, 0.196078, 0.345098, 0.419608)
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

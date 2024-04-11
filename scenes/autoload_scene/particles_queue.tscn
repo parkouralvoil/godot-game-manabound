@@ -1,0 +1,134 @@
+[gd_scene load_steps=2 format=3 uid="uid://dtodwvrfmdtsv"]
+
+[ext_resource type="Script" path="res://scenes/autoload_scene/particles_queue.gd" id="1_hlr3u"]
+
+[node name="particle_queue" type="Node2D"]
+script = ExtResource("1_hlr3u")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+emitting = false
+one_shot = true
+
+[node name="GPUParticles2D2" type="GPUParticles2D" parent="."]
+emitting = false
+one_shot = true
+
+[node name="GPUParticles2D3" type="GPUParticles2D" parent="."]
+emitting = false
+one_shot = true
+
+[node name="GPUParticles2D4" type="GPUParticles2D" parent="."]
+emitting = false
+one_shot = true
+
+[node name="GPUParticles2D5" type="GPUParticles2D" parent="."]
+emitting = false
+one_shot = true
+
+[node name="GPUParticles2D6" type="GPUParticles2D" parent="."]
+emitting = false
+one_shot = true
+
+[node name="GPUParticles2D7" type="GPUParticles2D" parent="."]
+emitting = false
+one_shot = true
+
+[node name="GPUParticles2D8" type="GPUParticles2D" parent="."]
+emitting = false
+one_shot = true
+
+[node name="GPUParticles2D9" type="GPUParticles2D" parent="."]
+emitting = false
+one_shot = true
+
+[node name="GPUParticles2D10" type="GPUParticles2D" parent="."]
+emitting = false
+one_shot = true
+
+[node name="GPUParticles2D11" type="GPUParticles2D" parent="."]
+emitting = false
+one_shot = true
+
+[node name="GPUParticles2D12" type="GPUParticles2D" parent="."]
+emitting = false
+one_shot = true
+
+[node name="GPUParticles2D13" type="GPUParticles2D" parent="."]
+emitting = false
+one_shot = true
+
+[node name="GPUParticles2D14" type="GPUParticles2D" parent="."]
+emitting = false
+one_shot = true
+
+[node name="GPUParticles2D15" type="GPUParticles2D" parent="."]
+emitting = false
+one_shot = true
+
+[node name="GPUParticles2D16" type="GPUParticles2D" parent="."]
+emitting = false
+one_shot = true
+
+[node name="GPUParticles2D17" type="GPUParticles2D" parent="."]
+emitting = false
+one_shot = true
+
+[node name="GPUParticles2D18" type="GPUParticles2D" parent="."]
+emitting = false
+one_shot = true
+
+[node name="GPUParticles2D19" type="GPUParticles2D" parent="."]
+emitting = false
+one_shot = true
+
+[node name="GPUParticles2D20" type="GPUParticles2D" parent="."]
+emitting = false
+one_shot = true
+
+[node name="GPUParticles2D21" type="GPUParticles2D" parent="."]
+emitting = false
+one_shot = true
+
+[node name="GPUParticles2D22" type="GPUParticles2D" parent="."]
+emitting = false
+one_shot = true
+
+[node name="GPUParticles2D23" type="GPUParticles2D" parent="."]
+emitting = false
+one_shot = true
+
+[node name="GPUParticles2D24" type="GPUParticles2D" parent="."]
+emitting = false
+one_shot = true
+
+[node name="GPUParticles2D25" type="GPUParticles2D" parent="."]
+emitting = false
+one_shot = true
+
+[node name="GPUParticles2D26" type="GPUParticles2D" parent="."]
+emitting = false
+one_shot = true
+
+[node name="GPUParticles2D27" type="GPUParticles2D" parent="."]
+emitting = false
+one_shot = true
+
+[node name="GPUParticles2D28" type="GPUParticles2D" parent="."]
+emitting = false
+one_shot = true
+
+[node name="GPUParticles2D29" type="GPUParticles2D" parent="."]
+emitting = false
+one_shot = true
+
+[node name="GPUParticles2D30" type="GPUParticles2D" parent="."]
+emitting = false
+one_shot = true
+
+[node name="GPUParticles2D31" type="GPUParticles2D" parent="."]
+emitting = false
+one_shot = true
+
+[node name="GPUParticles2D32" type="GPUParticles2D" parent="."]
+emitting = false
+one_shot = true

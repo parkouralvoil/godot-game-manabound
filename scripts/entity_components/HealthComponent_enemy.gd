@@ -4,15 +4,26 @@ class_name EnemyHealthComponent
 @export var damage_number: PackedScene
 @onready var e: BaseEnemy = owner
 
-@onready var element_indicator: Sprite2D = $element_indicator
+@onready var element_indicator: ElementIndicator = $HBoxContainer/element_indicator
+@onready var debuff_indicator: DebuffIndicator = $HBoxContainer/debuff_indicator
+@onready var healthbar: ProgressBar = $Healthbar
+@onready var HBox: HBoxContainer = $HBoxContainer
 
 var rng := RandomNumberGenerator.new()
 
 var element_initial: CombatManager.Elements = CombatManager.Elements.NONE
 
+var is_dead: bool = false
+
 func _ready() -> void:
+	var healthbar_size: float = 5.0 + (10.0 * (e.max_health/20.0) )
+	healthbar.size.x = healthbar_size
+	healthbar.position.x = -healthbar_size/2
+	HBox.position.x = -healthbar_size/2
+	
 	assert(damage_number, "forgot to export")
 
+#region Health Component
 func damage_received(damage: float, new_elem: CombatManager.Elements) -> void:
 	if damage > 0:
 		spawn_dmg_number(str(round(damage)), CombatManager.params[new_elem])
@@ -27,8 +38,10 @@ func damage_received(damage: float, new_elem: CombatManager.Elements) -> void:
 			_:
 				if new_elem != CombatManager.Elements.NONE && new_elem != element_initial:
 					apply_reaction(new_elem)
-	else:
-		PlayerInfo.mana_orbs += e.max_health
+	elif not is_dead:
+		is_dead = true
+		PlayerInfo.mana_orbs += int(e.max_health)
+		EventBus.enemy_died.emit()
 		e.make_impact()
 		e.queue_free()
 
@@ -54,14 +67,14 @@ func apply_reaction(new_elem: CombatManager.Elements) -> void:
 		CombatManager.Elements.LIGHTNING:
 			match new_elem:
 				CombatManager.Elements.ICE:
-					e.superconduct()
+					apply_debuff(CombatManager.Debuffs.SUPERCONDUCT)
 					spawn_dmg_number("Superconduct", CombatManager.params["superconduct"])
 				_:
 					pass
 		CombatManager.Elements.ICE:
 			match new_elem:
 				CombatManager.Elements.LIGHTNING:
-					e.superconduct()
+					apply_debuff(CombatManager.Debuffs.SUPERCONDUCT)
 					spawn_dmg_number("Superconduct", CombatManager.params["superconduct"])
 				_:
 					pass
@@ -69,3 +82,23 @@ func apply_reaction(new_elem: CombatManager.Elements) -> void:
 			pass
 	element_initial = CombatManager.Elements.NONE
 	element_indicator.element = CombatManager.Elements.NONE
+#endregion
+
+#region Debuff Component
+#@onready var particle_Q: ParticleQueue = $particle_queue
+
+@export var crystalize_effect: Crystalized
+@export var superconduct_effect: Superconduct
+
+func apply_debuff(new_debuff: CombatManager.Debuffs) -> void:
+	match new_debuff:
+		CombatManager.Debuffs.SUPERCONDUCT:
+			if superconduct_effect:
+				superconduct_effect.apply_effect(self)
+		CombatManager.Debuffs.CRYSTALIZED:
+			if crystalize_effect:
+				crystalize_effect.apply_effect(self)
+		_:
+			pass
+	debuff_indicator.current_debuff = new_debuff
+#endregion

@@ -10,6 +10,7 @@ class_name Witch_UltimateComponent
 # we can just have the explosion impact be "shockwave dealing minor dmg and additional lightning elem proc"
 
 @onready var character: Character = owner
+@onready var AM: Witch_AbilityManager = get_parent()
 
 func _process(delta: float) -> void:
 	raise_charge(delta)
@@ -28,8 +29,13 @@ func _process(delta: float) -> void:
 func spawn_area_effect(area_effect: PackedScene, target_pos: Vector2) -> void:
 	assert(area_effect, "missing proj")
 	
-	var effect_instance := area_effect.instantiate()
+	var effect_instance: FrostStorm = area_effect.instantiate()
 	effect_instance.global_position = target_pos
+	effect_instance.size = AM.explosion_scale
+	effect_instance.damage = AM.frost_storm_dmg
+	effect_instance.max_spawn_counter = AM.explosion_num
+	if AM.skill_ult_crystalize:
+		effect_instance.debuff = CombatManager.Debuffs.CRYSTALIZED
 	
 	get_tree().root.add_child(effect_instance)
 

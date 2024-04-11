@@ -1,11 +1,11 @@
 [gd_scene load_steps=14 format=3 uid="uid://c7qwpthsv6838"]
 
+[ext_resource type="Script" path="res://scenes/holder_scenes/player_holder.gd" id="1_pvica"]
 [ext_resource type="PackedScene" uid="uid://c35wulwk6e3b4" path="res://scenes/player.tscn" id="1_ymobu"]
 [ext_resource type="Script" path="res://scenes/UI/Label_HP.gd" id="3_s7bg0"]
 [ext_resource type="Script" path="res://scenes/UI/Label_Ammo.gd" id="4_4dkkb"]
 [ext_resource type="LabelSettings" uid="uid://buthhqor0rds0" path="res://resources/font_settings/font_system_desc.tres" id="4_54xf7"]
 [ext_resource type="Script" path="res://scenes/UI/Label_Charge.gd" id="5_d4n2q"]
-[ext_resource type="Script" path="res://scenes/UI/Camera2D_player.gd" id="6_ckbg4"]
 [ext_resource type="Script" path="res://scenes/UI/team_UI_stuff/Team_UI.gd" id="7_o7yj4"]
 [ext_resource type="PackedScene" uid="uid://cdc6lfjuxxbia" path="res://scenes/UI/team_UI_stuff/panel_char..tscn" id="8_tbcqf"]
 [ext_resource type="Script" path="res://scenes/UI/fps_counter.gd" id="9_bkpbr"]
@@ -15,10 +15,9 @@
 [ext_resource type="Script" path="res://scenes/UI/blood_overlay.gd" id="13_f4j4e"]
 
 [node name="PlayerHolder" type="Node2D"]
+script = ExtResource("1_pvica")
 
-[node name="Player" parent="." node_paths=PackedStringArray("camera", "blood_overlay") instance=ExtResource("1_ymobu")]
-position = Vector2(371, -83)
-camera = NodePath("Camera2D_player")
+[node name="Player" parent="." node_paths=PackedStringArray("blood_overlay") instance=ExtResource("1_ymobu")]
 blood_overlay = NodePath("../Layer_1/BloodOverlay")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Player"]
@@ -51,17 +50,6 @@ text = "aa"
 label_settings = ExtResource("4_54xf7")
 script = ExtResource("5_d4n2q")
 p = NodePath("../..")
-
-[node name="Camera2D_player" type="Camera2D" parent="Player"]
-process_mode = 3
-limit_bottom = 0
-position_smoothing_enabled = true
-position_smoothing_speed = 10.0
-editor_draw_limits = true
-editor_draw_drag_margin = true
-script = ExtResource("6_ckbg4")
-NOISE_SHAKE_SPEED = 6.0
-NOISE_SHAKE_STRENGTH = 3.0
 
 [node name="Layer_2" type="CanvasLayer" parent="."]
 process_mode = 3

@@ -32,15 +32,15 @@ var scale_ult_percent_tier2: int = 75
 # each char only has a specific upgrade for one stat, to ease building
 var base_stat: int = 9
 var scale_stat: int = 2
-var base_charge_rate: int = 50
+var base_charge_rate: int = 65
 var scale_charge_rate: int = 25
 
 # variables to store computations
-var damage_lightning_bolt: int
-var damage_basic_bolt: int
+var damage_lightning_bolt: float
+var damage_basic_bolt: float
 
-var ult_damage_tier1: int
-var ult_damage_tier2: int
+var ult_damage_tier1: float
+var ult_damage_tier2: float
 
 # variables to make skill tree easier to track:
 var level_basicAtk_ammo: int = 0:
@@ -134,7 +134,7 @@ func desc_update() -> void:
 	)
 
 func get_txt_info() -> Array:
-	var file := FileAccess.open("res://characters/blue_city_character_skill_info - skill description.csv"
+	var file := FileAccess.open("res://csv_files/blue_city_character_skill_info - skill description.csv"
 			, FileAccess.READ)
 	var data_set: Array = Array(file.get_csv_line() )
 	
@@ -147,8 +147,8 @@ func get_txt_info() -> Array:
 	file.close()
 	return data_set
 
-func compute(base: int, scaling: int, lvl: int) -> int:
+func compute(base: float, scaling: float, lvl: int) -> float:
 	var raw_output: float = character.atk * (base + scaling * max(0, lvl - 1))
 	
-	return snappedf(raw_output/100.0, 1)
+	return raw_output/100.0
 	

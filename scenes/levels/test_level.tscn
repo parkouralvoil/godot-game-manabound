@@ -1,11 +1,13 @@
-[gd_scene load_steps=8 format=3 uid="uid://t2e45srpirha"]
+[gd_scene load_steps=10 format=3 uid="uid://t2e45srpirha"]
 
 [ext_resource type="TileSet" uid="uid://bq4bd7di0pjwo" path="res://resources/tilemaps/blue_scifi.tres" id="1_hgvqm"]
+[ext_resource type="Script" path="res://scenes/levels/test_level.gd" id="1_xtwao"]
 [ext_resource type="PackedScene" uid="uid://d23s3ceqy66ry" path="res://scenes/levels/test_parallax.tscn" id="3_6smy2"]
 [ext_resource type="Texture2D" uid="uid://c6a2s8k867nfu" path="res://assets/background/black square.png" id="4_u72xy"]
 [ext_resource type="PackedScene" uid="uid://c7kau2srmy78i" path="res://scenes/enemies/stationary_enemies/dronefactory_small/enemy_dronefactory.tscn" id="5_vwkg7"]
 [ext_resource type="PackedScene" uid="uid://cg2ravjhx4yud" path="res://scenes/enemies/stationary_enemies/autobow/enemy_autobow.tscn" id="5_wr50s"]
 [ext_resource type="PackedScene" uid="uid://c7qwpthsv6838" path="res://scenes/holder_scenes/player_holder.tscn" id="6_khwf5"]
+[ext_resource type="PackedScene" uid="uid://dvuibymoxfgrl" path="res://scenes/enemies/stationary_enemies/laser_crystal/enemy_laser_crystal.tscn" id="7_aw426"]
 
 [sub_resource type="Environment" id="Environment_83uss"]
 background_mode = 3
@@ -17,6 +19,7 @@ glow_blend_mode = 0
 glow_hdr_threshold = 0.9
 
 [node name="test_level" type="Node2D"]
+script = ExtResource("1_xtwao")
 
 [node name="ParallaxBackground" parent="." instance=ExtResource("3_6smy2")]
 scroll_base_offset = Vector2(0, -1000)
@@ -83,7 +86,14 @@ position = Vector2(317, -257)
 [node name="enemy_autobow5" parent="EnemyHolder" instance=ExtResource("5_wr50s")]
 position = Vector2(480, -507)
 
+[node name="enemy_laser_crystal" parent="EnemyHolder" instance=ExtResource("7_aw426")]
+position = Vector2(800, -223)
+horizontal = false
+max_health = 50.0
+default_reload_time = 5.0
+
 [node name="PlayerHolder" parent="." instance=ExtResource("6_khwf5")]
+position = Vector2(699, -85)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_83uss")

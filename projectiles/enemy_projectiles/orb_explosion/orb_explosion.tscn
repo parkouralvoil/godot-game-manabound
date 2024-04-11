@@ -1,0 +1,34 @@
+[gd_scene load_steps=5 format=3 uid="uid://842pxmnrj5kb"]
+
+[ext_resource type="Script" path="res://projectiles/ice_projectiles/frost_nova/frost_nova_impact.gd" id="1_uru4b"]
+[ext_resource type="Texture2D" uid="uid://pvrjdm745q8m" path="res://assets/sprite_projectiles/bullet_pixel_DarkRed.png" id="2_v5obu"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_84s6o"]
+atlas = ExtResource("2_v5obu")
+region = Rect2(257, 65, 14, 14)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_o2l5i"]
+radius = 58.0086
+
+[node name="orb_explosion" type="Area2D"]
+collision_layer = 0
+collision_mask = 4
+monitorable = false
+script = ExtResource("1_uru4b")
+opaqueness = 1.1
+decay_rate = 3.0
+element = 2
+
+[node name="hitbox_lifespan" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+autostart = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.545098)
+z_index = -1
+scale = Vector2(8, 8)
+texture = SubResource("AtlasTexture_84s6o")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_o2l5i")

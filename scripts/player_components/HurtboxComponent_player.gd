@@ -8,6 +8,6 @@ extends Area2D
 
 # (FOR BULLETS) if bullet from player: set mask/layer to look for enemies
 
-func hurtbox_hit(damage: float, _element: CombatManager.Elements) -> void:
+func hit(damage: float, _element: CombatManager.Elements) -> void:
 	if p.player_hit_comp.iframes <= 0:
 		p.take_damage(damage)

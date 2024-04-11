@@ -15,5 +15,5 @@ func _process(_delta: float) -> void:
 	if character.ammo >= character.max_ammo or (PlayerInfo.basic_attacking and character.enabled):
 		t_ammo_regen.stop()
 
-func _on_ammo_regen_timeout() -> void:
+func _on_ammo_regen_timeout() -> void: # WAIT TIME IS CHANGED BY AbilityManager !!!
 	character.ammo += 1

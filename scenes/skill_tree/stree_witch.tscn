@@ -39,14 +39,14 @@ load_path = "res://.godot/imported/AbilityIcons0.png-31dba6544aa1a7b4320ff9e5f15
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_u4vf3"]
 atlas = SubResource("CompressedTexture2D_6kvqv")
-region = Rect2(113, 16, 15, 15)
+region = Rect2(64, 112, 16, 16)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_73dt2"]
 load_path = "res://.godot/imported/AbilityIcons0.png-31dba6544aa1a7b4320ff9e5f15eb420.ctex"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3u2ni"]
 atlas = SubResource("CompressedTexture2D_73dt2")
-region = Rect2(64, 112, 16, 16)
+region = Rect2(113, 16, 15, 16)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ihnym"]
 load_path = "res://.godot/imported/AbilityIcons0.png-31dba6544aa1a7b4320ff9e5f15eb420.ctex"

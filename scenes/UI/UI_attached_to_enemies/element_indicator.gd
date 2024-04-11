@@ -1,15 +1,14 @@
-extends Sprite2D
+extends TextureRect
+class_name ElementIndicator
 
 @export var lightning: AtlasTexture
 @export var ice: AtlasTexture
 
-@onready var HC: EnemyHealthComponent = get_parent()
+@onready var HC: EnemyHealthComponent = get_parent().get_parent()
 
 var element: CombatManager.Elements = CombatManager.Elements.NONE :
 	set(value):
 		element = _on_elem_change(value)
-	get:
-		return element
 
 func _ready() -> void:
 	assert(HC, "not there")
@@ -19,11 +18,11 @@ func _on_elem_change(new_elem: CombatManager.Elements) -> CombatManager.Elements
 	#print(CombatManager.Elements.keys()[new_elem])
 	match new_elem:
 		CombatManager.Elements.NONE:
-			set_deferred("visible", false)
+			hide()
 		CombatManager.Elements.LIGHTNING:
-			set_deferred("visible", true)
+			show()
 			texture = lightning
 		CombatManager.Elements.ICE:
-			set_deferred("visible", true)
+			show()
 			texture = ice
 	return new_elem

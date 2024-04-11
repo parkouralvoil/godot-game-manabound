@@ -11,8 +11,7 @@ class_name Player
 @export var afterimage_comp: Node2D
 @onready var hurtbox: Area2D = $Hurtbox
 
-#UI stuff (connect these in the level scene)
-@export var camera: Camera2D 
+#UI stuff (connect these in the holder scene)
 @export var blood_overlay: TextureRect
 
 @onready var char_manager: CharacterManager = $CharacterManager
@@ -77,8 +76,7 @@ func take_damage(damage: float) -> void:
 		blood_overlay.display_blood()
 
 func camera_shake(strength: int) -> void:
-	if camera:
-		camera.apply_noise_shake(strength)
+	EventBus.camera_shake.emit(strength)
 
 func update_player_info() -> void:
 	PlayerInfo.aim_direction = aim_direction

@@ -1,13 +1,26 @@
-[gd_scene load_steps=4 format=3 uid="uid://c1mef3esxg5jh"]
+[gd_scene load_steps=6 format=3 uid="uid://c1mef3esxg5jh"]
 
-[ext_resource type="Texture2D" uid="uid://ggeqdf7h0gk0" path="res://resources/lightning.tres" id="1_gngqs"]
+[ext_resource type="Texture2D" uid="uid://dxxhf06kwwpun" path="res://resources/element_icons/ice.tres" id="2_liv4n"]
 [ext_resource type="Script" path="res://scenes/UI/UI_attached_to_enemies/element_indicator.gd" id="2_u754f"]
-[ext_resource type="Texture2D" uid="uid://dxxhf06kwwpun" path="res://resources/ice.tres" id="3_w3y0v"]
 
-[node name="element_indicator" type="Sprite2D"]
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_4u5pq"]
+load_path = "res://.godot/imported/elementsymbols.png-0cf4b22d43d9f6ad14dc409849a81643.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lns7x"]
+atlas = SubResource("CompressedTexture2D_4u5pq")
+region = Rect2(54, 0, 9, 9)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vhhfx"]
+atlas = SubResource("CompressedTexture2D_4u5pq")
+region = Rect2(54, 0, 9, 9)
+
+[node name="element_indicator" type="TextureRect"]
 modulate = Color(0.95, 0.95, 0.95, 1)
-position = Vector2(-7, 24)
-texture = ExtResource("1_gngqs")
+offset_left = -7.0
+offset_top = 24.0
+offset_right = -7.0
+offset_bottom = 24.0
+texture = SubResource("AtlasTexture_lns7x")
 script = ExtResource("2_u754f")
-lightning = ExtResource("1_gngqs")
-ice = ExtResource("3_w3y0v")
+lightning = SubResource("AtlasTexture_vhhfx")
+ice = ExtResource("2_liv4n")

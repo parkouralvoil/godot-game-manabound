@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://oml2t17eroh7"]
+
+[ext_resource type="Script" path="res://scenes/UI/UI_attached_to_enemies/debuff_indicator.gd" id="2_8ibay"]
+[ext_resource type="LabelSettings" uid="uid://buthhqor0rds0" path="res://resources/font_settings/font_system_desc.tres" id="2_gkcjt"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_4u5pq"]
+load_path = "res://.godot/imported/elementsymbols.png-0cf4b22d43d9f6ad14dc409849a81643.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ytshv"]
+atlas = SubResource("CompressedTexture2D_4u5pq")
+region = Rect2(90, 0, 9, 9)
+
+[node name="debuff_indicator" type="TextureRect"]
+modulate = Color(0.95, 0.95, 0.95, 1)
+offset_left = -7.0
+offset_top = 24.0
+offset_right = -7.0
+offset_bottom = 24.0
+texture = SubResource("AtlasTexture_ytshv")
+script = ExtResource("2_8ibay")
+
+[node name="Label_stacks" type="Label" parent="."]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 4.0
+offset_right = 45.0
+offset_bottom = 27.0
+text = "x1"
+label_settings = ExtResource("2_gkcjt")

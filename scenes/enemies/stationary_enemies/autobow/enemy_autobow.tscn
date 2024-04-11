@@ -1,17 +1,13 @@
-[gd_scene load_steps=18 format=3 uid="uid://cg2ravjhx4yud"]
+[gd_scene load_steps=14 format=3 uid="uid://cg2ravjhx4yud"]
 
 [ext_resource type="Script" path="res://scenes/enemies/stationary_enemies/autobow/enemy_autobow.gd" id="1_7v7ie"]
 [ext_resource type="Texture2D" uid="uid://b5uv1u6y5momf" path="res://assets/sprite_enemies/bsf autobow.png" id="1_fyovm"]
 [ext_resource type="Script" path="res://scripts/entity_components/HurtboxComponent_enemy.gd" id="2_52e5o"]
-[ext_resource type="PackedScene" uid="uid://ccfj5qan8stdb" path="res://scenes/projectiles/bullet_impact.tscn" id="2_gb7ta"]
+[ext_resource type="PackedScene" uid="uid://ccfj5qan8stdb" path="res://projectiles/bullet_impact.tscn" id="2_x5tyu"]
 [ext_resource type="Script" path="res://scenes/enemies/stationary_enemies/autobow/autobow_ammo.gd" id="3_8d36t"]
 [ext_resource type="Texture2D" uid="uid://mnqy6onwpiay" path="res://resources/enemy_dead.tres" id="3_jq3je"]
 [ext_resource type="Script" path="res://scripts/entity_components/attack_components_specific/AttackComponent_Autobow.gd" id="5_ylnjd"]
-[ext_resource type="Script" path="res://scripts/entity_components/HealthComponent_enemy.gd" id="6_i76j2"]
-[ext_resource type="PackedScene" uid="uid://rdeieo07v8gt" path="res://scenes/UI/UI_attached_to_enemies/label_dmg_num.tscn" id="7_ltlpe"]
-[ext_resource type="PackedScene" uid="uid://dlecin0ht7e7l" path="res://scenes/UI/UI_attached_to_enemies/healthbar.tscn" id="8_10t5y"]
-[ext_resource type="PackedScene" uid="uid://c1mef3esxg5jh" path="res://scenes/UI/UI_attached_to_enemies/element_indicator.tscn" id="9_dqxqo"]
-[ext_resource type="PackedScene" uid="uid://dg7x1tbggfxgc" path="res://scripts/entity_components/debuff_component.tscn" id="12_t06qs"]
+[ext_resource type="PackedScene" uid="uid://bx54isqpe5u3x" path="res://scenes/enemies/enemies_components/health_component.tscn" id="6_if5fd"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dpic6"]
 atlas = ExtResource("1_fyovm")
@@ -33,10 +29,9 @@ region = Rect2(40, 39, 2, 2)
 collision_layer = 2
 collision_mask = 0
 script = ExtResource("1_7v7ie")
-bullet_impact_scene = ExtResource("2_gb7ta")
+bullet_impact_scene = ExtResource("2_x5tyu")
 enemy_dead_texture = ExtResource("3_jq3je")
 impact_scale = Vector2(2, 2)
-max_health = 40.0
 default_reload_time = 1.25
 
 [node name="Sprite2D_pivot" type="Sprite2D" parent="."]
@@ -63,16 +58,7 @@ texture = SubResource("AtlasTexture_14l55")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_dlwob")
 
-[node name="HealthComponent" type="Node2D" parent="."]
-script = ExtResource("6_i76j2")
-damage_number = ExtResource("7_ltlpe")
-
-[node name="Healthbar" parent="HealthComponent" instance=ExtResource("8_10t5y")]
-min_value = 3.0
-
-[node name="element_indicator" parent="HealthComponent" instance=ExtResource("9_dqxqo")]
-
-[node name="DebuffComponent" parent="." instance=ExtResource("12_t06qs")]
+[node name="HealthComponent" parent="." instance=ExtResource("6_if5fd")]
 
 [node name="HurtboxComponent" type="Area2D" parent="."]
 collision_layer = 8

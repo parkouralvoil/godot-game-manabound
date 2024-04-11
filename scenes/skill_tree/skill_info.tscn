@@ -47,7 +47,8 @@ color = Color(0.431373, 0.431373, 0.431373, 1)
 custom_minimum_size = Vector2(140, 0)
 layout_mode = 2
 label_settings = ExtResource("3_kit8y")
-autowrap_mode = 2
+autowrap_mode = 3
+justification_flags = 160
 
 [node name="Buy_Button" type="Button" parent="."]
 layout_mode = 0

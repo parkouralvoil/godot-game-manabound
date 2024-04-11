@@ -1,0 +1,61 @@
+[gd_scene load_steps=12 format=3 uid="uid://bhqkl7kraifkd"]
+
+[ext_resource type="Script" path="res://scenes/enemies/stationary_enemies/energizedOrb/enemy_energized_orb.gd" id="1_cgshh"]
+[ext_resource type="PackedScene" uid="uid://ccfj5qan8stdb" path="res://projectiles/bullet_impact.tscn" id="2_1kbps"]
+[ext_resource type="Texture2D" uid="uid://mnqy6onwpiay" path="res://resources/enemy_dead.tres" id="3_1qe5k"]
+[ext_resource type="Texture2D" uid="uid://cv8m0tgd2djtm" path="res://assets/sprite_enemies/bsf wisp.png" id="4_msriy"]
+[ext_resource type="PackedScene" uid="uid://bx54isqpe5u3x" path="res://scenes/enemies/enemies_components/health_component.tscn" id="5_k0xbi"]
+[ext_resource type="Script" path="res://scenes/enemies/stationary_enemies/energizedOrb/AttackComponent_energizedOrb.gd" id="5_modtn"]
+[ext_resource type="PackedScene" uid="uid://bokmrko2cf2sb" path="res://projectiles/enemy_projectiles/orb_explosion/orb_explosion_spawn.tscn" id="6_g81kv"]
+[ext_resource type="Script" path="res://scripts/entity_components/HurtboxComponent_enemy.gd" id="6_vusb1"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w0hsw"]
+atlas = ExtResource("4_msriy")
+region = Rect2(15, 13, 18, 22)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_dlwob"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ppbf0"]
+
+[node name="enemy_energizedOrb" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("1_cgshh")
+bullet_impact_scene = ExtResource("2_1kbps")
+enemy_dead_texture = ExtResource("3_1qe5k")
+default_reload_time = 2.0
+
+[node name="Sprite2D_main" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_w0hsw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_dlwob")
+
+[node name="HealthComponent" parent="." instance=ExtResource("5_k0xbi")]
+
+[node name="HurtboxComponent" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 0
+monitoring = false
+script = ExtResource("6_vusb1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
+shape = SubResource("CircleShape2D_ppbf0")
+debug_color = Color(0.901961, 0.282353, 0.337255, 0.419608)
+
+[node name="AttackComponent" type="Node2D" parent="."]
+script = ExtResource("5_modtn")
+
+[node name="reload" type="Timer" parent="AttackComponent"]
+wait_time = 5.0
+one_shot = true
+
+[node name="orb_explosion_spawn" parent="AttackComponent" instance=ExtResource("6_g81kv")]
+visible = false
+
+[node name="Line2D" type="Line2D" parent="AttackComponent"]
+points = PackedVector2Array(0, 0, 0, 0)
+width = 1.0
+default_color = Color(0.203922, 0.32549, 0.596078, 0.615686)
+
+[connection signal="timeout" from="AttackComponent/reload" to="AttackComponent" method="_on_reload_timeout"]

@@ -53,7 +53,8 @@ func shoot(bullet: PackedScene) -> void:
 		
 	bul_instance.first_icicle_dmg = AM.first_icicle_dmg
 	bul_instance.second_icicle_dmg = AM.second_icicle_dmg
-	print(bul_instance.first_icicle_dmg, bul_instance.second_icicle_dmg)
+	if AM.skill_basicAtk_crystalize:
+		bul_instance.debuff = CombatManager.Debuffs.CRYSTALIZED
 	bul_instance.set_collision_mask_value(4, true)
 	get_tree().root.add_child(bul_instance)
 

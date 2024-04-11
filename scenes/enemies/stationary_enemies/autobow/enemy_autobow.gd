@@ -1,4 +1,5 @@
 extends BaseEnemy
+class_name Enemy_Autobow
 
 var target_pos: Vector2 = Vector2.ZERO
 var vision_range: float = 500.0

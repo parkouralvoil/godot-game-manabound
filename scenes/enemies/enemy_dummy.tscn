@@ -1,0 +1,41 @@
+[gd_scene load_steps=10 format=3 uid="uid://bmqu3gpnmomg0"]
+
+[ext_resource type="Script" path="res://scenes/enemies/BaseEnemy.gd" id="1_qibg1"]
+[ext_resource type="PackedScene" uid="uid://ccfj5qan8stdb" path="res://projectiles/bullet_impact.tscn" id="2_wt2d2"]
+[ext_resource type="Texture2D" uid="uid://mnqy6onwpiay" path="res://resources/enemy_dead.tres" id="3_nci7v"]
+[ext_resource type="Texture2D" uid="uid://b5uv1u6y5momf" path="res://assets/sprite_enemies/bsf autobow.png" id="4_xjw5w"]
+[ext_resource type="PackedScene" uid="uid://bx54isqpe5u3x" path="res://scenes/enemies/enemies_components/health_component.tscn" id="6_0yksb"]
+[ext_resource type="Script" path="res://scripts/entity_components/HurtboxComponent_enemy.gd" id="7_0xhqn"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w0hsw"]
+atlas = ExtResource("4_xjw5w")
+region = Rect2(15, 13, 18, 22)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_dlwob"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ppbf0"]
+
+[node name="enemy_dummy" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("1_qibg1")
+bullet_impact_scene = ExtResource("2_wt2d2")
+enemy_dead_texture = ExtResource("3_nci7v")
+
+[node name="Sprite2D_main" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_w0hsw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_dlwob")
+
+[node name="HealthComponent" parent="." instance=ExtResource("6_0yksb")]
+
+[node name="HurtboxComponent" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 0
+monitoring = false
+script = ExtResource("7_0xhqn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
+shape = SubResource("CircleShape2D_ppbf0")
+debug_color = Color(0.901961, 0.282353, 0.337255, 0.419608)

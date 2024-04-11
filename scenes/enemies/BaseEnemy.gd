@@ -3,8 +3,7 @@ class_name BaseEnemy
 
 @export var bullet_impact_scene: PackedScene # im recycling this for enemy's death explosion sfx
 @export var enemy_dead_texture: AtlasTexture
-@onready var health_component: EnemyHealthComponent = $HealthComponent# manages elements/damage procs
-@onready var debuff_component: EnemyDebuffComponent = $DebuffComponent # manages debuffs received
+@onready var health_component: EnemyHealthComponent = $HealthComponent # now combined health and debuff
 
 @export var impact_scale: Vector2 = Vector2(3, 3)
 
@@ -14,7 +13,9 @@ signal health_changed(new_health: float)
 signal reload_time_changed(new_reload_time: float)
 
 # debuff vars:
-var debuff_by_superconduct: bool = false
+#var debuff_by_superconduct: bool = false
+## im against this ^ this "reload_time_changed" signal alrdy indicates it
+## draining ammo will be overload's effect
 
 @export var max_health: float = 50.0
 var health: float = max_health :
@@ -27,27 +28,35 @@ var reload_time: float = default_reload_time :
 	set(value):
 		reload_time = value
 		reload_time_changed.emit(reload_time)
-		
 
-var bullet_color: Color = Color(1, 0.4, 0)
+
+var default_color: Color
 
 
 func _ready() -> void:
-	assert(debuff_component, "missing")
 	assert(health_component, "missing")
 	health = max_health
 	reload_time = default_reload_time
 	assert(bullet_impact_scene, "missing ref")
 	assert(enemy_dead_texture, "missing ref")
+	EnemyAiManager.enemies_alive += 1
 	
 	# to give leeway for char when they first enter
 	process_mode = Node.PROCESS_MODE_DISABLED
 	await get_tree().create_timer(2).timeout
 	process_mode = Node.PROCESS_MODE_INHERIT
+	default_color = sprite_main.modulate
+
 
 func take_damage(damage: float, element: CombatManager.Elements) -> void:
 	if health_component:
 		health_component.damage_received(damage, element)
+
+
+func take_debuff(debuff: CombatManager.Debuffs) -> void:
+	if health_component:
+		health_component.apply_debuff(debuff)
+
 
 func make_impact() -> void:
 	var imp_instance: BulletImpact = bullet_impact_scene.instantiate()
@@ -56,7 +65,3 @@ func make_impact() -> void:
 	imp_instance.decay_rate = 10
 	imp_instance.scale = impact_scale
 	get_tree().root.call_deferred("add_child",imp_instance)
-
-func superconduct() -> void:
-	debuff_component.receive_superconduct()
-	debuff_by_superconduct = true
