@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://c35wulwk6e3b4"]
+[gd_scene load_steps=25 format=3 uid="uid://c35wulwk6e3b4"]
 
 [ext_resource type="Script" path="res://scenes/player.gd" id="1_ob8fa"]
 [ext_resource type="Script" path="res://scripts/player_components/HurtboxComponent_player.gd" id="2_w8hq5"]
@@ -13,7 +13,7 @@
 [ext_resource type="Script" path="res://scripts/player_components/DirectionIndicator.gd" id="11_vqh4r"]
 [ext_resource type="Texture2D" uid="uid://dy3hkciev768l" path="res://assets/sprite_UI/red_circle.png" id="12_i87yh"]
 [ext_resource type="SpriteFrames" uid="uid://n8tavxox3kua" path="res://characters/knight/knight_spriteframes.tres" id="13_7cy21"]
-[ext_resource type="Texture2D" uid="uid://bm71lln6lsmlc" path="res://assets/sprite_characters/knight_spritesheet.png" id="14_7yw6f"]
+[ext_resource type="Texture2D" uid="uid://3jkuw6bwhk01" path="res://characters/knight/knight_arm.tres" id="14_iiaao"]
 [ext_resource type="Script" path="res://scripts/StateMachine.gd" id="15_mooub"]
 [ext_resource type="Script" path="res://scripts/player_states/PlayerIdle.gd" id="16_01hcy"]
 [ext_resource type="Script" path="res://scripts/player_states/PlayerMove.gd" id="17_btrsq"]
@@ -42,10 +42,6 @@ scale_curve = SubResource("CurveTexture_gh1r7")
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_6tau6"]
 radius = 201.04
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_16aye"]
-atlas = ExtResource("14_7yw6f")
-region = Rect2(96, 96, 32, 32)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_c2x3k"]
 size = Vector2(8, 19)
@@ -131,10 +127,11 @@ texture = ExtResource("12_i87yh")
 sprite_frames = ExtResource("13_7cy21")
 animation = &"stance"
 
-[node name="Sprite2D_arm" type="Sprite2D" parent="AnimatedSprite2D"]
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="AnimatedSprite2D"]
 position = Vector2(-5, 2)
-texture = SubResource("AtlasTexture_16aye")
-offset = Vector2(5, -2)
+
+[node name="fake_arm" type="Sprite2D" parent="AnimatedSprite2D"]
+texture = ExtResource("14_iiaao")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-1, 3.5)

@@ -14,7 +14,7 @@ var selected_char_resource: Array[CharacterResource] = [null, null, null]
 
 var current_char: Character
 var current_char_spriteframes: SpriteFrames
-var current_char_arm: Texture
+var current_char_fake_arm: Texture
 
 var can_change_char: bool = true
 
@@ -30,8 +30,10 @@ func _ready() -> void:
 	for i in range(2):
 		stored_chars[i] = selected_char_resource[i].character_scene.instantiate()
 		add_child(stored_chars[i])
+		stored_chars[i].arm_sprite.hide()
+		stored_chars[i].wpn_sprite.hide()
 	
-	change_character(0)
+	#change_character(0) player calls this on its ready func instead
 
 func take_damage(damage: float) -> void:
 	if current_char.health - damage > 0:
@@ -41,10 +43,6 @@ func take_damage(damage: float) -> void:
 
 func _process(_delta: float) -> void:
 	if !p: return
-	
-	if p.anim_sprite.sprite_frames != current_char_spriteframes:
-		p.anim_sprite.sprite_frames = current_char_spriteframes
-		p.arm_sprite.texture = current_char_arm
 	
 	can_change_char = t_change_char.is_stopped() and !Input.is_action_pressed("right_click")
 	
@@ -59,19 +57,33 @@ func _process(_delta: float) -> void:
 			selected_char_resource[0].selected = false
 
 func change_character(num: int) -> void:
+	if p.arm_sprite != null:
+		p.arm_sprite.hide()
+		p.wpn_sprite.hide()
 	var _char := selected_char_resource[num]
 	var _AM := stored_chars[num]
 	current_char = _AM
 	current_char_spriteframes = _char.spriteframes
+	current_char_fake_arm = _char.sprite_arm
 	current_char.global_position = self.global_position
 	_AM.enabled = true
 	_char.selected = true
-	current_char_arm = _char.sprite_arm
+	
+	p.anim_sprite.sprite_frames = current_char_spriteframes
+	p.arm_node.remote_path = current_char.arm_sprite.get_path()
+	p.arm_sprite = current_char.arm_sprite
+	p.wpn_sprite = current_char.wpn_sprite
+	p.arm_sprite.show()
+	p.wpn_sprite.show()
+	
+	p.fake_arm_sprite.texture = current_char_fake_arm
 	
 	current_char.update_player_info()
 	
 	t_change_char.start()
 	p.character_changed_anim()
+
+
 
 #region Transfer: AM > (CM) > Player
 func set_player_velocity(velocity: Vector2) -> void:

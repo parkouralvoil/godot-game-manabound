@@ -16,7 +16,7 @@ var element_initial: CombatManager.Elements = CombatManager.Elements.NONE
 var is_dead: bool = false
 
 func _ready() -> void:
-	var healthbar_size: float = 5.0 + (10.0 * (e.max_health/20.0) )
+	var healthbar_size: float = 5.0 + (8.0 * (e.max_health/10.0) )
 	healthbar.size.x = healthbar_size
 	healthbar.position.x = -healthbar_size/2
 	HBox.position.x = -healthbar_size/2

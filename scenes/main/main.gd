@@ -5,10 +5,10 @@ const level_warehouse: PackedScene = preload("res://scenes/levels/blue_city/city
 var enemy_chance: float = 0 :
 	set(value):
 		enemy_chance = clampf(value, 0, 1)
-var enemy_chance_scaling: float = 0.5
+var enemy_chance_scaling: float = 0.1
 
 @onready var playerholder: Node2D = $PlayerHolder
-@onready var level: LevelManager = $city_warehouse
+@onready var level: LevelManager = get_child(0) ## REMEMBERRRRRRRRRRRRRRRRRRRRRRRR
 @onready var camera: Camera2D = $PlayerCamera
 @onready var black_screen: ColorRect = $PlayerCamera/CanvasLayer/ColorRect 
 
@@ -47,6 +47,7 @@ func load_next_lvl(current_lvl: LevelManager) -> void:
 	enemy_chance += enemy_chance_scaling
 	black_screen.show()
 	t.set_ease(Tween.EASE_OUT)
+	EventBus.clear_abilities.emit()
 	t.tween_property(black_screen, "color", Color(0,0,0,1), 0.7)
 	await t.finished
 	

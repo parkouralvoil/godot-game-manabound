@@ -2,6 +2,7 @@ extends Node2D
 class_name Knight_UltimateComponent
 
 @export var GrandBoltScene: PackedScene
+@export var LightningBoltScene: PackedScene
 @export var HomingMissileScene: PackedScene
 
 @onready var character: Character = owner
@@ -21,6 +22,7 @@ func _process(delta: float) -> void:
 		character.sprite_look_at(PlayerInfo.mouse_direction)
 	elif character.charge != 0:
 		spend_charge()
+		character.wpn_sprite.modulate = Color(1, 1, 1)
 
 func shoot(bullet: PackedScene, direction: Vector2) -> void:
 	assert(bullet, "missing ref")
@@ -32,27 +34,45 @@ func shoot(bullet: PackedScene, direction: Vector2) -> void:
 	bul_instance.rotation = direction.angle()
 	bul_instance.set_collision_mask_value(4, true)
 	bul_instance.max_distance = AM.ult_max_distance
+	bul_instance.speed = AM.ult_bullet_speed * 1.5 # since scale makes this move slower
 	match charge_tier:
 		2:
-			bul_instance.scale = Vector2(1, 1)
-			bul_instance.speed = AM.ult_bullet_speed
-			bul_instance.piercing = true
-			bul_instance.damage = AM.ult_damage_tier2
-		_:
-			bul_instance.scale = Vector2(0.5, 0.5)
-			bul_instance.speed = AM.ult_bullet_speed * 2 # since scale makes this move slower
+			bul_instance.scale = Vector2(0.75, 0.75)
+			#bul_instance.piercing = true
 			bul_instance.damage = AM.ult_damage_tier1
+		_:
+			bul_instance.scale = Vector2(0.75, 0.75)
+			bul_instance.damage = AM.ult_damage_tier1
+	get_tree().root.add_child(bul_instance)
+
+func shoot_extra(bullet: PackedScene, direction: Vector2) -> void:
+	assert(bullet, "missing ref")
+	
+	var bul_instance: Bullet = bullet.instantiate()
+	bul_instance.global_position = self.global_position
+	
+	bul_instance.direction = direction
+	bul_instance.rotation = direction.angle()
+	bul_instance.set_collision_mask_value(4, true)
+	bul_instance.max_distance = AM.max_distance
+	bul_instance.speed = AM.bullet_speed
+	bul_instance.damage = AM.damage_lightning_bolt
 	get_tree().root.add_child(bul_instance)
 
 func raise_charge(delta: float) -> void:
 	character.charge = min(character.max_charge, 
 		character.charge + character.charge_rate * delta)
 	
-	if character.charge == 100:
+	if character.charge >= 100:
 		charge_tier = 2
+		character.wpn_sprite.modulate = Color(4, 1, 0.4)
 	elif character.charge >= 50:
 		charge_tier = 1
-
+		character.wpn_sprite.modulate = Color(2, 2, 0.4)
+	else:
+		charge_tier = 0
+		character.wpn_sprite.modulate = Color(1, 1, 1)
+		
 func spend_charge() -> void:
 	character.apply_player_cam_shake(charge_tier * 2)
 	match charge_tier:
@@ -64,6 +84,14 @@ func spend_charge() -> void:
 				shoot_missile(3)
 		_:
 			shoot(GrandBoltScene, PlayerInfo.mouse_direction)
+			#var rng: RandomNumberGenerator = RandomNumberGenerator.new()
+			var _angle: float
+			_angle = -4 * PI/180
+			shoot_extra(LightningBoltScene, PlayerInfo.mouse_direction.rotated(_angle))
+			_angle = 0 #rng.randi_range(-4, 4) * PI/180
+			shoot_extra(LightningBoltScene, PlayerInfo.mouse_direction.rotated(_angle))
+			_angle = 4 * PI/180
+			shoot_extra(LightningBoltScene, PlayerInfo.mouse_direction.rotated(_angle))
 			if AM.skill_ult_missile:
 				shoot_missile(6)
 	character.charge = 0

@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://c7kau2srmy78i"]
+[gd_scene load_steps=11 format=3 uid="uid://c7kau2srmy78i"]
 
 [ext_resource type="Script" path="res://scripts/entity_components/SpawnerComponent_dronefactory.gd" id="1_bovej"]
 [ext_resource type="Script" path="res://scenes/enemies/stationary_enemies/dronefactory_small/enemy_dronefactory.gd" id="1_os3qv"]
@@ -8,7 +8,6 @@
 [ext_resource type="Script" path="res://scripts/entity_components/HurtboxComponent_enemy.gd" id="4_njlba"]
 [ext_resource type="PackedScene" uid="uid://wb7yfjqhq458" path="res://scenes/enemies/mobile_enemies/drone_small/enemy_smalldrone.tscn" id="5_glrca"]
 [ext_resource type="PackedScene" uid="uid://bx54isqpe5u3x" path="res://scenes/enemies/enemies_components/health_component.tscn" id="8_jll3m"]
-[ext_resource type="Resource" uid="uid://dcu6q2sy4u3fj" path="res://resources/debuff_resource/crystalized.tres" id="9_a5fm8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bfqw3"]
 size = Vector2(22, 15)
@@ -22,6 +21,7 @@ collision_mask = 0
 script = ExtResource("1_os3qv")
 bullet_impact_scene = ExtResource("2_p64pg")
 enemy_dead_texture = ExtResource("3_djpu2")
+max_health = 45.0
 default_reload_time = 10.0
 
 [node name="SpawnerComponent" type="Node2D" parent="."]
@@ -57,6 +57,5 @@ shape = SubResource("RectangleShape2D_gdgdi")
 debug_color = Color(0.694118, 0.47451, 0.4, 0.419608)
 
 [node name="HealthComponent" parent="." instance=ExtResource("8_jll3m")]
-crystalize_effect = ExtResource("9_a5fm8")
 
 [connection signal="timeout" from="SpawnerComponent/spawn_timer" to="SpawnerComponent" method="_on_spawn_timer_timeout"]

@@ -26,7 +26,7 @@ func Update(_delta: float) -> void:
 	if !p:
 		return
 	#if p.velocity != Vector2.ZERO:
-	if PlayerInfo.basic_attacking:
+	if Input.is_action_just_pressed("left_click"):
 		state_transition.emit(self, "PlayerIdle")
 	
 	flip_sprite()

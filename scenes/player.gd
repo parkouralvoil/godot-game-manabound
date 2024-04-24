@@ -3,7 +3,10 @@ class_name Player
 
 #onready var
 @onready var anim_sprite: AnimatedSprite2D = $AnimatedSprite2D
-@onready var arm_sprite: Sprite2D = $AnimatedSprite2D/Sprite2D_arm
+@onready var arm_node: RemoteTransform2D = $AnimatedSprite2D/RemoteTransform2D
+var arm_sprite: Sprite2D
+var wpn_sprite: Sprite2D
+@onready var fake_arm_sprite: Sprite2D = $AnimatedSprite2D/fake_arm
 @export var direction_indicator: Sprite2D #= $DirectionIndicator
 @export var circle_indicator: Sprite2D
 @export var target_lock_component: Area2D #= $TargetLock
@@ -38,6 +41,9 @@ var dist_to_mouse: Vector2 = Vector2.ZERO
 var auto_aim: bool = true
 var selected_target: Area2D = null
 
+func _ready() -> void:
+	char_manager.change_character(0)
+
 func _process(_delta: float) -> void:
 	EnemyAiManager.player_position = global_position # this seems too slow?
 	dist_to_mouse = get_global_mouse_position() - self.global_position
@@ -45,9 +51,9 @@ func _process(_delta: float) -> void:
 	mouse_direction = Vector2.ZERO.direction_to(dist_to_mouse).normalized()
 	
 	# for slow hover
-	move_direction = mouse_direction if dist_to_mouse.length() > 40 else Vector2.ZERO
+	move_direction = mouse_direction if dist_to_mouse.length() < 40 else Vector2.ZERO
 	
-	if auto_aim and selected_target != null:
+	if auto_aim and selected_target != null and PlayerInfo.current_state != PlayerInfo.States.STANCE:
 		aim_direction = Vector2.ZERO.direction_to(selected_target.global_position - self.global_position).normalized()
 	else:
 		aim_direction = mouse_direction
@@ -56,13 +62,20 @@ func _process(_delta: float) -> void:
 	update_player_info()
 	
 	#arm rotation
-	if PlayerInfo.basic_attacking:
-		if anim_sprite.scale.x == 1:
-			arm_sprite.rotation = aim_direction.angle() - (PI/2)
+	if arm_sprite != null:
+		if aim_direction.x > 0:
+			arm_node.rotation = aim_direction.angle() - PI/2
 		else:
-			arm_sprite.rotation = -(aim_direction.angle() - (PI/2))
+			arm_node.rotation = -(aim_direction.angle() - (PI/2))
+		
+	if PlayerInfo.basic_attacking or PlayerInfo.current_state == PlayerInfo.States.STANCE:
+		arm_sprite.show()
+		wpn_sprite.show()
+		fake_arm_sprite.hide()
 	else:
-		arm_sprite.rotation = 0
+		arm_sprite.hide()
+		wpn_sprite.hide()
+		fake_arm_sprite.show()
 	
 	
 	if Input.is_action_just_pressed("tab"):

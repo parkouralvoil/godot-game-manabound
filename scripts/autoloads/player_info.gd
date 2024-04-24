@@ -67,6 +67,7 @@ func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
 
 func _process(_delta: float) -> void:
+	# might be better to centralize input in player process or in an input_manager node?
 	match current_charge_type:
 		ChargeTypes.BURST:
 			can_charge = true

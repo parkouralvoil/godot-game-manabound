@@ -39,7 +39,7 @@ func shoot(bullet: PackedScene, position_modifier: int) -> void:
 	var bul_instance: Bullet = bullet.instantiate()
 	var direction := PlayerInfo.aim_direction
 	
-	bul_instance.global_position = (self.global_position + 
+	bul_instance.global_position = (global_position + 
 		direction.rotated(PI/2 * sign(position_modifier))
 		* abs(position_modifier)
 		)

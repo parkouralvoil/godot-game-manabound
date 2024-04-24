@@ -3,6 +3,9 @@ class_name Character
 
 @onready var skill_tree: SkillTree = $AbilityManager/SkillTree
 @onready var AM := $AbilityManager
+@onready var arm_sprite: Sprite2D = $Sprite2D_arm
+@onready var wpn_sprite: Sprite2D= $Sprite2D_arm/Sprite2D_wpn
+@onready var bullet_origin: Marker2D = $Sprite2D_arm/bullet_origin
 
 # i want the AM to remain universal, the components are the ones who play around with eachother
 @onready var CM: CharacterManager = get_parent()

@@ -48,7 +48,7 @@ func attack() -> void:
 	var rand_x: float = rng.randf_range(-100, 100)
 	var rand_y: float = rng.randf_range(-100, 100)
 	var target_pos: Vector2 = Vector2(EnemyAiManager.player_position.x + rand_x,
-			EnemyAiManager.player_position.y + rand_y)
+			min(EnemyAiManager.player_position.y + rand_y, -20)) # dont let it fire beyond camera border
 	spawner.prepare_impact(target_pos)
 	line.show()
 	var tween: Tween = create_tween()

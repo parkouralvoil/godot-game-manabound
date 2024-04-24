@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://bya3c6rgtudej" path="res://assets/sprite_projectiles/explosion_indicator/red_circle.png" id="2_bacff"]
 
 [node name="orb_explosion_spawn" type="Node2D"]
+z_index = 1
 script = ExtResource("1_1h2lx")
 
 [node name="blue_circle" type="Sprite2D" parent="."]

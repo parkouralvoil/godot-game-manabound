@@ -42,7 +42,9 @@ window/stretch/scale_mode="integer"
 [file_customization]
 
 folder_colors={
-"res://exports/": "yellow"
+"res://assets/": "pink",
+"res://exports/": "yellow",
+"res://resources/": "green"
 }
 
 [input]

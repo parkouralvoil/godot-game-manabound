@@ -9,7 +9,7 @@ class_name Knight_AbilityManager
 @onready var Ammo: Knight_AmmoComponent = $Ammo
 
 @export_category("basic atk: Base")
-var bullet_speed: float = 400
+var bullet_speed: float = 450
 var max_distance: float = 300
 var base_percent_basic_bolt: float = 50
 var base_percent_lightning_bolt: float = 80
@@ -20,7 +20,7 @@ var scale_percent_lightning_bolt: float = 40
 
 @export_category("ult: Base")
 var ult_bullet_speed: float = 600
-var ult_max_distance: float = 1000
+var ult_max_distance: float = 800
 var base_ult_percent_tier1: float = 200
 var base_ult_percent_tier2: float = 250
 

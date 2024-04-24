@@ -38,7 +38,7 @@ func shoot(bullet: PackedScene) -> void:
 	var bul_instance: Bullet = bullet.instantiate()
 	var direction: Vector2 = PlayerInfo.aim_direction
 	
-	bul_instance.global_position = self.global_position
+	bul_instance.global_position = global_position
 	bul_instance.speed = AM.bullet_speed
 	bul_instance.damage = AM.frost_spike_dmg
 	bul_instance.max_distance = AM.max_distance

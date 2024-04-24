@@ -1,19 +1,26 @@
-[gd_scene load_steps=11 format=3 uid="uid://despujxox3cs7"]
+[gd_scene load_steps=14 format=3 uid="uid://despujxox3cs7"]
 
 [ext_resource type="Script" path="res://characters/CharacterClass.gd" id="1_2hkjo"]
 [ext_resource type="Script" path="res://characters/knight/scripts/knight_AbilityManager.gd" id="2_e4ef6"]
 [ext_resource type="PackedScene" uid="uid://csxjnretvvtdj" path="res://scenes/skill_tree/stree_knight.tscn" id="3_bfk4m"]
 [ext_resource type="Script" path="res://characters/knight/scripts/knight_AttackComponent.gd" id="4_k4d5v"]
 [ext_resource type="PackedScene" uid="uid://b53veg8003vdg" path="res://projectiles/lightning_projectiles/homing_missile/homing_missile.tscn" id="5_1iwx0"]
-[ext_resource type="PackedScene" uid="uid://oi2y57fiqpdo" path="res://projectiles/bullet.tscn" id="5_wb6a2"]
+[ext_resource type="PackedScene" uid="uid://durs4s4d2quml" path="res://projectiles/lightning_projectiles/basic_bolt/basic_bolt.tscn" id="5_jahx0"]
 [ext_resource type="PackedScene" uid="uid://bf05bt5n34ymh" path="res://projectiles/lightning_projectiles/lightning_bullet/lightning_bullet.tscn" id="6_oe7nv"]
 [ext_resource type="Script" path="res://characters/knight/scripts/knight_UltimateComponent_knight.gd" id="7_hkru2"]
 [ext_resource type="PackedScene" uid="uid://j2b61v541lds" path="res://projectiles/lightning_projectiles/grand_bolt/grand_bolt.tscn" id="8_3k3pf"]
 [ext_resource type="Script" path="res://characters/knight/scripts/knight_AmmoComponent.gd" id="9_1ohy4"]
+[ext_resource type="Texture2D" uid="uid://bm71lln6lsmlc" path="res://assets/sprite_characters/knight_spritesheet.png" id="11_sbkwl"]
+[ext_resource type="Texture2D" uid="uid://bdxxu1pv6u0hh" path="res://assets/sprite_characters/knight weapon.png" id="12_8ugk7"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bls2u"]
+atlas = ExtResource("11_sbkwl")
+region = Rect2(96, 96, 32, 32)
 
 [node name="character_knight" type="Node2D"]
 script = ExtResource("1_2hkjo")
 max_health = 6.0
+max_ammo = 90
 fire_rate = 8.0
 
 [node name="AbilityManager" type="Node2D" parent="."]
@@ -23,7 +30,7 @@ script = ExtResource("2_e4ef6")
 
 [node name="BasicAttack" type="Node2D" parent="AbilityManager"]
 script = ExtResource("4_k4d5v")
-BasicBoltScene = ExtResource("5_wb6a2")
+BasicBoltScene = ExtResource("5_jahx0")
 LightningBoltScene = ExtResource("6_oe7nv")
 
 [node name="firerate" type="Timer" parent="AbilityManager/BasicAttack"]
@@ -37,6 +44,7 @@ one_shot = true
 [node name="Ultimate" type="Node2D" parent="AbilityManager"]
 script = ExtResource("7_hkru2")
 GrandBoltScene = ExtResource("8_3k3pf")
+LightningBoltScene = ExtResource("6_oe7nv")
 HomingMissileScene = ExtResource("5_1iwx0")
 
 [node name="Ammo" type="Node2D" parent="AbilityManager"]
@@ -45,3 +53,15 @@ script = ExtResource("9_1ohy4")
 [node name="ammo_regen" type="Timer" parent="AbilityManager/Ammo"]
 wait_time = 0.4
 one_shot = true
+
+[node name="Sprite2D_arm" type="Sprite2D" parent="."]
+z_index = 2
+position = Vector2(-5, 2)
+texture = SubResource("AtlasTexture_bls2u")
+offset = Vector2(5, -2)
+
+[node name="Sprite2D_wpn" type="Sprite2D" parent="Sprite2D_arm"]
+z_index = -1
+position = Vector2(3, 16)
+rotation = 1.5708
+texture = ExtResource("12_8ugk7")

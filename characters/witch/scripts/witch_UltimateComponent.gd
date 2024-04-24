@@ -23,8 +23,10 @@ func _process(delta: float) -> void:
 	if character.charge >= character.max_charge:
 		if PlayerInfo.current_state == PlayerInfo.States.STANCE:
 			character.sprite_look_at(PlayerInfo.mouse_direction)
+			character.wpn_sprite.modulate = Color(1.2, 1.2, 2)
 		elif Input.is_action_just_released("right_click"):
 			spend_charge()
+			character.wpn_sprite.modulate = Color(1, 1, 1)
 
 func spawn_area_effect(area_effect: PackedScene, target_pos: Vector2) -> void:
 	assert(area_effect, "missing proj")

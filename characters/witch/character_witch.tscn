@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dkyhb7voldou1"]
+[gd_scene load_steps=11 format=3 uid="uid://dkyhb7voldou1"]
 
 [ext_resource type="Script" path="res://characters/CharacterClass.gd" id="1_j0poo"]
 [ext_resource type="PackedScene" uid="uid://ckfsbsh4qe3us" path="res://scenes/skill_tree/stree_witch.tscn" id="2_rrqxe"]
@@ -8,6 +8,8 @@
 [ext_resource type="Script" path="res://characters/witch/scripts/witch_UltimateComponent.gd" id="5_wu24y"]
 [ext_resource type="PackedScene" uid="uid://bmykt4bk5s1bk" path="res://projectiles/ice_projectiles/frost_nova/frost_nova.tscn" id="7_5t8dy"]
 [ext_resource type="Script" path="res://characters/witch/scripts/witch_AmmoComponent.gd" id="7_jgtmk"]
+[ext_resource type="Texture2D" uid="uid://kdh26376nd2g" path="res://characters/witch/witch_arm.tres" id="9_khmxg"]
+[ext_resource type="Texture2D" uid="uid://dmpunjpb4iuff" path="res://assets/sprite_characters/witch weapon.png" id="10_37iad"]
 
 [node name="character_Witch" type="Node2D"]
 script = ExtResource("1_j0poo")
@@ -41,3 +43,16 @@ script = ExtResource("7_jgtmk")
 
 [node name="ammo_regen" type="Timer" parent="AbilityManager/Ammo"]
 one_shot = true
+
+[node name="Sprite2D_arm" type="Sprite2D" parent="."]
+z_index = 2
+position = Vector2(-5, 2)
+texture = ExtResource("9_khmxg")
+offset = Vector2(5, -2)
+
+[node name="Sprite2D_wpn" type="Sprite2D" parent="Sprite2D_arm"]
+modulate = Color(1.2, 1.2, 2, 1)
+z_index = -1
+position = Vector2(1, 13)
+rotation = 2.35619
+texture = ExtResource("10_37iad")

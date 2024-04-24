@@ -30,13 +30,17 @@ func Physics_Update(_delta: float) -> void:
 	if !p:
 		return
 	
-	if Input.is_action_pressed("space") and !PlayerInfo.basic_attacking: #prepare to boost
+	if Input.is_action_pressed("space"): #prepare to boost
 		state_transition.emit(self, "PlayerMove")
+		PlayerInfo.basic_attacking = false
+		p.circle_indicator.show()
 	if Input.is_action_pressed("right_click") and PlayerInfo.can_charge:
 		state_transition.emit(self, "PlayerStance")
 	
 	if !p.is_on_floor() and !PlayerInfo.basic_attacking:
 		p.velocity.y = min(p.velocity.y + p.gravity * _delta, p.gravity)
+		if not Input.is_action_pressed("space"):
+			p.circle_indicator.hide()
 	elif PlayerInfo.basic_attacking:
 		if p.auto_aim and p.selected_target != null:
 			p.velocity.y -= p.gravity * 0.3 * _delta
@@ -48,9 +52,9 @@ func Physics_Update(_delta: float) -> void:
 	# slow down player's speed xd
 
 func flip_sprite() -> void:
-	if p.velocity.x >= 1:
+	if p.velocity.x >= 1 or (PlayerInfo.basic_attacking and p.aim_direction.x > 0):
 		p.anim_sprite.scale.x = 1
-	elif p.velocity.x <= -1:
+	elif p.velocity.x <= -1 or (PlayerInfo.basic_attacking and p.aim_direction.x < 0):
 		p.anim_sprite.scale.x = -1
 
 func play_anim() -> void:

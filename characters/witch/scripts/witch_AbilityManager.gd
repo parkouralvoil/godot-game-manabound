@@ -6,8 +6,8 @@ class_name Witch_AbilityManager
 @onready var Ammo: Witch_AmmoComponent = $Ammo
 
 @export_category("basic atk: Base")
-var bullet_speed: float = 300
-var max_distance: float = 250
+var bullet_speed: float = 375
+var max_distance: float = 260
 var base_percent_frost_spear: float = 80
 var base_percent_1st_icicle: float = 30
 var base_percent_2nd_icicle: float = 20

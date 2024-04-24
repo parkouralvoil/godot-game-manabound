@@ -17,6 +17,7 @@ var debuff: CombatManager.Debuffs = CombatManager.Debuffs.NONE
 
 func _ready() -> void:
 	assert(bullet_impact, "missing")
+	EventBus.clear_abilities.connect(queue_free)
 
 func _physics_process(_delta: float) -> void:
 	if spawn_counter >= max_spawn_counter:

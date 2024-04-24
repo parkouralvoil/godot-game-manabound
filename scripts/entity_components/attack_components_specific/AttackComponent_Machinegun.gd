@@ -40,7 +40,7 @@ func shoot(projectile: PackedScene, direction: Vector2) -> void:
 	if pro_instance:
 		pro_instance.global_position = self.global_position
 		
-		pro_instance.speed = 240.0
+		pro_instance.speed = 200.0
 		pro_instance.direction = direction
 		pro_instance.rotation = direction.angle()
 		pro_instance.damage = 1.0

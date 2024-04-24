@@ -1,12 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://rdeieo07v8gt"]
+[gd_scene load_steps=3 format=3 uid="uid://rdeieo07v8gt"]
 
+[ext_resource type="LabelSettings" uid="uid://crxqvqu7eeoj8" path="res://resources/font_settings/font_settings_silver.tres" id="1_jnvxb"]
 [ext_resource type="Script" path="res://scenes/UI/UI_attached_to_enemies/label_dmg_num.gd" id="2_qm8cn"]
-
-[sub_resource type="SystemFont" id="SystemFont_f1sw8"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_v5gp4"]
-font = SubResource("SystemFont_f1sw8")
-font_size = 10
 
 [node name="Label_dmg_num" type="Label"]
 z_index = 5
@@ -14,5 +9,5 @@ texture_filter = 1
 offset_right = 40.0
 offset_bottom = 45.0
 text = "999"
-label_settings = SubResource("LabelSettings_v5gp4")
+label_settings = ExtResource("1_jnvxb")
 script = ExtResource("2_qm8cn")

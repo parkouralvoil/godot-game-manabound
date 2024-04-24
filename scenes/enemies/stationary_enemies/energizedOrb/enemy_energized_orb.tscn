@@ -23,6 +23,7 @@ collision_mask = 0
 script = ExtResource("1_cgshh")
 bullet_impact_scene = ExtResource("2_1kbps")
 enemy_dead_texture = ExtResource("3_1qe5k")
+max_health = 40.0
 default_reload_time = 2.0
 
 [node name="Sprite2D_main" type="Sprite2D" parent="."]

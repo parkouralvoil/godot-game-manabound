@@ -12,12 +12,8 @@ func Enter() -> void:
 	if !p:
 		return
 	p.gravity = 0
-	if PlayerInfo.current_charge_type == PlayerInfo.ChargeTypes.BURST:
-		p.direction_indicator.show()
-		p.circle_indicator.show()
-	else:
-		p.direction_indicator.show()
-		p.circle_indicator.show()
+	#p.direction_indicator.show()
+	p.circle_indicator.show()
 	PlayerInfo.current_state = PlayerInfo.States.STANCE
 
 func Exit() -> void:
@@ -38,9 +34,11 @@ func Physics_Update(_delta: float) -> void:
 	if !p:
 		return
 	if PlayerInfo.current_charge_type == PlayerInfo.ChargeTypes.BURST:
-		p.velocity = slow_speed * -p.move_direction
+		p.velocity = slow_speed * p.move_direction
 	else:
 		p.velocity = Vector2.ZERO
+	
+	p.circle_indicator.show()
 	
 	if PlayerInfo.current_charge_type == PlayerInfo.ChargeTypes.PASSIVE:
 		p.circle_indicator.position = p.dist_to_mouse
@@ -50,10 +48,10 @@ func Physics_Update(_delta: float) -> void:
 	p.move_and_slide()
 
 func flip_sprite() -> void:
-	if p.velocity.x >= 1:
-		p.anim_sprite.scale.x = -1
-	elif p.velocity.x <= -1:
+	if p.aim_direction.x > 0: ## ensure this is same as condition for aim_node in player's code
 		p.anim_sprite.scale.x = 1
+	else:
+		p.anim_sprite.scale.x = -1
 
 func play_anim() -> void:
 	if p.anim_sprite.animation != "air":
