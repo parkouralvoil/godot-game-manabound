@@ -34,11 +34,14 @@ func Physics_Update(_delta: float) -> void:
 		state_transition.emit(self, "PlayerMove")
 		PlayerInfo.basic_attacking = false
 		p.circle_indicator.show()
+		PlayerInfo.input_attack = false
+	else:
+		PlayerInfo.input_attack = Input.is_action_pressed("left_click")
 	if Input.is_action_pressed("right_click") and PlayerInfo.can_charge:
 		state_transition.emit(self, "PlayerStance")
 	
 	if !p.is_on_floor() and !PlayerInfo.basic_attacking:
-		p.velocity.y = min(p.velocity.y + p.gravity * _delta, p.gravity)
+		p.velocity.y = min(p.velocity.y + p.gravity * _delta, p.gravity/1.25)
 		if not Input.is_action_pressed("space"):
 			p.circle_indicator.hide()
 	elif PlayerInfo.basic_attacking:
@@ -60,7 +63,11 @@ func flip_sprite() -> void:
 func play_anim() -> void:
 	if p.velocity == Vector2.ZERO and p.is_on_floor():
 		p.anim_sprite.play("idle")
-	elif (abs(p.velocity.x) >= 1 or !p.is_on_floor()):
+	elif p.velocity.y > abs(p.velocity.x) and p.velocity.y > 225:
+		p.anim_sprite.play("fall")
+	elif PlayerInfo.basic_attacking:
+		p.anim_sprite.play("stance")
+	else:
 		p.anim_sprite.play("air")
 
 func horizontal_deaccel(_delta: float) -> void:

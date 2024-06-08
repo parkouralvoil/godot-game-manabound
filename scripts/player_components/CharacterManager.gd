@@ -73,8 +73,6 @@ func change_character(num: int) -> void:
 	p.arm_node.remote_path = current_char.arm_sprite.get_path()
 	p.arm_sprite = current_char.arm_sprite
 	p.wpn_sprite = current_char.wpn_sprite
-	p.arm_sprite.show()
-	p.wpn_sprite.show()
 	
 	p.fake_arm_sprite.texture = current_char_fake_arm
 	

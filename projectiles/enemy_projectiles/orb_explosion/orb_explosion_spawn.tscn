@@ -16,6 +16,5 @@ texture = ExtResource("1_ewikn")
 
 [node name="red_circle" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 1, 0.72549)
-z_index = -1
 scale = Vector2(0.15, 0.15)
 texture = ExtResource("2_bacff")

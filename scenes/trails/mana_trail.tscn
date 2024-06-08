@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://ddpntqoweyraq"]
+
+[ext_resource type="Script" path="res://scenes/trails/mana_trail.gd" id="1_mtrxa"]
+
+[sub_resource type="Curve" id="Curve_h82qn"]
+_data = [Vector2(0, 1), 0.0, -1.0, 0, 1, Vector2(1, 0), -1.0, 0.0, 1, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_r4b5k"]
+colors = PackedColorArray(0.14902, 0.443137, 0.945098, 0.176471, 0.184314, 0.584314, 1, 0.345098)
+
+[node name="ManaTrail" type="Line2D"]
+top_level = true
+z_index = 9
+width_curve = SubResource("Curve_h82qn")
+gradient = SubResource("Gradient_r4b5k")
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+antialiased = true
+script = ExtResource("1_mtrxa")

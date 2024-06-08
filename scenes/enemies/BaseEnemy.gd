@@ -62,6 +62,6 @@ func make_impact() -> void:
 	var imp_instance: BulletImpact = bullet_impact_scene.instantiate()
 	imp_instance.global_position = global_position
 	imp_instance.texture = enemy_dead_texture
-	imp_instance.decay_rate = 10
+	imp_instance.decay_rate = 3
 	imp_instance.scale = impact_scale
 	get_tree().root.call_deferred("add_child",imp_instance)

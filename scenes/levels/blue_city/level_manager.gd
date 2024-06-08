@@ -6,5 +6,9 @@ class_name LevelManager
 @onready var enemy_holder: EnemyHolder = $EnemyHolder
 
 
-func open_door() -> void:
+signal level_cleared
+
+
+func level_is_cleared() -> void:
 	door.open()
+	level_cleared.emit()

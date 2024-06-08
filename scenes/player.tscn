@@ -1,14 +1,21 @@
-[gd_scene load_steps=25 format=3 uid="uid://c35wulwk6e3b4"]
+[gd_scene load_steps=33 format=3 uid="uid://c35wulwk6e3b4"]
 
 [ext_resource type="Script" path="res://scenes/player.gd" id="1_ob8fa"]
 [ext_resource type="Script" path="res://scripts/player_components/HurtboxComponent_player.gd" id="2_w8hq5"]
 [ext_resource type="Script" path="res://scripts/player_components/PlayerHit.gd" id="3_lry20"]
 [ext_resource type="Script" path="res://scripts/player_components/AfterimageComponent.gd" id="4_ppq5l"]
+[ext_resource type="Script" path="res://scripts/player_components/OrbCollector.gd" id="5_g1vtf"]
 [ext_resource type="PackedScene" uid="uid://c6sl5r1r7eng1" path="res://scripts/player_components/afterimage.tscn" id="5_hni55"]
 [ext_resource type="Script" path="res://scripts/player_components/CharacterManager.gd" id="6_g8flh"]
 [ext_resource type="Resource" uid="uid://bt57r35hpevcb" path="res://characters/knight/knight_char_data.tres" id="7_0jpgg"]
+[ext_resource type="AudioStream" uid="uid://hm7es17x1vwu" path="res://assets/audio/sfx/player_hit.mp3" id="7_j8wvk"]
+[ext_resource type="Material" uid="uid://d2ddwhentkleq" path="res://resources/particles/boost_particles.tres" id="7_ou7dw"]
 [ext_resource type="Resource" uid="uid://c85jly26hwn1j" path="res://characters/witch/witch_data.tres" id="8_bowyj"]
+[ext_resource type="Script" path="res://scripts/player_components/boost_particles.gd" id="8_nmrq4"]
+[ext_resource type="Texture2D" uid="uid://csbvjbkyctbsw" path="res://assets/sprite_projectiles/boost_particle_texture.png" id="8_o2f0w"]
 [ext_resource type="Script" path="res://scripts/player_components/TargetLockComponent.gd" id="9_616gv"]
+[ext_resource type="Texture2D" uid="uid://onw8pmqbytda" path="res://assets/sprite_UI/Aim indicator.png" id="10_1g6d3"]
+[ext_resource type="AudioStream" uid="uid://cgvlbkvq11os4" path="res://assets/sound_effects/zapsplat_cartoon_whoosh_swipe_fast_grab_dash_003_74744.mp3" id="10_n47c6"]
 [ext_resource type="Texture2D" uid="uid://df4r12vpxwua7" path="res://assets/sprite_UI/DashDirectionIndicator.png" id="10_pcbep"]
 [ext_resource type="Script" path="res://scripts/player_components/DirectionIndicator.gd" id="11_vqh4r"]
 [ext_resource type="Texture2D" uid="uid://dy3hkciev768l" path="res://assets/sprite_UI/red_circle.png" id="12_i87yh"]
@@ -19,8 +26,17 @@
 [ext_resource type="Script" path="res://scripts/player_states/PlayerMove.gd" id="17_btrsq"]
 [ext_resource type="Script" path="res://scripts/player_states/PlayerStance.gd" id="18_f66as"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c2x3k"]
+size = Vector2(8, 19)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yy4pc"]
 size = Vector2(9, 17)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6tau6"]
+radius = 201.04
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_khpku"]
+radius = 80.0
 
 [sub_resource type="Curve" id="Curve_0j5ej"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.972222, 0), 0.0, 0.0, 0, 0]
@@ -40,34 +56,67 @@ scale_min = 4.0
 scale_max = 7.0
 scale_curve = SubResource("CurveTexture_gh1r7")
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_6tau6"]
-radius = 201.04
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_c2x3k"]
-size = Vector2(8, 19)
-
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("direction_indicator", "circle_indicator", "target_lock_component", "player_hit_comp", "afterimage_comp")]
 collision_layer = 2
+collision_mask = 129
 script = ExtResource("1_ob8fa")
 direction_indicator = NodePath("DirectionIndicator")
 circle_indicator = NodePath("circle")
-target_lock_component = NodePath("TargetLock")
+target_lock_component = NodePath("AreaComponents/TargetLock")
 player_hit_comp = NodePath("PlayerHit")
 afterimage_comp = NodePath("AfterimageSpawner")
 
-[node name="Hurtbox" type="Area2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, 3.5)
+shape = SubResource("RectangleShape2D_c2x3k")
+
+[node name="AreaComponents" type="Node2D" parent="."]
+
+[node name="Hurtbox" type="Area2D" parent="AreaComponents"]
 collision_layer = 4
 collision_mask = 0
 monitoring = false
 script = ExtResource("2_w8hq5")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AreaComponents/Hurtbox"]
 position = Vector2(-1.5, 3.5)
 shape = SubResource("RectangleShape2D_yy4pc")
 debug_color = Color(0.894118, 0.309804, 0.172549, 0.419608)
 
+[node name="TargetLock" type="Area2D" parent="AreaComponents" node_paths=PackedStringArray("p")]
+collision_layer = 0
+collision_mask = 8
+monitorable = false
+script = ExtResource("9_616gv")
+p = NodePath("../..")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AreaComponents/TargetLock"]
+shape = SubResource("CircleShape2D_6tau6")
+debug_color = Color(0.415686, 0.603922, 0.164706, 0.419608)
+
+[node name="update_target" type="Timer" parent="AreaComponents/TargetLock"]
+wait_time = 0.2
+autostart = true
+
+[node name="target_crosshair" type="Sprite2D" parent="AreaComponents/TargetLock"]
+modulate = Color(0.569, 1.5, 0.471, 1)
+z_index = 1
+texture = ExtResource("10_1g6d3")
+
+[node name="RayCast2D" type="RayCast2D" parent="AreaComponents/TargetLock"]
+
+[node name="OrbCollector" type="Area2D" parent="AreaComponents"]
+collision_layer = 0
+collision_mask = 128
+monitorable = false
+script = ExtResource("5_g1vtf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AreaComponents/OrbCollector"]
+shape = SubResource("CircleShape2D_khpku")
+
 [node name="PlayerHit" type="Node2D" parent="."]
 script = ExtResource("3_lry20")
+sfx_hit = ExtResource("7_j8wvk")
 
 [node name="iframe_cd" type="Timer" parent="PlayerHit"]
 wait_time = 0.2
@@ -83,6 +132,33 @@ explosiveness = 1.0
 fixed_fps = 100
 interpolate = false
 
+[node name="BoostSpecialEffects" type="Node2D" parent="."]
+
+[node name="boost_particles" type="GPUParticles2D" parent="BoostSpecialEffects"]
+emitting = false
+amount = 10
+process_material = ExtResource("7_ou7dw")
+texture = ExtResource("8_o2f0w")
+lifetime = 0.3
+one_shot = true
+explosiveness = 0.9
+script = ExtResource("8_nmrq4")
+
+[node name="boost_particles2" type="GPUParticles2D" parent="BoostSpecialEffects"]
+emitting = false
+amount = 10
+process_material = ExtResource("7_ou7dw")
+texture = ExtResource("8_o2f0w")
+lifetime = 0.3
+one_shot = true
+explosiveness = 0.9
+script = ExtResource("8_nmrq4")
+
+[node name="boost_sfx" type="AudioStreamPlayer2D" parent="BoostSpecialEffects"]
+stream = ExtResource("10_n47c6")
+volume_db = -15.0
+pitch_scale = 0.75
+
 [node name="AfterimageSpawner" type="Node2D" parent="."]
 script = ExtResource("4_ppq5l")
 afterimage_scene = ExtResource("5_hni55")
@@ -95,22 +171,6 @@ witch_resource = ExtResource("8_bowyj")
 [node name="change_char_cd" type="Timer" parent="CharacterManager"]
 wait_time = 0.7
 one_shot = true
-
-[node name="TargetLock" type="Area2D" parent="." node_paths=PackedStringArray("p")]
-collision_layer = 0
-collision_mask = 8
-monitorable = false
-script = ExtResource("9_616gv")
-p = NodePath("..")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="TargetLock"]
-shape = SubResource("CircleShape2D_6tau6")
-debug_color = Color(0.415686, 0.603922, 0.164706, 0.419608)
-
-[node name="update_target" type="Timer" parent="TargetLock"]
-wait_time = 0.1
-one_shot = true
-autostart = true
 
 [node name="DirectionIndicator" type="Sprite2D" parent="." node_paths=PackedStringArray("p")]
 modulate = Color(0.9, 0.9, 0.9, 1)
@@ -125,17 +185,13 @@ texture = ExtResource("12_i87yh")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = ExtResource("13_7cy21")
-animation = &"stance"
+animation = &"fall"
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="AnimatedSprite2D"]
 position = Vector2(-5, 2)
 
 [node name="fake_arm" type="Sprite2D" parent="AnimatedSprite2D"]
 texture = ExtResource("14_iiaao")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-1, 3.5)
-shape = SubResource("RectangleShape2D_c2x3k")
 
 [node name="FSM" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("15_mooub")
@@ -153,5 +209,7 @@ p = NodePath("../..")
 script = ExtResource("18_f66as")
 p = NodePath("../..")
 
+[connection signal="area_entered" from="AreaComponents/TargetLock" to="AreaComponents/TargetLock" method="_on_area_entered"]
+[connection signal="timeout" from="AreaComponents/TargetLock/update_target" to="AreaComponents/TargetLock" method="_on_update_target_timeout"]
+[connection signal="area_entered" from="AreaComponents/OrbCollector" to="AreaComponents/OrbCollector" method="_on_area_entered"]
 [connection signal="timeout" from="PlayerHit/iframe_cd" to="PlayerHit" method="_on_iframe_cd_timeout"]
-[connection signal="area_entered" from="TargetLock" to="TargetLock" method="_on_area_entered"]

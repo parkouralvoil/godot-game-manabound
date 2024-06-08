@@ -23,6 +23,7 @@ PlayerInfo="*res://scripts/autoloads/player_info.gd"
 CombatManager="*res://scripts/autoloads/combat_manager.gd"
 EventBus="*res://scripts/autoloads/event_bus.gd"
 ParticlesQueueNode="*res://scenes/autoload_scene/particles_queue.tscn"
+SoundPlayer="*res://scenes/autoload_scene/sound_player.tscn"
 
 [debug]
 
@@ -144,6 +145,7 @@ r={
 2d_physics/layer_5="player_projectile_hitbox"
 2d_physics/layer_6="enemy_projectile_hitbox"
 2d_physics/layer_7="moving_entity_collision"
+2d_physics/layer_8="player_collectible"
 
 [physics]
 

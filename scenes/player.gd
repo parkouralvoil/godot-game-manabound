@@ -12,7 +12,9 @@ var wpn_sprite: Sprite2D
 @export var target_lock_component: Area2D #= $TargetLock
 @export var player_hit_comp: Node2D
 @export var afterimage_comp: Node2D
-@onready var hurtbox: Area2D = $Hurtbox
+@onready var hurtbox: Area2D = $AreaComponents/Hurtbox
+@onready var boost_particles: Array[GPUParticles2D] = []
+@onready var boost_sfx: AudioStreamPlayer2D = $BoostSpecialEffects/boost_sfx
 
 #UI stuff (connect these in the holder scene)
 @export var blood_overlay: TextureRect
@@ -41,8 +43,17 @@ var dist_to_mouse: Vector2 = Vector2.ZERO
 var auto_aim: bool = true
 var selected_target: Area2D = null
 
+var boost_index: int = 0
+var boost_node_size: int = 0
+
 func _ready() -> void:
+	var boost_node: Node2D = $BoostSpecialEffects
 	char_manager.change_character(0)
+	
+	for i in boost_node.get_children():
+		if i is GPUParticles2D:
+			boost_particles.append(i)
+			boost_node_size += 1
 
 func _process(_delta: float) -> void:
 	EnemyAiManager.player_position = global_position # this seems too slow?
@@ -67,8 +78,12 @@ func _process(_delta: float) -> void:
 			arm_node.rotation = aim_direction.angle() - PI/2
 		else:
 			arm_node.rotation = -(aim_direction.angle() - (PI/2))
-		
-	if PlayerInfo.basic_attacking or PlayerInfo.current_state == PlayerInfo.States.STANCE:
+	
+	if anim_sprite.animation == "fall" or anim_sprite.animation == "air":
+		arm_sprite.hide()
+		wpn_sprite.hide()
+		fake_arm_sprite.hide()
+	elif PlayerInfo.basic_attacking or PlayerInfo.input_ult:
 		arm_sprite.show()
 		wpn_sprite.show()
 		fake_arm_sprite.hide()
@@ -87,6 +102,14 @@ func take_damage(damage: float) -> void:
 	
 	if blood_overlay:
 		blood_overlay.display_blood()
+
+
+func emit_boost_effects(boost_dir: Vector2) -> void:
+	boost_sfx.play()
+	boost_particles[boost_index].emit_boost_particles(boost_dir)
+	boost_index = clampi((boost_index + 1) % boost_node_size,
+		0, 
+		boost_node_size + 1)
 
 func camera_shake(strength: int) -> void:
 	EventBus.camera_shake.emit(strength)

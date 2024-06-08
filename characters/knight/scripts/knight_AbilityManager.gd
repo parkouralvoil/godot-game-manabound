@@ -21,12 +21,12 @@ var scale_percent_lightning_bolt: float = 40
 @export_category("ult: Base")
 var ult_bullet_speed: float = 600
 var ult_max_distance: float = 800
-var base_ult_percent_tier1: float = 200
-var base_ult_percent_tier2: float = 250
+var base_ult_percent_tier1: float = 150
+var base_ult_percent_tier2: float = 175
 
 @export_category("ult: Scaling")
-var scale_ult_percent_tier1: int = 50
-var scale_ult_percent_tier2: int = 75
+var scale_ult_percent_tier1: int = 20
+var scale_ult_percent_tier2: int = 30
 
 @export_category("Stats")
 # each char only has a specific upgrade for one stat, to ease building

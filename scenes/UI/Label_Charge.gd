@@ -2,14 +2,25 @@ extends Label
 
 @export var p: Player
 
-var format_string: String = "Charge: %d/%d"
-var actual_string: String = "aa"
 
 func _process(_delta: float) -> void:
 	if !p:
 		return
+	var type: String = "Charge"
+	match PlayerInfo.current_charge_type:
+		PlayerInfo.ChargeTypes.BURST:
+			type = "Charge"
+		PlayerInfo.ChargeTypes.ENERGY:
+			pass
+		PlayerInfo.ChargeTypes.PASSIVE:
+			type = "Mana"
 	
-	actual_string = format_string % [snapped(PlayerInfo.displayed_charge, 1), PlayerInfo.displayed_max_charge]
+	var format_string: String = "%s: %d/%d"
+	var actual_string: String = format_string % [type, 
+		snapped(PlayerInfo.displayed_charge, 1), 
+		PlayerInfo.displayed_max_charge]
+	
+	
 	text = actual_string
 	if PlayerInfo.displayed_charge >= 100:
 		modulate = Color(1, 0.2, 0.2)

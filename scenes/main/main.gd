@@ -2,23 +2,29 @@ extends Node2D
 class_name Main # handles loading levels, saving player, etc.
 
 const level_warehouse: PackedScene = preload("res://scenes/levels/blue_city/city_warehouse.tscn")
-var enemy_chance: float = 0 :
+const level_TEST: PackedScene = preload("res://scenes/levels/blue_city/city_TEST.tscn")
+var enemy_chance: float = 0.4 :
 	set(value):
 		enemy_chance = clampf(value, 0, 1)
 var enemy_chance_scaling: float = 0.1
 
 @onready var playerholder: Node2D = $PlayerHolder
-@onready var level: LevelManager = get_child(0) ## REMEMBERRRRRRRRRRRRRRRRRRRRRRRR
+@onready var level: LevelManager #= get_child(0) ## REMEMBERRRRRRRRRRRRRRRRRRRRRRRR
 @onready var camera: Camera2D = $PlayerCamera
 @onready var black_screen: ColorRect = $PlayerCamera/CanvasLayer/ColorRect 
+@onready var lvl_cleared_UI: CenterContainer = $LevelClearedUI/CenterContainer
 
 
 func _ready() -> void:
 	#remove_child(playerholder)
+	lvl_cleared_UI.hide()
 	EventBus.go_next_lvl.connect(load_next_lvl)
-	enter_next_lvl()
+	if not level:
+		load_next_lvl(null)
+	else:
+		enter_next_lvl()
 
-
+#print_orphan_nodes()
 func enter_next_lvl() -> void:
 	if not has_node("PlayerHolder"):
 		add_child(playerholder)
@@ -42,6 +48,7 @@ func enter_next_lvl() -> void:
 
 
 func load_next_lvl(current_lvl: LevelManager) -> void:
+	lvl_cleared_UI.hide()
 	var inst: LevelManager
 	var t: Tween = create_tween()
 	enemy_chance += enemy_chance_scaling
@@ -51,11 +58,30 @@ func load_next_lvl(current_lvl: LevelManager) -> void:
 	t.tween_property(black_screen, "color", Color(0,0,0,1), 0.7)
 	await t.finished
 	
-	level.queue_free()
+	if level:
+		level.level_cleared.disconnect(level_cleared_main)
+		level.queue_free()
 	remove_child(playerholder)
 	match current_lvl:
 		_:
 			inst = level_warehouse.instantiate()
 	level = inst
+	level.level_cleared.connect(level_cleared_main)
 	add_child(inst)
 	enter_next_lvl()
+
+
+func level_cleared_main() -> void:
+	show_lvl_cleared_UI()
+	await get_tree().create_timer(0.15).timeout
+	EnemyAiManager.call_attract_orbs.emit()
+
+
+func show_lvl_cleared_UI() -> void:
+	lvl_cleared_UI.show()
+	lvl_cleared_UI.modulate = Color(1, 1, 1, 1)
+	await get_tree().create_timer(2).timeout
+	var tw: Tween = create_tween()
+	tw.tween_property(lvl_cleared_UI, "modulate", Color(0, 0, 0, 0), 1)
+	await tw.finished
+	lvl_cleared_UI.hide()

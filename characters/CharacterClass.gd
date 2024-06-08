@@ -5,12 +5,13 @@ class_name Character
 @onready var AM := $AbilityManager
 @onready var arm_sprite: Sprite2D = $Sprite2D_arm
 @onready var wpn_sprite: Sprite2D= $Sprite2D_arm/Sprite2D_wpn
-@onready var bullet_origin: Marker2D = $Sprite2D_arm/bullet_origin
+#@onready var bullet_origin: Marker2D = $Sprite2D_arm/bullet_origin
 
 # i want the AM to remain universal, the components are the ones who play around with eachother
 @onready var CM: CharacterManager = get_parent()
 
 var enabled: bool = false # managed by char manager
+@export var charge_type: PlayerInfo.ChargeTypes = PlayerInfo.ChargeTypes.BURST
 
 @export_category("Initial Values")
 @export var max_health: float = 50.0

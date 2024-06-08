@@ -17,6 +17,8 @@ func Enter() -> void:
 	p.direction_indicator.show()
 	p.circle_indicator.show()
 	PlayerInfo.current_state = PlayerInfo.States.MOVE
+	PlayerInfo.input_ult = false
+	PlayerInfo.input_attack = false
 
 func Exit() -> void:
 	if !p:
@@ -40,6 +42,7 @@ func Physics_Update(_delta: float) -> void:
 	if !Input.is_action_pressed("space"): #boost away
 		p.velocity = boost_speed * p.mouse_direction
 		p.afterimage_comp.afterimages = boost_afterimages
+		p.emit_boost_effects(p.mouse_direction)
 		state_transition.emit(self, "PlayerIdle")
 	elif Input.is_action_pressed("right_click") and PlayerInfo.can_charge: # to cancel
 		state_transition.emit(self, "PlayerStance")
@@ -53,5 +56,9 @@ func flip_sprite() -> void:
 		p.anim_sprite.scale.x = -1
 
 func play_anim() -> void:
-	if p.anim_sprite.animation != "air":
+	if abs(p.velocity.y) > abs(p.velocity.x) and p.velocity.y > 225:
+		p.anim_sprite.play("fall")
+	elif Input.is_action_pressed("space"):
+		p.anim_sprite.play("stance")
+	else:
 		p.anim_sprite.play("air")

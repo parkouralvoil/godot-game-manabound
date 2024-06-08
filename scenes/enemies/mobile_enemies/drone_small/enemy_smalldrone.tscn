@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://mnqy6onwpiay" path="res://resources/enemy_dead.tres" id="3_qkuvi"]
 [ext_resource type="Script" path="res://scripts/entity_components/HurtboxComponent_enemy.gd" id="3_st8q1"]
 [ext_resource type="Script" path="res://scripts/entity_components/attack_components_specific/AttackComponent_Drone.gd" id="4_nuqg1"]
-[ext_resource type="PackedScene" uid="uid://bx54isqpe5u3x" path="res://scenes/enemies/enemies_components/health_component.tscn" id="7_gxn2a"]
+[ext_resource type="PackedScene" uid="uid://bx54isqpe5u3x" path="res://scenes/enemies/enemies_components/HealthComponent_enemy.tscn" id="5_mrnqf"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_6cq2t"]
 radius = 4.0
@@ -46,7 +46,10 @@ max_neighbors = 9
 wait_time = 0.2
 autostart = true
 
-[node name="HealthComponent" parent="." instance=ExtResource("7_gxn2a")]
+[node name="HealthComponent" parent="." instance=ExtResource("5_mrnqf")]
+explosion_volume = -25.0
+small_orbs = 1
+medium_orbs = 0
 
 [node name="HurtboxComponent" type="Area2D" parent="."]
 collision_layer = 8

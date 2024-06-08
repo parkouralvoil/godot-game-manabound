@@ -1,0 +1,68 @@
+[gd_scene load_steps=32 format=3 uid="uid://c35wulwk6e3b4"]
+
+[ext_resource type="Script" path="res://scenes/player.gd" id="1_ob8fa"]
+[ext_resource type="Script" path="res://scripts/player_components/HurtboxComponent_player.gd" id="2_w8hq5"]
+[ext_resource type="Script" path="res://scripts/player_components/PlayerHit.gd" id="3_lry20"]
+[ext_resource type="Script" path="res://scripts/player_components/AfterimageComponent.gd" id="4_ppq5l"]
+[ext_resource type="Script" path="res://scripts/player_components/OrbCollector.gd" id="5_g1vtf"]
+[ext_resource type="PackedScene" uid="uid://c6sl5r1r7eng1" path="res://scripts/player_components/afterimage.tscn" id="5_hni55"]
+[ext_resource type="Script" path="res://scripts/player_components/CharacterManager.gd" id="6_g8flh"]
+[ext_resource type="Resource" uid="uid://bt57r35hpevcb" path="res://characters/knight/knight_char_data.tres" id="7_0jpgg"]
+[ext_resource type="Material" uid="uid://d2ddwhentkleq" path="res://resources/particles/boost_particles.tres" id="7_ou7dw"]
+[ext_resource type="Resource" uid="uid://c85jly26hwn1j" path="res://characters/witch/witch_data.tres" id="8_bowyj"]
+[ext_resource type="Script" path="res://scripts/player_components/boost_particles.gd" id="8_nmrq4"]
+[ext_resource type="Texture2D" uid="uid://csbvjbkyctbsw" path="res://assets/sprite_projectiles/boost_particle_texture.png" id="8_o2f0w"]
+[ext_resource type="Script" path="res://scripts/player_components/TargetLockComponent.gd" id="9_616gv"]
+[ext_resource type="Texture2D" uid="uid://onw8pmqbytda" path="res://assets/sprite_UI/Aim indicator.png" id="10_1g6d3"]
+[ext_resource type="AudioStream" uid="uid://cgvlbkvq11os4" path="res://assets/sound_effects/zapsplat_cartoon_whoosh_swipe_fast_grab_dash_003_74744.mp3" id="10_n47c6"]
+[ext_resource type="Texture2D" uid="uid://df4r12vpxwua7" path="res://assets/sprite_UI/DashDirectionIndicator.png" id="10_pcbep"]
+[ext_resource type="Script" path="res://scripts/player_components/DirectionIndicator.gd" id="11_vqh4r"]
+[ext_resource type="Texture2D" uid="uid://dy3hkciev768l" path="res://assets/sprite_UI/red_circle.png" id="12_i87yh"]
+[ext_resource type="SpriteFrames" uid="uid://n8tavxox3kua" path="res://characters/knight/knight_spriteframes.tres" id="13_7cy21"]
+[ext_resource type="Texture2D" uid="uid://3jkuw6bwhk01" path="res://characters/knight/knight_arm.tres" id="14_iiaao"]
+[ext_resource type="Script" path="res://scripts/StateMachine.gd" id="15_mooub"]
+[ext_resource type="Script" path="res://scripts/player_states/PlayerIdle.gd" id="16_01hcy"]
+[ext_resource type="Script" path="res://scripts/player_states/PlayerMove.gd" id="17_btrsq"]
+[ext_resource type="Script" path="res://scripts/player_states/PlayerStance.gd" id="18_f66as"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c2x3k"]
+size = Vector2(8, 19)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yy4pc"]
+size = Vector2(9, 17)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6tau6"]
+radius = 201.04
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_khpku"]
+radius = 80.0
+
+[sub_resource type="Curve" id="Curve_0j5ej"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.972222, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_gh1r7"]
+curve = SubResource("Curve_0j5ej")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ia00x"]
+particle_flag_disable_z = true
+angle_max = 180.0
+spread = 180.0
+initial_velocity_min = 400.0
+initial_velocity_max = 500.0
+gravity = Vector3(0, 0, 0)
+scale_min = 4.0
+scale_max = 7.0
+scale_curve = SubResource("CurveTexture_gh1r7")
+
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("direction_indicator", "circle_indicator", "target_lock_component", "player_hit_comp", "afterimage_comp")]
+collision_layer = 2
+collision_mask = 129
+script = ExtResource("1_ob8fa")
+direction_indicator = NodePath("DirectionIndicator")
+circle_indicator = NodePath("circle")
+target_lock_component = NodePath("AreaComponents/TargetLock")
+player_hit_comp = NodePath("PlayerHit")
+afterimage_comp = NodePath("AfterimageSpawner")
+
+[node name

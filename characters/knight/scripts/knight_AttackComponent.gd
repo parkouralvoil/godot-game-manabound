@@ -11,6 +11,7 @@ var burst_counter: int = 0
 @onready var t_firerate: Timer = $firerate
 @onready var t_recoil: Timer = $recoil
 
+@export var sfx_gunshot: AudioStream
 
 func _ready() -> void:
 	pass
@@ -27,7 +28,7 @@ func _process(_delta: float) -> void:
 	elif t_recoil.is_stopped() or !can_shoot:
 		PlayerInfo.basic_attacking = false
 	
-	if Input.is_action_pressed("left_click") and character.ammo > 0 and can_shoot:
+	if PlayerInfo.input_attack and character.ammo > 0 and can_shoot:
 		if t_firerate.is_stopped():
 			basic_atk()
 			t_firerate.start()
@@ -64,8 +65,11 @@ func basic_atk() -> void:
 	if AM.skill_basicAtk_double:
 		shoot(p_scene, 4)
 		shoot(p_scene, -4)
+		SoundPlayer.play_sound(sfx_gunshot, -15, 0.8)
+		SoundPlayer.play_sound(sfx_gunshot, -15, 0.8)
 	else:
 		shoot(p_scene, 0)
+		SoundPlayer.play_sound(sfx_gunshot, -15, 0.9)
 	
 	if AM.level_basicAtk_upgrade > 0:
 		burst_counter = (burst_counter + 1) % 3

@@ -1,0 +1,7 @@
+[gd_resource type="AtlasTexture" load_steps=2 format=3 uid="uid://b3b2bkyf85d7a"]
+
+[ext_resource type="Texture2D" uid="uid://c36f5r6cnvwpu" path="res://assets/sprite_projectiles/bullet_pixel_Blue.png" id="1_0ck8n"]
+
+[resource]
+atlas = ExtResource("1_0ck8n")
+region = Rect2(182, 6, 4, 4)

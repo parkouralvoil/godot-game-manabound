@@ -7,7 +7,7 @@
 [ext_resource type="Script" path="res://scenes/enemies/stationary_enemies/autobow/autobow_ammo.gd" id="3_8d36t"]
 [ext_resource type="Texture2D" uid="uid://mnqy6onwpiay" path="res://resources/enemy_dead.tres" id="3_jq3je"]
 [ext_resource type="Script" path="res://scripts/entity_components/attack_components_specific/AttackComponent_Autobow.gd" id="5_ylnjd"]
-[ext_resource type="PackedScene" uid="uid://bx54isqpe5u3x" path="res://scenes/enemies/enemies_components/health_component.tscn" id="6_if5fd"]
+[ext_resource type="PackedScene" uid="uid://bx54isqpe5u3x" path="res://scenes/enemies/enemies_components/HealthComponent_enemy.tscn" id="6_if5fd"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dpic6"]
 atlas = ExtResource("1_fyovm")

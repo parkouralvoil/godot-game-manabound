@@ -18,6 +18,7 @@ region = Rect2(48, 80, 32, 48)
 size = Vector2(221, 101)
 
 [node name="Door" type="Marker2D"]
+z_index = -1
 script = ExtResource("1_a8wpb")
 
 [node name="closed_door" type="Sprite2D" parent="."]

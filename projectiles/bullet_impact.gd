@@ -11,6 +11,8 @@ var decay_rate: float = 10
 func _process(delta: float) -> void:
 	modulate = Color(1,1,1, transparency)
 	transparency = lerp(transparency, 0.0, decay_rate * delta)
+	if transparency <= 0.03: # now transparency has the job of lifespan_timer
+		queue_free()
 
 func _on_lifespan_timeout() -> void:
-	queue_free()
+	pass #queue_free()

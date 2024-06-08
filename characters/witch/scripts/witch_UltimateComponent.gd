@@ -21,10 +21,10 @@ func _process(delta: float) -> void:
 	PlayerInfo.current_charge_type = PlayerInfo.ChargeTypes.PASSIVE
 	
 	if character.charge >= character.max_charge:
-		if PlayerInfo.current_state == PlayerInfo.States.STANCE:
+		if PlayerInfo.input_ult:
 			character.sprite_look_at(PlayerInfo.mouse_direction)
-			character.wpn_sprite.modulate = Color(1.2, 1.2, 2)
-		elif Input.is_action_just_released("right_click"):
+			character.wpn_sprite.modulate = Color(0.5, 2, 2)
+		elif Input.is_action_just_released("right_click"): # this the best way
 			spend_charge()
 			character.wpn_sprite.modulate = Color(1, 1, 1)
 

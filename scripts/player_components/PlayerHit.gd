@@ -4,6 +4,8 @@ extends Node2D
 @onready var t_iframe: Timer = $iframe_cd
 @onready var hit_particles: GPUParticles2D = $GPUParticles2D
 
+@export var sfx_hit: AudioStream
+
 # iframes stuff
 var max_iframes: int = 5
 var iframes: int = 0
@@ -17,6 +19,7 @@ func player_hit() -> void:
 	iframes = max_iframes
 	t_iframe.start()
 	p.anim_sprite.modulate = red_hit
+	SoundPlayer.play_sound(sfx_hit, -10, 1.1)
 	
 	hit_particles.restart()
 

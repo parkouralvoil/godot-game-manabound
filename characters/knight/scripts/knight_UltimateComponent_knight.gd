@@ -4,6 +4,7 @@ class_name Knight_UltimateComponent
 @export var GrandBoltScene: PackedScene
 @export var LightningBoltScene: PackedScene
 @export var HomingMissileScene: PackedScene
+@export var sfx_grand_ballista: AudioStream
 
 @onready var character: Character = owner
 @onready var AM: Knight_AbilityManager = get_parent()
@@ -17,7 +18,7 @@ func _process(delta: float) -> void:
 	
 	PlayerInfo.current_charge_type = PlayerInfo.ChargeTypes.BURST
 	
-	if PlayerInfo.current_state == PlayerInfo.States.STANCE:
+	if PlayerInfo.input_ult:
 		raise_charge(delta)
 		character.sprite_look_at(PlayerInfo.mouse_direction)
 	elif character.charge != 0:
@@ -35,6 +36,7 @@ func shoot(bullet: PackedScene, direction: Vector2) -> void:
 	bul_instance.set_collision_mask_value(4, true)
 	bul_instance.max_distance = AM.ult_max_distance
 	bul_instance.speed = AM.ult_bullet_speed * 1.5 # since scale makes this move slower
+	SoundPlayer.play_sound(sfx_grand_ballista, -4, 1.1)
 	match charge_tier:
 		2:
 			bul_instance.scale = Vector2(0.75, 0.75)

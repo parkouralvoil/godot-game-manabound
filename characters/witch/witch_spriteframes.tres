@@ -1,10 +1,14 @@
-[gd_resource type="SpriteFrames" load_steps=10 format=3 uid="uid://dsg0xmjs2wxlj"]
+[gd_resource type="SpriteFrames" load_steps=11 format=3 uid="uid://dsg0xmjs2wxlj"]
 
 [ext_resource type="Texture2D" uid="uid://ug68u46641al" path="res://assets/sprite_characters/witch_spritesheet.png" id="1_atuhd"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_5mnja"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_cxyi6"]
 atlas = ExtResource("1_atuhd")
-region = Rect2(0, 64, 32, 32)
+region = Rect2(64, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_adb8c"]
+atlas = ExtResource("1_atuhd")
+region = Rect2(64, 64, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xrwn5"]
 atlas = ExtResource("1_atuhd")
@@ -38,10 +42,18 @@ region = Rect2(32, 32, 32, 32)
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_5mnja")
+"texture": SubResource("AtlasTexture_cxyi6")
 }],
 "loop": true,
 "name": &"air",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_adb8c")
+}],
+"loop": true,
+"name": &"fall",
 "speed": 5.0
 }, {
 "frames": [{

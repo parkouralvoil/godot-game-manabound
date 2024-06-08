@@ -1,0 +1,29 @@
+[gd_scene load_steps=7 format=3 uid="uid://c7fujnf00ttr0"]
+
+[ext_resource type="Texture2D" uid="uid://c36f5r6cnvwpu" path="res://assets/sprite_projectiles/bullet_pixel_Blue.png" id="1_viesd"]
+[ext_resource type="Script" path="res://scenes/collectibles/mana_orb.gd" id="2_e1u6a"]
+[ext_resource type="PackedScene" uid="uid://ddpntqoweyraq" path="res://scenes/trails/mana_trail.tscn" id="3_17j2x"]
+[ext_resource type="AudioStream" uid="uid://l5d5up5lhvbh" path="res://assets/audio/sfx/mana_orb_collected.mp3" id="3_utvdw"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ughvv"]
+atlas = ExtResource("1_viesd")
+region = Rect2(182, 22, 5, 5)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vu4ki"]
+radius = 4.0
+
+[node name="mana_orb" type="Sprite2D"]
+z_index = 10
+texture = SubResource("AtlasTexture_ughvv")
+script = ExtResource("2_e1u6a")
+sfx_collected = ExtResource("3_utvdw")
+
+[node name="OrbHitbox" type="Area2D" parent="."]
+collision_layer = 128
+collision_mask = 0
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="OrbHitbox"]
+shape = SubResource("CircleShape2D_vu4ki")
+
+[node name="ManaTrail" parent="." instance=ExtResource("3_17j2x")]

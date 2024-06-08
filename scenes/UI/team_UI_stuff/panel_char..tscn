@@ -27,7 +27,7 @@ theme_override_constants/separation = 1
 [node name="Label_name" type="Label" parent="VBoxContainer_info"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 10
-text = "1) Knight"
+text = "[1] Knight"
 label_settings = ExtResource("3_0t8gu")
 
 [node name="Label_health" type="Label" parent="VBoxContainer_info"]

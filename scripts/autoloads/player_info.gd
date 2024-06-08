@@ -22,12 +22,18 @@ var current_state: States = States.IDLE
 
 enum ChargeTypes {
 	BURST,
-	ACTIVE,
+	ENERGY,
 	PASSIVE
 }
 var current_charge_type: ChargeTypes = ChargeTypes.BURST
 
+## logic for inputs
+var input_attack: bool = false
+var input_ult: bool = false
+
+## logic for recoil, stance stuff
 var basic_attacking: bool = false # replaces "is_firing"
+		## should rename this to (do recoil)
 var can_charge: bool = true # for passive charge chars to set it false
 var charging: bool = false # for ult
 
@@ -71,7 +77,7 @@ func _process(_delta: float) -> void:
 	match current_charge_type:
 		ChargeTypes.BURST:
 			can_charge = true
-		ChargeTypes.ACTIVE:
+		ChargeTypes.ENERGY:
 			pass
 		ChargeTypes.PASSIVE:
 			if displayed_charge < displayed_max_charge:

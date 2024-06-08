@@ -6,7 +6,7 @@
 
 [resource]
 script = ExtResource("1_h32h2")
-duration = 4.0
+duration = 1.5
 particles_process_mat = ExtResource("1_maiyo")
 particles_textures = ExtResource("2_tmbre")
 one_shot = true

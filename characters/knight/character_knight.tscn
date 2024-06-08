@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://despujxox3cs7"]
+[gd_scene load_steps=16 format=3 uid="uid://despujxox3cs7"]
 
 [ext_resource type="Script" path="res://characters/CharacterClass.gd" id="1_2hkjo"]
 [ext_resource type="Script" path="res://characters/knight/scripts/knight_AbilityManager.gd" id="2_e4ef6"]
@@ -8,8 +8,10 @@
 [ext_resource type="PackedScene" uid="uid://durs4s4d2quml" path="res://projectiles/lightning_projectiles/basic_bolt/basic_bolt.tscn" id="5_jahx0"]
 [ext_resource type="PackedScene" uid="uid://bf05bt5n34ymh" path="res://projectiles/lightning_projectiles/lightning_bullet/lightning_bullet.tscn" id="6_oe7nv"]
 [ext_resource type="Script" path="res://characters/knight/scripts/knight_UltimateComponent_knight.gd" id="7_hkru2"]
+[ext_resource type="AudioStream" uid="uid://b1cwrq23fey4t" path="res://assets/audio/sfx/Lightning_gunshot.mp3" id="7_wf1ly"]
 [ext_resource type="PackedScene" uid="uid://j2b61v541lds" path="res://projectiles/lightning_projectiles/grand_bolt/grand_bolt.tscn" id="8_3k3pf"]
 [ext_resource type="Script" path="res://characters/knight/scripts/knight_AmmoComponent.gd" id="9_1ohy4"]
+[ext_resource type="AudioStream" uid="uid://c30ch7gxefbqw" path="res://assets/audio/sfx/lightning_grand_ballista.mp3" id="11_rpho5"]
 [ext_resource type="Texture2D" uid="uid://bm71lln6lsmlc" path="res://assets/sprite_characters/knight_spritesheet.png" id="11_sbkwl"]
 [ext_resource type="Texture2D" uid="uid://bdxxu1pv6u0hh" path="res://assets/sprite_characters/knight weapon.png" id="12_8ugk7"]
 
@@ -19,8 +21,7 @@ region = Rect2(96, 96, 32, 32)
 
 [node name="character_knight" type="Node2D"]
 script = ExtResource("1_2hkjo")
-max_health = 6.0
-max_ammo = 90
+max_health = 5.0
 fire_rate = 8.0
 
 [node name="AbilityManager" type="Node2D" parent="."]
@@ -32,6 +33,7 @@ script = ExtResource("2_e4ef6")
 script = ExtResource("4_k4d5v")
 BasicBoltScene = ExtResource("5_jahx0")
 LightningBoltScene = ExtResource("6_oe7nv")
+sfx_gunshot = ExtResource("7_wf1ly")
 
 [node name="firerate" type="Timer" parent="AbilityManager/BasicAttack"]
 wait_time = 0.15
@@ -46,6 +48,7 @@ script = ExtResource("7_hkru2")
 GrandBoltScene = ExtResource("8_3k3pf")
 LightningBoltScene = ExtResource("6_oe7nv")
 HomingMissileScene = ExtResource("5_1iwx0")
+sfx_grand_ballista = ExtResource("11_rpho5")
 
 [node name="Ammo" type="Node2D" parent="AbilityManager"]
 script = ExtResource("9_1ohy4")

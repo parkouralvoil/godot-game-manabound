@@ -14,13 +14,16 @@ func Enter() -> void:
 	p.gravity = 0
 	#p.direction_indicator.show()
 	p.circle_indicator.show()
+	p.direction_indicator.hide()
 	PlayerInfo.current_state = PlayerInfo.States.STANCE
+	PlayerInfo.input_ult = true
 
 func Exit() -> void:
 	if !p:
 		return
 	p.velocity = recoil_speed * -p.move_direction
 	p.circle_indicator.position = Vector2(0, 0)
+	PlayerInfo.input_ult = false
 
 func Update(_delta: float) -> void:
 	if !p:
@@ -54,5 +57,5 @@ func flip_sprite() -> void:
 		p.anim_sprite.scale.x = -1
 
 func play_anim() -> void:
-	if p.anim_sprite.animation != "air":
-		p.anim_sprite.play("air")
+	if p.anim_sprite.animation != "stance":
+		p.anim_sprite.play("stance")

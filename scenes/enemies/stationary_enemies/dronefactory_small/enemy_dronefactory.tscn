@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://mnqy6onwpiay" path="res://resources/enemy_dead.tres" id="3_djpu2"]
 [ext_resource type="Script" path="res://scripts/entity_components/HurtboxComponent_enemy.gd" id="4_njlba"]
 [ext_resource type="PackedScene" uid="uid://wb7yfjqhq458" path="res://scenes/enemies/mobile_enemies/drone_small/enemy_smalldrone.tscn" id="5_glrca"]
-[ext_resource type="PackedScene" uid="uid://bx54isqpe5u3x" path="res://scenes/enemies/enemies_components/health_component.tscn" id="8_jll3m"]
+[ext_resource type="PackedScene" uid="uid://bx54isqpe5u3x" path="res://scenes/enemies/enemies_components/HealthComponent_enemy.tscn" id="8_kxp28"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bfqw3"]
 size = Vector2(22, 15)
@@ -56,6 +56,8 @@ position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_gdgdi")
 debug_color = Color(0.694118, 0.47451, 0.4, 0.419608)
 
-[node name="HealthComponent" parent="." instance=ExtResource("8_jll3m")]
+[node name="HealthComponent" parent="." instance=ExtResource("8_kxp28")]
+small_orbs = 0
+medium_orbs = 3
 
 [connection signal="timeout" from="SpawnerComponent/spawn_timer" to="SpawnerComponent" method="_on_spawn_timer_timeout"]

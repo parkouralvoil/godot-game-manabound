@@ -6,6 +6,7 @@ var ProjectileScene: PackedScene = load("res://projectiles/enemy_projectiles/bul
 @onready var e: BaseEnemy = owner
 @onready var t_reload: Timer = $reload
 @onready var t_first_shot: Timer = $before_first_shot
+@onready var bullet_origin: Marker2D = $bullet_origin
 
 @onready var rng := RandomNumberGenerator.new()
 
@@ -38,7 +39,7 @@ func _physics_process(delta: float) -> void:
 func shoot(projectile: PackedScene, direction: Vector2) -> void:
 	var pro_instance: Bullet = projectile.instantiate()
 	if pro_instance:
-		pro_instance.global_position = self.global_position
+		pro_instance.global_position = bullet_origin.global_position
 		
 		pro_instance.speed = 200.0
 		pro_instance.direction = direction

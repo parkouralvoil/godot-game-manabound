@@ -1,4 +1,3 @@
-@tool
 extends Node
 class_name EnemyHolder # more like enemy manager but aosrjsejroae
 
@@ -132,7 +131,8 @@ func instantiate_enemy(info: SpawnInfo) -> BaseEnemy:
 func enemy_dead() -> void:
 	EnemyAiManager.enemies_alive -= 1
 	if EnemyAiManager.enemies_alive <= 0:
-		owner.open_door()
+		var lvl: LevelManager = owner
+		lvl.level_is_cleared()
 
 
 func roll_probability(success_chance: float) -> bool:

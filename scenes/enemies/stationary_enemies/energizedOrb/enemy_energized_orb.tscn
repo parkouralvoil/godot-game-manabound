@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://ccfj5qan8stdb" path="res://projectiles/bullet_impact.tscn" id="2_1kbps"]
 [ext_resource type="Texture2D" uid="uid://mnqy6onwpiay" path="res://resources/enemy_dead.tres" id="3_1qe5k"]
 [ext_resource type="Texture2D" uid="uid://cv8m0tgd2djtm" path="res://assets/sprite_enemies/bsf wisp.png" id="4_msriy"]
-[ext_resource type="PackedScene" uid="uid://bx54isqpe5u3x" path="res://scenes/enemies/enemies_components/health_component.tscn" id="5_k0xbi"]
+[ext_resource type="PackedScene" uid="uid://bx54isqpe5u3x" path="res://scenes/enemies/enemies_components/HealthComponent_enemy.tscn" id="5_d6l82"]
 [ext_resource type="Script" path="res://scenes/enemies/stationary_enemies/energizedOrb/AttackComponent_energizedOrb.gd" id="5_modtn"]
 [ext_resource type="PackedScene" uid="uid://bokmrko2cf2sb" path="res://projectiles/enemy_projectiles/orb_explosion/orb_explosion_spawn.tscn" id="6_g81kv"]
 [ext_resource type="Script" path="res://scripts/entity_components/HurtboxComponent_enemy.gd" id="6_vusb1"]
@@ -32,7 +32,9 @@ texture = SubResource("AtlasTexture_w0hsw")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_dlwob")
 
-[node name="HealthComponent" parent="." instance=ExtResource("5_k0xbi")]
+[node name="HealthComponent" parent="." instance=ExtResource("5_d6l82")]
+small_orbs = 5
+medium_orbs = 1
 
 [node name="HurtboxComponent" type="Area2D" parent="."]
 collision_layer = 8

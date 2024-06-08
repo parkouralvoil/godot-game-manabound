@@ -60,3 +60,7 @@ func superconduct_ended(HealthComp: EnemyHealthComponent) -> void:
 	var enemy: BaseEnemy = HealthComp.e
 	enemy.reload_time = enemy.default_reload_time
 	enemy.sprite_main.modulate = enemy.default_color
+
+
+func delete_ref(HealthComp: EnemyHealthComponent) -> void:
+	enemy_ref.erase(HealthComp)

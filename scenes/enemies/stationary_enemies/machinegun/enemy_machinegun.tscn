@@ -1,31 +1,21 @@
-[gd_scene load_steps=14 format=3 uid="uid://cucqth4r8k7y3"]
+[gd_scene load_steps=13 format=3 uid="uid://cucqth4r8k7y3"]
 
 [ext_resource type="Script" path="res://scenes/enemies/stationary_enemies/machinegun/enemy_machinegun.gd" id="1_4ftxf"]
 [ext_resource type="PackedScene" uid="uid://ccfj5qan8stdb" path="res://projectiles/bullet_impact.tscn" id="2_oai8o"]
 [ext_resource type="Texture2D" uid="uid://mnqy6onwpiay" path="res://resources/enemy_dead.tres" id="3_af3ky"]
 [ext_resource type="Script" path="res://scenes/enemies/stationary_enemies/machinegun/machinegun_ammo.gd" id="3_rk0t3"]
-[ext_resource type="Texture2D" uid="uid://b5uv1u6y5momf" path="res://assets/sprite_enemies/bsf autobow.png" id="4_4llwt"]
-[ext_resource type="PackedScene" uid="uid://bx54isqpe5u3x" path="res://scenes/enemies/enemies_components/health_component.tscn" id="6_6x73m"]
+[ext_resource type="Texture2D" uid="uid://8j2pf5jxcgbw" path="res://assets/sprite_enemies/turret enemy v2/turret_enemy v2 pivot.png" id="4_aux6u"]
+[ext_resource type="Texture2D" uid="uid://kkdwqtkdrsfo" path="res://assets/sprite_enemies/turret enemy v2/turret_enemy v2 turret.png" id="5_gt8rf"]
 [ext_resource type="Script" path="res://scripts/entity_components/attack_components_specific/AttackComponent_Machinegun.gd" id="6_rikjp"]
+[ext_resource type="Texture2D" uid="uid://d00dr80w0uslf" path="res://assets/sprite_enemies/turret enemy v1/mg ammo.png" id="7_p7erf"]
 [ext_resource type="Script" path="res://scripts/entity_components/HurtboxComponent_enemy.gd" id="7_w38ps"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_dpic6"]
-atlas = ExtResource("4_4llwt")
-region = Rect2(4, 36, 8, 8)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_w0hsw"]
-atlas = ExtResource("4_4llwt")
-region = Rect2(15, 13, 18, 22)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_14l55"]
-atlas = ExtResource("4_4llwt")
-region = Rect2(40, 39, 2, 2)
+[ext_resource type="PackedScene" uid="uid://bx54isqpe5u3x" path="res://scenes/enemies/enemies_components/HealthComponent_enemy.tscn" id="8_lvnqj"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_dlwob"]
 radius = 20.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ppbf0"]
-radius = 20.0
+radius = 22.0
 
 [node name="enemy_machinegun" type="CharacterBody2D"]
 collision_layer = 2
@@ -37,36 +27,30 @@ max_health = 90.0
 default_reload_time = 0.05
 
 [node name="Sprite2D_pivot" type="Sprite2D" parent="."]
-scale = Vector2(2, 2)
-texture = SubResource("AtlasTexture_dpic6")
+texture = ExtResource("4_aux6u")
 
 [node name="Sprite2D_main" type="Sprite2D" parent="."]
-modulate = Color(0.796078, 0.470588, 0.294118, 1)
-scale = Vector2(2, 2)
-texture = SubResource("AtlasTexture_w0hsw")
+texture = ExtResource("5_gt8rf")
 
 [node name="ammo_sprite_container" type="Node2D" parent="Sprite2D_main" node_paths=PackedStringArray("entity")]
 script = ExtResource("3_rk0t3")
 entity = NodePath("../..")
 
 [node name="Sprite2D_ammo1" type="Sprite2D" parent="Sprite2D_main/ammo_sprite_container"]
-modulate = Color(1, 0.619608, 0.584314, 1)
-texture = SubResource("AtlasTexture_14l55")
+texture = ExtResource("7_p7erf")
 
-[node name="Sprite2D_ammo2" type="Sprite2D" parent="Sprite2D_main/ammo_sprite_container"]
-modulate = Color(1, 0.619608, 0.584314, 1)
-position = Vector2(0, -3)
-texture = SubResource("AtlasTexture_14l55")
-
-[node name="Sprite2D_ammo3" type="Sprite2D" parent="Sprite2D_main/ammo_sprite_container"]
-modulate = Color(1, 0.619608, 0.584314, 1)
-position = Vector2(0, -6)
-texture = SubResource("AtlasTexture_14l55")
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Sprite2D_main"]
+position = Vector2(0, 16)
+remote_path = NodePath("../../AttackComponent/bullet_origin")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_dlwob")
 
-[node name="HealthComponent" parent="." instance=ExtResource("6_6x73m")]
+[node name="HealthComponent" parent="." instance=ExtResource("8_lvnqj")]
+position = Vector2(0, 19)
+explosion_volume = -9.0
+small_orbs = 6
+medium_orbs = 4
 
 [node name="HurtboxComponent" type="Area2D" parent="."]
 collision_layer = 8
@@ -80,6 +64,9 @@ debug_color = Color(0.901961, 0.282353, 0.337255, 0.419608)
 
 [node name="AttackComponent" type="Node2D" parent="."]
 script = ExtResource("6_rikjp")
+
+[node name="bullet_origin" type="Marker2D" parent="AttackComponent"]
+position = Vector2(0, 16)
 
 [node name="reload" type="Timer" parent="AttackComponent"]
 wait_time = 0.25

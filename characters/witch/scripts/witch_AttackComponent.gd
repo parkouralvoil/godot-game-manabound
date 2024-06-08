@@ -26,7 +26,7 @@ func _process(_delta: float) -> void:
 	elif t_recoil.is_stopped() or !can_shoot:
 		PlayerInfo.basic_attacking = false
 	
-	if Input.is_action_pressed("left_click") and character.ammo > 0 and can_shoot:
+	if PlayerInfo.input_attack and character.ammo > 0 and can_shoot:
 		if t_firerate.is_stopped():
 			basic_atk()
 			t_firerate.start()

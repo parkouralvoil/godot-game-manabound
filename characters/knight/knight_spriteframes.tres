@@ -1,10 +1,14 @@
-[gd_resource type="SpriteFrames" load_steps=10 format=3 uid="uid://n8tavxox3kua"]
+[gd_resource type="SpriteFrames" load_steps=11 format=3 uid="uid://n8tavxox3kua"]
 
 [ext_resource type="Texture2D" uid="uid://bm71lln6lsmlc" path="res://assets/sprite_characters/knight_spritesheet.png" id="1_h0hp8"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_skuxk"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_bh4fv"]
 atlas = ExtResource("1_h0hp8")
-region = Rect2(0, 64, 32, 32)
+region = Rect2(64, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gy4n1"]
+atlas = ExtResource("1_h0hp8")
+region = Rect2(64, 64, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_x0yad"]
 atlas = ExtResource("1_h0hp8")
@@ -22,9 +26,9 @@ region = Rect2(64, 0, 32, 32)
 atlas = ExtResource("1_h0hp8")
 region = Rect2(96, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_sckjg"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_skuxk"]
 atlas = ExtResource("1_h0hp8")
-region = Rect2(0, 96, 32, 32)
+region = Rect2(0, 64, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3bq4l"]
 atlas = ExtResource("1_h0hp8")
@@ -38,10 +42,18 @@ region = Rect2(32, 32, 32, 32)
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_skuxk")
+"texture": SubResource("AtlasTexture_bh4fv")
 }],
 "loop": true,
 "name": &"air",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gy4n1")
+}],
+"loop": true,
+"name": &"fall",
 "speed": 5.0
 }, {
 "frames": [{
@@ -63,7 +75,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_sckjg")
+"texture": SubResource("AtlasTexture_skuxk")
 }],
 "loop": true,
 "name": &"stance",

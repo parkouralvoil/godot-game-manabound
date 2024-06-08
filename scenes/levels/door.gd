@@ -7,6 +7,7 @@ extends Marker2D
 
 var player_nearby: bool = false
 var is_open: bool = false
+var pressed: bool = false
 
 var closed_text: String = "ENEMIES STILL ALIVE!"
 var open_text: String = "Press E to enter"
@@ -22,11 +23,13 @@ func _ready() -> void:
 	$opened_door.hide()
 
 func _physics_process(_delta: float) -> void:
+	
 	if open or player_nearby:
 		line_interact.points[1] = (EnemyAiManager.player_position - position)
-	if player_nearby and Input.is_action_just_pressed("interact") and is_open:
+	if player_nearby and Input.is_action_just_pressed("interact") and is_open and not pressed:
+		line_interact.hide()
 		EventBus.go_next_lvl.emit(level)
-		process_mode = Node.PROCESS_MODE_DISABLED
+		pressed = true
 
 
 func open() -> void:

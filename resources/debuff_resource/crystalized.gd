@@ -2,7 +2,7 @@ extends Resource
 class_name Crystalized
 
 @export_category("Debuff Effects")
-@export var duration: float = 4
+@export var duration: float = 1.5
 
 @export_category("Particles")
 @export var particles_process_mat: ParticleProcessMaterial
@@ -73,7 +73,11 @@ func detonate_crystalize(HealthComp: EnemyHealthComponent) -> void:
 			CombatManager.Elements.NONE)
 	var text: String = "Crystalize x" + str(current_stacks)
 	HealthComp.spawn_dmg_number(text, CombatManager.params[CombatManager.Elements.ICE])
-	enemy_ref[HealthComp].crystal_stacks = 0
+	if enemy_ref.has(HealthComp):
+		enemy_ref[HealthComp].crystal_stacks = 0
 	
 	# V this really sucks, better to have a signal emitted when crystal_stacks changes
 	HealthComp.debuff_indicator.current_debuff = CombatManager.Debuffs.NONE
+
+func delete_ref(HealthComp: EnemyHealthComponent) -> void:
+	enemy_ref.erase(HealthComp)
