@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=3 uid="uid://c25whdi1vpp8c"]
+
+[ext_resource type="Script" path="res://projectiles/ice_projectiles/frost_nova/frost_nova_impact.gd" id="1_7mcvk"]
+[ext_resource type="Texture2D" uid="uid://b2gagvgpvrjud" path="res://assets/sprite_projectiles/bullet_pixel_BrightRed.png" id="2_mk5q7"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kb0sb"]
+atlas = ExtResource("2_mk5q7")
+region = Rect2(481, 231, 29, 19)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_o2l5i"]
+radius = 22.0227
+
+[node name="rogue_melee_hit" type="Area2D"]
+collision_layer = 0
+collision_mask = 8
+monitorable = false
+script = ExtResource("1_7mcvk")
+opaqueness = 0.8
+transparency_limit = 0.2
+decay_rate = 8.0
+
+[node name="hitbox_lifespan" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+autostart = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.545098)
+z_index = -1
+position = Vector2(9, 0)
+rotation = 0.270526
+scale = Vector2(1.5, 2.131)
+texture = SubResource("AtlasTexture_kb0sb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(10, -1)
+shape = SubResource("CircleShape2D_o2l5i")

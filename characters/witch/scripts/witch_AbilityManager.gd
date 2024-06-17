@@ -29,7 +29,7 @@ var scale_ult_size: float = 25 # adds to scale
 # each char only has a specific upgrade for one stat, to ease building
 var base_stat: float = 1
 var scale_stat: float = 0.1 # PERCENTAGE
-var base_charge_rate: float = 6 # for witch, her charge rate remains da same
+var base_charge_rate: float = 100 # for witch, her charge rate remains da same
 
 var explosion_num: int = base_ult_explosions
 var explosion_scale: float = base_ult_size

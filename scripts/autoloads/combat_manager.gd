@@ -6,12 +6,16 @@ enum Elements {
 	NONE,
 	LIGHTNING,
 	ICE,
+	FIRE,
 }
 
 enum Debuffs {
 	NONE,
 	CRYSTALIZED,
 	SUPERCONDUCT, # reaction: Ice + Lightning
+	# OVERLOAD, # fire + lightning
+	# MELT, # fire + ice
+	# BURNING # fire DoT
 }
 
 # parameters

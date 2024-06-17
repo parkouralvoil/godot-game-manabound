@@ -115,7 +115,14 @@ layout_mode = 0
 offset_left = -21.0
 offset_top = 73.0
 offset_right = 91.0
-offset_bottom = 140.0
+offset_bottom = 134.0
+
+[node name="Panel_Char3" parent="Layer_1/Team_UI" instance=ExtResource("8_tbcqf")]
+layout_mode = 0
+offset_left = -21.0
+offset_top = 146.0
+offset_right = 91.0
+offset_bottom = 207.0
 
 [node name="BloodOverlay" type="TextureRect" parent="Layer_1"]
 anchors_preset = 15

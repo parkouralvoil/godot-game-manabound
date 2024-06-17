@@ -5,7 +5,51 @@
 [node name="SoundPlayer" type="Node2D"]
 script = ExtResource("1_t2mt3")
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+[node name="ShortPositionalQueue" type="Node2D" parent="."]
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="ShortPositionalQueue"]
+
+[node name="AudioStreamPlayer2D2" type="AudioStreamPlayer2D" parent="ShortPositionalQueue"]
+
+[node name="AudioStreamPlayer2D3" type="AudioStreamPlayer2D" parent="ShortPositionalQueue"]
+
+[node name="AudioStreamPlayer2D4" type="AudioStreamPlayer2D" parent="ShortPositionalQueue"]
+
+[node name="AudioStreamPlayer2D5" type="AudioStreamPlayer2D" parent="ShortPositionalQueue"]
+
+[node name="PositionalQueue" type="Node2D" parent="."]
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="PositionalQueue"]
+max_distance = 1000.0
+attenuation = 2.0
+
+[node name="AudioStreamPlayer2D2" type="AudioStreamPlayer2D" parent="PositionalQueue"]
+max_distance = 1000.0
+attenuation = 2.0
+
+[node name="AudioStreamPlayer2D3" type="AudioStreamPlayer2D" parent="PositionalQueue"]
+max_distance = 1000.0
+attenuation = 2.0
+
+[node name="AudioStreamPlayer2D4" type="AudioStreamPlayer2D" parent="PositionalQueue"]
+max_distance = 1000.0
+attenuation = 2.0
+
+[node name="AudioStreamPlayer2D5" type="AudioStreamPlayer2D" parent="PositionalQueue"]
+max_distance = 1000.0
+attenuation = 2.0
+
+[node name="AudioStreamPlayer2D6" type="AudioStreamPlayer2D" parent="PositionalQueue"]
+max_distance = 1000.0
+attenuation = 2.0
+
+[node name="AudioStreamPlayer2D7" type="AudioStreamPlayer2D" parent="PositionalQueue"]
+max_distance = 1000.0
+attenuation = 2.0
+
+[node name="AudioStreamPlayer2D8" type="AudioStreamPlayer2D" parent="PositionalQueue"]
+max_distance = 1000.0
+attenuation = 2.0
 
 [node name="NonPositionalQueue" type="Node" parent="."]
 

@@ -1,0 +1,7 @@
+[gd_resource type="AtlasTexture" load_steps=2 format=3 uid="uid://dfk82yyu3kqxe"]
+
+[ext_resource type="Texture2D" uid="uid://dsdu11io064xj" path="res://assets/sprite_characters/rogue_spritesheet.png" id="1_q1po3"]
+
+[resource]
+atlas = ExtResource("1_q1po3")
+region = Rect2(8, 7, 13, 10)

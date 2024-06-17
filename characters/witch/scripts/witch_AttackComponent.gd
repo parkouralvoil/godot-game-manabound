@@ -2,6 +2,7 @@ extends Node2D
 class_name Witch_AttackComponent
 
 @export var IceSpikeScene: PackedScene
+@export var sfx_IceCast: AudioStream
 
 @onready var character: Character = owner
 @onready var AM: Witch_AbilityManager = get_parent()
@@ -35,6 +36,9 @@ func _process(_delta: float) -> void:
 
 func shoot(bullet: PackedScene) -> void:
 	assert(bullet, "bruh its missing")
+	
+	SoundPlayer.play_sound(sfx_IceCast, -10, 1.05)
+	
 	var bul_instance: Bullet = bullet.instantiate()
 	var direction: Vector2 = PlayerInfo.aim_direction
 	

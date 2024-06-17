@@ -5,6 +5,7 @@ class_name PlayerIdle
 @export var p: Player
 
 var air_deaccel: float = 200 #deacceleration
+var recoil_speed: float = 10000
 
 func Enter() -> void:
 	if !p:
@@ -23,10 +24,11 @@ func Update(_delta: float) -> void:
 		return
 	#if p.velocity != Vector2.ZERO:
 	
-	flip_sprite()
+	if not PlayerInfo.basic_attacking:
+		flip_sprite()
 	play_anim()
 
-func Physics_Update(_delta: float) -> void:
+func Physics_Update(delta: float) -> void:
 	if !p:
 		return
 	
@@ -40,24 +42,26 @@ func Physics_Update(_delta: float) -> void:
 	if Input.is_action_pressed("right_click") and PlayerInfo.can_charge:
 		state_transition.emit(self, "PlayerStance")
 	
-	if !p.is_on_floor() and !PlayerInfo.basic_attacking:
-		p.velocity.y = min(p.velocity.y + p.gravity * _delta, p.gravity/1.25)
+	if not PlayerInfo.basic_attacking:
+		if !p.is_on_floor():
+			p.velocity.y = min(p.velocity.y + p.gravity * delta, p.gravity/1.25) ## gravity when player has no input
 		if not Input.is_action_pressed("space"):
 			p.circle_indicator.hide()
-	elif PlayerInfo.basic_attacking:
+	else:
 		if p.auto_aim and p.selected_target != null:
-			p.velocity.y -= p.gravity * 0.3 * _delta
-		else:
-			p.velocity = Vector2.ZERO
+			if not PlayerInfo.melee_character:
+				p.velocity.y -= (p.gravity * 0.3 * delta)
+			else:
+				pass
 	
-	horizontal_deaccel(_delta)
+	horizontal_deaccel(delta)
 	p.move_and_slide()
 	# slow down player's speed xd
 
 func flip_sprite() -> void:
-	if p.velocity.x >= 1 or (PlayerInfo.basic_attacking and p.aim_direction.x > 0):
+	if p.velocity.x >= 1:
 		p.anim_sprite.scale.x = 1
-	elif p.velocity.x <= -1 or (PlayerInfo.basic_attacking and p.aim_direction.x < 0):
+	elif p.velocity.x <= -1:
 		p.anim_sprite.scale.x = -1
 
 func play_anim() -> void:

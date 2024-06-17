@@ -78,8 +78,8 @@ func _process(_delta: float) -> void:
 			arm_node.rotation = aim_direction.angle() - PI/2
 		else:
 			arm_node.rotation = -(aim_direction.angle() - (PI/2))
-	
-	if anim_sprite.animation == "fall" or anim_sprite.animation == "air":
+		
+	if anim_sprite.animation == "fall" or anim_sprite.animation == "air" or (PlayerInfo.melee_character and PlayerInfo.basic_attacking):
 		arm_sprite.hide()
 		wpn_sprite.hide()
 		fake_arm_sprite.hide()

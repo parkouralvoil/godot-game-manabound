@@ -1,13 +1,22 @@
-[gd_scene load_steps=11 format=3 uid="uid://c7kau2srmy78i"]
+[gd_scene load_steps=14 format=3 uid="uid://c7kau2srmy78i"]
 
 [ext_resource type="Script" path="res://scripts/entity_components/SpawnerComponent_dronefactory.gd" id="1_bovej"]
 [ext_resource type="Script" path="res://scenes/enemies/stationary_enemies/dronefactory_small/enemy_dronefactory.gd" id="1_os3qv"]
-[ext_resource type="Texture2D" uid="uid://dc5x12svgwuv7" path="res://assets/sprite_enemies/drone_factory.png" id="2_3fh6q"]
 [ext_resource type="PackedScene" uid="uid://ccfj5qan8stdb" path="res://projectiles/bullet_impact.tscn" id="2_p64pg"]
 [ext_resource type="Texture2D" uid="uid://mnqy6onwpiay" path="res://resources/enemy_dead.tres" id="3_djpu2"]
 [ext_resource type="Script" path="res://scripts/entity_components/HurtboxComponent_enemy.gd" id="4_njlba"]
 [ext_resource type="PackedScene" uid="uid://wb7yfjqhq458" path="res://scenes/enemies/mobile_enemies/drone_small/enemy_smalldrone.tscn" id="5_glrca"]
+[ext_resource type="Texture2D" uid="uid://br4q05747i10h" path="res://assets/sprite_enemies/drone_factory_v2.png" id="6_oyvuu"]
+[ext_resource type="Script" path="res://scenes/enemies/stationary_enemies/dronefactory_small/sprite_lights.gd" id="7_wfkg7"]
 [ext_resource type="PackedScene" uid="uid://bx54isqpe5u3x" path="res://scenes/enemies/enemies_components/HealthComponent_enemy.tscn" id="8_kxp28"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pxl8n"]
+atlas = ExtResource("6_oyvuu")
+region = Rect2(2, 5, 28, 23)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oego0"]
+atlas = ExtResource("6_oyvuu")
+region = Rect2(29, 29, 2, 2)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bfqw3"]
 size = Vector2(22, 15)
@@ -15,31 +24,62 @@ size = Vector2(22, 15)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gdgdi"]
 size = Vector2(22, 17)
 
-[node name="enemy_dronefactory" type="CharacterBody2D"]
+[node name="enemy_dronefactory" type="CharacterBody2D" node_paths=PackedStringArray("spawner_comp")]
 collision_layer = 2
 collision_mask = 0
 script = ExtResource("1_os3qv")
+spawner_comp = NodePath("SpawnerComponent")
 bullet_impact_scene = ExtResource("2_p64pg")
 enemy_dead_texture = ExtResource("3_djpu2")
 max_health = 45.0
-default_reload_time = 10.0
+default_reload_time = 1.0
 
 [node name="SpawnerComponent" type="Node2D" parent="."]
 script = ExtResource("1_bovej")
 smalldrone_scene = ExtResource("5_glrca")
 
 [node name="Marker2D" type="Marker2D" parent="SpawnerComponent"]
-position = Vector2(-23, -14)
-
-[node name="Marker2D2" type="Marker2D" parent="SpawnerComponent"]
-position = Vector2(0, -20)
+position = Vector2(0, -13)
 
 [node name="spawn_timer" type="Timer" parent="SpawnerComponent"]
-wait_time = 7.0
-autostart = true
 
 [node name="Sprite2D_main" type="Sprite2D" parent="."]
-texture = ExtResource("2_3fh6q")
+texture = SubResource("AtlasTexture_pxl8n")
+
+[node name="sprite_lights" type="Node2D" parent="Sprite2D_main"]
+script = ExtResource("7_wfkg7")
+
+[node name="Sprite2D" type="Sprite2D" parent="Sprite2D_main/sprite_lights"]
+position = Vector2(-9, 4.5)
+texture = SubResource("AtlasTexture_oego0")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Sprite2D_main/sprite_lights"]
+position = Vector2(-9, 1.5)
+texture = SubResource("AtlasTexture_oego0")
+
+[node name="Sprite2D3" type="Sprite2D" parent="Sprite2D_main/sprite_lights"]
+position = Vector2(-9, -1.5)
+texture = SubResource("AtlasTexture_oego0")
+
+[node name="Sprite2D4" type="Sprite2D" parent="Sprite2D_main/sprite_lights"]
+position = Vector2(-9, -4.5)
+texture = SubResource("AtlasTexture_oego0")
+
+[node name="Sprite2D5" type="Sprite2D" parent="Sprite2D_main/sprite_lights"]
+position = Vector2(9, 4.5)
+texture = SubResource("AtlasTexture_oego0")
+
+[node name="Sprite2D6" type="Sprite2D" parent="Sprite2D_main/sprite_lights"]
+position = Vector2(9, 1.5)
+texture = SubResource("AtlasTexture_oego0")
+
+[node name="Sprite2D7" type="Sprite2D" parent="Sprite2D_main/sprite_lights"]
+position = Vector2(9, -1.5)
+texture = SubResource("AtlasTexture_oego0")
+
+[node name="Sprite2D8" type="Sprite2D" parent="Sprite2D_main/sprite_lights"]
+position = Vector2(9, -4.5)
+texture = SubResource("AtlasTexture_oego0")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 1.5)

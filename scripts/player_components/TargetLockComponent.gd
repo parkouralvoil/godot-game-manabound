@@ -26,6 +26,10 @@ func _process(_delta: float) -> void:
 			## might be better to have a remotetransform on the enemy
 
 func _update_target() -> void:
+	if not p.auto_aim:
+		p.selected_target = null
+		return
+	
 	if has_overlapping_areas(): # and (t_update.is_stopped() or closest_target == null):
 		#print("rah" + str(get_overlapping_areas() ) )
 		for enemy in get_overlapping_areas():
@@ -40,7 +44,7 @@ func _update_target() -> void:
 			elif (closest_target.global_position - p.global_position).length_squared() > (enemy.global_position - 
 					p.global_position).length_squared():
 				closest_target = enemy
-			   
+		
 		p.selected_target = closest_target
 		t_update.start()
 

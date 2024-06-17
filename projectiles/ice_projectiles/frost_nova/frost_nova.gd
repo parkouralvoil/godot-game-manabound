@@ -13,6 +13,7 @@ var size: float = 1
 
 var damage: float = 10
 var debuff: CombatManager.Debuffs = CombatManager.Debuffs.NONE
+var _time: float = 0 ## FOR TESTING
 @onready var rng := RandomNumberGenerator.new()
 
 func _ready() -> void:
@@ -20,7 +21,9 @@ func _ready() -> void:
 	EventBus.clear_abilities.connect(queue_free)
 
 func _physics_process(_delta: float) -> void:
+	#_time += _delta
 	if spawn_counter >= max_spawn_counter:
+		#print("Time ended: %f" % _time)
 		queue_free()
 
 func _on_spawn_cd_timeout() -> void:

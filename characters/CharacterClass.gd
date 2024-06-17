@@ -12,6 +12,7 @@ class_name Character
 
 var enabled: bool = false # managed by char manager
 @export var charge_type: PlayerInfo.ChargeTypes = PlayerInfo.ChargeTypes.BURST
+@export var melee: bool = false
 
 @export_category("Initial Values")
 @export var max_health: float = 50.0
@@ -115,4 +116,4 @@ func apply_player_cam_shake(strength: int) -> void:
 func sprite_look_at(direction: Vector2) -> void:
 	if CM:
 		CM.sprite_look_at(direction)
-#endregion
+#endregionmelee

@@ -2,7 +2,7 @@ extends Node2D
 class_name Witch_UltimateComponent
 
 @export var FrostNovaScene: PackedScene
-
+@export var sfx_FrostNova: AudioStream
 # this should have 2 charges
 # by default, it only has 1 charge, strong single target bullet (like ac6 linear rifle), no piercing
 # with upgrades:
@@ -30,6 +30,7 @@ func _process(delta: float) -> void:
 
 func spawn_area_effect(area_effect: PackedScene, target_pos: Vector2) -> void:
 	assert(area_effect, "missing proj")
+	SoundPlayer.play_sound_2D(target_pos, sfx_FrostNova, -10)
 	
 	var effect_instance: FrostStorm = area_effect.instantiate()
 	effect_instance.global_position = target_pos

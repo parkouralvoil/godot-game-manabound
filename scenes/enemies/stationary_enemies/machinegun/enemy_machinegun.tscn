@@ -24,7 +24,7 @@ script = ExtResource("1_4ftxf")
 bullet_impact_scene = ExtResource("2_oai8o")
 enemy_dead_texture = ExtResource("3_af3ky")
 max_health = 90.0
-default_reload_time = 0.05
+default_reload_time = 0.1
 
 [node name="Sprite2D_pivot" type="Sprite2D" parent="."]
 texture = ExtResource("4_aux6u")

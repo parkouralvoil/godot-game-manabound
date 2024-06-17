@@ -8,10 +8,10 @@
 [ext_resource type="PackedScene" uid="uid://durs4s4d2quml" path="res://projectiles/lightning_projectiles/basic_bolt/basic_bolt.tscn" id="5_jahx0"]
 [ext_resource type="PackedScene" uid="uid://bf05bt5n34ymh" path="res://projectiles/lightning_projectiles/lightning_bullet/lightning_bullet.tscn" id="6_oe7nv"]
 [ext_resource type="Script" path="res://characters/knight/scripts/knight_UltimateComponent_knight.gd" id="7_hkru2"]
-[ext_resource type="AudioStream" uid="uid://b1cwrq23fey4t" path="res://assets/audio/sfx/Lightning_gunshot.mp3" id="7_wf1ly"]
+[ext_resource type="AudioStream" uid="uid://b1cwrq23fey4t" path="res://assets/audio/sfx/character_sfx/Lightning_gunshot.mp3" id="7_khu4f"]
 [ext_resource type="PackedScene" uid="uid://j2b61v541lds" path="res://projectiles/lightning_projectiles/grand_bolt/grand_bolt.tscn" id="8_3k3pf"]
 [ext_resource type="Script" path="res://characters/knight/scripts/knight_AmmoComponent.gd" id="9_1ohy4"]
-[ext_resource type="AudioStream" uid="uid://c30ch7gxefbqw" path="res://assets/audio/sfx/lightning_grand_ballista.mp3" id="11_rpho5"]
+[ext_resource type="AudioStream" uid="uid://c30ch7gxefbqw" path="res://assets/audio/sfx/character_sfx/lightning_grand_ballista.mp3" id="11_n0ocq"]
 [ext_resource type="Texture2D" uid="uid://bm71lln6lsmlc" path="res://assets/sprite_characters/knight_spritesheet.png" id="11_sbkwl"]
 [ext_resource type="Texture2D" uid="uid://bdxxu1pv6u0hh" path="res://assets/sprite_characters/knight weapon.png" id="12_8ugk7"]
 
@@ -33,7 +33,7 @@ script = ExtResource("2_e4ef6")
 script = ExtResource("4_k4d5v")
 BasicBoltScene = ExtResource("5_jahx0")
 LightningBoltScene = ExtResource("6_oe7nv")
-sfx_gunshot = ExtResource("7_wf1ly")
+sfx_gunshot = ExtResource("7_khu4f")
 
 [node name="firerate" type="Timer" parent="AbilityManager/BasicAttack"]
 wait_time = 0.15
@@ -48,7 +48,7 @@ script = ExtResource("7_hkru2")
 GrandBoltScene = ExtResource("8_3k3pf")
 LightningBoltScene = ExtResource("6_oe7nv")
 HomingMissileScene = ExtResource("5_1iwx0")
-sfx_grand_ballista = ExtResource("11_rpho5")
+sfx_grand_ballista = ExtResource("11_n0ocq")
 
 [node name="Ammo" type="Node2D" parent="AbilityManager"]
 script = ExtResource("9_1ohy4")

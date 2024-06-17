@@ -43,7 +43,7 @@ func _ready() -> void:
 	
 	# to give leeway for char when they first enter
 	process_mode = Node.PROCESS_MODE_DISABLED
-	await get_tree().create_timer(2).timeout
+	await get_tree().create_timer(0.5).timeout
 	process_mode = Node.PROCESS_MODE_INHERIT
 	default_color = sprite_main.modulate
 

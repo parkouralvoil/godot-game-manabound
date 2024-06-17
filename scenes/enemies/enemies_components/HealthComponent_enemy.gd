@@ -53,7 +53,7 @@ func damage_received(damage: float, new_elem: CombatManager.Elements) -> void:
 		EventBus.enemy_died.emit()
 		EnemyAiManager.spawn_orbs(global_position, small_orbs, medium_orbs)
 		clear_debuff_references()
-		SoundPlayer.play_sound(enemy_explosion_sfx, explosion_volume, 1.1)
+		SoundPlayer.play_sound_2D(global_position, enemy_explosion_sfx, explosion_volume + 7, 1.1)
 		e.make_impact()
 		e.queue_free()
 

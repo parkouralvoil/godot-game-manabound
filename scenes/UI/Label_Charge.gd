@@ -11,7 +11,7 @@ func _process(_delta: float) -> void:
 		PlayerInfo.ChargeTypes.BURST:
 			type = "Charge"
 		PlayerInfo.ChargeTypes.ENERGY:
-			pass
+			type = "Energy"
 		PlayerInfo.ChargeTypes.PASSIVE:
 			type = "Mana"
 	

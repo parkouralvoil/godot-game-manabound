@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://c35wulwk6e3b4"]
+[gd_scene load_steps=34 format=3 uid="uid://c35wulwk6e3b4"]
 
 [ext_resource type="Script" path="res://scenes/player.gd" id="1_ob8fa"]
 [ext_resource type="Script" path="res://scripts/player_components/HurtboxComponent_player.gd" id="2_w8hq5"]
@@ -15,14 +15,15 @@
 [ext_resource type="Texture2D" uid="uid://csbvjbkyctbsw" path="res://assets/sprite_projectiles/boost_particle_texture.png" id="8_o2f0w"]
 [ext_resource type="Script" path="res://scripts/player_components/TargetLockComponent.gd" id="9_616gv"]
 [ext_resource type="Texture2D" uid="uid://onw8pmqbytda" path="res://assets/sprite_UI/Aim indicator.png" id="10_1g6d3"]
-[ext_resource type="AudioStream" uid="uid://cgvlbkvq11os4" path="res://assets/sound_effects/zapsplat_cartoon_whoosh_swipe_fast_grab_dash_003_74744.mp3" id="10_n47c6"]
 [ext_resource type="Texture2D" uid="uid://df4r12vpxwua7" path="res://assets/sprite_UI/DashDirectionIndicator.png" id="10_pcbep"]
+[ext_resource type="AudioStream" uid="uid://cgvlbkvq11os4" path="res://assets/audio/sfx/sound_effects/zapsplat_cartoon_whoosh_swipe_fast_grab_dash_003_74744.mp3" id="11_ut6yg"]
 [ext_resource type="Script" path="res://scripts/player_components/DirectionIndicator.gd" id="11_vqh4r"]
 [ext_resource type="Texture2D" uid="uid://dy3hkciev768l" path="res://assets/sprite_UI/red_circle.png" id="12_i87yh"]
 [ext_resource type="SpriteFrames" uid="uid://n8tavxox3kua" path="res://characters/knight/knight_spriteframes.tres" id="13_7cy21"]
 [ext_resource type="Texture2D" uid="uid://3jkuw6bwhk01" path="res://characters/knight/knight_arm.tres" id="14_iiaao"]
 [ext_resource type="Script" path="res://scripts/StateMachine.gd" id="15_mooub"]
 [ext_resource type="Script" path="res://scripts/player_states/PlayerIdle.gd" id="16_01hcy"]
+[ext_resource type="Resource" uid="uid://c11fmdv1k7omo" path="res://characters/rogue/rogue_char_data.tres" id="17_0jsqx"]
 [ext_resource type="Script" path="res://scripts/player_states/PlayerMove.gd" id="17_btrsq"]
 [ext_resource type="Script" path="res://scripts/player_states/PlayerStance.gd" id="18_f66as"]
 
@@ -155,7 +156,7 @@ explosiveness = 0.9
 script = ExtResource("8_nmrq4")
 
 [node name="boost_sfx" type="AudioStreamPlayer2D" parent="BoostSpecialEffects"]
-stream = ExtResource("10_n47c6")
+stream = ExtResource("11_ut6yg")
 volume_db = -15.0
 pitch_scale = 0.75
 
@@ -167,6 +168,7 @@ afterimage_scene = ExtResource("5_hni55")
 script = ExtResource("6_g8flh")
 knight_resource = ExtResource("7_0jpgg")
 witch_resource = ExtResource("8_bowyj")
+rogue_resource = ExtResource("17_0jsqx")
 
 [node name="change_char_cd" type="Timer" parent="CharacterManager"]
 wait_time = 0.7

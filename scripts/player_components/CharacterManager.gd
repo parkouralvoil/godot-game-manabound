@@ -5,6 +5,7 @@ class_name CharacterManager
 
 @export var knight_resource: CharacterResource
 @export var witch_resource: CharacterResource
+@export var rogue_resource: CharacterResource
 
 @onready var p: Player = get_parent()
 @onready var t_change_char: Timer = $change_char_cd
@@ -26,8 +27,10 @@ func _ready() -> void:
 	assert(selected_char_resource[0], "Missing reference to knight.")
 	selected_char_resource[1] = witch_resource
 	assert(selected_char_resource[1], "Missing reference to witch.")
+	selected_char_resource[2] = rogue_resource
+	assert(selected_char_resource[1], "Missing reference to rogue.")
 	
-	for i in range(2):
+	for i in range(3):
 		stored_chars[i] = selected_char_resource[i].character_scene.instantiate()
 		add_child(stored_chars[i])
 		stored_chars[i].arm_sprite.hide()
@@ -49,12 +52,11 @@ func _process(_delta: float) -> void:
 	if can_change_char:
 		if Input.is_action_just_pressed("1") and current_char != stored_chars[0]:
 			change_character(0)
-			stored_chars[1].enabled = false
-			selected_char_resource[1].selected = false
 		elif Input.is_action_just_pressed("2") and current_char != stored_chars[1]:
 			change_character(1)
-			stored_chars[0].enabled = false
-			selected_char_resource[0].selected = false
+		elif Input.is_action_just_pressed("3") and current_char != stored_chars[2]:
+			change_character(2)
+
 
 func change_character(num: int) -> void:
 	if p.arm_sprite != null:
@@ -66,6 +68,8 @@ func change_character(num: int) -> void:
 	current_char_spriteframes = _char.spriteframes
 	current_char_fake_arm = _char.sprite_arm
 	current_char.global_position = self.global_position
+	PlayerInfo.melee_character = current_char.melee ## tells PlayerInfo if current char is a melee char
+	
 	_AM.enabled = true
 	_char.selected = true
 	
@@ -80,7 +84,11 @@ func change_character(num: int) -> void:
 	
 	t_change_char.start()
 	p.character_changed_anim()
-
+	
+	for i in range(selected_char_resource.size()):
+		if i != num and stored_chars[i] != null:
+			selected_char_resource[i].selected = false
+			stored_chars[i].enabled = false
 
 
 #region Transfer: AM > (CM) > Player

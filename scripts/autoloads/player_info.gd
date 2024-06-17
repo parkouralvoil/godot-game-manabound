@@ -41,7 +41,11 @@ var mana_orbs: int = 0
 
 # set by player
 var aim_direction: Vector2
-var mouse_direction: Vector2 
+var mouse_direction: Vector2
+
+# set by characters
+var melee_character: bool
+var melee_aim_lock: bool
 
 # set by player's AM, for UI
 var displayed_ammo: int

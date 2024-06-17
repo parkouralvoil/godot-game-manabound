@@ -3,7 +3,7 @@ class_name Main # handles loading levels, saving player, etc.
 
 const level_warehouse: PackedScene = preload("res://scenes/levels/blue_city/city_warehouse.tscn")
 const level_TEST: PackedScene = preload("res://scenes/levels/blue_city/city_TEST.tscn")
-var enemy_chance: float = 0.4 :
+var enemy_chance: float = 0 :
 	set(value):
 		enemy_chance = clampf(value, 0, 1)
 var enemy_chance_scaling: float = 0.1

@@ -81,3 +81,12 @@ func basic_atk() -> void:
 		t_recoil.wait_time = 0.15
 	else: # auto
 		t_recoil.wait_time = 0.2
+
+
+func update_arm() -> void:
+	pass#await get_tree().process_frame
+	#if PlayerInfo.aim_direction.x > 0:
+		#character.arm_sprite.rotation = PlayerInfo.aim_direction.angle() - PI/2
+	#else:
+		#character.arm_sprite.rotation = -PlayerInfo.aim_direction.angle() + PI/2
+	#print(character.arm_sprite.rotation)

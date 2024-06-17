@@ -1,0 +1,128 @@
+[gd_scene load_steps=12 format=3 uid="uid://dyb83ujyxhk2b"]
+
+[ext_resource type="Script" path="res://characters/CharacterClass.gd" id="1_h1y8r"]
+[ext_resource type="Script" path="res://characters/rogue/scripts/rogue_AbilityManager.gd" id="2_hppn7"]
+[ext_resource type="Texture2D" uid="uid://d0b5yrantkkqm" path="res://characters/rogue/rogue_arm.tres" id="3_p6yb1"]
+[ext_resource type="PackedScene" uid="uid://csxjnretvvtdj" path="res://scenes/skill_tree/stree_knight.tscn" id="3_pv2tv"]
+[ext_resource type="Script" path="res://characters/rogue/scripts/rogue_AttackComponent.gd" id="4_u8b7v"]
+[ext_resource type="PackedScene" uid="uid://c0167p4yyhyxe" path="res://projectiles/rogue_melee_combo/rogue_melee_hit_down.tscn" id="5_evn1p"]
+[ext_resource type="Texture2D" uid="uid://xm4il8dlpthl" path="res://assets/sprite_characters/rogue weapon.png" id="5_x463i"]
+[ext_resource type="PackedScene" uid="uid://c25whdi1vpp8c" path="res://projectiles/rogue_melee_combo/rogue_melee_hit_up.tscn" id="6_xajw6"]
+
+[sub_resource type="Animation" id="Animation_7xdh8"]
+resource_name = "downward_swing"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("melee_arm:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [90.0, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("melee_arm/melee_wpn:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.785398, 2.35619]
+}
+
+[sub_resource type="Animation" id="Animation_a55dm"]
+resource_name = "upward_swinga"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("melee_arm:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.349066, -3.66519]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("melee_arm/melee_wpn:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [2.87979, 2.35619]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_t1hal"]
+_data = {
+"downward_swing": SubResource("Animation_7xdh8"),
+"upward_swinga": SubResource("Animation_a55dm")
+}
+
+[node name="character_rogue" type="Node2D"]
+script = ExtResource("1_h1y8r")
+charge_type = 1
+melee = true
+max_health = 5.0
+max_ammo = 3
+fire_rate = 40.0
+
+[node name="AbilityManager" type="Node2D" parent="."]
+script = ExtResource("2_hppn7")
+
+[node name="SkillTree" parent="AbilityManager" instance=ExtResource("3_pv2tv")]
+
+[node name="BasicAttack" type="Node2D" parent="AbilityManager"]
+script = ExtResource("4_u8b7v")
+RogueMeleeHitDown = ExtResource("5_evn1p")
+RogueMeleeHitUp = ExtResource("6_xajw6")
+
+[node name="firerate" type="Timer" parent="AbilityManager/BasicAttack"]
+wait_time = 0.25
+one_shot = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="AbilityManager/BasicAttack"]
+libraries = {
+"": SubResource("AnimationLibrary_t1hal")
+}
+
+[node name="melee_arm" type="Sprite2D" parent="AbilityManager/BasicAttack"]
+z_index = 2
+position = Vector2(-5, 2)
+rotation = -3.66519
+texture = ExtResource("3_p6yb1")
+offset = Vector2(5, -2)
+
+[node name="melee_wpn" type="Sprite2D" parent="AbilityManager/BasicAttack/melee_arm"]
+z_index = -1
+position = Vector2(1.4, 4)
+rotation = 2.35619
+texture = ExtResource("5_x463i")
+offset = Vector2(8.82934, -8.08328)
+
+[node name="Ultimate" type="Node2D" parent="AbilityManager"]
+
+[node name="Ammo" type="Node2D" parent="AbilityManager"]
+
+[node name="Sprite2D_arm" type="Sprite2D" parent="."]
+visible = false
+z_index = 2
+position = Vector2(-5, 2)
+texture = ExtResource("3_p6yb1")
+offset = Vector2(5, -2)
+
+[node name="Sprite2D_wpn" type="Sprite2D" parent="Sprite2D_arm"]
+z_index = -1
+position = Vector2(1, 16)
+rotation = 2.35619
+texture = ExtResource("5_x463i")

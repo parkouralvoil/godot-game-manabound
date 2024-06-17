@@ -19,7 +19,7 @@ func player_hit() -> void:
 	iframes = max_iframes
 	t_iframe.start()
 	p.anim_sprite.modulate = red_hit
-	SoundPlayer.play_sound(sfx_hit, -10, 1.1)
+	SoundPlayer.play_sound(sfx_hit, -18, 1.1)
 	
 	hit_particles.restart()
 
