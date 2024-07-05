@@ -3,28 +3,23 @@ class_name Witch_UltimateComponent
 
 @export var FrostNovaScene: PackedScene
 @export var sfx_FrostNova: AudioStream
-# this should have 2 charges
-# by default, it only has 1 charge, strong single target bullet (like ac6 linear rifle), no piercing
-# with upgrades:
-# 2nd charge: piercing bullet, disappears on wall collision
-# we can just have the explosion impact be "shockwave dealing minor dmg and additional lightning elem proc"
 
 @onready var character: Character = owner
+@onready var PlayerInfo: PlayerInfoResource
 @onready var AM: Witch_AbilityManager = get_parent()
 
 func _process(delta: float) -> void:
 	raise_charge(delta)
 	
-	if !character.enabled:
+	if not character.enabled:
 		return
 	
-	PlayerInfo.current_charge_type = PlayerInfo.ChargeTypes.PASSIVE
-	
-	if character.charge >= character.max_charge:
+	if character.stats.charge >= character.stats.MAX_CHARGE:
+		PlayerInfo.ult_recoil = true
 		if PlayerInfo.input_ult:
 			character.sprite_look_at(PlayerInfo.mouse_direction)
 			character.wpn_sprite.modulate = Color(0.5, 2, 2)
-		elif Input.is_action_just_released("right_click"): # this the best way
+		if Input.is_action_just_released("right_click"): # this the best way
 			spend_charge()
 			character.wpn_sprite.modulate = Color(1, 1, 1)
 
@@ -43,8 +38,9 @@ func spawn_area_effect(area_effect: PackedScene, target_pos: Vector2) -> void:
 	get_tree().root.add_child(effect_instance)
 
 func raise_charge(delta: float) -> void:
-	character.charge = min(character.max_charge, character.charge + character.charge_rate * delta)
+	character.stats.charge = min(character.stats.MAX_CHARGE, 
+		character.stats.charge + character.stats.CHR * delta)
 
 func spend_charge() -> void:
 	spawn_area_effect(FrostNovaScene, get_global_mouse_position())
-	character.charge = 0
+	character.stats.charge = 0

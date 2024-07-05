@@ -1,7 +1,8 @@
-[gd_scene load_steps=16 format=3 uid="uid://despujxox3cs7"]
+[gd_scene load_steps=17 format=3 uid="uid://despujxox3cs7"]
 
 [ext_resource type="Script" path="res://characters/CharacterClass.gd" id="1_2hkjo"]
 [ext_resource type="Script" path="res://characters/knight/scripts/knight_AbilityManager.gd" id="2_e4ef6"]
+[ext_resource type="Resource" uid="uid://fbbdhnnk7q74" path="res://characters/knight/knight_stats.tres" id="2_vf3hs"]
 [ext_resource type="PackedScene" uid="uid://csxjnretvvtdj" path="res://scenes/skill_tree/stree_knight.tscn" id="3_bfk4m"]
 [ext_resource type="Script" path="res://characters/knight/scripts/knight_AttackComponent.gd" id="4_k4d5v"]
 [ext_resource type="PackedScene" uid="uid://b53veg8003vdg" path="res://projectiles/lightning_projectiles/homing_missile/homing_missile.tscn" id="5_1iwx0"]
@@ -21,8 +22,7 @@ region = Rect2(96, 96, 32, 32)
 
 [node name="character_knight" type="Node2D"]
 script = ExtResource("1_2hkjo")
-max_health = 5.0
-fire_rate = 8.0
+stats = ExtResource("2_vf3hs")
 
 [node name="AbilityManager" type="Node2D" parent="."]
 script = ExtResource("2_e4ef6")

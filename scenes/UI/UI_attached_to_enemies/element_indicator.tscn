@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://c1mef3esxg5jh"]
+[gd_scene load_steps=7 format=3 uid="uid://c1mef3esxg5jh"]
 
 [ext_resource type="Texture2D" uid="uid://dxxhf06kwwpun" path="res://resources/element_icons/ice.tres" id="2_liv4n"]
 [ext_resource type="Script" path="res://scenes/UI/UI_attached_to_enemies/element_indicator.gd" id="2_u754f"]
+[ext_resource type="Texture2D" uid="uid://dp2qighty5pbj" path="res://resources/element_icons/fire.tres" id="3_2ceik"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_4u5pq"]
 load_path = "res://.godot/imported/elementsymbols.png-0cf4b22d43d9f6ad14dc409849a81643.ctex"
@@ -24,3 +25,4 @@ texture = SubResource("AtlasTexture_lns7x")
 script = ExtResource("2_u754f")
 lightning = SubResource("AtlasTexture_vhhfx")
 ice = ExtResource("2_liv4n")
+fire = ExtResource("3_2ceik")

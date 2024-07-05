@@ -31,6 +31,7 @@ var reload_time: float = default_reload_time :
 
 
 var default_color: Color
+var spawned_runtime: bool = false ## for spawned enemies like Small Drone
 
 
 func _ready() -> void:
@@ -41,11 +42,11 @@ func _ready() -> void:
 	assert(enemy_dead_texture, "missing ref")
 	EnemyAiManager.enemies_alive += 1
 	
-	# to give leeway for char when they first enter
-	process_mode = Node.PROCESS_MODE_DISABLED
-	await get_tree().create_timer(0.5).timeout
-	process_mode = Node.PROCESS_MODE_INHERIT
 	default_color = sprite_main.modulate
+	if not spawned_runtime:
+		process_mode = Node.PROCESS_MODE_DISABLED
+		await get_tree().create_timer(0.5).timeout
+		process_mode = Node.PROCESS_MODE_INHERIT
 
 
 func take_damage(damage: float, element: CombatManager.Elements) -> void:
@@ -62,6 +63,7 @@ func make_impact() -> void:
 	var imp_instance: BulletImpact = bullet_impact_scene.instantiate()
 	imp_instance.global_position = global_position
 	imp_instance.texture = enemy_dead_texture
-	imp_instance.decay_rate = 3
+	imp_instance.transparency = 0.5
+	imp_instance.decay_rate = 5
 	imp_instance.scale = impact_scale
 	get_tree().root.call_deferred("add_child",imp_instance)

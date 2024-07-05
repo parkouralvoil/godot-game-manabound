@@ -7,21 +7,24 @@ class_name Knight_UltimateComponent
 @export var sfx_grand_ballista: AudioStream
 
 @onready var character: Character = owner
+@onready var PlayerInfo: PlayerInfoResource ## given by AM
 @onready var AM: Knight_AbilityManager = get_parent()
 
 var charge_tier: int = 0
 
+func _ready() -> void:
+	pass
+
 func _process(delta: float) -> void:
 	if !character.enabled:
-		character.charge = 0
+		character.stats.charge = 0
 		return
 	
-	PlayerInfo.current_charge_type = PlayerInfo.ChargeTypes.BURST
-	
 	if PlayerInfo.input_ult:
+		PlayerInfo.ult_recoil = true
 		raise_charge(delta)
 		character.sprite_look_at(PlayerInfo.mouse_direction)
-	elif character.charge != 0:
+	elif character.stats.charge != 0:
 		spend_charge()
 		character.wpn_sprite.modulate = Color(1, 1, 1)
 
@@ -62,13 +65,13 @@ func shoot_extra(bullet: PackedScene, direction: Vector2) -> void:
 	get_tree().root.add_child(bul_instance)
 
 func raise_charge(delta: float) -> void:
-	character.charge = min(character.max_charge, 
-		character.charge + character.charge_rate * delta)
+	character.stats.charge = min(character.stats.MAX_CHARGE, 
+		character.stats.charge + character.stats.CHR * delta)
 	
-	if character.charge >= 100:
+	if character.stats.charge >= 100:
 		charge_tier = 2
 		character.wpn_sprite.modulate = Color(4, 1, 0.4)
-	elif character.charge >= 50:
+	elif character.stats.charge >= 50:
 		charge_tier = 1
 		character.wpn_sprite.modulate = Color(2, 2, 0.4)
 	else:
@@ -96,7 +99,7 @@ func spend_charge() -> void:
 			shoot_extra(LightningBoltScene, PlayerInfo.mouse_direction.rotated(_angle))
 			if AM.skill_ult_missile:
 				shoot_missile(6)
-	character.charge = 0
+	character.stats.charge = 0
 	charge_tier = 0
 
 func shoot_missile(num_of_missiles: int) -> void:

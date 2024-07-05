@@ -128,8 +128,10 @@ func instantiate_enemy(info: SpawnInfo) -> BaseEnemy:
 	return inst
 
 
-func enemy_dead() -> void:
+func enemy_dead(type: BaseEnemy) -> void:
 	EnemyAiManager.enemies_alive -= 1
+	if type is Enemy_SmallDrone:
+		EnemyAiManager.small_drones -= 1
 	if EnemyAiManager.enemies_alive <= 0:
 		var lvl: LevelManager = owner
 		lvl.level_is_cleared()

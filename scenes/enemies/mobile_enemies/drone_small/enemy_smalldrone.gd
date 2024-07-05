@@ -1,4 +1,5 @@
 extends BaseEnemy
+class_name Enemy_SmallDrone    
 
 @onready var nav_agent: NavigationAgent2D = $NavigationAgent2D
 @onready var player_raycast: RayCast2D = $Raycast_toPlayer
@@ -14,15 +15,9 @@ var engage_speed: float = 0
 var speed: float = max_speed
 
 
+
 func _ready() -> void:
-	assert(health_component, "missing")
-	health = max_health
-	reload_time = default_reload_time
-	assert(bullet_impact_scene, "missing ref")
-	assert(enemy_dead_texture, "missing ref")
-	EnemyAiManager.enemies_alive += 1
-	
-	default_color = sprite_main.modulate
+	super()
 	
 	nav_agent.max_speed = max_speed
 
@@ -56,6 +51,7 @@ func _physics_process(delta: float) -> void:
 func _on_updatePath_timeout() -> void:
 	nav_agent.target_position = EnemyAiManager.player_position
 
+
 func behavior_pattern(input_delta: float) -> void:
 	if target_pos.length() <= 140 and !player_raycast.is_colliding() and !can_fire:
 		can_fire = true
@@ -68,6 +64,7 @@ func behavior_pattern(input_delta: float) -> void:
 	else:
 		speed = min(speed + 50 * input_delta, max_speed)
 		sprite_main.rotation = aim_direction.angle() - PI/2
+
 
 func _on_navigation_agent_2d_velocity_computed(safe_velocity: Vector2) -> void:
 	if speed == 0 and can_fire:

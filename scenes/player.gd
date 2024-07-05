@@ -1,6 +1,8 @@
 extends CharacterBody2D
 class_name Player
 
+var PlayerInfo: PlayerInfoResource = preload("res://resources/data/player_info.tres")
+
 #onready var
 @onready var anim_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var arm_node: RemoteTransform2D = $AnimatedSprite2D/RemoteTransform2D
@@ -15,28 +17,22 @@ var wpn_sprite: Sprite2D
 @onready var hurtbox: Area2D = $AreaComponents/Hurtbox
 @onready var boost_particles: Array[GPUParticles2D] = []
 @onready var boost_sfx: AudioStreamPlayer2D = $BoostSpecialEffects/boost_sfx
+@onready var buff_particles: GPUParticles2D = $BuffParticles
 
 #UI stuff (connect these in the holder scene)
 @export var blood_overlay: TextureRect
 
 @onready var char_manager: CharacterManager = $CharacterManager
 
-# input variables
-var x_movement: float = 0
-var y_movement: float = 0
 
 # movement variables
 var default_gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity")
 var gravity: float = default_gravity
 
 
-#logic
-var airboost_ready: bool = false # ready's when jump release
-var airboost_input: bool = false
-
-var aim_direction: Vector2 = Vector2.ZERO #radians
+#var aim_direction: Vector2 = Vector2.ZERO # NOW STORED IN PlayerInfo, since other peeps need it
 var move_direction: Vector2 = Vector2.ZERO #radians
-var mouse_direction: Vector2 = Vector2.ZERO
+#var mouse_direction: Vector2 = Vector2.ZERO
 var dist_to_mouse: Vector2 = Vector2.ZERO
 
 #target lock stuff
@@ -54,30 +50,39 @@ func _ready() -> void:
 		if i is GPUParticles2D:
 			boost_particles.append(i)
 			boost_node_size += 1
+	
+	PlayerInfo.changed_buff_raw_atk.connect(on_buff_particles)
 
 func _process(_delta: float) -> void:
-	EnemyAiManager.player_position = global_position # this seems too slow?
+	EnemyAiManager.player_position = global_position ## this seems too slow?
 	dist_to_mouse = get_global_mouse_position() - self.global_position
-	# for airboost
-	mouse_direction = Vector2.ZERO.direction_to(dist_to_mouse).normalized()
+	## for airboost
+	PlayerInfo.mouse_direction = Vector2.ZERO.direction_to(dist_to_mouse).normalized()
 	
-	# for slow hover
-	move_direction = mouse_direction if dist_to_mouse.length() < 40 else Vector2.ZERO
+	## for slow hover
+	move_direction = PlayerInfo.mouse_direction if dist_to_mouse.length() < 40 else Vector2.ZERO
 	
 	if auto_aim and selected_target != null and PlayerInfo.current_state != PlayerInfo.States.STANCE:
-		aim_direction = Vector2.ZERO.direction_to(selected_target.global_position - self.global_position).normalized()
+		PlayerInfo.aim_direction = Vector2.ZERO.direction_to(selected_target.global_position - self.global_position).normalized()
 	else:
-		aim_direction = mouse_direction
+		PlayerInfo.aim_direction = PlayerInfo.mouse_direction
 	
-	#print(str(get_viewport_rect().size) )
-	update_player_info()
+	## can_charge setter
+	match PlayerInfo.current_charge_type:
+		PlayerInfoResource.ChargeTypes.BURST:
+			PlayerInfo.can_charge = true
+		_:
+			if PlayerInfo.displayed_charge < PlayerInfo.displayed_MAX_CHARGE:
+				PlayerInfo.can_charge = false
+			else:
+				PlayerInfo.can_charge = true
 	
-	#arm rotation
+	## arm rotation
 	if arm_sprite != null:
-		if aim_direction.x > 0:
-			arm_node.rotation = aim_direction.angle() - PI/2
+		if PlayerInfo.aim_direction.x > 0:
+			arm_node.rotation = PlayerInfo.aim_direction.angle() - PI/2
 		else:
-			arm_node.rotation = -(aim_direction.angle() - (PI/2))
+			arm_node.rotation = -(PlayerInfo.aim_direction.angle() - (PI/2))
 		
 	if anim_sprite.animation == "fall" or anim_sprite.animation == "air" or (PlayerInfo.melee_character and PlayerInfo.basic_attacking):
 		arm_sprite.hide()
@@ -95,6 +100,8 @@ func _process(_delta: float) -> void:
 	
 	if Input.is_action_just_pressed("tab"):
 		auto_aim = !auto_aim
+
+
 # cuz each character have their healths in AM
 func take_damage(damage: float) -> void:
 	char_manager.take_damage(damage)
@@ -114,11 +121,23 @@ func emit_boost_effects(boost_dir: Vector2) -> void:
 func camera_shake(strength: int) -> void:
 	EventBus.camera_shake.emit(strength)
 
-func update_player_info() -> void:
-	PlayerInfo.aim_direction = aim_direction
-	PlayerInfo.mouse_direction = mouse_direction
+#func update_player_info() -> void: ## can streamline this
+	#PlayerInfo.aim_direction = aim_direction
+	#PlayerInfo.mouse_direction = mouse_direction
 
 func character_changed_anim() -> void:
 	if anim_sprite:
 		var tween: Tween = create_tween()
 		tween.tween_property(anim_sprite, "modulate", Color(1,1,1,1), 0.4).from(Color(0.4,0.4,1, 0.6))
+
+
+func on_buff_particles() -> void:
+	if PlayerInfo.buff_raw_atk > 0:
+		buff_particles.emitting = true
+	else:
+		buff_particles.emitting = false
+
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("cheat_menu"):
+			PlayerInfo.mana_orbs += 10000

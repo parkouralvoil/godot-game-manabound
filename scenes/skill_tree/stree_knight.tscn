@@ -75,8 +75,8 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 
-[node name="Panel" type="Panel" parent="Control"]
-modulate = Color(0.219608, 0.156863, 0.137255, 1)
+[node name="ColorRect" type="ColorRect" parent="Control"]
+z_index = -1
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -84,6 +84,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
+color = Color(0, 0.00392157, 0.0666667, 1)
 
 [node name="ExitButton" type="Button" parent="Control"]
 layout_mode = 1
@@ -99,9 +100,9 @@ metadata/_edit_use_anchors_ = true
 [node name="Root" parent="Control" instance=ExtResource("2_lkft4")]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.642
+anchor_left = 0.690437
 anchor_top = 0.165306
-anchor_right = 0.722
+anchor_right = 0.770438
 anchor_bottom = 0.246939
 offset_left = -10.88
 offset_top = -19.3469
@@ -183,6 +184,7 @@ offset_right = 90.0
 offset_bottom = 115.0
 texture_normal = SubResource("AtlasTexture_u4vf3")
 default_cost = 200
+max_level = 1
 skill_name = "Piercing Bolt"
 skill_desc = "Adds a 2nd charge tier with increased projectile size and  piercing.
 
@@ -213,7 +215,13 @@ skill_desc = "Charge rate increased.
 
 Each level further increases charge rate."
 
-[node name="Skill_Info" parent="Control" instance=ExtResource("4_e6dxy")]
-layout_mode = 1
+[node name="Skill_Info" parent="." instance=ExtResource("4_e6dxy")]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -392.0
+offset_right = 267.0
+offset_bottom = 0.0
+grow_vertical = 0
 
 [connection signal="button_down" from="Control/ExitButton" to="." method="_on_exit_button_button_down"]

@@ -13,12 +13,13 @@ var size: float = 1
 
 var damage: float = 10
 var debuff: CombatManager.Debuffs = CombatManager.Debuffs.NONE
-var _time: float = 0 ## FOR TESTING
 @onready var rng := RandomNumberGenerator.new()
+
 
 func _ready() -> void:
 	assert(bullet_impact, "missing")
 	EventBus.clear_abilities.connect(queue_free)
+
 
 func _physics_process(_delta: float) -> void:
 	#_time += _delta
@@ -26,8 +27,10 @@ func _physics_process(_delta: float) -> void:
 		#print("Time ended: %f" % _time)
 		queue_free()
 
+
 func _on_spawn_cd_timeout() -> void:
 	spawn_impact(global_position + Vector2(rng.randf_range(-radius, radius), rng.randf_range(-radius, radius) ) )
+
 
 func spawn_impact(pos: Vector2) -> void:
 	var instance: DamageImpact = bullet_impact.instantiate()

@@ -1,11 +1,11 @@
 [gd_scene load_steps=6 format=3 uid="uid://bw8ro1y5k2f67"]
 
-[ext_resource type="Script" path="res://projectiles/Bullet.gd" id="1_soaco"]
-[ext_resource type="PackedScene" uid="uid://ccfj5qan8stdb" path="res://projectiles/bullet_impact.tscn" id="2_br1dk"]
-[ext_resource type="Texture2D" uid="uid://brgsvft0urgcs" path="res://assets/sprite_projectiles/bullet_pixel_Red.png" id="3_ev7uy"]
+[ext_resource type="Script" path="res://projectiles/Bullet.gd" id="1_k2iap"]
+[ext_resource type="PackedScene" uid="uid://ccfj5qan8stdb" path="res://projectiles/bullet_impact.tscn" id="2_sbwwu"]
+[ext_resource type="Texture2D" uid="uid://brgsvft0urgcs" path="res://assets/sprite_projectiles/bullet_pixel_Red.png" id="3_gaawc"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ggs10"]
-atlas = ExtResource("3_ev7uy")
+atlas = ExtResource("3_gaawc")
 region = Rect2(181, 85, 7, 7)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5d8ra"]
@@ -13,8 +13,8 @@ radius = 3.0
 
 [node name="Bullet" type="Area2D"]
 collision_layer = 0
-script = ExtResource("1_soaco")
-bullet_impact = ExtResource("2_br1dk")
+script = ExtResource("1_k2iap")
+bullet_impact = ExtResource("2_sbwwu")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(1.3, 1.3, 1.3, 1)

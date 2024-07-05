@@ -2,89 +2,85 @@ extends Node2D
 class_name Witch_AbilityManager
 
 @onready var character: Character = owner
+@onready var PlayerInfo: PlayerInfoResource = character.PlayerInfo
 @onready var skill_tree: SkillTree = $SkillTree
+@onready var stats: CharacterStats = character.stats
+
+## components
+@onready var BasicAttack: Witch_AttackComponent = $BasicAttack
+@onready var Ultimate: Witch_UltimateComponent = $Ultimate
 @onready var Ammo: Witch_AmmoComponent = $Ammo
 
-@export_category("basic atk: Base")
+## Basic atk properties
 var bullet_speed: float = 375
 var max_distance: float = 260
-var base_percent_frost_spear: float = 80
-var base_percent_1st_icicle: float = 30
-var base_percent_2nd_icicle: float = 20
+var base_percent_frost_spear: float = 1
+var base_percent_1st_icicle: float = 0.5
+var base_percent_2nd_icicle: float = 0.25
 
-@export_category("basic atk: Scale") # ALL SCALES EVERYWHERE ARE PERCENTAGES 
-var scale_percent_1st_icicle: float = 15
-var scale_percent_2nd_icicle: float = 10
+var scale_percent_1st_icicle: float = 0.3
+var scale_percent_2nd_icicle: float = 0.15
 
-@export_category("ult: Base")
-var base_ult_percent: float = 70
+## Ult properties
+var base_ult_percent: float = 0.7
 var base_ult_explosions: int = 15
 var base_ult_size: float = 1
 
-@export_category("ult: Scaling")
 var scale_ult_explosions: int = 3
 var scale_ult_size: float = 25 # adds to scale
 
-@export_category("Stats")
-# each char only has a specific upgrade for one stat, to ease building
-var base_stat: float = 1
-var scale_stat: float = 0.1 # PERCENTAGE
-var base_charge_rate: float = 100 # for witch, her charge rate remains da same
+## Stats scaling
+@onready var base_reload_time: float = stats.reload_time
+var scale_reload_time: float = 0.1 ## subtracts from base reload time, to speed it up
+@onready var base_charge_rate: float = stats.CHR # for witch, her charge rate remains da same
 
+## Final Computations
 var explosion_num: int = base_ult_explosions
 var explosion_scale: float = base_ult_size
 
-var frost_spike_dmg: float = 0
-var first_icicle_dmg: float = 0
-var second_icicle_dmg: float = 0
+var frost_spike_dmg: float
+var first_icicle_dmg: float
+var second_icicle_dmg: float
 
-var frost_storm_dmg: float = 0
+var frost_storm_dmg: float
 
-var level_basicAtk_firerate: int = 0:
+@onready var level_basicAtk_firerate: int = 0:
 	set(lvl):
 		level_basicAtk_firerate = lvl
-		Ammo.t_ammo_regen.wait_time = base_stat - (
-				base_stat * scale_stat * lvl)
+		Ammo.t_ammo_regen.wait_time = base_reload_time - (
+			base_reload_time * scale_reload_time * lvl)
 
-var level_basicAtk_second_icicle: int = 0:
+@onready var level_basicAtk_second_icicle: int = 0:
 	set(lvl):
 		level_basicAtk_second_icicle = lvl
-		first_icicle_dmg = character.atk * (base_percent_1st_icicle + 
-				scale_percent_1st_icicle * lvl )/100.0
-		second_icicle_dmg = character.atk * (base_percent_2nd_icicle + 
-				scale_percent_2nd_icicle * lvl )/100.0
+		update_damage()
 
-var level_ult_explosions: int = 0:
+@onready var level_ult_explosions: int = 0:
 	set(lvl):
 		level_ult_explosions = lvl
 		explosion_num = base_ult_explosions + (
-				scale_ult_explosions * lvl)
+			scale_ult_explosions * lvl)
 
-var level_ult_size: int = 0:
+@onready var level_ult_size: int = 0:
 	set(lvl):
 		level_ult_size = lvl
 		explosion_scale = base_ult_size + (
-				scale_ult_size/100.0 * lvl)
+			scale_ult_size/100.0 * lvl)
 
 var skill_ult_crystalize: bool = false
 var skill_basicAtk_crystalize: bool = false
 
 
-func stats_update() -> void:
-	frost_spike_dmg = compute(base_percent_frost_spear, 
-			0,
-			0,)
-	first_icicle_dmg = compute(base_percent_1st_icicle, 
-			scale_percent_1st_icicle,
-			level_basicAtk_second_icicle,)
-	second_icicle_dmg = compute(base_percent_2nd_icicle, 
-			scale_percent_2nd_icicle,
-			level_basicAtk_second_icicle,)
-	frost_storm_dmg = compute(base_ult_percent,
-			0,
-			0)
+func _ready() -> void:
+	BasicAttack.PlayerInfo = character.PlayerInfo
+	Ultimate.PlayerInfo = character.PlayerInfo
+	Ammo.PlayerInfo = character.PlayerInfo
 	
-	character.charge_rate = base_charge_rate
+	PlayerInfo.changed_buff_raw_atk.connect(update_damage)
+	update_damage()
+
+
+func stats_update() -> void:
 	level_basicAtk_firerate = skill_tree.BasicAtk_array[1].level
 	level_basicAtk_second_icicle = skill_tree.BasicAtk_array[2].level
 	
@@ -96,68 +92,75 @@ func stats_update() -> void:
 	skill_basicAtk_crystalize = skill_tree.BasicAtk_array[3].level
 
 func desc_update() -> void:
-	var data := get_txt_info()
+	## description of char
+	skill_tree.root_node.skill_name = "Apprentice Witch"
+	skill_tree.root_node.skill_desc = """A witch from Mana Haven, trained in the magic of Frost Art. 
+\nFrost Art is a mystic art of mana imparted to the witches by the elves of the north. 
+\nElement: Ice"""
 	
-	# description of char
-	data.pop_front() # remove "witch"
-	skill_tree.root_node.skill_name = data.pop_front()
-	skill_tree.root_node.skill_desc = data.pop_front()
-	
-	# char's basic atk nodes
-	skill_tree.BasicAtk_array[0].skill_name = data.pop_front()
-	skill_tree.BasicAtk_array[0].skill_desc = data.pop_front() % (
-			[base_percent_frost_spear, base_percent_1st_icicle]
+	## char's basic atk nodes
+	skill_tree.BasicAtk_array[0].skill_name = "Apprentice's Icestaff"
+	skill_tree.BasicAtk_array[0].skill_desc = """Hold left click to fire ice spikes with %d%% base damage. 
+\nThese spikes explode into icicles that deal %d%% base damage. 
+\nAmmo takes longer to reload.""" % (
+			[base_percent_frost_spear * 100, base_percent_1st_icicle * 100]
 		)
 	
-	skill_tree.BasicAtk_array[1].skill_name = data.pop_front()
-	skill_tree.BasicAtk_array[1].skill_desc = data.pop_front() % (
-			[scale_stat * 100]
+	skill_tree.BasicAtk_array[1].skill_name = "Pre-drawn Frost Spikes"
+	skill_tree.BasicAtk_array[1].skill_desc = """Each level decreases reload time by %.2f seconds""" % (
+			[scale_reload_time]
 	)
 	
-	skill_tree.BasicAtk_array[2].skill_name = data.pop_front()
-	skill_tree.BasicAtk_array[2].skill_desc = data.pop_front() % (
-			[base_percent_2nd_icicle, scale_percent_1st_icicle, scale_percent_2nd_icicle]
+	skill_tree.BasicAtk_array[2].skill_name = "Greater Icicles"
+	skill_tree.BasicAtk_array[2].skill_desc = "Icicles now explode for a 2nd time, dealing %d%% damage.
+\nEach upgrade increases 1st icicle damage by %d%% and 2nd icicle damage by %d%%." % (
+			[base_percent_2nd_icicle * 100, scale_percent_1st_icicle * 100, scale_percent_2nd_icicle * 100]
 	)
 	
-	skill_tree.BasicAtk_array[3].skill_name = data.pop_front()
-	skill_tree.BasicAtk_array[3].skill_desc = data.pop_front() 
+	skill_tree.BasicAtk_array[3].skill_name = "Crystalized Spears"
+	skill_tree.BasicAtk_array[3].skill_desc = "Cystalization: detonates at 9 stacks or after 5 seconds. 
+\nEach stack deals 3 damage. 
+\nEvery 3 stacks increases crystalization damage by 20%"
 	
 	# char's ult nodes
-	skill_tree.Ult_array[0].skill_name = data.pop_front()
-	skill_tree.Ult_array[0].skill_desc = data.pop_front() % (
-			[base_ult_percent, base_charge_rate]
+	skill_tree.Ult_array[0].skill_name = "Frost Storm"
+	skill_tree.Ult_array[0].skill_desc = "Charge Type: Passive
+\nPassively accumulates charge. At 50 charge, press right click to cast a Frost Storm in the target position. 
+\nIce explosions from Frost Storm deals %d%% damage.
+\nHas a base charge rate of %d%%" % (
+			[base_ult_percent * 100, base_charge_rate]
 	)
 	
-	skill_tree.Ult_array[1].skill_name = data.pop_front()
-	skill_tree.Ult_array[1].skill_desc = data.pop_front() % (
+	skill_tree.Ult_array[1].skill_name = "Longer Duration"
+	skill_tree.Ult_array[1].skill_desc = "Each level increases number of ice explosions by %d" % (
 			[scale_ult_explosions]
 	)
 	
-	skill_tree.Ult_array[2].skill_name = data.pop_front()
-	skill_tree.Ult_array[2].skill_desc = data.pop_front() % (
+	skill_tree.Ult_array[2].skill_name = "Greater Frost Storm"
+	skill_tree.Ult_array[2].skill_desc = "Each level increases size of ice explosion by %d%%" % (
 			[scale_ult_size]
 	)
 	
-	skill_tree.Ult_array[3].skill_name = data.pop_front()
-	skill_tree.Ult_array[3].skill_desc = data.pop_front()
-
-
-func get_txt_info() -> Array:
-	var file := FileAccess.open("res://csv_files/blue_city_character_skill_info - skill description.csv"
-			, FileAccess.READ)
-	var data_set: Array = Array(file.get_csv_line())
-	
-	# seems kinda bad to rely on arbitrary index bounds
-	# better to reformat CSV so that it knows which array to put it in
-	while !file.eof_reached() and data_set[0] != "Witch":
-		data_set = Array(file.get_csv_line() ) # travels to next csv line
-	
-	#print(data_set)
-	file.close()
-	return data_set
-
+	skill_tree.Ult_array[3].skill_name = "Crystalized Storm"
+	skill_tree.Ult_array[3].skill_desc = "Ice explosions from Frost Storm now inflict a stack of crystalization.
+\nCystalization: detonates at 9 stacks or after 5 seconds. 
+\nEach stack deals 3 damage. 
+\nEvery 3 stacks increases crystalization damage by 20%"
+	## might wanna have this scale from EP
 
 func compute(base: float, scaling: float, lvl: int) -> float:
-	var raw_output: float = character.atk * (base + scaling * max(0, lvl - 1))
+	var raw_output: float = character.stats.ATK * (base + scaling * max(0, lvl - 1))
+	return raw_output
+
+func update_damage() -> void:
+	frost_spike_dmg = compute(base_percent_frost_spear, 
+			0, 0)
 	
-	return raw_output/100.0
+	first_icicle_dmg = compute(base_percent_1st_icicle, 
+			scale_percent_1st_icicle, level_basicAtk_second_icicle,)
+	
+	second_icicle_dmg = compute(base_percent_2nd_icicle, 
+			scale_percent_2nd_icicle, level_basicAtk_second_icicle,)
+	
+	frost_storm_dmg = compute(base_ult_percent,
+			0, 0)

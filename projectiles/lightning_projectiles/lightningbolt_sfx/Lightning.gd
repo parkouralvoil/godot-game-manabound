@@ -5,7 +5,7 @@ var goal_point : Vector2 = Vector2(100,100)
 var min_segment_size : float = 2
 var max_segment_size : float = 10
 var points : Array = []
-var emitting = true
+var emitting: bool = true
 var final_goal : Vector2
 
 @export var angle_var: float = 15
@@ -36,9 +36,9 @@ func update_points() -> void:
 	min_segment_size = max(Vector2().distance_to(final_goal)/40,1)
 	max_segment_size = min(Vector2().distance_to(final_goal)/20,10)
 	while(curr_line_len < Vector2().distance_to(final_goal)):
-		var move_vector = start_point.direction_to(final_goal) * randf_range(min_segment_size,max_segment_size)
-		var new_point = start_point + move_vector
-		var new_point_rotated = start_point + move_vector.rotated(deg_to_rad(randf_range(-angle_var,angle_var)))
+		var move_vector: Vector2 = start_point.direction_to(final_goal) * randf_range(min_segment_size,max_segment_size)
+		var new_point: Vector2 = start_point + move_vector
+		var new_point_rotated: Vector2 = start_point + move_vector.rotated(deg_to_rad(randf_range(-angle_var,angle_var)))
 		points.append(new_point_rotated)
 		start_point = new_point
 		curr_line_len = start_point.length()

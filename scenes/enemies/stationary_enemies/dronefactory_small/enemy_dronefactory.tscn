@@ -97,6 +97,7 @@ shape = SubResource("RectangleShape2D_gdgdi")
 debug_color = Color(0.694118, 0.47451, 0.4, 0.419608)
 
 [node name="HealthComponent" parent="." instance=ExtResource("8_kxp28")]
+explosion_volume = -20.0
 small_orbs = 0
 medium_orbs = 3
 

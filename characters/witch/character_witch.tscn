@@ -1,8 +1,9 @@
-[gd_scene load_steps=13 format=3 uid="uid://dkyhb7voldou1"]
+[gd_scene load_steps=14 format=3 uid="uid://dkyhb7voldou1"]
 
 [ext_resource type="Script" path="res://characters/CharacterClass.gd" id="1_j0poo"]
 [ext_resource type="PackedScene" uid="uid://ckfsbsh4qe3us" path="res://scenes/skill_tree/stree_witch.tscn" id="2_rrqxe"]
 [ext_resource type="Script" path="res://characters/witch/scripts/witch_AbilityManager.gd" id="2_xnkl8"]
+[ext_resource type="Resource" uid="uid://do0figvykvlcp" path="res://characters/witch/witch_stats.tres" id="2_ygtrj"]
 [ext_resource type="Script" path="res://characters/witch/scripts/witch_AttackComponent.gd" id="3_b0vy3"]
 [ext_resource type="PackedScene" uid="uid://b8740u5oqxn7d" path="res://projectiles/ice_projectiles/ice_spike/ice_spike.tscn" id="5_of8tm"]
 [ext_resource type="Script" path="res://characters/witch/scripts/witch_UltimateComponent.gd" id="5_wu24y"]
@@ -15,10 +16,8 @@
 
 [node name="character_Witch" type="Node2D"]
 script = ExtResource("1_j0poo")
+stats = ExtResource("2_ygtrj")
 charge_type = 2
-max_health = 3.0
-max_ammo = 5
-fire_rate = 3.0
 
 [node name="AbilityManager" type="Node2D" parent="."]
 script = ExtResource("2_xnkl8")

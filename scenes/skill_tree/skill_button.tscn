@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://c70mm6f8inx8d"]
+[gd_scene load_steps=6 format=3 uid="uid://c70mm6f8inx8d"]
 
 [ext_resource type="Texture2D" uid="uid://h46xv64l4n2u" path="res://assets/sprite_UI/AbilityIcons0.png" id="1_hms1h"]
 [ext_resource type="Script" path="res://scenes/skill_tree/skill_button.gd" id="2_3vrfc"]
 [ext_resource type="LabelSettings" uid="uid://buthhqor0rds0" path="res://resources/font_settings/font_system_desc.tres" id="3_34ajg"]
+[ext_resource type="Resource" uid="uid://6renh852kiei" path="res://resources/data/player_info.tres" id="3_165fl"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_y0w4i"]
 atlas = ExtResource("1_hms1h")
@@ -16,6 +17,7 @@ toggle_mode = true
 texture_normal = SubResource("AtlasTexture_y0w4i")
 stretch_mode = 4
 script = ExtResource("2_3vrfc")
+PlayerInfo = ExtResource("3_165fl")
 
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 1

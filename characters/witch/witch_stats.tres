@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="CharacterStats" load_steps=2 format=3 uid="uid://do0figvykvlcp"]
+
+[ext_resource type="Script" path="res://resources/data/character_stats.gd" id="1_yfq21"]
+
+[resource]
+script = ExtResource("1_yfq21")
+MAX_HP = 3
+ATK = 8.0
+EP = 10.0
+CHR = 4.0
+charge_tier = 0
+MAX_AMMO = 5
+reload_time = 1.0
+SPD = 400.0
+firerate = 3.0

@@ -13,6 +13,8 @@ var enemies_alive: int
 signal call_attract_orbs
 var v: int = 10
 
+var small_drones: int = 0
+var max_drones: int = 20
 
 func spawn_orbs(pos: Vector2, small: int, med: int) -> void:
 	var orb: ManaOrb

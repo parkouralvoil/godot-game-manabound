@@ -1,13 +1,12 @@
 extends Label
 
-@export var entity: CharacterBody2D
+@export var p: Player
 
 var format_string: String = "HP: %s/%s"
 var actual_string: String = "aaa"
 
 func _process(_delta: float) -> void:
-	if entity is Player:
-		actual_string = format_string % [str(PlayerInfo.displayed_health), str(PlayerInfo.displayed_max_health)]
-	else:
-		actual_string = format_string % [str(entity.health), str(entity.max_health)]
+	if p:
+		actual_string = format_string % [str(p.PlayerInfo.displayed_HP), 
+			str(p.PlayerInfo.displayed_MAX_HP)]
 	text = actual_string

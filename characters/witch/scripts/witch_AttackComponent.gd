@@ -5,6 +5,7 @@ class_name Witch_AttackComponent
 @export var sfx_IceCast: AudioStream
 
 @onready var character: Character = owner
+@onready var PlayerInfo: PlayerInfoResource
 @onready var AM: Witch_AbilityManager = get_parent()
 
 @onready var t_firerate: Timer = $firerate
@@ -16,7 +17,7 @@ var element: CombatManager.Elements = CombatManager.Elements.ICE
 var can_shoot: bool = true
 
 func _process(_delta: float) -> void:
-	can_shoot = PlayerInfo.current_state != PlayerInfo.States.STANCE
+	can_shoot = PlayerInfo.current_state != PlayerInfoResource.States.STANCE
 	
 	if !character.enabled:
 		return
@@ -27,7 +28,7 @@ func _process(_delta: float) -> void:
 	elif t_recoil.is_stopped() or !can_shoot:
 		PlayerInfo.basic_attacking = false
 	
-	if PlayerInfo.input_attack and character.ammo > 0 and can_shoot:
+	if PlayerInfo.input_attack and character.stats.ammo > 0 and can_shoot:
 		if t_firerate.is_stopped():
 			basic_atk()
 			t_firerate.start()
@@ -65,9 +66,9 @@ func shoot(bullet: PackedScene) -> void:
 func basic_atk() -> void:
 	shoot(IceSpikeScene)
 	character.apply_player_cam_shake(1)
-	character.ammo -= 1
+	character.stats.ammo -= 1
 	
-	t_firerate.wait_time = 1 / character.fire_rate
+	t_firerate.wait_time = 1 / character.stats.firerate
 	if t_firerate.wait_time > 0.2: # semi
 		t_recoil.wait_time = 0.15
 	else: # auto

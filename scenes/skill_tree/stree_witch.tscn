@@ -176,9 +176,6 @@ offset_bottom = 113.0
 texture_normal = SubResource("AtlasTexture_u4vf3")
 default_cost = 250
 skill_name = "Piercing Bolt"
-skill_desc = "Adds a 2nd charge tier with increased projectile size and  piercing.
-
-Each level  increases damage of 2nd charge shot by 10."
 
 [node name="Ult_2" parent="Control/Root/Ult_root/Ult_1" groups=["skillnode_Ult"] instance=ExtResource("2_8m8yx")]
 layout_mode = 0
@@ -205,7 +202,13 @@ skill_desc = "Charge rate increased.
 
 Each level further increases charge rate."
 
-[node name="Skill_Info" parent="Control" instance=ExtResource("3_klpk0")]
-layout_mode = 1
+[node name="Skill_Info" parent="." instance=ExtResource("3_klpk0")]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -392.0
+offset_right = 267.0
+offset_bottom = 0.0
+grow_vertical = 0
 
 [connection signal="button_down" from="Control/ExitButton" to="." method="_on_exit_button_button_down"]

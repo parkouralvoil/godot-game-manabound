@@ -1,19 +1,17 @@
 extends TextureButton
 class_name SkillNode 
 
+@export var PlayerInfo: PlayerInfoResource
+
 @onready var panel: Panel = $Panel
 @onready var VBox: VBoxContainer = $VBox
-
 @onready var label_lvl: Label = $VBox/Label_lvl
 @onready var label_cost: Label = $VBox/Label_cost
-
 @onready var line_2D: Line2D = $Line2D
 
 @export var root: bool = false
-
 @export var default_cost: int = 100
 @onready var cost: int = default_cost
-
 @export var max_level: int = 3
 
 @export var skill_name: String

@@ -1,4 +1,4 @@
-extends Control
+extends VBoxContainer
 
 @export var p: Player
 
@@ -14,7 +14,7 @@ var char_manager: CharacterManager = null
 func _ready() -> void:
 	assert(p, "missing player")
 	char_manager = p.char_manager
-	for i in range(3):
+	for i in range(char_manager.selected_char_resource.size()):
 		var character := char_manager.selected_char_resource[i]
 		var AM := char_manager.stored_chars[i]
 		char_box[i].initialize_info(character, AM, i + 1)

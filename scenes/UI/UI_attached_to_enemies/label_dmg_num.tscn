@@ -6,8 +6,11 @@
 [node name="Label_dmg_num" type="Label"]
 z_index = 5
 texture_filter = 1
-offset_right = 40.0
-offset_bottom = 45.0
-text = "999"
+offset_right = 17.0
+offset_bottom = 20.0
+pivot_offset = Vector2(8, 8)
+size_flags_horizontal = 4
+text = "OVERLOAD"
 label_settings = ExtResource("1_jnvxb")
+horizontal_alignment = 1
 script = ExtResource("2_qm8cn")

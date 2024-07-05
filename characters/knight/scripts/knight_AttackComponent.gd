@@ -6,6 +6,7 @@ class_name Knight_AttackComponent
 var burst_counter: int = 0
 
 @onready var character: Character = owner
+@onready var PlayerInfo: PlayerInfoResource ## given by AM
 @onready var AM: Knight_AbilityManager = get_parent()
 
 @onready var t_firerate: Timer = $firerate
@@ -17,7 +18,7 @@ func _ready() -> void:
 	pass
 
 func _process(_delta: float) -> void:
-	var can_shoot: bool = PlayerInfo.current_state != PlayerInfo.States.STANCE
+	var can_shoot: bool = PlayerInfo.current_state != PlayerInfoResource.States.STANCE
 	
 	if !character.enabled:
 		return
@@ -28,7 +29,7 @@ func _process(_delta: float) -> void:
 	elif t_recoil.is_stopped() or !can_shoot:
 		PlayerInfo.basic_attacking = false
 	
-	if PlayerInfo.input_attack and character.ammo > 0 and can_shoot:
+	if PlayerInfo.input_attack and character.stats.ammo > 0 and can_shoot:
 		if t_firerate.is_stopped():
 			basic_atk()
 			t_firerate.start()
@@ -57,7 +58,7 @@ func shoot(bullet: PackedScene, position_modifier: int) -> void:
 
 
 func basic_atk() -> void:
-	character.ammo -= 1
+	character.stats.ammo -= 1
 	character.apply_player_cam_shake(1)
 	var p_scene: PackedScene
 	p_scene = BasicBoltScene if burst_counter < 2 else LightningBoltScene
@@ -76,17 +77,8 @@ func basic_atk() -> void:
 	else:
 		burst_counter = 0
 	
-	t_firerate.wait_time = 1 / character.fire_rate
+	t_firerate.wait_time = 1 / character.stats.firerate
 	if t_firerate.wait_time > 0.2: # semi
 		t_recoil.wait_time = 0.15
 	else: # auto
 		t_recoil.wait_time = 0.2
-
-
-func update_arm() -> void:
-	pass#await get_tree().process_frame
-	#if PlayerInfo.aim_direction.x > 0:
-		#character.arm_sprite.rotation = PlayerInfo.aim_direction.angle() - PI/2
-	#else:
-		#character.arm_sprite.rotation = -PlayerInfo.aim_direction.angle() + PI/2
-	#print(character.arm_sprite.rotation)

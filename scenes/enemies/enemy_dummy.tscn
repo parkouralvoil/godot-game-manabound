@@ -21,6 +21,7 @@ collision_mask = 0
 script = ExtResource("1_qibg1")
 bullet_impact_scene = ExtResource("2_wt2d2")
 enemy_dead_texture = ExtResource("3_nci7v")
+max_health = 5000.0
 
 [node name="Sprite2D_main" type="Sprite2D" parent="."]
 texture = SubResource("AtlasTexture_w0hsw")

@@ -13,7 +13,7 @@ func Enter() -> void:
 	p.gravity = p.default_gravity
 	p.direction_indicator.hide()
 	p.circle_indicator.hide()
-	PlayerInfo.current_state = PlayerInfo.States.IDLE
+	p.PlayerInfo.current_state = PlayerInfoResource.States.IDLE
 
 func Exit() -> void:
 	if !p:
@@ -24,7 +24,7 @@ func Update(_delta: float) -> void:
 		return
 	#if p.velocity != Vector2.ZERO:
 	
-	if not PlayerInfo.basic_attacking:
+	if not p.PlayerInfo.basic_attacking:
 		flip_sprite()
 	play_anim()
 
@@ -34,22 +34,22 @@ func Physics_Update(delta: float) -> void:
 	
 	if Input.is_action_pressed("space"): #prepare to boost
 		state_transition.emit(self, "PlayerMove")
-		PlayerInfo.basic_attacking = false
+		p.PlayerInfo.basic_attacking = false
 		p.circle_indicator.show()
-		PlayerInfo.input_attack = false
+		p.PlayerInfo.input_attack = false
 	else:
-		PlayerInfo.input_attack = Input.is_action_pressed("left_click")
-	if Input.is_action_pressed("right_click") and PlayerInfo.can_charge:
+		p.PlayerInfo.input_attack = Input.is_action_pressed("left_click")
+	if Input.is_action_pressed("right_click") and p.PlayerInfo.can_charge:
 		state_transition.emit(self, "PlayerStance")
 	
-	if not PlayerInfo.basic_attacking:
+	if not p.PlayerInfo.basic_attacking:
 		if !p.is_on_floor():
 			p.velocity.y = min(p.velocity.y + p.gravity * delta, p.gravity/1.25) ## gravity when player has no input
 		if not Input.is_action_pressed("space"):
 			p.circle_indicator.hide()
 	else:
 		if p.auto_aim and p.selected_target != null:
-			if not PlayerInfo.melee_character:
+			if not p.PlayerInfo.melee_character:
 				p.velocity.y -= (p.gravity * 0.3 * delta)
 			else:
 				pass
@@ -69,7 +69,7 @@ func play_anim() -> void:
 		p.anim_sprite.play("idle")
 	elif p.velocity.y > abs(p.velocity.x) and p.velocity.y > 225:
 		p.anim_sprite.play("fall")
-	elif PlayerInfo.basic_attacking:
+	elif p.PlayerInfo.basic_attacking:
 		p.anim_sprite.play("stance")
 	else:
 		p.anim_sprite.play("air")

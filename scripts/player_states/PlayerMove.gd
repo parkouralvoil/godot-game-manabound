@@ -4,7 +4,6 @@ class_name PlayerMove
 # can transition back to idle after boosting or stance if attacking
 # can acivate shield
 @export var p: Player
-var mouse_position: Vector2 = Vector2.ZERO
 var boost_speed: float = 400
 var slow_speed: float = 20
 
@@ -16,9 +15,9 @@ func Enter() -> void:
 	p.gravity = 0
 	p.direction_indicator.show()
 	p.circle_indicator.show()
-	PlayerInfo.current_state = PlayerInfo.States.MOVE
-	PlayerInfo.input_ult = false
-	PlayerInfo.input_attack = false
+	p.PlayerInfo.current_state = PlayerInfoResource.States.MOVE
+	p.PlayerInfo.input_ult = false
+	p.PlayerInfo.input_attack = false
 
 func Exit() -> void:
 	if !p:
@@ -40,11 +39,11 @@ func Physics_Update(_delta: float) -> void:
 	p.velocity = slow_speed * p.move_direction
 	
 	if !Input.is_action_pressed("space"): #boost away
-		p.velocity = boost_speed * p.mouse_direction
+		p.velocity = boost_speed * p.PlayerInfo.mouse_direction
 		p.afterimage_comp.afterimages = boost_afterimages
-		p.emit_boost_effects(p.mouse_direction)
+		p.emit_boost_effects(p.PlayerInfo.mouse_direction)
 		state_transition.emit(self, "PlayerIdle")
-	elif Input.is_action_pressed("right_click") and PlayerInfo.can_charge: # to cancel
+	elif Input.is_action_pressed("right_click") and p.PlayerInfo.can_charge:
 		state_transition.emit(self, "PlayerStance")
 	
 	p.move_and_slide()

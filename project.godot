@@ -13,13 +13,11 @@ config_version=5
 config/name="New-tower-bullet-hell"
 run/main_scene="res://scenes/main/main.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
-run/max_fps=60
 config/icon="res://icon.svg"
 
 [autoload]
 
 EnemyAiManager="*res://scripts/autoloads/enemy_AI_manager.gd"
-PlayerInfo="*res://scripts/autoloads/player_info.gd"
 CombatManager="*res://scripts/autoloads/combat_manager.gd"
 EventBus="*res://scripts/autoloads/event_bus.gd"
 ParticlesQueueNode="*res://scenes/autoload_scene/particles_queue.tscn"
@@ -156,6 +154,7 @@ r={
 
 textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="mobile"
-renderer/rendering_method.mobile="gl_compatibility"
+renderer/rendering_method.web="mobile"
+anti_aliasing/screen_space_roughness_limiter/enabled=false
 environment/glow/upscale_mode=0
 environment/defaults/default_clear_color=Color(0, 0, 0, 1)

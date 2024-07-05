@@ -60,6 +60,7 @@ texture = SubResource("AtlasTexture_14l55")
 shape = SubResource("CircleShape2D_dlwob")
 
 [node name="HealthComponent" parent="." instance=ExtResource("6_if5fd")]
+explosion_volume = -20.0
 
 [node name="HurtboxComponent" type="Area2D" parent="."]
 collision_layer = 8

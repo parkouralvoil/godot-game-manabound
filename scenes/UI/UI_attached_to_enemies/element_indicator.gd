@@ -3,6 +3,7 @@ class_name ElementIndicator
 
 @export var lightning: AtlasTexture
 @export var ice: AtlasTexture
+@export var fire: AtlasTexture
 
 @onready var HC: EnemyHealthComponent = get_parent().get_parent()
 
@@ -25,4 +26,7 @@ func _on_elem_change(new_elem: CombatManager.Elements) -> CombatManager.Elements
 		CombatManager.Elements.ICE:
 			show()
 			texture = ice
+		CombatManager.Elements.FIRE:
+			show()
+			texture = fire
 	return new_elem

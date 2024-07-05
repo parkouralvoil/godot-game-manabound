@@ -11,6 +11,7 @@ class_name Superconduct
 @export var amount: int = 30
 @export var explosiveness: float = 1
 @export var lifetime: float = 0.7
+@export var dmg_proc: float = 5
 
 class EnemyInfo:
 	var timer: Timer
@@ -49,8 +50,8 @@ func receive_superconduct(HealthComp: EnemyHealthComponent) -> void:
 			explosiveness,
 			lifetime,
 			HealthComp.global_position,)
-	enemy.take_damage(10, CombatManager.Elements.NONE)
-	enemy.reload_time = (enemy.default_reload_time * 2) + 0.7
+	enemy.take_damage(dmg_proc, CombatManager.Elements.NONE)
+	enemy.reload_time = enemy.default_reload_time + 1
 	
 	tween.tween_property(enemy.sprite_main, "modulate", 
 			enemy.default_color, duration).from(color_sc)

@@ -7,6 +7,7 @@ signal go_next_lvl(current_lvl: Node2D)
 signal camera_shake(strength: int)
 
 ## enemies
+signal enemy_lost_5_hp(procs: int)
 signal enemy_died()
 
 

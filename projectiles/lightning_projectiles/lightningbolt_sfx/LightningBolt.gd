@@ -5,10 +5,10 @@ var goal_point : Vector2 = Vector2(100,100)
 @export var line_width : float = 1: set = set_width
 @onready var lightning : Array = get_children()
 
-func _ready():
+func _ready() -> void:
 	set_width(line_width)
 	
-func _process(_delta) -> void:
+func _process(_delta: float) -> void:
 	for child in lightning:
 		child.goal_point =  goal_point
 	

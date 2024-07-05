@@ -19,15 +19,17 @@ var debuff: CombatManager.Debuffs = CombatManager.Debuffs.NONE
 
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var t_lifespan: Timer = $hitbox_lifespan
+@onready var scolor: Color = sprite.modulate ## starting color
 
 func _ready() -> void:
 	self.connect("area_entered", _on_area_entered)
 	t_lifespan.connect("timeout", _on_lifespan_timeout )
 	t_lifespan.one_shot = true
 	t_lifespan.autostart = true
+	
 
 func _physics_process(delta: float) -> void:
-	sprite.modulate = Color(1,1,1, opaqueness)
+	sprite.modulate = Color(scolor.r, scolor.g, scolor.b, opaqueness)
 	opaqueness = lerp(opaqueness, 0.0, decay_rate * delta)
 	
 	if opaqueness <= transparency_limit:

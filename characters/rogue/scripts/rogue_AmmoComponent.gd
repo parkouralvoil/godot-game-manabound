@@ -1,0 +1,2 @@
+extends Character_AmmoComponent
+class_name Rogue_AmmoComponent

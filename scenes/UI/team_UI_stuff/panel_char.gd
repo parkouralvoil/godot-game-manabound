@@ -31,28 +31,37 @@ func _process(_delta: float) -> void:
 	
 func update_health() -> void:
 	var format_string: String = "Health: %s/%s"
-	var actual_string: String = format_string % [str(tracked_character.health), 
-		str(tracked_character.max_health)]
+	var actual_string: String = format_string % [str(tracked_character.stats.HP), 
+		str(tracked_character.stats.MAX_HP)]
 	health.text = actual_string
 
 func update_ammo() -> void:
 	var format_string: String = "Ammo: %d/%d"
-	var actual_string: String = format_string % [tracked_character.ammo,
-		tracked_character.max_ammo]
+	var actual_string: String = format_string % [tracked_character.stats.ammo,
+		tracked_character.stats.MAX_AMMO]
 	ammo.text = actual_string
 
 func update_charge() -> void:
 	var type: String = "Charge"
 	match tracked_character.charge_type:
-		PlayerInfo.ChargeTypes.BURST:
+		PlayerInfoResource.ChargeTypes.BURST:
 			type = "Charge"
-		PlayerInfo.ChargeTypes.ENERGY:
+		PlayerInfoResource.ChargeTypes.ENERGY:
 			type = "Energy"
-		PlayerInfo.ChargeTypes.PASSIVE:
+		PlayerInfoResource.ChargeTypes.PASSIVE:
 			type = "Mana"
 	
 	var format_string: String = "%s: %d/%d"
 	var actual_string: String = format_string % [type, 
-		snapped(tracked_character.charge, 1), 
-		tracked_character.max_charge]
+		snapped(tracked_character.stats.charge, 1), 
+		tracked_character.stats.MAX_CHARGE]
 	charge.text = actual_string
+	
+	if tracked_character.stats.charge >= 100:
+		charge.modulate = Color(1, 0.2, 0.2)
+	elif tracked_character.stats.charge >= 50:
+		charge.modulate = Color(1, 1, 0.2)
+	elif tracked_character.stats.charge >= 1:
+		charge.modulate = Color(1, 1, 1, 0.8)
+	else:
+		charge.modulate = Color(0.6, 0.6, 0.6, 0.8)

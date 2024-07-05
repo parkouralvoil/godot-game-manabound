@@ -1,17 +1,12 @@
 extends Node2D
 class_name CharacterManager
 
-# THE GENSHIN IS REAL
-
-@export var knight_resource: CharacterResource
-@export var witch_resource: CharacterResource
-@export var rogue_resource: CharacterResource
-
 @onready var p: Player = get_parent()
 @onready var t_change_char: Timer = $change_char_cd
 
 var stored_chars: Array[Character] = [null, null, null]
-var selected_char_resource: Array[CharacterResource] = [null, null, null]
+@export var selected_char_resource: Array[CharacterResource] = [null, null, null]
+	## remove "export" when adding more chars (after starter trio)
 
 var current_char: Character
 var current_char_spriteframes: SpriteFrames
@@ -21,16 +16,9 @@ var can_change_char: bool = true
 
 # important logic:
 
-
 func _ready() -> void:
-	selected_char_resource[0] = knight_resource
-	assert(selected_char_resource[0], "Missing reference to knight.")
-	selected_char_resource[1] = witch_resource
-	assert(selected_char_resource[1], "Missing reference to witch.")
-	selected_char_resource[2] = rogue_resource
-	assert(selected_char_resource[1], "Missing reference to rogue.")
 	
-	for i in range(3):
+	for i in range(selected_char_resource.size()):
 		stored_chars[i] = selected_char_resource[i].character_scene.instantiate()
 		add_child(stored_chars[i])
 		stored_chars[i].arm_sprite.hide()
@@ -39,10 +27,10 @@ func _ready() -> void:
 	#change_character(0) player calls this on its ready func instead
 
 func take_damage(damage: float) -> void:
-	if current_char.health - damage > 0:
-		current_char.health -= damage
+	if current_char.stats.HP - damage > 0:
+		current_char.stats.HP -= damage
 	else:
-		current_char.health = 0
+		current_char.stats.HP = 0
 
 func _process(_delta: float) -> void:
 	if !p: return
@@ -50,12 +38,17 @@ func _process(_delta: float) -> void:
 	can_change_char = t_change_char.is_stopped() and !Input.is_action_pressed("right_click")
 	
 	if can_change_char:
-		if Input.is_action_just_pressed("1") and current_char != stored_chars[0]:
-			change_character(0)
-		elif Input.is_action_just_pressed("2") and current_char != stored_chars[1]:
-			change_character(1)
-		elif Input.is_action_just_pressed("3") and current_char != stored_chars[2]:
-			change_character(2)
+		if Input.is_action_just_pressed("1"):
+			input_change_char(0)
+		elif Input.is_action_just_pressed("2"):
+			input_change_char(1)
+		elif Input.is_action_just_pressed("3"):
+			input_change_char(2)
+
+
+func input_change_char(num: int) -> void:
+	if stored_chars[num] != null and current_char != stored_chars[num]:
+		change_character(num)
 
 
 func change_character(num: int) -> void:
@@ -68,13 +61,14 @@ func change_character(num: int) -> void:
 	current_char_spriteframes = _char.spriteframes
 	current_char_fake_arm = _char.sprite_arm
 	current_char.global_position = self.global_position
-	PlayerInfo.melee_character = current_char.melee ## tells PlayerInfo if current char is a melee char
+	p.PlayerInfo.melee_character = current_char.melee ## tells PlayerInfo if current char is a melee char
 	
 	_AM.enabled = true
 	_char.selected = true
 	
 	p.anim_sprite.sprite_frames = current_char_spriteframes
 	p.arm_node.remote_path = current_char.arm_sprite.get_path()
+	p.PlayerInfo.current_charge_type = current_char.charge_type
 	p.arm_sprite = current_char.arm_sprite
 	p.wpn_sprite = current_char.wpn_sprite
 	

@@ -1,77 +1,89 @@
 extends Node2D
 class_name Knight_AbilityManager
 
-# Character stores ammo, hp, max charge, current charge, charge rate
-# AM stores projectile stats and properties
+## AM stores projectile stats and properties
+
+## single "" include newlines (shift enter's counted as \n)
+## triple """""" allow verbatim newlines (shift enter's are nto counted as \n)
 
 @onready var character: Character = owner
+@onready var PlayerInfo: PlayerInfoResource = character.PlayerInfo
 @onready var skill_tree: SkillTree = $SkillTree
+@onready var stats: CharacterStats = character.stats
+
+## components:
+@onready var BasicAttack: Knight_AttackComponent = $BasicAttack
+@onready var Ultimate: Knight_UltimateComponent = $Ultimate
 @onready var Ammo: Knight_AmmoComponent = $Ammo
 
-@export_category("basic atk: Base")
+## Basic atk properties
 var bullet_speed: float = 450
 var max_distance: float = 300
-var base_percent_basic_bolt: float = 50
-var base_percent_lightning_bolt: float = 80
 
-@export_category("basic atk: Scaling")
+var base_percent_basic_bolt: float = 1
+var base_percent_lightning_bolt: float = 1.5
+
 var scale_percent_basic_bolt: float = 0
-var scale_percent_lightning_bolt: float = 40
+var scale_percent_lightning_bolt: float = 0.4
 
-@export_category("ult: Base")
+## Ult properties
 var ult_bullet_speed: float = 600
 var ult_max_distance: float = 800
-var base_ult_percent_tier1: float = 150
-var base_ult_percent_tier2: float = 175
 
-@export_category("ult: Scaling")
-var scale_ult_percent_tier1: int = 20
-var scale_ult_percent_tier2: int = 30
+var base_ult_percent_tier1: float = 3 ## tier 2 gives "shotgun" effect
 
-@export_category("Stats")
-# each char only has a specific upgrade for one stat, to ease building
-var base_stat: int = 9
-var scale_stat: int = 2
-var base_charge_rate: int = 65
-var scale_charge_rate: int = 25
+var scale_ult_percent_tier1: int = 0.4
 
-# variables to store computations
+## Stats scaling
+@onready var base_max_ammo: int = stats.MAX_AMMO ## MUST NOT BE CHANGED AGAIN
+var scale_ammo: int = 2
+@onready var base_CHR: float = stats.CHR
+var scale_CHR: float = 10 ## charge rate
+
+## Final Computations
 var damage_lightning_bolt: float
 var damage_basic_bolt: float
 
 var ult_damage_tier1: float
-var ult_damage_tier2: float
 
-# variables to make skill tree easier to track:
-var level_basicAtk_ammo: int = 0:
-	set(lvl):
-		level_basicAtk_ammo = lvl
-		character.max_ammo = base_stat + (scale_stat * lvl)
+## variables to make skill tree easier to track:
+@onready var level_basicAtk_ammo: int = 0:
+	set(level):
+		level_basicAtk_ammo = level
+		stats.MAX_AMMO = base_max_ammo + (scale_ammo * level)
 
-var level_basicAtk_upgrade: int = 0:
-	set(lvl):
-		level_basicAtk_upgrade = lvl
-		damage_lightning_bolt = compute(base_percent_lightning_bolt,
-				scale_percent_lightning_bolt, lvl)
-		damage_basic_bolt = compute(base_percent_basic_bolt, 0, lvl)
+@onready var level_basicAtk_upgrade: int = 0:
+	set(level):
+		level_basicAtk_upgrade = level
+		damage_lightning_bolt = compute(base_percent_lightning_bolt, scale_percent_lightning_bolt, level)
+		damage_basic_bolt = compute(base_percent_basic_bolt, 0, level)
 
-var level_ult_upgrade: int = 0:
-	set(lvl):
-		level_ult_upgrade = lvl
-		character.max_charge = 50 + (50 * min(lvl, 1))
-		ult_damage_tier1 = compute(base_ult_percent_tier1,
-				scale_ult_percent_tier1, lvl)
-		ult_damage_tier2 = compute(base_ult_percent_tier2,
-				scale_ult_percent_tier2, lvl )
+@onready var level_ult_upgrade: int = 0:
+	set(level):
+		level_ult_upgrade = level
+		stats.MAX_CHARGE = 50 + (50 * min(level, 1))
+		ult_damage_tier1 = compute(base_ult_percent_tier1, scale_ult_percent_tier1, level)
+		if level == 1:
+			character.stats.charge_tier = stats.charge_tiers.TWO
+		else:
+			character.stats.charge_tier = stats.charge_tiers.ONE
 
-var level_ult_chargeRate: int = 0:
-	set(lvl):
-		level_ult_chargeRate = lvl
-		character.charge_rate = base_charge_rate + (
-				scale_charge_rate * lvl)
+@onready var level_ult_chargeRate: int = 0:
+	set(level):
+		level_ult_chargeRate = level
+		stats.CHR = base_CHR + (scale_CHR * level)
 
 var skill_ult_missile: bool = false
 var skill_basicAtk_double: bool = false
+
+
+func _ready() -> void:
+	BasicAttack.PlayerInfo = character.PlayerInfo
+	Ultimate.PlayerInfo = character.PlayerInfo
+	Ammo.PlayerInfo = character.PlayerInfo
+	
+	PlayerInfo.changed_buff_raw_atk.connect(update_damage)
+	update_damage()
 
 
 func stats_update() -> void:
@@ -86,69 +98,72 @@ func stats_update() -> void:
 	skill_basicAtk_double = skill_tree.BasicAtk_array[3].level
 
 func desc_update() -> void:
-	var data := get_txt_info()
+	## description of char
+	skill_tree.root_node.skill_name = "Lightning Knight"
+	skill_tree.root_node.skill_desc = """An infantry soldier wielding a rapid-fire crossbow.
+\nHailing from the City of Light, these lightning knights pave the way for technology in a world dominated by magic.
+\nElement: Lightning"""
 	
-	# description of char
-	data.pop_front() # remove "knight"
-	skill_tree.root_node.skill_name = data.pop_front()
-	skill_tree.root_node.skill_desc = data.pop_front()
-	
-	# char's basic atk nodes
-	skill_tree.BasicAtk_array[0].skill_name = data.pop_front()
-	skill_tree.BasicAtk_array[0].skill_desc = data.pop_front() % (
-			[base_percent_basic_bolt]
+	## char's basic atk nodes
+	skill_tree.BasicAtk_array[0].skill_name = "Rapid-fire Crossbow"
+	skill_tree.BasicAtk_array[0].skill_desc = """Hold left click to fire lightning bolts with %d%% base damage. 
+\nRequires ammo which reloads overtime.""" % (
+		[base_percent_basic_bolt * 100]
 	)
 	
-	skill_tree.BasicAtk_array[1].skill_name = data.pop_front()
-	skill_tree.BasicAtk_array[1].skill_desc = data.pop_front() % (
-			[scale_stat]
+	skill_tree.BasicAtk_array[1].skill_name = "More ammo"
+	skill_tree.BasicAtk_array[1].skill_desc = "Each level increases max ammo count by %d." % (
+		[scale_ammo]
 	)
 	
-	skill_tree.BasicAtk_array[2].skill_name = data.pop_front()
-	skill_tree.BasicAtk_array[2].skill_desc = data.pop_front() % (
-			[base_percent_lightning_bolt, scale_percent_lightning_bolt]
+	skill_tree.BasicAtk_array[2].skill_name = "Burst shot"
+	skill_tree.BasicAtk_array[2].skill_desc = "Every 3rd shot shoots an enhanced lightning bolts with %d%% base damage.
+\nEach upgrade increases damage of enhanced lightning bolts by %d%%." % (
+		[base_percent_lightning_bolt * 100, scale_percent_lightning_bolt * 100]
 	)
 	
-	skill_tree.BasicAtk_array[3].skill_name = data.pop_front()
-	skill_tree.BasicAtk_array[3].skill_desc = data.pop_front() 
+	skill_tree.BasicAtk_array[3].skill_name = "Doubleshot"
+	skill_tree.BasicAtk_array[3].skill_desc = """Every shot now fires 2 bullets, ammo is unaffected.
+\nAlso works with Burst shot."""
 	
-	# char's ult nodes
-	skill_tree.Ult_array[0].skill_name = data.pop_front()
-	skill_tree.Ult_array[0].skill_desc = data.pop_front() % (
-			[base_ult_percent_tier1, base_charge_rate]
+	## char's ult nodes
+	skill_tree.Ult_array[0].skill_name = "Grand Ballista"
+	skill_tree.Ult_array[0].skill_desc = """Charge Type: Burst
+\nHold down right click until you reach a charge tier (50, 100, etc.) then let go to fire a Grand Bolt with %d%% base damage.
+\nHas a base charge rate of %d%%
+""" % (
+		[base_ult_percent_tier1 * 100, stats.CHR]
 	)
 	
-	skill_tree.Ult_array[1].skill_name = data.pop_front()
-	skill_tree.Ult_array[1].skill_desc = data.pop_front() % (
-			[base_ult_percent_tier2, scale_ult_percent_tier1, scale_ult_percent_tier2]
+	skill_tree.Ult_array[1].skill_name = "2nd Tier Upgrade"
+	skill_tree.Ult_array[1].skill_desc = """
+Adds a 2nd charge tier which adds 3 enhanced lightning bolts along with the main projectile. 
+\nEnhanced lightning bolts deal %d%% damage.""" % (
+		[base_percent_lightning_bolt * 100]
 	)
 	
-	skill_tree.Ult_array[2].skill_name = data.pop_front()
-	skill_tree.Ult_array[2].skill_desc = data.pop_front() % (
-			[base_percent_basic_bolt]
+	skill_tree.Ult_array[2].skill_name = "Missile volley"
+	skill_tree.Ult_array[2].skill_desc = """Bonus Effect: Charged shots also fire a volley of homing missiles with %d%% base damage. 
+\nHigher charge tiers fire more missiles.""" % (
+		[base_percent_basic_bolt * 100]
 	)
 	
-	skill_tree.Ult_array[3].skill_name = data.pop_front()
-	skill_tree.Ult_array[3].skill_desc = data.pop_front() % (
-			[scale_charge_rate]
+	skill_tree.Ult_array[3].skill_name = "Faster charge rate"
+	skill_tree.Ult_array[3].skill_desc = """Each level increases charge rate by %d.""" % (
+		[scale_CHR]
 	)
 
-func get_txt_info() -> Array:
-	var file := FileAccess.open("res://csv_files/blue_city_character_skill_info - skill description.csv"
-			, FileAccess.READ)
-	var data_set: Array = Array(file.get_csv_line() )
-	
-	# seems kinda bad to rely on arbitrary index bounds
-	# better to reformat CSV so that it knows which array to put it in
-	while !file.eof_reached() and data_set[0] != "Knight":
-		data_set = Array(file.get_csv_line() ) # travels to next csv line
-	
-	#print(data_set)
-	file.close()
-	return data_set
 
-func compute(base: float, scaling: float, lvl: int) -> float:
-	var raw_output: float = character.atk * (base + scaling * max(0, lvl - 1))
+func compute(base: float, scaling: float, level: int) -> float:
+	var raw_output: float = (stats.ATK + PlayerInfo.buff_raw_atk) * (base 
+		+ scaling * max(0, level - 1))
 	
-	return raw_output/100.0
+	return raw_output
 	
+
+func update_damage() -> void:
+	damage_lightning_bolt = compute(base_percent_lightning_bolt, scale_percent_lightning_bolt, level_basicAtk_upgrade)
+		
+	damage_basic_bolt = compute(base_percent_basic_bolt, 0, 1)
+	
+	ult_damage_tier1 = compute(base_ult_percent_tier1, 0, level_ult_upgrade)

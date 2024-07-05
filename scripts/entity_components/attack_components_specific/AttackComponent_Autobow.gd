@@ -33,7 +33,8 @@ func shoot(projectile: PackedScene, direction: Vector2) -> void:
 		pro_instance.direction = direction
 		pro_instance.rotation = direction.angle()
 		pro_instance.damage = 1.0
-		pro_instance.set_collision_mask_value(3, true) # to look for player
+		pro_instance.set_collision_mask_value(3, true) ## to look for player
+		pro_instance.set_collision_layer_value(6, true) ## for parry
 		pro_instance.modulate = bullet_color
 		pro_instance.max_distance = e.vision_range
 		get_tree().root.add_child(pro_instance)

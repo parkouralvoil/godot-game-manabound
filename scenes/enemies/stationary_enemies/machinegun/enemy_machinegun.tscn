@@ -48,7 +48,7 @@ shape = SubResource("CircleShape2D_dlwob")
 
 [node name="HealthComponent" parent="." instance=ExtResource("8_lvnqj")]
 position = Vector2(0, 19)
-explosion_volume = -9.0
+explosion_volume = -18.0
 small_orbs = 6
 medium_orbs = 4
 

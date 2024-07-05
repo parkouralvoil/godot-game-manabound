@@ -1,12 +1,13 @@
 extends CanvasLayer
 class_name SkillTree
 
-var selected_node: SkillNode = null:
+@onready var selected_node: SkillNode = null:
 	set(value):
 		selected_node = value
-		skill_info.show_selected_skill(value)
+		if value:
+			skill_info.show_selected_skill(value)
 
-@onready var skill_info: Control = $Control/Skill_Info
+@onready var skill_info: SkillInfoClass = $Skill_Info
 @onready var root_node: SkillNode = $Control/Root
 
 var BasicAtk_array: Array[SkillNode] = []
@@ -16,14 +17,14 @@ var Ult_array: Array[SkillNode] = []
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_WHEN_PAUSED
 	
-	selected_node = null
+	selected_node = root_node
 	for child in root_node.get_children():
 		if child is SkillNode:
 			if child.is_in_group("skillnode_BasicAtk"):
 				BasicAtk_preorder(child)
 			else:
 				Ult_preorder(child)
-
+	
 
 func BasicAtk_preorder(node: SkillNode) -> void:
 	BasicAtk_array.append(node)
