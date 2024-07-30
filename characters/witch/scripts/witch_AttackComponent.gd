@@ -40,7 +40,7 @@ func shoot(bullet: PackedScene) -> void:
 	
 	SoundPlayer.play_sound(sfx_IceCast, -10, 1.05)
 	
-	var bul_instance: Bullet = bullet.instantiate()
+	var bul_instance: IceSpikeBullet = bullet.instantiate()
 	var direction: Vector2 = PlayerInfo.aim_direction
 	
 	bul_instance.global_position = global_position

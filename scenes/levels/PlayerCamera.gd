@@ -1,4 +1,5 @@
 extends Camera2D
+class_name PlayerCamera
 
 # How quickly to move through the noise
 @export var NOISE_SHAKE_SPEED: float = 30.0

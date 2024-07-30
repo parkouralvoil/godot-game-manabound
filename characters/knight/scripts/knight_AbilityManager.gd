@@ -32,7 +32,7 @@ var ult_max_distance: float = 800
 
 var base_ult_percent_tier1: float = 3 ## tier 2 gives "shotgun" effect
 
-var scale_ult_percent_tier1: int = 0.4
+var scale_ult_percent_tier1: float = 0.4
 
 ## Stats scaling
 @onready var base_max_ammo: int = stats.MAX_AMMO ## MUST NOT BE CHANGED AGAIN

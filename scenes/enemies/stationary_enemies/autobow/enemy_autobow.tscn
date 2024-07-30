@@ -41,9 +41,9 @@ texture = SubResource("AtlasTexture_dpic6")
 [node name="Sprite2D_main" type="Sprite2D" parent="."]
 texture = SubResource("AtlasTexture_w0hsw")
 
-[node name="ammo_sprite_container" type="Node2D" parent="Sprite2D_main" node_paths=PackedStringArray("entity")]
+[node name="ammo_sprite_container" type="Node2D" parent="Sprite2D_main" node_paths=PackedStringArray("e")]
 script = ExtResource("3_8d36t")
-entity = NodePath("../..")
+e = NodePath("../..")
 
 [node name="Sprite2D_ammo1" type="Sprite2D" parent="Sprite2D_main/ammo_sprite_container"]
 texture = SubResource("AtlasTexture_14l55")

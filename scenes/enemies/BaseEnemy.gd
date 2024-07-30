@@ -1,6 +1,9 @@
 extends CharacterBody2D
 class_name BaseEnemy
 
+signal health_changed(new_health: float)
+signal reload_time_changed(new_reload_time: float)
+
 @export var bullet_impact_scene: PackedScene # im recycling this for enemy's death explosion sfx
 @export var enemy_dead_texture: AtlasTexture
 @onready var health_component: EnemyHealthComponent = $HealthComponent # now combined health and debuff
@@ -8,9 +11,6 @@ class_name BaseEnemy
 @export var impact_scale: Vector2 = Vector2(3, 3)
 
 @onready var sprite_main: Sprite2D = $Sprite2D_main
-
-signal health_changed(new_health: float)
-signal reload_time_changed(new_reload_time: float)
 
 # debuff vars:
 #var debuff_by_superconduct: bool = false

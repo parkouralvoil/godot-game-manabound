@@ -29,6 +29,7 @@ func spawn_orbs(pos: Vector2, small: int, med: int) -> void:
 	for i in range(med):
 		orb = mana_orb_scene.instantiate()
 		orb.tier = orb.possible_tiers.MEDIUM
+		@warning_ignore("integer_division")
 		orb.global_position = pos + Vector2(rng.randi_range(-v/2, v/2),
 			rng.randi_range(-v, v)
 		)

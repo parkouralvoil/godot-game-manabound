@@ -16,7 +16,7 @@ func _ready() -> void:
 	t_reload.start()
 
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if ammo == max_ammo and t_duration.is_stopped():
 		for las in laser:
 			las.is_casting = true

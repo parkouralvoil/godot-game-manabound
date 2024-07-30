@@ -3,7 +3,7 @@ class_name SpawnerComponent
 
 @export var smalldrone_scene: PackedScene
 
-@onready var e: DroneFactoryClass = owner
+@onready var e: Enemy_DroneFactory = owner
 
 @onready var markers: Array[Marker2D] = [$Marker2D]
 @onready var t_spawn: Timer = $spawn_timer

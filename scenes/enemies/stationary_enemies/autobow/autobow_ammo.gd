@@ -1,16 +1,16 @@
 extends Node2D
 
-@export var entity: CharacterBody2D
+@export var e: Enemy_Autobow
 @onready var sprite_ammo: Array[Sprite2D] = [$Sprite2D_ammo1, $Sprite2D_ammo2, $Sprite2D_ammo3]
 
 var current_ammo: int
 
 func _ready() -> void:
-	current_ammo = entity.ammo
+	current_ammo = e.ammo
 
 func _process(_delta: float) -> void:
-	if current_ammo != entity.ammo:
-		current_ammo = entity.ammo
+	if current_ammo != e.ammo:
+		current_ammo = e.ammo
 		match current_ammo:
 			3:
 				sprite_ammo[0].show()

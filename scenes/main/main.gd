@@ -10,7 +10,7 @@ var enemy_chance_scaling: float = 0.1
 
 @onready var playerholder: Node2D = $PlayerHolder
 @onready var level: LevelManager #= get_child(0) ## REMEMBERRRRRRRRRRRRRRRRRRRRRRRR
-@onready var camera: Camera2D = $PlayerCamera
+@onready var camera: PlayerCamera = $PlayerCamera
 @onready var black_screen: ColorRect = $PlayerCamera/CanvasLayer/ColorRect 
 @onready var lvl_cleared_UI: CenterContainer = $LevelClearedUI/CenterContainer
 

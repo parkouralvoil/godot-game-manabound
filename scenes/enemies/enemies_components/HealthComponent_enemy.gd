@@ -76,7 +76,7 @@ func produce_energy(difference: float) -> void:
 
 func spawn_dmg_number(effect: String, color: Color) -> void:
 	var pos_variance: Vector2
-	var label_inst: Label = damage_number.instantiate()
+	var label_inst: LabelCombatText = damage_number.instantiate()
 	
 	label_inst.text = effect
 	label_inst.modulate = color

@@ -26,7 +26,7 @@ func _ready() -> void:
 	
 	#change_character(0) player calls this on its ready func instead
 
-func take_damage(damage: float) -> void:
+func take_damage(damage: int) -> void:
 	if current_char.stats.HP - damage > 0:
 		current_char.stats.HP -= damage
 	else:

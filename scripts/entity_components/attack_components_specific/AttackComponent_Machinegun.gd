@@ -3,7 +3,7 @@ class_name EnemyAttackComponent_Machinegun
 
 var ProjectileScene: PackedScene = load("res://projectiles/enemy_projectiles/bullet_machinegun.tscn")
 
-@onready var e: BaseEnemy = owner
+@onready var e: Enemy_MachineGun = owner
 @onready var t_reload: Timer = $reload
 @onready var t_first_shot: Timer = $before_first_shot
 @onready var bullet_origin: Marker2D = $bullet_origin

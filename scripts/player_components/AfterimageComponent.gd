@@ -1,4 +1,7 @@
 extends Node2D
+class_name PlayerAfterimageComponent
+
+## why not a generic "after image" class? since player's sprites changes alot
 
 @onready var p: Player = owner 
 

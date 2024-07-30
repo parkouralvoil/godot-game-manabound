@@ -1,4 +1,5 @@
 extends Node2D
+class_name PlayerHitComponent
 
 @onready var p: Player = owner
 @onready var t_iframe: Timer = $iframe_cd

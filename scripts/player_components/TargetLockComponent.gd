@@ -14,6 +14,7 @@ var closest_target: HurtboxComponent = null
 # seems expensive
 # doesnt update once target is dead, has to wait for the queue free instead of checking hp
 func _ready() -> void:
+	@warning_ignore("unsafe_property_access") ## this aint unsafe bruh godot just tripping
 	collision_shape.shape.radius = 500
 
 func _process(_delta: float) -> void:

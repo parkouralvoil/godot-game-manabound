@@ -2,20 +2,20 @@ extends TextureButton
 class_name SkillNode 
 
 @export var PlayerInfo: PlayerInfoResource
+@export var root: bool = false
+@export var default_cost: int = 100
+@export var max_level: int = 3
+
+@export var skill_name: String
+@export_multiline var skill_desc: String
 
 @onready var panel: Panel = $Panel
 @onready var VBox: VBoxContainer = $VBox
 @onready var label_lvl: Label = $VBox/Label_lvl
 @onready var label_cost: Label = $VBox/Label_cost
 @onready var line_2D: Line2D = $Line2D
-
-@export var root: bool = false
-@export var default_cost: int = 100
 @onready var cost: int = default_cost
-@export var max_level: int = 3
 
-@export var skill_name: String
-@export_multiline var skill_desc: String
 
 var level: int = 0:
 	set(value):
@@ -43,8 +43,9 @@ func _ready() -> void:
 
 func update_lines() -> void:
 	if get_parent() is SkillNode:
+		var parent: SkillNode = get_parent()
 		line_2D.points[0] = (global_position + size/2)
-		line_2D.points[1] = (get_parent().global_position + size/2)
+		line_2D.points[1] = (parent.global_position + size/2)
 
 func _on_pressed() -> void:
 	var stree: SkillTree = owner
@@ -57,7 +58,8 @@ func attempt_buy() -> void:
 	if see_if_can_buy():
 		PlayerInfo.mana_orbs -= cost
 		level = min(level+1, max_level)
-		cost = default_cost + (default_cost/2 * level)
+		@warning_ignore("integer_division")
+		cost = default_cost + (default_cost/2 * level) ## TODO: finalize cost scaling from orbs gained during game
 		update_lvl_and_cost()
 		
 		panel.hide()

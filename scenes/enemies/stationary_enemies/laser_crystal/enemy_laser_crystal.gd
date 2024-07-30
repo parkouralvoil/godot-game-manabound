@@ -1,5 +1,5 @@
 extends BaseEnemy
-class_name LaserEnemy
+class_name Enemy_LaserCrystal
 
 @export var horizontal: bool = false
 @export var spinning: bool = false

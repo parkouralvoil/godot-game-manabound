@@ -2,7 +2,7 @@ extends Node2D
 
 var ProjectileScene: PackedScene = load("res://projectiles/enemy_projectiles/bullet_drone.tscn")
 
-@onready var e: BaseEnemy = owner
+@onready var e: Enemy_SmallDrone = owner
 @onready var t_firerate: Timer = $firerate
 @onready var projecitle_pos: Marker2D = $projectile_origin
 

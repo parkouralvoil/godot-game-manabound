@@ -1,7 +1,7 @@
 extends Area2D
 class_name HurtboxComponent
 
-@onready var entity: CharacterBody2D = owner
+@onready var entity: BaseEnemy = owner
 
 # projectile was hitting player smh
 # for a permanent fix, i can do smthg like

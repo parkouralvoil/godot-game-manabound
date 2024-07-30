@@ -96,6 +96,7 @@ func emit() -> void:
 
 
 func update_particles() -> void:
+	@warning_ignore("unsafe_property_access") ## godot tripping bruh
 	casting_particle.process_material.direction = Vector3(line.points[1].x,
 			line.points[1].y,
 			0)

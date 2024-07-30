@@ -59,6 +59,7 @@ func detonate_crystalize(HealthComp: EnemyHealthComponent) -> void:
 	enemy_ref[HealthComp].timer.stop()
 	var current_stacks: int = enemy_ref[HealthComp].crystal_stacks
 	
+	@warning_ignore("integer_division")
 	var dmg_multiplier: float = (base_damage 
 			+ (base_damage * scale_damage/100.0) 
 			* int(current_stacks/stack_multiply) )

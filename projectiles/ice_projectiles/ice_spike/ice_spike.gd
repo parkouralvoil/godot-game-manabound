@@ -1,4 +1,5 @@
 extends Bullet
+class_name IceSpikeBullet
 
 var first_icicle_dmg: float = 999
 var second_icicle_dmg: float = 999
@@ -16,7 +17,7 @@ func _on_area_entered(hurtbox: Area2D) -> void:
 func make_impact() -> void:
 	if !impact_created:
 		impact_created = true
-		var instance: Area2D = bullet_impact.instantiate()
+		var instance: IceSpikeDamageImpact = bullet_impact.instantiate()
 		instance.global_position = self.global_position
 		
 		instance.element = element # ice procced here

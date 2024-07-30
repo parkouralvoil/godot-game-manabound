@@ -1,6 +1,7 @@
 extends Node2D
 class_name LightningLine
 ## SOURCE: https://github.com/Geminimax/Godot-2d-Lightning
+
 var goal_point : Vector2 = Vector2(100,100)
 var min_segment_size : float = 2
 var max_segment_size : float = 10
@@ -10,11 +11,12 @@ var final_goal : Vector2
 
 @export var angle_var: float = 15
 
-@onready var line : Line2D = $Line2D
+@onready var line: Line2D = $Line2D
+@onready var timer: Timer = $Timer
 
 func _ready() -> void:
 	final_goal = goal_point - global_position 
-	$Timer.start(randf_range(0.1,0.3))
+	timer.start(randf_range(0.1,0.3))
 
 func _on_Timer_timeout() -> void:
 	if(points.size() > 0):

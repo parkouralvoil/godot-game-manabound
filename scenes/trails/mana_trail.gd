@@ -21,7 +21,8 @@ func _physics_process(_delta: float) -> void:
 
 func _get_position() -> Vector2:
 	if get_parent():
-		return get_parent().position
+		var source: Node2D = get_parent()
+		return source.position
 	return Vector2.ZERO
 
 #

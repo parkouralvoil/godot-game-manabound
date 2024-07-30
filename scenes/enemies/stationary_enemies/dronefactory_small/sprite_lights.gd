@@ -1,13 +1,14 @@
 extends Node2D
+class_name FactoryAmmoComponent
 
-@onready var e: DroneFactoryClass = owner
-@onready var lights: Array[Sprite2D] = []
 var num_of_lights: int = 0
-var lights_on: int = 0 :
+var lights_on: int = 0 : ## lights is ammo, full lights mean drone can spawn
 	set(value):
 		lights_on = value
 		turn_on_light()
 
+@onready var e: Enemy_DroneFactory = owner
+@onready var lights: Array[Sprite2D] = []
 
 func _ready() -> void:
 	for child in get_children():

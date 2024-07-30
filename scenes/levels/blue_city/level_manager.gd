@@ -1,12 +1,12 @@
 extends Node2D
 class_name LevelManager
 
-@onready var starting_pos: Vector2 = $StartingPos.global_position
+signal level_cleared
+
+@onready var starting_pos_marker: Marker2D = $StartingPos
+@onready var starting_pos: Vector2 = starting_pos_marker.global_position
 @onready var door: Marker2D = $Door
 @onready var enemy_holder: EnemyHolder = $EnemyHolder
-
-
-signal level_cleared
 
 
 func level_is_cleared() -> void:

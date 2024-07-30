@@ -91,7 +91,6 @@ func spawn_enemies() -> void: ## calculate chance to spawn
 	
 	for i in range(max_enemies):
 		#info_array.shuffle()
-		var offset: float = 0
 		var random: int = rng.randi() % 100
 		## it works like this;
 		## autobow: 30%		[0, 29]
@@ -106,26 +105,27 @@ func spawn_enemies() -> void: ## calculate chance to spawn
 				break
 		markers[i].add_child(instantiate_enemy(chosen_info))
 
-func remove_enemies(): ## TOOL SCRIPT
+func remove_enemies() -> void: ## TOOL SCRIPT
 	if Engine.is_editor_hint():
 		for mark in markers:
 			if mark.get_child(0) is BaseEnemy:
 				mark.get_child(0).queue_free()
 
 func instantiate_enemy(info: SpawnInfo) -> BaseEnemy:
-	var inst: BaseEnemy
 	match info.scene:
 		LasercrystalScene:
-			inst = (info.scene).instantiate() as LaserEnemy
+			var inst: Enemy_LaserCrystal = (info.scene).instantiate()
 			if roll_probability(0.4):
 				inst.horizontal = true
 			if roll_probability(0.4):
 				inst.horizontal = false
 				inst.spinning = true
+			return inst
 		_:
+			var inst: BaseEnemy
 			inst = (info.scene).instantiate()
+			return inst
 	#inst.dead.connect(enemy_dead) # I CANT DO THIS CUZ DRONEFACTORY SPAWNS ITS OWN ENEMIES
-	return inst
 
 
 func enemy_dead(type: BaseEnemy) -> void:

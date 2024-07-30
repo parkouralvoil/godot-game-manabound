@@ -88,7 +88,6 @@ position = Vector2(480, -507)
 
 [node name="enemy_laser_crystal" parent="EnemyHolder" instance=ExtResource("7_aw426")]
 position = Vector2(800, -223)
-horizontal = false
 max_health = 50.0
 default_reload_time = 5.0
 

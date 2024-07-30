@@ -1,9 +1,10 @@
 extends BaseEnemy
-class_name DroneFactoryClass
+class_name Enemy_DroneFactory
 
 
 @export var spawner_comp: SpawnerComponent
-@onready var sprite_lights: Node2D = $Sprite2D_main/sprite_lights
+
+@onready var ammo_comp: FactoryAmmoComponent = $Sprite2D_main/AmmoComponent
 
 func _ready() -> void:
 	super()
@@ -12,8 +13,8 @@ func _ready() -> void:
 
 
 func _reset_lights() -> void:
-	sprite_lights.reset_lights()
+	ammo_comp.reset_lights()
 
 
 func _add_light() -> void:
-	sprite_lights.lights_on += 1
+	ammo_comp.lights_on += 1

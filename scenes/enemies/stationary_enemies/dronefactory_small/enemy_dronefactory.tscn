@@ -46,38 +46,38 @@ position = Vector2(0, -13)
 [node name="Sprite2D_main" type="Sprite2D" parent="."]
 texture = SubResource("AtlasTexture_pxl8n")
 
-[node name="sprite_lights" type="Node2D" parent="Sprite2D_main"]
+[node name="AmmoComponent" type="Node2D" parent="Sprite2D_main"]
 script = ExtResource("7_wfkg7")
 
-[node name="Sprite2D" type="Sprite2D" parent="Sprite2D_main/sprite_lights"]
+[node name="Sprite2D" type="Sprite2D" parent="Sprite2D_main/AmmoComponent"]
 position = Vector2(-9, 4.5)
 texture = SubResource("AtlasTexture_oego0")
 
-[node name="Sprite2D2" type="Sprite2D" parent="Sprite2D_main/sprite_lights"]
+[node name="Sprite2D2" type="Sprite2D" parent="Sprite2D_main/AmmoComponent"]
 position = Vector2(-9, 1.5)
 texture = SubResource("AtlasTexture_oego0")
 
-[node name="Sprite2D3" type="Sprite2D" parent="Sprite2D_main/sprite_lights"]
+[node name="Sprite2D3" type="Sprite2D" parent="Sprite2D_main/AmmoComponent"]
 position = Vector2(-9, -1.5)
 texture = SubResource("AtlasTexture_oego0")
 
-[node name="Sprite2D4" type="Sprite2D" parent="Sprite2D_main/sprite_lights"]
+[node name="Sprite2D4" type="Sprite2D" parent="Sprite2D_main/AmmoComponent"]
 position = Vector2(-9, -4.5)
 texture = SubResource("AtlasTexture_oego0")
 
-[node name="Sprite2D5" type="Sprite2D" parent="Sprite2D_main/sprite_lights"]
+[node name="Sprite2D5" type="Sprite2D" parent="Sprite2D_main/AmmoComponent"]
 position = Vector2(9, 4.5)
 texture = SubResource("AtlasTexture_oego0")
 
-[node name="Sprite2D6" type="Sprite2D" parent="Sprite2D_main/sprite_lights"]
+[node name="Sprite2D6" type="Sprite2D" parent="Sprite2D_main/AmmoComponent"]
 position = Vector2(9, 1.5)
 texture = SubResource("AtlasTexture_oego0")
 
-[node name="Sprite2D7" type="Sprite2D" parent="Sprite2D_main/sprite_lights"]
+[node name="Sprite2D7" type="Sprite2D" parent="Sprite2D_main/AmmoComponent"]
 position = Vector2(9, -1.5)
 texture = SubResource("AtlasTexture_oego0")
 
-[node name="Sprite2D8" type="Sprite2D" parent="Sprite2D_main/sprite_lights"]
+[node name="Sprite2D8" type="Sprite2D" parent="Sprite2D_main/AmmoComponent"]
 position = Vector2(9, -4.5)
 texture = SubResource("AtlasTexture_oego0")
 

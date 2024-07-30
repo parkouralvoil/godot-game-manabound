@@ -1,5 +1,5 @@
 extends BaseEnemy
-class_name Enemy_SmallDrone    
+class_name Enemy_SmallDrone
 
 @onready var nav_agent: NavigationAgent2D = $NavigationAgent2D
 @onready var player_raycast: RayCast2D = $Raycast_toPlayer

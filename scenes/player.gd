@@ -12,8 +12,8 @@ var wpn_sprite: Sprite2D
 @export var direction_indicator: Sprite2D #= $DirectionIndicator
 @export var circle_indicator: Sprite2D
 @export var target_lock_component: Area2D #= $TargetLock
-@export var player_hit_comp: Node2D
-@export var afterimage_comp: Node2D
+@export var player_hit_comp: PlayerHitComponent
+@export var afterimage_comp: PlayerAfterimageComponent
 @onready var hurtbox: Area2D = $AreaComponents/Hurtbox
 @onready var boost_particles: Array[GPUParticles2D] = []
 @onready var boost_sfx: AudioStreamPlayer2D = $BoostSpecialEffects/boost_sfx
@@ -103,7 +103,7 @@ func _process(_delta: float) -> void:
 
 
 # cuz each character have their healths in AM
-func take_damage(damage: float) -> void:
+func take_damage(damage: int) -> void:
 	char_manager.take_damage(damage)
 	player_hit_comp.player_hit()
 	

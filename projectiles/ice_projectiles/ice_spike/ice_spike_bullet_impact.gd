@@ -1,4 +1,5 @@
 extends DamageImpact
+class_name IceSpikeDamageImpact
 
 @onready var sprite_start: Sprite2D = $Sprite2D/Sprite2D_start_explosion
 @onready var sprite_2nd_icicle: Sprite2D = $Sprite2D_second_icicle

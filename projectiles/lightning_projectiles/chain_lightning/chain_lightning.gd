@@ -1,4 +1,5 @@
 extends Area2D
+class_name ChainLightning
 
 @export var dmg_impact: PackedScene
 

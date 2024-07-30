@@ -2,7 +2,7 @@ extends Node2D
 
 var ProjectileScene: PackedScene = load("res://projectiles/bullet.tscn")
 
-@onready var e: BaseEnemy = owner
+@onready var e: Enemy_Autobow = owner
 @onready var t_firerate: Timer = $firerate
 @onready var t_reload: Timer = $reload
 @onready var t_first_shot: Timer = $before_first_shot

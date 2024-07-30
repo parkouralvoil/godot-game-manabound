@@ -24,8 +24,11 @@ func _process(delta: float) -> void:
 		PlayerInfo.ult_recoil = true
 		raise_charge(delta)
 		character.sprite_look_at(PlayerInfo.mouse_direction)
-	elif character.stats.charge != 0:
-		spend_charge()
+	else:
+		if character.stats.charge >= 50:
+			spend_charge()
+		else:
+			decay_charge(delta)
 		character.wpn_sprite.modulate = Color(1, 1, 1)
 
 func shoot(bullet: PackedScene, direction: Vector2) -> void:
@@ -64,6 +67,7 @@ func shoot_extra(bullet: PackedScene, direction: Vector2) -> void:
 	bul_instance.damage = AM.damage_lightning_bolt
 	get_tree().root.add_child(bul_instance)
 
+
 func raise_charge(delta: float) -> void:
 	character.stats.charge = min(character.stats.MAX_CHARGE, 
 		character.stats.charge + character.stats.CHR * delta)
@@ -77,17 +81,32 @@ func raise_charge(delta: float) -> void:
 	else:
 		charge_tier = 0
 		character.wpn_sprite.modulate = Color(1, 1, 1)
-		
+
+
+func decay_charge(delta: float) -> void:
+	character.stats.charge = max(0, 
+		character.stats.charge - 6 * delta)
+	
+	if character.stats.charge >= 50:
+		charge_tier = 1
+		character.wpn_sprite.modulate = Color(2, 2, 0.4)
+	else:
+		charge_tier = 0
+		character.wpn_sprite.modulate = Color(2, 2, 0.4)
+
+
 func spend_charge() -> void:
 	character.apply_player_cam_shake(charge_tier * 2)
 	match charge_tier:
 		0:
 			pass
 		1:
+			character.stats.charge = 0
 			shoot(GrandBoltScene, PlayerInfo.mouse_direction)
 			if AM.skill_ult_missile:
 				shoot_missile(3)
 		_:
+			character.stats.charge = 0
 			shoot(GrandBoltScene, PlayerInfo.mouse_direction)
 			#var rng: RandomNumberGenerator = RandomNumberGenerator.new()
 			var _angle: float
@@ -99,8 +118,8 @@ func spend_charge() -> void:
 			shoot_extra(LightningBoltScene, PlayerInfo.mouse_direction.rotated(_angle))
 			if AM.skill_ult_missile:
 				shoot_missile(6)
-	character.stats.charge = 0
 	charge_tier = 0
+
 
 func shoot_missile(num_of_missiles: int) -> void:
 	assert(HomingMissileScene, "missing export")
