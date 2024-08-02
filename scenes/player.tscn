@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://c35wulwk6e3b4"]
+[gd_scene load_steps=37 format=3 uid="uid://c35wulwk6e3b4"]
 
 [ext_resource type="Script" path="res://scenes/player.gd" id="1_ob8fa"]
 [ext_resource type="Script" path="res://scripts/player_components/HurtboxComponent_player.gd" id="2_w8hq5"]
@@ -19,12 +19,11 @@
 [ext_resource type="AudioStream" uid="uid://cgvlbkvq11os4" path="res://assets/audio/sfx/sound_effects/zapsplat_cartoon_whoosh_swipe_fast_grab_dash_003_74744.mp3" id="11_ut6yg"]
 [ext_resource type="Script" path="res://scripts/player_components/DirectionIndicator.gd" id="11_vqh4r"]
 [ext_resource type="Texture2D" uid="uid://dy3hkciev768l" path="res://assets/sprite_UI/red_circle.png" id="12_i87yh"]
-[ext_resource type="SpriteFrames" uid="uid://n8tavxox3kua" path="res://characters/knight/knight_spriteframes.tres" id="13_7cy21"]
-[ext_resource type="Texture2D" uid="uid://3jkuw6bwhk01" path="res://characters/knight/knight_arm.tres" id="14_iiaao"]
+[ext_resource type="SpriteFrames" uid="uid://n8tavxox3kua" path="res://characters/knight/visuals/knight_spriteframes.tres" id="13_7cy21"]
+[ext_resource type="Texture2D" uid="uid://3jkuw6bwhk01" path="res://characters/knight/visuals/knight_arm.tres" id="14_iiaao"]
 [ext_resource type="Script" path="res://scripts/StateMachine.gd" id="15_mooub"]
 [ext_resource type="Script" path="res://scripts/player_states/PlayerIdle.gd" id="16_01hcy"]
 [ext_resource type="Script" path="res://scripts/player_states/PlayerMove.gd" id="17_btrsq"]
-[ext_resource type="Resource" uid="uid://c85jly26hwn1j" path="res://characters/witch/witch_char_data.tres" id="17_ddnmu"]
 [ext_resource type="Script" path="res://scripts/player_states/PlayerStance.gd" id="18_f66as"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_c2x3k"]
@@ -198,7 +197,7 @@ afterimage_scene = ExtResource("5_hni55")
 
 [node name="CharacterManager" type="Node2D" parent="."]
 script = ExtResource("6_g8flh")
-selected_char_resource = Array[Resource("res://characters/CharacterResource.gd")]([ExtResource("7_0jpgg"), ExtResource("17_ddnmu")])
+selected_char_resource = Array[Resource("res://characters/CharacterResource.gd")]([ExtResource("7_0jpgg")])
 
 [node name="change_char_cd" type="Timer" parent="CharacterManager"]
 wait_time = 0.7

@@ -1,0 +1,121 @@
+[gd_scene load_steps=15 format=3 uid="uid://dblvtepnyt1hx"]
+
+[ext_resource type="Script" path="res://user_interface/skill_tree_menu/stree.gd" id="1_xpeam"]
+[ext_resource type="PackedScene" uid="uid://ckobamacrfgq1" path="res://user_interface/skill_tree_menu/skill_node_button.tscn" id="2_b3vp8"]
+[ext_resource type="Resource" uid="uid://cqakpeajr2jcy" path="res://characters/knight/knight_stree_model.tres" id="2_ctwew"]
+[ext_resource type="Texture2D" uid="uid://h46xv64l4n2u" path="res://assets/sprite_UI/AbilityIcons0.png" id="3_6roue"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cqs56"]
+atlas = ExtResource("3_6roue")
+region = Rect2(0, 32, 16, 16)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_seawk"]
+load_path = "res://.godot/imported/AbilityIcons0.png-31dba6544aa1a7b4320ff9e5f15eb420.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jpyy4"]
+atlas = SubResource("CompressedTexture2D_seawk")
+region = Rect2(64, 64, 16, 16)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_1yk67"]
+load_path = "res://.godot/imported/AbilityIcons0.png-31dba6544aa1a7b4320ff9e5f15eb420.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ms2x6"]
+atlas = SubResource("CompressedTexture2D_1yk67")
+region = Rect2(112, 80, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a7fye"]
+atlas = SubResource("CompressedTexture2D_1yk67")
+region = Rect2(32, 80, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ycotj"]
+atlas = SubResource("CompressedTexture2D_seawk")
+region = Rect2(80, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3tmk8"]
+atlas = SubResource("CompressedTexture2D_seawk")
+region = Rect2(64, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dl120"]
+atlas = SubResource("CompressedTexture2D_1yk67")
+region = Rect2(112, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0r3o6"]
+atlas = SubResource("CompressedTexture2D_1yk67")
+region = Rect2(112, 64, 16, 16)
+
+[node name="Stree_of_Knight" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_xpeam")
+skill_tree_model = ExtResource("2_ctwew")
+
+[node name="root" parent="." instance=ExtResource("2_b3vp8")]
+layout_mode = 0
+offset_left = 404.0
+offset_top = 27.0
+offset_right = 454.0
+offset_bottom = 77.0
+
+[node name="left_root" parent="root" instance=ExtResource("2_b3vp8")]
+layout_mode = 0
+offset_left = -105.0
+offset_top = 90.0
+offset_right = -55.0
+offset_bottom = 140.0
+texture_normal = SubResource("AtlasTexture_cqs56")
+
+[node name="left_1" parent="root/left_root" instance=ExtResource("2_b3vp8")]
+layout_mode = 0
+offset_top = 110.0
+offset_bottom = 160.0
+texture_normal = SubResource("AtlasTexture_jpyy4")
+
+[node name="left_2" parent="root/left_root/left_1" instance=ExtResource("2_b3vp8")]
+layout_mode = 0
+offset_left = -50.0
+offset_top = 90.0
+offset_right = 0.0
+offset_bottom = 140.0
+texture_normal = SubResource("AtlasTexture_ms2x6")
+
+[node name="left_3" parent="root/left_root/left_1" instance=ExtResource("2_b3vp8")]
+layout_mode = 0
+offset_left = 50.0
+offset_top = 90.0
+offset_right = 100.0
+offset_bottom = 140.0
+texture_normal = SubResource("AtlasTexture_a7fye")
+
+[node name="right_root" parent="root" instance=ExtResource("2_b3vp8")]
+layout_mode = 0
+offset_left = 105.0
+offset_top = 90.0
+offset_right = 155.0
+offset_bottom = 140.0
+texture_normal = SubResource("AtlasTexture_ycotj")
+
+[node name="right_1" parent="root/right_root" instance=ExtResource("2_b3vp8")]
+layout_mode = 0
+offset_top = 110.0
+offset_bottom = 160.0
+texture_normal = SubResource("AtlasTexture_3tmk8")
+
+[node name="right_2" parent="root/right_root/right_1" instance=ExtResource("2_b3vp8")]
+layout_mode = 0
+offset_left = -50.0
+offset_top = 90.0
+offset_right = 0.0
+offset_bottom = 140.0
+texture_normal = SubResource("AtlasTexture_dl120")
+
+[node name="right_3" parent="root/right_root/right_1" instance=ExtResource("2_b3vp8")]
+layout_mode = 0
+offset_left = 50.0
+offset_top = 90.0
+offset_right = 100.0
+offset_bottom = 140.0
+texture_normal = SubResource("AtlasTexture_0r3o6")

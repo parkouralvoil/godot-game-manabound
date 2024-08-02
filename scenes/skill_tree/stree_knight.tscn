@@ -64,6 +64,7 @@ region = Rect2(80, 96, 16, 16)
 
 [node name="SkillTree_knight" type="CanvasLayer"]
 process_mode = 2
+layer = 2
 script = ExtResource("1_a54q8")
 
 [node name="ColorRect" type="ColorRect" parent="."]

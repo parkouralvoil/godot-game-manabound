@@ -1,34 +1,19 @@
 extends CharacterBody2D
 class_name Player
 
-var PlayerInfo: PlayerInfoResource = preload("res://resources/data/player_info.tres")
+signal PlayerDamaged
 
-#onready var
-@onready var anim_sprite: AnimatedSprite2D = $AnimatedSprite2D
-@onready var arm_node: RemoteTransform2D = $AnimatedSprite2D/RemoteTransform2D
-var arm_sprite: Sprite2D
-var wpn_sprite: Sprite2D
-@onready var fake_arm_sprite: Sprite2D = $AnimatedSprite2D/fake_arm
+const PlayerInfo: PlayerInfoResource = preload("res://resources/data/player_info.tres")
+
 @export var direction_indicator: Sprite2D #= $DirectionIndicator
 @export var circle_indicator: Sprite2D
 @export var target_lock_component: Area2D #= $TargetLock
 @export var player_hit_comp: PlayerHitComponent
 @export var afterimage_comp: PlayerAfterimageComponent
-@onready var hurtbox: Area2D = $AreaComponents/Hurtbox
-@onready var boost_particles: Array[GPUParticles2D] = []
-@onready var boost_sfx: AudioStreamPlayer2D = $BoostSpecialEffects/boost_sfx
-@onready var buff_particles: GPUParticles2D = $BuffParticles
-
-#UI stuff (connect these in the holder scene)
-@export var blood_overlay: TextureRect
-
-@onready var char_manager: CharacterManager = $CharacterManager
-
 
 # movement variables
 var default_gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity")
 var gravity: float = default_gravity
-
 
 #var aim_direction: Vector2 = Vector2.ZERO # NOW STORED IN PlayerInfo, since other peeps need it
 var move_direction: Vector2 = Vector2.ZERO #radians
@@ -42,6 +27,20 @@ var selected_target: Area2D = null
 var boost_index: int = 0
 var boost_node_size: int = 0
 
+#onready var
+@onready var anim_sprite: AnimatedSprite2D = $AnimatedSprite2D
+@onready var arm_node: RemoteTransform2D = $AnimatedSprite2D/RemoteTransform2D
+var arm_sprite: Sprite2D
+var wpn_sprite: Sprite2D
+@onready var fake_arm_sprite: Sprite2D = $AnimatedSprite2D/fake_arm
+@onready var hurtbox: Area2D = $AreaComponents/Hurtbox
+@onready var boost_particles: Array[GPUParticles2D] = []
+@onready var boost_sfx: AudioStreamPlayer2D = $BoostSpecialEffects/boost_sfx
+@onready var buff_particles: GPUParticles2D = $BuffParticles
+
+
+@onready var char_manager: CharacterManager = $CharacterManager
+
 func _ready() -> void:
 	var boost_node: Node2D = $BoostSpecialEffects
 	char_manager.change_character(0)
@@ -52,6 +51,7 @@ func _ready() -> void:
 			boost_node_size += 1
 	
 	PlayerInfo.changed_buff_raw_atk.connect(on_buff_particles)
+
 
 func _process(_delta: float) -> void:
 	EnemyAiManager.player_position = global_position ## this seems too slow?
@@ -106,9 +106,7 @@ func _process(_delta: float) -> void:
 func take_damage(damage: int) -> void:
 	char_manager.take_damage(damage)
 	player_hit_comp.player_hit()
-	
-	if blood_overlay:
-		blood_overlay.display_blood()
+	PlayerDamaged.emit()
 
 
 func emit_boost_effects(boost_dir: Vector2) -> void:

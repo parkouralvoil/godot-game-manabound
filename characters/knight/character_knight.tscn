@@ -28,6 +28,7 @@ stats = ExtResource("2_vf3hs")
 script = ExtResource("2_e4ef6")
 
 [node name="SkillTree" parent="AbilityManager" instance=ExtResource("3_bfk4m")]
+visible = false
 
 [node name="BasicAttack" type="Node2D" parent="AbilityManager"]
 script = ExtResource("4_k4d5v")

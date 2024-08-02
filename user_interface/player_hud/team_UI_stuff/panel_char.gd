@@ -1,11 +1,11 @@
-extends Panel
+extends PanelContainer
 class_name Panel_Char
 
-@onready var sprite_portrait: Sprite2D = $Sprite2D_portrait
-@onready var char_name: Label = $VBoxContainer_info/Label_name
-@onready var health: Label = $VBoxContainer_info/Label_health
-@onready var ammo: Label = $VBoxContainer_info/Label_ammo
-@onready var charge: Label = $VBoxContainer_info/Label_charge
+@onready var sprite_portrait: TextureRect = $HBoxContainer/CharPortrait
+@onready var char_name: Label = $HBoxContainer/VBoxContainer_info/Label_name
+@onready var health: Label = $HBoxContainer/VBoxContainer_info/Label_health
+@onready var ammo: Label = $HBoxContainer/VBoxContainer_info/Label_ammo
+@onready var charge: Label = $HBoxContainer/VBoxContainer_info/Label_charge
 
 var tracked_character: Character = null
 var tracked_char_resource: CharacterResource = null
@@ -20,12 +20,15 @@ func initialize_info(character: CharacterResource, AM: Character, index: int) ->
 	char_name.text = "[%s] %s" % [str(index), character.char_name]
 
 func _process(_delta: float) -> void:
-	if tracked_character:
-		update_health()
-		update_ammo()
-		update_charge()
+	if not tracked_character:
+		return
+	
+	update_health()
+	update_ammo()
+	update_charge()
+	
 	if not tracked_char_resource.selected:
-		modulate = Color(1, 1, 1, 0.7)
+		modulate = Color(1, 1, 1, 0.5)
 	else:
 		modulate = Color(1, 1, 1, 1)
 	

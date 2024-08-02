@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://rdeieo07v8gt"]
 
 [ext_resource type="LabelSettings" uid="uid://crxqvqu7eeoj8" path="res://resources/font_settings/font_settings_silver.tres" id="1_jnvxb"]
-[ext_resource type="Script" path="res://scenes/UI/UI_attached_to_enemies/label_dmg_num.gd" id="2_qm8cn"]
+[ext_resource type="Script" path="res://user_interface/UI_attached_to_enemies/label_dmg_num.gd" id="2_qm8cn"]
 
 [node name="Label_dmg_num" type="Label"]
 z_index = 5

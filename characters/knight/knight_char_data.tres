@@ -2,9 +2,9 @@
 
 [ext_resource type="PackedScene" uid="uid://despujxox3cs7" path="res://characters/knight/character_knight.tscn" id="1_3qysw"]
 [ext_resource type="Script" path="res://characters/CharacterResource.gd" id="2_jelce"]
-[ext_resource type="Texture2D" uid="uid://3jkuw6bwhk01" path="res://characters/knight/knight_arm.tres" id="3_pvj11"]
-[ext_resource type="Texture2D" uid="uid://ci6hb127q6kmh" path="res://characters/knight/knight_portrait.tres" id="4_gj36d"]
-[ext_resource type="SpriteFrames" uid="uid://n8tavxox3kua" path="res://characters/knight/knight_spriteframes.tres" id="5_bb4yo"]
+[ext_resource type="Texture2D" uid="uid://3jkuw6bwhk01" path="res://characters/knight/visuals/knight_arm.tres" id="3_pvj11"]
+[ext_resource type="Texture2D" uid="uid://ci6hb127q6kmh" path="res://characters/knight/visuals/knight_portrait.tres" id="4_gj36d"]
+[ext_resource type="SpriteFrames" uid="uid://n8tavxox3kua" path="res://characters/knight/visuals/knight_spriteframes.tres" id="5_bb4yo"]
 
 [resource]
 script = ExtResource("2_jelce")

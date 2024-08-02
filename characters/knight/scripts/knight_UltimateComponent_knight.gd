@@ -17,7 +17,7 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	if !character.enabled:
-		character.stats.charge = 0
+		decay_charge(delta)
 		return
 	
 	if PlayerInfo.input_ult:

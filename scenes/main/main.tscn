@@ -24,11 +24,10 @@ shadow_size = 7
 [node name="Main" type="Node2D"]
 script = ExtResource("1_fwn4r")
 
-[node name="PlayerCamera" parent="." instance=ExtResource("3_b3eh2")]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="CanvasLayer" type="CanvasLayer" parent="PlayerCamera"]
-
-[node name="ColorRect" type="ColorRect" parent="PlayerCamera/CanvasLayer"]
+[node name="Blackscreen" type="ColorRect" parent="CanvasLayer"]
+visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -36,31 +35,31 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
+[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -236.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/CenterContainer"]
+custom_minimum_size = Vector2(300, 80)
+layout_mode = 2
+color = Color(0.0156863, 0.0352941, 0.0941176, 0.615686)
+
+[node name="LevelCleared" type="Label" parent="CanvasLayer/CenterContainer"]
+layout_mode = 2
+text = "ALL ENEMIES DEFEATED"
+label_settings = SubResource("LabelSettings_ggscm")
+
+[node name="PlayerCamera" parent="." instance=ExtResource("3_b3eh2")]
+
 [node name="PlayerHolder" parent="." instance=ExtResource("4_p316a")]
 
 [node name="level_summary" type="Node" parent="."]
 
 [node name="HTTPRequest" type="HTTPRequest" parent="level_summary"]
-
-[node name="LevelClearedUI" type="CanvasLayer" parent="."]
-
-[node name="CenterContainer" type="CenterContainer" parent="LevelClearedUI"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_bottom = -228.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="ColorRect" type="ColorRect" parent="LevelClearedUI/CenterContainer"]
-custom_minimum_size = Vector2(300, 80)
-layout_mode = 2
-color = Color(0.0156863, 0.0352941, 0.0941176, 0.615686)
-
-[node name="Label" type="Label" parent="LevelClearedUI/CenterContainer"]
-layout_mode = 2
-text = "ALL ENEMIES DEFEATED"
-label_settings = SubResource("LabelSettings_ggscm")
 
 [node name="particle_preloader_for_web" type="Node2D" parent="."]
 script = ExtResource("4_j1irx")

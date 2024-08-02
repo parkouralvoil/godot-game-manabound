@@ -3,7 +3,7 @@ class_name Main # handles loading levels, saving player, etc.
 
 const level_warehouse: PackedScene = preload("res://scenes/levels/blue_city/city_warehouse.tscn")
 const level_TEST: PackedScene = preload("res://scenes/levels/blue_city/city_TEST.tscn")
-var enemy_chance: float = 1 :
+var enemy_chance: float = 0 :
 	set(value):
 		enemy_chance = clampf(value, 0, 1)
 var enemy_chance_scaling: float = 0.1
@@ -11,8 +11,8 @@ var enemy_chance_scaling: float = 0.1
 @onready var playerholder: Node2D = $PlayerHolder
 @onready var level: LevelManager #= get_child(0) ## REMEMBERRRRRRRRRRRRRRRRRRRRRRRR
 @onready var camera: PlayerCamera = $PlayerCamera
-@onready var black_screen: ColorRect = $PlayerCamera/CanvasLayer/ColorRect 
-@onready var lvl_cleared_UI: CenterContainer = $LevelClearedUI/CenterContainer
+@onready var black_screen: ColorRect = $CanvasLayer/Blackscreen 
+@onready var lvl_cleared_UI: CenterContainer = $CanvasLayer/CenterContainer
 
 
 func _ready() -> void:

@@ -1,13 +1,13 @@
 [gd_scene load_steps=9 format=3 uid="uid://bx54isqpe5u3x"]
 
 [ext_resource type="Script" path="res://scenes/enemies/enemies_components/HealthComponent_enemy.gd" id="1_c8uh4"]
-[ext_resource type="PackedScene" uid="uid://rdeieo07v8gt" path="res://scenes/UI/UI_attached_to_enemies/label_dmg_num.tscn" id="2_stj50"]
+[ext_resource type="PackedScene" uid="uid://rdeieo07v8gt" path="res://user_interface/UI_attached_to_enemies/label_dmg_num.tscn" id="2_stj50"]
 [ext_resource type="Resource" uid="uid://dcu6q2sy4u3fj" path="res://resources/debuff_resource/crystalized.tres" id="3_3eaof"]
 [ext_resource type="AudioStream" uid="uid://dl7jjtk1psmvx" path="res://assets/audio/sfx/enemy_explosion.mp3" id="3_x2b3c"]
 [ext_resource type="Resource" uid="uid://c1kncqtjwfxj" path="res://resources/debuff_resource/superconduct.tres" id="4_kby8h"]
-[ext_resource type="PackedScene" uid="uid://dlecin0ht7e7l" path="res://scenes/UI/UI_attached_to_enemies/healthbar.tscn" id="5_kg14b"]
-[ext_resource type="PackedScene" uid="uid://c1mef3esxg5jh" path="res://scenes/UI/UI_attached_to_enemies/element_indicator.tscn" id="6_tg0eq"]
-[ext_resource type="PackedScene" uid="uid://oml2t17eroh7" path="res://scenes/UI/UI_attached_to_enemies/debuff_indicator.tscn" id="7_tlc04"]
+[ext_resource type="PackedScene" uid="uid://dlecin0ht7e7l" path="res://user_interface/UI_attached_to_enemies/healthbar.tscn" id="5_kg14b"]
+[ext_resource type="PackedScene" uid="uid://c1mef3esxg5jh" path="res://user_interface/UI_attached_to_enemies/element_indicator.tscn" id="6_tg0eq"]
+[ext_resource type="PackedScene" uid="uid://oml2t17eroh7" path="res://user_interface/UI_attached_to_enemies/debuff_indicator.tscn" id="7_tlc04"]
 
 [node name="HealthComponent" type="Node2D"]
 script = ExtResource("1_c8uh4")

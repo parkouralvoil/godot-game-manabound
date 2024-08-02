@@ -50,9 +50,11 @@ func _process(_delta: float) -> void:
 func _on_exit_button_button_down() -> void:
 	unpause()
 
+
 func unpause() -> void:
-	var parent := get_parent()
-	if parent.has_method("stats_update"):
-		parent.stats_update()
+	## Pausing and Unpausing should be handled by UI manager
+	#var parent := get_parent()
+	#if parent.has_method("stats_update"):
+	#	parent.stats_update()
 	hide()
 	get_tree().paused = false

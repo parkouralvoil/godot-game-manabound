@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3 uid="uid://dnfu85x4yhumf"]
+
+[ext_resource type="PackedScene" uid="uid://6dikqxysux0p" path="res://user_interface/skill_tree_menu/skill_tree_menu.tscn" id="1_38d3r"]
+
+[node name="UI_CanvasLayer" type="CanvasLayer"]
+
+[node name="PauseMenu" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="CheatMenu" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="SkillTreeMenu" parent="." instance=ExtResource("1_38d3r")]

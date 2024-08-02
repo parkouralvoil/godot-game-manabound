@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://dlecin0ht7e7l"]
 
-[ext_resource type="Script" path="res://scenes/UI/UI_attached_to_enemies/Healthbar.gd" id="1_l12hh"]
+[ext_resource type="Script" path="res://user_interface/UI_attached_to_enemies/Healthbar.gd" id="1_l12hh"]
 
 [node name="Healthbar" type="ProgressBar"]
 modulate = Color(1, 0.207843, 0.32549, 1)

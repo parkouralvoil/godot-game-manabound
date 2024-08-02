@@ -9,6 +9,8 @@ class_name SkillNode
 @export var skill_name: String
 @export_multiline var skill_desc: String
 
+var stree: SkillTree = owner
+
 @onready var panel: Panel = $Panel
 @onready var VBox: VBoxContainer = $VBox
 @onready var label_lvl: Label = $VBox/Label_lvl
@@ -48,10 +50,11 @@ func update_lines() -> void:
 		line_2D.points[1] = (parent.global_position + size/2)
 
 func _on_pressed() -> void:
-	var stree: SkillTree = owner
 	if stree:
 		stree.selected_node = self
 
+
+#region RESPONSIBILITY OF SKILL TREE INTERFACE, HANDLING LOGIC
 func attempt_buy() -> void:
 	if root:
 		return
@@ -73,13 +76,14 @@ func see_if_can_buy() -> bool:
 	else:
 		return false
 
+
 func update_lvl_and_cost() -> void:
 	label_lvl.text = "Level: %d/%d" % [level, max_level]
 	if level < max_level:
 		label_cost.text = "Cost: %d" % [cost]
 	else:
 		label_cost.text = "Cost: ---"
-
+#endregion
 #func enable_child_buttons() -> void:
 	#var skills: Array[Node] = get_children()
 	#for skill in skills:

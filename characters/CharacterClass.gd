@@ -32,9 +32,9 @@ func _ready() -> void:
 	stats.max_ammo_changed.connect(_on_max_ammo_change)
 	stats.max_charge_changed.connect(_on_max_charge_change)
 	
-	if AM.has_method("stats_update"): ## temporary if condition, just for testing
-		AM.stats_update()
-		AM.desc_update()
+	#if AM.has_method("stats_update"): ## temporary if condition, just for testing
+		#AM.stats_update()
+		#AM.desc_update()
 
 
 func _process(_delta: float) -> void:

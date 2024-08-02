@@ -1,0 +1,6 @@
+[gd_resource type="Resource" script_class="SkillTreeModel" load_steps=2 format=3 uid="uid://cqakpeajr2jcy"]
+
+[ext_resource type="Script" path="res://resources/data/stree/stree_model.gd" id="1_8g2xl"]
+
+[resource]
+script = ExtResource("1_8g2xl")

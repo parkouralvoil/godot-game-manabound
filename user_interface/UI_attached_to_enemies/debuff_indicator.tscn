@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://oml2t17eroh7"]
 
-[ext_resource type="Script" path="res://scenes/UI/UI_attached_to_enemies/debuff_indicator.gd" id="2_8ibay"]
+[ext_resource type="Script" path="res://user_interface/UI_attached_to_enemies/debuff_indicator.gd" id="2_8ibay"]
 [ext_resource type="LabelSettings" uid="uid://buthhqor0rds0" path="res://resources/font_settings/font_system_desc.tres" id="2_gkcjt"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_4u5pq"]

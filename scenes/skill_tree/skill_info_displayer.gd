@@ -2,9 +2,9 @@ extends MarginContainer
 class_name SkillInfoClass
 
 @onready var icon: TextureRect = $VBoxContainer/Skill_Icon
-@onready var skill_name: Label = $VBoxContainer/ColorRect/MarginContainer/VBoxContainer/Label_name
-@onready var skill_desc: Label = $VBoxContainer/ColorRect/MarginContainer/VBoxContainer/Label_desc
-@onready var buy_button: Button = $VBoxContainer/ColorRect/MarginContainer/Buy_Button
+@onready var skill_name: Label = $VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/Label_name
+@onready var skill_desc: Label = $VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/Label_desc
+@onready var buy_button: Button = $VBoxContainer/PanelContainer/MarginContainer/Buy_Button
 
 var selected_node: SkillNode
 

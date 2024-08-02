@@ -1,19 +1,15 @@
-[gd_scene load_steps=17 format=3 uid="uid://c7qwpthsv6838"]
+[gd_scene load_steps=13 format=3 uid="uid://c7qwpthsv6838"]
 
 [ext_resource type="Script" path="res://scenes/holder_scenes/player_holder.gd" id="1_pvica"]
 [ext_resource type="PackedScene" uid="uid://c35wulwk6e3b4" path="res://scenes/player.tscn" id="1_ymobu"]
-[ext_resource type="Script" path="res://scenes/UI/Label_HP.gd" id="3_s7bg0"]
-[ext_resource type="Script" path="res://scenes/UI/Label_Ammo.gd" id="4_4dkkb"]
 [ext_resource type="LabelSettings" uid="uid://buthhqor0rds0" path="res://resources/font_settings/font_system_desc.tres" id="4_54xf7"]
-[ext_resource type="Script" path="res://scenes/UI/Label_Charge.gd" id="5_d4n2q"]
-[ext_resource type="Script" path="res://scenes/UI/team_UI_stuff/Team_UI.gd" id="7_o7yj4"]
-[ext_resource type="PackedScene" uid="uid://cdc6lfjuxxbia" path="res://scenes/UI/team_UI_stuff/panel_char..tscn" id="8_tbcqf"]
-[ext_resource type="Script" path="res://scenes/UI/fps_counter.gd" id="9_bkpbr"]
+[ext_resource type="Script" path="res://user_interface/player_hud/team_UI_stuff/Team_UI.gd" id="6_xe7lk"]
+[ext_resource type="PackedScene" uid="uid://cdc6lfjuxxbia" path="res://user_interface/player_hud/team_UI_stuff/panel_char..tscn" id="7_fqt64"]
+[ext_resource type="Script" path="res://user_interface/player_hud/fps_counter.gd" id="8_egwuq"]
+[ext_resource type="Script" path="res://user_interface/player_hud/Label_AutoAim.gd" id="9_q47ex"]
+[ext_resource type="Script" path="res://user_interface/player_hud/currency_counter.gd" id="10_75qgu"]
 [ext_resource type="Resource" uid="uid://6renh852kiei" path="res://resources/data/player_info.tres" id="10_ckewk"]
-[ext_resource type="Script" path="res://scenes/UI/Label_AutoAim.gd" id="10_kyqis"]
-[ext_resource type="Script" path="res://scenes/UI/currency_counter.gd" id="11_x60wv"]
 [ext_resource type="Texture2D" uid="uid://duidexikehj1a" path="res://assets/sprite_UI/damage overlay.png" id="12_wtoa7"]
-[ext_resource type="Script" path="res://scenes/UI/blood_overlay.gd" id="13_f4j4e"]
 
 [sub_resource type="SystemFont" id="SystemFont_chrtk"]
 subpixel_positioning = 0
@@ -27,8 +23,7 @@ font_color = Color(0.901961, 0.901961, 0.901961, 0.901961)
 [node name="PlayerHolder" type="Node2D"]
 script = ExtResource("1_pvica")
 
-[node name="Player" parent="." node_paths=PackedStringArray("blood_overlay") instance=ExtResource("1_ymobu")]
-blood_overlay = NodePath("../Layer_1/BloodOverlay")
+[node name="Player" parent="." instance=ExtResource("1_ymobu")]
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Player"]
 offset_left = 5.0
@@ -37,88 +32,81 @@ offset_right = 168.0
 offset_bottom = 63.0
 theme_override_constants/separation = 1
 
-[node name="Label_HP" type="Label" parent="Player/VBoxContainer" node_paths=PackedStringArray("p")]
+[node name="HP" type="Label" parent="Player/VBoxContainer"]
 modulate = Color(1, 1, 1, 0.788235)
 layout_mode = 2
 text = "aaa"
 label_settings = ExtResource("4_54xf7")
-script = ExtResource("3_s7bg0")
-p = NodePath("../..")
 
-[node name="Label_Ammo" type="Label" parent="Player/VBoxContainer" node_paths=PackedStringArray("p")]
+[node name="Ammo" type="Label" parent="Player/VBoxContainer"]
 modulate = Color(1, 1, 1, 0.8)
 layout_mode = 2
 text = "aa"
 label_settings = ExtResource("4_54xf7")
-script = ExtResource("4_4dkkb")
-p = NodePath("../..")
 
-[node name="Label_Charge" type="Label" parent="Player/VBoxContainer" node_paths=PackedStringArray("p")]
+[node name="Charge" type="Label" parent="Player/VBoxContainer"]
 modulate = Color(1, 1, 1, 0.788235)
 layout_mode = 2
 text = "aa"
 label_settings = ExtResource("4_54xf7")
-script = ExtResource("5_d4n2q")
-p = NodePath("../..")
 
-[node name="Layer_2" type="CanvasLayer" parent="."]
+[node name="HUD_elements" type="CanvasLayer" parent="."]
 process_mode = 3
-layer = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Layer_2"]
-offset_right = 40.0
-offset_bottom = 40.0
-mouse_filter = 2
-
-[node name="Label_FPS" type="Label" parent="Layer_2/VBoxContainer"]
-layout_mode = 2
-text = "aaa"
-label_settings = SubResource("LabelSettings_l4gnj")
-script = ExtResource("9_bkpbr")
-
-[node name="Label_AutoAim" type="Label" parent="Layer_2/VBoxContainer" node_paths=PackedStringArray("p")]
-layout_mode = 2
-text = "aa"
-label_settings = SubResource("LabelSettings_l4gnj")
-script = ExtResource("10_kyqis")
-p = NodePath("../../../Player")
-
-[node name="Label_Currency" type="Label" parent="Layer_2/VBoxContainer"]
-layout_mode = 2
-text = "aaa"
-label_settings = SubResource("LabelSettings_l4gnj")
-script = ExtResource("11_x60wv")
-PlayerInfo = ExtResource("10_ckewk")
-
-[node name="Layer_1" type="CanvasLayer" parent="."]
-process_mode = 3
-layer = 0
-
-[node name="Team_UI" type="VBoxContainer" parent="Layer_1" node_paths=PackedStringArray("p")]
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -121.0
-offset_top = 139.0
-offset_bottom = 298.0
-grow_horizontal = 0
-mouse_filter = 2
-theme_override_constants/separation = 70
-script = ExtResource("7_o7yj4")
-p = NodePath("../../Player")
-
-[node name="Panel_Char1" parent="Layer_1/Team_UI" instance=ExtResource("8_tbcqf")]
-layout_mode = 2
-
-[node name="Panel_Char2" parent="Layer_1/Team_UI" instance=ExtResource("8_tbcqf")]
-layout_mode = 2
-
-[node name="BloodOverlay" type="TextureRect" parent="Layer_1"]
+[node name="BloodOverlay" type="TextureRect" parent="HUD_elements"]
+modulate = Color(1, 1, 1, 0)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = -10.0
+offset_bottom = 10.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 texture = ExtResource("12_wtoa7")
-script = ExtResource("13_f4j4e")
+
+[node name="PanelContainer" type="PanelContainer" parent="HUD_elements"]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HUD_elements/PanelContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="FPS" type="Label" parent="HUD_elements/PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "aaa"
+label_settings = SubResource("LabelSettings_l4gnj")
+script = ExtResource("8_egwuq")
+
+[node name="AutoAim" type="Label" parent="HUD_elements/PanelContainer/VBoxContainer" node_paths=PackedStringArray("p")]
+layout_mode = 2
+text = "aa"
+label_settings = SubResource("LabelSettings_l4gnj")
+script = ExtResource("9_q47ex")
+p = NodePath("../../../../Player")
+
+[node name="Currency" type="Label" parent="HUD_elements/PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "aaa"
+label_settings = SubResource("LabelSettings_l4gnj")
+script = ExtResource("10_75qgu")
+PlayerInfo = ExtResource("10_ckewk")
+
+[node name="TeamHud" type="VBoxContainer" parent="HUD_elements"]
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -120.0
+offset_top = -69.0
+offset_bottom = 69.0
+grow_horizontal = 0
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/separation = 20
+script = ExtResource("6_xe7lk")
+
+[node name="Panel_Char1" parent="HUD_elements/TeamHud" instance=ExtResource("7_fqt64")]
+layout_mode = 2
