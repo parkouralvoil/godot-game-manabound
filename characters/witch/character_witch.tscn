@@ -1,7 +1,6 @@
-[gd_scene load_steps=14 format=3 uid="uid://dkyhb7voldou1"]
+[gd_scene load_steps=13 format=3 uid="uid://dkyhb7voldou1"]
 
 [ext_resource type="Script" path="res://characters/CharacterClass.gd" id="1_j0poo"]
-[ext_resource type="PackedScene" uid="uid://ckfsbsh4qe3us" path="res://scenes/skill_tree/stree_witch.tscn" id="2_rrqxe"]
 [ext_resource type="Script" path="res://characters/witch/scripts/witch_AbilityManager.gd" id="2_xnkl8"]
 [ext_resource type="Resource" uid="uid://do0figvykvlcp" path="res://characters/witch/witch_stats.tres" id="2_ygtrj"]
 [ext_resource type="Script" path="res://characters/witch/scripts/witch_AttackComponent.gd" id="3_b0vy3"]
@@ -11,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://bmykt4bk5s1bk" path="res://projectiles/ice_projectiles/frost_nova/frost_nova.tscn" id="7_5t8dy"]
 [ext_resource type="Script" path="res://characters/witch/scripts/witch_AmmoComponent.gd" id="7_jgtmk"]
 [ext_resource type="AudioStream" uid="uid://bj0nahh0080ju" path="res://assets/audio/sfx/character_sfx/frost_nova.mp3" id="8_jwyfu"]
-[ext_resource type="Texture2D" uid="uid://kdh26376nd2g" path="res://characters/witch/witch_arm.tres" id="9_khmxg"]
+[ext_resource type="Texture2D" uid="uid://kdh26376nd2g" path="res://characters/witch/visuals/witch_arm.tres" id="9_khmxg"]
 [ext_resource type="Texture2D" uid="uid://dmpunjpb4iuff" path="res://assets/sprite_characters/witch weapon.png" id="10_37iad"]
 
 [node name="character_Witch" type="Node2D"]
@@ -21,8 +20,6 @@ charge_type = 2
 
 [node name="AbilityManager" type="Node2D" parent="."]
 script = ExtResource("2_xnkl8")
-
-[node name="SkillTree" parent="AbilityManager" instance=ExtResource("2_rrqxe")]
 
 [node name="BasicAttack" type="Node2D" parent="AbilityManager"]
 script = ExtResource("3_b0vy3")

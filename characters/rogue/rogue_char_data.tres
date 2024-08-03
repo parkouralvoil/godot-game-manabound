@@ -2,9 +2,9 @@
 
 [ext_resource type="PackedScene" uid="uid://dyb83ujyxhk2b" path="res://characters/rogue/character_rogue.tscn" id="1_tlf23"]
 [ext_resource type="Script" path="res://characters/CharacterResource.gd" id="2_60cp1"]
-[ext_resource type="Texture2D" uid="uid://d0b5yrantkkqm" path="res://characters/rogue/rogue_arm.tres" id="3_hgjmt"]
-[ext_resource type="Texture2D" uid="uid://dfk82yyu3kqxe" path="res://characters/rogue/rogue_portrait.tres" id="4_mpu5f"]
-[ext_resource type="SpriteFrames" uid="uid://d1jev7rih8fxr" path="res://characters/rogue/rogue_spriteframes.tres" id="5_e00bt"]
+[ext_resource type="Texture2D" uid="uid://d0b5yrantkkqm" path="res://characters/rogue/visuals/rogue_arm.tres" id="3_hgjmt"]
+[ext_resource type="Texture2D" uid="uid://dfk82yyu3kqxe" path="res://characters/rogue/visuals/rogue_portrait.tres" id="4_mpu5f"]
+[ext_resource type="SpriteFrames" uid="uid://d1jev7rih8fxr" path="res://characters/rogue/visuals/rogue_spriteframes.tres" id="5_e00bt"]
 
 [resource]
 script = ExtResource("2_60cp1")

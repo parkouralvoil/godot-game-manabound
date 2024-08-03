@@ -7,11 +7,13 @@ class_name PlayerInfoResource
 	## affect the variables here, 
 	## for now its ayt but its worth considering to put it as a "var preload" in the FUTURE
 
+## OLD IDEA:
 # currency
-# upgrades unlocked
 # teambuffing relic inventory
 # overall, just makes communication between all scripts related to player easier
 	# so im using it for states as well hehe
+
+signal changed_buff_raw_atk
 
 enum States {
 	IDLE,
@@ -37,7 +39,7 @@ var basic_attacking: bool = false # replaces "is_firing"
 var can_charge: bool = true # for passive charge chars to set it false
 var charging: bool = false # for ult
 
-var mana_orbs: int = 0
+var mana_orbs: int = 5000
 
 ## set by player
 var aim_direction: Vector2
@@ -62,7 +64,4 @@ var buff_raw_atk: float = 0:
 		buff_raw_atk = value
 		changed_buff_raw_atk.emit()
 
-signal changed_buff_raw_atk
-
-func _ready() -> void:
-	mana_orbs = 0
+## READY FUNCTIONS DONT WORK HERE, cuz its a resource nto a node

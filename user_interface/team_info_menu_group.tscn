@@ -1,0 +1,101 @@
+[gd_scene load_steps=3 format=3 uid="uid://lieb5rtvgudj"]
+
+[ext_resource type="PackedScene" uid="uid://6dikqxysux0p" path="res://user_interface/skill_tree_menu/skill_tree_menu.tscn" id="1_3jjdu"]
+[ext_resource type="Script" path="res://user_interface/team_info_menu_group.gd" id="1_acnv3"]
+
+[node name="TeamInfoMenuGroup" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_acnv3")
+
+[node name="Background" type="ColorRect" parent="."]
+z_index = -1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.25098, 0.278431, 0.368627, 1)
+
+[node name="SkillTreeMenu" parent="." instance=ExtResource("1_3jjdu")]
+layout_mode = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 31.0
+grow_horizontal = 2
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 25
+theme_override_constants/margin_bottom = 10
+
+[node name="VBox" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="HBox1" type="HBoxContainer" parent="MarginContainer/VBox"]
+layout_mode = 2
+
+[node name="SkillTrees" type="Button" parent="MarginContainer/VBox/HBox1"]
+layout_mode = 2
+text = "Skill Trees"
+
+[node name="CharacterStats" type="Button" parent="MarginContainer/VBox/HBox1"]
+layout_mode = 2
+text = "Character Stats"
+
+[node name="Control" type="Control" parent="MarginContainer/VBox/HBox1"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ExitButton" type="Button" parent="MarginContainer/VBox/HBox1"]
+layout_mode = 2
+text = "Return"
+metadata/_edit_use_anchors_ = true
+
+[node name="line" type="ColorRect" parent="MarginContainer/VBox"]
+custom_minimum_size = Vector2(0, 3)
+layout_mode = 2
+color = Color(0.431373, 0.431373, 0.431373, 1)
+
+[node name="HBox2" type="HBoxContainer" parent="MarginContainer/VBox"]
+layout_mode = 2
+
+[node name="Char1" type="Button" parent="MarginContainer/VBox/HBox2"]
+custom_minimum_size = Vector2(114, 0)
+layout_mode = 2
+text = "Knight"
+clip_text = true
+
+[node name="Char2" type="Button" parent="MarginContainer/VBox/HBox2"]
+custom_minimum_size = Vector2(114, 0)
+layout_mode = 2
+text = "Witch"
+clip_text = true
+
+[node name="Char3" type="Button" parent="MarginContainer/VBox/HBox2"]
+custom_minimum_size = Vector2(114, 0)
+layout_mode = 2
+text = "Rogue"
+clip_text = true
+
+[node name="Spacer" type="Control" parent="MarginContainer/VBox/HBox2"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+
+[node name="CurrentMenu" type="Label" parent="MarginContainer/VBox/HBox2"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Knight Skill Tree"
+horizontal_alignment = 1
+
+[connection signal="pressed" from="MarginContainer/VBox/HBox1/ExitButton" to="." method="_on_exit_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBox/HBox2/Char1" to="." method="_on_char_1_pressed"]
+[connection signal="pressed" from="MarginContainer/VBox/HBox2/Char2" to="." method="_on_char_2_pressed"]

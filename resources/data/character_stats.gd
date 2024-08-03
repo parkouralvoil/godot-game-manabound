@@ -20,16 +20,18 @@ var MAX_CHARGE: float = 50:
 	set(value):
 		MAX_CHARGE = value
 		max_HP_changed.emit()
+
 @export var charge_tier: charge_tiers = charge_tiers.ONE:
 	set(tier):
 		charge_tier = tier
 		MAX_CHARGE = (50 * (tier+1))
 		max_charge_changed.emit()
-		print("tier = %s, max_charge = %f" % [str(tier), charge_tier])
+
 @export var MAX_AMMO: int = 7:
 	set(value):
 		MAX_AMMO = value
 		max_ammo_changed.emit()
+
 @export var reload_time: float = 0.5 ## seconds
 @export var SPD: float = 400 ## not yet used
 

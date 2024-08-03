@@ -14,7 +14,7 @@ var ranged_dmg: float = 5
 var bullet_speed: float = 400
 var ranged_max_distance: float = 275
 
-@onready var skill_tree: SkillTree = $SkillTree
+#@onready var skill_tree: SkillTree = $SkillTree
 
 func _ready() -> void:
 	character = owner

@@ -19,6 +19,7 @@ glow_blend_mode = 0
 glow_hdr_threshold = 0.9
 
 [node name="test_level" type="Node2D"]
+process_mode = 1
 script = ExtResource("1_xtwao")
 
 [node name="ParallaxBackground" parent="." instance=ExtResource("3_6smy2")]

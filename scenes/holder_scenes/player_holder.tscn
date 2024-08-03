@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scenes/holder_scenes/player_holder.gd" id="1_pvica"]
 [ext_resource type="PackedScene" uid="uid://c35wulwk6e3b4" path="res://scenes/player.tscn" id="1_ymobu"]
-[ext_resource type="LabelSettings" uid="uid://buthhqor0rds0" path="res://resources/font_settings/font_system_desc.tres" id="4_54xf7"]
+[ext_resource type="LabelSettings" uid="uid://buthhqor0rds0" path="res://resources/label_settings/font_system_desc.tres" id="3_a0ibe"]
 [ext_resource type="Script" path="res://user_interface/player_hud/team_UI_stuff/Team_UI.gd" id="6_xe7lk"]
 [ext_resource type="PackedScene" uid="uid://cdc6lfjuxxbia" path="res://user_interface/player_hud/team_UI_stuff/panel_char..tscn" id="7_fqt64"]
 [ext_resource type="Script" path="res://user_interface/player_hud/fps_counter.gd" id="8_egwuq"]
@@ -36,19 +36,19 @@ theme_override_constants/separation = 1
 modulate = Color(1, 1, 1, 0.788235)
 layout_mode = 2
 text = "aaa"
-label_settings = ExtResource("4_54xf7")
+label_settings = ExtResource("3_a0ibe")
 
 [node name="Ammo" type="Label" parent="Player/VBoxContainer"]
 modulate = Color(1, 1, 1, 0.8)
 layout_mode = 2
 text = "aa"
-label_settings = ExtResource("4_54xf7")
+label_settings = ExtResource("3_a0ibe")
 
 [node name="Charge" type="Label" parent="Player/VBoxContainer"]
 modulate = Color(1, 1, 1, 0.788235)
 layout_mode = 2
 text = "aa"
-label_settings = ExtResource("4_54xf7")
+label_settings = ExtResource("3_a0ibe")
 
 [node name="HUD_elements" type="CanvasLayer" parent="."]
 process_mode = 3
@@ -99,14 +99,19 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -120.0
-offset_top = -69.0
-offset_bottom = 69.0
+offset_left = -74.0
+offset_top = -29.0
+offset_bottom = 30.0
 grow_horizontal = 0
 grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
 mouse_filter = 2
 theme_override_constants/separation = 20
 script = ExtResource("6_xe7lk")
 
 [node name="Panel_Char1" parent="HUD_elements/TeamHud" instance=ExtResource("7_fqt64")]
+layout_mode = 2
+
+[node name="Panel_Char2" parent="HUD_elements/TeamHud" instance=ExtResource("7_fqt64")]
 layout_mode = 2

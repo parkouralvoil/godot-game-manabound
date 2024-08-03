@@ -1,9 +1,8 @@
-[gd_scene load_steps=16 format=3 uid="uid://dyb83ujyxhk2b"]
+[gd_scene load_steps=15 format=3 uid="uid://dyb83ujyxhk2b"]
 
 [ext_resource type="Script" path="res://characters/CharacterClass.gd" id="1_h1y8r"]
 [ext_resource type="Script" path="res://characters/rogue/scripts/rogue_AbilityManager.gd" id="2_hppn7"]
-[ext_resource type="Texture2D" uid="uid://d0b5yrantkkqm" path="res://characters/rogue/rogue_arm.tres" id="3_p6yb1"]
-[ext_resource type="PackedScene" uid="uid://csxjnretvvtdj" path="res://scenes/skill_tree/stree_knight.tscn" id="3_pv2tv"]
+[ext_resource type="Texture2D" uid="uid://d0b5yrantkkqm" path="res://characters/rogue/visuals/rogue_arm.tres" id="3_p6yb1"]
 [ext_resource type="Script" path="res://characters/rogue/scripts/rogue_AttackComponent.gd" id="4_u8b7v"]
 [ext_resource type="PackedScene" uid="uid://dn3gk3lgb0iqk" path="res://projectiles/fire_projectiles/fire_blade/fire_blade.tscn" id="5_ua7bq"]
 [ext_resource type="Texture2D" uid="uid://xm4il8dlpthl" path="res://assets/sprite_characters/rogue weapon.png" id="5_x463i"]
@@ -83,8 +82,6 @@ melee = true
 
 [node name="AbilityManager" type="Node2D" parent="."]
 script = ExtResource("2_hppn7")
-
-[node name="SkillTree" parent="AbilityManager" instance=ExtResource("3_pv2tv")]
 
 [node name="BasicAttack" type="Node2D" parent="AbilityManager"]
 script = ExtResource("4_u8b7v")

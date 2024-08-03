@@ -11,13 +11,13 @@ var enemy_chance_scaling: float = 0.1
 @onready var playerholder: Node2D = $PlayerHolder
 @onready var level: LevelManager #= get_child(0) ## REMEMBERRRRRRRRRRRRRRRRRRRRRRRR
 @onready var camera: PlayerCamera = $PlayerCamera
-@onready var black_screen: ColorRect = $CanvasLayer/Blackscreen 
-@onready var lvl_cleared_UI: CenterContainer = $CanvasLayer/CenterContainer
+@onready var black_screen: ColorRect = $MainCanvas/Blackscreen 
+@onready var popup_indicator: PopupIndicator = $MainCanvas/Popup_indicator
 
 
 func _ready() -> void:
 	#remove_child(playerholder)
-	lvl_cleared_UI.hide()
+	popup_indicator.hide()
 	EventBus.go_next_lvl.connect(load_next_lvl)
 	if not level:
 		load_next_lvl(null)
@@ -48,14 +48,14 @@ func enter_next_lvl() -> void:
 
 
 func load_next_lvl(current_lvl: LevelManager) -> void:
-	lvl_cleared_UI.hide()
+	popup_indicator.hide()
 	var inst: LevelManager
 	var t: Tween = create_tween()
 	enemy_chance += enemy_chance_scaling
 	black_screen.show()
 	t.set_ease(Tween.EASE_OUT)
 	EventBus.clear_abilities.emit()
-	t.tween_property(black_screen, "color", Color(0,0,0,1), 0.7)
+	t.tween_property(black_screen, "color", Color(0,0,0,1), 0.5)
 	await t.finished
 	
 	if level:
@@ -72,16 +72,6 @@ func load_next_lvl(current_lvl: LevelManager) -> void:
 
 
 func level_cleared_main() -> void:
-	show_lvl_cleared_UI()
+	popup_indicator.show_lvl_cleared()
 	await get_tree().create_timer(0.15).timeout
 	EnemyAiManager.call_attract_orbs.emit()
-
-
-func show_lvl_cleared_UI() -> void:
-	lvl_cleared_UI.show()
-	lvl_cleared_UI.modulate = Color(1, 1, 1, 1)
-	await get_tree().create_timer(2).timeout
-	var tw: Tween = create_tween()
-	tw.tween_property(lvl_cleared_UI, "modulate", Color(0, 0, 0, 0), 1)
-	await tw.finished
-	lvl_cleared_UI.hide()

@@ -1,6 +1,8 @@
 [gd_scene load_steps=13 format=3 uid="uid://bfigo4q6at8d8"]
 
 [ext_resource type="Script" path="res://scenes/main/main.gd" id="1_fwn4r"]
+[ext_resource type="PackedScene" uid="uid://dnfu85x4yhumf" path="res://user_interface/menu_manager.tscn" id="2_4a0os"]
+[ext_resource type="PackedScene" uid="uid://b3cfd23wes4l7" path="res://user_interface/popup_indicator/popup_indicator.tscn" id="2_udvq4"]
 [ext_resource type="PackedScene" uid="uid://quvfsmagt2h1" path="res://scenes/levels/PlayerCamera.tscn" id="3_b3eh2"]
 [ext_resource type="Script" path="res://scenes/main/particle_preloader_for_web.gd" id="4_j1irx"]
 [ext_resource type="PackedScene" uid="uid://c7qwpthsv6838" path="res://scenes/holder_scenes/player_holder.tscn" id="4_p316a"]
@@ -11,23 +13,17 @@
 [ext_resource type="Material" uid="uid://c8r5m4n7colab" path="res://resources/particles/laser_impact_particles.tres" id="9_sarm2"]
 [ext_resource type="AudioStream" uid="uid://nm3appge6che" path="res://assets/audio/music/DUNGEON002 (haven).mp3" id="10_6bqnx"]
 
-[sub_resource type="SystemFont" id="SystemFont_vuj0e"]
-font_italic = true
-
-[sub_resource type="LabelSettings" id="LabelSettings_ggscm"]
-line_spacing = 1.0
-font = SubResource("SystemFont_vuj0e")
-font_size = 20
-font_color = Color(0.992157, 1, 1, 1)
-shadow_size = 7
-
 [node name="Main" type="Node2D"]
+process_mode = 3
 script = ExtResource("1_fwn4r")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="MainCanvas" type="CanvasLayer" parent="."]
+layer = 2
 
-[node name="Blackscreen" type="ColorRect" parent="CanvasLayer"]
-visible = false
+[node name="MenuManager" parent="MainCanvas" instance=ExtResource("2_4a0os")]
+
+[node name="Blackscreen" type="ColorRect" parent="MainCanvas"]
+process_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -35,33 +31,20 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
-[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_bottom = -236.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer/CenterContainer"]
-custom_minimum_size = Vector2(300, 80)
-layout_mode = 2
-color = Color(0.0156863, 0.0352941, 0.0941176, 0.615686)
-
-[node name="LevelCleared" type="Label" parent="CanvasLayer/CenterContainer"]
-layout_mode = 2
-text = "ALL ENEMIES DEFEATED"
-label_settings = SubResource("LabelSettings_ggscm")
+[node name="Popup_indicator" parent="MainCanvas" instance=ExtResource("2_udvq4")]
+visible = false
 
 [node name="PlayerCamera" parent="." instance=ExtResource("3_b3eh2")]
 
 [node name="PlayerHolder" parent="." instance=ExtResource("4_p316a")]
+process_mode = 1
 
 [node name="level_summary" type="Node" parent="."]
 
 [node name="HTTPRequest" type="HTTPRequest" parent="level_summary"]
 
 [node name="particle_preloader_for_web" type="Node2D" parent="."]
+process_mode = 1
 script = ExtResource("4_j1irx")
 par_array = Array[ParticleProcessMaterial]([ExtResource("5_lx26c"), ExtResource("6_omtpx"), ExtResource("7_dlauh"), ExtResource("8_6k147"), ExtResource("9_sarm2")])
 

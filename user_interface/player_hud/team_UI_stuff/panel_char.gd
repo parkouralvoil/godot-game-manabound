@@ -1,7 +1,7 @@
 extends PanelContainer
 class_name Panel_Char
 
-@onready var sprite_portrait: TextureRect = $HBoxContainer/CharPortrait
+@onready var sprite_portrait: TextureRect = $CharPortrait
 @onready var char_name: Label = $HBoxContainer/VBoxContainer_info/Label_name
 @onready var health: Label = $HBoxContainer/VBoxContainer_info/Label_health
 @onready var ammo: Label = $HBoxContainer/VBoxContainer_info/Label_ammo

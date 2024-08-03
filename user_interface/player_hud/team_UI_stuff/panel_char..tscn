@@ -2,17 +2,26 @@
 
 [ext_resource type="Script" path="res://user_interface/player_hud/team_UI_stuff/panel_char.gd" id="1_n0l6s"]
 [ext_resource type="Texture2D" uid="uid://ci6hb127q6kmh" path="res://characters/knight/visuals/knight_portrait.tres" id="2_34r3i"]
-[ext_resource type="LabelSettings" uid="uid://buthhqor0rds0" path="res://resources/font_settings/font_system_desc.tres" id="3_ele2s"]
+[ext_resource type="LabelSettings" uid="uid://buthhqor0rds0" path="res://resources/label_settings/font_system_desc.tres" id="3_ele2s"]
 
 [node name="Panel_Char1" type="PanelContainer"]
-offset_right = 98.0
+offset_right = 93.0
 offset_bottom = 59.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
 mouse_filter = 2
 script = ExtResource("1_n0l6s")
 
+[node name="CharPortrait" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+texture = ExtResource("2_34r3i")
+stretch_mode = 5
+
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
+custom_minimum_size = Vector2(95, 0)
 layout_mode = 2
 
 [node name="VBoxContainer_info" type="VBoxContainer" parent="HBoxContainer"]
@@ -44,9 +53,3 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 10
 text = "Charge: 0/100"
 label_settings = ExtResource("3_ele2s")
-
-[node name="CharPortrait" type="TextureRect" parent="HBoxContainer"]
-custom_minimum_size = Vector2(40, 0)
-layout_mode = 2
-texture = ExtResource("2_34r3i")
-stretch_mode = 5

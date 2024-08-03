@@ -29,29 +29,23 @@ func _init() -> void:
 	create_subtree(right_nodes)
 	left_nodes[0].active = true
 	right_nodes[0].active = true
+	
+	left_nodes[0].parent = root_node
+	right_nodes[0].parent = root_node
 
 
 func create_subtree(node_array: Array[SkillTreeNode]) -> void:
-	var prev_node: SkillTreeNode = root_node
-	
+	## PARENT HAS TO BE ASSIGNED BY THE TREE
 	for i in range(4):
 		var node := SkillTreeNode.new()
 		if i != 0:
 			node.max_lvl = 1
-		node.parent = prev_node
 		node.name = str(i)
-		prev_node = node
 		node_array.append(node) ## NOTE: oh my lord i had this as "SkillTreeNode.new()" so node was ignored...
 
 
 func attempt_buy_node(node: SkillTreeNode) -> bool: ## bool to check if buying was successful
-	if node.info_node:
-		print("You passed an information node to (attempt_buy) with node: (%s)" % node.name)
-		return false
-	
-	if (PlayerInfo.mana_orbs >= node.cost 
-			and node.lvl < node.max_lvl 
-			and node.parent.active):
+	if check_if_can_buy(node):
 		buy_node(node)
 		return true
 	else:
@@ -65,6 +59,12 @@ func buy_node(node: SkillTreeNode) -> void:
 	node.lvl = min(node.lvl + 1, node.max_lvl)
 	node.cost = _cost_increase(node.cost)
 	skill_node_bought.emit() ## this will tell AM when to do (update_skills)
+
+
+func check_if_can_buy(node: SkillTreeNode) -> bool:
+	return (PlayerInfo.mana_orbs >= node.cost 
+			and node.lvl < node.max_lvl 
+			and node.parent.active)
 
 
 func _cost_increase(prev_cost: int) -> int:

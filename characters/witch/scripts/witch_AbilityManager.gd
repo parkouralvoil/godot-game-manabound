@@ -1,9 +1,10 @@
 extends Node2D
 class_name Witch_AbilityManager
 
+const StreeModel: SkillTreeModel = preload("res://characters/witch/witch_stree_model.tres")
+
 @onready var character: Character = owner
 @onready var PlayerInfo: PlayerInfoResource = character.PlayerInfo
-@onready var skill_tree: SkillTree = $SkillTree
 @onready var stats: CharacterStats = character.stats
 
 ## components
@@ -44,9 +45,9 @@ var second_icicle_dmg: float
 
 var frost_storm_dmg: float
 
-@onready var level_basicAtk_firerate: int = 0:
+@onready var level_basicAtk_reload: int = 0:
 	set(lvl):
-		level_basicAtk_firerate = lvl
+		level_basicAtk_reload = lvl
 		Ammo.t_ammo_regen.wait_time = base_reload_time - (
 			base_reload_time * scale_reload_time * lvl)
 
@@ -76,81 +77,94 @@ func _ready() -> void:
 	Ultimate.PlayerInfo = character.PlayerInfo
 	Ammo.PlayerInfo = character.PlayerInfo
 	
+	initialize_model()
+	StreeModel.skill_node_bought.connect(update_skills)
 	PlayerInfo.changed_buff_raw_atk.connect(update_damage)
 	update_damage()
 
 
-func stats_update() -> void:
-	level_basicAtk_firerate = skill_tree.BasicAtk_array[1].level
-	level_basicAtk_second_icicle = skill_tree.BasicAtk_array[2].level
+func update_skills() -> void:
+	level_basicAtk_reload = StreeModel.left_nodes[1].lvl
+	level_basicAtk_second_icicle = StreeModel.left_nodes[2].lvl
 	
-	level_ult_explosions = skill_tree.Ult_array[1].level
-	level_ult_size = skill_tree.Ult_array[2].level
+	level_ult_explosions = StreeModel.right_nodes[1].lvl
+	level_ult_size = StreeModel.right_nodes[2].lvl
 	
 	# boolean from int, 0 = false, 1 = true
-	skill_ult_crystalize = skill_tree.Ult_array[3].level
-	skill_basicAtk_crystalize = skill_tree.BasicAtk_array[3].level
+	skill_ult_crystalize = StreeModel.right_nodes[3].lvl
+	skill_basicAtk_crystalize = StreeModel.left_nodes[3].lvl
 
-func desc_update() -> void:
+
+func initialize_model() -> void:
 	## description of char
-	skill_tree.root_node.skill_name = "Apprentice Witch"
-	skill_tree.root_node.skill_desc = """A witch from Mana Haven, trained in the magic of Frost Art. 
+	StreeModel.root_node.name = "Apprentice Witch"
+	StreeModel.root_node.description = """A witch from Mana Haven, trained in the magic of Frost Art. 
 \nFrost Art is a mystic art of mana imparted to the witches by the elves of the north. 
 \nElement: Ice"""
 	
 	## char's basic atk nodes
-	skill_tree.BasicAtk_array[0].skill_name = "Apprentice's Icestaff"
-	skill_tree.BasicAtk_array[0].skill_desc = """Hold left click to fire ice spikes with %d%% base damage. 
+	StreeModel.left_nodes[0].name = "Apprentice's Icestaff"
+	StreeModel.left_nodes[0].description = """Hold left click to fire ice spikes with %d%% base damage. 
 \nThese spikes explode into icicles that deal %d%% base damage. 
 \nAmmo takes longer to reload.""" % (
 			[base_percent_frost_spear * 100, base_percent_1st_icicle * 100]
 		)
 	
-	skill_tree.BasicAtk_array[1].skill_name = "Pre-drawn Frost Spikes"
-	skill_tree.BasicAtk_array[1].skill_desc = """Each level decreases reload time by %.2f seconds""" % (
+	StreeModel.left_nodes[1].name = "Pre-drawn Frost Spikes"
+	StreeModel.left_nodes[1].description = """Each level decreases reload time by %.2f seconds""" % (
 			[scale_reload_time]
 	)
+	StreeModel.left_nodes[1].max_lvl = 3
+	StreeModel.left_nodes[1].cost = 350
 	
-	skill_tree.BasicAtk_array[2].skill_name = "Greater Icicles"
-	skill_tree.BasicAtk_array[2].skill_desc = "Icicles now explode for a 2nd time, dealing %d%% damage.
+	StreeModel.left_nodes[2].name = "Greater Icicles"
+	StreeModel.left_nodes[2].description = "Icicles now explode for a 2nd time, dealing %d%% damage.
 \nEach upgrade increases 1st icicle damage by %d%% and 2nd icicle damage by %d%%." % (
 			[base_percent_2nd_icicle * 100, scale_percent_1st_icicle * 100, scale_percent_2nd_icicle * 100]
 	)
+	StreeModel.left_nodes[2].max_lvl = 3
+	StreeModel.left_nodes[2].cost = 1400
 	
-	skill_tree.BasicAtk_array[3].skill_name = "Crystalized Spears"
-	skill_tree.BasicAtk_array[3].skill_desc = "Cystalization: detonates at 9 stacks or after 5 seconds. 
-\nEach stack deals 3 damage. 
-\nEvery 3 stacks increases crystalization damage by 20%"
+	StreeModel.left_nodes[3].name = "Crystalized Spears"
+	StreeModel.left_nodes[3].description = "Ice Spears and icicles now inflict a stack of crystalized.
+\nCrystalized: Detonates at 9 stack or after 2.5 seconds
+Each stack deals 5 damage, Every 3 stack increases final damage by 30%%"
+	StreeModel.left_nodes[2].cost = 3200
 	
 	# char's ult nodes
-	skill_tree.Ult_array[0].skill_name = "Frost Storm"
-	skill_tree.Ult_array[0].skill_desc = "Charge Type: Passive
-\nPassively accumulates charge. At 50 charge, press right click to cast a Frost Storm in the target position. 
-\nIce explosions from Frost Storm deals %d%% damage.
-\nHas a base charge rate of %d%%" % (
-			[base_ult_percent * 100, base_charge_rate]
+	StreeModel.right_nodes[0].name = "Frost Storm"
+	StreeModel.right_nodes[0].description = "Ultimate Type: Mana
+\nPassively accumulates mana. At 50 mana, press right click to cast a Frost Storm in the target position. 
+\nIce explosions from Frost Storm deals %d%% damage." % (
+			[base_ult_percent * 100]
 	)
 	
-	skill_tree.Ult_array[1].skill_name = "Longer Duration"
-	skill_tree.Ult_array[1].skill_desc = "Each level increases number of ice explosions by %d" % (
+	StreeModel.right_nodes[1].name = "Longer Duration"
+	StreeModel.right_nodes[1].description = "Each level increases number of ice explosions by %d" % (
 			[scale_ult_explosions]
 	)
+	StreeModel.right_nodes[1].max_lvl = 3
+	StreeModel.right_nodes[1].cost = 300
 	
-	skill_tree.Ult_array[2].skill_name = "Greater Frost Storm"
-	skill_tree.Ult_array[2].skill_desc = "Each level increases size of ice explosion by %d%%" % (
+	StreeModel.right_nodes[2].name = "Greater Frost Storm"
+	StreeModel.right_nodes[2].description = "Each level increases size of ice explosion by %d%%" % (
 			[scale_ult_size]
 	)
+	StreeModel.right_nodes[2].max_lvl = 3
+	StreeModel.right_nodes[2].cost = 1000
 	
-	skill_tree.Ult_array[3].skill_name = "Crystalized Storm"
-	skill_tree.Ult_array[3].skill_desc = "Ice explosions from Frost Storm now inflict a stack of crystalization.
-\nCystalization: detonates at 9 stacks or after 5 seconds. 
-\nEach stack deals 3 damage. 
-\nEvery 3 stacks increases crystalization damage by 20%"
-	## might wanna have this scale from EP
+	StreeModel.right_nodes[3].name = "Crystalized Storm"
+	StreeModel.right_nodes[3].description = "Explosions from Frost Storm now inflict a stack of crystalized.
+\nCrystalized: Detonates at 9 stack or after 2.5 seconds
+Each stack deals 5 damage, Every 3 stack increases final damage by 30%%"
+	StreeModel.right_nodes[2].cost = 2000
+	### might wanna have this scale from EP
+
 
 func compute(base: float, scaling: float, lvl: int) -> float:
 	var raw_output: float = character.stats.ATK * (base + scaling * max(0, lvl - 1))
 	return raw_output
+
 
 func update_damage() -> void:
 	frost_spike_dmg = compute(base_percent_frost_spear, 

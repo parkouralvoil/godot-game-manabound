@@ -3,18 +3,14 @@ class_name Character
 
 var PlayerInfo: PlayerInfoResource = preload("res://resources/data/player_info.tres")
 
-## MAKE ammo, charge, health, PART OF STATS RESOURCE
-
-@onready var skill_tree: SkillTree = $AbilityManager/SkillTree
 @onready var AM := $AbilityManager
 @onready var arm_sprite: Sprite2D = $Sprite2D_arm
 @onready var wpn_sprite: Sprite2D = $Sprite2D_arm/Sprite2D_wpn
-#@onready var bullet_origin: Marker2D = $Sprite2D_arm/bullet_origin
 
-# i want the AM to remain universal, the components are the ones who play around with eachother
+## i want the AM to remain universal, the components are the ones who play around with eachother
 @onready var CM: CharacterManager = get_parent()
 
-var enabled: bool = false # managed by char manager
+var enabled: bool = false ## managed by char manager
 
 @export var stats: CharacterStats
 
@@ -24,28 +20,17 @@ var enabled: bool = false # managed by char manager
 
 
 func _ready() -> void:
-	skill_tree.hide()
 	stats.HP = stats.MAX_HP
 	stats.ammo = stats.MAX_AMMO
 	
 	stats.max_HP_changed.connect(_on_max_health_change)
 	stats.max_ammo_changed.connect(_on_max_ammo_change)
 	stats.max_charge_changed.connect(_on_max_charge_change)
-	
-	#if AM.has_method("stats_update"): ## temporary if condition, just for testing
-		#AM.stats_update()
-		#AM.desc_update()
 
 
 func _process(_delta: float) -> void:
 	if !enabled:
-		if skill_tree.visible:
-			skill_tree.hide()
 		return
-	if Input.is_action_just_pressed("shop_key") and !skill_tree.visible:
-		skill_tree.show()
-		skill_tree.selected_node = skill_tree.root_node
-		get_tree().paused = true
 	
 	## since these variables change frequently
 	PlayerInfo.displayed_charge = stats.charge
@@ -91,4 +76,4 @@ func apply_player_cam_shake(strength: int) -> void:
 func sprite_look_at(direction: Vector2) -> void:
 	if CM:
 		CM.sprite_look_at(direction)
-#endregio
+#endregion

@@ -1,51 +1,64 @@
-[gd_scene load_steps=4 format=3 uid="uid://6dikqxysux0p"]
+[gd_scene load_steps=5 format=3 uid="uid://6dikqxysux0p"]
 
 [ext_resource type="Script" path="res://user_interface/skill_tree_menu/skill_tree_menu.gd" id="1_3r2he"]
-[ext_resource type="PackedScene" uid="uid://ynd4jyc4neao" path="res://scenes/skill_tree/skill_info.tscn" id="1_ag6n8"]
 [ext_resource type="PackedScene" uid="uid://dblvtepnyt1hx" path="res://user_interface/skill_tree_menu/stree_specific/stree_knight.tscn" id="3_mn811"]
+[ext_resource type="PackedScene" uid="uid://cbv6l6ryqhw1x" path="res://user_interface/skill_tree_menu/stree_specific/stree_witch.tscn" id="3_p3yjx"]
+[ext_resource type="PackedScene" uid="uid://ynd4jyc4neao" path="res://user_interface/skill_tree_menu/skill_info/skill_info.tscn" id="3_uohtl"]
 
 [node name="SkillTreeMenu" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_3r2he")
 
-[node name="Background" type="ColorRect" parent="."]
-z_index = -1
+[node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 1
-color = Color(0.0509804, 0.133333, 0.223529, 1)
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 60
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 10
 
-[node name="Skill_Info" parent="." instance=ExtResource("1_ag6n8")]
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_top = -439.0
-offset_right = 257.0
-offset_bottom = -50.0
-grow_vertical = 0
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
 
-[node name="Stree_Knight" parent="." instance=ExtResource("3_mn811")]
-layout_mode = 1
+[node name="StreeHolder" type="AspectRatioContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
 
-[node name="ExitButton" type="Button" parent="."]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.852
-anchor_top = 0.0591837
-anchor_right = 0.952
-anchor_bottom = 0.122449
-grow_horizontal = 0
-text = "Close"
+[node name="Knight Skill Tree" parent="MarginContainer/HBoxContainer/StreeHolder" instance=ExtResource("3_mn811")]
+layout_mode = 2
+
+[node name="Witch Skill Tree" parent="MarginContainer/HBoxContainer/StreeHolder" instance=ExtResource("3_p3yjx")]
+layout_mode = 2
+
+[node name="Spacer" type="Control" parent="MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_bottom = 30
+
+[node name="Skill_Info" parent="MarginContainer/HBoxContainer/MarginContainer" instance=ExtResource("3_uohtl")]
+layout_mode = 2
 metadata/_edit_use_anchors_ = true
 
-[connection signal="pressed" from="ExitButton" to="." method="_on_exit_button_pressed"]
+[node name="OrbsDisplay" type="Label" parent="."]
+layout_mode = 0
+offset_left = 46.0
+offset_top = 399.0
+offset_right = 86.0
+offset_bottom = 422.0
+text = "Mana Orbs: 9"

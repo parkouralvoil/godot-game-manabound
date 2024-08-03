@@ -9,6 +9,10 @@ signal level_cleared
 @onready var enemy_holder: EnemyHolder = $EnemyHolder
 
 
+func _ready() -> void:
+	process_mode = Node.PROCESS_MODE_PAUSABLE
+
+
 func level_is_cleared() -> void:
 	door.open()
 	level_cleared.emit()

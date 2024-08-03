@@ -9,7 +9,10 @@ var lvl: int = 0:
 	set(val):
 		lvl = val
 		node_updated.emit()
-var max_lvl: int = 0
+var max_lvl: int = 0:
+	set(val):
+		max_lvl = val
+		node_updated.emit()
 
 var parent: SkillTreeNode = null:
 	set(node):

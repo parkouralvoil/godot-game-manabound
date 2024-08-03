@@ -1,6 +1,6 @@
 [gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://crxqvqu7eeoj8"]
 
-[ext_resource type="FontFile" uid="uid://c41yv1d1anklx" path="res://assets/Silver.ttf" id="1_6dgo8"]
+[ext_resource type="FontFile" uid="uid://c41yv1d1anklx" path="res://assets/fonts/Silver.ttf" id="1_6dgo8"]
 
 [resource]
 line_spacing = -3.0
