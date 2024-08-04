@@ -1,7 +1,7 @@
 [gd_scene load_steps=15 format=3 uid="uid://dblvtepnyt1hx"]
 
-[ext_resource type="Script" path="res://user_interface/skill_tree_menu/stree.gd" id="1_xpeam"]
-[ext_resource type="PackedScene" uid="uid://ckobamacrfgq1" path="res://user_interface/skill_tree_menu/skill_node_button.tscn" id="2_b3vp8"]
+[ext_resource type="Script" path="res://user_interface/team_info_menu_group/skill_tree_menu/stree.gd" id="1_xpeam"]
+[ext_resource type="PackedScene" uid="uid://ckobamacrfgq1" path="res://user_interface/team_info_menu_group/skill_tree_menu/skill_node_button.tscn" id="2_b3vp8"]
 [ext_resource type="Resource" uid="uid://cqakpeajr2jcy" path="res://characters/knight/knight_stree_model.tres" id="2_ctwew"]
 [ext_resource type="Texture2D" uid="uid://h46xv64l4n2u" path="res://assets/sprite_UI/AbilityIcons0.png" id="3_6roue"]
 

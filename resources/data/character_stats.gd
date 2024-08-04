@@ -37,13 +37,15 @@ var MAX_CHARGE: float = 50:
 
 @export_category("Kit Specific") ## export variables in character
 @export var firerate: float = 7
+@export var charge_type: PlayerInfoResource.ChargeTypes = PlayerInfoResource.ChargeTypes.CHARGE
+@export var element: CombatManager.Elements = CombatManager.Elements.LIGHTNING
+@export var melee: bool = false
 
 enum charge_tiers{
 	ONE,
 	TWO,
 	THREE,
 }
-
 
 ## signals to connect for playerinfo
 signal max_HP_changed

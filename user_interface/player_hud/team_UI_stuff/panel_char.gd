@@ -46,12 +46,12 @@ func update_ammo() -> void:
 
 func update_charge() -> void:
 	var type: String = "Charge"
-	match tracked_character.charge_type:
-		PlayerInfoResource.ChargeTypes.BURST:
+	match tracked_character.stats.charge_type:
+		PlayerInfoResource.ChargeTypes.CHARGE:
 			type = "Charge"
 		PlayerInfoResource.ChargeTypes.ENERGY:
 			type = "Energy"
-		PlayerInfoResource.ChargeTypes.PASSIVE:
+		PlayerInfoResource.ChargeTypes.MANA:
 			type = "Mana"
 	
 	var format_string: String = "%s: %d/%d"

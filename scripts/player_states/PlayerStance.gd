@@ -36,7 +36,7 @@ func Update(_delta: float) -> void:
 func Physics_Update(_delta: float) -> void:
 	if !p:
 		return
-	if p.PlayerInfo.current_charge_type != PlayerInfoResource.ChargeTypes.PASSIVE:
+	if p.PlayerInfo.current_charge_type == PlayerInfoResource.ChargeTypes.CHARGE:
 		p.velocity = slow_speed * p.move_direction
 	else:
 		p.velocity = Vector2.ZERO

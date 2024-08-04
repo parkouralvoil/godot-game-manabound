@@ -1,0 +1,68 @@
+[gd_scene load_steps=5 format=3 uid="uid://bw8ij5pmpfuvl"]
+
+[ext_resource type="Texture2D" uid="uid://yylj6tta24tp" path="res://characters/knight/visuals/knight_window.tres" id="1_hin0k"]
+[ext_resource type="Script" path="res://user_interface/team_info_menu_group/character_status_menu/character_window.gd" id="1_w3dlk"]
+[ext_resource type="LabelSettings" uid="uid://2ltl51gdr4g6" path="res://user_interface/team_info_menu_group/character_status_menu/char_status_label.tres" id="2_63k2e"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_u14qa"]
+font_size = 12
+
+[node name="CharacterWindow" type="PanelContainer"]
+custom_minimum_size = Vector2(140, 0)
+offset_right = 140.0
+offset_bottom = 246.0
+script = ExtResource("1_w3dlk")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_right = 5
+
+[node name="VBox" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="char_name" type="Label" parent="MarginContainer/VBox"]
+layout_mode = 2
+text = "Knight"
+horizontal_alignment = 1
+
+[node name="SpritePicture" type="TextureRect" parent="MarginContainer/VBox"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+texture = ExtResource("1_hin0k")
+stretch_mode = 5
+
+[node name="element" type="Label" parent="MarginContainer/VBox"]
+layout_mode = 2
+text = "Element: Lightning"
+label_settings = SubResource("LabelSettings_u14qa")
+
+[node name="line" type="ColorRect" parent="MarginContainer/VBox"]
+custom_minimum_size = Vector2(0, 3)
+layout_mode = 2
+color = Color(0.556863, 0.556863, 0.556863, 1)
+
+[node name="basic_atk" type="Label" parent="MarginContainer/VBox"]
+layout_mode = 2
+text = "Basic Attack: "
+label_settings = ExtResource("2_63k2e")
+
+[node name="basic_atk_name" type="Label" parent="MarginContainer/VBox"]
+layout_mode = 2
+text = "Rapidfire Crossbow"
+label_settings = ExtResource("2_63k2e")
+
+[node name="line2" type="ColorRect" parent="MarginContainer/VBox"]
+custom_minimum_size = Vector2(0, 3)
+layout_mode = 2
+color = Color(0.556863, 0.556863, 0.556863, 1)
+
+[node name="ult" type="Label" parent="MarginContainer/VBox"]
+layout_mode = 2
+text = "Ultimate Ability:"
+label_settings = ExtResource("2_63k2e")
+
+[node name="ult_name" type="Label" parent="MarginContainer/VBox"]
+layout_mode = 2
+text = "Grand Ballista"
+label_settings = ExtResource("2_63k2e")

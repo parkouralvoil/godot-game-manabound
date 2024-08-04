@@ -22,12 +22,12 @@ enum States {
 }
 var current_state: States = States.IDLE
 
-enum ChargeTypes {
-	BURST,
-	ENERGY,
-	PASSIVE
+enum ChargeTypes { ## i wanna rename this UltTypes but too much hassle, CHARGE works alrdy
+	CHARGE, ## previously BURST
+	ENERGY, ## previously ACTIVE
+	MANA ## previously PASSIVE
 }
-var current_charge_type: ChargeTypes = ChargeTypes.BURST
+var current_charge_type: ChargeTypes = ChargeTypes.CHARGE
 
 ## logic for inputs
 var input_attack: bool = false
@@ -39,7 +39,7 @@ var basic_attacking: bool = false # replaces "is_firing"
 var can_charge: bool = true # for passive charge chars to set it false
 var charging: bool = false # for ult
 
-var mana_orbs: int = 5000
+var mana_orbs: int = 500000
 
 ## set by player
 var aim_direction: Vector2

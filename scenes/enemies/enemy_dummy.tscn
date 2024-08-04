@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scenes/enemies/BaseEnemy.gd" id="1_qibg1"]
 [ext_resource type="PackedScene" uid="uid://ccfj5qan8stdb" path="res://projectiles/bullet_impact.tscn" id="2_wt2d2"]
-[ext_resource type="Texture2D" uid="uid://mnqy6onwpiay" path="res://resources/enemy_dead.tres" id="3_nci7v"]
+[ext_resource type="Texture2D" uid="uid://mnqy6onwpiay" path="res://resources/textures/impacts/enemy_dead.tres" id="3_nci7v"]
 [ext_resource type="Texture2D" uid="uid://b5uv1u6y5momf" path="res://assets/sprite_enemies/bsf autobow.png" id="4_xjw5w"]
 [ext_resource type="PackedScene" uid="uid://bx54isqpe5u3x" path="res://scenes/enemies/enemies_components/HealthComponent_enemy.tscn" id="6_0yksb"]
 [ext_resource type="Script" path="res://scripts/entity_components/HurtboxComponent_enemy.gd" id="7_0xhqn"]

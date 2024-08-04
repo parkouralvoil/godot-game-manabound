@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://ckobamacrfgq1"]
 
 [ext_resource type="Texture2D" uid="uid://h46xv64l4n2u" path="res://assets/sprite_UI/AbilityIcons0.png" id="1_y5des"]
-[ext_resource type="Script" path="res://user_interface/skill_tree_menu/skill_node_button.gd" id="2_pvbba"]
+[ext_resource type="Script" path="res://user_interface/team_info_menu_group/skill_tree_menu/skill_node_button.gd" id="2_pvbba"]
 [ext_resource type="LabelSettings" uid="uid://buthhqor0rds0" path="res://resources/label_settings/font_system_desc.tres" id="3_n7160"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_y0w4i"]

@@ -13,3 +13,6 @@ MAX_AMMO = 5
 reload_time = 1.0
 SPD = 400.0
 firerate = 3.0
+charge_type = 2
+element = 2
+melee = false

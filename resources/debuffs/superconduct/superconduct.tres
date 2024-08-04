@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Superconduct" load_steps=4 format=3 uid="uid://c1kncqtjwfxj"]
+
+[ext_resource type="Script" path="res://resources/debuffs/superconduct/superconduct.gd" id="1_r5rfi"]
+[ext_resource type="Material" uid="uid://bccvk3vgyafgq" path="res://resources/debuffs/superconduct/superconduct_particles.tres" id="1_wupda"]
+[ext_resource type="Texture2D" uid="uid://dm5mfus5ewtdb" path="res://resources/debuffs/superconduct/superconduct_texture.tres" id="2_jogbb"]
+
+[resource]
+script = ExtResource("1_r5rfi")
+duration = 7.0
+particles_process_mat = ExtResource("1_wupda")
+particles_textures = ExtResource("2_jogbb")
+one_shot = true
+amount = 30
+explosiveness = 1.0
+lifetime = 0.7
+dmg_proc = 3.0

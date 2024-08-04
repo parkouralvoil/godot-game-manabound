@@ -129,7 +129,7 @@ func initialize_model() -> void:
 	StreeModel.left_nodes[3].description = "Ice Spears and icicles now inflict a stack of crystalized.
 \nCrystalized: Detonates at 9 stack or after 2.5 seconds
 Each stack deals 5 damage, Every 3 stack increases final damage by 30%%"
-	StreeModel.left_nodes[2].cost = 3200
+	StreeModel.left_nodes[3].cost = 3200
 	
 	# char's ult nodes
 	StreeModel.right_nodes[0].name = "Frost Storm"
@@ -157,7 +157,7 @@ Each stack deals 5 damage, Every 3 stack increases final damage by 30%%"
 	StreeModel.right_nodes[3].description = "Explosions from Frost Storm now inflict a stack of crystalized.
 \nCrystalized: Detonates at 9 stack or after 2.5 seconds
 Each stack deals 5 damage, Every 3 stack increases final damage by 30%%"
-	StreeModel.right_nodes[2].cost = 2000
+	StreeModel.right_nodes[3].cost = 2000
 	### might wanna have this scale from EP
 
 

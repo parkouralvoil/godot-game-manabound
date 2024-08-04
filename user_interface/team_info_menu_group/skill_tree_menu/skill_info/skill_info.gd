@@ -5,7 +5,7 @@ signal buy_button_pressed
 
 @onready var icon: TextureRect = $MarginContainer/VBox/SkillIcon
 @onready var skill_name: Label = $MarginContainer/VBox/name
-@onready var skill_desc: Label = $MarginContainer/VBox/description
+@onready var skill_desc: Label = $MarginContainer/VBox/ScrollContainer/description
 @onready var skill_lvl: Label = $MarginContainer/VBox/lvl
 @onready var skill_cost: Label = $MarginContainer/VBox/cost
 @onready var buy_button: Button = $MarginContainer/VBox/Buy_Button

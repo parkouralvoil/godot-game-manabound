@@ -1,7 +1,8 @@
-[gd_scene load_steps=13 format=3 uid="uid://c7qwpthsv6838"]
+[gd_scene load_steps=14 format=3 uid="uid://c7qwpthsv6838"]
 
 [ext_resource type="Script" path="res://scenes/holder_scenes/player_holder.gd" id="1_pvica"]
 [ext_resource type="PackedScene" uid="uid://c35wulwk6e3b4" path="res://scenes/player.tscn" id="1_ymobu"]
+[ext_resource type="Resource" uid="uid://drmmperiwdmdh" path="res://resources/subscriptions/PlayerHolder_to_UI.tres" id="2_avd8w"]
 [ext_resource type="LabelSettings" uid="uid://buthhqor0rds0" path="res://resources/label_settings/font_system_desc.tres" id="3_a0ibe"]
 [ext_resource type="Script" path="res://user_interface/player_hud/team_UI_stuff/Team_UI.gd" id="6_xe7lk"]
 [ext_resource type="PackedScene" uid="uid://cdc6lfjuxxbia" path="res://user_interface/player_hud/team_UI_stuff/panel_char..tscn" id="7_fqt64"]
@@ -22,6 +23,7 @@ font_color = Color(0.901961, 0.901961, 0.901961, 0.901961)
 
 [node name="PlayerHolder" type="Node2D"]
 script = ExtResource("1_pvica")
+subscribe_playerholder_ui = ExtResource("2_avd8w")
 
 [node name="Player" parent="." instance=ExtResource("1_ymobu")]
 
@@ -111,7 +113,13 @@ theme_override_constants/separation = 20
 script = ExtResource("6_xe7lk")
 
 [node name="Panel_Char1" parent="HUD_elements/TeamHud" instance=ExtResource("7_fqt64")]
+visible = false
 layout_mode = 2
 
 [node name="Panel_Char2" parent="HUD_elements/TeamHud" instance=ExtResource("7_fqt64")]
+visible = false
+layout_mode = 2
+
+[node name="Panel_Char3" parent="HUD_elements/TeamHud" instance=ExtResource("7_fqt64")]
+visible = false
 layout_mode = 2

@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scenes/enemies/mobile_enemies/drone_small/enemy_smalldrone.gd" id="1_0q3x6"]
 [ext_resource type="PackedScene" uid="uid://ccfj5qan8stdb" path="res://projectiles/bullet_impact.tscn" id="2_0ja26"]
 [ext_resource type="Texture2D" uid="uid://c5yynjtnoolo2" path="res://assets/sprite_enemies/smalldrone.png" id="2_4y6fh"]
-[ext_resource type="Texture2D" uid="uid://mnqy6onwpiay" path="res://resources/enemy_dead.tres" id="3_qkuvi"]
+[ext_resource type="Texture2D" uid="uid://mnqy6onwpiay" path="res://resources/textures/impacts/enemy_dead.tres" id="3_qkuvi"]
 [ext_resource type="Script" path="res://scripts/entity_components/HurtboxComponent_enemy.gd" id="3_st8q1"]
 [ext_resource type="Script" path="res://scripts/entity_components/attack_components_specific/AttackComponent_Drone.gd" id="4_nuqg1"]
 [ext_resource type="PackedScene" uid="uid://bx54isqpe5u3x" path="res://scenes/enemies/enemies_components/HealthComponent_enemy.tscn" id="5_mrnqf"]

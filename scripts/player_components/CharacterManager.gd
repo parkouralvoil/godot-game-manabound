@@ -61,14 +61,14 @@ func change_character(num: int) -> void:
 	current_char_spriteframes = _char.spriteframes
 	current_char_fake_arm = _char.sprite_arm
 	current_char.global_position = self.global_position
-	p.PlayerInfo.melee_character = current_char.melee ## tells PlayerInfo if current char is a melee char
+	p.PlayerInfo.melee_character = current_char.stats.melee ## tells PlayerInfo if current char is a melee char
 	
 	_AM.enabled = true
 	_char.selected = true
 	
 	p.anim_sprite.sprite_frames = current_char_spriteframes
 	p.arm_node.remote_path = current_char.arm_sprite.get_path()
-	p.PlayerInfo.current_charge_type = current_char.charge_type
+	p.PlayerInfo.current_charge_type = current_char.stats.charge_type
 	p.arm_sprite = current_char.arm_sprite
 	p.wpn_sprite = current_char.wpn_sprite
 	

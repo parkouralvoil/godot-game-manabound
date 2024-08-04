@@ -1,15 +1,23 @@
-[gd_resource type="Resource" script_class="CharacterResource" load_steps=6 format=3 uid="uid://bt57r35hpevcb"]
+[gd_resource type="Resource" script_class="CharacterResource" load_steps=9 format=3 uid="uid://bt57r35hpevcb"]
 
 [ext_resource type="PackedScene" uid="uid://despujxox3cs7" path="res://characters/knight/character_knight.tscn" id="1_3qysw"]
-[ext_resource type="Script" path="res://characters/CharacterResource.gd" id="2_jelce"]
+[ext_resource type="Script" path="res://characters/CharacterResource.gd" id="2_es5gc"]
+[ext_resource type="PackedScene" uid="uid://dblvtepnyt1hx" path="res://user_interface/team_info_menu_group/skill_tree_menu/stree_specific/stree_knight.tscn" id="3_njqoj"]
 [ext_resource type="Texture2D" uid="uid://3jkuw6bwhk01" path="res://characters/knight/visuals/knight_arm.tres" id="3_pvj11"]
 [ext_resource type="Texture2D" uid="uid://ci6hb127q6kmh" path="res://characters/knight/visuals/knight_portrait.tres" id="4_gj36d"]
 [ext_resource type="SpriteFrames" uid="uid://n8tavxox3kua" path="res://characters/knight/visuals/knight_spriteframes.tres" id="5_bb4yo"]
+[ext_resource type="Texture2D" uid="uid://yylj6tta24tp" path="res://characters/knight/visuals/knight_window.tres" id="5_mi2sv"]
+[ext_resource type="Resource" uid="uid://fbbdhnnk7q74" path="res://characters/knight/knight_stats.tres" id="7_rvbwx"]
 
 [resource]
-script = ExtResource("2_jelce")
+script = ExtResource("2_es5gc")
 character_scene = ExtResource("1_3qysw")
 spriteframes = ExtResource("5_bb4yo")
 sprite_arm = ExtResource("3_pvj11")
+skill_tree_scene = ExtResource("3_njqoj")
 sprite_portrait = ExtResource("4_gj36d")
+sprite_window = ExtResource("5_mi2sv")
 char_name = "Knight"
+stats = ExtResource("7_rvbwx")
+basic_atk_name = "Rapidfire Crossbow"
+ult_name = "Grand Ballista"

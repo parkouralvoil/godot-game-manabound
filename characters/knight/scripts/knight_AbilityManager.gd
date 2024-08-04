@@ -8,14 +8,9 @@ class_name Knight_AbilityManager
 
 const StreeModel: SkillTreeModel = preload("res://characters/knight/knight_stree_model.tres")
 
-@onready var character: Character = owner
-@onready var PlayerInfo: PlayerInfoResource = character.PlayerInfo
-@onready var stats: CharacterStats = character.stats
-
-## components:
-@onready var BasicAttack: Knight_AttackComponent = $BasicAttack
-@onready var Ultimate: Knight_UltimateComponent = $Ultimate
-@onready var Ammo: Knight_AmmoComponent = $Ammo
+## names
+var _basic_atk_name: String = "Rapidfire Crossbow"
+var _ult_name: String = "Grand Ballista"
 
 ## Basic atk properties
 var bullet_speed: float = 450
@@ -35,17 +30,30 @@ var base_ult_percent_tier1: float = 3 ## tier 2 gives "shotgun" effect
 
 var scale_ult_percent_tier1: float = 0.4
 
-## Stats scaling
-@onready var base_max_ammo: int = stats.MAX_AMMO ## MUST NOT BE CHANGED AGAIN
-var scale_ammo: int = 2
-@onready var base_CHR: float = stats.CHR
 var scale_CHR: float = 10 ## charge rate
+var scale_ammo: int = 2
 
 ## Final Computations
 var damage_lightning_bolt: float
 var damage_basic_bolt: float
 
 var ult_damage_tier1: float
+
+var skill_ult_missile: bool = false
+var skill_basicAtk_double: bool = false
+
+@onready var character: Character = owner
+@onready var PlayerInfo: PlayerInfoResource = character.PlayerInfo
+@onready var stats: CharacterStats = character.stats
+
+## components:
+@onready var BasicAttack: Knight_AttackComponent = $BasicAttack
+@onready var Ultimate: Knight_UltimateComponent = $Ultimate
+@onready var Ammo: Knight_AmmoComponent = $Ammo
+
+## Stats scaling
+@onready var base_max_ammo: int = stats.MAX_AMMO ## MUST NOT BE CHANGED AGAIN
+@onready var base_CHR: float = stats.CHR
 
 ## variables to make skill tree easier to track:
 @onready var level_basicAtk_ammo: int = 0:
@@ -74,9 +82,6 @@ var ult_damage_tier1: float
 		level_ult_chargeRate = level
 		stats.CHR = base_CHR + (scale_CHR * level)
 
-var skill_ult_missile: bool = false
-var skill_basicAtk_double: bool = false
-
 
 func _ready() -> void:
 	BasicAttack.PlayerInfo = character.PlayerInfo
@@ -104,13 +109,13 @@ func update_skills() -> void:
 #region Initialize Model
 func initialize_model() -> void:
 	## description of char
-	StreeModel.root_node.name = "Infantry Knight"
+	StreeModel.root_node.name = "Infantry Knight" ## more detailed name purely for stree
 	StreeModel.root_node.description = """An infantry soldier wielding a rapid-fire crossbow.
 \nHailing from the City of Light, these lightning knights pave the way for technology in a world dominated by magic.
 \nElement: Lightning"""
 	
 	## char's basic atk nodes -----------------------------------------------------
-	StreeModel.left_nodes[0].name = "Rapid-fire Crossbow"
+	StreeModel.left_nodes[0].name = _basic_atk_name
 	StreeModel.left_nodes[0].description = """Hold left click to fire lightning bolts with %d%% base damage. 
 \nRequires ammo which reloads overtime.""" % (
 		[base_percent_basic_bolt * 100]
@@ -137,7 +142,7 @@ func initialize_model() -> void:
 	StreeModel.left_nodes[3].cost = 5000
 	
 	## char's ult nodes -----------------------------------------------------
-	StreeModel.right_nodes[0].name = "Grand Ballista"
+	StreeModel.right_nodes[0].name = _ult_name
 	StreeModel.right_nodes[0].description = """Ultimate Type: Charge
 \nHold down right click until you reach a charge tier (50, 100) then let go to fire a Grand Bolt with %d%% base damage.
 \nHas a base charge rate of %d%%
@@ -171,7 +176,7 @@ func compute(base: float, scaling: float, level: int) -> float:
 		+ scaling * max(0, level - 1))
 	
 	return raw_output
-	
+
 
 func update_damage() -> void:
 	damage_lightning_bolt = compute(base_percent_lightning_bolt, scale_percent_lightning_bolt, level_basicAtk_upgrade)

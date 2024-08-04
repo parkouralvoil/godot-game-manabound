@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://dnfu85x4yhumf"]
 
 [ext_resource type="Script" path="res://user_interface/menu_manager.gd" id="1_6gycy"]
-[ext_resource type="PackedScene" uid="uid://lieb5rtvgudj" path="res://user_interface/team_info_menu_group.tscn" id="2_kfbnn"]
+[ext_resource type="PackedScene" uid="uid://lieb5rtvgudj" path="res://user_interface/team_info_menu_group/team_info_menu_group.tscn" id="2_kfbnn"]
 
 [node name="MenuManager" type="Control"]
 process_mode = 3
@@ -21,13 +21,6 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="CheatMenu" type="Control" parent="."]
-visible = false
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="CharacterStatsMenu" type="Control" parent="."]
 visible = false
 layout_mode = 3
 anchors_preset = 0

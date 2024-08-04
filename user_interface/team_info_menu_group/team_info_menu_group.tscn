@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://lieb5rtvgudj"]
+[gd_scene load_steps=5 format=3 uid="uid://lieb5rtvgudj"]
 
-[ext_resource type="PackedScene" uid="uid://6dikqxysux0p" path="res://user_interface/skill_tree_menu/skill_tree_menu.tscn" id="1_3jjdu"]
-[ext_resource type="Script" path="res://user_interface/team_info_menu_group.gd" id="1_acnv3"]
+[ext_resource type="Script" path="res://user_interface/team_info_menu_group/team_info_menu_group.gd" id="1_iqaa8"]
+[ext_resource type="Resource" uid="uid://drmmperiwdmdh" path="res://resources/subscriptions/PlayerHolder_to_UI.tres" id="2_18cph"]
+[ext_resource type="PackedScene" uid="uid://6dikqxysux0p" path="res://user_interface/team_info_menu_group/skill_tree_menu/skill_tree_menu.tscn" id="2_icl2l"]
+[ext_resource type="PackedScene" uid="uid://brfpdmoe2l0uu" path="res://user_interface/team_info_menu_group/character_status_menu/character_status_menu.tscn" id="3_sb7mf"]
 
 [node name="TeamInfoMenuGroup" type="Control"]
 layout_mode = 3
@@ -10,7 +12,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_acnv3")
+script = ExtResource("1_iqaa8")
+subscribe_playerholder_ui = ExtResource("2_18cph")
 
 [node name="Background" type="ColorRect" parent="."]
 z_index = -1
@@ -21,9 +24,13 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-color = Color(0.25098, 0.278431, 0.368627, 1)
+color = Color(0.25, 0.28, 0.37, 1)
 
-[node name="SkillTreeMenu" parent="." instance=ExtResource("1_3jjdu")]
+[node name="SkillTreeMenu" parent="." instance=ExtResource("2_icl2l")]
+visible = false
+layout_mode = 1
+
+[node name="CharacterStatusMenu" parent="." instance=ExtResource("3_sb7mf")]
 layout_mode = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
@@ -32,9 +39,9 @@ anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 31.0
 grow_horizontal = 2
-theme_override_constants/margin_left = 25
+theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 25
+theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 10
 
 [node name="VBox" type="VBoxContainer" parent="MarginContainer"]
@@ -68,34 +75,35 @@ color = Color(0.431373, 0.431373, 0.431373, 1)
 [node name="HBox2" type="HBoxContainer" parent="MarginContainer/VBox"]
 layout_mode = 2
 
+[node name="CurrentMenu" type="Label" parent="MarginContainer/VBox/HBox2"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Knight Skill Tree"
+
 [node name="Char1" type="Button" parent="MarginContainer/VBox/HBox2"]
+visible = false
 custom_minimum_size = Vector2(114, 0)
 layout_mode = 2
 text = "Knight"
 clip_text = true
 
 [node name="Char2" type="Button" parent="MarginContainer/VBox/HBox2"]
+visible = false
 custom_minimum_size = Vector2(114, 0)
 layout_mode = 2
 text = "Witch"
 clip_text = true
 
 [node name="Char3" type="Button" parent="MarginContainer/VBox/HBox2"]
+visible = false
 custom_minimum_size = Vector2(114, 0)
 layout_mode = 2
 text = "Rogue"
 clip_text = true
 
-[node name="Spacer" type="Control" parent="MarginContainer/VBox/HBox2"]
-custom_minimum_size = Vector2(30, 0)
-layout_mode = 2
-
-[node name="CurrentMenu" type="Label" parent="MarginContainer/VBox/HBox2"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Knight Skill Tree"
-horizontal_alignment = 1
-
+[connection signal="pressed" from="MarginContainer/VBox/HBox1/SkillTrees" to="." method="_on_skill_trees_pressed"]
+[connection signal="pressed" from="MarginContainer/VBox/HBox1/CharacterStats" to="." method="_on_character_stats_pressed"]
 [connection signal="pressed" from="MarginContainer/VBox/HBox1/ExitButton" to="." method="_on_exit_button_pressed"]
 [connection signal="pressed" from="MarginContainer/VBox/HBox2/Char1" to="." method="_on_char_1_pressed"]
 [connection signal="pressed" from="MarginContainer/VBox/HBox2/Char2" to="." method="_on_char_2_pressed"]
+[connection signal="pressed" from="MarginContainer/VBox/HBox2/Char3" to="." method="_on_char_3_pressed"]

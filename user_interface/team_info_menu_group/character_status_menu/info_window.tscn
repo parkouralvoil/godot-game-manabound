@@ -1,0 +1,124 @@
+[gd_scene load_steps=2 format=3 uid="uid://cbkx0rob51hry"]
+
+[ext_resource type="LabelSettings" uid="uid://2ltl51gdr4g6" path="res://user_interface/team_info_menu_group/character_status_menu/char_status_label.tres" id="1_boft5"]
+
+[node name="InfoWindow" type="PanelContainer"]
+offset_right = 279.0
+offset_bottom = 417.0
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_right = 5
+
+[node name="VBox" type="VBoxContainer" parent="ScrollContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="info" type="Label" parent="ScrollContainer/MarginContainer/VBox"]
+layout_mode = 2
+text = "Info"
+horizontal_alignment = 1
+
+[node name="lvl_stats" type="Label" parent="ScrollContainer/MarginContainer/VBox"]
+layout_mode = 2
+text = "Leveling up stats:"
+label_settings = ExtResource("1_boft5")
+
+[node name="on_base_stats" type="Label" parent="ScrollContainer/MarginContainer/VBox"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+text = "Base stats can be upgraded with runes. After clearing a level , you can use runes through the LEVEL UP menu."
+label_settings = ExtResource("1_boft5")
+autowrap_mode = 3
+
+[node name="Separator" type="Control" parent="ScrollContainer/MarginContainer/VBox"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
+[node name="on_special_stats" type="Label" parent="ScrollContainer/MarginContainer/VBox"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+text = "Special stats require other means to be upgraded, such as through skill tree nodes."
+label_settings = ExtResource("1_boft5")
+autowrap_mode = 3
+
+[node name="Separator2" type="Control" parent="ScrollContainer/MarginContainer/VBox"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
+[node name="line" type="ColorRect" parent="ScrollContainer/MarginContainer/VBox"]
+custom_minimum_size = Vector2(0, 3)
+layout_mode = 2
+color = Color(0.556863, 0.556863, 0.556863, 1)
+
+[node name="reactions" type="Label" parent="ScrollContainer/MarginContainer/VBox"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+text = "Elemental reactions:"
+label_settings = ExtResource("1_boft5")
+autowrap_mode = 3
+
+[node name="reactions2" type="Label" parent="ScrollContainer/MarginContainer/VBox"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+text = "Reactions scale off Elemental Profiency (EP)"
+label_settings = ExtResource("1_boft5")
+autowrap_mode = 3
+
+[node name="Separator3" type="Control" parent="ScrollContainer/MarginContainer/VBox"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
+[node name="sc_eq" type="Label" parent="ScrollContainer/MarginContainer/VBox"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+text = "Lightning + Ice = Superconduct"
+label_settings = ExtResource("1_boft5")
+autowrap_mode = 3
+
+[node name="sc_details" type="Label" parent="ScrollContainer/MarginContainer/VBox"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+text = "Superconduct slows down enemy reload time. Deals light damage based on EP."
+label_settings = ExtResource("1_boft5")
+autowrap_mode = 3
+
+[node name="Separator4" type="Control" parent="ScrollContainer/MarginContainer/VBox"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
+[node name="melt_eq" type="Label" parent="ScrollContainer/MarginContainer/VBox"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+text = "Fire + Ice = Melt"
+label_settings = ExtResource("1_boft5")
+autowrap_mode = 3
+
+[node name="melt_details" type="Label" parent="ScrollContainer/MarginContainer/VBox"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+text = "Melt doubles the damage of the last hit that triggers the reaction. EP increases multiplier."
+label_settings = ExtResource("1_boft5")
+autowrap_mode = 3
+
+[node name="Separator5" type="Control" parent="ScrollContainer/MarginContainer/VBox"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
+[node name="ol_eq" type="Label" parent="ScrollContainer/MarginContainer/VBox"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+text = "Fire + Lightning = Overload"
+label_settings = ExtResource("1_boft5")
+autowrap_mode = 3
+
+[node name="ol_details" type="Label" parent="ScrollContainer/MarginContainer/VBox"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+text = "Overload triggers an explosion on the target, dealing moderate AoE fire damage."
+label_settings = ExtResource("1_boft5")
+autowrap_mode = 3

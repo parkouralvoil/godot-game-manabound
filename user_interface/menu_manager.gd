@@ -6,6 +6,8 @@ var current_menu_opened: Control = null
 
 @onready var team_info: Control = $TeamInfoMenuGroup
 
+## track current character so switching stree to stats remains on witch
+
 func _ready() -> void:
 	hide()
 	team_info.hide()

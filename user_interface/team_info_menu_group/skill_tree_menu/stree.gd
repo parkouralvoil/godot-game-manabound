@@ -51,10 +51,13 @@ func traverse_tree(node: SkillTreeNodeButton, arr: Array[SkillTreeNodeButton]) -
 
 func assign_parent(node_button: SkillTreeNodeButton) -> void:
 	for child in node_button.get_children():
-		if child is SkillTreeNodeButton:
-			var child_node: SkillTreeNode = child.stree_node
-			child_node.parent = node_button.stree_node
-			assign_parent(child)
+		if not child is SkillTreeNodeButton:
+			continue
+		
+		var _b: SkillTreeNodeButton = child
+		var child_node: SkillTreeNode = _b.stree_node
+		child_node.parent = node_button.stree_node
+		assign_parent(child)
 
 
 func button_selected(button: SkillTreeNodeButton) -> void:

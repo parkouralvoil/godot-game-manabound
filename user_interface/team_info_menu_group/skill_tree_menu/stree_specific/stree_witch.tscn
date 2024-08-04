@@ -1,8 +1,8 @@
 [gd_scene load_steps=15 format=3 uid="uid://cbv6l6ryqhw1x"]
 
-[ext_resource type="Script" path="res://user_interface/skill_tree_menu/stree.gd" id="1_1c53j"]
+[ext_resource type="Script" path="res://user_interface/team_info_menu_group/skill_tree_menu/stree.gd" id="1_1c53j"]
 [ext_resource type="Resource" uid="uid://cu5bs2vgb1nod" path="res://characters/witch/witch_stree_model.tres" id="2_m5sgq"]
-[ext_resource type="PackedScene" uid="uid://ckobamacrfgq1" path="res://user_interface/skill_tree_menu/skill_node_button.tscn" id="3_okxro"]
+[ext_resource type="PackedScene" uid="uid://ckobamacrfgq1" path="res://user_interface/team_info_menu_group/skill_tree_menu/skill_node_button.tscn" id="3_okxro"]
 [ext_resource type="Texture2D" uid="uid://h46xv64l4n2u" path="res://assets/sprite_UI/AbilityIcons0.png" id="4_ecw67"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cqs56"]

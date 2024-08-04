@@ -1,8 +1,8 @@
 extends Sprite2D
 class_name ManaOrb
 
-const texture_small: Texture = preload("res://resources/textures/mana_orb_small.tres")
-const texture_medium: Texture = preload("res://resources/textures/mana_orb_medium.tres")
+const texture_small: Texture = preload("res://resources/textures/mana_orb/mana_orb_small.tres")
+const texture_medium: Texture = preload("res://resources/textures/mana_orb/mana_orb_medium.tres")
 
 @export var PlayerInfo: PlayerInfoResource
 @export var sfx_collected: AudioStream

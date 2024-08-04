@@ -69,7 +69,7 @@ func _process(_delta: float) -> void:
 	
 	## can_charge setter
 	match PlayerInfo.current_charge_type:
-		PlayerInfoResource.ChargeTypes.BURST:
+		PlayerInfoResource.ChargeTypes.CHARGE:
 			PlayerInfo.can_charge = true
 		_:
 			if PlayerInfo.displayed_charge < PlayerInfo.displayed_MAX_CHARGE:

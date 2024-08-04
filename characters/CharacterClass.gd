@@ -3,20 +3,22 @@ class_name Character
 
 var PlayerInfo: PlayerInfoResource = preload("res://resources/data/player_info.tres")
 
-@onready var AM := $AbilityManager
 @onready var arm_sprite: Sprite2D = $Sprite2D_arm
 @onready var wpn_sprite: Sprite2D = $Sprite2D_arm/Sprite2D_wpn
 
 ## i want the AM to remain universal, the components are the ones who play around with eachother
 @onready var CM: CharacterManager = get_parent()
 
+## char_manager DOESNT have reference to char_data, since char_data is the one that holds reference to this scene
+
 var enabled: bool = false ## managed by char manager
 
 @export var stats: CharacterStats
 
 @export_category("Kit Specific")
-@export var charge_type: PlayerInfoResource.ChargeTypes = PlayerInfo.ChargeTypes.BURST
-@export var melee: bool = false
+## this is now part of Stats
+#@export var charge_type: PlayerInfoResource.ChargeTypes = PlayerInfo.ChargeTypes.CHARGE
+#@export var melee: bool = false
 
 
 func _ready() -> void:

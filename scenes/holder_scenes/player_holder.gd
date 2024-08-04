@@ -1,5 +1,7 @@
 extends Node2D
 
+@export var subscribe_playerholder_ui: SubscribePlayerHolder_To_UI
+
 @onready var p: Player = $Player
 
 @onready var hp_label: Label = $Player/VBoxContainer/HP
@@ -12,6 +14,7 @@ extends Node2D
 func _ready() -> void:
 	p.PlayerDamaged.connect(trigger_blood_overlay)
 	team_hud.initialize_hud(p)
+	subscribe_playerholder_ui.assign_array(p.char_manager.selected_char_resource)
 
 
 func _process(_delta: float) -> void:
@@ -29,11 +32,11 @@ func _process(_delta: float) -> void:
 func update_current_charge(info: PlayerInfoResource) -> void:
 	var type: String
 	match info.current_charge_type:
-		PlayerInfoResource.ChargeTypes.BURST:
+		PlayerInfoResource.ChargeTypes.CHARGE:
 			type = "Charge"
-		PlayerInfoResource.ChargeTypes.PASSIVE:
+		PlayerInfoResource.ChargeTypes.MANA:
 			type = "Mana"
-		_:
+		PlayerInfoResource.ChargeTypes.ENERGY:
 			type = "Energy"
 	
 	var format_string: String = "%s: %d/%d"

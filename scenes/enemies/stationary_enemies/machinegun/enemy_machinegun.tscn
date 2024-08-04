@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scenes/enemies/stationary_enemies/machinegun/enemy_machinegun.gd" id="1_4ftxf"]
 [ext_resource type="PackedScene" uid="uid://ccfj5qan8stdb" path="res://projectiles/bullet_impact.tscn" id="2_oai8o"]
-[ext_resource type="Texture2D" uid="uid://mnqy6onwpiay" path="res://resources/enemy_dead.tres" id="3_af3ky"]
+[ext_resource type="Texture2D" uid="uid://mnqy6onwpiay" path="res://resources/textures/impacts/enemy_dead.tres" id="3_af3ky"]
 [ext_resource type="Script" path="res://scenes/enemies/stationary_enemies/machinegun/machinegun_ammo.gd" id="3_rk0t3"]
 [ext_resource type="Texture2D" uid="uid://8j2pf5jxcgbw" path="res://assets/sprite_enemies/turret enemy v2/turret_enemy v2 pivot.png" id="4_aux6u"]
 [ext_resource type="Texture2D" uid="uid://kkdwqtkdrsfo" path="res://assets/sprite_enemies/turret enemy v2/turret_enemy v2 turret.png" id="5_gt8rf"]

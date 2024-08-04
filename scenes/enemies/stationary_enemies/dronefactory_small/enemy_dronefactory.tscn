@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/entity_components/SpawnerComponent_dronefactory.gd" id="1_bovej"]
 [ext_resource type="Script" path="res://scenes/enemies/stationary_enemies/dronefactory_small/enemy_dronefactory.gd" id="1_os3qv"]
 [ext_resource type="PackedScene" uid="uid://ccfj5qan8stdb" path="res://projectiles/bullet_impact.tscn" id="2_p64pg"]
-[ext_resource type="Texture2D" uid="uid://mnqy6onwpiay" path="res://resources/enemy_dead.tres" id="3_djpu2"]
+[ext_resource type="Texture2D" uid="uid://mnqy6onwpiay" path="res://resources/textures/impacts/enemy_dead.tres" id="3_djpu2"]
 [ext_resource type="Script" path="res://scripts/entity_components/HurtboxComponent_enemy.gd" id="4_njlba"]
 [ext_resource type="PackedScene" uid="uid://wb7yfjqhq458" path="res://scenes/enemies/mobile_enemies/drone_small/enemy_smalldrone.tscn" id="5_glrca"]
 [ext_resource type="Texture2D" uid="uid://br4q05747i10h" path="res://assets/sprite_enemies/drone_factory_v2.png" id="6_oyvuu"]
