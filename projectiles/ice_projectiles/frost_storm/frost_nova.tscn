@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://bmykt4bk5s1bk"]
 
-[ext_resource type="Script" path="res://projectiles/ice_projectiles/frost_nova/frost_nova.gd" id="1_dxavq"]
-[ext_resource type="PackedScene" uid="uid://5f6ajry7qgrd" path="res://projectiles/ice_projectiles/frost_nova/frost_nova_impact.tscn" id="2_gmbiq"]
+[ext_resource type="Script" path="res://projectiles/ice_projectiles/frost_storm/frost_nova.gd" id="1_dxavq"]
+[ext_resource type="PackedScene" uid="uid://5f6ajry7qgrd" path="res://projectiles/ice_projectiles/frost_storm/frost_nova_impact.tscn" id="2_gmbiq"]
 [ext_resource type="Texture2D" uid="uid://c36f5r6cnvwpu" path="res://assets/sprite_projectiles/bullet_pixel_Blue.png" id="3_x0rvr"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0x76w"]

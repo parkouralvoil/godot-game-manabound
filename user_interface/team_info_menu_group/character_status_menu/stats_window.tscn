@@ -4,6 +4,7 @@
 [ext_resource type="Script" path="res://user_interface/team_info_menu_group/character_status_menu/stats_window.gd" id="1_lapys"]
 
 [node name="StatsWindow" type="PanelContainer"]
+custom_minimum_size = Vector2(165, 0)
 script = ExtResource("1_lapys")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
@@ -52,7 +53,6 @@ text = "Charge Rate:"
 label_settings = ExtResource("1_bq655")
 
 [node name="Separator" type="Control" parent="MarginContainer/VBox/base_stats"]
-custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 
@@ -79,7 +79,7 @@ horizontal_alignment = 2
 
 [node name="chr" type="Label" parent="MarginContainer/VBox/base_stats/stat_number"]
 layout_mode = 2
-text = "35"
+text = "3541"
 label_settings = ExtResource("1_bq655")
 horizontal_alignment = 2
 
@@ -130,7 +130,6 @@ text = "Ammo Capacity:"
 label_settings = ExtResource("1_bq655")
 
 [node name="Separator" type="Control" parent="MarginContainer/VBox/special_stats"]
-custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 

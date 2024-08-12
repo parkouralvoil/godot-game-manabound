@@ -37,6 +37,7 @@ func shoot(bullet: PackedScene, direction: Vector2) -> void:
 	var bul_instance: Bullet = bullet.instantiate()
 	bul_instance.global_position = self.global_position
 	
+	bul_instance.ep = character.stats.EP
 	bul_instance.direction = direction
 	bul_instance.rotation = direction.angle()
 	bul_instance.set_collision_mask_value(4, true)
@@ -59,6 +60,7 @@ func shoot_extra(bullet: PackedScene, direction: Vector2) -> void:
 	var bul_instance: Bullet = bullet.instantiate()
 	bul_instance.global_position = self.global_position
 	
+	bul_instance.ep = character.stats.EP
 	bul_instance.direction = direction
 	bul_instance.rotation = direction.angle()
 	bul_instance.set_collision_mask_value(4, true)
@@ -131,6 +133,7 @@ func shoot_missile(num_of_missiles: int) -> void:
 		var missile_inst: Bullet = HomingMissileScene.instantiate()
 		missile_inst.global_position = self.global_position
 		
+		missile_inst.ep = character.stats.EP
 		missile_inst.direction = direction
 		missile_inst.rotation = direction.angle()
 		missile_inst.set_collision_mask_value(4, true)

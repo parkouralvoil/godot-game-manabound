@@ -43,11 +43,11 @@ func explosion_animation() -> void:
 
 func _on_area_entered(hurtbox: Area2D) -> void:
 	if hurtbox.has_method("hit"):
-		hurtbox.hit(damage, element)
+		hurtbox.hit(damage, element, ep)
 		if first_icicle:
-			hurtbox.hit(second_icicle_dmg, element)
+			hurtbox.hit(second_icicle_dmg, element, ep)
 	
 	if hurtbox.has_method("apply_debuff"):
-		hurtbox.apply_debuff(debuff)
+		hurtbox.apply_debuff(debuff, ep)
 		if first_icicle:
-			hurtbox.apply_debuff(debuff)
+			hurtbox.apply_debuff(debuff, ep)

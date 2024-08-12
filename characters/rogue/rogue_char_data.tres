@@ -1,15 +1,23 @@
-[gd_resource type="Resource" script_class="CharacterResource" load_steps=6 format=3 uid="uid://c11fmdv1k7omo"]
+[gd_resource type="Resource" script_class="CharacterResource" load_steps=9 format=3 uid="uid://c11fmdv1k7omo"]
 
 [ext_resource type="PackedScene" uid="uid://dyb83ujyxhk2b" path="res://characters/rogue/character_rogue.tscn" id="1_tlf23"]
 [ext_resource type="Script" path="res://characters/CharacterResource.gd" id="2_60cp1"]
+[ext_resource type="PackedScene" uid="uid://cybp0skh3c672" path="res://user_interface/team_info_menu_group/skill_tree_menu/stree_specific/stree_rogue.tscn" id="3_gwiyi"]
 [ext_resource type="Texture2D" uid="uid://d0b5yrantkkqm" path="res://characters/rogue/visuals/rogue_arm.tres" id="3_hgjmt"]
 [ext_resource type="Texture2D" uid="uid://dfk82yyu3kqxe" path="res://characters/rogue/visuals/rogue_portrait.tres" id="4_mpu5f"]
+[ext_resource type="Texture2D" uid="uid://cr6dnlf3rjh2u" path="res://characters/rogue/visuals/rogue_window.tres" id="5_3qf17"]
 [ext_resource type="SpriteFrames" uid="uid://d1jev7rih8fxr" path="res://characters/rogue/visuals/rogue_spriteframes.tres" id="5_e00bt"]
+[ext_resource type="Resource" uid="uid://4m7ffonja3cx" path="res://characters/rogue/rogue_stats.tres" id="8_apfru"]
 
 [resource]
 script = ExtResource("2_60cp1")
 character_scene = ExtResource("1_tlf23")
 spriteframes = ExtResource("5_e00bt")
 sprite_arm = ExtResource("3_hgjmt")
+skill_tree_scene = ExtResource("3_gwiyi")
 sprite_portrait = ExtResource("4_mpu5f")
+sprite_window = ExtResource("5_3qf17")
 char_name = "Rogue"
+stats = ExtResource("8_apfru")
+basic_atk_name = "Fireblade Slash"
+ult_name = "Eruption"

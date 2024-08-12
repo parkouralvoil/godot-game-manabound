@@ -43,6 +43,7 @@ func shoot(bullet: PackedScene) -> void:
 	var bul_instance: IceSpikeBullet = bullet.instantiate()
 	var direction: Vector2 = PlayerInfo.aim_direction
 	
+	bul_instance.ep = character.stats.EP
 	bul_instance.global_position = global_position
 	bul_instance.speed = AM.bullet_speed
 	bul_instance.damage = AM.frost_spike_dmg

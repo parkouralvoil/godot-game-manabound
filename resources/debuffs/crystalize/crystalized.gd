@@ -14,10 +14,10 @@ class_name Crystalized
 
 class EnemyInfo:
 	var crystal_stacks: int = 0
+	var accumulated_dmg: float = 0
 	var timer: Timer
 
-var base_damage: float = 3
-var scale_damage: float = 20 # PERCENTAGE!!
+var scale_damage: float = 0.2 # PERCENTAGE!!
 var stack_detonate: int = 9
 var stack_multiply: int = 3
 
@@ -30,7 +30,7 @@ func get_info(HealthComp: EnemyHealthComponent) -> int:
 		return 0
 
 
-func apply_effect(HealthComp: EnemyHealthComponent) -> void:
+func apply_effect(HealthComp: EnemyHealthComponent, ep: float) -> void:
 	if not enemy_ref.has(HealthComp):
 		var info: EnemyInfo = EnemyInfo.new()
 		info.crystal_stacks = 0
@@ -45,6 +45,7 @@ func apply_effect(HealthComp: EnemyHealthComponent) -> void:
 	if enemy_ref.has(HealthComp):
 		var current_e: EnemyInfo = enemy_ref[HealthComp]
 		current_e.crystal_stacks += 1
+		current_e.accumulated_dmg += ep/2
 		if current_e.timer.is_stopped():
 			current_e.timer.start()
 		if enemy_ref[HealthComp].crystal_stacks >= stack_detonate:
@@ -58,11 +59,10 @@ func detonate_crystalize(HealthComp: EnemyHealthComponent) -> void:
 	
 	enemy_ref[HealthComp].timer.stop()
 	var current_stacks: int = enemy_ref[HealthComp].crystal_stacks
+	var base_dmg: float = enemy_ref[HealthComp].accumulated_dmg
 	
 	@warning_ignore("integer_division")
-	var dmg_multiplier: float = (base_damage 
-			+ (base_damage * scale_damage/100.0) 
-			* int(current_stacks/stack_multiply) )
+	var final_dmg: float = (base_dmg * clampi(current_stacks/stack_multiply, 1, 3))
 	ParticlesQueueNode.set_property_restart(particles_process_mat,
 			particles_textures,
 			one_shot,
@@ -70,15 +70,15 @@ func detonate_crystalize(HealthComp: EnemyHealthComponent) -> void:
 			explosiveness,
 			lifetime,
 			HealthComp.global_position,)
-	HealthComp.damage_received(current_stacks * dmg_multiplier, 
-			CombatManager.Elements.NONE)
-	var text: String = "Crystalize x" + str(current_stacks)
-	HealthComp.spawn_dmg_number(text, CombatManager.params[CombatManager.Elements.ICE])
 	if enemy_ref.has(HealthComp):
 		enemy_ref[HealthComp].crystal_stacks = 0
+		enemy_ref[HealthComp].accumulated_dmg = 0
 	
-	# V this really sucks, better to have a signal emitted when crystal_stacks changes
+	var text: String = "Crystalize x" + str(current_stacks)
+	HealthComp.spawn_dmg_number(text, CombatManager.params[CombatManager.Elements.ICE])
 	HealthComp.debuff_indicator.current_debuff = CombatManager.Debuffs.NONE
+	
+	HealthComp.damage_received(final_dmg, CombatManager.Elements.NONE)
 
 func delete_ref(HealthComp: EnemyHealthComponent) -> void:
 	enemy_ref.erase(HealthComp)

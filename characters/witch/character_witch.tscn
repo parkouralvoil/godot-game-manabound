@@ -7,16 +7,15 @@
 [ext_resource type="PackedScene" uid="uid://b8740u5oqxn7d" path="res://projectiles/ice_projectiles/ice_spike/ice_spike.tscn" id="5_of8tm"]
 [ext_resource type="Script" path="res://characters/witch/scripts/witch_UltimateComponent.gd" id="5_wu24y"]
 [ext_resource type="AudioStream" uid="uid://bwauhc5i6k2iq" path="res://assets/audio/sfx/character_sfx/ice_cast_kr.mp3" id="6_khbv3"]
-[ext_resource type="PackedScene" uid="uid://bmykt4bk5s1bk" path="res://projectiles/ice_projectiles/frost_nova/frost_nova.tscn" id="7_5t8dy"]
 [ext_resource type="Script" path="res://characters/witch/scripts/witch_AmmoComponent.gd" id="7_jgtmk"]
 [ext_resource type="AudioStream" uid="uid://bj0nahh0080ju" path="res://assets/audio/sfx/character_sfx/frost_nova.mp3" id="8_jwyfu"]
+[ext_resource type="PackedScene" uid="uid://bmykt4bk5s1bk" path="res://projectiles/ice_projectiles/frost_storm/frost_nova.tscn" id="8_l58th"]
 [ext_resource type="Texture2D" uid="uid://kdh26376nd2g" path="res://characters/witch/visuals/witch_arm.tres" id="9_khmxg"]
 [ext_resource type="Texture2D" uid="uid://dmpunjpb4iuff" path="res://assets/sprite_characters/witch weapon.png" id="10_37iad"]
 
 [node name="character_Witch" type="Node2D"]
 script = ExtResource("1_j0poo")
 stats = ExtResource("2_ygtrj")
-charge_type = 2
 
 [node name="AbilityManager" type="Node2D" parent="."]
 script = ExtResource("2_xnkl8")
@@ -36,7 +35,7 @@ one_shot = true
 
 [node name="Ultimate" type="Node2D" parent="AbilityManager"]
 script = ExtResource("5_wu24y")
-FrostNovaScene = ExtResource("7_5t8dy")
+FrostNovaScene = ExtResource("8_l58th")
 sfx_FrostNova = ExtResource("8_jwyfu")
 
 [node name="Ammo" type="Node2D" parent="AbilityManager"]

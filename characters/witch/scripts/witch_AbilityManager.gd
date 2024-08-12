@@ -98,7 +98,7 @@ func update_skills() -> void:
 func initialize_model() -> void:
 	## description of char
 	StreeModel.root_node.name = "Apprentice Witch"
-	StreeModel.root_node.description = """A witch from Mana Haven, trained in the magic of Frost Art. 
+	StreeModel.root_node.description = """A student from Mana Haven, trained in the magic of Frost Art. 
 \nFrost Art is a mystic art of mana imparted to the witches by the elves of the north. 
 \nElement: Ice"""
 	
@@ -161,20 +161,15 @@ Each stack deals 5 damage, Every 3 stack increases final damage by 30%%"
 	### might wanna have this scale from EP
 
 
-func compute(base: float, scaling: float, lvl: int) -> float:
-	var raw_output: float = character.stats.ATK * (base + scaling * max(0, lvl - 1))
-	return raw_output
-
-
 func update_damage() -> void:
-	frost_spike_dmg = compute(base_percent_frost_spear, 
-			0, 0)
+	frost_spike_dmg =  AbilityHelper.compute_damage(base_percent_frost_spear, 
+			0, 0, stats)
 	
-	first_icicle_dmg = compute(base_percent_1st_icicle, 
-			scale_percent_1st_icicle, level_basicAtk_second_icicle,)
+	first_icicle_dmg =  AbilityHelper.compute_damage(base_percent_1st_icicle, 
+			scale_percent_1st_icicle, level_basicAtk_second_icicle, stats)
 	
-	second_icicle_dmg = compute(base_percent_2nd_icicle, 
-			scale_percent_2nd_icicle, level_basicAtk_second_icicle,)
+	second_icicle_dmg =  AbilityHelper.compute_damage(base_percent_2nd_icicle, 
+			scale_percent_2nd_icicle, level_basicAtk_second_icicle, stats)
 	
-	frost_storm_dmg = compute(base_ult_percent,
-			0, 0)
+	frost_storm_dmg =  AbilityHelper.compute_damage(base_ult_percent,
+			0, 0, stats)

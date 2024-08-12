@@ -51,5 +51,5 @@ par_array = Array[ParticleProcessMaterial]([ExtResource("5_lx26c"), ExtResource(
 [node name="music" type="AudioStreamPlayer" parent="."]
 process_mode = 3
 stream = ExtResource("10_6bqnx")
-volume_db = -58.757
+volume_db = -55.0
 autoplay = true

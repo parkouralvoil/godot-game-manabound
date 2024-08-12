@@ -6,6 +6,9 @@ class_name CharacterStats
 	set(value):
 		MAX_HP = value
 		max_HP_changed.emit()
+
+## need to add "base" stats once i add the stat runes to increase stats
+
 @export var ATK: float = 10
 @export var EP: float = 0 ## Elemental Profiency
 @export var CHR: float = 25 ## base charge rate, 
@@ -48,6 +51,12 @@ enum charge_tiers{
 }
 
 ## signals to connect for playerinfo
+# commented lines indicate "no need cuz it updates properly na
 signal max_HP_changed
 signal max_charge_changed
 signal max_ammo_changed
+#signal ATK_changed ## might need this afterall
+#signal EP_changed
+#signal reload_time_changed
+#signal firerate_changed
+#signal charge_rate_changed

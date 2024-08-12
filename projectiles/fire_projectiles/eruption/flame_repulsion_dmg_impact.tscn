@@ -1,10 +1,10 @@
 [gd_scene load_steps=5 format=3 uid="uid://cxo81uwgev1mg"]
 
-[ext_resource type="Script" path="res://projectiles/fire_projectiles/flame_repulsion/flame_repulsion_dmg_impact.gd" id="1_ijvov"]
-[ext_resource type="Texture2D" uid="uid://b2gagvgpvrjud" path="res://assets/sprite_projectiles/bullet_pixel_BrightRed.png" id="2_yil36"]
+[ext_resource type="Script" path="res://projectiles/fire_projectiles/eruption/flame_repulsion_dmg_impact.gd" id="1_wwsg4"]
+[ext_resource type="Texture2D" uid="uid://b2gagvgpvrjud" path="res://assets/sprite_projectiles/bullet_pixel_BrightRed.png" id="2_1p85v"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hbiax"]
-atlas = ExtResource("2_yil36")
+atlas = ExtResource("2_1p85v")
 region = Rect2(257, 65, 14, 14)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_6ec0u"]
@@ -14,7 +14,7 @@ radius = 86.0233
 collision_layer = 0
 collision_mask = 40
 monitorable = false
-script = ExtResource("1_ijvov")
+script = ExtResource("1_wwsg4")
 opaqueness = 0.7
 
 [node name="hitbox_lifespan" type="Timer" parent="."]

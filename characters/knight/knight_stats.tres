@@ -1,6 +1,5 @@
-[gd_resource type="Resource" script_class="CharacterStats" load_steps=3 format=3 uid="uid://fbbdhnnk7q74"]
+[gd_resource type="Resource" script_class="CharacterStats" load_steps=2 format=3 uid="uid://fbbdhnnk7q74"]
 
-[ext_resource type="Texture2D" uid="uid://yylj6tta24tp" path="res://characters/knight/visuals/knight_window.tres" id="1_gnksg"]
 [ext_resource type="Script" path="res://resources/data/character_stats.gd" id="1_thmi0"]
 
 [resource]
@@ -14,4 +13,6 @@ MAX_AMMO = 7
 reload_time = 0.5
 SPD = 400.0
 firerate = 7.0
-idle_sprite = ExtResource("1_gnksg")
+charge_type = 0
+element = 1
+melee = false

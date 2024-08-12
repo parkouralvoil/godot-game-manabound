@@ -13,6 +13,7 @@ var direction: Vector2 = Vector2.ZERO
 
 # im not making these export, it should be up to the Attack/Ult comp to change these
 var damage: float = 5
+var ep: float = 0
 var element: CombatManager.Elements = CombatManager.Elements.LIGHTNING
 
 var impact_created: bool = false
@@ -32,7 +33,7 @@ func _physics_process(delta: float) -> void:
 
 func _on_area_entered(hurtbox: Area2D) -> void:
 	if hurtbox.has_method("hit"):
-		hurtbox.hit(damage, element)
+		hurtbox.hit(damage, element, ep)
 	disappear()
 
 func _on_body_entered(_body: TileMap) -> void: # tilemap since thats the collision of the world

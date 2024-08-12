@@ -32,6 +32,7 @@ func spawn_area_effect(area_effect: PackedScene, target_pos: Vector2) -> void:
 	effect_instance.size = AM.explosion_scale
 	effect_instance.damage = AM.frost_storm_dmg
 	effect_instance.max_spawn_counter = AM.explosion_num
+	effect_instance.ep = character.stats.EP
 	if AM.skill_ult_crystalize:
 		effect_instance.debuff = CombatManager.Debuffs.CRYSTALIZED
 	

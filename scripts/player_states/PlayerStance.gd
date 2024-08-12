@@ -36,7 +36,8 @@ func Update(_delta: float) -> void:
 func Physics_Update(_delta: float) -> void:
 	if !p:
 		return
-	if p.PlayerInfo.current_charge_type == PlayerInfoResource.ChargeTypes.CHARGE:
+	## TODO: need to change this to "Ult ability of char requires circle indicator to aim"
+	if p.PlayerInfo.current_charge_type != PlayerInfoResource.ChargeTypes.MANA: 
 		p.velocity = slow_speed * p.move_direction
 	else:
 		p.velocity = Vector2.ZERO

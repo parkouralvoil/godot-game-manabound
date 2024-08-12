@@ -16,7 +16,6 @@ collision_mask = 8
 monitorable = false
 script = ExtResource("1_87xhd")
 opaqueness = 0.6
-damage = 10.0
 
 [node name="hitbox_lifespan" type="Timer" parent="."]
 wait_time = 0.15

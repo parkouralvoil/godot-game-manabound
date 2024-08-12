@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="CharacterStats" load_steps=2 format=3 uid="uid://4m7ffonja3cx"]
+
+[ext_resource type="Script" path="res://resources/data/character_stats.gd" id="1_omsin"]
+
+[resource]
+script = ExtResource("1_omsin")
+MAX_HP = 5
+ATK = 8.0
+EP = 0.0
+CHR = 4.0
+charge_tier = 0
+MAX_AMMO = 3
+reload_time = 1.0
+SPD = 400.0
+firerate = 4.0
+charge_type = 1
+element = 3
+melee = true

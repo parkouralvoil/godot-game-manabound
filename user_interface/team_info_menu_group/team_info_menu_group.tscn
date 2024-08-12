@@ -24,7 +24,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-color = Color(0.25, 0.28, 0.37, 1)
+color = Color(0.184314, 0.313726, 0.258824, 1)
 
 [node name="SkillTreeMenu" parent="." instance=ExtResource("2_icl2l")]
 visible = false
@@ -32,6 +32,19 @@ layout_mode = 1
 
 [node name="CharacterStatusMenu" parent="." instance=ExtResource("3_sb7mf")]
 layout_mode = 1
+
+[node name="CurrentMenu" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.114583
+anchor_right = 1.0
+anchor_bottom = 0.1625
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+text = "Knight Skill Tree"
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -50,13 +63,26 @@ layout_mode = 2
 [node name="HBox1" type="HBoxContainer" parent="MarginContainer/VBox"]
 layout_mode = 2
 
-[node name="SkillTrees" type="Button" parent="MarginContainer/VBox/HBox1"]
+[node name="Char1" type="Button" parent="MarginContainer/VBox/HBox1"]
+visible = false
+custom_minimum_size = Vector2(114, 0)
 layout_mode = 2
-text = "Skill Trees"
+text = "Knight"
+clip_text = true
 
-[node name="CharacterStats" type="Button" parent="MarginContainer/VBox/HBox1"]
+[node name="Char2" type="Button" parent="MarginContainer/VBox/HBox1"]
+visible = false
+custom_minimum_size = Vector2(114, 0)
 layout_mode = 2
-text = "Character Stats"
+text = "Witch"
+clip_text = true
+
+[node name="Char3" type="Button" parent="MarginContainer/VBox/HBox1"]
+visible = false
+custom_minimum_size = Vector2(114, 0)
+layout_mode = 2
+text = "Rogue"
+clip_text = true
 
 [node name="Control" type="Control" parent="MarginContainer/VBox/HBox1"]
 layout_mode = 2
@@ -75,35 +101,22 @@ color = Color(0.431373, 0.431373, 0.431373, 1)
 [node name="HBox2" type="HBoxContainer" parent="MarginContainer/VBox"]
 layout_mode = 2
 
-[node name="CurrentMenu" type="Label" parent="MarginContainer/VBox/HBox2"]
+[node name="SkillTrees" type="Button" parent="MarginContainer/VBox/HBox2"]
+layout_mode = 2
+text = "Skill Trees"
+
+[node name="CharacterStats" type="Button" parent="MarginContainer/VBox/HBox2"]
+layout_mode = 2
+text = "Character Stats"
+
+[node name="spacer2" type="Control" parent="MarginContainer/VBox/HBox2"]
+custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Knight Skill Tree"
 
-[node name="Char1" type="Button" parent="MarginContainer/VBox/HBox2"]
-visible = false
-custom_minimum_size = Vector2(114, 0)
-layout_mode = 2
-text = "Knight"
-clip_text = true
-
-[node name="Char2" type="Button" parent="MarginContainer/VBox/HBox2"]
-visible = false
-custom_minimum_size = Vector2(114, 0)
-layout_mode = 2
-text = "Witch"
-clip_text = true
-
-[node name="Char3" type="Button" parent="MarginContainer/VBox/HBox2"]
-visible = false
-custom_minimum_size = Vector2(114, 0)
-layout_mode = 2
-text = "Rogue"
-clip_text = true
-
-[connection signal="pressed" from="MarginContainer/VBox/HBox1/SkillTrees" to="." method="_on_skill_trees_pressed"]
-[connection signal="pressed" from="MarginContainer/VBox/HBox1/CharacterStats" to="." method="_on_character_stats_pressed"]
+[connection signal="pressed" from="MarginContainer/VBox/HBox1/Char1" to="." method="_on_char_1_pressed"]
+[connection signal="pressed" from="MarginContainer/VBox/HBox1/Char2" to="." method="_on_char_2_pressed"]
+[connection signal="pressed" from="MarginContainer/VBox/HBox1/Char3" to="." method="_on_char_3_pressed"]
 [connection signal="pressed" from="MarginContainer/VBox/HBox1/ExitButton" to="." method="_on_exit_button_pressed"]
-[connection signal="pressed" from="MarginContainer/VBox/HBox2/Char1" to="." method="_on_char_1_pressed"]
-[connection signal="pressed" from="MarginContainer/VBox/HBox2/Char2" to="." method="_on_char_2_pressed"]
-[connection signal="pressed" from="MarginContainer/VBox/HBox2/Char3" to="." method="_on_char_3_pressed"]
+[connection signal="pressed" from="MarginContainer/VBox/HBox2/SkillTrees" to="." method="_on_skill_trees_pressed"]
+[connection signal="pressed" from="MarginContainer/VBox/HBox2/CharacterStats" to="." method="_on_character_stats_pressed"]

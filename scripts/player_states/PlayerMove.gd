@@ -7,7 +7,7 @@ class_name PlayerMove
 var boost_speed: float = 400
 var slow_speed: float = 20
 
-var boost_afterimages: int = 5
+var boost_afterimages: int = 1
 
 func Enter() -> void:
 	if !p:

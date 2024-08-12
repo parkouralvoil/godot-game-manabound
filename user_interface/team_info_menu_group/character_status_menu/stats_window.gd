@@ -36,8 +36,20 @@ func change_stats(cr: CharacterResource) -> void:
 	spd.text = str(s.SPD)
 	rel.text = "%ss" % str(s.reload_time)
 	firerate.text = str(s.firerate)
-	ult.text = "WIP" ## TODO, make stats store ult type of char
+	ult.text = _determine_ult_type(s.charge_type)
 	ammo.text = str(s.MAX_AMMO)
+
+
+func _determine_ult_type(type: PlayerInfoResource.ChargeTypes) -> String:
+	match type:
+		PlayerInfoResource.ChargeTypes.CHARGE:
+			return "Charge"
+		PlayerInfoResource.ChargeTypes.ENERGY:
+			return "Energy"
+		PlayerInfoResource.ChargeTypes.MANA:
+			return "Mana"
+		_:
+			return "UNKNOWN"
 
 
 func update_stats() -> void:

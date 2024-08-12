@@ -45,7 +45,7 @@ func shoot(bullet: PackedScene, position_modifier: int) -> void:
 		direction.rotated(PI/2 * sign(position_modifier))
 		* abs(position_modifier)
 		)
-	
+	bul_instance.ep = character.stats.EP
 	bul_instance.speed = AM.bullet_speed
 	bul_instance.damage = (AM.damage_basic_bolt if bullet == BasicBoltScene 
 		else AM.damage_lightning_bolt)
@@ -72,7 +72,7 @@ func basic_atk() -> void:
 		shoot(p_scene, 0)
 		SoundPlayer.play_sound(sfx_gunshot, -15, 0.9)
 	
-	if AM.level_basicAtk_upgrade > 0:
+	if AM.level_basicAtk_burst > 0:
 		burst_counter = (burst_counter + 1) % 3
 	else:
 		burst_counter = 0

@@ -9,9 +9,9 @@ var debuff: CombatManager.Debuffs = CombatManager.Debuffs.NONE
 
 func _on_area_entered(hurtbox: Area2D) -> void:
 	if hurtbox.has_method("hit"):
-		hurtbox.hit(damage, element) # MORE PROCS!!!
+		hurtbox.hit(damage, element, ep)
 	if hurtbox.has_method("apply_debuff"):
-		hurtbox.apply_debuff(debuff)
+		hurtbox.apply_debuff(debuff, ep)
 	disappear()
 
 func make_impact() -> void:
@@ -20,6 +20,7 @@ func make_impact() -> void:
 		var instance: IceSpikeDamageImpact = bullet_impact.instantiate()
 		instance.global_position = self.global_position
 		
+		instance.ep = ep
 		instance.element = element # ice procced here
 		instance.damage = first_icicle_dmg
 		instance.second_icicle_dmg = second_icicle_dmg

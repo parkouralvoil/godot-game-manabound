@@ -13,4 +13,4 @@ one_shot = true
 amount = 30
 explosiveness = 1.0
 lifetime = 0.7
-dmg_proc = 3.0
+dmg_proc = 5.0

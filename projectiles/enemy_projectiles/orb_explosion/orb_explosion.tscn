@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://842pxmnrj5kb"]
 
-[ext_resource type="Script" path="res://projectiles/ice_projectiles/frost_nova/frost_nova_impact.gd" id="1_uru4b"]
+[ext_resource type="Script" path="res://projectiles/ice_projectiles/frost_storm/frost_nova_impact.gd" id="1_uru4b"]
 [ext_resource type="Texture2D" uid="uid://pvrjdm745q8m" path="res://assets/sprite_projectiles/bullet_pixel_DarkRed.png" id="2_v5obu"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_84s6o"]

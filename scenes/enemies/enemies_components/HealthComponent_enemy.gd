@@ -27,7 +27,6 @@ var rng := RandomNumberGenerator.new()
 var element_initial: CombatManager.Elements = CombatManager.Elements.NONE
 
 var is_dead: bool = false
-@onready var old_hp: float
 
 func _ready() -> void:
 	var healthbar_size: float = clampf(5.0 + (8.0 * (e.max_health/10.0) ), 1, 150)
@@ -36,18 +35,16 @@ func _ready() -> void:
 	HBox.position.x = -healthbar_size/2
 	
 	assert(damage_number, "forgot to export")
-	await e.ready
-	old_hp = e.max_health
 
 #region Health Component
-func damage_received(damage: float, new_elem: CombatManager.Elements) -> void:
+func damage_received(damage: float, new_elem: CombatManager.Elements, ep: float = 0) -> void:
 	var inflicted_reaction: CombatManager.Reactions = CombatManager.Reactions.NONE
 	
 	if element_initial == CombatManager.Elements.NONE:
 		element_initial = new_elem
 		element_indicator.element = new_elem
 	elif new_elem != CombatManager.Elements.NONE && new_elem != element_initial:
-		inflicted_reaction = apply_reaction(new_elem)
+		inflicted_reaction = apply_reaction(new_elem, ep)
 		if inflicted_reaction == CombatManager.Reactions.MELT:
 			damage = damage * 2
 	
@@ -56,11 +53,9 @@ func damage_received(damage: float, new_elem: CombatManager.Elements) -> void:
 	
 	if e.health - damage > 0:
 		e.health -= damage
-		if (old_hp - e.health) >= 5:
-			produce_energy(old_hp - e.health)
-			old_hp = e.health
+		produce_energy(0.5)
 	elif not is_dead:
-		produce_energy(e.health)
+		produce_energy(3)
 		is_dead = true
 		EventBus.enemy_died.emit(e)
 		EnemyAiManager.spawn_orbs(global_position, small_orbs, medium_orbs)
@@ -70,9 +65,9 @@ func damage_received(damage: float, new_elem: CombatManager.Elements) -> void:
 		e.queue_free()
 
 
-func produce_energy(difference: float) -> void:
-	var procs: int = roundi(difference / 5)
-	EventBus.enemy_lost_5_hp.emit(procs)
+func produce_energy(procs: float) -> void:
+	EventBus.energy_gen_from_enemy_got_hit.emit(procs)
+
 
 func spawn_dmg_number(effect: String, color: Color) -> void:
 	var pos_variance: Vector2
@@ -98,7 +93,7 @@ func spawn_dmg_number(effect: String, color: Color) -> void:
 	get_tree().root.call_deferred("add_child", label_inst)
 
 
-func apply_reaction(new_elem: CombatManager.Elements) -> CombatManager.Reactions:
+func apply_reaction(new_elem: CombatManager.Elements, ep: float) -> CombatManager.Reactions:
 	#print(CombatManager.Elements.keys()[element_initial] + " ||NEW: " 
 	#+ CombatManager.Elements.keys()[new_elem])
 	var reaction: CombatManager.Reactions = CombatManager.determine_reaction(element_initial, new_elem)
@@ -107,11 +102,11 @@ func apply_reaction(new_elem: CombatManager.Elements) -> CombatManager.Reactions
 			spawn_dmg_number("Melt", CombatManager.params["melt"])
 			## double damage dealt
 		CombatManager.Reactions.SUPERCONDUCT:
-			apply_debuff(CombatManager.Debuffs.SUPERCONDUCT)
+			apply_debuff(CombatManager.Debuffs.SUPERCONDUCT, ep)
 			spawn_dmg_number("Superconduct", CombatManager.params["superconduct"])
 		CombatManager.Reactions.OVERLOAD:
 			spawn_dmg_number("Overload", CombatManager.params["overload"])
-			spawn_overload_impact(global_position)
+			spawn_overload_impact(global_position, ep)
 			## interrupt enemy charging attack (LASER, ORB)
 				## enemy is interrupted by cancelling current fire cycle and
 				## subtracting one ammo to force a reload
@@ -123,21 +118,21 @@ func apply_reaction(new_elem: CombatManager.Elements) -> CombatManager.Reactions
 #endregion
 
 
-func spawn_overload_impact(pos: Vector2) -> void:
+func spawn_overload_impact(pos: Vector2, ep: float) -> void:
 	var inst: DamageImpact = CombatManager.overload_impact.instantiate()
 	inst.global_position = pos
 	get_tree().root.call_deferred("add_child", inst)
 
 
 #region Debuff Component
-func apply_debuff(new_debuff: CombatManager.Debuffs) -> void:
+func apply_debuff(new_debuff: CombatManager.Debuffs, ep) -> void:
 	match new_debuff:
 		CombatManager.Debuffs.SUPERCONDUCT:
 			if superconduct_effect:
-				superconduct_effect.apply_effect(self)
+				superconduct_effect.apply_effect(self, ep)
 		CombatManager.Debuffs.CRYSTALIZED:
 			if crystalize_effect:
-				crystalize_effect.apply_effect(self)
+				crystalize_effect.apply_effect(self, ep)
 		_:
 			pass
 	debuff_indicator.current_debuff = new_debuff

@@ -7,7 +7,7 @@ var char_manager: CharacterManager = null
 @onready var char_2: Panel_Char = $Panel_Char2
 @onready var char_3: Panel_Char = $Panel_Char3
 
-@onready var char_box: Array[Panel_Char] = [char_1, char_2]#, char_3]
+@onready var char_box: Array[Panel_Char] = [char_1, char_2, char_3]
 # move each new panel 75 y pos 
 
 func initialize_hud(p: Player) -> void: ## called by PlayerHolder

@@ -119,6 +119,6 @@ autowrap_mode = 3
 [node name="ol_details" type="Label" parent="ScrollContainer/MarginContainer/VBox"]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
-text = "Overload triggers an explosion on the target, dealing moderate AoE fire damage."
+text = "Overload triggers an explosion on the target, dealing moderate AoE damage."
 label_settings = ExtResource("1_boft5")
 autowrap_mode = 3

@@ -5,7 +5,7 @@ signal exit_menu
 @export var subscribe_playerholder_ui: SubscribePlayerHolder_To_UI
 
 var color_stree := Color(0.25, 0.28, 0.37) #40475e
-var color_char_stats := Color(0.25, 0.28, 0.37)
+var color_char_stats := Color(0.18, 0.32, 0.26)
 
 var current_index: int = 0
 
@@ -14,11 +14,11 @@ var current_index: int = 0
 @onready var background: ColorRect = $Background
 
 @onready var current_menu: Control = stree_menu
-@onready var label_current_menu: Label = $MarginContainer/VBox/HBox2/CurrentMenu
+@onready var label_current_menu: Label = $CurrentMenu
 
-@onready var char_1: Button = $MarginContainer/VBox/HBox2/Char1
-@onready var char_2: Button = $MarginContainer/VBox/HBox2/Char2
-@onready var char_3: Button = $MarginContainer/VBox/HBox2/Char3
+@onready var char_1: Button = $MarginContainer/VBox/HBox1/Char1
+@onready var char_2: Button = $MarginContainer/VBox/HBox1/Char2
+@onready var char_3: Button = $MarginContainer/VBox/HBox1/Char3
 @onready var char_buttons: Array[Button] = [char_1, char_2, char_3]
 
 

@@ -6,6 +6,7 @@ class_name FrostStorm
 
 @onready var t_spawn_cd: Timer = $spawn_cd
 
+var ep: float = 0
 var radius: float = 60
 var max_spawn_counter: int = 30
 var spawn_counter: int = 0
@@ -38,5 +39,6 @@ func spawn_impact(pos: Vector2) -> void:
 	instance.damage = damage
 	instance.scale = Vector2(1, 1) * size
 	instance.debuff = debuff
+	instance.ep = ep
 	get_tree().root.call_deferred("add_child", instance)
 	spawn_counter += 1

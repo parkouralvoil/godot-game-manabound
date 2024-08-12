@@ -10,7 +10,7 @@ func _on_area_entered(hurtbox: Area2D) -> void:
 		enemy_hit = true
 		impact_pos = hurtbox.global_position
 		spawn_chain_lightning(impact_pos)
-		hurtbox.call_deferred("hit", damage, element)
+		hurtbox.call_deferred("hit", damage, element, ep)
 		# spawn lightning chain source
 	disappear()
 
@@ -29,4 +29,5 @@ func spawn_chain_lightning(global_pos: Vector2) -> void:
 	var inst: ChainLightning = chain_lightning_packed.instantiate()
 	inst.global_position = global_pos
 	inst.starting_pos = global_pos ## HAS TO BE GLOBAL
+	inst.damage = damage/5
 	get_tree().root.call_deferred("add_child", inst)

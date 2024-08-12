@@ -4,7 +4,7 @@ var piercing: bool = false
 
 func _on_area_entered(hurtbox: Area2D) -> void:
 	if hurtbox.has_method("hit"):
-		hurtbox.hit(damage, element)
+		hurtbox.hit(damage, element, ep)
 		make_impact()
 	if !piercing:
 		disappear()

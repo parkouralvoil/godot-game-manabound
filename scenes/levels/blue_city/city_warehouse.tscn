@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dvekt06510ha5"]
+[gd_scene load_steps=10 format=3 uid="uid://dvekt06510ha5"]
 
 [ext_resource type="PackedScene" uid="uid://d23s3ceqy66ry" path="res://scenes/levels/test_parallax.tscn" id="1_aw2ts"]
 [ext_resource type="Script" path="res://scenes/levels/blue_city/level_manager.gd" id="1_uo5gf"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://scenes/holder_scenes/enemy_holder.gd" id="4_8uock"]
 [ext_resource type="PackedScene" uid="uid://cc327ml5lr825" path="res://scenes/levels/door.tscn" id="5_0hj1c"]
 [ext_resource type="Texture2D" uid="uid://cb07f2ey0p54u" path="res://assets/sprite_tilesets/blue scifi doors.png" id="6_33gt5"]
+[ext_resource type="PackedScene" uid="uid://bmqu3gpnmomg0" path="res://scenes/enemies/enemy_dummy.tscn" id="7_slp24"]
 
 [sub_resource type="Environment" id="Environment_2st5j"]
 background_mode = 3
@@ -90,5 +91,9 @@ position = Vector2(1051, -76)
 
 [node name="StartingDoor" type="Sprite2D" parent="."]
 modulate = Color(0.505882, 0.505882, 0.505882, 1)
+z_index = -1
 position = Vector2(1055, -72)
 texture = SubResource("AtlasTexture_bpyg2")
+
+[node name="enemy_dummy" parent="." instance=ExtResource("7_slp24")]
+position = Vector2(871, -124)

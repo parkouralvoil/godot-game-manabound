@@ -39,8 +39,8 @@ var damage_basic_bolt: float
 
 var ult_damage_tier1: float
 
-var skill_ult_missile: bool = false
-var skill_basicAtk_double: bool = false
+var skill_ult_missile: bool = false ## right node 2A
+var skill_basicAtk_double: bool = false ## right node 2A
 
 @onready var character: Character = owner
 @onready var PlayerInfo: PlayerInfoResource = character.PlayerInfo
@@ -56,28 +56,27 @@ var skill_basicAtk_double: bool = false
 @onready var base_CHR: float = stats.CHR
 
 ## variables to make skill tree easier to track:
-@onready var level_basicAtk_ammo: int = 0:
+@onready var level_basicAtk_ammo: int = 0: ## left node 1
 	set(level):
 		level_basicAtk_ammo = level
 		stats.MAX_AMMO = base_max_ammo + (scale_ammo * level)
 
-@onready var level_basicAtk_upgrade: int = 0:
+@onready var level_basicAtk_burst: int = 0: ## left node 2B
 	set(level):
-		level_basicAtk_upgrade = level
-		damage_lightning_bolt = compute(base_percent_lightning_bolt, scale_percent_lightning_bolt, level)
-		damage_basic_bolt = compute(base_percent_basic_bolt, 0, level)
+		level_basicAtk_burst = level
+		update_damage()
 
-@onready var level_ult_upgrade: int = 0:
+@onready var level_ult_upgrade: int = 0: ## right node 1
 	set(level):
 		level_ult_upgrade = level
 		stats.MAX_CHARGE = 50 + (50 * min(level, 1))
-		ult_damage_tier1 = compute(base_ult_percent_tier1, scale_ult_percent_tier1, level)
+		update_damage()
 		if level == 1:
 			character.stats.charge_tier = stats.charge_tiers.TWO
 		else:
 			character.stats.charge_tier = stats.charge_tiers.ONE
 
-@onready var level_ult_chargeRate: int = 0:
+@onready var level_ult_chargeRate: int = 0: ## right node 2B
 	set(level):
 		level_ult_chargeRate = level
 		stats.CHR = base_CHR + (scale_CHR * level)
@@ -96,7 +95,7 @@ func _ready() -> void:
 
 func update_skills() -> void:
 	level_basicAtk_ammo = StreeModel.left_nodes[1].lvl
-	level_basicAtk_upgrade = StreeModel.left_nodes[2].lvl
+	level_basicAtk_burst = StreeModel.left_nodes[2].lvl
 	
 	level_ult_upgrade = StreeModel.right_nodes[1].lvl
 	level_ult_chargeRate = StreeModel.right_nodes[3].lvl
@@ -110,8 +109,8 @@ func update_skills() -> void:
 func initialize_model() -> void:
 	## description of char
 	StreeModel.root_node.name = "Infantry Knight" ## more detailed name purely for stree
-	StreeModel.root_node.description = """An infantry soldier wielding a rapid-fire crossbow.
-\nHailing from the City of Light, these lightning knights pave the way for technology in a world dominated by magic.
+	StreeModel.root_node.description = """A soldier wielding an sophisticated crossbow.
+\nHailing from the City of Light, these knights pave the way for technology in a world dominated by magic.
 \nElement: Lightning"""
 	
 	## char's basic atk nodes -----------------------------------------------------
@@ -130,7 +129,8 @@ func initialize_model() -> void:
 	
 	StreeModel.left_nodes[2].name = "Burst shot"
 	StreeModel.left_nodes[2].description = "Every 3rd shot shoots an enhanced lightning bolts with %d%% base damage.
-\nEach upgrade increases damage of enhanced lightning bolts by %d%%." % (
+\nEach upgrade increases damage of enhanced lightning bolts by %d%%.
+\nOn hit, the enhanced bolt releases a chain lightning that deals 20%% of the bolt's damage and targets up to 3 nearby enemies." % (
 		[base_percent_lightning_bolt * 100, scale_percent_lightning_bolt * 100]
 	)
 	StreeModel.left_nodes[2].max_lvl = 3
@@ -145,14 +145,13 @@ func initialize_model() -> void:
 	StreeModel.right_nodes[0].name = _ult_name
 	StreeModel.right_nodes[0].description = """Ultimate Type: Charge
 \nHold down right click until you reach a charge tier (50, 100) then let go to fire a Grand Bolt with %d%% base damage.
-\nHas a base charge rate of %d%%
+\nSpeed of charge depends on the character's Charge rate.
 """ % (
-		[base_ult_percent_tier1 * 100, stats.CHR]
+		[base_ult_percent_tier1 * 100]
 	)
 	
 	StreeModel.right_nodes[1].name = "2nd Tier Upgrade"
-	StreeModel.right_nodes[1].description = """
-Adds a 2nd charge tier which fires 3 enhanced lightning bolts along with the Grand Bolt."""
+	StreeModel.right_nodes[1].description = """Adds a 2nd charge tier which fires 3 enhanced lightning bolts along with the Grand Bolt."""
 	StreeModel.right_nodes[1].cost = 400
 	
 	StreeModel.right_nodes[2].name = "Missile volley"
@@ -171,16 +170,12 @@ Adds a 2nd charge tier which fires 3 enhanced lightning bolts along with the Gra
 #endregion
 
 
-func compute(base: float, scaling: float, level: int) -> float:
-	var raw_output: float = (stats.ATK + PlayerInfo.buff_raw_atk) * (base 
-		+ scaling * max(0, level - 1))
-	
-	return raw_output
-
-
 func update_damage() -> void:
-	damage_lightning_bolt = compute(base_percent_lightning_bolt, scale_percent_lightning_bolt, level_basicAtk_upgrade)
+	damage_lightning_bolt = AbilityHelper.compute_damage(base_percent_lightning_bolt, 
+			scale_percent_lightning_bolt, level_basicAtk_burst, stats)
 		
-	damage_basic_bolt = compute(base_percent_basic_bolt, 0, 1)
+	damage_basic_bolt = AbilityHelper.compute_damage(base_percent_basic_bolt, 
+			0, 1, stats)
 	
-	ult_damage_tier1 = compute(base_ult_percent_tier1, 0, level_ult_upgrade)
+	ult_damage_tier1 = AbilityHelper.compute_damage(base_ult_percent_tier1, 
+			0, level_ult_upgrade, stats)

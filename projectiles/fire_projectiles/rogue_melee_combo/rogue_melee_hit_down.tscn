@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://c0167p4yyhyxe"]
 
-[ext_resource type="Script" path="res://projectiles/ice_projectiles/frost_nova/frost_nova_impact.gd" id="1_igig1"]
+[ext_resource type="Script" path="res://projectiles/fire_projectiles/rogue_melee_combo/rogue_melee_hit.gd" id="1_uubsj"]
 [ext_resource type="Texture2D" uid="uid://b2gagvgpvrjud" path="res://assets/sprite_projectiles/bullet_pixel_BrightRed.png" id="2_w3ra0"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kb0sb"]
@@ -14,10 +14,7 @@ radius = 22.0227
 collision_layer = 0
 collision_mask = 8
 monitorable = false
-script = ExtResource("1_igig1")
-opaqueness = 0.8
-transparency_limit = 0.2
-decay_rate = 8.0
+script = ExtResource("1_uubsj")
 
 [node name="hitbox_lifespan" type="Timer" parent="."]
 wait_time = 0.1
