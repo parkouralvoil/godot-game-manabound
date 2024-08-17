@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://cvl2bs7enu5a2"]
+
+[ext_resource type="Texture2D" uid="uid://bb3lpehyybypd" path="res://resources/textures/runes/runeATK.tres" id="1_7ripe"]
+[ext_resource type="Script" path="res://scenes/collectibles/rune_drop.gd" id="2_rau8g"]
+
+[node name="RuneDrop" type="Sprite2D"]
+texture = ExtResource("1_7ripe")
+script = ExtResource("2_rau8g")

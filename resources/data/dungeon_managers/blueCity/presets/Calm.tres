@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="RoomPreset" load_steps=2 format=3 uid="uid://dh0s11cxw5qqb"]
+
+[ext_resource type="Script" path="res://resources/data/dungeon_managers/room_preset.gd" id="1_ijy1b"]
+
+[resource]
+script = ExtResource("1_ijy1b")
+preset_name = "Calm"
+num_of_enemies = 4
+autobow = 5.0
+orb = 3.0
+laser = 3.0
+dronefactory = 1.0
+num_of_elites = 0
+machinegun = 1.0
+HP_potion_present = false

@@ -8,7 +8,7 @@ atlas = ExtResource("2_mjmlf")
 region = Rect2(272, 96, 16, 16)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_6ec0u"]
-radius = 39.0128
+radius = 56.0
 
 [node name="OverloadImpact" type="Area2D"]
 collision_layer = 0
@@ -23,8 +23,9 @@ one_shot = true
 autostart = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.462745)
 rotation = 1.5708
-scale = Vector2(5, 5)
+scale = Vector2(7, 7)
 texture = SubResource("AtlasTexture_nhxun")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

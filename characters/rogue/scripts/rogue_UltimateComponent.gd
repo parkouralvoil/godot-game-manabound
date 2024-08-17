@@ -10,7 +10,7 @@ class_name Rogue_UltimateComponent
 @onready var t_buff: Timer = $buff_duration
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if not character.enabled:
 		return
 	

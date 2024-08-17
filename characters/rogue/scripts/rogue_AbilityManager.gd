@@ -51,8 +51,8 @@ var ult_atk_buff: float # final
 @onready var Ammo: Rogue_AmmoComponent = $Ammo
 
 ## Stats scaling
-@onready var base_atk: int = stats.ATK
-var scale_atk: int = 4
+@onready var base_atk: float = stats.ATK
+var scale_atk: float = 4
 
 ## variables to make skill tree easier to track:
 @onready var lvl_basicAtk_size_atk: int:

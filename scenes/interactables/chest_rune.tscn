@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://b4cdpgn1inhqq"]
+
+[ext_resource type="Texture2D" uid="uid://oid7awkrx1fx" path="res://resources/textures/interactables/chest_rune_closed.tres" id="1_qti7a"]
+[ext_resource type="Script" path="res://scenes/interactables/chest_rune.gd" id="1_uid5h"]
+
+[node name="ChestRune" type="Sprite2D"]
+texture = ExtResource("1_qti7a")
+script = ExtResource("1_uid5h")

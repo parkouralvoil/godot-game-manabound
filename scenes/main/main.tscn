@@ -1,11 +1,13 @@
-[gd_scene load_steps=13 format=3 uid="uid://bfigo4q6at8d8"]
+[gd_scene load_steps=15 format=3 uid="uid://bfigo4q6at8d8"]
 
 [ext_resource type="Script" path="res://scenes/main/main.gd" id="1_fwn4r"]
 [ext_resource type="PackedScene" uid="uid://dnfu85x4yhumf" path="res://user_interface/menu_manager.tscn" id="2_4a0os"]
+[ext_resource type="Script" path="res://scenes/main/DungeonHolder.gd" id="2_j78xc"]
 [ext_resource type="PackedScene" uid="uid://b3cfd23wes4l7" path="res://user_interface/popup_indicator/popup_indicator.tscn" id="2_udvq4"]
+[ext_resource type="Resource" uid="uid://cnqflwm13q5h2" path="res://resources/data/dungeon_managers/blueCity/dm_blueCity.tres" id="3_4q3ef"]
 [ext_resource type="PackedScene" uid="uid://quvfsmagt2h1" path="res://scenes/levels/PlayerCamera.tscn" id="3_b3eh2"]
 [ext_resource type="Script" path="res://scenes/main/particle_preloader_for_web.gd" id="4_j1irx"]
-[ext_resource type="PackedScene" uid="uid://c7qwpthsv6838" path="res://scenes/holder_scenes/player_holder.tscn" id="4_p316a"]
+[ext_resource type="PackedScene" uid="uid://c7qwpthsv6838" path="res://scenes/complex_dependencies/player_holder.tscn" id="4_p316a"]
 [ext_resource type="Material" uid="uid://b1hyqx5c4ut8u" path="res://resources/debuffs/crystalize/crystalized_particles.tres" id="5_lx26c"]
 [ext_resource type="Material" uid="uid://bccvk3vgyafgq" path="res://resources/debuffs/superconduct/superconduct_particles.tres" id="6_omtpx"]
 [ext_resource type="Material" uid="uid://cyq64d3nqou5u" path="res://resources/particles/bolt_impact_particles.tres" id="7_dlauh"]
@@ -16,6 +18,10 @@
 [node name="Main" type="Node2D"]
 process_mode = 3
 script = ExtResource("1_fwn4r")
+
+[node name="DungeonHolder" type="Node2D" parent="."]
+script = ExtResource("2_j78xc")
+current_DM = ExtResource("3_4q3ef")
 
 [node name="MainCanvas" type="CanvasLayer" parent="."]
 layer = 2

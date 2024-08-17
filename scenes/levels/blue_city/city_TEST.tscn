@@ -1,10 +1,10 @@
 [gd_scene load_steps=9 format=3 uid="uid://b0ucgpjsybwrp"]
 
 [ext_resource type="Script" path="res://scenes/levels/blue_city/level_manager.gd" id="1_cdepn"]
-[ext_resource type="PackedScene" uid="uid://d23s3ceqy66ry" path="res://scenes/levels/test_parallax.tscn" id="2_riqsw"]
+[ext_resource type="PackedScene" uid="uid://d23s3ceqy66ry" path="res://scenes/levels/test/test_parallax.tscn" id="2_riqsw"]
 [ext_resource type="TileSet" uid="uid://bq4bd7di0pjwo" path="res://resources/tilemaps/blue_scifi.tres" id="3_bcsgq"]
-[ext_resource type="Script" path="res://scenes/holder_scenes/enemy_holder.gd" id="4_cja48"]
-[ext_resource type="PackedScene" uid="uid://cc327ml5lr825" path="res://scenes/levels/door.tscn" id="5_1h6rf"]
+[ext_resource type="Script" path="res://scenes/levels/holders/enemy_holder.gd" id="4_cja48"]
+[ext_resource type="PackedScene" uid="uid://cc327ml5lr825" path="res://scenes/levels/door/door.tscn" id="5_1h6rf"]
 [ext_resource type="Texture2D" uid="uid://cb07f2ey0p54u" path="res://assets/sprite_tilesets/blue scifi doors.png" id="6_dgscs"]
 
 [sub_resource type="Environment" id="Environment_2st5j"]

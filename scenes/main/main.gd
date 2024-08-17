@@ -1,5 +1,5 @@
 extends Node2D
-class_name Main # handles loading levels, saving player, etc.
+class_name Main # handles saving player, etc.
 
 const level_warehouse: PackedScene = preload("res://scenes/levels/blue_city/city_warehouse.tscn")
 const level_TEST: PackedScene = preload("res://scenes/levels/blue_city/city_TEST.tscn")
@@ -35,7 +35,6 @@ func enter_next_lvl() -> void:
 	player.global_position = level.starting_pos
 	camera.global_position = level.starting_pos
 	level.enemy_holder.enemy_chance = enemy_chance
-	print("EnemyChance: " + str(enemy_chance))
 	level.enemy_holder.spawn_enemies()
 	
 	var t: Tween = create_tween()

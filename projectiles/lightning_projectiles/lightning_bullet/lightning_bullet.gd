@@ -29,5 +29,5 @@ func spawn_chain_lightning(global_pos: Vector2) -> void:
 	var inst: ChainLightning = chain_lightning_packed.instantiate()
 	inst.global_position = global_pos
 	inst.starting_pos = global_pos ## HAS TO BE GLOBAL
-	inst.damage = damage/5
+	inst.damage = damage/5.0
 	get_tree().root.call_deferred("add_child", inst)

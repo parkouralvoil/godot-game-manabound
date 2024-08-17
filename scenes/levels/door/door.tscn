@@ -1,17 +1,15 @@
 [gd_scene load_steps=7 format=3 uid="uid://cc327ml5lr825"]
 
-[ext_resource type="Script" path="res://scenes/levels/door.gd" id="1_a8wpb"]
+[ext_resource type="Script" path="res://scenes/levels/door/door.gd" id="1_a8wpb"]
+[ext_resource type="Texture2D" uid="uid://cb07f2ey0p54u" path="res://assets/sprite_tilesets/blue scifi doors.png" id="2_ny233"]
 [ext_resource type="LabelSettings" uid="uid://crxqvqu7eeoj8" path="res://resources/label_settings/font_settings_silver.tres" id="3_scjv4"]
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_b1drv"]
-load_path = "res://.godot/imported/blue scifi doors.png-ffd16b1f10c38f268d56773d8ed677bd.ctex"
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_ko17m"]
-atlas = SubResource("CompressedTexture2D_b1drv")
+atlas = ExtResource("2_ny233")
 region = Rect2(0, 80, 32, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7vsuj"]
-atlas = SubResource("CompressedTexture2D_b1drv")
+atlas = ExtResource("2_ny233")
 region = Rect2(48, 80, 32, 48)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mrjlk"]

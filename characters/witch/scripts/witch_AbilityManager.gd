@@ -85,14 +85,14 @@ func _ready() -> void:
 
 func update_skills() -> void:
 	level_basicAtk_reload = StreeModel.left_nodes[1].lvl
-	level_basicAtk_second_icicle = StreeModel.left_nodes[2].lvl
+	skill_basicAtk_crystalize = StreeModel.left_nodes[2].lvl
+	level_basicAtk_second_icicle = StreeModel.left_nodes[3].lvl
 	
 	level_ult_explosions = StreeModel.right_nodes[1].lvl
 	level_ult_size = StreeModel.right_nodes[2].lvl
 	
 	# boolean from int, 0 = false, 1 = true
 	skill_ult_crystalize = StreeModel.right_nodes[3].lvl
-	skill_basicAtk_crystalize = StreeModel.left_nodes[3].lvl
 
 
 func initialize_model() -> void:
@@ -117,19 +117,19 @@ func initialize_model() -> void:
 	StreeModel.left_nodes[1].max_lvl = 3
 	StreeModel.left_nodes[1].cost = 350
 	
-	StreeModel.left_nodes[2].name = "Greater Icicles"
-	StreeModel.left_nodes[2].description = "Icicles now explode for a 2nd time, dealing %d%% damage.
+	StreeModel.left_nodes[2].name = "Crystalized Spears"
+	StreeModel.left_nodes[2].description = "Ice Spears and icicles now inflict a stack of crystalized.
+\nCrystalized: Detonates at 9 stack or after 2.5 seconds
+Each stack deals 5 damage, Every 3 stack increases final damage by 30%%"
+	StreeModel.left_nodes[2].cost = 1400
+	
+	StreeModel.left_nodes[3].name = "Denser Icicles"
+	StreeModel.left_nodes[3].description = "Icicles now explode for a 2nd time, dealing %d%% damage.
 \nEach upgrade increases 1st icicle damage by %d%% and 2nd icicle damage by %d%%." % (
 			[base_percent_2nd_icicle * 100, scale_percent_1st_icicle * 100, scale_percent_2nd_icicle * 100]
 	)
-	StreeModel.left_nodes[2].max_lvl = 3
-	StreeModel.left_nodes[2].cost = 1400
-	
-	StreeModel.left_nodes[3].name = "Crystalized Spears"
-	StreeModel.left_nodes[3].description = "Ice Spears and icicles now inflict a stack of crystalized.
-\nCrystalized: Detonates at 9 stack or after 2.5 seconds
-Each stack deals 5 damage, Every 3 stack increases final damage by 30%%"
-	StreeModel.left_nodes[3].cost = 3200
+	StreeModel.left_nodes[3].max_lvl = 3
+	StreeModel.left_nodes[3].cost = 2800
 	
 	# char's ult nodes
 	StreeModel.right_nodes[0].name = "Frost Storm"

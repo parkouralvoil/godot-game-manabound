@@ -125,7 +125,7 @@ func spawn_overload_impact(pos: Vector2, ep: float) -> void:
 
 
 #region Debuff Component
-func apply_debuff(new_debuff: CombatManager.Debuffs, ep) -> void:
+func apply_debuff(new_debuff: CombatManager.Debuffs, ep: float) -> void:
 	match new_debuff:
 		CombatManager.Debuffs.SUPERCONDUCT:
 			if superconduct_effect:

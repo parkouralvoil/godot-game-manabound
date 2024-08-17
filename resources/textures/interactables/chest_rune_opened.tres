@@ -1,0 +1,7 @@
+[gd_resource type="AtlasTexture" load_steps=2 format=3 uid="uid://50v8vfrvomnk"]
+
+[ext_resource type="Texture2D" uid="uid://bq75fx3na8ody" path="res://assets/sprite_interactables/blue_scifi_interactables.png" id="1_112fq"]
+
+[resource]
+atlas = ExtResource("1_112fq")
+region = Rect2(32, 104, 32, 24)

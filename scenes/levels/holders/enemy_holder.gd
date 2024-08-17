@@ -7,13 +7,6 @@ const DronefactoryScene: PackedScene = preload("res://scenes/enemies/stationary_
 const LasercrystalScene: PackedScene = preload("res://scenes/enemies/stationary_enemies/laser_crystal/enemy_laser_crystal.tscn")
 const EnergizedorbScene: PackedScene = preload("res://scenes/enemies/stationary_enemies/energizedOrb/enemy_energized_orb.tscn")
 
-@export var tool_button_spawn: bool = false :
-	set(val):
-		spawn_enemies()
-
-@export var tool_button_clear: bool = false :
-	set(val):
-		remove_enemies()
 
 class SpawnInfo:
 	var scene: PackedScene
@@ -92,6 +85,8 @@ func spawn_enemies() -> void: ## calculate chance to spawn
 	for i in range(max_enemies):
 		#info_array.shuffle()
 		var random: int = rng.randi() % 100
+		## future me here, (Aug 17), this sucks so bad
+		
 		## it works like this;
 		## autobow: 30%		[0, 29]
 		## machinegun: 10%	[30, 39]

@@ -1,12 +1,12 @@
 [gd_scene load_steps=10 format=3 uid="uid://t2e45srpirha"]
 
 [ext_resource type="TileSet" uid="uid://bq4bd7di0pjwo" path="res://resources/tilemaps/blue_scifi.tres" id="1_hgvqm"]
-[ext_resource type="Script" path="res://scenes/levels/test_level.gd" id="1_xtwao"]
-[ext_resource type="PackedScene" uid="uid://d23s3ceqy66ry" path="res://scenes/levels/test_parallax.tscn" id="3_6smy2"]
+[ext_resource type="Script" path="res://scenes/levels/test/test_level.gd" id="1_xtwao"]
+[ext_resource type="PackedScene" uid="uid://d23s3ceqy66ry" path="res://scenes/levels/test/test_parallax.tscn" id="3_6smy2"]
 [ext_resource type="Texture2D" uid="uid://c6a2s8k867nfu" path="res://assets/background/black square.png" id="4_u72xy"]
 [ext_resource type="PackedScene" uid="uid://c7kau2srmy78i" path="res://scenes/enemies/stationary_enemies/dronefactory_small/enemy_dronefactory.tscn" id="5_vwkg7"]
 [ext_resource type="PackedScene" uid="uid://cg2ravjhx4yud" path="res://scenes/enemies/stationary_enemies/autobow/enemy_autobow.tscn" id="5_wr50s"]
-[ext_resource type="PackedScene" uid="uid://c7qwpthsv6838" path="res://scenes/holder_scenes/player_holder.tscn" id="6_khwf5"]
+[ext_resource type="PackedScene" uid="uid://c7qwpthsv6838" path="res://scenes/complex_dependencies/player_holder.tscn" id="6_khwf5"]
 [ext_resource type="PackedScene" uid="uid://dvuibymoxfgrl" path="res://scenes/enemies/stationary_enemies/laser_crystal/enemy_laser_crystal.tscn" id="7_aw426"]
 
 [sub_resource type="Environment" id="Environment_83uss"]
