@@ -6,6 +6,7 @@ var markers: Array[Marker2D] = []
 
 ## Variables given by Level manager
 var num_of_enemies: int = 0
+var hp_scaling: float = 1
 
 
 @onready var rng: RandomNumberGenerator = RandomNumberGenerator.new()
@@ -38,16 +39,17 @@ func spawn_enemies(info_array: Array[RoomPreset.SpawnInfo]) -> void: ## called b
 
 
 func _instantiate_enemy(info: RoomPreset.SpawnInfo) -> BaseEnemy:
+	var inst: BaseEnemy
 	match info.scene:
 		RoomPreset.LasercrystalScene:
-			var inst: Enemy_LaserCrystal = (info.scene).instantiate()
+			inst = (info.scene).instantiate()
 			if roll_probability(0.4):
 				inst.horizontal = true
-			return inst
 		_:
-			var inst: BaseEnemy
 			inst = (info.scene).instantiate()
-			return inst
+	inst.healthbar_length = inst.max_health
+	inst.max_health *= hp_scaling
+	return inst
 
 
 func roll_probability(success_chance: float) -> bool:

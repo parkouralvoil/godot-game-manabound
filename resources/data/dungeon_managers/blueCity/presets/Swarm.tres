@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource("1_bfecq")
-preset_name = "Calm"
+preset_name = "Swarm"
 num_of_enemies = 7
 autobow = 1.0
 orb = 1.0

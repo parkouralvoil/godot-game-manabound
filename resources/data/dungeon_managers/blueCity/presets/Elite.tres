@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource("1_1xi6q")
-preset_name = "Calm"
+preset_name = "Elite"
 num_of_enemies = 5
 autobow = 5.0
 orb = 3.0

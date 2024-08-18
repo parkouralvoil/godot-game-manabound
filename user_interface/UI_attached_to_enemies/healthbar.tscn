@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://user_interface/UI_attached_to_enemies/Healthbar.gd" id="1_l12hh"]
 
 [node name="Healthbar" type="ProgressBar"]
-modulate = Color(1, 0.207843, 0.32549, 1)
+modulate = Color(1, 0.396078, 0.0156863, 1)
 offset_left = -12.0
 offset_top = 13.0
 offset_right = 12.0

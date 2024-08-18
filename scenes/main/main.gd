@@ -17,6 +17,7 @@ func _ready() -> void:
 	dungeon_holder.next_level_loaded.connect(_enter_next_lvl)
 	
 	popup_indicator.hide()
+	await dungeon_holder.initialize_dungeon()
 	dungeon_holder.load_next_lvl()
 
 
@@ -32,6 +33,8 @@ func _enter_next_lvl(starting_pos: Vector2) -> void: ## should be in (fade_out) 
 	await fade_in()
 	camera.target_node = player
 	camera.position_smoothing_enabled = true
+	print_orphan_nodes()
+	print("orphan nodes printed")
 
 
 func _remove_player_holder() -> void:

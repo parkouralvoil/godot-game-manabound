@@ -1,5 +1,5 @@
 extends Resource
-class_name DungeonManager
+class_name DungeonData
 #region Comment Information
 ## make a UNIQUE resource of this for EACH dungeon has info of 
 """
@@ -47,7 +47,7 @@ how modifiers are chosen by game:
 PRESETS:
 Calm: small number of enemies, VV
 Normal: Mostly autobows, moderate lasers/energyorb/ rarely drone factory
-Bowless: Mostly orbs and lasers, rarely autobows
+Bowless: Mostly orbs and lasers, no autobows
 Risky: NORMAL but much more enemies
 
 Hard:
@@ -71,43 +71,54 @@ enum RoomInfo {
 	BOSS,
 }
 
-@export_category("Dungeon Manager")
+@export_category("Dungeon Data")
 @export var name: String = "Region"
 @export var NormalRooms: Array[PackedScene]
 @export var EasyPresets: Array[RoomPreset]
 @export var HardPresets: Array[RoomPreset]
 
-var current_cycle: int = 0
-var current_room: int = 1
+var current_cycle: int:
+	set(val):
+		current_cycle = maxi(1, val)
+		_update_cycle_info()
+var current_room: int = 1:
+	set(val):
+		current_room = maxi(0, val)
 var available_presets: Array[RoomPreset] = EasyPresets
 @export var chosen_preset: RoomPreset: ## FOR TESTING
 	set(val):
 		chosen_preset = val
-		chosen_preset.min_rune_chests = min_chest_spawns
-		chosen_preset.max_rune_chests = max_chest_spawns
-		chosen_preset.initialize_info()
-		print("preset: %s, max rune chests: %d" % [chosen_preset.preset_name, chosen_preset.max_rune_chests])
+		_update_preset()
 ## NOTE: im still not sure whats a good way to go about this, if i need to limit the available presets
 ## ALTERNATIVELY: i could just have 2 export vars of presets, one for Easy (first 4 lvls) and one for Hard (all lvls)
 
-var enemy_HP_scaling: float = 1
-var min_chest_spawns: int = 3:
+var enemy_HP_scaling: float = 0
+var min_chest_spawns: int = 1:
 	set(value):
 		min_chest_spawns = max(value, 0)
 		if max_chest_spawns < min_chest_spawns:
 			max_chest_spawns = max(value, 0)
-var max_chest_spawns: int = 6:
+var max_chest_spawns: int = 3:
 	set(value):
 		max_chest_spawns = max(value, 0)
 		if max_chest_spawns < min_chest_spawns:
 			min_chest_spawns = max(value, 0)
 
 
-func set_cycle(new_cycle: int) -> void: ## UNUSED
-	current_cycle = new_cycle
+#region Cycle Functions
+func start_cycle() -> void:
+	current_cycle = 1
+
+
+func go_next_cycle() -> void:
+	current_cycle += 1
 	## set enemy HP scaling here
-	## set available 
-	match new_cycle:
+	## set available presets
+
+
+func _update_cycle_info() -> void: ## inside setter of cycle
+	#print("cycle updated")
+	match current_cycle:
 		1:
 			min_chest_spawns = 1
 			max_chest_spawns = 3
@@ -123,11 +134,24 @@ func set_cycle(new_cycle: int) -> void: ## UNUSED
 			max_chest_spawns = 9
 			
 			enemy_HP_scaling = 4
+	_update_preset()
+#endregion
 
 
-func check_next_room_info() -> RoomInfo: ## UNUSED
+#region Room functions
+func start_room() -> void:
+	current_room = 1
+
+
+func go_next_room() -> void:
 	current_room += 1
-	match current_room:
+	if current_room >= 2: ## TESTING
+		go_next_cycle()
+
+
+func retrieve_next_room_info() -> RoomInfo: ## UNUSED
+	var next_room = current_room + 1
+	match next_room:
 		5:
 			return RoomInfo.COMBAT # rest
 		9:
@@ -136,3 +160,13 @@ func check_next_room_info() -> RoomInfo: ## UNUSED
 			return RoomInfo.COMBAT # boss
 		_:
 			return RoomInfo.COMBAT
+#endregion
+
+
+func _update_preset() -> void:
+	chosen_preset.min_rune_chests = min_chest_spawns
+	chosen_preset.max_rune_chests = max_chest_spawns
+	chosen_preset.enemy_HP_scaling = enemy_HP_scaling
+	chosen_preset.initialize_info()
+	#print("preset: %s, max rune chests: %d" % [chosen_preset.preset_name, 
+			#chosen_preset.max_rune_chests])

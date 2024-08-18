@@ -4,12 +4,12 @@
 
 [resource]
 script = ExtResource("1_pqj5q")
-preset_name = "Calm"
+preset_name = "Risky"
 num_of_enemies = 10
-autobow = 5.0
-orb = 3.0
-laser = 3.0
-dronefactory = 1.0
+autobow = 3.0
+orb = 2.0
+laser = 2.0
+dronefactory = 3.0
 num_of_elites = 2
 machinegun = 1.0
 HP_potion_present = true

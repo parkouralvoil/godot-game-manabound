@@ -41,6 +41,7 @@ class SpawnInfo: ## TODO: replace this with EnemySpawnInfo resource
 ## set by DM
 var min_rune_chests: int = 0
 var max_rune_chests: int = 0
+var enemy_HP_scaling: float = 1
 
 @export_category("Specific Room (leave blank for normal)")
 @export var room: PackedScene

@@ -14,11 +14,16 @@ signal reload_time_changed(new_reload_time: float)
 ## draining ammo will be overload's effect
 
 @export var max_health: float = 50.0
+var healthbar_length: float ## set by enemy holder on spawn
 @export var default_reload_time: float = 5.0
 
 ## I moved these from EnemyAIManager to here
-static var enemies_alive: int = 0
-static var small_drones: int = 0
+static var enemies_alive: int = 0:
+	set(val):
+		enemies_alive = max(val, 0)
+static var small_drones: int = 0:
+	set(val):
+		small_drones = max(val, 0)
 static var max_drones: int = 20
 
 var health: float = max_health:

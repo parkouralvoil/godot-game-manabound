@@ -29,3 +29,11 @@ offset_bottom = 40.0
 
 [node name="TeamInfoMenuGroup" parent="." instance=ExtResource("2_kfbnn")]
 layout_mode = 1
+
+[node name="SelectRoomPreset" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

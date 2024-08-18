@@ -29,6 +29,9 @@ func give_children_room_preset(preset: RoomPreset) -> void: ## assigned by dunge
 	enemy_holder.num_of_enemies = preset.num_of_enemies
 	elite_holder.num_of_enemies = preset.num_of_elites
 	
+	enemy_holder.hp_scaling = preset.enemy_HP_scaling
+	elite_holder.hp_scaling = preset.enemy_HP_scaling
+	
 	chest_rune_holder.min_chest_spawns = preset.min_rune_chests
 	chest_rune_holder.max_chest_spawns = preset.max_rune_chests
 	chest_rune_holder.initialize_chests()
@@ -40,6 +43,9 @@ func give_children_room_preset(preset: RoomPreset) -> void: ## assigned by dunge
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_PAUSABLE
 	EventBus.enemy_died.connect(_enemy_dead)
+	await get_tree().physics_frame
+	if BaseEnemy.enemies_alive <= 0:
+		_level_is_cleared()
 
 
 func _enemy_dead(type: BaseEnemy) -> void:

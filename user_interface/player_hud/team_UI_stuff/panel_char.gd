@@ -7,20 +7,24 @@ class_name Panel_Char
 @onready var ammo: Label = $HBoxContainer/VBoxContainer_info/Label_ammo
 @onready var charge: Label = $HBoxContainer/VBoxContainer_info/Label_charge
 
-var tracked_character: Character = null
+# var tracked_character: Character = null ## this is only needed for retrieving stats, which 
+# CharacterResource now contains
 var tracked_char_resource: CharacterResource = null
+var tracked_stats: CharacterStats = null
 
 
-func initialize_info(character: CharacterResource, AM: Character, index: int) -> void:
-	sprite_portrait.texture = character.sprite_portrait
+func initialize_info(character_data: CharacterResource, index: int) -> void:
+	sprite_portrait.texture = character_data.sprite_portrait
 	
-	tracked_char_resource = character
-	tracked_character = AM
+	tracked_char_resource = character_data
+	tracked_stats = character_data.stats
 	
-	char_name.text = "[%s] %s" % [str(index), character.char_name]
+	char_name.text = "[%s] %s" % [str(index), character_data.char_name]
+
 
 func _process(_delta: float) -> void:
-	if not tracked_character:
+	if not tracked_char_resource or not tracked_stats:
+		push_warning("TeamHud's panel (%s) is missing tracked_char_resource/stats" % name)
 		return
 	
 	update_health()
@@ -31,22 +35,25 @@ func _process(_delta: float) -> void:
 		modulate = Color(1, 1, 1, 0.5)
 	else:
 		modulate = Color(1, 1, 1, 1)
-	
+
+
 func update_health() -> void:
 	var format_string: String = "Health: %s/%s"
-	var actual_string: String = format_string % [str(tracked_character.stats.HP), 
-		str(tracked_character.stats.MAX_HP)]
+	var actual_string: String = format_string % [str(tracked_stats.HP), 
+		str(tracked_stats.MAX_HP)]
 	health.text = actual_string
+
 
 func update_ammo() -> void:
 	var format_string: String = "Ammo: %d/%d"
-	var actual_string: String = format_string % [tracked_character.stats.ammo,
-		tracked_character.stats.MAX_AMMO]
+	var actual_string: String = format_string % [tracked_stats.ammo,
+		tracked_stats.MAX_AMMO]
 	ammo.text = actual_string
+
 
 func update_charge() -> void:
 	var type: String = "Charge"
-	match tracked_character.stats.charge_type:
+	match tracked_stats.charge_type:
 		PlayerInfoResource.ChargeTypes.CHARGE:
 			type = "Charge"
 		PlayerInfoResource.ChargeTypes.ENERGY:
@@ -56,15 +63,15 @@ func update_charge() -> void:
 	
 	var format_string: String = "%s: %d/%d"
 	var actual_string: String = format_string % [type, 
-		snapped(tracked_character.stats.charge, 1), 
-		tracked_character.stats.MAX_CHARGE]
+		snapped(tracked_stats.charge, 1), 
+		tracked_stats.MAX_CHARGE]
 	charge.text = actual_string
 	
-	if tracked_character.stats.charge >= 100:
+	if tracked_stats.charge >= 100:
 		charge.modulate = Color(1, 0.2, 0.2)
-	elif tracked_character.stats.charge >= 50:
+	elif tracked_stats.charge >= 50:
 		charge.modulate = Color(1, 1, 0.2)
-	elif tracked_character.stats.charge >= 1:
+	elif tracked_stats.charge >= 1:
 		charge.modulate = Color(1, 1, 1, 0.8)
 	else:
 		charge.modulate = Color(0.6, 0.6, 0.6, 0.8)

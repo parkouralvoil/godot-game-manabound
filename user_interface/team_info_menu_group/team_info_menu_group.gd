@@ -2,7 +2,7 @@ extends Control
 
 signal exit_menu
 
-@export var subscribe_playerholder_ui: SubscribePlayerHolder_To_UI
+@export var selected_team_info: SelectedTeamInfo
 
 var color_stree := Color(0.25, 0.28, 0.37) #40475e
 var color_char_stats := Color(0.18, 0.32, 0.26)
@@ -24,7 +24,7 @@ var current_index: int = 0
 
 func _ready() -> void:
 	visibility_changed.connect(_switch_sub_menu.bind(stree_menu))
-	subscribe_playerholder_ui.data_updated.connect(_update_char_buttons)
+	selected_team_info.data_updated.connect(_update_char_buttons)
 	for b in char_buttons:
 		b.hide()
 

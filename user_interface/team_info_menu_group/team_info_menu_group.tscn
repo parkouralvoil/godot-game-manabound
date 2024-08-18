@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://lieb5rtvgudj"]
 
 [ext_resource type="Script" path="res://user_interface/team_info_menu_group/team_info_menu_group.gd" id="1_iqaa8"]
-[ext_resource type="Resource" uid="uid://drmmperiwdmdh" path="res://resources/subscriptions/PlayerHolder_to_UI.tres" id="2_18cph"]
 [ext_resource type="PackedScene" uid="uid://6dikqxysux0p" path="res://user_interface/team_info_menu_group/skill_tree_menu/skill_tree_menu.tscn" id="2_icl2l"]
+[ext_resource type="Resource" uid="uid://cw7j4j6w6f1yk" path="res://resources/data/selected_team_info/selected_team_info.tres" id="2_wbj4m"]
 [ext_resource type="PackedScene" uid="uid://brfpdmoe2l0uu" path="res://user_interface/team_info_menu_group/character_status_menu/character_status_menu.tscn" id="3_sb7mf"]
 
 [node name="TeamInfoMenuGroup" type="Control"]
@@ -13,7 +13,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_iqaa8")
-subscribe_playerholder_ui = ExtResource("2_18cph")
+selected_team_info = ExtResource("2_wbj4m")
 
 [node name="Background" type="ColorRect" parent="."]
 z_index = -1

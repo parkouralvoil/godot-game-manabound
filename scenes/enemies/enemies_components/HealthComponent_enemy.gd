@@ -4,12 +4,6 @@ class_name EnemyHealthComponent
 @export var damage_number: PackedScene
 @export var enemy_explosion_sfx: AudioStream
 @export var explosion_volume: float = -15
-@onready var e: BaseEnemy = owner
-
-@onready var element_indicator: ElementIndicator = $HBoxContainer/element_indicator
-@onready var debuff_indicator: DebuffIndicator = $HBoxContainer/debuff_indicator
-@onready var healthbar: ProgressBar = $Healthbar
-@onready var HBox: HBoxContainer = $HBoxContainer
 
 @export_category("Enemy Value")
 @export var small_orbs: int = 2
@@ -23,16 +17,22 @@ class_name EnemyHealthComponent
 	## they need to be relagated to debuff resources
 
 var rng := RandomNumberGenerator.new()
-
 var element_initial: CombatManager.Elements = CombatManager.Elements.NONE
-
 var is_dead: bool = false
 
+## healthbar colors
+var color_tier1 := Color(1, 0.21, 0.32)
+var color_tier2 := Color(1, 0.4, 0.015)
+var color_tier3 := Color(0.87, 0, 1)
+
+@onready var e: BaseEnemy = owner
+@onready var element_indicator: ElementIndicator = $HBoxContainer/element_indicator
+@onready var debuff_indicator: DebuffIndicator = $HBoxContainer/debuff_indicator
+@onready var healthbar: ProgressBar = $Healthbar
+@onready var HBox: HBoxContainer = $HBoxContainer
+
 func _ready() -> void:
-	var healthbar_size: float = clampf(5.0 + (8.0 * (e.max_health/10.0) ), 1, 150)
-	healthbar.size.x = healthbar_size
-	healthbar.position.x = -healthbar_size/2
-	HBox.position.x = -healthbar_size/2
+	_set_healthbar_properties()
 	
 	assert(damage_number, "forgot to export")
 
@@ -46,7 +46,7 @@ func damage_received(damage: float, new_elem: CombatManager.Elements, ep: float 
 	elif new_elem != CombatManager.Elements.NONE && new_elem != element_initial:
 		inflicted_reaction = apply_reaction(new_elem, ep)
 		if inflicted_reaction == CombatManager.Reactions.MELT:
-			damage = damage * 2
+			damage = damage * (2 + ep/100)
 	
 	if damage > 0:
 		spawn_dmg_number(str(round(damage)), CombatManager.params[new_elem])
@@ -120,7 +120,11 @@ func apply_reaction(new_elem: CombatManager.Elements, ep: float) -> CombatManage
 
 func spawn_overload_impact(pos: Vector2, ep: float) -> void:
 	var inst: DamageImpact = CombatManager.overload_impact.instantiate()
+	var base_dmg: float = 10
+	var overload_dmg: float = base_dmg + (ep ** 1.2)
 	inst.global_position = pos
+	inst.damage = overload_dmg
+	inst.element = CombatManager.Elements.NONE
 	get_tree().root.call_deferred("add_child", inst)
 
 
@@ -144,3 +148,18 @@ func clear_debuff_references() -> void:
 	if superconduct_effect:
 		superconduct_effect.delete_ref(self)
 #endregion
+
+
+func _set_healthbar_properties() -> void:
+	var healthbar_size: float = clampf(5.0 + (8.0 * (e.healthbar_length/10.0) ), 1, 150)
+	healthbar.size.x = healthbar_size
+	healthbar.position.x = -healthbar_size/2
+	HBox.position.x = -healthbar_size/2
+	
+	#print("%0.2f vs real: %0.2f" % [e.healthbar_length, e.max_health])
+	if e.healthbar_length >= e.max_health: ## x1 hp
+		healthbar.modulate = color_tier1
+	elif e.healthbar_length * 2 >= e.max_health: ## (x2) HP
+		healthbar.modulate = color_tier2
+	else: ## more than x2 HP
+		healthbar.modulate = color_tier3

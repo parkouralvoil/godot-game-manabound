@@ -9,5 +9,5 @@ var char_data_array: Array[CharacterResource]:
 		data_updated.emit(val) ## UI
 
 
-func assign_array(arr: Array[CharacterResource]) -> void: ## player holder
+func assign_array(arr: Array[CharacterResource]) -> void: ## player holder, now character manager's job
 	char_data_array = arr

@@ -1,12 +1,11 @@
 extends Node2D
 class_name CharacterManager
 
-@onready var p: Player = get_parent()
-@onready var t_change_char: Timer = $change_char_cd
-
-var stored_chars: Array[Character] = [null, null, null]
-@export var selected_char_resource: Array[CharacterResource] = [null, null, null]
+@export var selected_team_info: SelectedTeamInfo ## for char_manager to communicate with UI's
 	## remove "export" when adding more chars (after starter trio)
+
+var data_array: Array[CharacterResource] = [null, null, null] ## the resource
+var stored_chars: Array[Character] = [null, null, null] ## the scene, which has AbilityManager
 
 var current_char: Character
 var current_char_spriteframes: SpriteFrames
@@ -14,23 +13,25 @@ var current_char_fake_arm: Texture
 
 var can_change_char: bool = true
 
-# important logic:
+@onready var p: Player = owner
+@onready var t_change_char: Timer = $change_char_cd
 
 func _ready() -> void:
-	
-	for i in range(selected_char_resource.size()):
-		stored_chars[i] = selected_char_resource[i].character_scene.instantiate()
+	data_array = selected_team_info.char_data_array
+	for i in range(data_array.size()):
+		stored_chars[i] = data_array[i].character_scene.instantiate()
 		add_child(stored_chars[i])
 		stored_chars[i].arm_sprite.hide()
 		stored_chars[i].wpn_sprite.hide()
-	
 	#change_character(0) player calls this on its ready func instead
+
 
 func take_damage(damage: int) -> void:
 	if current_char.stats.HP - damage > 0:
 		current_char.stats.HP -= damage
 	else:
 		current_char.stats.HP = 0
+
 
 func _process(_delta: float) -> void:
 	if !p: return
@@ -55,7 +56,7 @@ func change_character(num: int) -> void:
 	if p.arm_sprite != null:
 		p.arm_sprite.hide()
 		p.wpn_sprite.hide()
-	var _char := selected_char_resource[num]
+	var _char := data_array[num]
 	var _AM := stored_chars[num]
 	current_char = _AM
 	current_char_spriteframes = _char.spriteframes
@@ -79,9 +80,9 @@ func change_character(num: int) -> void:
 	t_change_char.start()
 	p.character_changed_anim()
 	
-	for i in range(selected_char_resource.size()):
+	for i in range(data_array.size()):
 		if i != num and stored_chars[i] != null:
-			selected_char_resource[i].selected = false
+			data_array[i].selected = false
 			stored_chars[i].enabled = false
 
 
@@ -90,9 +91,11 @@ func set_player_velocity(velocity: Vector2) -> void:
 	if p:
 		p.velocity = velocity
 
+
 func apply_player_cam_shake(strength: int) -> void:
 	if p:
 		p.camera_shake(strength)
+
 
 func sprite_look_at(direction: Vector2) -> void:
 	if p:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://c7qwpthsv6838"]
+[gd_scene load_steps=15 format=3 uid="uid://c7qwpthsv6838"]
 
 [ext_resource type="Script" path="res://scenes/complex_dependencies/player_holder.gd" id="1_pvica"]
 [ext_resource type="PackedScene" uid="uid://c35wulwk6e3b4" path="res://scenes/player.tscn" id="1_ymobu"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" path="res://user_interface/player_hud/Label_AutoAim.gd" id="9_q47ex"]
 [ext_resource type="Script" path="res://user_interface/player_hud/currency_counter.gd" id="10_75qgu"]
 [ext_resource type="Resource" uid="uid://6renh852kiei" path="res://resources/data/player_info.tres" id="10_ckewk"]
+[ext_resource type="Resource" uid="uid://cw7j4j6w6f1yk" path="res://resources/data/selected_team_info/selected_team_info.tres" id="11_cna00"]
 [ext_resource type="Texture2D" uid="uid://duidexikehj1a" path="res://assets/sprite_UI/damage overlay.png" id="12_wtoa7"]
 
 [sub_resource type="SystemFont" id="SystemFont_chrtk"]
@@ -111,6 +112,7 @@ size_flags_vertical = 8
 mouse_filter = 2
 theme_override_constants/separation = 20
 script = ExtResource("6_xe7lk")
+selected_team_info = ExtResource("11_cna00")
 
 [node name="Panel_Char1" parent="HUD_elements/TeamHud" instance=ExtResource("7_fqt64")]
 visible = false

@@ -4,12 +4,12 @@
 
 [resource]
 script = ExtResource("1_dksiu")
-preset_name = "Calm"
+preset_name = "Normal"
 num_of_enemies = 7
-autobow = 5.0
+autobow = 4.0
 orb = 3.0
 laser = 3.0
-dronefactory = 1.0
+dronefactory = 2.0
 num_of_elites = 1
 machinegun = 1.0
 HP_potion_present = false
