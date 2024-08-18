@@ -31,6 +31,7 @@ offset_bottom = 40.0
 layout_mode = 1
 
 [node name="SelectRoomPreset" type="Control" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

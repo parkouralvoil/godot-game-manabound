@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="DungeonData" load_steps=9 format=3 uid="uid://cnqflwm13q5h2"]
+[gd_resource type="Resource" script_class="DungeonData" load_steps=8 format=3 uid="uid://cnqflwm13q5h2"]
 
 [ext_resource type="Resource" uid="uid://dh0s11cxw5qqb" path="res://resources/data/dungeon_managers/blueCity/presets/Calm.tres" id="1_niru0"]
 [ext_resource type="Resource" uid="uid://c5u2hkuq1dvd3" path="res://resources/data/dungeon_managers/blueCity/presets/Normal.tres" id="2_ipw1w"]
@@ -7,7 +7,6 @@
 [ext_resource type="Script" path="res://resources/data/dungeon_managers/dungeon_data.gd" id="4_pfx3o"]
 [ext_resource type="Resource" uid="uid://dbiyi6sqm4qs7" path="res://resources/data/dungeon_managers/blueCity/presets/Swarm.tres" id="4_tig00"]
 [ext_resource type="Resource" uid="uid://dn3dx4sgyxvm8" path="res://resources/data/dungeon_managers/blueCity/presets/Elite.tres" id="5_slprj"]
-[ext_resource type="Resource" uid="uid://dcer0bfs8bw54" path="res://resources/data/dungeon_managers/blueCity/presets/Test.tres" id="7_6odtk"]
 
 [resource]
 script = ExtResource("4_pfx3o")
@@ -15,4 +14,4 @@ name = "City"
 NormalRooms = Array[PackedScene]([ExtResource("3_428ps")])
 EasyPresets = Array[Resource("res://resources/data/dungeon_managers/room_preset.gd")]([ExtResource("1_niru0"), ExtResource("2_ipw1w"), ExtResource("3_ch4dh"), ExtResource("4_tig00"), ExtResource("5_slprj")])
 HardPresets = Array[Resource("res://resources/data/dungeon_managers/room_preset.gd")]([])
-chosen_preset = ExtResource("7_6odtk")
+chosen_preset = ExtResource("1_niru0")
