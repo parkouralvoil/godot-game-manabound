@@ -80,23 +80,30 @@ enum RoomInfo {
 var current_cycle: int = 0
 var current_room: int = 1
 var available_presets: Array[RoomPreset] = EasyPresets
-var chosen_preset: RoomPreset = null
+@export var chosen_preset: RoomPreset: ## FOR TESTING
+	set(val):
+		chosen_preset = val
+		chosen_preset.min_rune_chests = min_chest_spawns
+		chosen_preset.max_rune_chests = max_chest_spawns
+		chosen_preset.initialize_info()
+		print("preset: %s, max rune chests: %d" % [chosen_preset.preset_name, chosen_preset.max_rune_chests])
 ## NOTE: im still not sure whats a good way to go about this, if i need to limit the available presets
 ## ALTERNATIVELY: i could just have 2 export vars of presets, one for Easy (first 4 lvls) and one for Hard (all lvls)
 
 var enemy_HP_scaling: float = 1
-var min_chest_spawns: int:
+var min_chest_spawns: int = 3:
 	set(value):
 		min_chest_spawns = max(value, 0)
 		if max_chest_spawns < min_chest_spawns:
 			max_chest_spawns = max(value, 0)
-var max_chest_spawns: int:
+var max_chest_spawns: int = 6:
 	set(value):
 		max_chest_spawns = max(value, 0)
 		if max_chest_spawns < min_chest_spawns:
 			min_chest_spawns = max(value, 0)
 
-func set_cycle(new_cycle: int) -> void:
+
+func set_cycle(new_cycle: int) -> void: ## UNUSED
 	current_cycle = new_cycle
 	## set enemy HP scaling here
 	## set available 
@@ -118,7 +125,7 @@ func set_cycle(new_cycle: int) -> void:
 			enemy_HP_scaling = 4
 
 
-func go_next_room() -> RoomInfo:
+func check_next_room_info() -> RoomInfo: ## UNUSED
 	current_room += 1
 	match current_room:
 		5:

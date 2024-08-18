@@ -6,11 +6,7 @@ signal reload_time_changed(new_reload_time: float)
 
 @export var bullet_impact_scene: PackedScene # im recycling this for enemy's death explosion sfx
 @export var enemy_dead_texture: AtlasTexture
-@onready var health_component: EnemyHealthComponent = $HealthComponent # now combined health and debuff
-
 @export var impact_scale: Vector2 = Vector2(3, 3)
-
-@onready var sprite_main: Sprite2D = $Sprite2D_main
 
 # debuff vars:
 #var debuff_by_superconduct: bool = false
@@ -18,20 +14,27 @@ signal reload_time_changed(new_reload_time: float)
 ## draining ammo will be overload's effect
 
 @export var max_health: float = 50.0
-var health: float = max_health :
+@export var default_reload_time: float = 5.0
+
+## I moved these from EnemyAIManager to here
+static var enemies_alive: int = 0
+static var small_drones: int = 0
+static var max_drones: int = 20
+
+var health: float = max_health:
 	set(value):
 		health = value
 		health_changed.emit(health)
-
-@export var default_reload_time: float = 5.0
-var reload_time: float = default_reload_time :
+var reload_time: float = default_reload_time:
 	set(value):
 		reload_time = value
 		reload_time_changed.emit(reload_time)
-
-
 var default_color: Color
 var spawned_runtime: bool = false ## for spawned enemies like Small Drone
+
+
+@onready var health_component: EnemyHealthComponent = $HealthComponent # now combined health and debuff
+@onready var sprite_main: Sprite2D = $Sprite2D_main
 
 
 func _ready() -> void:
@@ -40,7 +43,7 @@ func _ready() -> void:
 	reload_time = default_reload_time
 	assert(bullet_impact_scene, "missing ref")
 	assert(enemy_dead_texture, "missing ref")
-	EnemyAiManager.enemies_alive += 1
+	BaseEnemy.enemies_alive += 1
 	
 	default_color = sprite_main.modulate
 	if not spawned_runtime:

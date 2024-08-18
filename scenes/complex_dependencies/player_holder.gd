@@ -15,6 +15,8 @@ func _ready() -> void:
 	p.PlayerDamaged.connect(trigger_blood_overlay)
 	team_hud.initialize_hud(p)
 	subscribe_playerholder_ui.assign_array(p.char_manager.selected_char_resource)
+	## NOTE: I shouldnt need to provide the node's p.char_manager data to the UI, it should be
+	## a TeamInfoData resource instead
 
 
 func _process(_delta: float) -> void:

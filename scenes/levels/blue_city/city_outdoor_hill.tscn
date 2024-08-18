@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://d23s3ceqy66ry" path="res://scenes/levels/test/test_parallax.tscn" id="2_16my1"]
 [ext_resource type="TileSet" uid="uid://bq4bd7di0pjwo" path="res://resources/tilemaps/blue_scifi.tres" id="3_k31s4"]
 [ext_resource type="Script" path="res://scenes/levels/holders/enemy_holder.gd" id="4_7vxec"]
-[ext_resource type="PackedScene" uid="uid://cc327ml5lr825" path="res://scenes/levels/door/door.tscn" id="5_n61vg"]
+[ext_resource type="PackedScene" uid="uid://cc327ml5lr825" path="res://scenes/levels/door/exit_door.tscn" id="5_n61vg"]
 [ext_resource type="Texture2D" uid="uid://cb07f2ey0p54u" path="res://assets/sprite_tilesets/blue scifi doors.png" id="6_kydx1"]
 
 [sub_resource type="Environment" id="Environment_2st5j"]

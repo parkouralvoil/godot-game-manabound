@@ -36,7 +36,7 @@ func _physics_process(_delta: float) -> void:
 
 func spawn(drone: PackedScene, pos: Vector2) -> void:
 	var drone_instance: Enemy_SmallDrone = drone.instantiate()
-	EnemyAiManager.small_drones += 1
+	BaseEnemy.small_drones += 1
 	if drone_instance:
 		drone_instance.global_position = pos
 		drone_instance.spawned_runtime = true
@@ -47,7 +47,7 @@ func spawn(drone: PackedScene, pos: Vector2) -> void:
 
 func _on_spawn_timer_timeout() -> void:
 	t_spawn.wait_time = e.reload_time # update on the next cycle
-	var can_spawn: bool = EnemyAiManager.small_drones < EnemyAiManager.max_drones
+	var can_spawn: bool = BaseEnemy.small_drones < BaseEnemy.max_drones
 	ammo = (ammo % max_ammo) + 1
 	if ammo == max_ammo:
 		spawned_enemy.emit() ## this is just for lights

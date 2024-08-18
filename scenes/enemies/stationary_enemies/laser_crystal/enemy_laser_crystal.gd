@@ -8,12 +8,7 @@ class_name Enemy_LaserCrystal
 var target: Array[Vector2] = [Vector2.DOWN, Vector2.UP]
 
 func _ready() -> void:
-	assert(health_component, "missing")
-	health = max_health
-	reload_time = default_reload_time
-	assert(bullet_impact_scene, "missing ref")
-	assert(enemy_dead_texture, "missing ref")
-	EnemyAiManager.enemies_alive += 1
+	super()
 	
 	if horizontal:
 		sprite_main.rotation = PI/2
@@ -22,10 +17,6 @@ func _ready() -> void:
 	for i in range(2):
 		attack_comp.laser[i].raycast.target_position = target[i] * attack_comp.max_range
 		attack_comp.laser[i].update()
-	process_mode = Node.PROCESS_MODE_DISABLED
-	await get_tree().create_timer(2).timeout
-	process_mode = Node.PROCESS_MODE_INHERIT
-	default_color = sprite_main.modulate
 
 
 func _physics_process(delta: float) -> void:

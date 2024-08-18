@@ -1,23 +1,23 @@
 [gd_scene load_steps=7 format=3 uid="uid://cc327ml5lr825"]
 
-[ext_resource type="Script" path="res://scenes/levels/door/door.gd" id="1_a8wpb"]
-[ext_resource type="Texture2D" uid="uid://cb07f2ey0p54u" path="res://assets/sprite_tilesets/blue scifi doors.png" id="2_ny233"]
-[ext_resource type="LabelSettings" uid="uid://crxqvqu7eeoj8" path="res://resources/label_settings/font_settings_silver.tres" id="3_scjv4"]
+[ext_resource type="Script" path="res://scenes/levels/door/exit_door.gd" id="1_r8jdu"]
+[ext_resource type="Texture2D" uid="uid://cb07f2ey0p54u" path="res://assets/sprite_tilesets/blue scifi doors.png" id="2_44brs"]
+[ext_resource type="LabelSettings" uid="uid://crxqvqu7eeoj8" path="res://resources/label_settings/font_settings_silver.tres" id="3_iuf4v"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ko17m"]
-atlas = ExtResource("2_ny233")
+atlas = ExtResource("2_44brs")
 region = Rect2(0, 80, 32, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7vsuj"]
-atlas = ExtResource("2_ny233")
+atlas = ExtResource("2_44brs")
 region = Rect2(48, 80, 32, 48)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mrjlk"]
 size = Vector2(221, 101)
 
-[node name="Door" type="Marker2D"]
+[node name="ExitDoor" type="Node2D"]
 z_index = -1
-script = ExtResource("1_a8wpb")
+script = ExtResource("1_r8jdu")
 
 [node name="closed_door" type="Sprite2D" parent="."]
 position = Vector2(4, -5)
@@ -57,7 +57,7 @@ color = Color(0.0941176, 0.0862745, 0.12549, 0.568627)
 custom_minimum_size = Vector2(100, 20)
 layout_mode = 2
 text = "ENEMIES STILL ALIVE!"
-label_settings = ExtResource("3_scjv4")
+label_settings = ExtResource("3_iuf4v")
 horizontal_alignment = 1
 vertical_alignment = 2
 autowrap_mode = 1

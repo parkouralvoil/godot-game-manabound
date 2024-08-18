@@ -6,19 +6,9 @@ var max_chest_spawns: int = 9
 
 @onready var chest_array: Array[ChestRune]
 
-var DM: DungeonManager: ## set by level manager in its _ready func
-	set(val):
-		DM = val
-		if val:
-			_initialize_chests()
 
-
-func _initialize_chests() -> void:
-	min_chest_spawns = DM.min_chest_spawns
-	max_chest_spawns = DM.max_chest_spawns
+func initialize_chests() -> void: ## called by level manager
 	var rng: RandomNumberGenerator = RandomNumberGenerator.new()
-	randomize()
-	
 	var chest_spawns: int = rng.randi_range(min_chest_spawns, max_chest_spawns)
 	
 	var children_array: Array[Node] = get_children()
@@ -34,7 +24,7 @@ func _initialize_chests() -> void:
 			child.disable_chest()
 
 
-func open_all_chest_rune() -> void:
+func open_all_chest_rune() -> void: ## called by level manager
 	for chest in chest_array:
 		chest.open_chest_rune()
 
@@ -45,11 +35,6 @@ func open_all_chest_rune() -> void:
 - AFTER COMBAT: open all chests
 	- holder is responsible of doing RNG to decide which rune is assigned to the chest
 	- chest will spawn the rune and make it "pop out"
-"""
-
-## FIRST THING TODO:
-"""
-separate dungeon/level loading from Main
 """
 
 ## TODO: after chest and runes work,
