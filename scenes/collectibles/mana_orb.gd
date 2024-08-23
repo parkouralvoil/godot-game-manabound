@@ -4,7 +4,7 @@ class_name ManaOrb
 const texture_small: Texture = preload("res://resources/textures/mana_orb/mana_orb_small.tres")
 const texture_medium: Texture = preload("res://resources/textures/mana_orb/mana_orb_medium.tres")
 
-@export var PlayerInfo: PlayerInfoResource
+@export var inventory: PlayerInventory
 @export var sfx_collected: AudioStream
 
 enum possible_tiers
@@ -16,7 +16,7 @@ enum possible_tiers
 var tier: possible_tiers = possible_tiers.SMALL
 
 var value: int = 5
-var speed: float = 400
+var speed: float = 600
 var go_towards_player: bool = false
 
 @onready var current_trail: Trail = $ManaTrail
@@ -49,7 +49,7 @@ func attract_orb() -> void:
 
 
 func collected() -> void:
-	PlayerInfo.mana_orbs += value
+	inventory.mana_orbs += value
 	
 	if SoundPlayer.collected_mana_cooldown(): # return true if the CD is done. False otherwise
 		SoundPlayer.play_sound(sfx_collected, -20, 0.88)

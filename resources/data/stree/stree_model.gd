@@ -17,7 +17,7 @@ class_name SkillTreeModel
 
 signal skill_node_bought ## for AM to connect to
 
-const PlayerInfo: PlayerInfoResource = preload("res://resources/data/player_info.tres")
+const inventory: PlayerInventory = preload("res://resources/data/player_inventory/player_inventory.tres")
 
 var root_node: SkillTreeNode = SkillTreeNode.new()
 var left_nodes: Array[SkillTreeNode]
@@ -55,14 +55,14 @@ func attempt_buy_node(node: SkillTreeNode) -> bool: ## bool to check if buying w
 func buy_node(node: SkillTreeNode) -> void:
 	if not node.active:
 		node.active = true
-	PlayerInfo.mana_orbs -= node.cost
+	inventory.mana_orbs -= node.cost
 	node.lvl = min(node.lvl + 1, node.max_lvl)
 	node.cost = _cost_increase(node.cost)
 	skill_node_bought.emit() ## this will tell AM when to do (update_skills)
 
 
 func check_if_can_buy(node: SkillTreeNode) -> bool:
-	return (PlayerInfo.mana_orbs >= node.cost 
+	return (inventory.mana_orbs >= node.cost 
 			and node.lvl < node.max_lvl 
 			and node.parent.active)
 

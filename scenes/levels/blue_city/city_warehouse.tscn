@@ -142,4 +142,59 @@ environment = SubResource("Environment_2st5j")
 position = Vector2(156, -67)
 
 [node name="StartingPos" type="Marker2D" parent="."]
-position = Vector2(1051, -76)
+position = Vector2(224, -72)
+
+[node name="BlackScreens" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="black1" type="ColorRect" parent="BlackScreens"]
+layout_mode = 0
+offset_left = -213.0
+offset_top = -20.0
+offset_right = 1354.0
+offset_bottom = 175.0
+color = Color(0, 0, 0, 1)
+
+[node name="black2" type="ColorRect" parent="BlackScreens"]
+layout_mode = 0
+offset_left = -213.0
+offset_top = -946.0
+offset_right = 1354.0
+offset_bottom = -751.0
+color = Color(0, 0, 0, 1)
+
+[node name="black3" type="ColorRect" parent="BlackScreens"]
+layout_mode = 0
+offset_left = -275.0
+offset_top = -946.0
+offset_right = 162.0
+offset_bottom = -169.0
+color = Color(0, 0, 0, 1)
+
+[node name="black4" type="ColorRect" parent="BlackScreens"]
+layout_mode = 0
+offset_left = 990.0
+offset_top = -946.0
+offset_right = 1427.0
+offset_bottom = -169.0
+color = Color(0, 0, 0, 1)
+
+[node name="black5" type="ColorRect" parent="BlackScreens"]
+layout_mode = 0
+offset_left = 1134.0
+offset_top = -181.0
+offset_right = 1427.0
+offset_bottom = 18.0
+color = Color(0, 0, 0, 1)
+
+[node name="black6" type="ColorRect" parent="BlackScreens"]
+layout_mode = 0
+offset_left = -277.0
+offset_top = -181.0
+offset_right = 16.0
+offset_bottom = 18.0
+color = Color(0, 0, 0, 1)

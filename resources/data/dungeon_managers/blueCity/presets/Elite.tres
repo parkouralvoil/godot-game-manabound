@@ -5,6 +5,9 @@
 [resource]
 script = ExtResource("1_1xi6q")
 preset_name = "Elite"
+info1 = "Average enemy density"
+info2 = "All elites spawn"
+info3 = "HP potion guaranteed"
 num_of_enemies = 5
 autobow = 5.0
 orb = 3.0

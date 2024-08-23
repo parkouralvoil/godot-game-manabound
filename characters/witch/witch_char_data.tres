@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://dkyhb7voldou1" path="res://characters/witch/character_witch.tscn" id="1_ynoo3"]
 [ext_resource type="Script" path="res://characters/CharacterResource.gd" id="2_xpn14"]
 [ext_resource type="Texture2D" uid="uid://kdh26376nd2g" path="res://characters/witch/visuals/witch_arm.tres" id="3_elrf0"]
-[ext_resource type="PackedScene" uid="uid://cbv6l6ryqhw1x" path="res://user_interface/team_info_menu_group/skill_tree_menu/stree_specific/stree_witch.tscn" id="3_rbose"]
+[ext_resource type="PackedScene" uid="uid://cbv6l6ryqhw1x" path="res://user_interface/main_canvas/team_info_menu_group/skill_tree_menu/stree_specific/stree_witch.tscn" id="3_rbose"]
 [ext_resource type="Texture2D" uid="uid://dhs0tcgsbwnqp" path="res://characters/witch/visuals/witch_portrait.tres" id="4_mn6l5"]
 [ext_resource type="SpriteFrames" uid="uid://dsg0xmjs2wxlj" path="res://characters/witch/visuals/witch_spriteframes.tres" id="5_3sa7r"]
 [ext_resource type="Texture2D" uid="uid://q2syp5evlell" path="res://characters/witch/visuals/witch_window.tres" id="6_rmqeb"]

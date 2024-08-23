@@ -7,6 +7,8 @@ signal data_updated(data: Array[CharacterResource])
 @export var TEMP_char_data_array: Array[CharacterResource]
 var char_data_array: Array[CharacterResource]:
 	get: ## HACK: cuz i dont have smthg that updates the data (aka the team selection menu)
+		## for now this suffices, alternative i can put it to main but then main would need more shit to do
+		#print("infinite?")
 		data_updated.emit(TEMP_char_data_array)
 		return TEMP_char_data_array
 	set(val):

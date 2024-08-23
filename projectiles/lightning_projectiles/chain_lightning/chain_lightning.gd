@@ -13,7 +13,7 @@ var targets: Array[Vector2] = []
 var final_targets: Array[Vector2] = []
 var max_targets: int = 1
 
-var damage: int = 5
+var damage: float = 5
 var starting_pos: Vector2
 var checking_pos: Vector2
 

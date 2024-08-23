@@ -5,6 +5,9 @@
 [resource]
 script = ExtResource("1_dksiu")
 preset_name = "Normal"
+info1 = "Average enemy density"
+info2 = ""
+info3 = ""
 num_of_enemies = 7
 autobow = 4.0
 orb = 3.0

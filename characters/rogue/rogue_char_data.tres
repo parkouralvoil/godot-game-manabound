@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://dyb83ujyxhk2b" path="res://characters/rogue/character_rogue.tscn" id="1_tlf23"]
 [ext_resource type="Script" path="res://characters/CharacterResource.gd" id="2_60cp1"]
-[ext_resource type="PackedScene" uid="uid://cybp0skh3c672" path="res://user_interface/team_info_menu_group/skill_tree_menu/stree_specific/stree_rogue.tscn" id="3_gwiyi"]
+[ext_resource type="PackedScene" uid="uid://cybp0skh3c672" path="res://user_interface/main_canvas/team_info_menu_group/skill_tree_menu/stree_specific/stree_rogue.tscn" id="3_gwiyi"]
 [ext_resource type="Texture2D" uid="uid://d0b5yrantkkqm" path="res://characters/rogue/visuals/rogue_arm.tres" id="3_hgjmt"]
 [ext_resource type="Texture2D" uid="uid://dfk82yyu3kqxe" path="res://characters/rogue/visuals/rogue_portrait.tres" id="4_mpu5f"]
 [ext_resource type="Texture2D" uid="uid://cr6dnlf3rjh2u" path="res://characters/rogue/visuals/rogue_window.tres" id="5_3qf17"]

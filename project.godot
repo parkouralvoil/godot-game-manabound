@@ -44,7 +44,8 @@ window/vsync/vsync_mode=0
 folder_colors={
 "res://assets/": "pink",
 "res://exports/": "yellow",
-"res://resources/": "green"
+"res://resources/": "green",
+"res://user_interface/": "purple"
 }
 
 [input]

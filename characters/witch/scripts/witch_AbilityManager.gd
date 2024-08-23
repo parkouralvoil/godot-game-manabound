@@ -80,6 +80,7 @@ func _ready() -> void:
 	initialize_model()
 	StreeModel.skill_node_bought.connect(update_skills)
 	PlayerInfo.changed_buff_raw_atk.connect(update_damage)
+	stats.stats_changed.connect(update_damage)
 	update_damage()
 
 

@@ -22,6 +22,11 @@ class SpawnInfo: ## TODO: replace this with EnemySpawnInfo resource
 	var raw_chance: float ## used to compute final probability
 
 @export var preset_name: String = "name"
+## TODO: this sucks for when i need to add translations...
+@export_category("Description")
+@export_multiline var info1: String = ""
+@export_multiline var info2: String = ""
+@export_multiline var info3: String = ""
 @export_category("Normal Enemies")
 @export var num_of_enemies: int = 1
 @export_category("Chance to spawn") ## gets average then divides

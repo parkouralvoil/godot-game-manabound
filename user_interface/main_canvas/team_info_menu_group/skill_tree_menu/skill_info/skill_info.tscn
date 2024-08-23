@@ -1,0 +1,91 @@
+[gd_scene load_steps=7 format=3 uid="uid://ynd4jyc4neao"]
+
+[ext_resource type="Script" path="res://user_interface/main_canvas/team_info_menu_group/skill_tree_menu/skill_info/skill_info.gd" id="1_o0ofg"]
+[ext_resource type="Texture2D" uid="uid://h46xv64l4n2u" path="res://assets/sprite_UI/AbilityIcons0.png" id="2_5g4pe"]
+[ext_resource type="LabelSettings" uid="uid://6y7111xwu3do" path="res://resources/label_settings/font_system_big.tres" id="3_2f8wp"]
+[ext_resource type="LabelSettings" uid="uid://buthhqor0rds0" path="res://resources/label_settings/font_system_desc.tres" id="5_w32p4"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fbmtq"]
+atlas = ExtResource("2_5g4pe")
+region = Rect2(48, 48, 16, 16)
+
+[sub_resource type="LabelSettings" id="LabelSettings_27joy"]
+font_size = 11
+
+[node name="Skill_Info" type="PanelContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -412.0
+offset_bottom = -145.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+script = ExtResource("1_o0ofg")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBox" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="SkillIcon" type="TextureRect" parent="MarginContainer/VBox"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+texture = SubResource("AtlasTexture_fbmtq")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="name" type="Label" parent="MarginContainer/VBox"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+label_settings = ExtResource("3_2f8wp")
+autowrap_mode = 3
+
+[node name="Separator" type="ColorRect" parent="MarginContainer/VBox"]
+custom_minimum_size = Vector2(0, 3)
+layout_mode = 2
+size_flags_vertical = 4
+color = Color(0.431373, 0.431373, 0.431373, 1)
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="description" type="Label" parent="MarginContainer/VBox/ScrollContainer"]
+custom_minimum_size = Vector2(140, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "aaaaaaaaa"
+label_settings = SubResource("LabelSettings_27joy")
+autowrap_mode = 3
+justification_flags = 160
+
+[node name="lvl" type="Label" parent="MarginContainer/VBox"]
+custom_minimum_size = Vector2(140, 0)
+layout_mode = 2
+text = "Level: "
+label_settings = ExtResource("5_w32p4")
+autowrap_mode = 3
+justification_flags = 160
+
+[node name="cost" type="Label" parent="MarginContainer/VBox"]
+custom_minimum_size = Vector2(140, 0)
+layout_mode = 2
+text = "Cost: "
+label_settings = ExtResource("5_w32p4")
+autowrap_mode = 3
+justification_flags = 160
+
+[node name="Buy_Button" type="Button" parent="MarginContainer/VBox"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+text = "Unlock Skill"
+
+[connection signal="pressed" from="MarginContainer/VBox/Buy_Button" to="." method="_on_buy_button_pressed"]

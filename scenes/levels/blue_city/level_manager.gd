@@ -1,8 +1,9 @@
 extends Node2D
 class_name LevelManager
 
-signal level_cleared ## this is for the state when the last enemy dies
-signal exit_door_interacted ## this is state for when player goes through exit door
+## THESE SIGNALS MOVED TO EventBus
+#signal level_cleared ## this is for the state when the last enemy dies
+#signal exit_door_interacted ## this is state for when player goes through exit door
 ## emitted by exit door
 
 var room_preset: RoomPreset = null:
@@ -43,6 +44,8 @@ func give_children_room_preset(preset: RoomPreset) -> void: ## assigned by dunge
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_PAUSABLE
 	EventBus.enemy_died.connect(_enemy_dead)
+	exit_door.local_exit_door_interacted.connect(_on_local_exit_door_interacted)
+	
 	await get_tree().physics_frame
 	if BaseEnemy.enemies_alive <= 0:
 		_level_is_cleared()
@@ -59,4 +62,8 @@ func _enemy_dead(type: BaseEnemy) -> void:
 func _level_is_cleared() -> void:
 	exit_door.open()
 	chest_rune_holder.open_all_chest_rune()
-	level_cleared.emit()
+	EventBus.level_cleared.emit()
+
+
+func _on_local_exit_door_interacted() -> void:
+	EventBus.exit_door_interacted.emit()

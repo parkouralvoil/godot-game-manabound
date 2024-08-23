@@ -1,0 +1,273 @@
+[gd_scene load_steps=8 format=3 uid="uid://bsyp187e5wn0w"]
+
+[ext_resource type="LabelSettings" uid="uid://2ltl51gdr4g6" path="res://user_interface/main_canvas/team_info_menu_group/character_status_menu/char_status_label.tres" id="1_4evtm"]
+[ext_resource type="Script" path="res://user_interface/main_canvas/upgrade_stats_window.gd" id="1_q1hu2"]
+[ext_resource type="Texture2D" uid="uid://1r2e47in58kt" path="res://assets/sprite_items/stat_runes.png" id="2_e7lie"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yqom6"]
+atlas = ExtResource("2_e7lie")
+region = Rect2(0, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cwn31"]
+atlas = ExtResource("2_e7lie")
+region = Rect2(24, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fiw3l"]
+atlas = ExtResource("2_e7lie")
+region = Rect2(24, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gc40w"]
+atlas = ExtResource("2_e7lie")
+region = Rect2(0, 24, 24, 24)
+
+[node name="UpgradeStatsWindow" type="PanelContainer"]
+custom_minimum_size = Vector2(180, 0)
+script = ExtResource("1_q1hu2")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_right = 5
+
+[node name="VBox" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="UpgradeStats" type="Label" parent="MarginContainer/VBox"]
+layout_mode = 2
+text = "Upgrade Stats"
+horizontal_alignment = 1
+
+[node name="line2" type="ColorRect" parent="MarginContainer/VBox"]
+custom_minimum_size = Vector2(0, 3)
+layout_mode = 2
+color = Color(0.556863, 0.556863, 0.556863, 1)
+
+[node name="RunesLeft" type="Label" parent="MarginContainer/VBox"]
+layout_mode = 2
+text = "Use runes to upgrade stats"
+label_settings = ExtResource("1_4evtm")
+horizontal_alignment = 1
+
+[node name="HP_rune" type="HBoxContainer" parent="MarginContainer/VBox"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="name" type="Label" parent="MarginContainer/VBox/HP_rune"]
+layout_mode = 2
+text = "HP Rune:"
+label_settings = ExtResource("1_4evtm")
+
+[node name="Spacer" type="Control" parent="MarginContainer/VBox/HP_rune"]
+custom_minimum_size = Vector2(0, 15)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="rune" type="TextureRect" parent="MarginContainer/VBox/HP_rune"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_yqom6")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="amt" type="Label" parent="MarginContainer/VBox/HP_rune"]
+layout_mode = 2
+text = "x0"
+label_settings = ExtResource("1_4evtm")
+horizontal_alignment = 1
+
+[node name="HPRuneUse" type="Button" parent="MarginContainer/VBox/HP_rune"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Use"
+
+[node name="ATK_rune" type="HBoxContainer" parent="MarginContainer/VBox"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="name" type="Label" parent="MarginContainer/VBox/ATK_rune"]
+layout_mode = 2
+text = "ATK Rune:"
+label_settings = ExtResource("1_4evtm")
+
+[node name="Spacer" type="Control" parent="MarginContainer/VBox/ATK_rune"]
+custom_minimum_size = Vector2(0, 15)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="rune" type="TextureRect" parent="MarginContainer/VBox/ATK_rune"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_cwn31")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="amt" type="Label" parent="MarginContainer/VBox/ATK_rune"]
+layout_mode = 2
+text = "x0"
+label_settings = ExtResource("1_4evtm")
+horizontal_alignment = 1
+
+[node name="ATKRuneUse" type="Button" parent="MarginContainer/VBox/ATK_rune"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Use"
+
+[node name="EP_rune" type="HBoxContainer" parent="MarginContainer/VBox"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="name" type="Label" parent="MarginContainer/VBox/EP_rune"]
+layout_mode = 2
+text = "EP Rune:"
+label_settings = ExtResource("1_4evtm")
+
+[node name="Spacer" type="Control" parent="MarginContainer/VBox/EP_rune"]
+custom_minimum_size = Vector2(0, 15)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="rune" type="TextureRect" parent="MarginContainer/VBox/EP_rune"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_fiw3l")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="amt" type="Label" parent="MarginContainer/VBox/EP_rune"]
+layout_mode = 2
+text = "x0"
+label_settings = ExtResource("1_4evtm")
+horizontal_alignment = 1
+
+[node name="EPRuneUse" type="Button" parent="MarginContainer/VBox/EP_rune"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Use"
+
+[node name="CHR_rune" type="HBoxContainer" parent="MarginContainer/VBox"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="name" type="Label" parent="MarginContainer/VBox/CHR_rune"]
+layout_mode = 2
+text = "CHR Rune:"
+label_settings = ExtResource("1_4evtm")
+
+[node name="Spacer" type="Control" parent="MarginContainer/VBox/CHR_rune"]
+custom_minimum_size = Vector2(0, 15)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="rune" type="TextureRect" parent="MarginContainer/VBox/CHR_rune"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_gc40w")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="amt" type="Label" parent="MarginContainer/VBox/CHR_rune"]
+layout_mode = 2
+text = "x0"
+label_settings = ExtResource("1_4evtm")
+horizontal_alignment = 1
+
+[node name="CHRRuneUse" type="Button" parent="MarginContainer/VBox/CHR_rune"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Use"
+
+[node name="line" type="ColorRect" parent="MarginContainer/VBox"]
+custom_minimum_size = Vector2(0, 3)
+layout_mode = 2
+color = Color(0.556863, 0.556863, 0.556863, 1)
+
+[node name="BaseStats" type="Label" parent="MarginContainer/VBox"]
+layout_mode = 2
+text = "Base Stats:"
+label_settings = ExtResource("1_4evtm")
+horizontal_alignment = 1
+
+[node name="HP_stat" type="HBoxContainer" parent="MarginContainer/VBox"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="name" type="Label" parent="MarginContainer/VBox/HP_stat"]
+layout_mode = 2
+text = "HP:"
+label_settings = ExtResource("1_4evtm")
+
+[node name="Spacer" type="Control" parent="MarginContainer/VBox/HP_stat"]
+custom_minimum_size = Vector2(0, 15)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="amt" type="Label" parent="MarginContainer/VBox/HP_stat"]
+layout_mode = 2
+text = "5"
+label_settings = ExtResource("1_4evtm")
+horizontal_alignment = 1
+
+[node name="ATK_stat" type="HBoxContainer" parent="MarginContainer/VBox"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="name" type="Label" parent="MarginContainer/VBox/ATK_stat"]
+layout_mode = 2
+text = "ATK:"
+label_settings = ExtResource("1_4evtm")
+
+[node name="Spacer" type="Control" parent="MarginContainer/VBox/ATK_stat"]
+custom_minimum_size = Vector2(0, 15)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="amt" type="Label" parent="MarginContainer/VBox/ATK_stat"]
+layout_mode = 2
+text = "10"
+label_settings = ExtResource("1_4evtm")
+horizontal_alignment = 1
+
+[node name="EP_stat" type="HBoxContainer" parent="MarginContainer/VBox"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="name" type="Label" parent="MarginContainer/VBox/EP_stat"]
+layout_mode = 2
+text = "EP:"
+label_settings = ExtResource("1_4evtm")
+
+[node name="Spacer" type="Control" parent="MarginContainer/VBox/EP_stat"]
+custom_minimum_size = Vector2(0, 15)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="amt" type="Label" parent="MarginContainer/VBox/EP_stat"]
+layout_mode = 2
+text = "0"
+label_settings = ExtResource("1_4evtm")
+horizontal_alignment = 1
+
+[node name="CHR_stat" type="HBoxContainer" parent="MarginContainer/VBox"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="name" type="Label" parent="MarginContainer/VBox/CHR_stat"]
+layout_mode = 2
+text = "CHR:"
+label_settings = ExtResource("1_4evtm")
+
+[node name="Spacer" type="Control" parent="MarginContainer/VBox/CHR_stat"]
+custom_minimum_size = Vector2(0, 15)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="amt" type="Label" parent="MarginContainer/VBox/CHR_stat"]
+layout_mode = 2
+text = "35"
+label_settings = ExtResource("1_4evtm")
+horizontal_alignment = 1
+
+[connection signal="pressed" from="MarginContainer/VBox/HP_rune/HPRuneUse" to="." method="_on_hp_rune_use_pressed"]
+[connection signal="pressed" from="MarginContainer/VBox/ATK_rune/ATKRuneUse" to="." method="_on_atk_rune_use_pressed"]
+[connection signal="pressed" from="MarginContainer/VBox/EP_rune/EPRuneUse" to="." method="_on_ep_rune_use_pressed"]
+[connection signal="pressed" from="MarginContainer/VBox/CHR_rune/CHRRuneUse" to="." method="_on_chr_rune_use_pressed"]

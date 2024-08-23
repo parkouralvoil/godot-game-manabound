@@ -1,0 +1,54 @@
+[gd_scene load_steps=3 format=3 uid="uid://b42wkdqsrp4cr"]
+
+[ext_resource type="LabelSettings" uid="uid://2ltl51gdr4g6" path="res://user_interface/main_canvas/team_info_menu_group/character_status_menu/char_status_label.tres" id="1_nhg4f"]
+[ext_resource type="Script" path="res://user_interface/choose_preset_menu/preset_window.gd" id="1_ue3g0"]
+
+[node name="Preset1" type="PanelContainer"]
+self_modulate = Color(1, 0.0313726, 0.254902, 1)
+custom_minimum_size = Vector2(200, 150)
+script = ExtResource("1_ue3g0")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 10
+
+[node name="VBox" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="preset_name" type="Label" parent="MarginContainer/VBox"]
+layout_mode = 2
+text = "CALM"
+horizontal_alignment = 1
+
+[node name="line" type="ColorRect" parent="MarginContainer/VBox"]
+custom_minimum_size = Vector2(0, 3)
+layout_mode = 2
+color = Color(0.556863, 0.556863, 0.556863, 1)
+
+[node name="info1" type="Label" parent="MarginContainer/VBox"]
+layout_mode = 2
+text = "- Max elite enemy spawn rate"
+label_settings = ExtResource("1_nhg4f")
+
+[node name="info2" type="Label" parent="MarginContainer/VBox"]
+layout_mode = 2
+text = "- Average enemy density"
+label_settings = ExtResource("1_nhg4f")
+
+[node name="info3" type="Label" parent="MarginContainer/VBox"]
+layout_mode = 2
+text = "- HP Potion guaranteed"
+label_settings = ExtResource("1_nhg4f")
+
+[node name="Spacer" type="Control" parent="MarginContainer/VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="select" type="Button" parent="MarginContainer/VBox"]
+layout_mode = 2
+text = "Select"
+
+[connection signal="pressed" from="MarginContainer/VBox/select" to="." method="_on_select_pressed"]

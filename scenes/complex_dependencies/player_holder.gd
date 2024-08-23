@@ -1,17 +1,12 @@
 extends Node2D
+class_name PlayerHolder
 
-@onready var p: Player = $Player
+@onready var p: Player = $Player ## lez think abt this, why should PlayerInfo be gotten from player
+## like PlayerHolde should pass player_info to the stuff that need it noh
 
 @onready var hp_label: Label = $Player/VBoxContainer/HP
 @onready var ammo_label: Label = $Player/VBoxContainer/Ammo
 @onready var charge_label: Label = $Player/VBoxContainer/Charge
-@onready var blood_overlay: TextureRect = $HUD_elements/BloodOverlay
-
-@onready var team_hud: TeamHud = $HUD_elements/TeamHud
-
-func _ready() -> void:
-	p.PlayerDamaged.connect(trigger_blood_overlay)
-	team_hud.initialize_hud()
 
 
 func _process(_delta: float) -> void:
@@ -21,9 +16,6 @@ func _process(_delta: float) -> void:
 	hp_label.text = "HP: %d/%d" % [p.PlayerInfo.displayed_HP, p.PlayerInfo.displayed_MAX_HP]
 	ammo_label.text = "Ammo: %d/%d" % [p.PlayerInfo.displayed_ammo, p.PlayerInfo.displayed_MAX_AMMO]
 	update_current_charge(p.PlayerInfo)
-	
-	## HUD elements:
-	
 
 
 func update_current_charge(info: PlayerInfoResource) -> void:
@@ -49,8 +41,8 @@ func update_current_charge(info: PlayerInfoResource) -> void:
 		charge_label.modulate = Color(0.6, 0.6, 0.6, 0.8)
 
 
-func trigger_blood_overlay() -> void:
-	var color_transparent: Color = Color(1, 1, 1, 0)
-	var color_visible: Color = Color(1, 1, 1, 1)
-	var tween: Tween = create_tween()
-	tween.tween_property(blood_overlay, "modulate", color_transparent, 1).from(color_visible)
+#func trigger_blood_overlay() -> void:
+	#var color_transparent: Color = Color(1, 1, 1, 0)
+	#var color_visible: Color = Color(1, 1, 1, 1)
+	#var tween: Tween = create_tween()
+	#tween.tween_property(blood_overlay, "modulate", color_transparent, 1).from(color_visible)

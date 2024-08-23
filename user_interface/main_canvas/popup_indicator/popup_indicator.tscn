@@ -1,0 +1,40 @@
+[gd_scene load_steps=4 format=3 uid="uid://b3cfd23wes4l7"]
+
+[ext_resource type="Script" path="res://user_interface/main_canvas/popup_indicator/popup_indicator.gd" id="1_c2iq4"]
+
+[sub_resource type="SystemFont" id="SystemFont_vuj0e"]
+font_italic = true
+subpixel_positioning = 0
+
+[sub_resource type="LabelSettings" id="LabelSettings_ggscm"]
+line_spacing = 1.0
+font = SubResource("SystemFont_vuj0e")
+font_size = 20
+font_color = Color(0.992157, 1, 1, 1)
+shadow_size = 7
+
+[node name="Popup_indicator" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 640.0
+offset_bottom = 254.0
+script = ExtResource("1_c2iq4")
+metadata/_edit_use_anchors_ = true
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="CenterContainer"]
+custom_minimum_size = Vector2(300, 80)
+layout_mode = 2
+color = Color(0.0156863, 0.0352941, 0.0941176, 0.615686)
+
+[node name="LevelCleared" type="Label" parent="CenterContainer"]
+layout_mode = 2
+text = "ALL ENEMIES DEFEATED"
+label_settings = SubResource("LabelSettings_ggscm")

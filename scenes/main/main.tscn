@@ -1,13 +1,15 @@
-[gd_scene load_steps=15 format=3 uid="uid://bfigo4q6at8d8"]
+[gd_scene load_steps=17 format=3 uid="uid://bfigo4q6at8d8"]
 
 [ext_resource type="Script" path="res://scenes/main/main.gd" id="1_fwn4r"]
-[ext_resource type="PackedScene" uid="uid://dnfu85x4yhumf" path="res://user_interface/menu_manager.tscn" id="2_4a0os"]
 [ext_resource type="Script" path="res://scenes/main/DungeonHolder.gd" id="2_j78xc"]
-[ext_resource type="PackedScene" uid="uid://b3cfd23wes4l7" path="res://user_interface/popup_indicator/popup_indicator.tscn" id="2_udvq4"]
 [ext_resource type="Resource" uid="uid://cnqflwm13q5h2" path="res://resources/data/dungeon_managers/blueCity/dungeon_blueCity.tres" id="3_4q3ef"]
 [ext_resource type="PackedScene" uid="uid://quvfsmagt2h1" path="res://scenes/levels/PlayerCamera.tscn" id="3_b3eh2"]
+[ext_resource type="Resource" uid="uid://cw7j4j6w6f1yk" path="res://resources/data/selected_team_info/selected_team_info.tres" id="3_x1j0k"]
+[ext_resource type="PackedScene" uid="uid://c88sdm1pehvym" path="res://user_interface/player_hud_canvas/player_hud_canvas.tscn" id="4_43gs0"]
+[ext_resource type="Resource" uid="uid://bnybxlb6y58wv" path="res://resources/data/player_inventory/player_inventory.tres" id="4_gevh3"]
 [ext_resource type="Script" path="res://scenes/main/particle_preloader_for_web.gd" id="4_j1irx"]
 [ext_resource type="PackedScene" uid="uid://c7qwpthsv6838" path="res://scenes/complex_dependencies/player_holder.tscn" id="4_p316a"]
+[ext_resource type="PackedScene" uid="uid://bxevdtlubutni" path="res://user_interface/main_canvas/main_canvas.tscn" id="5_jftyw"]
 [ext_resource type="Material" uid="uid://b1hyqx5c4ut8u" path="res://resources/debuffs/crystalize/crystalized_particles.tres" id="5_lx26c"]
 [ext_resource type="Material" uid="uid://bccvk3vgyafgq" path="res://resources/debuffs/superconduct/superconduct_particles.tres" id="6_omtpx"]
 [ext_resource type="Material" uid="uid://cyq64d3nqou5u" path="res://resources/particles/bolt_impact_particles.tres" id="7_dlauh"]
@@ -18,27 +20,17 @@
 [node name="Main" type="Node2D"]
 process_mode = 3
 script = ExtResource("1_fwn4r")
+main_dungeon_data = ExtResource("3_4q3ef")
+main_selected_team_info = ExtResource("3_x1j0k")
+main_player_inventory = ExtResource("4_gevh3")
 
 [node name="DungeonHolder" type="Node2D" parent="."]
+process_mode = 1
 script = ExtResource("2_j78xc")
-dungeon_data = ExtResource("3_4q3ef")
 
-[node name="MainCanvas" type="CanvasLayer" parent="."]
-layer = 2
+[node name="PlayerHudCanvas" parent="." instance=ExtResource("4_43gs0")]
 
-[node name="MenuManager" parent="MainCanvas" instance=ExtResource("2_4a0os")]
-
-[node name="Blackscreen" type="ColorRect" parent="MainCanvas"]
-process_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0, 0, 0, 1)
-
-[node name="Popup_indicator" parent="MainCanvas" instance=ExtResource("2_udvq4")]
-visible = false
+[node name="MainCanvas" parent="." instance=ExtResource("5_jftyw")]
 
 [node name="PlayerCamera" parent="." instance=ExtResource("3_b3eh2")]
 
@@ -51,6 +43,7 @@ process_mode = 1
 
 [node name="particle_preloader_for_web" type="Node2D" parent="."]
 process_mode = 1
+position = Vector2(-126, 135)
 script = ExtResource("4_j1irx")
 par_array = Array[ParticleProcessMaterial]([ExtResource("5_lx26c"), ExtResource("6_omtpx"), ExtResource("7_dlauh"), ExtResource("8_6k147"), ExtResource("9_sarm2")])
 

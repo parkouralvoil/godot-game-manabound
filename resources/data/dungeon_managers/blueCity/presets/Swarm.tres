@@ -5,7 +5,10 @@
 [resource]
 script = ExtResource("1_bfecq")
 preset_name = "Swarm"
-num_of_enemies = 7
+info1 = "High enemy density"
+info2 = "Drone factories prevalent"
+info3 = "No elites spawn"
+num_of_enemies = 10
 autobow = 1.0
 orb = 1.0
 laser = 1.0

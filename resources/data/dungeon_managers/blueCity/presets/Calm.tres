@@ -5,6 +5,9 @@
 [resource]
 script = ExtResource("1_ijy1b")
 preset_name = "Calm"
+info1 = "Low enemy density"
+info2 = "No elites spawn"
+info3 = ""
 num_of_enemies = 4
 autobow = 5.0
 orb = 3.0

@@ -23,13 +23,13 @@ var enabled: bool = false ## managed by char manager
 
 
 func _ready() -> void:
-	stats.HP = stats.MAX_HP
-	stats.ammo = stats.MAX_AMMO
-	
 	## for current UI, tho honestly i can optimize this by making panel_char give info to current UI noh
 	stats.max_HP_changed.connect(_on_max_health_change)
 	stats.max_ammo_changed.connect(_on_max_ammo_change)
 	stats.max_charge_changed.connect(_on_max_charge_change)
+	
+	await get_tree().process_frame
+	stats.reset_stats()
 
 
 func _process(_delta: float) -> void:
@@ -58,7 +58,7 @@ func _on_max_charge_change() -> void:
 #endregion
 
 
-func update_player_info() -> void:
+func update_player_info() -> void: ## called by character manager maybe?
 	PlayerInfo.displayed_MAX_AMMO = stats.MAX_AMMO
 	PlayerInfo.displayed_MAX_HP = stats.MAX_HP
 	PlayerInfo.displayed_MAX_CHARGE = stats.MAX_CHARGE

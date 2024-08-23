@@ -1,0 +1,40 @@
+[gd_scene load_steps=5 format=3 uid="uid://ds8nqgeovl5ny"]
+
+[ext_resource type="Script" path="res://user_interface/main_canvas/upgrade_stats_menu/upgrade_stats_tab.gd" id="1_xkmkb"]
+[ext_resource type="PackedScene" uid="uid://bw8ij5pmpfuvl" path="res://user_interface/main_canvas/team_info_menu_group/character_status_menu/character_window.tscn" id="1_yvkmy"]
+[ext_resource type="PackedScene" uid="uid://bsyp187e5wn0w" path="res://user_interface/main_canvas/upgrade_stats_window.tscn" id="2_tmmb4"]
+[ext_resource type="PackedScene" uid="uid://cbkx0rob51hry" path="res://user_interface/main_canvas/team_info_menu_group/character_status_menu/info_window.tscn" id="4_hciui"]
+
+[node name="UpgradeStatsTab" type="MarginContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -118.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+script = ExtResource("1_xkmkb")
+
+[node name="HBox" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="CharacterWindow" parent="HBox" instance=ExtResource("1_yvkmy")]
+layout_mode = 2
+
+[node name="gap" type="Control" parent="HBox"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+
+[node name="UpgradeStatsWindow" parent="HBox" instance=ExtResource("2_tmmb4")]
+layout_mode = 2
+
+[node name="gap2" type="Control" parent="HBox"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+
+[node name="InfoWindow" parent="HBox" instance=ExtResource("4_hciui")]
+layout_mode = 2
+size_flags_horizontal = 3

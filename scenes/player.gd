@@ -1,9 +1,8 @@
 extends CharacterBody2D
 class_name Player
 
-signal PlayerDamaged
-
 const PlayerInfo: PlayerInfoResource = preload("res://resources/data/player_info.tres")
+const inventory: PlayerInventory = preload("res://resources/data/player_inventory/player_inventory.tres")
 
 @export var direction_indicator: Sprite2D #= $DirectionIndicator
 @export var circle_indicator: Sprite2D
@@ -21,7 +20,6 @@ var move_direction: Vector2 = Vector2.ZERO #radians
 var dist_to_mouse: Vector2 = Vector2.ZERO
 
 #target lock stuff
-var auto_aim: bool = true
 var selected_target: Area2D = null
 
 var boost_index: int = 0
@@ -62,8 +60,11 @@ func _process(_delta: float) -> void:
 	## for slow hover
 	move_direction = PlayerInfo.mouse_direction if dist_to_mouse.length() < 40 else Vector2.ZERO
 	
-	if auto_aim and selected_target != null and PlayerInfo.current_state != PlayerInfo.States.STANCE:
-		PlayerInfo.aim_direction = Vector2.ZERO.direction_to(selected_target.global_position - self.global_position).normalized()
+	if (PlayerInfo.auto_aim 
+			and selected_target != null 
+			and PlayerInfo.current_state != PlayerInfo.States.STANCE):
+		PlayerInfo.aim_direction = Vector2.ZERO.direction_to(selected_target.global_position 
+				- self.global_position).normalized()
 	else:
 		PlayerInfo.aim_direction = PlayerInfo.mouse_direction
 	
@@ -84,7 +85,9 @@ func _process(_delta: float) -> void:
 		else:
 			arm_node.rotation = -(PlayerInfo.aim_direction.angle() - (PI/2))
 		
-	if anim_sprite.animation == "fall" or anim_sprite.animation == "air" or (PlayerInfo.melee_character and PlayerInfo.basic_attacking):
+	if (anim_sprite.animation == "fall" 
+			or anim_sprite.animation == "air" 
+			or (PlayerInfo.melee_character and PlayerInfo.basic_attacking)):
 		arm_sprite.hide()
 		wpn_sprite.hide()
 		fake_arm_sprite.hide()
@@ -99,14 +102,14 @@ func _process(_delta: float) -> void:
 	
 	
 	if Input.is_action_just_pressed("tab"):
-		auto_aim = !auto_aim
+		PlayerInfo.auto_aim = !PlayerInfo.auto_aim
 
 
 # cuz each character have their healths in AM
 func take_damage(damage: int) -> void:
 	char_manager.take_damage(damage)
 	player_hit_comp.player_hit()
-	PlayerDamaged.emit()
+	PlayerInfo.player_got_hit.emit()
 
 
 func emit_boost_effects(boost_dir: Vector2) -> void:
@@ -137,5 +140,5 @@ func on_buff_particles() -> void:
 
 
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("cheat_menu"):
-			PlayerInfo.mana_orbs += 10000
+	if event.is_action_pressed("cheat_menu"): ## TESTING
+		inventory.mana_orbs += 100000

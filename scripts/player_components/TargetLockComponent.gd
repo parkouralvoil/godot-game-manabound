@@ -18,7 +18,7 @@ func _ready() -> void:
 	collision_shape.shape.radius = 500
 
 func _process(_delta: float) -> void:
-	if not p.auto_aim or closest_target == null:
+	if not p.PlayerInfo.auto_aim or closest_target == null:
 		target_guide.hide()
 	else:
 		target_guide.show()
@@ -27,7 +27,7 @@ func _process(_delta: float) -> void:
 			## might be better to have a remotetransform on the enemy
 
 func _update_target() -> void:
-	if not p.auto_aim:
+	if not p.PlayerInfo.auto_aim:
 		p.selected_target = null
 		return
 	

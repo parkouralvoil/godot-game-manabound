@@ -5,6 +5,9 @@
 [resource]
 script = ExtResource("1_85gck")
 preset_name = "Test"
+info1 = "no enemies spawn"
+info2 = ""
+info3 = ""
 num_of_enemies = 0
 autobow = 5.0
 orb = 3.0

@@ -32,23 +32,13 @@ func Physics_Update(delta: float) -> void:
 	if !p:
 		return
 	
-	if Input.is_action_pressed("space"): #prepare to boost
-		state_transition.emit(self, "PlayerMove")
-		p.PlayerInfo.basic_attacking = false
-		p.circle_indicator.show()
-		p.PlayerInfo.input_attack = false
-	else:
-		p.PlayerInfo.input_attack = Input.is_action_pressed("left_click")
-	if Input.is_action_pressed("right_click") and p.PlayerInfo.can_charge:
-		state_transition.emit(self, "PlayerStance")
-	
 	if not p.PlayerInfo.basic_attacking:
 		if !p.is_on_floor():
 			p.velocity.y = min(p.velocity.y + p.gravity * delta, p.gravity/1.25) ## gravity when player has no input
 		if not Input.is_action_pressed("space"):
 			p.circle_indicator.hide()
 	else:
-		if p.auto_aim and p.selected_target != null:
+		if p.PlayerInfo.auto_aim and p.selected_target != null:
 			if not p.PlayerInfo.melee_character:
 				p.velocity.y -= (p.gravity * 0.3 * delta)
 			else:
@@ -57,6 +47,25 @@ func Physics_Update(delta: float) -> void:
 	horizontal_deaccel(delta)
 	p.move_and_slide()
 	# slow down player's speed xd
+
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("space"): #prepare to boost
+		state_transition.emit(self, "PlayerMove")
+		p.PlayerInfo.basic_attacking = false
+		p.circle_indicator.show()
+		p.PlayerInfo.input_attack = false
+	else:
+		if event.is_action_pressed("left_click"):
+			p.PlayerInfo.input_attack = true
+	
+	if event.is_action_released("left_click"):
+		p.PlayerInfo.input_attack = false
+	
+	if event.is_action_pressed("right_click") and p.PlayerInfo.can_charge:
+		state_transition.emit(self, "PlayerStance")
+	
+
 
 func flip_sprite() -> void:
 	if p.velocity.x >= 1:

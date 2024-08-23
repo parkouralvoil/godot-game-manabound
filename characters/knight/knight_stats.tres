@@ -1,15 +1,15 @@
 [gd_resource type="Resource" script_class="CharacterStats" load_steps=2 format=3 uid="uid://fbbdhnnk7q74"]
 
-[ext_resource type="Script" path="res://resources/data/character_stats.gd" id="1_thmi0"]
+[ext_resource type="Script" path="res://characters/character_stats.gd" id="1_thmi0"]
 
 [resource]
 script = ExtResource("1_thmi0")
-MAX_HP = 5
-ATK = 5.0
-EP = 0.0
-CHR = 35.0
+initial_MAX_HP = 5
+initial_ATK = 5000.0
+initial_EP = 0.0
+initial_CHR = 25.0
 charge_tier = 0
-MAX_AMMO = 7
+MAX_AMMO = 50
 reload_time = 0.5
 SPD = 400.0
 firerate = 7.0

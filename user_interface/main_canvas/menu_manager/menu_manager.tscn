@@ -1,0 +1,42 @@
+[gd_scene load_steps=5 format=3 uid="uid://dnfu85x4yhumf"]
+
+[ext_resource type="Script" path="res://user_interface/main_canvas/menu_manager/menu_manager.gd" id="1_6gycy"]
+[ext_resource type="PackedScene" uid="uid://lieb5rtvgudj" path="res://user_interface/main_canvas/team_info_menu_group/team_info_menu_group.tscn" id="2_kfbnn"]
+[ext_resource type="PackedScene" uid="uid://3c5xxkbdnexp" path="res://user_interface/choose_preset_menu/choose_preset_menu.tscn" id="3_ilmyu"]
+[ext_resource type="PackedScene" uid="uid://b4bsddkt71vf8" path="res://user_interface/main_canvas/upgrade_stats_menu/upgrade_stats_menu.tscn" id="4_mjqvt"]
+
+[node name="MenuManager" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_6gycy")
+
+[node name="PauseMenu" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="CheatMenu" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TeamInfoMenuGroup" parent="." instance=ExtResource("2_kfbnn")]
+visible = false
+layout_mode = 1
+
+[node name="PresetChoiceWindow" parent="." instance=ExtResource("3_ilmyu")]
+layout_mode = 1
+
+[node name="UpgradeStatsMenu" parent="." instance=ExtResource("4_mjqvt")]
+visible = false
+layout_mode = 1

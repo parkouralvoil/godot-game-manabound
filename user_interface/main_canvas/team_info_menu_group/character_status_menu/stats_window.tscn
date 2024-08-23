@@ -1,0 +1,172 @@
+[gd_scene load_steps=3 format=3 uid="uid://cj0yy01htk2iq"]
+
+[ext_resource type="LabelSettings" uid="uid://2ltl51gdr4g6" path="res://user_interface/main_canvas/team_info_menu_group/character_status_menu/char_status_label.tres" id="1_bq655"]
+[ext_resource type="Script" path="res://user_interface/main_canvas/team_info_menu_group/character_status_menu/stats_window.gd" id="1_lapys"]
+
+[node name="StatsWindow" type="PanelContainer"]
+custom_minimum_size = Vector2(165, 0)
+script = ExtResource("1_lapys")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_right = 5
+
+[node name="VBox" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Stats" type="Label" parent="MarginContainer/VBox"]
+layout_mode = 2
+text = "Stats"
+horizontal_alignment = 1
+
+[node name="line" type="ColorRect" parent="MarginContainer/VBox"]
+custom_minimum_size = Vector2(0, 3)
+layout_mode = 2
+color = Color(0.556863, 0.556863, 0.556863, 1)
+
+[node name="label_base_stats" type="Label" parent="MarginContainer/VBox"]
+layout_mode = 2
+text = "Base Stats"
+label_settings = ExtResource("1_bq655")
+horizontal_alignment = 1
+
+[node name="base_stats" type="HBoxContainer" parent="MarginContainer/VBox"]
+layout_mode = 2
+
+[node name="stat_name" type="VBoxContainer" parent="MarginContainer/VBox/base_stats"]
+layout_mode = 2
+
+[node name="HP" type="Label" parent="MarginContainer/VBox/base_stats/stat_name"]
+layout_mode = 2
+text = "HP:"
+label_settings = ExtResource("1_bq655")
+
+[node name="ATK" type="Label" parent="MarginContainer/VBox/base_stats/stat_name"]
+layout_mode = 2
+text = "ATK:"
+label_settings = ExtResource("1_bq655")
+
+[node name="EP" type="Label" parent="MarginContainer/VBox/base_stats/stat_name"]
+layout_mode = 2
+text = "Elemental Profiency:"
+label_settings = ExtResource("1_bq655")
+
+[node name="CHR" type="Label" parent="MarginContainer/VBox/base_stats/stat_name"]
+layout_mode = 2
+text = "Charge Rate:"
+label_settings = ExtResource("1_bq655")
+
+[node name="Separator" type="Control" parent="MarginContainer/VBox/base_stats"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="stat_number" type="VBoxContainer" parent="MarginContainer/VBox/base_stats"]
+layout_mode = 2
+
+[node name="hp" type="Label" parent="MarginContainer/VBox/base_stats/stat_number"]
+layout_mode = 2
+text = "5"
+label_settings = ExtResource("1_bq655")
+horizontal_alignment = 2
+
+[node name="atk" type="Label" parent="MarginContainer/VBox/base_stats/stat_number"]
+layout_mode = 2
+text = "10"
+label_settings = ExtResource("1_bq655")
+horizontal_alignment = 2
+
+[node name="ep" type="Label" parent="MarginContainer/VBox/base_stats/stat_number"]
+layout_mode = 2
+text = "0"
+label_settings = ExtResource("1_bq655")
+horizontal_alignment = 2
+
+[node name="chr" type="Label" parent="MarginContainer/VBox/base_stats/stat_number"]
+layout_mode = 2
+text = "3541"
+label_settings = ExtResource("1_bq655")
+horizontal_alignment = 2
+
+[node name="Separator" type="Control" parent="MarginContainer/VBox"]
+custom_minimum_size = Vector2(0, 15)
+layout_mode = 2
+
+[node name="line2" type="ColorRect" parent="MarginContainer/VBox"]
+custom_minimum_size = Vector2(0, 3)
+layout_mode = 2
+color = Color(0.556863, 0.556863, 0.556863, 1)
+
+[node name="label_special_stats" type="Label" parent="MarginContainer/VBox"]
+layout_mode = 2
+text = "Special Stats"
+label_settings = ExtResource("1_bq655")
+horizontal_alignment = 1
+
+[node name="special_stats" type="HBoxContainer" parent="MarginContainer/VBox"]
+layout_mode = 2
+
+[node name="stat_name" type="VBoxContainer" parent="MarginContainer/VBox/special_stats"]
+layout_mode = 2
+
+[node name="SPD" type="Label" parent="MarginContainer/VBox/special_stats/stat_name"]
+layout_mode = 2
+text = "Movement Speed:"
+label_settings = ExtResource("1_bq655")
+
+[node name="REL" type="Label" parent="MarginContainer/VBox/special_stats/stat_name"]
+layout_mode = 2
+text = "Reload Time:"
+label_settings = ExtResource("1_bq655")
+
+[node name="FIRERATE" type="Label" parent="MarginContainer/VBox/special_stats/stat_name"]
+layout_mode = 2
+text = "Firerate:"
+label_settings = ExtResource("1_bq655")
+
+[node name="ULT" type="Label" parent="MarginContainer/VBox/special_stats/stat_name"]
+layout_mode = 2
+text = "Ultimate Type:"
+label_settings = ExtResource("1_bq655")
+
+[node name="AMMO" type="Label" parent="MarginContainer/VBox/special_stats/stat_name"]
+layout_mode = 2
+text = "Ammo Capacity:"
+label_settings = ExtResource("1_bq655")
+
+[node name="Separator" type="Control" parent="MarginContainer/VBox/special_stats"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="stat_number" type="VBoxContainer" parent="MarginContainer/VBox/special_stats"]
+layout_mode = 2
+
+[node name="spd" type="Label" parent="MarginContainer/VBox/special_stats/stat_number"]
+layout_mode = 2
+text = "200"
+label_settings = ExtResource("1_bq655")
+horizontal_alignment = 2
+
+[node name="rel" type="Label" parent="MarginContainer/VBox/special_stats/stat_number"]
+layout_mode = 2
+text = "0.4s"
+label_settings = ExtResource("1_bq655")
+horizontal_alignment = 2
+
+[node name="firerate" type="Label" parent="MarginContainer/VBox/special_stats/stat_number"]
+layout_mode = 2
+text = "6"
+label_settings = ExtResource("1_bq655")
+horizontal_alignment = 2
+
+[node name="ult" type="Label" parent="MarginContainer/VBox/special_stats/stat_number"]
+layout_mode = 2
+text = "Charge"
+label_settings = ExtResource("1_bq655")
+horizontal_alignment = 2
+
+[node name="ammo" type="Label" parent="MarginContainer/VBox/special_stats/stat_number"]
+layout_mode = 2
+text = "9"
+label_settings = ExtResource("1_bq655")
+horizontal_alignment = 2

@@ -1,0 +1,51 @@
+[gd_scene load_steps=3 format=3 uid="uid://3c5xxkbdnexp"]
+
+[ext_resource type="Script" path="res://user_interface/choose_preset_menu/choose_preset_menu.gd" id="1_0iscx"]
+[ext_resource type="PackedScene" uid="uid://b42wkdqsrp4cr" path="res://user_interface/choose_preset_menu/preset_window.tscn" id="1_oqsm0"]
+
+[node name="PresetChoiceWindow" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_0iscx")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0352941, 0.0352941, 0.0352941, 0.803922)
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBox" type="VBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+
+[node name="title" type="Label" parent="CenterContainer/VBox"]
+layout_mode = 2
+text = "Select Next Room"
+horizontal_alignment = 1
+
+[node name="HBox" type="HBoxContainer" parent="CenterContainer/VBox"]
+layout_mode = 2
+
+[node name="Preset1" parent="CenterContainer/VBox/HBox" instance=ExtResource("1_oqsm0")]
+layout_mode = 2
+
+[node name="Separator" type="Control" parent="CenterContainer/VBox/HBox"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+
+[node name="Preset2" parent="CenterContainer/VBox/HBox" instance=ExtResource("1_oqsm0")]
+layout_mode = 2

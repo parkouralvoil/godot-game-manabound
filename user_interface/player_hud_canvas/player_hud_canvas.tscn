@@ -1,0 +1,27 @@
+[gd_scene load_steps=10 format=3 uid="uid://c88sdm1pehvym"]
+
+[ext_resource type="Script" path="res://user_interface/player_hud_canvas/player_hud_canvas.gd" id="1_imfh2"]
+[ext_resource type="Resource" uid="uid://cnqflwm13q5h2" path="res://resources/data/dungeon_managers/blueCity/dungeon_blueCity.tres" id="2_8yjwh"]
+[ext_resource type="PackedScene" uid="uid://cnrrjvflykcui" path="res://user_interface/player_hud_canvas/game_info/game_info.tscn" id="2_p730a"]
+[ext_resource type="PackedScene" uid="uid://w160vey4ewti" path="res://user_interface/player_hud_canvas/blood_overlay/blood_overlay.tscn" id="2_xr203"]
+[ext_resource type="Resource" uid="uid://6renh852kiei" path="res://resources/data/player_info.tres" id="3_unjgf"]
+[ext_resource type="PackedScene" uid="uid://ditj78b8rkpnw" path="res://user_interface/player_hud_canvas/team_UI_stuff/team_hud.tscn" id="3_w0rs6"]
+[ext_resource type="Resource" uid="uid://bnybxlb6y58wv" path="res://resources/data/player_inventory/player_inventory.tres" id="4_nlug2"]
+[ext_resource type="Resource" uid="uid://cw7j4j6w6f1yk" path="res://resources/data/selected_team_info/selected_team_info.tres" id="5_jw52t"]
+[ext_resource type="PackedScene" uid="uid://b3cfd23wes4l7" path="res://user_interface/main_canvas/popup_indicator/popup_indicator.tscn" id="9_tft8f"]
+
+[node name="PlayerHudCanvas" type="CanvasLayer"]
+process_mode = 1
+script = ExtResource("1_imfh2")
+dungeon_data = ExtResource("2_8yjwh")
+player_info = ExtResource("3_unjgf")
+inventory = ExtResource("4_nlug2")
+selected_team_info = ExtResource("5_jw52t")
+
+[node name="BloodOverlay" parent="." instance=ExtResource("2_xr203")]
+
+[node name="GameInfoHud" parent="." instance=ExtResource("2_p730a")]
+
+[node name="TeamHud" parent="." instance=ExtResource("3_w0rs6")]
+
+[node name="Popup_indicator" parent="." instance=ExtResource("9_tft8f")]

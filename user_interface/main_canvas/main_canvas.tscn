@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3 uid="uid://bxevdtlubutni"]
+
+[ext_resource type="PackedScene" uid="uid://dnfu85x4yhumf" path="res://user_interface/main_canvas/menu_manager/menu_manager.tscn" id="1_ol5qe"]
+
+[node name="MainCanvas" type="CanvasLayer"]
+process_mode = 3
+layer = 2
+
+[node name="MenuManager" parent="." instance=ExtResource("1_ol5qe")]
+
+[node name="Blackscreen" type="ColorRect" parent="."]
+process_mode = 3
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)

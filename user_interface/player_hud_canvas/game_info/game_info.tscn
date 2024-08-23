@@ -1,0 +1,210 @@
+[gd_scene load_steps=8 format=3 uid="uid://cnrrjvflykcui"]
+
+[ext_resource type="Script" path="res://user_interface/player_hud_canvas/game_info/game_info.gd" id="1_tvrhp"]
+[ext_resource type="LabelSettings" uid="uid://2ltl51gdr4g6" path="res://user_interface/main_canvas/team_info_menu_group/character_status_menu/char_status_label.tres" id="2_8oro1"]
+[ext_resource type="Texture2D" uid="uid://1r2e47in58kt" path="res://assets/sprite_items/stat_runes.png" id="3_twxwh"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lefp4"]
+atlas = ExtResource("3_twxwh")
+region = Rect2(0, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hdesh"]
+atlas = ExtResource("3_twxwh")
+region = Rect2(24, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pkc00"]
+atlas = ExtResource("3_twxwh")
+region = Rect2(24, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_siwc1"]
+atlas = ExtResource("3_twxwh")
+region = Rect2(0, 24, 24, 24)
+
+[node name="GameInfo" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_tvrhp")
+
+[node name="VBox" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/separation = 2
+
+[node name="MainInfo" type="PanelContainer" parent="VBox"]
+layout_mode = 2
+size_flags_horizontal = 0
+mouse_filter = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="VBox/MainInfo"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="HBox" type="HBoxContainer" parent="VBox/MainInfo/MarginContainer"]
+layout_mode = 2
+
+[node name="CycleRoom" type="Label" parent="VBox/MainInfo/MarginContainer/HBox"]
+layout_mode = 2
+text = "Level: 1-4"
+label_settings = ExtResource("2_8oro1")
+
+[node name="line" type="ColorRect" parent="VBox/MainInfo/MarginContainer/HBox"]
+custom_minimum_size = Vector2(2, 0)
+layout_mode = 2
+color = Color(0.4, 0.4, 0.4, 0.670588)
+
+[node name="Preset" type="Label" parent="VBox/MainInfo/MarginContainer/HBox"]
+layout_mode = 2
+text = "Room: Calm"
+label_settings = ExtResource("2_8oro1")
+
+[node name="OtherInfo" type="PanelContainer" parent="VBox"]
+layout_mode = 2
+size_flags_horizontal = 0
+mouse_filter = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="VBox/OtherInfo"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBox" type="VBoxContainer" parent="VBox/OtherInfo/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+mouse_filter = 2
+
+[node name="FPS" type="Label" parent="VBox/OtherInfo/MarginContainer/VBox"]
+custom_minimum_size = Vector2(55, 0)
+layout_mode = 2
+text = "FPS: 9999"
+label_settings = ExtResource("2_8oro1")
+
+[node name="Spacer" type="Control" parent="VBox"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="InventoryInfo" type="PanelContainer" parent="VBox"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+mouse_filter = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="VBox/InventoryInfo"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBox" type="VBoxContainer" parent="VBox/InventoryInfo/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="inventory" type="Label" parent="VBox/InventoryInfo/MarginContainer/VBox"]
+layout_mode = 2
+text = "Inventory"
+label_settings = ExtResource("2_8oro1")
+horizontal_alignment = 1
+
+[node name="line" type="ColorRect" parent="VBox/InventoryInfo/MarginContainer/VBox"]
+custom_minimum_size = Vector2(0, 3)
+layout_mode = 2
+color = Color(0.4, 0.4, 0.4, 0.670588)
+
+[node name="ManaOrbs" type="Label" parent="VBox/InventoryInfo/MarginContainer/VBox"]
+layout_mode = 2
+text = "Orbs: 99999"
+label_settings = ExtResource("2_8oro1")
+
+[node name="line2" type="ColorRect" parent="VBox/InventoryInfo/MarginContainer/VBox"]
+custom_minimum_size = Vector2(0, 3)
+layout_mode = 2
+color = Color(0.4, 0.4, 0.4, 0.670588)
+
+[node name="runes" type="Label" parent="VBox/InventoryInfo/MarginContainer/VBox"]
+layout_mode = 2
+text = "Runes:"
+label_settings = ExtResource("2_8oro1")
+
+[node name="GridContainer" type="GridContainer" parent="VBox/InventoryInfo/MarginContainer/VBox"]
+layout_mode = 2
+size_flags_horizontal = 0
+columns = 2
+
+[node name="HP" type="TextureRect" parent="VBox/InventoryInfo/MarginContainer/VBox/GridContainer"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_lefp4")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="amt_hp" type="Label" parent="VBox/InventoryInfo/MarginContainer/VBox/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+text = "x0"
+label_settings = ExtResource("2_8oro1")
+
+[node name="ATK" type="TextureRect" parent="VBox/InventoryInfo/MarginContainer/VBox/GridContainer"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_hdesh")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="amt_atk" type="Label" parent="VBox/InventoryInfo/MarginContainer/VBox/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+text = "x0"
+label_settings = ExtResource("2_8oro1")
+
+[node name="EP" type="TextureRect" parent="VBox/InventoryInfo/MarginContainer/VBox/GridContainer"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_pkc00")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="num_ep" type="Label" parent="VBox/InventoryInfo/MarginContainer/VBox/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+text = "x0"
+label_settings = ExtResource("2_8oro1")
+
+[node name="CHR" type="TextureRect" parent="VBox/InventoryInfo/MarginContainer/VBox/GridContainer"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_siwc1")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="num_chr" type="Label" parent="VBox/InventoryInfo/MarginContainer/VBox/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+text = "x0"
+label_settings = ExtResource("2_8oro1")
+
+[node name="UpgradeStatsButton" type="Button" parent="VBox/InventoryInfo/MarginContainer/VBox"]
+modulate = Color(0.388235, 0.698039, 0.858824, 1)
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Upgrade Stats"
+
+[connection signal="pressed" from="VBox/InventoryInfo/MarginContainer/VBox/UpgradeStatsButton" to="." method="_on_upgrade_stats_pressed"]

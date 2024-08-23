@@ -8,12 +8,12 @@ class_name PlayerInfoResource
 	## for now its ayt but its worth considering to put it as a "var preload" in the FUTURE
 
 ## OLD IDEA:
-# currency
 # teambuffing relic inventory
 # overall, just makes communication between all scripts related to player easier
 	# so im using it for states as well hehe
 
 signal changed_buff_raw_atk
+signal player_got_hit
 
 enum States {
 	IDLE,
@@ -39,9 +39,8 @@ var basic_attacking: bool = false # replaces "is_firing"
 var can_charge: bool = true # for passive charge chars to set it false
 var charging: bool = false # for ult
 
-var mana_orbs: int = 500000
-
 ## set by player
+var auto_aim: bool = true
 var aim_direction: Vector2
 var mouse_direction: Vector2
 

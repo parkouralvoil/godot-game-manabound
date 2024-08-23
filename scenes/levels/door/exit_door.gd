@@ -1,7 +1,7 @@
 extends Node2D
 class_name ExitDoor
 
-signal exit_door_interacted
+signal local_exit_door_interacted
 
 var player_nearby: bool = false
 var is_open: bool = false
@@ -37,7 +37,7 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("interact"):
 		if player_nearby and is_open and not pressed:
 			line_interact.hide()
-			level.exit_door_interacted.emit()
+			local_exit_door_interacted.emit()
 			pressed = true
 
 
