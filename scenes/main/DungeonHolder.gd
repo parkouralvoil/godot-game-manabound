@@ -8,10 +8,9 @@ this handles the ff:
 ## TODO, aug 19:
 """
 NEXT
-- make chests drop runes
-- make runes model
-- make Stat Upgrade menu, thru button that appears when no enemy alive
 - use spreadsheet to balance HP scaling and rune droprates
+
+- make HP rune very fockin rare
 
 NEXT
 - make hub area where u can start lvl

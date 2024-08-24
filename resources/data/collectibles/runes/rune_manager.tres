@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="RuneManager" load_steps=6 format=3 uid="uid://cceryypyga662"]
+
+[ext_resource type="Script" path="res://resources/data/collectibles/runes/rune_manager.gd" id="1_4sj0s"]
+[ext_resource type="Resource" uid="uid://cindcurnm6k31" path="res://resources/data/collectibles/runes/rune_datas/rune_HP.tres" id="1_5keal"]
+[ext_resource type="Resource" uid="uid://ca8fwqxykuaqo" path="res://resources/data/collectibles/runes/rune_datas/rune_ATK.tres" id="2_71g14"]
+[ext_resource type="Resource" uid="uid://e1mn6njcw7b1" path="res://resources/data/collectibles/runes/rune_datas/rune_EP.tres" id="3_mkssk"]
+[ext_resource type="Resource" uid="uid://jql1glk6xasx" path="res://resources/data/collectibles/runes/rune_datas/rune_CHR.tres" id="4_gvx4f"]
+
+[resource]
+script = ExtResource("1_4sj0s")
+runes_data_array = Array[Resource("res://resources/data/collectibles/runes/rune_data.gd")]([ExtResource("1_5keal"), ExtResource("2_71g14"), ExtResource("3_mkssk"), ExtResource("4_gvx4f")])

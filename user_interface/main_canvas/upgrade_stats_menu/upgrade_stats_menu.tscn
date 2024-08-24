@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://ds8nqgeovl5ny" path="res://user_interface/main_canvas/upgrade_stats_menu/upgrade_stats_tab.tscn" id="2_3h8qe"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ufjtm"]
-bg_color = Color(0, 0.00392157, 0.0235294, 1)
+bg_color = Color(0.211765, 0.223529, 0.243137, 0.803922)
 
 [node name="UpgradeStatsMenu" type="Control"]
 layout_mode = 3
@@ -15,14 +15,14 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_4wlrb")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="background" type="ColorRect" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.0862745, 0.101961, 0.117647, 1)
+color = Color(0.125126, 0.170598, 0.370774, 1)
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1

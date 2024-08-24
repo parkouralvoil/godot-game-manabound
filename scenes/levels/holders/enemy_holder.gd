@@ -9,7 +9,7 @@ var num_of_enemies: int = 0
 var hp_scaling: float = 1
 
 
-@onready var rng: RandomNumberGenerator = RandomNumberGenerator.new()
+#@onready var rng: RandomNumberGenerator = RandomNumberGenerator.new()
 
 
 func _ready() -> void:
@@ -28,7 +28,7 @@ func spawn_enemies(info_array: Array[RoomPreset.SpawnInfo]) -> void: ## called b
 		var chosen_info: RoomPreset.SpawnInfo
 		var pity: float = 0 ## necessary to ensure an enemy is guaranteed to be selected
 		for info in info_array:
-			if roll_probability(info.final_probability + pity): ## with this method, its POSSIBLE not to roll anything
+			if RNG.roll_probability(info.final_probability + pity): ## with this method, its POSSIBLE not to roll anything
 				chosen_info = info
 				break
 			pity += info.final_probability
@@ -43,7 +43,7 @@ func _instantiate_enemy(info: RoomPreset.SpawnInfo) -> BaseEnemy:
 	match info.scene:
 		RoomPreset.LasercrystalScene:
 			inst = (info.scene).instantiate()
-			if roll_probability(0.4):
+			if RNG.roll_probability(0.4):
 				inst.horizontal = true
 		_:
 			inst = (info.scene).instantiate()
@@ -52,6 +52,6 @@ func _instantiate_enemy(info: RoomPreset.SpawnInfo) -> BaseEnemy:
 	return inst
 
 
-func roll_probability(success_chance: float) -> bool:
-	var probability: float = rng.randf()
-	return probability <= success_chance ## true if probability is <= success
+#func roll_probability(success_chance: float) -> bool:
+	#var probability: float = rng.randf()
+	#return probability <= success_chance ## true if probability is <= success

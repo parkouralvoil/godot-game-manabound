@@ -60,6 +60,7 @@ func sort_chances_from_highest(a: SpawnInfo, b: SpawnInfo) -> bool:
 		return true
 	return false
 
+
 func initialize_info() -> void: ## must be called by dungeon_manager
 	var autobow_info: SpawnInfo = SpawnInfo.new()
 	autobow_info.scene = AutobowScene
@@ -90,6 +91,7 @@ func initialize_info() -> void: ## must be called by dungeon_manager
 	elite_enemies_info.sort_custom(sort_chances_from_highest)
 	_compute_final_probability(normal_enemies_info)
 	_compute_final_probability(elite_enemies_info)
+
 
 func _compute_final_probability(info_array: Array[SpawnInfo]) -> void: ## calculate chance to spawn
 	var total_chance: float = 0

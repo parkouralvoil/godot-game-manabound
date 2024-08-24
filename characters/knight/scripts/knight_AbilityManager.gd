@@ -16,7 +16,7 @@ var _ult_name: String = "Grand Ballista"
 var bullet_speed: float = 450
 var max_distance: float = 300
 
-var base_percent_basic_bolt: float = 1
+var base_percent_basic_bolt: float = 0.5
 var base_percent_lightning_bolt: float = 1.5
 
 var scale_percent_basic_bolt: float = 0
@@ -26,7 +26,7 @@ var scale_percent_lightning_bolt: float = 0.4
 var ult_bullet_speed: float = 600
 var ult_max_distance: float = 800
 
-var base_ult_percent_tier1: float = 3 ## tier 2 gives "shotgun" effect
+var base_ult_percent_tier1: float = 3.5 ## tier 2 gives "shotgun" effect
 
 var scale_ult_percent_tier1: float = 0.4
 

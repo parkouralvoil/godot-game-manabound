@@ -49,15 +49,15 @@ func Physics_Update(delta: float) -> void:
 	# slow down player's speed xd
 
 
-func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("space"): #prepare to boost
+func _unhandled_input(event: InputEvent) -> void: ## since control UIs need to take click
+	if Input.is_action_pressed("space"): #prepare to boost
 		state_transition.emit(self, "PlayerMove")
 		p.PlayerInfo.basic_attacking = false
 		p.circle_indicator.show()
 		p.PlayerInfo.input_attack = false
-	else:
-		if event.is_action_pressed("left_click"):
-			p.PlayerInfo.input_attack = true
+	
+	if event.is_action_pressed("left_click") and not Input.is_action_pressed("space"):
+		p.PlayerInfo.input_attack = true
 	
 	if event.is_action_released("left_click"):
 		p.PlayerInfo.input_attack = false

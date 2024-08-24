@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://user_interface/main_canvas/upgrade_stats_menu/upgrade_stats_tab.gd" id="1_xkmkb"]
 [ext_resource type="PackedScene" uid="uid://bw8ij5pmpfuvl" path="res://user_interface/main_canvas/team_info_menu_group/character_status_menu/character_window.tscn" id="1_yvkmy"]
 [ext_resource type="PackedScene" uid="uid://bsyp187e5wn0w" path="res://user_interface/main_canvas/upgrade_stats_window.tscn" id="2_tmmb4"]
-[ext_resource type="PackedScene" uid="uid://cbkx0rob51hry" path="res://user_interface/main_canvas/team_info_menu_group/character_status_menu/info_window.tscn" id="4_hciui"]
+[ext_resource type="PackedScene" uid="uid://dx4c1ljwj71uk" path="res://user_interface/main_canvas/upgrade_stats_menu/upgrade_info_window.tscn" id="4_bs28d"]
 
 [node name="UpgradeStatsTab" type="MarginContainer"]
 anchors_preset = 15
@@ -35,6 +35,5 @@ layout_mode = 2
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
 
-[node name="InfoWindow" parent="HBox" instance=ExtResource("4_hciui")]
+[node name="UpgradeInfoWindow" parent="HBox" instance=ExtResource("4_bs28d")]
 layout_mode = 2
-size_flags_horizontal = 3

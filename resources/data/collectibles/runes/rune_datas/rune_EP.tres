@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="RuneData" load_steps=3 format=3 uid="uid://e1mn6njcw7b1"]
+
+[ext_resource type="Script" path="res://resources/data/collectibles/runes/rune_data.gd" id="1_ta8et"]
+[ext_resource type="Texture2D" uid="uid://dit7vqb70ud5s" path="res://resources/textures/runes/runeEP.tres" id="2_js6ln"]
+
+[resource]
+script = ExtResource("1_ta8et")
+type = 2
+chance = 7.0
+texture = ExtResource("2_js6ln")

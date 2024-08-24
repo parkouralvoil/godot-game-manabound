@@ -15,7 +15,7 @@ func _ready() -> void:
 	assert(player_info)
 	assert(inventory)
 	initialize_hud_children()
-	print("%s: initialize_hud_children done" % name)
+	print_debug("%s: initialize_hud_children done" % name)
 
 
 func initialize_hud_children() -> void:

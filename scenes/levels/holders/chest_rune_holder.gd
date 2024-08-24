@@ -23,6 +23,9 @@ func initialize_chests() -> void: ## called by level manager
 		else:
 			child.disable_chest()
 
+#func _input(event: InputEvent) -> void:
+	#if event.is_action_pressed("1"): ## TESTING
+		#open_all_chest_rune()
 
 func open_all_chest_rune() -> void: ## called by level manager
 	for chest in chest_array:

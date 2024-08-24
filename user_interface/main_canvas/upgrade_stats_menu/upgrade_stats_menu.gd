@@ -20,13 +20,11 @@ func initialize_stats_menu(_selected_team_info: SelectedTeamInfo,
 		_inventory: PlayerInventory,
 ) -> void:
 	char_resource_array = _selected_team_info.char_data_array
-	print("window array: %d" % char_resource_array.size())
 	for i in range(window_array.size()):
 		if char_resource_array.size() > i:
 			window_array[i].initialize_windows(_inventory, char_resource_array[i])
 			window_array[i].name = " %s " % char_resource_array[i].char_name
 			tab_container.set_tab_hidden(i, false)
-			print("ayt")
 		else:
 			tab_container.set_tab_hidden(i, true)
 	

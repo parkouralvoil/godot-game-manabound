@@ -83,15 +83,25 @@ theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
 
-[node name="VBox" type="VBoxContainer" parent="VBox/OtherInfo/MarginContainer"]
+[node name="HBox" type="HBoxContainer" parent="VBox/OtherInfo/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 mouse_filter = 2
 
-[node name="FPS" type="Label" parent="VBox/OtherInfo/MarginContainer/VBox"]
+[node name="FPS" type="Label" parent="VBox/OtherInfo/MarginContainer/HBox"]
 custom_minimum_size = Vector2(55, 0)
 layout_mode = 2
 text = "FPS: 9999"
+label_settings = ExtResource("2_8oro1")
+
+[node name="line2" type="ColorRect" parent="VBox/OtherInfo/MarginContainer/HBox"]
+custom_minimum_size = Vector2(2, 0)
+layout_mode = 2
+color = Color(0.4, 0.4, 0.4, 0.670588)
+
+[node name="Enemies" type="Label" parent="VBox/OtherInfo/MarginContainer/HBox"]
+layout_mode = 2
+text = "Enemies left: 15"
 label_settings = ExtResource("2_8oro1")
 
 [node name="Spacer" type="Control" parent="VBox"]
@@ -155,7 +165,7 @@ texture = SubResource("AtlasTexture_lefp4")
 expand_mode = 2
 stretch_mode = 5
 
-[node name="amt_hp" type="Label" parent="VBox/InventoryInfo/MarginContainer/VBox/GridContainer"]
+[node name="num_hp" type="Label" parent="VBox/InventoryInfo/MarginContainer/VBox/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
@@ -168,7 +178,7 @@ texture = SubResource("AtlasTexture_hdesh")
 expand_mode = 2
 stretch_mode = 5
 
-[node name="amt_atk" type="Label" parent="VBox/InventoryInfo/MarginContainer/VBox/GridContainer"]
+[node name="num_atk" type="Label" parent="VBox/InventoryInfo/MarginContainer/VBox/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
@@ -205,6 +215,6 @@ label_settings = ExtResource("2_8oro1")
 modulate = Color(0.388235, 0.698039, 0.858824, 1)
 layout_mode = 2
 theme_override_font_sizes/font_size = 12
-text = "Upgrade Stats"
+text = "LEVEL UP"
 
 [connection signal="pressed" from="VBox/InventoryInfo/MarginContainer/VBox/UpgradeStatsButton" to="." method="_on_upgrade_stats_pressed"]
