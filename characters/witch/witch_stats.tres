@@ -5,8 +5,8 @@
 [resource]
 script = ExtResource("1_yfq21")
 initial_MAX_HP = 3
-initial_ATK = 8.0
-initial_EP = 10.0
+initial_ATK = 18.0
+initial_EP = 30.0
 initial_CHR = 5.0
 charge_tier = 0
 MAX_AMMO = 5

@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://wb7yfjqhq458"]
+[gd_scene load_steps=11 format=3 uid="uid://wb7yfjqhq458"]
 
 [ext_resource type="Script" path="res://scenes/enemies/mobile_enemies/drone_small/enemy_smalldrone.gd" id="1_0q3x6"]
 [ext_resource type="PackedScene" uid="uid://ccfj5qan8stdb" path="res://projectiles/bullet_impact.tscn" id="2_0ja26"]
 [ext_resource type="Texture2D" uid="uid://c5yynjtnoolo2" path="res://assets/sprite_enemies/smalldrone.png" id="2_4y6fh"]
+[ext_resource type="Resource" uid="uid://ln7neifg5sl6" path="res://resources/data/enemy/enemy_stats/stats_smallDrone.tres" id="2_u040i"]
 [ext_resource type="Texture2D" uid="uid://mnqy6onwpiay" path="res://resources/textures/impacts/enemy_dead.tres" id="3_qkuvi"]
 [ext_resource type="Script" path="res://scripts/entity_components/HurtboxComponent_enemy.gd" id="3_st8q1"]
 [ext_resource type="Script" path="res://scripts/entity_components/attack_components_specific/AttackComponent_Drone.gd" id="4_nuqg1"]
@@ -20,11 +21,10 @@ collision_mask = 65
 motion_mode = 1
 wall_min_slide_angle = 0.0
 script = ExtResource("1_0q3x6")
+stats = ExtResource("2_u040i")
 bullet_impact_scene = ExtResource("2_0ja26")
 enemy_dead_texture = ExtResource("3_qkuvi")
 impact_scale = Vector2(0.5, 0.5)
-max_health = 10.0
-default_reload_time = 4.0
 
 [node name="Sprite2D_main" type="Sprite2D" parent="."]
 scale = Vector2(2, 2)
@@ -48,8 +48,6 @@ autostart = true
 
 [node name="HealthComponent" parent="." instance=ExtResource("5_mrnqf")]
 explosion_volume = -25.0
-small_orbs = 1
-medium_orbs = 0
 
 [node name="HurtboxComponent" type="Area2D" parent="."]
 collision_layer = 8

@@ -1,6 +1,7 @@
-[gd_scene load_steps=13 format=3 uid="uid://cucqth4r8k7y3"]
+[gd_scene load_steps=14 format=3 uid="uid://cucqth4r8k7y3"]
 
 [ext_resource type="Script" path="res://scenes/enemies/stationary_enemies/machinegun/enemy_machinegun.gd" id="1_4ftxf"]
+[ext_resource type="Resource" uid="uid://bd8yd78nv85uf" path="res://resources/data/enemy/enemy_stats/stats_machineGun.tres" id="2_eql8e"]
 [ext_resource type="PackedScene" uid="uid://ccfj5qan8stdb" path="res://projectiles/bullet_impact.tscn" id="2_oai8o"]
 [ext_resource type="Texture2D" uid="uid://mnqy6onwpiay" path="res://resources/textures/impacts/enemy_dead.tres" id="3_af3ky"]
 [ext_resource type="Script" path="res://scenes/enemies/stationary_enemies/machinegun/machinegun_ammo.gd" id="3_rk0t3"]
@@ -21,10 +22,9 @@ radius = 22.0
 collision_layer = 2
 collision_mask = 0
 script = ExtResource("1_4ftxf")
+stats = ExtResource("2_eql8e")
 bullet_impact_scene = ExtResource("2_oai8o")
 enemy_dead_texture = ExtResource("3_af3ky")
-max_health = 90.0
-default_reload_time = 0.1
 
 [node name="Sprite2D_pivot" type="Sprite2D" parent="."]
 texture = ExtResource("4_aux6u")

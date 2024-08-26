@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://cg2ravjhx4yud"]
+[gd_scene load_steps=15 format=3 uid="uid://cg2ravjhx4yud"]
 
 [ext_resource type="Script" path="res://scenes/enemies/stationary_enemies/autobow/enemy_autobow.gd" id="1_7v7ie"]
 [ext_resource type="Texture2D" uid="uid://b5uv1u6y5momf" path="res://assets/sprite_enemies/bsf autobow.png" id="1_fyovm"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://ccfj5qan8stdb" path="res://projectiles/bullet_impact.tscn" id="2_x5tyu"]
 [ext_resource type="Script" path="res://scenes/enemies/stationary_enemies/autobow/autobow_ammo.gd" id="3_8d36t"]
 [ext_resource type="Texture2D" uid="uid://mnqy6onwpiay" path="res://resources/textures/impacts/enemy_dead.tres" id="3_jq3je"]
+[ext_resource type="Resource" uid="uid://bnjdhefenp486" path="res://resources/data/enemy/enemy_stats/stats_autobow.tres" id="4_wenyq"]
 [ext_resource type="Script" path="res://scripts/entity_components/attack_components_specific/AttackComponent_Autobow.gd" id="5_ylnjd"]
 [ext_resource type="PackedScene" uid="uid://bx54isqpe5u3x" path="res://scenes/enemies/enemies_components/HealthComponent_enemy.tscn" id="6_if5fd"]
 
@@ -29,11 +30,10 @@ region = Rect2(40, 39, 2, 2)
 collision_layer = 2
 collision_mask = 0
 script = ExtResource("1_7v7ie")
+stats = ExtResource("4_wenyq")
 bullet_impact_scene = ExtResource("2_x5tyu")
 enemy_dead_texture = ExtResource("3_jq3je")
 impact_scale = Vector2(2, 2)
-max_health = 35.0
-default_reload_time = 1.25
 
 [node name="Sprite2D_pivot" type="Sprite2D" parent="."]
 texture = SubResource("AtlasTexture_dpic6")

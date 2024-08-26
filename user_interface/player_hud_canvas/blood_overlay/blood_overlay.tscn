@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://duidexikehj1a" path="res://assets/sprite_UI/damage overlay.png" id="1_q7ppb"]
 [ext_resource type="Script" path="res://user_interface/player_hud_canvas/blood_overlay/blood_overlay.gd" id="2_lv3iu"]
-[ext_resource type="Resource" uid="uid://6renh852kiei" path="res://resources/data/player_info.tres" id="3_wj3kp"]
+[ext_resource type="Resource" uid="uid://6renh852kiei" path="res://resources/data/player_info/player_info.tres" id="3_wj3kp"]
 
 [node name="BloodOverlay" type="TextureRect"]
 modulate = Color(1, 1, 1, 0)

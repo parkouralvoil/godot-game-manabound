@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="EnemyStats" load_steps=2 format=3 uid="uid://bd8yd78nv85uf"]
+
+[ext_resource type="Script" path="res://resources/data/enemy/enemy_stats/enemy_stats.gd" id="1_cnq7o"]
+
+[resource]
+script = ExtResource("1_cnq7o")
+health = 400.0
+mana_orbs = 300.0
+default_reload_time = 0.3

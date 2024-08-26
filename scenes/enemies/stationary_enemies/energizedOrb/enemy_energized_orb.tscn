@@ -1,7 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://bhqkl7kraifkd"]
+[gd_scene load_steps=13 format=3 uid="uid://bhqkl7kraifkd"]
 
 [ext_resource type="Script" path="res://scenes/enemies/stationary_enemies/energizedOrb/enemy_energized_orb.gd" id="1_cgshh"]
 [ext_resource type="PackedScene" uid="uid://ccfj5qan8stdb" path="res://projectiles/bullet_impact.tscn" id="2_1kbps"]
+[ext_resource type="Resource" uid="uid://dj581exf47q50" path="res://resources/data/enemy/enemy_stats/stats_energyOrb.tres" id="2_nktuf"]
 [ext_resource type="Texture2D" uid="uid://mnqy6onwpiay" path="res://resources/textures/impacts/enemy_dead.tres" id="3_1qe5k"]
 [ext_resource type="Texture2D" uid="uid://cv8m0tgd2djtm" path="res://assets/sprite_enemies/bsf wisp.png" id="4_msriy"]
 [ext_resource type="PackedScene" uid="uid://bx54isqpe5u3x" path="res://scenes/enemies/enemies_components/HealthComponent_enemy.tscn" id="5_d6l82"]
@@ -21,10 +22,9 @@ region = Rect2(15, 13, 18, 22)
 collision_layer = 2
 collision_mask = 0
 script = ExtResource("1_cgshh")
+stats = ExtResource("2_nktuf")
 bullet_impact_scene = ExtResource("2_1kbps")
 enemy_dead_texture = ExtResource("3_1qe5k")
-max_health = 40.0
-default_reload_time = 2.0
 
 [node name="Sprite2D_main" type="Sprite2D" parent="."]
 texture = SubResource("AtlasTexture_w0hsw")
@@ -34,8 +34,6 @@ shape = SubResource("CircleShape2D_dlwob")
 
 [node name="HealthComponent" parent="." instance=ExtResource("5_d6l82")]
 explosion_volume = -20.0
-small_orbs = 5
-medium_orbs = 1
 
 [node name="HurtboxComponent" type="Area2D" parent="."]
 collision_layer = 8

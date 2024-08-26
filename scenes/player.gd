@@ -1,7 +1,7 @@
 extends CharacterBody2D
 class_name Player
 
-const PlayerInfo: PlayerInfoResource = preload("res://resources/data/player_info.tres")
+const PlayerInfo: PlayerInfoResource = preload("res://resources/data/player_info/player_info.tres")
 const inventory: PlayerInventory = preload("res://resources/data/player_inventory/player_inventory.tres")
 
 @export var direction_indicator: Sprite2D #= $DirectionIndicator

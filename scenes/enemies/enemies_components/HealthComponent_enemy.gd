@@ -5,10 +5,6 @@ class_name EnemyHealthComponent
 @export var enemy_explosion_sfx: AudioStream
 @export var explosion_volume: float = -15
 
-@export_category("Enemy Value")
-@export var small_orbs: int = 2
-@export var medium_orbs: int = 2
-
 @export_category("Debuff Resources")
 @export var crystalize_effect: Crystalized
 @export var superconduct_effect: Superconduct
@@ -32,8 +28,6 @@ var color_tier3 := Color(0.87, 0, 1)
 @onready var HBox: HBoxContainer = $HBoxContainer
 
 func _ready() -> void:
-	_set_healthbar_properties()
-	
 	assert(damage_number, "forgot to export")
 
 #region Health Component
@@ -58,7 +52,7 @@ func damage_received(damage: float, new_elem: CombatManager.Elements, ep: float 
 		produce_energy(3)
 		is_dead = true
 		EventBus.enemy_died.emit(e)
-		EnemyAiManager.spawn_orbs(global_position, small_orbs, medium_orbs)
+		EnemyAiManager.spawn_orbs(global_position, e.mana_orbs_dropped)
 		clear_debuff_references()
 		SoundPlayer.play_sound_2D(global_position, enemy_explosion_sfx, explosion_volume + 7, 1.1)
 		e.make_impact()
@@ -150,16 +144,16 @@ func clear_debuff_references() -> void:
 #endregion
 
 
-func _set_healthbar_properties() -> void:
-	var healthbar_size: float = clampf(5.0 + (8.0 * (e.healthbar_length/10.0) ), 1, 150)
-	healthbar.size.x = healthbar_size
-	healthbar.position.x = -healthbar_size/2
-	HBox.position.x = -healthbar_size/2
+func set_healthbar_properties(og_length: float) -> void: ## called by BaseEnemy.gd
+	var size: float = clampf(og_length/3, 1, 100)
 	
-	#print("%0.2f vs real: %0.2f" % [e.healthbar_length, e.max_health])
-	if e.healthbar_length >= e.max_health: ## x1 hp
+	healthbar.size.x = size
+	healthbar.position.x = -size/2
+	HBox.position.x = -size/2
+	
+	if og_length >= e.max_health: ## x1 HP
 		healthbar.modulate = color_tier1
-	elif e.healthbar_length * 2 >= e.max_health: ## (x2) HP
+	elif og_length * 3 >= e.max_health: ## x3 HP
 		healthbar.modulate = color_tier2
 	else: ## more than x2 HP
 		healthbar.modulate = color_tier3

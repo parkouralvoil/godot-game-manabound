@@ -1,7 +1,7 @@
 extends Node2D
 class_name Character
 
-var PlayerInfo: PlayerInfoResource = preload("res://resources/data/player_info.tres")
+const PlayerInfo: PlayerInfoResource = preload("res://resources/data/player_info/player_info.tres")
 
 @onready var arm_sprite: Sprite2D = $Sprite2D_arm
 @onready var wpn_sprite: Sprite2D = $Sprite2D_arm/Sprite2D_wpn

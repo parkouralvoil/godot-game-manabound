@@ -4,9 +4,9 @@
 
 [resource]
 script = ExtResource("1_omsin")
-MAX_HP = 5
-initial_ATK = 10.0
-initial_EP = 0.0
+initial_MAX_HP = 5
+initial_ATK = 30.0
+initial_EP = 20.0
 initial_CHR = 2.0
 charge_tier = 0
 MAX_AMMO = 3

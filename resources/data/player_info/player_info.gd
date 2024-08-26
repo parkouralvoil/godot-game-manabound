@@ -12,6 +12,7 @@ class_name PlayerInfoResource
 # overall, just makes communication between all scripts related to player easier
 	# so im using it for states as well hehe
 
+## I CANT MAKE THIS "script signal" ONLY, CUZ I NEED THE RESOURCE FOR SIGNALS
 signal changed_buff_raw_atk
 signal player_got_hit
 

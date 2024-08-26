@@ -4,7 +4,7 @@
 [ext_resource type="Resource" uid="uid://cnqflwm13q5h2" path="res://resources/data/dungeon_managers/blueCity/dungeon_blueCity.tres" id="2_8yjwh"]
 [ext_resource type="PackedScene" uid="uid://cnrrjvflykcui" path="res://user_interface/player_hud_canvas/game_info/game_info.tscn" id="2_p730a"]
 [ext_resource type="PackedScene" uid="uid://w160vey4ewti" path="res://user_interface/player_hud_canvas/blood_overlay/blood_overlay.tscn" id="2_xr203"]
-[ext_resource type="Resource" uid="uid://6renh852kiei" path="res://resources/data/player_info.tres" id="3_unjgf"]
+[ext_resource type="Resource" uid="uid://6renh852kiei" path="res://resources/data/player_info/player_info.tres" id="3_unjgf"]
 [ext_resource type="PackedScene" uid="uid://ditj78b8rkpnw" path="res://user_interface/player_hud_canvas/team_UI_stuff/team_hud.tscn" id="3_w0rs6"]
 [ext_resource type="Resource" uid="uid://bnybxlb6y58wv" path="res://resources/data/player_inventory/player_inventory.tres" id="4_nlug2"]
 [ext_resource type="Resource" uid="uid://cw7j4j6w6f1yk" path="res://resources/data/selected_team_info/selected_team_info.tres" id="5_jw52t"]

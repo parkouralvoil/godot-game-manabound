@@ -47,10 +47,12 @@ func _instantiate_enemy(info: RoomPreset.SpawnInfo) -> BaseEnemy:
 				inst.horizontal = true
 		_:
 			inst = (info.scene).instantiate()
-	inst.healthbar_length = inst.max_health
-	inst.max_health *= hp_scaling
+	inst.HP_multiplier *= hp_scaling
 	return inst
 
+## idea, have the data manager already affect the enemy's HP scaling before
+## enemy_holder gets a hold of it
+## orajseurasjeuorjaosejroasjeorsur ORAOEUARJOWEHROWUER
 
 #func roll_probability(success_chance: float) -> bool:
 	#var probability: float = rng.randf()

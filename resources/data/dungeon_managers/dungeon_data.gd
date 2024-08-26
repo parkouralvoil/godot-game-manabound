@@ -135,12 +135,12 @@ func _update_cycle_info() -> void: ## inside setter of cycle
 			min_chest_spawns = 3
 			max_chest_spawns = 5
 			
-			enemy_HP_scaling = 2
+			enemy_HP_scaling = 3
 		_: ## cycles 3 and above go here
 			min_chest_spawns = 7
 			max_chest_spawns = 9
 			
-			enemy_HP_scaling = 4
+			enemy_HP_scaling = 5
 	_update_preset()
 #endregion
 

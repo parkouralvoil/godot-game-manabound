@@ -2,7 +2,7 @@ extends Node
 class_name AbilityHelper
 
 
-const PlayerInfo: PlayerInfoResource = preload("res://resources/data/player_info.tres")
+const PlayerInfo: PlayerInfoResource = preload("res://resources/data/player_info/player_info.tres")
 
 
 static func compute_damage(base: float, scaling: float, level: int, stats: CharacterStats) -> float:

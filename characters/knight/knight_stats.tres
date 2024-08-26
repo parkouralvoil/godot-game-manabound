@@ -5,11 +5,11 @@
 [resource]
 script = ExtResource("1_thmi0")
 initial_MAX_HP = 5
-initial_ATK = 10.0
-initial_EP = 0.0
+initial_ATK = 20.0
+initial_EP = 10.0
 initial_CHR = 25.0
 charge_tier = 0
-MAX_AMMO = 50
+MAX_AMMO = 9
 reload_time = 0.5
 SPD = 400.0
 firerate = 7.0
