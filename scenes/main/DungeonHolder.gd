@@ -5,26 +5,10 @@ this handles the ff:
 	- loading levels of dungeon data
 """
 
-## TODO, aug 19:
-"""
-NEXT
-- use spreadsheet to balance HP scaling and rune droprates
-
-- make HP rune very fockin rare
-
-NEXT
-- make hub area where u can start lvl
-- make rest rooms where u can upgrade stree, appears every 5 lvls
-
-LAST
-- make death mechanic and revives
-- make first boss fight
-- make tutorials
-- rogue sound effects
-"""
-
 signal previous_level_cleaned_up
 signal next_level_loaded(starting_pos: Vector2)
+
+@onready var main_hub: MainHub = $MainHub
 
 var dungeon_data: DungeonData ## given by main
 
@@ -33,23 +17,29 @@ var dungeon_data: DungeonData ## given by main
 
 var current_level: LevelManager
 
-
 @onready var main: Main = owner
+
+## load the main hub
+func initialize_main_hub() -> void:
+	next_level_loaded.emit(main_hub.starting_pos)
+	dungeon_data.main_hub_loaded.emit()
+	main_hub.main_hub_departed.connect(initialize_dungeon)
+
 
 ## Initialize dungeon before loading the first level
 func initialize_dungeon() -> void: ## called by main
 	if dungeon_data:
 		dungeon_data.start_cycle() ## sets cycle to 1
 		dungeon_data.start_room() ## sets room_num to 1
+		dungeon_data.game_started.emit()
 		dungeon_data.state_in_combat = true
 		dungeon_data.preset_selected.connect(_on_preset_selected)
 	else:
 		push_error("(%s): Dungeon data is null" % name)
 
-
 func _ready() -> void:
-	EventBus.level_cleared.connect(_on_level_cleared)
-	EventBus.exit_door_interacted.connect(_on_exit_door_interacted)
+	EventBus.level_cleared.connect(_on_level_cleared) # emitted by level
+	EventBus.exit_door_interacted.connect(_on_exit_door_interacted) # emitted by exit door
 
 
 func remove_previous_lvl() -> void:
@@ -66,20 +56,23 @@ func remove_previous_lvl() -> void:
 
 func load_next_lvl() -> void: ## needs a parameter to see which map got chosen
 	## TODO: implement selecting random maps
-	assert(dungeon_data.NormalRooms.size() > 0, "Check the dungeon data's NormalRooms export array")
+	assert(dungeon_data.NormalRooms.size() > 0, "Check the dungeon data's NormalRooms 
+			export array")
 	
 	## TODO: implement going to rest room
-	current_level = dungeon_data.NormalRooms[0].instantiate()
+	var lvl_scene: PackedScene = dungeon_data.get_level()
+	current_level = lvl_scene.instantiate()
 	current_level.room_preset = dungeon_data.chosen_preset
 	
 	dungeon_data.state_in_combat = true
 	
 	add_child(current_level)
 	## set level's enemy chances
+	
 	next_level_loaded.emit(current_level.starting_pos)
 
 
-func _on_level_cleared() -> void:
+func _on_level_cleared(_is_combat_room: bool) -> void:
 	await get_tree().create_timer(0.15).timeout
 	EnemyAiManager.call_attract_orbs.emit()
 	dungeon_data.state_in_combat = false
@@ -93,7 +86,10 @@ func _on_exit_door_interacted() -> void:
 func _on_preset_selected(preset_from_UI: RoomPreset) -> void:
 	await remove_previous_lvl()
 	
-	dungeon_data.go_next_room(preset_from_UI) ## this updates room number, which can update cycle
+	if has_node("MainHub"):
+		remove_child(main_hub)
+	dungeon_data.go_next_room(preset_from_UI) ## this updates room number, 
+	## which can update cycle
 	load_next_lvl()
 
 

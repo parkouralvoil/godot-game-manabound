@@ -31,8 +31,9 @@ func _ready() -> void:
 	
 	dungeon_holder.previous_level_cleaned_up.connect(_remove_player_holder)
 	dungeon_holder.next_level_loaded.connect(_enter_next_lvl)
-	dungeon_holder.initialize_dungeon()
-	dungeon_holder.load_next_lvl()
+	
+	dungeon_holder.initialize_main_hub()
+	#dungeon_holder.load_next_lvl()
 	## STEPS: dungeon.load_next_lvl -> _enter_next_lvl -> fade in
 
 
@@ -56,10 +57,12 @@ func _enter_next_lvl(starting_pos: Vector2) -> void: ## should be in (fade_out) 
 	if not has_node("PlayerHolder"):
 		add_child(playerholder)
 	
+	EventBus.level_loaded.emit()
 	var player: Player = playerholder.p
 	camera.position_smoothing_enabled = false
 	player.global_position = starting_pos
 	camera.global_position = starting_pos
+	#print("player loaded with camera")
 	
 	player_hud.show()
 	await fade_in()

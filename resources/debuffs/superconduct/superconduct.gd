@@ -3,7 +3,7 @@ class_name Superconduct
 
 @export_category("Debuff Effects") ## only when i add a 2nd superconduct against boses
 var duration: float = 7
-var base_dmg: float = 5
+var base_dmg: float = 15
 
 @export_category("Particles")
 @export var particles_process_mat: ParticleProcessMaterial
@@ -49,12 +49,17 @@ func receive_superconduct(enemy: BaseEnemy, ep: float) -> void:
 			explosiveness,
 			lifetime,
 			enemy.global_position,)
-	var dmg_proc: float = (ep ** 1.1) + base_dmg
-	enemy.take_damage(dmg_proc, CombatManager.Elements.NONE)
+	var final_dmg: float = damage_equation(ep)
+	enemy.take_damage(final_dmg, CombatManager.Elements.NONE)
 	enemy.reload_time = enemy.default_reload_time + 1
 	
 	tween.tween_property(enemy.sprite_main, "modulate", 
 			enemy.default_color, duration).from(color_sc)
+
+
+func damage_equation(ep: float) -> float:
+	var ep_dmg: float = ep * 1.25
+	return base_dmg + ep_dmg
 
 
 func superconduct_ended(enemy: BaseEnemy) -> void:

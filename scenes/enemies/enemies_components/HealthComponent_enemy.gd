@@ -34,6 +34,8 @@ func _ready() -> void:
 func damage_received(damage: float, new_elem: CombatManager.Elements, ep: float = 0) -> void:
 	var inflicted_reaction: CombatManager.Reactions = CombatManager.Reactions.NONE
 	
+	#print_debug("received ep = %0.1f" % ep)
+	
 	if element_initial == CombatManager.Elements.NONE:
 		element_initial = new_elem
 		element_indicator.element = new_elem
@@ -114,8 +116,10 @@ func apply_reaction(new_elem: CombatManager.Elements, ep: float) -> CombatManage
 
 func spawn_overload_impact(pos: Vector2, ep: float) -> void:
 	var inst: DamageImpact = CombatManager.overload_impact.instantiate()
-	var base_dmg: float = 10
-	var overload_dmg: float = base_dmg + (ep ** 1.2)
+	var base_dmg: float = 20
+	var ep_dmg: float = ep * 1.5
+	var overload_dmg: float = base_dmg + ep_dmg
+	
 	inst.global_position = pos
 	inst.damage = overload_dmg
 	inst.element = CombatManager.Elements.NONE
@@ -145,7 +149,7 @@ func clear_debuff_references() -> void:
 
 
 func set_healthbar_properties(og_length: float) -> void: ## called by BaseEnemy.gd
-	var size: float = clampf(og_length/3, 1, 100)
+	var size: float = clampf(og_length/4.5, 5, 100)
 	
 	healthbar.size.x = size
 	healthbar.position.x = -size/2

@@ -30,6 +30,7 @@ func _ready() -> void:
 	
 	await get_tree().process_frame
 	stats.reset_stats()
+	print("%s has %0.2f EP" % [name, stats.EP])
 
 
 func _process(_delta: float) -> void:

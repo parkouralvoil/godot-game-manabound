@@ -15,6 +15,7 @@ func _ready() -> void:
 
 
 func hit(damage: float, element: CombatManager.Elements, ep: float = 0) -> void:
+	#print_debug("ep received = %0.1f" % ep)
 	entity.take_damage(damage, element, ep)
 
 

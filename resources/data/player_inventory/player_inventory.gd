@@ -3,7 +3,7 @@ class_name PlayerInventory
 
 signal number_of_runes_changed
 
-var mana_orbs: int = 50000
+var mana_orbs: int = 0 #50000
 
 var rune_HP: int = 0:
 	set(val):

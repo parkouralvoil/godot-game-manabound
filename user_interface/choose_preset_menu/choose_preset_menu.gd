@@ -12,6 +12,7 @@ var dungeon_data: DungeonData = null
 func initialize_preset_window(data: DungeonData) -> void:
 	dungeon_data = data
 	dungeon_data.exit_door_interacted.connect(_distribute_preset_choices)
+	dungeon_data.game_started.connect(_distribute_preset_choices)
 
 
 func _ready() -> void:

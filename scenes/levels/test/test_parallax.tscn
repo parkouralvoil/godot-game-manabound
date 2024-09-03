@@ -4,7 +4,9 @@
 [ext_resource type="Texture2D" uid="uid://bt14j7o32mm7b" path="res://assets/background/City Foreground.png" id="2_307nh"]
 [ext_resource type="Texture2D" uid="uid://35esyf53xnmg" path="res://assets/background/City Background.png" id="2_ax866"]
 
-[node name="ParallaxBackground" type="ParallaxBackground"]
+[node name="test_parallax" type="ParallaxBackground"]
+scroll_base_offset = Vector2(0, -759)
+scroll_ignore_camera_zoom = true
 
 [node name="ParallaxLayer_Sky" type="ParallaxLayer" parent="."]
 motion_scale = Vector2(0, 0)
@@ -28,7 +30,6 @@ centered = false
 
 [node name="ParallaxLayer_Foreground" type="ParallaxLayer" parent="."]
 motion_scale = Vector2(0.7, 0.7)
-motion_offset = Vector2(0, 80)
 motion_mirroring = Vector2(1120, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer_Foreground"]

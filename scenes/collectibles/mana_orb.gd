@@ -15,7 +15,10 @@ enum possible_tiers
 
 var tier: possible_tiers = possible_tiers.SMALL
 
-var value: int = 5
+var value: int
+static var value_small: int = 10
+static var value_med: int = 40
+
 var speed: float = 600
 var go_towards_player: bool = false
 
@@ -28,11 +31,11 @@ func _ready() -> void:
 		possible_tiers.SMALL:
 			texture = texture_small
 			current_trail.width = 5
-			value = 5
+			value = value_small
 		possible_tiers.MEDIUM:
 			texture = texture_medium
 			current_trail.width = 10
-			value = 20
+			value = value_med
 
 
 func _physics_process(delta: float) -> void:

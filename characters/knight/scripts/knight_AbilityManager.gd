@@ -16,11 +16,11 @@ var _ult_name: String = "Grand Ballista"
 var bullet_speed: float = 450
 var max_distance: float = 300
 
-var base_percent_basic_bolt: float = 0.5
+var base_percent_basic_bolt: float = 1
 var base_percent_lightning_bolt: float = 1.5
 
 var scale_percent_basic_bolt: float = 0
-var scale_percent_lightning_bolt: float = 0.4
+var scale_percent_lightning_bolt: float = 0.5
 
 ## Ult properties
 var ult_bullet_speed: float = 600

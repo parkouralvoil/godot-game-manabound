@@ -15,15 +15,9 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_6gycy")
+dev_console_enabled = null
 
 [node name="PauseMenu" type="Control" parent="."]
-visible = false
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="CheatMenu" type="Control" parent="."]
 visible = false
 layout_mode = 3
 anchors_preset = 0

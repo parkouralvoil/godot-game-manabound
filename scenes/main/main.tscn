@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://bfigo4q6at8d8"]
+[gd_scene load_steps=18 format=3 uid="uid://bfigo4q6at8d8"]
 
 [ext_resource type="Script" path="res://scenes/main/main.gd" id="1_fwn4r"]
 [ext_resource type="Script" path="res://scenes/main/DungeonHolder.gd" id="2_j78xc"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://c7qwpthsv6838" path="res://scenes/complex_dependencies/player_holder.tscn" id="4_p316a"]
 [ext_resource type="PackedScene" uid="uid://bxevdtlubutni" path="res://user_interface/main_canvas/main_canvas.tscn" id="5_jftyw"]
 [ext_resource type="Material" uid="uid://b1hyqx5c4ut8u" path="res://resources/debuffs/crystalize/crystalized_particles.tres" id="5_lx26c"]
+[ext_resource type="PackedScene" uid="uid://bdn5claftvmgn" path="res://scenes/levels/main_hub/main_hub.tscn" id="6_aqqlm"]
 [ext_resource type="Material" uid="uid://bccvk3vgyafgq" path="res://resources/debuffs/superconduct/superconduct_particles.tres" id="6_omtpx"]
 [ext_resource type="Material" uid="uid://cyq64d3nqou5u" path="res://resources/particles/bolt_impact_particles.tres" id="7_dlauh"]
 [ext_resource type="Material" uid="uid://bhwosssphve8" path="res://resources/particles/laser_casting_particles.tres" id="8_6k147"]
@@ -28,11 +29,14 @@ main_player_inventory = ExtResource("4_gevh3")
 process_mode = 1
 script = ExtResource("2_j78xc")
 
+[node name="MainHub" parent="DungeonHolder" instance=ExtResource("6_aqqlm")]
+
 [node name="PlayerHudCanvas" parent="." instance=ExtResource("4_43gs0")]
 
 [node name="MainCanvas" parent="." instance=ExtResource("5_jftyw")]
 
 [node name="PlayerCamera" parent="." instance=ExtResource("3_b3eh2")]
+position_smoothing_speed = 20.0
 
 [node name="PlayerHolder" parent="." instance=ExtResource("4_p316a")]
 process_mode = 1
@@ -50,5 +54,5 @@ par_array = Array[ParticleProcessMaterial]([ExtResource("5_lx26c"), ExtResource(
 [node name="music" type="AudioStreamPlayer" parent="."]
 process_mode = 3
 stream = ExtResource("10_6bqnx")
-volume_db = -20.0
+volume_db = -60.0
 autoplay = true

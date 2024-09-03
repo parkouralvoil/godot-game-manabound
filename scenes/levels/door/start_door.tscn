@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://ik5ko0nytiss"]
+
+[ext_resource type="Texture2D" uid="uid://cb07f2ey0p54u" path="res://assets/sprite_tilesets/blue scifi doors.png" id="1_shye6"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c5p3c"]
+atlas = ExtResource("1_shye6")
+region = Rect2(0, 40, 32, 40)
+
+[node name="StartDoor" type="Sprite2D"]
+position = Vector2(1024, -68)
+texture = SubResource("AtlasTexture_c5p3c")

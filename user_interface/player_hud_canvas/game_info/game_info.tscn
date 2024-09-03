@@ -21,6 +21,7 @@ atlas = ExtResource("3_twxwh")
 region = Rect2(0, 24, 24, 24)
 
 [node name="GameInfo" type="Control"]
+process_mode = 1
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

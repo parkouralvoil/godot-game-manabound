@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="RoomPreset" load_steps=3 format=3 uid="uid://bt31wp1frvhxs"]
+
+[ext_resource type="PackedScene" uid="uid://dg8mvmb7h5m4t" path="res://scenes/levels/blue_city/city_rest.tscn" id="1_hlgnt"]
+[ext_resource type="Script" path="res://resources/data/dungeon_managers/room_preset.gd" id="1_kxbi2"]
+
+[resource]
+script = ExtResource("1_kxbi2")
+preset_name = "Rest"
+info1 = "Safe room"
+info2 = "Can upgrade skill tree here"
+info3 = ""
+num_of_enemies = 0
+autobow = 5.0
+orb = 3.0
+laser = 3.0
+dronefactory = 1.0
+num_of_elites = 0
+machinegun = 1.0
+HP_potion_present = false
+room = ExtResource("1_hlgnt")

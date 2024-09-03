@@ -9,12 +9,14 @@ var player_position: Vector2 = Vector2.ZERO
 signal call_attract_orbs
 var v: int = 10
 
+
+## shouldnt be in ENemyAIManager but whatever
 func spawn_orbs(pos: Vector2, mana_orbs: float) -> void:
 	var orb: ManaOrb
 	var rng: RandomNumberGenerator = RandomNumberGenerator.new()
 	
-	while mana_orbs >= 20:
-		mana_orbs -= 20 ## value of med orbs
+	while mana_orbs >= ManaOrb.value_med:
+		mana_orbs -= ManaOrb.value_med ## value of med orbs
 		orb = mana_orb_scene.instantiate()
 		orb.tier = orb.possible_tiers.MEDIUM
 		@warning_ignore("integer_division")
@@ -24,7 +26,7 @@ func spawn_orbs(pos: Vector2, mana_orbs: float) -> void:
 		get_tree().root.call_deferred("add_child", orb)
 	
 	while mana_orbs > 0:
-		mana_orbs -= 5
+		mana_orbs -= ManaOrb.value_small
 		orb = mana_orb_scene.instantiate()
 		orb.tier = orb.possible_tiers.SMALL
 		orb.global_position = pos + Vector2(rng.randi_range(-v, v),

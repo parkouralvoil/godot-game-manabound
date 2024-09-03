@@ -1,101 +1,59 @@
 extends Resource
 class_name DungeonData
-#region Comment Information
-## make a UNIQUE resource of this for EACH dungeon has info of 
 """
-- Cycle info
-	- enemy HP scaling
-	- chest spawn rates (runes and items)
-- Area info
+- Area/Cycle info
 	- all room types available in each area of the dungeon
 	- types of enemies that can spawn
+	- enemy HP scaling
+	- chest spawn rates (runes and items)
 - Level info
 	- which room to use
 	- what PRESET of enemies
+
+- on one hand, i need UI elems to know the current preset/lvl/area
+	- can work with below by having "current_preset"
+- on the other hand, i can move Area and Lvl info to DungeonHolder,
+	- DungeonData would just be a collection of area and lvl infos
+	- DungeonHolder would set the # of enemies, type of lvl, and # of chests
+	- before the level is added to the tree
 """
-
-## this is the base script for all area info models, like
-## dungeon_blueCity
-
-## each dungeon has 3 areas
-## each area has 10 levels and 1 unique boss
-## 4 combat lvls (NORMAL/SPECIAL) > rest lvl > next 4 combat lvl > rest lvl > boss
-
-## hence there has to be at least 8 different room types to reduce area repetition
-"""
-BlueCity, City:
-NORMAL ROOMS, has the PRESETS below (these arent options, 
-they just randomly picked once u choose a PRESET)
-
-Warehouse
-Hourglass (2 floors)
-4 Rooms
-Alley-way
-U shaped
-
-
-FIRST AREA, first 4 levels only have calm, normal, bridge, dwelling, bowless
-next 4 levels doesnt have calm anymore, all modifiers available
-how modifiers are chosen by game: 
-- everything has an equal chance to appear
-
-
-idea for presets:
-Bowless: Mostly orbs and lasers, no autobows
-"""
-
-"""
-SPECIAL ROOM (u can choose a guaranteed room like this):
-Cornered [Small Room] = only elites spawn
-Dwelling [Small Room] = CALM but small room 
-Bridge [Horizontal Tunnel] = autobows and lasers
-Tower [Verticality] = orbs and lasers
-Factory [Warehouse] = dronefactories and machineguns
-"""
-#endregion
 
 ## DungeonHolder -> UI
 signal combat_state_changed() # for show lvl up button
-signal exit_door_interacted() # for showing preset menu
+signal exit_door_interacted() # for showing preset menu after battle
+signal main_hub_loaded() # to tell certain UIs to change when at main hub
+signal game_started() # to show preset menu at start/load
 
 ## UI -> DungeonHolder
 signal preset_selected(preset: RoomPreset) # for loading next level with selected preset
 
-enum RoomInfo {
-	COMBAT,
-	REST,
-	BOSS,
-}
+@export_category("Debug Exports")
+@export var force_test_preset: bool = false
+@export var test_preset: RoomPreset
+@export var force_lvl_index: int = 99
 
 @export_category("Dungeon Data")
 @export var name: String = "Region"
 @export var NormalRooms: Array[PackedScene]
-@export var TESTPreset: Array[RoomPreset]
+
+@export_category("Array Room Presets")
+@export var RestPresets: Array[RoomPreset] ## array of size 1
 @export var EasyPresets: Array[RoomPreset]
 @export var HardPresets: Array[RoomPreset]
+@export var BossPreset: Array[RoomPreset] ## array of size 1
+var available_presets: Array[RoomPreset]
+var chosen_preset: RoomPreset
+
 
 var current_cycle: int:
 	set(val):
-		current_cycle = maxi(1, val)
-		_update_cycle_info()
-var current_room: int = 1:
+		current_cycle = maxi(0, val)
+var current_room: int = 0:
 	set(val):
 		current_room = maxi(0, val)
-var cycle_room_progression: int = 5 ## FINAL: 10
+var previous_level: PackedScene
+var cycle_room_progression: int = 10 ## FINAL: 10
 
-var available_presets: Array[RoomPreset]
-
-@export_category("Debug Exports")
-@export var initial_preset: RoomPreset ## FOR TESTING
-var chosen_preset: RoomPreset: ## FOR TESTING
-	get:
-		assert(chosen_preset, "Chosen Preset is null")
-		return chosen_preset
-	set(val):
-		chosen_preset = val
-		_update_preset()
-
-##  one for EasyPresets (first 4 lvls) and one for HardPresets (next 4 lvls)
 
 var enemy_HP_scaling: float = 0
 var min_chest_spawns: int = 1:
@@ -118,86 +76,100 @@ var state_in_combat: bool = false:
 
 #region Cycle Functions
 func start_cycle() -> void:
-	chosen_preset = initial_preset
 	available_presets = EasyPresets
 	current_cycle = 1
+	game_started.emit()
 
 
 func _update_cycle_info() -> void: ## inside setter of cycle
 	#print("cycle updated")
-	match current_cycle:
-		1:
-			min_chest_spawns = 1
-			max_chest_spawns = 3
-			
-			enemy_HP_scaling = 1
-		2:
-			min_chest_spawns = 3
-			max_chest_spawns = 5
-			
-			enemy_HP_scaling = 3
-		_: ## cycles 3 and above go here
-			min_chest_spawns = 7
-			max_chest_spawns = 9
-			
-			enemy_HP_scaling = 5
-	_update_preset()
+	if current_cycle <= 1: ## Tutorial and first cycle/area
+		min_chest_spawns = 1
+		max_chest_spawns = 3
+		enemy_HP_scaling = 1
+	elif current_cycle == 2:
+		min_chest_spawns = 3
+		max_chest_spawns = 5
+		enemy_HP_scaling = 3
+	else: ## Cycle 3 and above
+		min_chest_spawns = 7
+		max_chest_spawns = 9
+		enemy_HP_scaling = 5
 #endregion
 
 
 #region Room functions
 func start_room() -> void:
-	current_room = 1
+	current_room = 0
 
 
 func go_next_room(new_preset: RoomPreset) -> void:
 	current_room += 1
-	print("current room: %d" % current_room)
-	## FUTURE TODO: when i add Underground Shelter and Research Facility, 
-	## cycle only changes after 10 rooms
-	if current_room <= cycle_room_progression: 
-		current_cycle = 1
-		available_presets = EasyPresets ## HACK
-	elif current_room <= cycle_room_progression * 2:
-		current_cycle = 2
-		available_presets = HardPresets
+	print_debug("current room: %d" % current_room)
+	if current_room >= cycle_room_progression: 
+		current_cycle += 1
+		current_room = 1
+	
+	if current_cycle == 1 and current_room < 4:
+		available_presets = EasyPresets
+	elif current_room == 4 or current_room == 8:
+		available_presets = RestPresets
 	else:
-		current_cycle = 3
 		available_presets = HardPresets
+	
+	#if current_room == 10:
+	#	available_presets = BossPreset
+	
 	chosen_preset = new_preset ## must be set after cycle is updated
-
-func retrieve_next_room_info() -> RoomInfo: ## UNUSED
-	var next_room: int = current_room + 1
-	match next_room:
-		5:
-			return RoomInfo.COMBAT # rest
-		9:
-			return RoomInfo.COMBAT # rest
-		10:
-			return RoomInfo.COMBAT # boss
-		_:
-			return RoomInfo.COMBAT
+	_update_cycle_info()
+	_update_preset(chosen_preset)
 #endregion
 
 
-func _update_preset() -> void:
-	chosen_preset.min_rune_chests = min_chest_spawns
-	chosen_preset.max_rune_chests = max_chest_spawns
-	chosen_preset.enemy_HP_scaling = enemy_HP_scaling
-	chosen_preset.initialize_info()
+func _update_preset(_preset: RoomPreset) -> void:
+	_preset.min_rune_chests = min_chest_spawns
+	_preset.max_rune_chests = max_chest_spawns
+	_preset.enemy_HP_scaling = enemy_HP_scaling
+	_preset.initialize_info()
 	#print("preset: %s, max rune chests: %d" % [chosen_preset.preset_name, 
 			#chosen_preset.max_rune_chests])
 
 
+func get_level() -> PackedScene:
+	## elif current lvl is 4 or 9, return rest room
+	## chosen preset will handle boss, since boss is a preset
+	if chosen_preset.room:
+		return chosen_preset.room
+	
+	var lvl_available: Array[PackedScene] = NormalRooms.duplicate(false)
+	## TODO: available rooms shuold remove the last room in NormalROoms
+	if force_lvl_index < NormalRooms.size():
+		print_debug("FORCE LVL INDEX ON")
+		previous_level = NormalRooms[force_lvl_index]
+		return NormalRooms[force_lvl_index]
+	
+	if NormalRooms.size() > 1 and previous_level != null:
+		lvl_available.erase(previous_level)
+		previous_level = lvl_available.pick_random()
+	else:
+		previous_level = lvl_available.pick_random()
+	return previous_level
+
+
 func get_preset_choices() -> Array[RoomPreset]: ## always return array of size 2
-	var choices: Array[RoomPreset]
+	var choices: Array[RoomPreset] = [null]
 	var copy_available: Array[RoomPreset] = available_presets.duplicate(false) ## shallow copy
 	## shallow copy means it wont duplicate recursively
 	## it works here since im not modifying the elems, just removing
 	#print("copy available = %s" % str(copy_available))
 	if copy_available.size() > 0:
-		choices.append(copy_available.pick_random() )
-	if copy_available.size() - 1 > 0:
-		copy_available.erase(choices[0])
-		choices.append(copy_available.pick_random() )
+		choices[0] = copy_available.pick_random()
+	if copy_available == RestPresets:
+		return choices
+	if not force_test_preset:
+		if copy_available.size() - 1 > 0:
+			copy_available.erase(choices[0])
+			choices.append(copy_available.pick_random())
+	else:
+		choices.append(test_preset)
 	return choices

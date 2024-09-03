@@ -11,9 +11,9 @@ var dungeon_data: DungeonData: ## given by main
 	set(val):
 		dungeon_data = val
 		if val:
-			val.combat_state_changed.connect(try_show_inventory)
+			dungeon_data.combat_state_changed.connect(try_show_inventory)
+			dungeon_data.main_hub_loaded.connect(_on_main_hub_loaded)
 
-var current_lvl: int = 1
 
 @onready var label_fps: Label = $VBox/OtherInfo/MarginContainer/HBox/FPS
 @onready var label_enemies: Label = $VBox/OtherInfo/MarginContainer/HBox/Enemies
@@ -37,12 +37,19 @@ Level translate it as:
 @onready var label_ep_rune: Label = $VBox/InventoryInfo/MarginContainer/VBox/GridContainer/num_ep
 @onready var label_chr_rune: Label = $VBox/InventoryInfo/MarginContainer/VBox/GridContainer/num_chr
 
+@onready var line_1: ColorRect = $VBox/MainInfo/MarginContainer/HBox/line
+@onready var line_2: ColorRect = $VBox/OtherInfo/MarginContainer/HBox/line2
+
 ## TODO: lmao i have two ways of doing initialize, either function or i just assign values xd
 ## ig in the longrun doing function is better since i can get the type hints from the function
 func initialize(new_inventory: PlayerInventory, new_dungeon_data: DungeonData) -> void:
 	inventory = new_inventory
 	dungeon_data = new_dungeon_data
-	call_deferred("_update_cycle_room")
+
+
+func _ready() -> void:
+	EventBus.level_loaded.connect(_update_cycle_room)
+	EventBus.level_loaded.connect(_on_game_started)
 
 
 func _process(_delta: float) -> void:
@@ -51,9 +58,6 @@ func _process(_delta: float) -> void:
 	label_fps.text = "FPS: " + str(Engine.get_frames_per_second())
 	label_orbs.text = "Orbs: " + str(inventory.mana_orbs)
 	label_enemies.text = "Enemies left: %d" % BaseEnemy.enemies_alive
-	
-	if current_lvl != dungeon_data.current_room: ## to reduce unnecessary computations
-		_update_cycle_room()
 
 
 func try_show_inventory() -> void:
@@ -64,14 +68,10 @@ func try_show_inventory() -> void:
 
 
 func _update_cycle_room() -> void:
-	current_lvl = dungeon_data.current_room
-	var offset: int = dungeon_data.cycle_room_progression
-	var shown_lvl: int = current_lvl % offset
-	if shown_lvl == 0:
-		shown_lvl = offset
-	
-	label_cycle_room.text = "Level: %d-%d" % [dungeon_data.current_cycle, shown_lvl]
-	label_preset.text = "Room: %s" %dungeon_data.chosen_preset.preset_name
+	label_cycle_room.text = "Level: %d-%d" % [dungeon_data.current_cycle, 
+				dungeon_data.current_room]
+	if dungeon_data.chosen_preset:
+		label_preset.text = "Room: %s" % dungeon_data.chosen_preset.preset_name
 
 
 func _update_rune_number() -> void:
@@ -85,3 +85,20 @@ func _update_rune_number() -> void:
 func _on_upgrade_stats_pressed() -> void:
 	EventBus.upgrade_stats_pressed.emit()
 	upgrade_stats_button.release_focus()
+
+
+func _on_main_hub_loaded() -> void:
+	inventory_info.hide()
+	line_1.hide()
+	label_cycle_room.hide()
+	line_2.hide()
+	label_enemies.hide()
+	label_preset.text = "Room: Hub"
+
+
+func _on_game_started() -> void:
+	if dungeon_data.chosen_preset:
+		label_cycle_room.show()
+		line_1.show()
+		label_enemies.show()
+		line_2.show()

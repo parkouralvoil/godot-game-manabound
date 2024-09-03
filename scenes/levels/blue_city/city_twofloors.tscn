@@ -1,0 +1,113 @@
+[gd_scene load_steps=10 format=3 uid="uid://bt83dqwnea6g6"]
+
+[ext_resource type="Script" path="res://scenes/levels/blue_city/level_manager.gd" id="1_c3gkj"]
+[ext_resource type="PackedScene" uid="uid://d23s3ceqy66ry" path="res://scenes/levels/test/test_parallax.tscn" id="2_01bcl"]
+[ext_resource type="PackedScene" uid="uid://bgvs1h3jaufow" path="res://scenes/levels/blue_city/tilemaps/tilemap_twofloors.tscn" id="3_sifh8"]
+[ext_resource type="Script" path="res://scenes/levels/holders/chest_rune_holder.gd" id="4_acdc8"]
+[ext_resource type="PackedScene" uid="uid://b4cdpgn1inhqq" path="res://scenes/interactables/chest_rune.tscn" id="5_bauf6"]
+[ext_resource type="Script" path="res://scenes/levels/holders/enemy_holder.gd" id="6_0gbnx"]
+[ext_resource type="PackedScene" uid="uid://cievadvfmo3xd" path="res://scenes/levels/level_world_environment.tscn" id="7_aue4u"]
+[ext_resource type="PackedScene" uid="uid://cc327ml5lr825" path="res://scenes/levels/door/exit_door.tscn" id="8_j6sx8"]
+[ext_resource type="PackedScene" uid="uid://ik5ko0nytiss" path="res://scenes/levels/door/start_door.tscn" id="9_sgw75"]
+
+[node name="city_warehouse" type="Node2D"]
+script = ExtResource("1_c3gkj")
+
+[node name="ParallaxBackground" parent="." instance=ExtResource("2_01bcl")]
+
+[node name="tilemap_twofloors" parent="." instance=ExtResource("3_sifh8")]
+
+[node name="ChestRuneHolder" type="Node2D" parent="."]
+script = ExtResource("4_acdc8")
+
+[node name="ChestRune1" parent="ChestRuneHolder" instance=ExtResource("5_bauf6")]
+position = Vector2(802, -140)
+
+[node name="ChestRune2" parent="ChestRuneHolder" instance=ExtResource("5_bauf6")]
+position = Vector2(1022, -140)
+
+[node name="ChestRune3" parent="ChestRuneHolder" instance=ExtResource("5_bauf6")]
+position = Vector2(1066, -140)
+
+[node name="ChestRune4" parent="ChestRuneHolder" instance=ExtResource("5_bauf6")]
+position = Vector2(766, -140)
+
+[node name="ChestRune5" parent="ChestRuneHolder" instance=ExtResource("5_bauf6")]
+position = Vector2(508, -140)
+
+[node name="ChestRune6" parent="ChestRuneHolder" instance=ExtResource("5_bauf6")]
+position = Vector2(467, -140)
+
+[node name="ChestRune7" parent="ChestRuneHolder" instance=ExtResource("5_bauf6")]
+position = Vector2(386, -380)
+
+[node name="ChestRune8" parent="ChestRuneHolder" instance=ExtResource("5_bauf6")]
+position = Vector2(428, -380)
+
+[node name="ChestRune9" parent="ChestRuneHolder" instance=ExtResource("5_bauf6")]
+position = Vector2(928, -380)
+
+[node name="ChestRune10" parent="ChestRuneHolder" instance=ExtResource("5_bauf6")]
+position = Vector2(970, -380)
+
+[node name="NormalEnemyHolder" type="Node2D" parent="."]
+script = ExtResource("6_0gbnx")
+
+[node name="spawn1" type="Marker2D" parent="NormalEnemyHolder"]
+position = Vector2(520, -650)
+
+[node name="spawn2" type="Marker2D" parent="NormalEnemyHolder"]
+position = Vector2(159, -424)
+
+[node name="spawn3" type="Marker2D" parent="NormalEnemyHolder"]
+position = Vector2(383, -261)
+
+[node name="spawn4" type="Marker2D" parent="NormalEnemyHolder"]
+position = Vector2(416, -293)
+
+[node name="spawn5" type="Marker2D" parent="NormalEnemyHolder"]
+position = Vector2(803, -245)
+
+[node name="spawn6" type="Marker2D" parent="NormalEnemyHolder"]
+position = Vector2(763, -623)
+
+[node name="spawn7" type="Marker2D" parent="NormalEnemyHolder"]
+position = Vector2(720, -586)
+
+[node name="spawn8" type="Marker2D" parent="NormalEnemyHolder"]
+position = Vector2(1018, -607)
+
+[node name="spawn9" type="Marker2D" parent="NormalEnemyHolder"]
+position = Vector2(798, -424)
+
+[node name="spawn10" type="Marker2D" parent="NormalEnemyHolder"]
+position = Vector2(496, -428)
+
+[node name="spawn11" type="Marker2D" parent="NormalEnemyHolder"]
+position = Vector2(955, -473)
+
+[node name="EliteEnemyHolder" type="Node2D" parent="."]
+script = ExtResource("6_0gbnx")
+
+[node name="elite1" type="Marker2D" parent="EliteEnemyHolder"]
+position = Vector2(883, -572)
+gizmo_extents = 40.0
+
+[node name="elite2" type="Marker2D" parent="EliteEnemyHolder"]
+position = Vector2(593, -256)
+gizmo_extents = 40.0
+
+[node name="elite3" type="Marker2D" parent="EliteEnemyHolder"]
+position = Vector2(347, -457)
+gizmo_extents = 40.0
+
+[node name="LevelWorldEnvironment" parent="." instance=ExtResource("7_aue4u")]
+
+[node name="ExitDoor" parent="." instance=ExtResource("8_j6sx8")]
+position = Vector2(287, -595)
+
+[node name="StartDoor" parent="." instance=ExtResource("9_sgw75")]
+position = Vector2(1133, -148)
+
+[node name="StartingPos" type="Marker2D" parent="."]
+position = Vector2(1129, -175)

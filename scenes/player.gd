@@ -101,7 +101,7 @@ func _process(_delta: float) -> void:
 		fake_arm_sprite.show()
 	
 	
-	if Input.is_action_just_pressed("tab"):
+	if Input.is_action_just_pressed("toggle_aim"):
 		PlayerInfo.auto_aim = !PlayerInfo.auto_aim
 
 
@@ -137,8 +137,3 @@ func on_buff_particles() -> void:
 		buff_particles.emitting = true
 	else:
 		buff_particles.emitting = false
-
-
-func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("cheat_menu"): ## TESTING
-		inventory.mana_orbs += 100000

@@ -19,7 +19,6 @@ class EnemyInfo:
 
 var scale_damage: float = 0.2 # PERCENTAGE!!
 var stack_detonate: int = 9
-var stack_multiply: int = 3
 
 var enemy_ref: Dictionary = {}
 
@@ -45,7 +44,7 @@ func apply_effect(HealthComp: EnemyHealthComponent, ep: float) -> void:
 	if enemy_ref.has(HealthComp):
 		var current_e: EnemyInfo = enemy_ref[HealthComp]
 		current_e.crystal_stacks += 1
-		current_e.accumulated_dmg += ep/2
+		current_e.accumulated_dmg += ep
 		if current_e.timer.is_stopped():
 			current_e.timer.start()
 		if enemy_ref[HealthComp].crystal_stacks >= stack_detonate:
@@ -58,15 +57,12 @@ func detonate_crystalize(HealthComp: EnemyHealthComponent) -> void:
 		return
 	
 	enemy_ref[HealthComp].timer.stop()
-	var current_stacks: int = enemy_ref[HealthComp].crystal_stacks
-	var base_dmg: float = enemy_ref[HealthComp].accumulated_dmg
 	
-	@warning_ignore("integer_division")
-	var final_dmg: float = (base_dmg * clampi(current_stacks/stack_multiply, 1, 3))
+	var final_dmg: float = damage_equation(enemy_ref[HealthComp])
 	ParticlesQueueNode.set_property_restart(particles_process_mat,
 			particles_textures,
 			one_shot,
-			amount * max(current_stacks, 1),
+			amount * max(enemy_ref[HealthComp].crystal_stacks, 1),
 			explosiveness,
 			lifetime,
 			HealthComp.global_position,)
@@ -74,7 +70,7 @@ func detonate_crystalize(HealthComp: EnemyHealthComponent) -> void:
 		enemy_ref[HealthComp].crystal_stacks = 0
 		enemy_ref[HealthComp].accumulated_dmg = 0
 	
-	var text: String = "Crystalize x" + str(current_stacks)
+	var text: String = "Crystalize x" + str(enemy_ref[HealthComp].crystal_stacks)
 	HealthComp.spawn_dmg_number(text, CombatManager.params[CombatManager.Elements.ICE])
 	HealthComp.debuff_indicator.current_debuff = CombatManager.Debuffs.NONE
 	
@@ -82,3 +78,18 @@ func detonate_crystalize(HealthComp: EnemyHealthComponent) -> void:
 
 func delete_ref(HealthComp: EnemyHealthComponent) -> void:
 	enemy_ref.erase(HealthComp)
+
+
+func damage_equation(crystalized_info: EnemyInfo) -> float:
+	var stacks: int = crystalized_info.crystal_stacks
+	var base_dmg: float = crystalized_info.accumulated_dmg/3
+	
+	@warning_ignore("integer_division")
+	var dmg_multiplier: float = 1 + 0.25 * int(stacks/3)
+	
+	## accumulated_dmg = value of EP for stack
+	## final dmg = base * 1.5 at 9 stacks
+	
+	return base_dmg * max(1, dmg_multiplier)
+	
+	

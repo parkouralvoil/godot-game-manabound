@@ -16,7 +16,7 @@ func _ready() -> void:
 	assert(inventory)
 	initialize_hud_children()
 	print_debug("%s: initialize_hud_children done" % name)
-
+	
 
 func initialize_hud_children() -> void:
 	blood_overlay.initialize(player_info)

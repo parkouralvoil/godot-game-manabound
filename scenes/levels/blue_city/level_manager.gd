@@ -6,6 +6,8 @@ class_name LevelManager
 #signal exit_door_interacted ## this is state for when player goes through exit door
 ## emitted by exit door
 
+@export var combat_room: bool = true
+
 var room_preset: RoomPreset = null:
 	set(val):
 		room_preset = val
@@ -62,7 +64,7 @@ func _enemy_dead(type: BaseEnemy) -> void:
 func _level_is_cleared() -> void:
 	exit_door.open()
 	chest_rune_holder.open_all_chest_rune()
-	EventBus.level_cleared.emit()
+	EventBus.level_cleared.emit(combat_room)
 
 
 func _on_local_exit_door_interacted() -> void:

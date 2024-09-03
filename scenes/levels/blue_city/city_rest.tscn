@@ -1,0 +1,37 @@
+[gd_scene load_steps=9 format=3 uid="uid://dg8mvmb7h5m4t"]
+
+[ext_resource type="Script" path="res://scenes/levels/blue_city/level_manager.gd" id="1_spgcc"]
+[ext_resource type="PackedScene" uid="uid://d23s3ceqy66ry" path="res://scenes/levels/test/test_parallax.tscn" id="2_odiln"]
+[ext_resource type="PackedScene" uid="uid://c7bhxgmj0utcy" path="res://scenes/levels/blue_city/tilemaps/tilemap_cityRest.tscn" id="3_kw5v5"]
+[ext_resource type="Script" path="res://scenes/levels/holders/chest_rune_holder.gd" id="4_d8s8o"]
+[ext_resource type="Script" path="res://scenes/levels/holders/enemy_holder.gd" id="6_j1c72"]
+[ext_resource type="PackedScene" uid="uid://cievadvfmo3xd" path="res://scenes/levels/level_world_environment.tscn" id="7_t4ktx"]
+[ext_resource type="PackedScene" uid="uid://cc327ml5lr825" path="res://scenes/levels/door/exit_door.tscn" id="8_jjrnb"]
+[ext_resource type="PackedScene" uid="uid://ik5ko0nytiss" path="res://scenes/levels/door/start_door.tscn" id="9_qlajw"]
+
+[node name="city_rest" type="Node2D"]
+script = ExtResource("1_spgcc")
+
+[node name="ParallaxBackground" parent="." instance=ExtResource("2_odiln")]
+
+[node name="tilemap_cityRest" parent="." instance=ExtResource("3_kw5v5")]
+
+[node name="ChestRuneHolder" type="Node2D" parent="."]
+script = ExtResource("4_d8s8o")
+
+[node name="NormalEnemyHolder" type="Node2D" parent="."]
+script = ExtResource("6_j1c72")
+
+[node name="EliteEnemyHolder" type="Node2D" parent="."]
+script = ExtResource("6_j1c72")
+
+[node name="LevelWorldEnvironment" parent="." instance=ExtResource("7_t4ktx")]
+
+[node name="ExitDoor" parent="." instance=ExtResource("8_jjrnb")]
+position = Vector2(85, -52)
+
+[node name="StartDoor" parent="." instance=ExtResource("9_qlajw")]
+position = Vector2(340, -52)
+
+[node name="StartingPos" type="Marker2D" parent="."]
+position = Vector2(333, -75)

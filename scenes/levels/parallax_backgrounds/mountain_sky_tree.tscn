@@ -1,0 +1,42 @@
+[gd_scene load_steps=5 format=3 uid="uid://baksvorn8xwwc"]
+
+[ext_resource type="Texture2D" uid="uid://drfo5m6vvdosy" path="res://assets/background/summer 4_cloud/1.png" id="1_aa68a"]
+[ext_resource type="Texture2D" uid="uid://btr5edo34krxv" path="res://assets/background/summer 4_cloud/2.png" id="2_qp2k5"]
+[ext_resource type="Texture2D" uid="uid://delql4idh8aet" path="res://assets/background/summer 4_cloud/3.png" id="3_xwgeg"]
+[ext_resource type="Script" path="res://scenes/levels/parallax_backgrounds/parallax_preview_cam.gd" id="6_htswm"]
+
+[node name="cloud_tree" type="ParallaxBackground"]
+scale = Vector2(1.5, 1.5)
+transform = Transform2D(1.5, 0, 0, 1.5, 0, 0)
+scroll_base_offset = Vector2(0, -500)
+scroll_ignore_camera_zoom = true
+
+[node name="ParallaxLayer_Sky" type="ParallaxLayer" parent="."]
+motion_scale = Vector2(0, 0)
+motion_mirroring = Vector2(576, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer_Sky"]
+modulate = Color(0.917647, 0.690196, 1, 1)
+texture = ExtResource("1_aa68a")
+centered = false
+
+[node name="ParallaxLayer_green" type="ParallaxLayer" parent="."]
+motion_scale = Vector2(0.4, 0.4)
+motion_offset = Vector2(0, -30)
+motion_mirroring = Vector2(576, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer_green"]
+texture = ExtResource("2_qp2k5")
+centered = false
+
+[node name="ParallaxLayer_ground" type="ParallaxLayer" parent="."]
+motion_scale = Vector2(0.6, 0.6)
+motion_mirroring = Vector2(576, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer_ground"]
+texture = ExtResource("3_xwgeg")
+centered = false
+
+[node name="Camera2D" type="Camera2D" parent="."]
+enabled = false
+script = ExtResource("6_htswm")

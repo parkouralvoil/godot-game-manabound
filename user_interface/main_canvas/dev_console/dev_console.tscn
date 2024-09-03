@@ -1,0 +1,71 @@
+[gd_scene load_steps=2 format=3 uid="uid://b32nk7q2hof1i"]
+
+[ext_resource type="Script" path="res://user_interface/main_canvas/dev_console/dev_console.gd" id="1_puexl"]
+
+[node name="DevConsole" type="CanvasLayer"]
+process_mode = 3
+layer = 5
+script = ExtResource("1_puexl")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -188.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="background" type="ColorRect" parent="Control/MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
+color = Color(0.14902, 0.14902, 0.14902, 0.411765)
+
+[node name="VBox" type="VBoxContainer" parent="Control/MarginContainer"]
+layout_mode = 2
+
+[node name="line" type="ColorRect" parent="Control/MarginContainer/VBox"]
+custom_minimum_size = Vector2(0, 3)
+layout_mode = 2
+color = Color(0.192157, 0.192157, 0.192157, 1)
+
+[node name="Console" type="RichTextLabel" parent="Control/MarginContainer/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/normal_font_size = 12
+bbcode_enabled = true
+text = "[color=gray]Start of console
+extra newlines added here to make the output appear right above cmd[/color]
+
+
+"
+scroll_following = true
+
+[node name="TextInput" type="LineEdit" parent="Control/MarginContainer/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+placeholder_text = "Command: "
+
+[node name="exit" type="Button" parent="Control"]
+unique_name_in_owner = true
+layout_mode = 2
+offset_left = 570.0
+offset_top = -178.0
+offset_right = 612.0
+offset_bottom = -152.0
+theme_override_font_sizes/font_size = 13
+text = "Close"

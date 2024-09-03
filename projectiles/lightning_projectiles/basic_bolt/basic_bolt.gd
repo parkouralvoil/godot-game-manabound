@@ -4,7 +4,7 @@ extends Bullet
 
 func _on_area_entered(hurtbox: Area2D) -> void:
 	if hurtbox.has_method("hit"):
-		hurtbox.hit(damage, element)
+		hurtbox.hit(damage, element, ep) ## BRUH
 		spawn_impact_particles()
 	disappear()
 

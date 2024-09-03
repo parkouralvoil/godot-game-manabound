@@ -1,6 +1,7 @@
 extends Control
 class_name MenuManager
 
+@export var dev_console_enabled: bool = true
 
 var current_menu_opened: Control = null
 var level_up_available: bool
@@ -31,7 +32,7 @@ func _ready() -> void:
 	preset_choice_window.hide()
 
 
-func _input(event: InputEvent) -> void:
+func _unhandled_input(event: InputEvent) -> void:
 	if (event.is_action_pressed("shop_key") 
 			and current_menu_opened != team_info
 			and not preset_choice_window.visible):
@@ -41,6 +42,9 @@ func _input(event: InputEvent) -> void:
 	
 	if event.is_action_pressed("esc") and current_menu_opened:
 		close_menu()
+		
+	if event.is_action_pressed("console"):
+		DevConsole.visible = not DevConsole.visible
 
 
 func switch_current_menu(_menu: Control) -> void:

@@ -4,6 +4,6 @@
 
 [resource]
 script = ExtResource("1_ic5a7")
-health = 120.0
+health = 20.0
 mana_orbs = 60.0
 default_reload_time = 4.0

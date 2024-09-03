@@ -42,7 +42,7 @@ func _instantiate_enemy(info: RoomPreset.SpawnInfo) -> BaseEnemy:
 	var inst: BaseEnemy
 	match info.scene:
 		RoomPreset.LasercrystalScene:
-			inst = (info.scene).instantiate()
+			inst = (info.scene).instantiate() as Enemy_LaserCrystal
 			if RNG.roll_probability(0.4):
 				inst.horizontal = true
 		_:

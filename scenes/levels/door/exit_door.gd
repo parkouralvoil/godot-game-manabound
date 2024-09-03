@@ -7,8 +7,10 @@ var player_nearby: bool = false
 var is_open: bool = false
 var pressed: bool = false
 
-var closed_text: String = "ENEMIES STILL ALIVE!"
-var open_text: String = "Press E to enter"
+
+@export var starts_open: bool ## for rest rooms/ main hub
+@export var closed_text: String = "ENEMIES STILL ALIVE!"
+@export var open_text: String = "Press E to enter"
 
 var red_opaque: Color = Color(1, 0.5, 0.5, 1)
 
@@ -16,16 +18,18 @@ var green_fade: Color = Color(0.3, 0.8, 0.3, 0.2)
 var green_opaque: Color = Color(0.4, 1, 0.4, 1)
 
 
-@onready var level: LevelManager = owner ## this shows exit door CANNOT exist without being a child of level
 @onready var line_interact: Line2D = $Line2D_interact
-@onready var label_container: CenterContainer = $CenterContainer
-@onready var label: Label = $CenterContainer/Label
+@onready var label_container: PanelContainer = $PanelContainer
+@onready var label: Label = $PanelContainer/Label
+@onready var opened_door: Sprite2D = $opened_door
 
 
 func _ready() -> void:
 	line_interact.visible = false
 	label_container.visible = false
-	$opened_door.hide()
+	opened_door.hide()
+	if starts_open:
+		open()
 
 
 func _physics_process(_delta: float) -> void:
@@ -45,7 +49,7 @@ func open() -> void:
 	is_open = true
 	line_interact.visible = true
 	line_interact.default_color = green_opaque if player_nearby else green_fade
-	$opened_door.show()
+	opened_door.show()
 
 
 func _on_area_2d_playercheck_body_entered(body: Node2D) -> void:

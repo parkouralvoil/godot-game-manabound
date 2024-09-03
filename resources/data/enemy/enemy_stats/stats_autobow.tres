@@ -4,6 +4,6 @@
 
 [resource]
 script = ExtResource("1_acjyp")
-health = 100.0
+health = 150.0
 mana_orbs = 50.0
 default_reload_time = 1.0

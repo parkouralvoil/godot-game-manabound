@@ -5,7 +5,8 @@ extends Node
 signal camera_shake(strength: int) # emitted by player i think || used by camera
 
 ## UI and levels
-signal level_cleared() # emitted by level_manager || used by DungeonHolder, popup_indicator
+signal level_loaded() # emitted by main || used by game_info
+signal level_cleared(is_combat_room: bool) # emitted by level_manager || used by DungeonHolder, popup_indicator
 signal exit_door_interacted() # emitted by level_manager || used by DungeonHolder, UI
 
 
