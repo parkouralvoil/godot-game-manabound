@@ -21,8 +21,12 @@ source_geometry_group_name = &"navigation_polygon_source_group"
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_1woc7"]
 
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_s0ewg"]
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_acko7"]
+vertices = PackedVector2Array(8, 8, -8, 8, -8, -8, 8, -8)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)])
 source_geometry_group_name = &"navigation_polygon_source_group"
+agent_radius = 0.0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_10wn6"]
 texture = ExtResource("1_h5881")
@@ -175,7 +179,7 @@ texture = ExtResource("1_h5881")
 4:7/0 = 0
 4:7/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 4:7/0/physics_layer_0/angular_velocity = 0.0
-4:7/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_s0ewg")
+4:7/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_acko7")
 5:7/0 = 0
 5:7/0/occlusion_layer_0/polygon = SubResource("OccluderPolygon2D_8uu23")
 5:7/0/physics_layer_0/linear_velocity = Vector2(0, 0)

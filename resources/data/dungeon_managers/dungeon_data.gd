@@ -1,21 +1,16 @@
 extends Resource
 class_name DungeonData
 """
-- Area/Cycle info
-	- all room types available in each area of the dungeon
-	- types of enemies that can spawn
+- Dungeon (Cycle) info
 	- enemy HP scaling
 	- chest spawn rates (runes and items)
 - Level info
 	- which room to use
 	- what PRESET of enemies
-
-- on one hand, i need UI elems to know the current preset/lvl/area
-	- can work with below by having "current_preset"
-- on the other hand, i can move Area and Lvl info to DungeonHolder,
-	- DungeonData would just be a collection of area and lvl infos
-	- DungeonHolder would set the # of enemies, type of lvl, and # of chests
-	- before the level is added to the tree
+- Area info
+	- presets available
+	- normal rooms available
+	- dictates when rest and boss lvl is
 """
 
 ## DungeonHolder -> UI
@@ -32,15 +27,12 @@ signal preset_selected(preset: RoomPreset) # for loading next level with selecte
 @export var test_preset: RoomPreset
 @export var force_lvl_index: int = 99
 
-@export_category("Dungeon Data")
-@export var name: String = "Region"
-@export var NormalRooms: Array[PackedScene]
+@export_category("Dungeon")
+@export var dungeon_name: String = "Region"
+@export_category("Area Datas")
+@export var area_datas: Array[AreaData]
+var area: AreaData
 
-@export_category("Array Room Presets")
-@export var RestPresets: Array[RoomPreset] ## array of size 1
-@export var EasyPresets: Array[RoomPreset]
-@export var HardPresets: Array[RoomPreset]
-@export var BossPreset: Array[RoomPreset] ## array of size 1
 var available_presets: Array[RoomPreset]
 var chosen_preset: RoomPreset
 
@@ -52,7 +44,6 @@ var current_room: int = 0:
 	set(val):
 		current_room = maxi(0, val)
 var previous_level: PackedScene
-var cycle_room_progression: int = 10 ## FINAL: 10
 
 
 var enemy_HP_scaling: float = 0
@@ -76,7 +67,9 @@ var state_in_combat: bool = false:
 
 #region Cycle Functions
 func start_cycle() -> void:
-	available_presets = EasyPresets
+	assert(area_datas.size() > 0)
+	area = area_datas[0]
+	available_presets = area.EasyPresets
 	current_cycle = 1
 	game_started.emit()
 
@@ -104,18 +97,19 @@ func start_room() -> void:
 
 
 func go_next_room(new_preset: RoomPreset) -> void:
-	current_room += 1
-	print_debug("current room: %d" % current_room)
-	if current_room >= cycle_room_progression: 
+	if current_room >= area.boss_lvl: ## go to next area
 		current_cycle += 1
 		current_room = 1
-	
-	if current_cycle == 1 and current_room < 4:
-		available_presets = EasyPresets
-	elif current_room == 4 or current_room == 8:
-		available_presets = RestPresets
 	else:
-		available_presets = HardPresets
+		current_room += 1
+	#print_debug("current room: %d" % current_room)
+	
+	if current_room < area.rest_lvl:
+		available_presets = area.EasyPresets
+	elif current_room == area.rest_lvl or current_room == area.rest_lvl * 2:
+		available_presets = area.RestPresets
+	else:
+		available_presets = area.HardPresets
 	
 	#if current_room == 10:
 	#	available_presets = BossPreset
@@ -138,17 +132,18 @@ func _update_preset(_preset: RoomPreset) -> void:
 func get_level() -> PackedScene:
 	## elif current lvl is 4 or 9, return rest room
 	## chosen preset will handle boss, since boss is a preset
+	assert(area, "dungeon_data has no area_data")
 	if chosen_preset.room:
 		return chosen_preset.room
 	
-	var lvl_available: Array[PackedScene] = NormalRooms.duplicate(false)
+	var lvl_available: Array[PackedScene] = area.NormalRooms.duplicate(false)
 	## TODO: available rooms shuold remove the last room in NormalROoms
-	if force_lvl_index < NormalRooms.size():
+	if force_lvl_index < area.NormalRooms.size():
 		print_debug("FORCE LVL INDEX ON")
-		previous_level = NormalRooms[force_lvl_index]
-		return NormalRooms[force_lvl_index]
+		previous_level = area.NormalRooms[force_lvl_index]
+		return area.NormalRooms[force_lvl_index]
 	
-	if NormalRooms.size() > 1 and previous_level != null:
+	if area.NormalRooms.size() > 1 and previous_level != null:
 		lvl_available.erase(previous_level)
 		previous_level = lvl_available.pick_random()
 	else:
@@ -164,7 +159,7 @@ func get_preset_choices() -> Array[RoomPreset]: ## always return array of size 2
 	#print("copy available = %s" % str(copy_available))
 	if copy_available.size() > 0:
 		choices[0] = copy_available.pick_random()
-	if copy_available == RestPresets:
+	if copy_available == area.RestPresets:
 		return choices
 	if not force_test_preset:
 		if copy_available.size() - 1 > 0:

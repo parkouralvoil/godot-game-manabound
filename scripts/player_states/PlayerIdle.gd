@@ -15,9 +15,11 @@ func Enter() -> void:
 	p.circle_indicator.hide()
 	p.PlayerInfo.current_state = PlayerInfoResource.States.IDLE
 
+
 func Exit() -> void:
 	if !p:
 		return
+
 
 func Update(_delta: float) -> void:
 	if !p:
@@ -27,6 +29,7 @@ func Update(_delta: float) -> void:
 	if not p.PlayerInfo.basic_attacking:
 		flip_sprite()
 	play_anim()
+
 
 func Physics_Update(delta: float) -> void:
 	if !p:
@@ -64,24 +67,25 @@ func _unhandled_input(event: InputEvent) -> void: ## since control UIs need to t
 	
 	if event.is_action_pressed("right_click") and p.PlayerInfo.can_charge:
 		state_transition.emit(self, "PlayerStance")
-	
 
 
 func flip_sprite() -> void:
 	if p.velocity.x >= 1:
-		p.anim_sprite.scale.x = 1
+		p.PlayerInfo.facing_direction = 1
 	elif p.velocity.x <= -1:
-		p.anim_sprite.scale.x = -1
+		p.PlayerInfo.facing_direction = -1
+
 
 func play_anim() -> void:
 	if p.velocity == Vector2.ZERO and p.is_on_floor():
-		p.anim_sprite.play("idle")
+		p.PlayerInfo.current_anim = "idle" #p.anim_sprite.play("idle")
 	elif p.velocity.y > abs(p.velocity.x) and p.velocity.y > 225:
-		p.anim_sprite.play("fall")
+		p.PlayerInfo.current_anim = "fall" #p.anim_sprite.play("fall")
 	elif p.PlayerInfo.basic_attacking:
-		p.anim_sprite.play("stance")
+		p.PlayerInfo.current_anim = "stance" #p.anim_sprite.play("stance")
 	else:
-		p.anim_sprite.play("air")
+		p.PlayerInfo.current_anim = "air" #p.anim_sprite.play("air")
+
 
 func horizontal_deaccel(_delta: float) -> void:
 	if p.velocity.x >= 0:

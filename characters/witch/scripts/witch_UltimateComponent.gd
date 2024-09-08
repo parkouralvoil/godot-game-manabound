@@ -18,10 +18,11 @@ func _process(delta: float) -> void:
 		PlayerInfo.ult_recoil = true
 		if PlayerInfo.input_ult:
 			character.sprite_look_at(PlayerInfo.mouse_direction)
-			character.wpn_sprite.modulate = Color(0.5, 2, 2)
+			character.wpn.modulate = Color(0.5, 2, 2)
 		if Input.is_action_just_released("right_click"): # this the best way
 			spend_charge()
-			character.wpn_sprite.modulate = Color(1, 1, 1)
+			character.wpn.modulate = Color(1, 1, 1)
+
 
 func spawn_area_effect(area_effect: PackedScene, target_pos: Vector2) -> void:
 	assert(area_effect, "missing proj")

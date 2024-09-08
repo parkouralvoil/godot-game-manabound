@@ -120,10 +120,11 @@ func do_swing_animation(downwards: bool) -> void:
 	character.sprite_look_at(PlayerInfo.aim_direction)
 	await get_tree().physics_frame
 	var iniital_rot: float
-	melee_arm.transform = character.arm_sprite.transform
 	var aim_angle: float = PlayerInfo.aim_direction.angle()
 	var duration: float
 	var anim_slash_rot: float
+	
+	get_parent().scale = character.anim_sprite.scale ## this is so budots
 	## swing sword downwards
 	if downwards:
 		if PlayerInfo.aim_direction.x > 0:

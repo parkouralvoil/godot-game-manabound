@@ -3,6 +3,8 @@ class_name CharacterResource ## aka CharacterData
 
 @export_category("For Player")
 @export var character_scene: PackedScene
+
+@export_category("unused, transfered to character.tscn")
 @export var spriteframes: SpriteFrames
 @export var sprite_arm: Texture
 
@@ -13,7 +15,7 @@ class_name CharacterResource ## aka CharacterData
 
 @export var char_name: String = "woopsies"
 
-## this is a fuckin HACK
+## this is a HACK
 ## stuff needed for TeamInfoGrp
 @export var stats: CharacterStats
 ## NOTICE: all text related stuff (names, descriptions) need to be transferred to a csv
@@ -25,18 +27,7 @@ var selected: bool = false
 
 ## purpose of CharacterResource is mainly for easier player communication
 
-## this presents a dilemma for (character_stats) which needs have character_name as well
-"""
-in the end, PLAYER_HOLDER is the one that informs the panel_char about the portrait
-
-so it also makes sense to make PLAYER_HOLDER inform the team_info_grp about the stree's and frame
-
-character_manager only focuses on
-- character to player interactions
-- loading the 3 characters
-
-player_holder is the dependency injector 
-"""
+## this presents a minor dilemma for (character_stats) which needs have character_name as well
 
 func _ready() -> void:
 	assert(character_scene, "missing AM")

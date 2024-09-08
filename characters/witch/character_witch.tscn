@@ -1,9 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://dkyhb7voldou1"]
+[gd_scene load_steps=14 format=3 uid="uid://dkyhb7voldou1"]
 
 [ext_resource type="Script" path="res://characters/CharacterClass.gd" id="1_j0poo"]
 [ext_resource type="Script" path="res://characters/witch/scripts/witch_AbilityManager.gd" id="2_xnkl8"]
 [ext_resource type="Resource" uid="uid://do0figvykvlcp" path="res://characters/witch/witch_stats.tres" id="2_ygtrj"]
 [ext_resource type="Script" path="res://characters/witch/scripts/witch_AttackComponent.gd" id="3_b0vy3"]
+[ext_resource type="SpriteFrames" uid="uid://dsg0xmjs2wxlj" path="res://characters/witch/visuals/witch_spriteframes.tres" id="3_gmwro"]
 [ext_resource type="PackedScene" uid="uid://b8740u5oqxn7d" path="res://projectiles/ice_projectiles/ice_spike/ice_spike.tscn" id="5_of8tm"]
 [ext_resource type="Script" path="res://characters/witch/scripts/witch_UltimateComponent.gd" id="5_wu24y"]
 [ext_resource type="AudioStream" uid="uid://bwauhc5i6k2iq" path="res://assets/audio/sfx/character_sfx/ice_cast_kr.mp3" id="6_khbv3"]
@@ -16,6 +17,23 @@
 [node name="character_Witch" type="Node2D"]
 script = ExtResource("1_j0poo")
 stats = ExtResource("2_ygtrj")
+
+[node name="CharacterAnimationSprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = ExtResource("3_gmwro")
+animation = &"stance"
+
+[node name="arm" type="Sprite2D" parent="CharacterAnimationSprite"]
+z_index = 2
+position = Vector2(-5, 2)
+texture = ExtResource("9_khmxg")
+offset = Vector2(5, -2)
+
+[node name="weapon" type="Sprite2D" parent="CharacterAnimationSprite/arm"]
+modulate = Color(1.2, 1.2, 2, 1)
+z_index = -1
+position = Vector2(1, 13)
+rotation = 2.35619
+texture = ExtResource("10_37iad")
 
 [node name="AbilityManager" type="Node2D" parent="."]
 script = ExtResource("2_xnkl8")
@@ -43,16 +61,3 @@ script = ExtResource("7_jgtmk")
 
 [node name="ammo_regen" type="Timer" parent="AbilityManager/Ammo"]
 one_shot = true
-
-[node name="Sprite2D_arm" type="Sprite2D" parent="."]
-z_index = 2
-position = Vector2(-5, 2)
-texture = ExtResource("9_khmxg")
-offset = Vector2(5, -2)
-
-[node name="Sprite2D_wpn" type="Sprite2D" parent="Sprite2D_arm"]
-modulate = Color(1.2, 1.2, 2, 1)
-z_index = -1
-position = Vector2(1, 13)
-rotation = 2.35619
-texture = ExtResource("10_37iad")

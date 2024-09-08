@@ -19,9 +19,11 @@ func Enter() -> void:
 	p.PlayerInfo.input_ult = false
 	p.PlayerInfo.input_attack = false
 
+
 func Exit() -> void:
 	if !p:
 		return
+
 
 func Update(_delta: float) -> void:
 	if !p:
@@ -32,6 +34,7 @@ func Update(_delta: float) -> void:
 	
 	flip_sprite()
 	play_anim()
+
 
 func Physics_Update(_delta: float) -> void:
 	if !p:
@@ -48,16 +51,18 @@ func Physics_Update(_delta: float) -> void:
 	
 	p.move_and_slide()
 
+
 func flip_sprite() -> void:
 	if p.velocity.x >= 1:
-		p.anim_sprite.scale.x = 1
+		p.PlayerInfo.facing_direction = 1
 	elif p.velocity.x <= -1:
-		p.anim_sprite.scale.x = -1
+		p.PlayerInfo.facing_direction = -1
+
 
 func play_anim() -> void:
 	if abs(p.velocity.y) > abs(p.velocity.x) and p.velocity.y > 225:
-		p.anim_sprite.play("fall")
+		p.PlayerInfo.current_anim = "fall" #p.anim_sprite.play("fall")
 	elif Input.is_action_pressed("space"):
-		p.anim_sprite.play("stance")
+		p.PlayerInfo.current_anim = "stance" #p.anim_sprite.play("stance")
 	else:
-		p.anim_sprite.play("air")
+		p.PlayerInfo.current_anim = "air" #p.anim_sprite.play("air")

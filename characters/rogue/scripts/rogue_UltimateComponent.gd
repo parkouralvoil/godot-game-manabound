@@ -18,10 +18,10 @@ func _process(_delta: float) -> void:
 	if character.stats.charge >= character.stats.MAX_CHARGE:
 		if PlayerInfo.input_ult:
 			character.sprite_look_at(PlayerInfo.mouse_direction)
-			character.wpn_sprite.modulate = Color(2, 0.4, 0.4)
+			character.wpn.modulate = Color(2, 0.4, 0.4)
 		if Input.is_action_just_released("right_click"): # this the best way
 			spend_charge()
-			character.wpn_sprite.modulate = Color(1, 1, 1)
+			character.wpn.modulate = Color(1, 1, 1)
 
 
 func spawn_impact(dmg_impact: PackedScene) -> void:

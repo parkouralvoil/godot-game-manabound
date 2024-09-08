@@ -1,8 +1,12 @@
 extends CanvasLayer
 
+var dungeon_data: DungeonData
+var selected_team_info: SelectedTeamInfo
+var inventory: PlayerInventory
+
+#region DevConsole inner variables
 var history: Array[String] = []
 var history_index: int = -1
-
 
 ## Where in the list of possible matches are we
 var autocomplete_index: int = 0
@@ -13,6 +17,7 @@ var last_input_was_autocomplete: bool = false
 ## Store matches of the last autocomplete so that the search doesn't have to be repeated
 ## when Tab is pressed multiple times
 var prev_autocomplete_matches: Array = []
+#endregion
 
 @onready var console: RichTextLabel = %Console
 @onready var text_input: LineEdit = %TextInput
@@ -27,7 +32,7 @@ func _ready() -> void:
 			.map(func(x: Dictionary) -> String: return x.name)
 			.filter(func(method_name: String) -> bool: return method_name[0] != '_')
 			)
-	print_debug(autocomplete_methods)
+	#print_debug(autocomplete_methods)
 	hide()
 
 
@@ -82,7 +87,7 @@ func _input(event: InputEvent) -> void:
 	# Track if the user has hit any inputs that should reset the autocomplete index
 	if event.is_action_pressed("_dev_console_autocomplete") and text_input.has_focus():
 		_autocomplete()
-		print_debug("pressed tab")
+		#print_debug("pressed tab")
 	last_input_was_autocomplete = Input.is_action_just_pressed('_dev_console_autocomplete') \
 	or Input.is_action_just_released('_dev_console_autocomplete') \
 	and text_input.has_focus()
@@ -93,7 +98,7 @@ func _autocomplete() -> void:
 	var match_string: String = text_input.text
 	# Run through matches for the last string if the user is stepping through autocomplete options
 	if last_input_was_autocomplete:
-		print_debug("== 0")
+		#print_debug("last input was autocomplete")
 		matches = prev_autocomplete_matches
 	# Step through all possible matches if no input string
 	elif match_string.length() == 0:
@@ -119,7 +124,7 @@ func _autocomplete() -> void:
 		autocomplete_index = 0
 	# Populate console input with match
 	text_input.text = matches[autocomplete_index] + "()"
-	print_debug("NICE")
+	#print_debug("NICE")
 	text_input.caret_column = 100000
 
 
@@ -130,15 +135,116 @@ func _print_console(string: String) -> void:
 ## functions usable in console
 ## Reload the current scene
 func restart_main() -> String:
+	## BUG: spawned enemies (drones) are not queue_freed
 	get_tree().reload_current_scene() ## it complete restarts the scene, cuz im using the main scene now
-	return "restart_main()\n\t[color=#7FFFD4]- Main scene restarted.[/color]"
+	return "{function}\n\t[color=#7FFFD4]- {msg}[/color]".format({
+			"function":"restart_main()",
+			"msg":"Main scene restarted.",
+	})
 
 
 ## ideas (keep them simple pls)
-"""
-- set_current_char_stats("ATK", 1)
-- give_runes("ATK", 1)
-- give_mana_orbs(5000)
-- set_dungeon_level(6)
-- skip_dungeon_level()
-"""
+func give_mana_orbs(num: int) -> String:
+	if inventory:
+		inventory.mana_orbs += num
+		return "{function}\n\t[color=#7FFFD4]- {msg}[/color]".format({
+				"function":"give_mana_orbs(%d)" % num,
+				"msg":"Received %d orbs." % num,
+		})
+	else:
+		return "{function}\n\t[color=red]- {msg}[/color]".format({
+				"function":"give_mana_orbs(%d)" % num,
+				"msg":"CODE FAILED: player_inventory is null.",
+		})
+
+
+func give_runes(rune: String, num: int) -> String:
+	var _rune: String = rune.to_upper()
+	if _rune == "ATK":
+		inventory.rune_ATK += num
+	elif _rune == "EP":
+		inventory.rune_EP += num
+	elif _rune == "HP":
+		inventory.rune_HP += num
+	elif _rune == "CHR":
+		inventory.rune_CHR += num
+	else: ## wrong rune
+		return "{function}\n\t[color=red]- {msg}[/color]".format({
+			"function":"give_runes(\"%s\", %d)" % [_rune, num],
+			"msg":"CODE FAILED: unknown rune: \"%s\"" % _rune,
+		})
+	
+	return "{function}\n\t[color=#7FFFD4]- {msg}[/color]".format({
+			"function":"give_runes(\"%s\", %d)" % [_rune, num],
+			"msg":"Received %d %s runes." % [num, _rune],
+	})
+
+
+func skip_dungeon_level() -> String:
+	if dungeon_data.current_room == 0: ## warning
+		return "{function}\n\t[color=yellow]- {msg}[/color]".format({
+			"function":"skip_dungeon_level()",
+			"msg":"Cannot skip level since player is in main hub.",
+		})
+	else:
+		EventBus.exit_door_interacted.emit()
+		return "{function}\n\t[color=#7FFFD4]- {msg}[/color]".format({
+				"function":"skip_dungeon_level()",
+				"msg":"Level skipped.",
+		})
+
+
+func set_dungeon_level(lvl: int) -> String:
+	if dungeon_data.current_room == 0: ## warning
+		return "{function}\n\t[color=yellow]- {msg}[/color]".format({
+				"function":"set_dungeon_level(%d)" % lvl,
+				"msg":"Cannot set level since player is in main hub.",
+		})
+	elif lvl < 1 or lvl > 10: ## out of bouunds
+		return "{function}\n\t[color=yellow]- {msg}[/color]".format({
+				"function":"set_dungeon_level(%d)" % lvl,
+				"msg":"Cannot set level to %d since it is not within [1, 10]." % lvl,
+		})
+	else:
+		dungeon_data.current_room = lvl
+		return "{function}\n\t[color=#7FFFD4]- {msg}[/color]".format({
+				"function":"set_dungeon_level(%d)" % lvl,
+				"msg":"Level set to %d." % lvl,
+		})
+
+
+func set_char_stats(index: int, stat: String, num: int) -> String:
+	var _stat: String = stat.to_upper()
+	if not selected_team_info:
+		return "{function}\n\t[color=red]- {msg}[/color]".format({
+				"function":"set_char_stats(%d, %s, %d)" % [index, _stat, num],
+				"msg":"CODE FAILED: selected_team_info is null",
+		})
+	
+	var team_size: int = selected_team_info.char_data_array.size()
+	if index < 0 or index >= team_size:
+		return "{function}\n\t[color=red]- {msg}[/color]".format({
+				"function":"set_char_stats(index=%d, %s, num=%d)" % [index, _stat, num],
+				"msg":"CODE FAILED: index %d not within [0, %d]" % [index, team_size],
+		})
+	
+	var c: CharacterResource = selected_team_info.char_data_array[index]
+	var char_stats: CharacterStats = c.stats
+	if _stat == "ATK":
+		char_stats.ATK = num
+	elif _stat == "EP":
+		char_stats.EP = num
+	elif _stat == "HP":
+		char_stats.MAX_HP = num
+		char_stats.HP = num
+	elif _stat == "CHR":
+		char_stats.CHR = num
+	else:
+		return "{function}\n\t[color=red]- {msg}[/color]".format({
+				"function":"set_char_stats(%d, %s, %d)" % [index, _stat, num],
+				"msg":"CODE FAILED: Unknown stat: %s" % _stat,
+		})
+	return "{function}\n\t[color=#7FFFD4]- {msg}[/color]".format({
+			"function":"set_char_stats(%d, %s, %d)" % [index, _stat, num],
+			"msg":"%s's %s stat set to %d" % [c.char_name, _stat, num],
+	})

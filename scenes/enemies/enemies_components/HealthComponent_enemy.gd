@@ -60,6 +60,12 @@ func damage_received(damage: float, new_elem: CombatManager.Elements, ep: float 
 		e.make_impact()
 		e.queue_free()
 
+## required for dev_console's skip_dungeon_level()
+func _notification(what: int) -> void:
+	if(what == NOTIFICATION_PREDELETE):
+		if not is_dead: ## not dead, since enemyholder would handle it
+			BaseEnemy.enemies_alive -= 1
+
 
 func produce_energy(procs: float) -> void:
 	EventBus.energy_gen_from_enemy_got_hit.emit(procs)

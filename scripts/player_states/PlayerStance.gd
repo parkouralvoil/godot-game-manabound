@@ -50,12 +50,13 @@ func Physics_Update(_delta: float) -> void:
 		state_transition.emit(self, "PlayerIdle")
 	p.move_and_slide()
 
+
 func flip_sprite() -> void:
 	if p.PlayerInfo.aim_direction.x > 0: ## ensure this is same as condition for aim_node in player's code
-		p.anim_sprite.scale.x = 1
+		p.PlayerInfo.facing_direction = 1
 	else:
-		p.anim_sprite.scale.x = -1
+		p.PlayerInfo.facing_direction = -1
+
 
 func play_anim() -> void:
-	if p.anim_sprite.animation != "stance":
-		p.anim_sprite.play("stance")
+	p.PlayerInfo.current_anim = "stance" #p.anim_sprite.play("stance")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://c35wulwk6e3b4"]
+[gd_scene load_steps=35 format=3 uid="uid://c35wulwk6e3b4"]
 
 [ext_resource type="Script" path="res://scenes/player.gd" id="1_ob8fa"]
 [ext_resource type="Script" path="res://scripts/player_components/HurtboxComponent_player.gd" id="2_w8hq5"]
@@ -18,8 +18,6 @@
 [ext_resource type="AudioStream" uid="uid://cgvlbkvq11os4" path="res://assets/audio/sfx/sound_effects/zapsplat_cartoon_whoosh_swipe_fast_grab_dash_003_74744.mp3" id="11_ut6yg"]
 [ext_resource type="Script" path="res://scripts/player_components/DirectionIndicator.gd" id="11_vqh4r"]
 [ext_resource type="Texture2D" uid="uid://dy3hkciev768l" path="res://assets/sprite_UI/red_circle.png" id="12_i87yh"]
-[ext_resource type="SpriteFrames" uid="uid://n8tavxox3kua" path="res://characters/knight/visuals/knight_spriteframes.tres" id="13_7cy21"]
-[ext_resource type="Texture2D" uid="uid://3jkuw6bwhk01" path="res://characters/knight/visuals/knight_arm.tres" id="14_iiaao"]
 [ext_resource type="Script" path="res://scripts/StateMachine.gd" id="15_mooub"]
 [ext_resource type="Script" path="res://scripts/player_states/PlayerIdle.gd" id="16_01hcy"]
 [ext_resource type="Resource" uid="uid://cw7j4j6w6f1yk" path="res://resources/data/selected_team_info/selected_team_info.tres" id="16_fh5ne"]
@@ -213,16 +211,6 @@ p = NodePath("..")
 modulate = Color(0, 0.211765, 0.117647, 0.509804)
 scale = Vector2(0.1, 0.1)
 texture = ExtResource("12_i87yh")
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-sprite_frames = ExtResource("13_7cy21")
-animation = &"fall"
-
-[node name="RemoteTransform2D" type="RemoteTransform2D" parent="AnimatedSprite2D"]
-position = Vector2(-5, 2)
-
-[node name="fake_arm" type="Sprite2D" parent="AnimatedSprite2D"]
-texture = ExtResource("14_iiaao")
 
 [node name="FSM" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("15_mooub")

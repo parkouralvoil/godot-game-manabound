@@ -1,8 +1,9 @@
-[gd_scene load_steps=16 format=3 uid="uid://despujxox3cs7"]
+[gd_scene load_steps=17 format=3 uid="uid://despujxox3cs7"]
 
 [ext_resource type="Script" path="res://characters/CharacterClass.gd" id="1_2hkjo"]
 [ext_resource type="Script" path="res://characters/knight/scripts/knight_AbilityManager.gd" id="2_e4ef6"]
 [ext_resource type="Resource" uid="uid://fbbdhnnk7q74" path="res://characters/knight/knight_stats.tres" id="2_vf3hs"]
+[ext_resource type="SpriteFrames" uid="uid://n8tavxox3kua" path="res://characters/knight/visuals/knight_spriteframes.tres" id="3_eatwp"]
 [ext_resource type="Script" path="res://characters/knight/scripts/knight_AttackComponent.gd" id="4_k4d5v"]
 [ext_resource type="PackedScene" uid="uid://b53veg8003vdg" path="res://projectiles/lightning_projectiles/homing_missile/homing_missile.tscn" id="5_1iwx0"]
 [ext_resource type="PackedScene" uid="uid://durs4s4d2quml" path="res://projectiles/lightning_projectiles/basic_bolt/basic_bolt.tscn" id="5_jahx0"]
@@ -22,6 +23,22 @@ region = Rect2(96, 96, 32, 32)
 [node name="character_knight" type="Node2D"]
 script = ExtResource("1_2hkjo")
 stats = ExtResource("2_vf3hs")
+
+[node name="CharacterAnimationSprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = ExtResource("3_eatwp")
+animation = &"stance"
+
+[node name="arm" type="Sprite2D" parent="CharacterAnimationSprite"]
+z_index = 2
+position = Vector2(-5, 2)
+texture = SubResource("AtlasTexture_bls2u")
+offset = Vector2(5, -2)
+
+[node name="weapon" type="Sprite2D" parent="CharacterAnimationSprite/arm"]
+z_index = -1
+position = Vector2(3, 16)
+rotation = 1.5708
+texture = ExtResource("12_8ugk7")
 
 [node name="AbilityManager" type="Node2D" parent="."]
 script = ExtResource("2_e4ef6")
@@ -53,15 +70,3 @@ script = ExtResource("9_1ohy4")
 [node name="ammo_regen" type="Timer" parent="AbilityManager/Ammo"]
 wait_time = 0.4
 one_shot = true
-
-[node name="Sprite2D_arm" type="Sprite2D" parent="."]
-z_index = 2
-position = Vector2(-5, 2)
-texture = SubResource("AtlasTexture_bls2u")
-offset = Vector2(5, -2)
-
-[node name="Sprite2D_wpn" type="Sprite2D" parent="Sprite2D_arm"]
-z_index = -1
-position = Vector2(3, 16)
-rotation = 1.5708
-texture = ExtResource("12_8ugk7")

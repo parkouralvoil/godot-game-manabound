@@ -83,3 +83,6 @@ func _update_children_data() -> void:
 	if menu_manager:
 		menu_manager.initialize_menus(main_dungeon_data, main_selected_team_info,
 				main_player_inventory) 
+	DevConsole.dungeon_data = main_dungeon_data
+	DevConsole.selected_team_info = main_selected_team_info
+	DevConsole.inventory = main_player_inventory

@@ -25,12 +25,7 @@ var selected_target: Area2D = null
 var boost_index: int = 0
 var boost_node_size: int = 0
 
-#onready var
-@onready var anim_sprite: AnimatedSprite2D = $AnimatedSprite2D
-@onready var arm_node: RemoteTransform2D = $AnimatedSprite2D/RemoteTransform2D
-var arm_sprite: Sprite2D
-var wpn_sprite: Sprite2D
-@onready var fake_arm_sprite: Sprite2D = $AnimatedSprite2D/fake_arm
+##onready var
 @onready var hurtbox: Area2D = $AreaComponents/Hurtbox
 @onready var boost_particles: Array[GPUParticles2D] = []
 @onready var boost_sfx: AudioStreamPlayer2D = $BoostSpecialEffects/boost_sfx
@@ -78,29 +73,6 @@ func _process(_delta: float) -> void:
 			else:
 				PlayerInfo.can_charge = true
 	
-	## arm rotation
-	if arm_sprite != null:
-		if PlayerInfo.aim_direction.x > 0:
-			arm_node.rotation = PlayerInfo.aim_direction.angle() - PI/2
-		else:
-			arm_node.rotation = -(PlayerInfo.aim_direction.angle() - (PI/2))
-		
-	if (anim_sprite.animation == "fall" 
-			or anim_sprite.animation == "air" 
-			or (PlayerInfo.melee_character and PlayerInfo.basic_attacking)):
-		arm_sprite.hide()
-		wpn_sprite.hide()
-		fake_arm_sprite.hide()
-	elif PlayerInfo.basic_attacking or PlayerInfo.input_ult:
-		arm_sprite.show()
-		wpn_sprite.show()
-		fake_arm_sprite.hide()
-	else:
-		arm_sprite.hide()
-		wpn_sprite.hide()
-		fake_arm_sprite.show()
-	
-	
 	if Input.is_action_just_pressed("toggle_aim"):
 		PlayerInfo.auto_aim = !PlayerInfo.auto_aim
 
@@ -119,17 +91,9 @@ func emit_boost_effects(boost_dir: Vector2) -> void:
 		0, 
 		boost_node_size + 1)
 
+
 func camera_shake(strength: int) -> void:
 	EventBus.camera_shake.emit(strength)
-
-#func update_player_info() -> void: ## can streamline this
-	#PlayerInfo.aim_direction = aim_direction
-	#PlayerInfo.mouse_direction = mouse_direction
-
-func character_changed_anim() -> void:
-	if anim_sprite:
-		var tween: Tween = create_tween()
-		tween.tween_property(anim_sprite, "modulate", Color(1,1,1,1), 0.4).from(Color(0.4,0.4,1, 0.6))
 
 
 func on_buff_particles() -> void:

@@ -22,7 +22,7 @@ anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -188.0
+offset_top = -152.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_constants/margin_left = 5
@@ -32,7 +32,7 @@ theme_override_constants/margin_bottom = 5
 [node name="background" type="ColorRect" parent="Control/MarginContainer"]
 layout_mode = 2
 mouse_filter = 2
-color = Color(0.14902, 0.14902, 0.14902, 0.411765)
+color = Color(0.0470588, 0.0470588, 0.0470588, 0.945098)
 
 [node name="VBox" type="VBoxContainer" parent="Control/MarginContainer"]
 layout_mode = 2
@@ -62,10 +62,11 @@ placeholder_text = "Command: "
 
 [node name="exit" type="Button" parent="Control"]
 unique_name_in_owner = true
+modulate = Color(0.184314, 0.921569, 0.941176, 1)
 layout_mode = 2
-offset_left = 570.0
-offset_top = -178.0
-offset_right = 612.0
-offset_bottom = -152.0
+offset_left = 568.0
+offset_top = -143.0
+offset_right = 610.0
+offset_bottom = -117.0
 theme_override_font_sizes/font_size = 13
 text = "Close"

@@ -1,24 +1,13 @@
-[gd_resource type="Resource" script_class="DungeonData" load_steps=11 format=3 uid="uid://cnqflwm13q5h2"]
+[gd_resource type="Resource" script_class="DungeonData" load_steps=4 format=3 uid="uid://cnqflwm13q5h2"]
 
-[ext_resource type="Resource" uid="uid://dh0s11cxw5qqb" path="res://resources/data/dungeon_managers/blueCity/presets/Calm.tres" id="1_niru0"]
-[ext_resource type="Resource" uid="uid://c5u2hkuq1dvd3" path="res://resources/data/dungeon_managers/blueCity/presets/Normal.tres" id="2_ipw1w"]
-[ext_resource type="PackedScene" uid="uid://dvekt06510ha5" path="res://scenes/levels/blue_city/city_warehouse.tscn" id="3_428ps"]
-[ext_resource type="Resource" uid="uid://pjyqa0vee8t0" path="res://resources/data/dungeon_managers/blueCity/presets/Risky.tres" id="3_ch4dh"]
+[ext_resource type="Resource" uid="uid://jmm8hearhswm" path="res://resources/data/dungeon_managers/blueCity/areas/area_city.tres" id="1_ofhcx"]
 [ext_resource type="Script" path="res://resources/data/dungeon_managers/dungeon_data.gd" id="4_pfx3o"]
-[ext_resource type="Resource" uid="uid://dbiyi6sqm4qs7" path="res://resources/data/dungeon_managers/blueCity/presets/Swarm.tres" id="4_tig00"]
-[ext_resource type="Resource" uid="uid://dn3dx4sgyxvm8" path="res://resources/data/dungeon_managers/blueCity/presets/Elite.tres" id="5_slprj"]
 [ext_resource type="Resource" uid="uid://dcer0bfs8bw54" path="res://resources/data/dungeon_managers/blueCity/presets/Test.tres" id="7_5o87i"]
-[ext_resource type="PackedScene" uid="uid://bt83dqwnea6g6" path="res://scenes/levels/blue_city/city_twofloors.tscn" id="7_8lmwp"]
-[ext_resource type="Resource" uid="uid://bt31wp1frvhxs" path="res://resources/data/dungeon_managers/blueCity/presets/CityRest.tres" id="8_di422"]
 
 [resource]
 script = ExtResource("4_pfx3o")
 force_test_preset = true
 test_preset = ExtResource("7_5o87i")
 force_lvl_index = 99
-name = "City"
-NormalRooms = Array[PackedScene]([ExtResource("7_8lmwp"), ExtResource("3_428ps")])
-RestPresets = Array[Resource("res://resources/data/dungeon_managers/room_preset.gd")]([ExtResource("8_di422")])
-EasyPresets = Array[Resource("res://resources/data/dungeon_managers/room_preset.gd")]([ExtResource("1_niru0"), ExtResource("2_ipw1w"), ExtResource("3_ch4dh")])
-HardPresets = Array[Resource("res://resources/data/dungeon_managers/room_preset.gd")]([ExtResource("5_slprj"), ExtResource("2_ipw1w"), ExtResource("3_ch4dh"), ExtResource("4_tig00")])
-BossPreset = Array[Resource("res://resources/data/dungeon_managers/room_preset.gd")]([])
+dungeon_name = "Region"
+area_datas = Array[Resource("res://resources/data/dungeon_managers/area_data.gd")]([ExtResource("1_ofhcx")])

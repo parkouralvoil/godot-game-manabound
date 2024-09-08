@@ -21,8 +21,8 @@ func _ready() -> void:
 	for i in range(data_array.size()):
 		stored_chars[i] = data_array[i].character_scene.instantiate()
 		add_child(stored_chars[i])
-		stored_chars[i].arm_sprite.hide()
-		stored_chars[i].wpn_sprite.hide()
+		stored_chars[i].arm.hide()
+		stored_chars[i].anim_sprite.hide()
 	#change_character(0) player calls this on its ready func instead
 
 
@@ -53,32 +53,28 @@ func input_change_char(num: int) -> void:
 
 
 func change_character(num: int) -> void:
-	if p.arm_sprite != null:
-		p.arm_sprite.hide()
-		p.wpn_sprite.hide()
+	#if p.arm_sprite != null:
+		#p.arm_sprite.hide()
+		#p.wpn_sprite.hide()
+	if current_char:
+		current_char.anim_sprite.hide()
 	var _char := data_array[num]
 	var _AM := stored_chars[num]
 	current_char = _AM
-	current_char_spriteframes = _char.spriteframes
-	current_char_fake_arm = _char.sprite_arm
+	current_char.anim_sprite.show()
+	p.PlayerInfo.char_current_anim_sprite = current_char.anim_sprite
 	current_char.global_position = self.global_position
 	p.PlayerInfo.melee_character = current_char.stats.melee ## tells PlayerInfo if current char is a melee char
 	
 	_AM.enabled = true
 	_char.selected = true
 	
-	p.anim_sprite.sprite_frames = current_char_spriteframes
-	p.arm_node.remote_path = current_char.arm_sprite.get_path()
 	p.PlayerInfo.current_charge_type = current_char.stats.charge_type
-	p.arm_sprite = current_char.arm_sprite
-	p.wpn_sprite = current_char.wpn_sprite
-	
-	p.fake_arm_sprite.texture = current_char_fake_arm
 	
 	current_char.update_player_info()
 	
 	t_change_char.start()
-	p.character_changed_anim()
+	current_char.character_changed_anim()
 	
 	for i in range(data_array.size()):
 		if i != num and stored_chars[i] != null:
@@ -95,12 +91,4 @@ func set_player_velocity(velocity: Vector2) -> void:
 func apply_player_cam_shake(strength: int) -> void:
 	if p:
 		p.camera_shake(strength)
-
-
-func sprite_look_at(direction: Vector2) -> void:
-	if p:
-		if direction.x > 0:
-			p.anim_sprite.scale.x = 1
-		else:
-			p.anim_sprite.scale.x = -1
 #endregion

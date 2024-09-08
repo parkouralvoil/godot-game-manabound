@@ -25,6 +25,7 @@ func initialize_info(character_data: CharacterResource, index: int) -> void:
 func _process(_delta: float) -> void:
 	if not tracked_char_resource or not tracked_stats:
 		push_warning("TeamHud's panel (%s) is missing tracked_char_resource/stats" % name)
+		queue_free()
 		return
 	
 	update_health()

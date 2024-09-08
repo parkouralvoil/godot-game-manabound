@@ -58,6 +58,14 @@ var displayed_MAX_CHARGE: float
 var displayed_HP: float
 var displayed_MAX_HP: float
 
+## player to character:
+var current_anim: String = "idle"
+var facing_direction: int = 1
+
+## character to player
+var char_current_anim_sprite: AnimatedSprite2D
+var char_current_sprite: Texture
+
 ## temporary buff effects:
 var buff_raw_atk: float = 0:
 	set(value):

@@ -1,8 +1,9 @@
-[gd_scene load_steps=16 format=3 uid="uid://dyb83ujyxhk2b"]
+[gd_scene load_steps=17 format=3 uid="uid://dyb83ujyxhk2b"]
 
 [ext_resource type="Script" path="res://characters/CharacterClass.gd" id="1_h1y8r"]
 [ext_resource type="Script" path="res://characters/rogue/scripts/rogue_AbilityManager.gd" id="2_hppn7"]
 [ext_resource type="Resource" uid="uid://4m7ffonja3cx" path="res://characters/rogue/rogue_stats.tres" id="2_umd7v"]
+[ext_resource type="SpriteFrames" uid="uid://d1jev7rih8fxr" path="res://characters/rogue/visuals/rogue_spriteframes.tres" id="3_kwca4"]
 [ext_resource type="Texture2D" uid="uid://d0b5yrantkkqm" path="res://characters/rogue/visuals/rogue_arm.tres" id="3_p6yb1"]
 [ext_resource type="Script" path="res://characters/rogue/scripts/rogue_AttackComponent.gd" id="4_u8b7v"]
 [ext_resource type="PackedScene" uid="uid://dn3gk3lgb0iqk" path="res://projectiles/fire_projectiles/fire_blade/fire_blade.tscn" id="5_ua7bq"]
@@ -80,6 +81,22 @@ _data = {
 script = ExtResource("1_h1y8r")
 stats = ExtResource("2_umd7v")
 
+[node name="CharacterAnimationSprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = ExtResource("3_kwca4")
+animation = &"stance"
+
+[node name="arm" type="Sprite2D" parent="CharacterAnimationSprite"]
+z_index = 2
+position = Vector2(-5, 2)
+texture = ExtResource("3_p6yb1")
+offset = Vector2(5, -2)
+
+[node name="weapon" type="Sprite2D" parent="CharacterAnimationSprite/arm"]
+z_index = -1
+position = Vector2(1, 16)
+rotation = 2.35619
+texture = ExtResource("5_x463i")
+
 [node name="AbilityManager" type="Node2D" parent="."]
 script = ExtResource("2_hppn7")
 
@@ -124,18 +141,5 @@ script = ExtResource("9_1qn3a")
 
 [node name="ammo_regen" type="Timer" parent="AbilityManager/Ammo"]
 one_shot = true
-
-[node name="Sprite2D_arm" type="Sprite2D" parent="."]
-visible = false
-z_index = 2
-position = Vector2(-5, 2)
-texture = ExtResource("3_p6yb1")
-offset = Vector2(5, -2)
-
-[node name="Sprite2D_wpn" type="Sprite2D" parent="Sprite2D_arm"]
-z_index = -1
-position = Vector2(1, 16)
-rotation = 2.35619
-texture = ExtResource("5_x463i")
 
 [connection signal="timeout" from="AbilityManager/Ultimate/buff_duration" to="AbilityManager/Ultimate" method="_on_buff_duration_timeout"]

@@ -29,7 +29,7 @@ func _process(delta: float) -> void:
 			spend_charge()
 		else:
 			decay_charge(delta)
-		character.wpn_sprite.modulate = Color(1, 1, 1)
+		character.wpn.modulate = Color(1, 1, 1)
 
 func shoot(bullet: PackedScene, direction: Vector2) -> void:
 	assert(bullet, "missing ref")
@@ -76,13 +76,13 @@ func raise_charge(delta: float) -> void:
 	
 	if character.stats.charge >= 100:
 		charge_tier = 2
-		character.wpn_sprite.modulate = Color(4, 1, 0.4)
+		character.wpn.modulate = Color(4, 1, 0.4)
 	elif character.stats.charge >= 50:
 		charge_tier = 1
-		character.wpn_sprite.modulate = Color(2, 2, 0.4)
+		character.wpn.modulate = Color(2, 2, 0.4)
 	else:
 		charge_tier = 0
-		character.wpn_sprite.modulate = Color(1, 1, 1)
+		character.wpn.modulate = Color(1, 1, 1)
 
 
 func decay_charge(delta: float) -> void:
@@ -91,10 +91,10 @@ func decay_charge(delta: float) -> void:
 	
 	if character.stats.charge >= 50:
 		charge_tier = 1
-		character.wpn_sprite.modulate = Color(2, 2, 0.4)
+		character.wpn.modulate = Color(2, 2, 0.4)
 	else:
 		charge_tier = 0
-		character.wpn_sprite.modulate = Color(2, 2, 0.4)
+		character.wpn.modulate = Color(2, 2, 0.4)
 
 
 func spend_charge() -> void:
