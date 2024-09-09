@@ -190,6 +190,7 @@ _dev_console_autocomplete={
 2d_physics/layer_6="enemy_projectile_hitbox"
 2d_physics/layer_7="moving_entity_collision"
 2d_physics/layer_8="player_collectible"
+2d_physics/layer_9="player_interactable"
 
 [physics]
 

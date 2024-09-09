@@ -1,6 +1,8 @@
 extends Resource
 class_name CharacterResource ## aka CharacterData
 
+signal selected_changed()
+
 @export_category("For Player")
 @export var character_scene: PackedScene
 
@@ -23,7 +25,10 @@ class_name CharacterResource ## aka CharacterData
 @export var basic_atk_name: String
 @export var ult_name: String
 
-var selected: bool = false
+var selected: bool = false:
+	set(val):
+		selected = val
+		selected_changed.emit()
 
 ## purpose of CharacterResource is mainly for easier player communication
 

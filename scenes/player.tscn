@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://c35wulwk6e3b4"]
+[gd_scene load_steps=37 format=3 uid="uid://c35wulwk6e3b4"]
 
 [ext_resource type="Script" path="res://scenes/player.gd" id="1_ob8fa"]
 [ext_resource type="Script" path="res://scripts/player_components/HurtboxComponent_player.gd" id="2_w8hq5"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://c6sl5r1r7eng1" path="res://scripts/player_components/afterimage.tscn" id="5_hni55"]
 [ext_resource type="Script" path="res://scripts/player_components/CharacterManager.gd" id="6_g8flh"]
 [ext_resource type="Texture2D" uid="uid://brgsvft0urgcs" path="res://assets/sprite_projectiles/bullet_pixel_Red.png" id="6_k26py"]
+[ext_resource type="Script" path="res://scripts/player_components/Interact.gd" id="6_nsbg4"]
 [ext_resource type="AudioStream" uid="uid://hm7es17x1vwu" path="res://assets/audio/sfx/player_hit.mp3" id="7_j8wvk"]
 [ext_resource type="Material" uid="uid://d2ddwhentkleq" path="res://resources/particles/boost_particles.tres" id="7_ou7dw"]
 [ext_resource type="Script" path="res://scripts/player_components/boost_particles.gd" id="8_nmrq4"]
@@ -35,6 +36,9 @@ radius = 201.04
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_khpku"]
 radius = 80.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8fkqa"]
+radius = 60.0
 
 [sub_resource type="Gradient" id="Gradient_de2bk"]
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
@@ -136,6 +140,25 @@ script = ExtResource("5_g1vtf")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AreaComponents/OrbCollector"]
 shape = SubResource("CircleShape2D_khpku")
 
+[node name="Interact" type="Area2D" parent="AreaComponents"]
+collision_layer = 0
+collision_mask = 256
+monitorable = false
+script = ExtResource("6_nsbg4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AreaComponents/Interact"]
+shape = SubResource("CircleShape2D_8fkqa")
+debug_color = Color(0.819608, 0.341176, 0.556863, 0.419608)
+
+[node name="UpdateClosest" type="Timer" parent="AreaComponents/Interact"]
+wait_time = 0.5
+autostart = true
+
+[node name="Line2D" type="Line2D" parent="AreaComponents/Interact"]
+points = PackedVector2Array(0, 0, 0, 5)
+width = 1.0
+default_color = Color(0.737255, 0.709804, 0.427451, 1)
+
 [node name="BuffParticles" type="GPUParticles2D" parent="."]
 z_index = 1
 emitting = false
@@ -231,4 +254,7 @@ p = NodePath("../..")
 [connection signal="area_entered" from="AreaComponents/TargetLock" to="AreaComponents/TargetLock" method="_on_area_entered"]
 [connection signal="timeout" from="AreaComponents/TargetLock/update_target" to="AreaComponents/TargetLock" method="_on_update_target_timeout"]
 [connection signal="area_entered" from="AreaComponents/OrbCollector" to="AreaComponents/OrbCollector" method="_on_area_entered"]
+[connection signal="area_entered" from="AreaComponents/Interact" to="AreaComponents/Interact" method="_on_area_entered"]
+[connection signal="area_exited" from="AreaComponents/Interact" to="AreaComponents/Interact" method="_on_area_exited"]
+[connection signal="timeout" from="AreaComponents/Interact/UpdateClosest" to="AreaComponents/Interact" method="_on_update_closest_timeout"]
 [connection signal="timeout" from="PlayerHit/iframe_cd" to="PlayerHit" method="_on_iframe_cd_timeout"]

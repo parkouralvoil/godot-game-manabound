@@ -1,8 +1,9 @@
-[gd_scene load_steps=14 format=3 uid="uid://dkyhb7voldou1"]
+[gd_scene load_steps=15 format=3 uid="uid://dkyhb7voldou1"]
 
 [ext_resource type="Script" path="res://characters/CharacterClass.gd" id="1_j0poo"]
 [ext_resource type="Script" path="res://characters/witch/scripts/witch_AbilityManager.gd" id="2_xnkl8"]
 [ext_resource type="Resource" uid="uid://do0figvykvlcp" path="res://characters/witch/witch_stats.tres" id="2_ygtrj"]
+[ext_resource type="Texture2D" uid="uid://q2syp5evlell" path="res://characters/witch/visuals/witch_window.tres" id="3_2rhuo"]
 [ext_resource type="Script" path="res://characters/witch/scripts/witch_AttackComponent.gd" id="3_b0vy3"]
 [ext_resource type="SpriteFrames" uid="uid://dsg0xmjs2wxlj" path="res://characters/witch/visuals/witch_spriteframes.tres" id="3_gmwro"]
 [ext_resource type="PackedScene" uid="uid://b8740u5oqxn7d" path="res://projectiles/ice_projectiles/ice_spike/ice_spike.tscn" id="5_of8tm"]
@@ -17,6 +18,7 @@
 [node name="character_Witch" type="Node2D"]
 script = ExtResource("1_j0poo")
 stats = ExtResource("2_ygtrj")
+character_window = ExtResource("3_2rhuo")
 
 [node name="CharacterAnimationSprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = ExtResource("3_gmwro")

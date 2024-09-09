@@ -40,8 +40,10 @@ func spawn_area_effect(area_effect: PackedScene, target_pos: Vector2) -> void:
 	get_tree().root.add_child(effect_instance)
 
 func raise_charge(delta: float) -> void:
-	character.stats.charge = min(character.stats.MAX_CHARGE, 
-		character.stats.charge + character.stats.CHR * delta)
+	var s: CharacterStats = character.stats
+	s.charge = min(s.MAX_CHARGE, s.charge + (
+			s.base_charge_rate * (s.CHR/100) * delta))
+
 
 func spend_charge() -> void:
 	spawn_area_effect(FrostNovaScene, get_global_mouse_position())

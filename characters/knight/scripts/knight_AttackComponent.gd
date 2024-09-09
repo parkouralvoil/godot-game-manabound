@@ -20,7 +20,7 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	var can_shoot: bool = PlayerInfo.current_state != PlayerInfoResource.States.STANCE
 	
-	if !character.enabled:
+	if !character.enabled or character.is_dead:
 		return
 	
 	if !t_recoil.is_stopped():

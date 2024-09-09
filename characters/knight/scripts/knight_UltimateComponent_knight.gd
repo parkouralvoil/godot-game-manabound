@@ -16,7 +16,7 @@ func _ready() -> void:
 	pass
 
 func _process(delta: float) -> void:
-	if !character.enabled:
+	if !character.enabled or character.is_dead:
 		decay_charge(delta)
 		return
 	
@@ -71,13 +71,14 @@ func shoot_extra(bullet: PackedScene, direction: Vector2) -> void:
 
 
 func raise_charge(delta: float) -> void:
-	character.stats.charge = min(character.stats.MAX_CHARGE, 
-		character.stats.charge + character.stats.CHR * delta)
+	var s: CharacterStats = character.stats
+	s.charge = min(s.MAX_CHARGE, s.charge + (
+			s.base_charge_rate * (s.CHR/100) * delta))
 	
-	if character.stats.charge >= 100:
+	if s.charge >= 100:
 		charge_tier = 2
 		character.wpn.modulate = Color(4, 1, 0.4)
-	elif character.stats.charge >= 50:
+	elif s.charge >= 50:
 		charge_tier = 1
 		character.wpn.modulate = Color(2, 2, 0.4)
 	else:

@@ -1,7 +1,17 @@
 extends Node2D
 class_name Character
 
-const PlayerInfo: PlayerInfoResource = preload("res://resources/data/player_info/player_info.tres")
+## const (constants) are for its the same for all instances
+const PlayerInfo: PlayerInfoResource = preload(
+			"res://resources/data/player_info/player_info.tres")
+const DownedCharacterScene: PackedScene = preload(
+			"res://scenes/interactables/downed_character/downed_character.tscn")
+
+signal character_died ## for CM
+
+## exports are for when it has to be unique for this instance
+@export var stats: CharacterStats
+@export var character_window: Texture ## for downed_character texture
 
 @onready var anim_sprite: AnimatedSprite2D = $CharacterAnimationSprite
 @onready var arm: Sprite2D = $CharacterAnimationSprite/arm
@@ -14,23 +24,25 @@ const PlayerInfo: PlayerInfoResource = preload("res://resources/data/player_info
 ## since char_data is the one that holds reference to this scene
 
 var enabled: bool = false ## managed by char manager
-
-@export var stats: CharacterStats
+var is_dead: bool = false
 
 
 func _ready() -> void:
 	## for current UI, tho honestly i can optimize this by making panel_char give info to current UI noh
+	assert(stats)
+	assert(character_window)
 	stats.max_HP_changed.connect(_on_stats_updated)
 	stats.max_ammo_changed.connect(_on_stats_updated)
 	stats.max_charge_changed.connect(_on_stats_updated)
+	stats.HP_changed.connect(_on_HP_changed)
 	
 	await get_tree().process_frame
 	stats.reset_stats()
-	print("%s has %0.2f EP" % [name, stats.EP])
+	#print_debug("%s has %0.2f EP" % [name, stats.EP])
 
 
 func _process(_delta: float) -> void:
-	if !enabled:
+	if !enabled or is_dead:
 		return
 	
 	arm_updater()
@@ -55,6 +67,33 @@ func update_player_info() -> void: ## called by character manager maybe?
 	PlayerInfo.displayed_MAX_AMMO = stats.MAX_AMMO
 	PlayerInfo.displayed_MAX_HP = stats.MAX_HP
 	PlayerInfo.displayed_MAX_CHARGE = stats.MAX_CHARGE
+
+
+func _on_HP_changed() -> void:
+	if stats.HP <= 0 and not is_dead:
+		is_dead = true
+		anim_sprite.hide()
+		spawn_downed_char()
+		character_died.emit()
+
+
+func spawn_downed_char() -> void:
+	var inst: DownedCharacter = DownedCharacterScene.instantiate()
+	
+	#print_debug(inst)
+	inst.top_level = true ## NOTE this is important, otherwise it would move alongside char
+	inst.global_position = global_position
+	inst.linked_character = self ## this can be made into a signal, but this works too so
+	inst.x_direction = PlayerInfo.facing_direction
+	inst.texture = character_window
+	
+	call_deferred("add_child", inst)
+
+
+func revive() -> void: ## called by downed_char
+	if is_dead:
+		stats.HP = 1
+		is_dead = false
 
 
 #region Transfer: (AM) > CM > Player

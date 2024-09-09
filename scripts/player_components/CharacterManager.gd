@@ -23,6 +23,7 @@ func _ready() -> void:
 		add_child(stored_chars[i])
 		stored_chars[i].arm.hide()
 		stored_chars[i].anim_sprite.hide()
+		stored_chars[i].character_died.connect(_on_character_died)
 	#change_character(0) player calls this on its ready func instead
 
 
@@ -48,7 +49,9 @@ func _process(_delta: float) -> void:
 
 
 func input_change_char(num: int) -> void:
-	if stored_chars[num] != null and current_char != stored_chars[num]:
+	if (stored_chars[num] != null 
+			and current_char != stored_chars[num]
+			and not stored_chars[num].is_dead):
 		change_character(num)
 
 
@@ -92,3 +95,17 @@ func apply_player_cam_shake(strength: int) -> void:
 	if p:
 		p.camera_shake(strength)
 #endregion
+
+
+func _on_character_died() -> void:
+	p.controls_disabled = true
+	t_change_char.start()
+	await t_change_char.timeout
+	
+	for i in range(stored_chars.size()):
+		if not stored_chars[i].is_dead:
+			change_character(i)
+			p.controls_disabled = false
+			return
+	
+	print_debug("TODO: add gameover when no remaining character is alive.")

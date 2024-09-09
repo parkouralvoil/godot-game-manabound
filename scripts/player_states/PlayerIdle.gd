@@ -26,6 +26,7 @@ func Update(_delta: float) -> void:
 		return
 	#if p.velocity != Vector2.ZERO:
 	
+	
 	if not p.PlayerInfo.basic_attacking:
 		flip_sprite()
 	play_anim()
@@ -33,6 +34,10 @@ func Update(_delta: float) -> void:
 
 func Physics_Update(delta: float) -> void:
 	if !p:
+		return
+	
+	if p.controls_disabled:
+		p.velocity = Vector2.ZERO
 		return
 	
 	if not p.PlayerInfo.basic_attacking:
@@ -53,6 +58,9 @@ func Physics_Update(delta: float) -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void: ## since control UIs need to take click
+	if p.controls_disabled:
+		return
+	
 	if Input.is_action_pressed("space"): #prepare to boost
 		state_transition.emit(self, "PlayerMove")
 		p.PlayerInfo.basic_attacking = false
@@ -89,6 +97,6 @@ func play_anim() -> void:
 
 func horizontal_deaccel(_delta: float) -> void:
 	if p.velocity.x >= 0:
-			p.velocity.x = max(p.velocity.x - air_deaccel * 1 * _delta, 0)
+		p.velocity.x = max(p.velocity.x - air_deaccel * 1 * _delta, 0)
 	if p.velocity.x < 0:
 		p.velocity.x = min(p.velocity.x - air_deaccel * -1 * _delta, 0)

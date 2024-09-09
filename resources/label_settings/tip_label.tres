@@ -1,0 +1,7 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://bo0v4fgba3vq4"]
+
+[ext_resource type="FontFile" uid="uid://b7bhxk05x7pwi" path="res://assets/fonts/aseprite-remix.ttf" id="1_x2da6"]
+
+[resource]
+font = ExtResource("1_x2da6")
+font_size = 7

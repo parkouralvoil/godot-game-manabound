@@ -19,14 +19,13 @@ var green_opaque: Color = Color(0.4, 1, 0.4, 1)
 
 
 @onready var line_interact: Line2D = $Line2D_interact
-@onready var label_container: PanelContainer = $PanelContainer
-@onready var label: Label = $PanelContainer/Label
+@onready var label: Label = $Label
 @onready var opened_door: Sprite2D = $opened_door
 
 
 func _ready() -> void:
 	line_interact.visible = false
-	label_container.visible = false
+	label.visible = false
 	opened_door.hide()
 	if starts_open:
 		open()
@@ -57,7 +56,7 @@ func _on_area_2d_playercheck_body_entered(body: Node2D) -> void:
 		player_nearby = true
 		line_interact.visible = true
 		line_interact.default_color = red_opaque if not is_open else green_opaque
-		label_container.visible = true
+		label.visible = true
 		label.text = closed_text if not is_open else open_text
 
 
@@ -66,5 +65,5 @@ func _on_area_2d_playercheck_body_exited(body: Node2D) -> void:
 		player_nearby = false
 		line_interact.visible = false if not is_open else true
 		line_interact.default_color = red_opaque if not is_open else green_fade
-		label_container.visible = false
+		label.visible = false
 		label.text = closed_text if not is_open else open_text

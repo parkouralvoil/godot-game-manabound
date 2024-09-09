@@ -25,7 +25,7 @@ var rune_CHR: int = 0:
 var HP_increase: int = 1
 var ATK_increase: int = 3
 var EP_increase: int = 5
-var CHR_increase: int = 2
+var CHR_increase: int = 10
 
 ## TEMP: gonna have inventory handle upgrading stats for now
 ## ideally, it'd be responsibility of UpgradeModel, but im still thinkin

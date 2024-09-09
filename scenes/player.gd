@@ -24,6 +24,7 @@ var selected_target: Area2D = null
 
 var boost_index: int = 0
 var boost_node_size: int = 0
+var controls_disabled: int = false ## when character dies and respawning, set this to true
 
 ##onready var
 @onready var hurtbox: Area2D = $AreaComponents/Hurtbox
@@ -43,7 +44,7 @@ func _ready() -> void:
 			boost_particles.append(i)
 			boost_node_size += 1
 	
-	PlayerInfo.changed_buff_raw_atk.connect(on_buff_particles)
+	PlayerInfo.changed_buff_raw_atk.connect(_on_buff_particles)
 
 
 func _process(_delta: float) -> void:
@@ -96,7 +97,7 @@ func camera_shake(strength: int) -> void:
 	EventBus.camera_shake.emit(strength)
 
 
-func on_buff_particles() -> void:
+func _on_buff_particles() -> void:
 	if PlayerInfo.buff_raw_atk > 0:
 		buff_particles.emitting = true
 	else:

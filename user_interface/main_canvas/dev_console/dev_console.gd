@@ -248,3 +248,26 @@ func set_char_stats(index: int, stat: String, num: int) -> String:
 			"function":"set_char_stats(%d, %s, %d)" % [index, _stat, num],
 			"msg":"%s's %s stat set to %d" % [c.char_name, _stat, num],
 	})
+
+
+func kill_char(index: int) -> String:
+	if not selected_team_info:
+		return "{function}\n\t[color=red]- {msg}[/color]".format({
+				"function":"kill_char(%d)" % index,
+				"msg":"CODE FAILED: selected_team_info is null",
+		})
+	
+	var team_size: int = selected_team_info.char_data_array.size()
+	if index < 0 or index >= team_size:
+		return "{function}\n\t[color=red]- {msg}[/color]".format({
+				"function":"kill_char(index=%d)" % index,
+				"msg":"CODE FAILED: index %d not within [0, %d]" % [index, team_size],
+		})
+	
+	var c: CharacterResource = selected_team_info.char_data_array[index]
+	var char_stats: CharacterStats = c.stats
+	char_stats.HP = 0
+	return "{function}\n\t[color=#7FFFD4]- {msg}[/color]".format({
+			"function":"kill_char(%d)" % index,
+			"msg":"%s's HP set to 0." % [c.char_name],
+	})

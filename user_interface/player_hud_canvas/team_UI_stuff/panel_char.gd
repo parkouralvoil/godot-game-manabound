@@ -1,23 +1,29 @@
 extends PanelContainer
 class_name Panel_Char
 
+# var tracked_character: Character = null ## this is only needed for retrieving stats, which 
+# CharacterResource now contains
+var tracked_char_resource: CharacterResource = null
+var tracked_stats: CharacterStats = null
+
+var color_selected := Color(1, 1, 1, 1)
+var color_off_field := Color(1, 1, 1, 0.5)
+var color_dead := Color(1, 0.3, 0.3, 0.8)
+
 @onready var sprite_portrait: TextureRect = $CharPortrait
 @onready var char_name: Label = $HBoxContainer/VBoxContainer_info/Label_name
 @onready var health: Label = $HBoxContainer/VBoxContainer_info/Label_health
 @onready var ammo: Label = $HBoxContainer/VBoxContainer_info/Label_ammo
 @onready var charge: Label = $HBoxContainer/VBoxContainer_info/Label_charge
 
-# var tracked_character: Character = null ## this is only needed for retrieving stats, which 
-# CharacterResource now contains
-var tracked_char_resource: CharacterResource = null
-var tracked_stats: CharacterStats = null
-
-
 func initialize_info(character_data: CharacterResource, index: int) -> void:
 	sprite_portrait.texture = character_data.sprite_portrait
 	
 	tracked_char_resource = character_data
 	tracked_stats = character_data.stats
+	
+	tracked_char_resource.selected_changed.connect(_update_panel_status)
+	tracked_stats.HP_changed.connect(_update_panel_status)
 	
 	char_name.text = "[%s] %s" % [str(index), character_data.char_name]
 
@@ -31,11 +37,6 @@ func _process(_delta: float) -> void:
 	update_health()
 	update_ammo()
 	update_charge()
-	
-	if not tracked_char_resource.selected:
-		modulate = Color(1, 1, 1, 0.5)
-	else:
-		modulate = Color(1, 1, 1, 1)
 
 
 func update_health() -> void:
@@ -76,3 +77,15 @@ func update_charge() -> void:
 		charge.modulate = Color(1, 1, 1, 0.8)
 	else:
 		charge.modulate = Color(0.6, 0.6, 0.6, 0.8)
+
+
+func _update_panel_status() -> void:
+	if not tracked_stats:
+		return
+	
+	if tracked_stats.HP <= 0:
+		modulate = color_dead
+	elif tracked_char_resource.selected:
+		modulate = color_selected
+	else:
+		modulate = color_off_field

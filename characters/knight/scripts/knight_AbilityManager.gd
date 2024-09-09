@@ -51,15 +51,14 @@ var skill_basicAtk_double: bool = false ## right node 2A
 @onready var Ultimate: Knight_UltimateComponent = $Ultimate
 @onready var Ammo: Knight_AmmoComponent = $Ammo
 
-## Stats scaling
-@onready var base_max_ammo: int = stats.MAX_AMMO ## MUST NOT BE CHANGED AGAIN
-@onready var base_CHR: float = stats.CHR
+## Stats scaling (i need += so no more of this)
 
 ## variables to make skill tree easier to track:
 @onready var level_basicAtk_ammo: int = 0: ## left node 1
 	set(level):
-		level_basicAtk_ammo = level
-		stats.MAX_AMMO = base_max_ammo + (scale_ammo * level)
+		if level > level_basicAtk_ammo:
+			level_basicAtk_ammo = level
+			stats.MAX_AMMO += scale_ammo
 
 @onready var level_basicAtk_burst: int = 0: ## left node 2B
 	set(level):
@@ -78,8 +77,9 @@ var skill_basicAtk_double: bool = false ## right node 2A
 
 @onready var level_ult_chargeRate: int = 0: ## right node 2B
 	set(level):
-		level_ult_chargeRate = level
-		stats.CHR = base_CHR + (scale_CHR * level)
+		if level > level_ult_chargeRate:
+			level_ult_chargeRate = level
+			stats.CHR += scale_CHR
 
 
 func _ready() -> void:

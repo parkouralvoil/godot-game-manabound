@@ -5,7 +5,9 @@ class_name CharacterStats
 @export var initial_MAX_HP: int = 5
 @export var initial_ATK: float = 10
 @export var initial_EP: float = 0 ## Elemental Profiency
-@export var initial_CHR: float = 25 ## base charge rate, 
+@export_category("Base Charge Rate (scaled by CHR)")
+@export var base_charge_rate: float = 25 ## base charge rate, 
+var initial_CHR: float = 100
 
 var MAX_HP: int = initial_MAX_HP:
 	set(value):
@@ -26,7 +28,10 @@ var CHR: float = initial_CHR:
 		stats_changed.emit()
 
 ## Dynamic stats, they change frequently
-var HP: int
+var HP: int:
+	set(val):
+		HP = val
+		HP_changed.emit()
 var ammo: int
 var charge: float = 0
 
@@ -69,6 +74,7 @@ signal max_charge_changed
 signal max_ammo_changed
 
 signal stats_changed
+signal HP_changed ## to see if char should die
 
 func reset_stats() -> void: ## called by character scene
 	MAX_HP = initial_MAX_HP

@@ -6,5 +6,5 @@
 [resource]
 script = ExtResource("1_ehfrw")
 type = 0
-chance = 1.0
+chance = 0.0
 texture = ExtResource("2_n56st")

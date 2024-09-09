@@ -9,6 +9,8 @@ signal level_loaded() # emitted by main || used by game_info
 signal level_cleared(is_combat_room: bool) # emitted by level_manager || used by DungeonHolder, popup_indicator
 signal exit_door_interacted() # emitted by level_manager || used by DungeonHolder, UI
 
+## interactable
+signal interactable_detected(component: Interactable)
 
 ## UI and UI
 signal upgrade_stats_pressed()

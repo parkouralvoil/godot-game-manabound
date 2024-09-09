@@ -29,6 +29,10 @@ func Update(_delta: float) -> void:
 	if !p:
 		return
 	#if p.velocity != Vector2.ZERO:
+	
+	if p.controls_disabled:
+		state_transition.emit(self, "PlayerIdle")
+	
 	if Input.is_action_just_pressed("left_click"):
 		state_transition.emit(self, "PlayerIdle")
 	

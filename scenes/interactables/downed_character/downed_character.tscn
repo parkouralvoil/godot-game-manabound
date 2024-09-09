@@ -1,0 +1,77 @@
+[gd_scene load_steps=11 format=3 uid="uid://biaoqq352snjo"]
+
+[ext_resource type="Script" path="res://scenes/interactables/downed_character/downed_character.gd" id="1_t0dpl"]
+[ext_resource type="Script" path="res://scenes/interactables/interactable.gd" id="2_1bi0f"]
+[ext_resource type="Texture2D" uid="uid://yylj6tta24tp" path="res://characters/knight/visuals/knight_window.tres" id="2_7c6iw"]
+[ext_resource type="StyleBox" uid="uid://dei3nbnn0da3" path="res://resources/label_settings/normal_tips_style_box.tres" id="3_c6pvx"]
+[ext_resource type="LabelSettings" uid="uid://bo0v4fgba3vq4" path="res://resources/label_settings/tip_label.tres" id="4_7wq17"]
+[ext_resource type="FontFile" uid="uid://b7bhxk05x7pwi" path="res://assets/fonts/aseprite-remix.ttf" id="4_mlupf"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ajfgw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ihxs0"]
+size = Vector2(19, 10)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mh6en"]
+bg_color = Color(0.0588235, 0.0588235, 0.0588235, 0.788235)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u2ys4"]
+bg_color = Color(0.262745, 0.454902, 0.188235, 0.858824)
+
+[node name="DownedCharacter" type="CharacterBody2D"]
+top_level = true
+collision_layer = 0
+script = ExtResource("1_t0dpl")
+
+[node name="Interactable" type="Area2D" parent="."]
+collision_layer = 256
+collision_mask = 0
+script = ExtResource("2_1bi0f")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interactable"]
+shape = SubResource("CircleShape2D_ajfgw")
+debug_color = Color(0.803922, 0.411765, 0.160784, 0.419608)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_ihxs0")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.364706, 0.372549, 0.560784, 1)
+rotation = 1.5708
+texture = ExtResource("2_7c6iw")
+offset = Vector2(-1, -2)
+flip_h = true
+
+[node name="ReviveBarProgress" type="ProgressBar" parent="."]
+offset_left = -16.0
+offset_top = 7.0
+offset_right = 16.0
+offset_bottom = 15.0
+theme_override_fonts/font = ExtResource("4_mlupf")
+theme_override_font_sizes/font_size = 7
+theme_override_styles/background = SubResource("StyleBoxFlat_mh6en")
+theme_override_styles/fill = SubResource("StyleBoxFlat_u2ys4")
+step = 1.0
+value = 5.0
+
+[node name="Tip" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.5
+offset_top = -27.0
+offset_right = 20.5
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+theme_override_styles/normal = ExtResource("3_c6pvx")
+text = "Hold E 
+to revive"
+label_settings = ExtResource("4_7wq17")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3

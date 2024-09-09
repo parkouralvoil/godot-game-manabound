@@ -174,6 +174,9 @@ func update_damage() -> void:
 	
 	ult_dmg = AbilityHelper.compute_damage(base_ult_dmg,
 			0, 1, stats)
+	
+	ult_atk_buff = (ult_atk_buff_base + (ult_atk_buff_scale * lvl_ult_buff)
+			) * stats.ATK
 
 
 func energy_production(procs: float) -> void:
@@ -181,9 +184,11 @@ func energy_production(procs: float) -> void:
 		push_error("ERROR ON ROGUE AM")
 		return
 	
-	var base_energy_prod: float = 1 + stats.CHR/50
+	#var base_energy_prod: float = 1 + stats.CHR/50
 	#print("procs = %0.2f" % (base_energy_prod * procs))
-	character.stats.charge = clampf(character.stats.charge + base_energy_prod * procs, 
-		0, character.stats.MAX_CHARGE)
+	var s: CharacterStats = character.stats
+	s.charge = clampf(s.charge + s.base_charge_rate * (s.CHR/100) * procs,
+			0,
+			s.MAX_CHARGE)
 	## every enemy death gives 3 proc
 	## every enemy hit gives 0.5 proc

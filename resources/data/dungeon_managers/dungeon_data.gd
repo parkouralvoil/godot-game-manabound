@@ -102,11 +102,11 @@ func go_next_room(new_preset: RoomPreset) -> void:
 		current_room = 1
 	else:
 		current_room += 1
-	#print_debug("current room: %d" % current_room)
-	
-	if current_room < area.rest_lvl:
+	print_debug("current room: %d" % current_room)
+	var next_room: int = current_room + 1 ## available presets is for the next room
+	if next_room < area.rest_lvl:
 		available_presets = area.EasyPresets
-	elif current_room == area.rest_lvl or current_room == area.rest_lvl * 2:
+	elif next_room == area.rest_lvl or next_room == area.rest_lvl * 2:
 		available_presets = area.RestPresets
 	else:
 		available_presets = area.HardPresets

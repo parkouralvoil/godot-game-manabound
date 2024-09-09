@@ -17,6 +17,7 @@ func Enter() -> void:
 	p.PlayerInfo.current_state = PlayerInfoResource.States.STANCE
 	p.PlayerInfo.input_ult = true
 
+
 func Exit() -> void:
 	if !p:
 		return
@@ -25,13 +26,18 @@ func Exit() -> void:
 	p.circle_indicator.position = Vector2(0, 0)
 	p.PlayerInfo.input_ult = false
 
+
 func Update(_delta: float) -> void:
 	if !p:
 		return
 	#if p.velocity != Vector2.ZERO:
 	
+	if p.controls_disabled:
+		state_transition.emit(self, "PlayerIdle")
+	
 	flip_sprite()
 	play_anim()
+
 
 func Physics_Update(_delta: float) -> void:
 	if !p:
