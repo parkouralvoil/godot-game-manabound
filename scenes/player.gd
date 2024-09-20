@@ -80,6 +80,8 @@ func _process(_delta: float) -> void:
 
 # cuz each character have their healths in AM
 func take_damage(damage: int) -> void:
+	if char_manager.current_char.is_dead:
+		return
 	char_manager.take_damage(damage)
 	player_hit_comp.player_hit()
 	PlayerInfo.player_got_hit.emit()

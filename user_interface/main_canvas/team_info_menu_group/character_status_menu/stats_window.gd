@@ -31,7 +31,7 @@ func change_stats(cr: CharacterResource) -> void:
 	hp.text = str(s.MAX_HP)
 	atk.text = str(s.ATK)
 	ep.text = str(s.EP)
-	chr.text = str(s.CHR)
+	chr.text = str(s.CHR) + "%"
 	
 	spd.text = str(s.SPD)
 	rel.text = "%ss" % str(s.reload_time)
