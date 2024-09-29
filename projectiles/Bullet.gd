@@ -36,7 +36,7 @@ func _on_area_entered(hurtbox: Area2D) -> void:
 		hurtbox.hit(damage, element, ep)
 	disappear()
 
-func _on_body_entered(_body: TileMap) -> void: # tilemap since thats the collision of the world
+func _on_body_entered(_body: TileMapLayer) -> void: # tilemap since thats the collision of the world
 	disappear()
 
 func make_impact() -> void:

@@ -34,11 +34,10 @@ texture = ExtResource("2_4y6fh")
 shape = SubResource("CircleShape2D_6cq2t")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
-target_desired_distance = 150.0
-path_max_distance = 300.0
+target_desired_distance = 50.0
 path_postprocessing = 1
+simplify_path = true
 avoidance_enabled = true
-radius = 6.0
 neighbor_distance = 150.0
 max_neighbors = 9
 
@@ -69,6 +68,7 @@ position = Vector2(0.5, 2)
 one_shot = true
 
 [node name="Raycast_toPlayer" type="RayCast2D" parent="."]
+position = Vector2(0, -2)
 
 [connection signal="velocity_computed" from="NavigationAgent2D" to="." method="_on_navigation_agent_2d_velocity_computed"]
 [connection signal="timeout" from="updatePath" to="." method="_on_updatePath_timeout"]

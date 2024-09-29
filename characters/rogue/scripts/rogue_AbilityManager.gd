@@ -1,7 +1,7 @@
 extends Node2D
 class_name Rogue_AbilityManager
 
-const StreeModel: SkillTreeModel = preload("res://characters/rogue/rogue_stree_model.tres")
+var StreeModel: SkillTreeModel = preload("res://characters/rogue/rogue_stree_model.tres")
 
 ## names
 var _basic_atk_name: String = "Fireblade Slash"

@@ -1,10 +1,9 @@
 extends Node2D
 class_name Character
 
-## const (constants) are for its the same for all instances
-const PlayerInfo: PlayerInfoResource = preload(
+var PlayerInfo: PlayerInfoResource = preload(
 			"res://resources/data/player_info/player_info.tres")
-const DownedCharacterScene: PackedScene = preload(
+var DownedCharacterScene: PackedScene = preload(
 			"res://scenes/interactables/downed_character/downed_character.tscn")
 
 signal character_died ## for CM

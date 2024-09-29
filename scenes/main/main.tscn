@@ -36,6 +36,7 @@ script = ExtResource("2_j78xc")
 [node name="MainCanvas" parent="." instance=ExtResource("5_jftyw")]
 
 [node name="PlayerCamera" parent="." instance=ExtResource("3_b3eh2")]
+position_smoothing_enabled = false
 
 [node name="PlayerHolder" parent="." instance=ExtResource("4_p316a")]
 process_mode = 1

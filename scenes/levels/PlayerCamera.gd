@@ -21,7 +21,7 @@ var shake_strength: float = 0.0
 var target_node: Node2D = null
 
 func _ready() -> void:
-	rand.randomize()
+	position_smoothing_enabled = false
 	# Randomize the generated noise
 	noise.seed = rand.randi()
 	# Period affects how quickly the noise changes values
@@ -34,7 +34,7 @@ func apply_noise_shake(strength: int) -> void: # 1 for weakest (60), 3 for stron
 func _process(delta: float) -> void:
 	# Fade out the intensity over time
 	shake_strength = lerp(shake_strength, 0.0, SHAKE_DECAY_RATE * delta)
-
+	
 	# Shake by adjusting camera.offset so we can move the camera around the level via it's position
 	offset = get_noise_offset(delta)
 	if target_node:

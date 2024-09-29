@@ -6,7 +6,7 @@ class_name Knight_AbilityManager
 ## single "" include newlines (shift enter's counted as \n)
 ## triple """""" allow verbatim newlines (shift enter's are nto counted as \n)
 
-const StreeModel: SkillTreeModel = preload("res://characters/knight/knight_stree_model.tres")
+var StreeModel: SkillTreeModel = preload("res://characters/knight/knight_stree_model.tres")
 
 ## names
 var _basic_atk_name: String = "Rapidfire Crossbow"

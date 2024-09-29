@@ -17,7 +17,7 @@ class_name SkillTreeModel
 
 signal skill_node_bought ## for AM to connect to
 
-const inventory: PlayerInventory = preload("res://resources/data/player_inventory/player_inventory.tres")
+var inventory: PlayerInventory = preload("res://resources/data/player_inventory/player_inventory.tres")
 
 var root_node: SkillTreeNode = SkillTreeNode.new()
 var left_nodes: Array[SkillTreeNode]

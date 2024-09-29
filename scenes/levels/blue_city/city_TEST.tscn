@@ -25,7 +25,6 @@ script = ExtResource("1_cdepn")
 
 [node name="ParallaxBackground" parent="." instance=ExtResource("2_riqsw")]
 scroll_base_offset = Vector2(0, -750)
-scroll_ignore_camera_zoom = true
 
 [node name="tilemap" type="TileMap" parent="."]
 tile_set = ExtResource("3_bcsgq")
@@ -41,11 +40,6 @@ layer_2/tile_data = PackedInt32Array(-786413, 262144, 7, -720877, 262144, 7, -65
 
 [node name="EnemyHolder" type="Node2D" parent="."]
 script = ExtResource("4_cja48")
-ratio_autobow = 1
-ratio_machinegun = 1000
-ratio_dronefactory = 1
-ratio_lasercrystal = 1
-ratio_energizedorb = 1
 
 [node name="Marker2D" type="Marker2D" parent="EnemyHolder"]
 position = Vector2(745, -166)

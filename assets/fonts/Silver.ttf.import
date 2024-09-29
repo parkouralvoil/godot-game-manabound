@@ -15,6 +15,7 @@ dest_files=["res://.godot/imported/Silver.ttf-821872bb71e3788f5a26fb5a32e04f06.f
 Rendering=null
 antialiasing=1
 generate_mipmaps=false
+disable_embedded_bitmaps=true
 multichannel_signed_distance_field=false
 msdf_pixel_range=8
 msdf_size=48

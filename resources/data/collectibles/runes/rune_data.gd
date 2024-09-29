@@ -1,7 +1,7 @@
 extends Resource
 class_name RuneData
 
-const inventory: PlayerInventory = preload("res://resources/data/player_inventory/player_inventory.tres")
+var inventory: PlayerInventory = preload("res://resources/data/player_inventory/player_inventory.tres")
 
 @export var type: RuneType
 @export var chance: float ## RAW CHANCE, has to be divided by total chance after

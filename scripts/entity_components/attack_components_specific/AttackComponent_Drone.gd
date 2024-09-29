@@ -26,7 +26,7 @@ func shoot(projectile: PackedScene, direction: Vector2) -> void:
 		pro_instance.set_collision_mask_value(3, true)
 		pro_instance.set_collision_layer_value(6, true) ## for parry
 		pro_instance.modulate = bullet_color
-		pro_instance.max_distance = e.vision_range
+		pro_instance.max_distance = 150
 		get_tree().root.add_child(pro_instance)
 	elif pro_instance == null:
 		print(projectile)

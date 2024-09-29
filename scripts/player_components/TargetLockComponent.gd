@@ -45,8 +45,8 @@ func _update_target() -> void:
 			elif (closest_target.global_position - p.global_position).length_squared() > (enemy.global_position - 
 					p.global_position).length_squared():
 				closest_target = enemy
-		
-		p.selected_target = closest_target
+		if is_instance_valid(closest_target):
+			p.selected_target = closest_target
 		t_update.start()
 
 

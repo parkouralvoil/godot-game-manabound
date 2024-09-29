@@ -40,7 +40,8 @@ func spawn(drone: PackedScene, pos: Vector2) -> void:
 	if drone_instance:
 		drone_instance.global_position = pos
 		drone_instance.spawned_runtime = true
-		get_tree().root.add_child(drone_instance)
+		drone_instance.top_level = true
+		add_child(drone_instance)
 	elif drone_instance == null:
 		pass # print(drone)
 

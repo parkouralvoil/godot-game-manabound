@@ -1,7 +1,7 @@
 extends Node2D
 class_name Witch_AbilityManager
 
-const StreeModel: SkillTreeModel = preload("res://characters/witch/witch_stree_model.tres")
+var StreeModel: SkillTreeModel = preload("res://characters/witch/witch_stree_model.tres")
 
 @onready var character: Character = owner
 @onready var PlayerInfo: PlayerInfoResource = character.PlayerInfo

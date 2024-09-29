@@ -1,7 +1,6 @@
 [gd_resource type="AtlasTexture" load_steps=2 format=3 uid="uid://dwkkeflj1gmgf"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_70iyv"]
-load_path = "res://.godot/imported/bullet_pixel_Blue.png-05621972d9be0fe79cb9b7d7d75cabd9.ctex"
 
 [resource]
 atlas = SubResource("CompressedTexture2D_70iyv")
