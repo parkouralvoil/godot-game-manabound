@@ -8,8 +8,6 @@ var data_array: Array[CharacterResource] = [null, null, null] ## the resource
 var stored_chars: Array[Character] = [null, null, null] ## the scene, which has AbilityManager
 
 var current_char: Character
-var current_char_spriteframes: SpriteFrames
-var current_char_fake_arm: Texture
 
 var can_change_char: bool = true
 
@@ -17,6 +15,7 @@ var can_change_char: bool = true
 @onready var t_change_char: Timer = $change_char_cd
 
 func _ready() -> void:
+	EventBus.returned_to_mainhub.connect(_on_returned_to_mainhub)
 	data_array = selected_team_info.char_data_array
 	for i in range(data_array.size()):
 		stored_chars[i] = data_array[i].character_scene.instantiate()
@@ -24,6 +23,8 @@ func _ready() -> void:
 		stored_chars[i].arm.hide()
 		stored_chars[i].anim_sprite.hide()
 		stored_chars[i].character_died.connect(_on_character_died)
+	p.PlayerInfo.team_size = data_array.size()
+	p.PlayerInfo.team_alive = data_array.size()
 	#change_character(0) player calls this on its ready func instead
 
 
@@ -65,7 +66,7 @@ func change_character(num: int) -> void:
 	var _AM := stored_chars[num]
 	current_char = _AM
 	current_char.anim_sprite.show()
-	p.PlayerInfo.char_current_anim_sprite = current_char.anim_sprite
+	p.PlayerInfo.char_current_anim_sprite = current_char.anim_sprite ## needed to turn character red
 	current_char.global_position = self.global_position
 	p.PlayerInfo.melee_character = current_char.stats.melee ## tells PlayerInfo if current char is a melee char
 	
@@ -103,9 +104,24 @@ func _on_character_died() -> void:
 	await t_change_char.timeout
 	
 	for i in range(stored_chars.size()):
+		if not stored_chars[i]:
+			continue ## null check
 		if not stored_chars[i].is_dead:
 			change_character(i)
 			p.controls_disabled = false
 			return
 	
 	print_debug("TODO: add gameover when no remaining character is alive.")
+
+
+func _on_returned_to_mainhub() -> void:
+	for i in range(stored_chars.size()):
+		var char: Character = stored_chars[i]
+		if not char:
+			continue ## null check
+		if char.is_dead:
+			char.revive()
+			char.stats.reset_stats()
+	p.global_position = Vector2(1000, 1000) ## to hide player hehe
+	p.controls_disabled = false
+	change_character(0)

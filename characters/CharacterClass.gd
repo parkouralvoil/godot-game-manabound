@@ -30,6 +30,7 @@ func _ready() -> void:
 	## for current UI, tho honestly i can optimize this by making panel_char give info to current UI noh
 	assert(stats)
 	assert(character_window)
+	PlayerInfo.drank_hp_potion.connect(_on_drank_hp_potion)
 	stats.max_HP_changed.connect(_on_stats_updated)
 	stats.max_ammo_changed.connect(_on_stats_updated)
 	stats.max_charge_changed.connect(_on_stats_updated)
@@ -41,17 +42,16 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
-	if !enabled or is_dead:
-		return
-	
-	arm_updater()
-	update_anim_sprite()
-	update_PlayerInfo_sprite()
-	
-	## since these variables change frequently
-	PlayerInfo.displayed_charge = stats.charge
-	PlayerInfo.displayed_ammo = stats.ammo
-	PlayerInfo.displayed_HP = stats.HP
+	if enabled:
+		## since these variables change frequently
+		PlayerInfo.displayed_charge = stats.charge
+		PlayerInfo.displayed_ammo = stats.ammo
+		PlayerInfo.displayed_HP = stats.HP
+		
+		if not is_dead:
+			arm_updater()
+			update_anim_sprite()
+			update_PlayerInfo_sprite()
 
 #region Update Displayed UI
 func _on_stats_updated() -> void:
@@ -72,11 +72,18 @@ func _on_HP_changed() -> void:
 	if stats.HP <= 0 and not is_dead:
 		is_dead = true
 		anim_sprite.hide()
-		spawn_downed_char()
+		var downed_char := spawn_downed_char()
 		character_died.emit()
+		PlayerInfo.team_alive -= 1
+		PlayerInfo.character_died.emit(downed_char)
 
 
-func spawn_downed_char() -> void:
+func _on_drank_hp_potion() -> void:
+	if not is_dead:
+		stats.HP = min(stats.HP + 1, stats.MAX_HP)
+
+
+func spawn_downed_char() -> DownedCharacter:
 	var inst: DownedCharacter = DownedCharacterScene.instantiate()
 	
 	#print_debug(inst)
@@ -87,12 +94,14 @@ func spawn_downed_char() -> void:
 	inst.texture = character_window
 	
 	call_deferred("add_child", inst)
+	return inst
 
 
 func revive() -> void: ## called by downed_char
 	if is_dead:
 		stats.HP = 1
 		is_dead = false
+		PlayerInfo.team_alive += 1
 
 
 #region Transfer: (AM) > CM > Player

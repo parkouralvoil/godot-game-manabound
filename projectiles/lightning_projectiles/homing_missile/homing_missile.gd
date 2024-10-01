@@ -30,7 +30,7 @@ func get_nearest_enemy() -> HurtboxComponent:
 	var nearest_enemy: HurtboxComponent
 	for enemy in enemy_detector.get_overlapping_areas():
 			var dist: float = position.distance_squared_to(enemy.global_position)
-			if nearest_enemy == null:
+			if not nearest_enemy:
 				nearest_enemy = enemy
 			elif dist < position.distance_squared_to(nearest_enemy.global_position):
 				nearest_enemy = enemy

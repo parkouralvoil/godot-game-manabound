@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://quvfsmagt2h1"]
+[gd_scene load_steps=3 format=3 uid="uid://quvfsmagt2h1"]
 
 [ext_resource type="Script" path="res://scenes/levels/PlayerCamera.gd" id="1_bmed6"]
+[ext_resource type="Resource" uid="uid://6renh852kiei" path="res://resources/data/player_info/player_info.tres" id="2_lrbr2"]
 
 [node name="PlayerCamera" type="Camera2D"]
 process_mode = 3
@@ -10,5 +11,6 @@ position_smoothing_speed = 10.0
 editor_draw_limits = true
 editor_draw_drag_margin = true
 script = ExtResource("1_bmed6")
+PlayerInfo = ExtResource("2_lrbr2")
 NOISE_SHAKE_SPEED = 6.0
 NOISE_SHAKE_STRENGTH = 3.0

@@ -19,20 +19,22 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	# movement and vision
-	var range := nav_agent.target_desired_distance	
+	var vision_range := nav_agent.target_desired_distance
 	target_pos = EnemyAiManager.player_position - global_position
 	player_raycast.target_position = target_pos
 	
 	## fire only when target is nearby and in Line of sight
 	## if close enough, slow down
-	if target_pos.length() <= range * 4 and not player_raycast.is_colliding():
+	if target_pos.length() <= vision_range * 4 and not player_raycast.is_colliding():
 		can_fire = true
 		speed = max(speed - 400 * delta, engage_speed)
 		sprite_main.rotation = target_pos.angle() - PI/2
-	elif (target_pos.length() > range * 2 or player_raycast.is_colliding()):
+	elif (target_pos.length() > vision_range * 2 or player_raycast.is_colliding()):
 		can_fire = false
 		speed = min(speed + 50 * delta, max_speed)
-		sprite_main.rotation = aim_direction.angle() - PI/2
+		sprite_main.rotation = lerp_angle(sprite_main.rotation, 
+				aim_direction.angle() - PI/2, 
+				5 * delta)
 	
 	## prepare next path, turn sprite
 	var desired_direction: Vector2 = to_local(nav_agent.get_next_path_position() ).normalized()

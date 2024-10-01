@@ -1,22 +1,46 @@
-[gd_scene load_steps=5 format=3 uid="uid://bmykt4bk5s1bk"]
+[gd_scene load_steps=9 format=3 uid="uid://bmykt4bk5s1bk"]
 
 [ext_resource type="Script" path="res://projectiles/ice_projectiles/frost_storm/frost_nova.gd" id="1_dxavq"]
 [ext_resource type="PackedScene" uid="uid://5f6ajry7qgrd" path="res://projectiles/ice_projectiles/frost_storm/frost_nova_impact.tscn" id="2_gmbiq"]
+[ext_resource type="Texture2D" uid="uid://bcybqbge3j75o" path="res://assets/sprite_projectiles/explosion_indicator/blue_circle.png" id="3_pooa6"]
 [ext_resource type="Texture2D" uid="uid://c36f5r6cnvwpu" path="res://assets/sprite_projectiles/bullet_pixel_Blue.png" id="3_x0rvr"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_0x76w"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_u28u5"]
 atlas = ExtResource("3_x0rvr")
-region = Rect2(304, 96, 16, 16)
+region = Rect2(66, 99, 13, 13)
+
+[sub_resource type="Curve" id="Curve_dcwyl"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_nwfwr"]
+curve = SubResource("Curve_dcwyl")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_a4bgm"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 90.0
+spread = 100.0
+gravity = Vector3(0, 40, 0)
+scale_curve = SubResource("CurveTexture_nwfwr")
 
 [node name="FrostNova" type="Marker2D"]
 script = ExtResource("1_dxavq")
 bullet_impact = ExtResource("2_gmbiq")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-modulate = Color(0.745098, 0.74902, 0.733333, 0.286275)
+[node name="Sprite2D_crystal" type="Sprite2D" parent="."]
+scale = Vector2(2, 2)
+texture = SubResource("AtlasTexture_u28u5")
+
+[node name="Sprite2D_circle" type="Sprite2D" parent="."]
+modulate = Color(0.611765, 0.329412, 0.87451, 0.301961)
 z_index = -1
-scale = Vector2(13, 13)
-texture = SubResource("AtlasTexture_0x76w")
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("3_pooa6")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+amount = 25
+process_material = SubResource("ParticleProcessMaterial_a4bgm")
 
 [node name="spawn_cd" type="Timer" parent="."]
 wait_time = 0.3

@@ -20,6 +20,7 @@ var debuff: CombatManager.Debuffs = CombatManager.Debuffs.NONE
 @onready var scolor: Color = sprite.modulate ## starting color
 
 func _ready() -> void:
+	sprite.modulate = Color(scolor.r, scolor.g, scolor.b, opaqueness)
 	self.connect("area_entered", _on_area_entered)
 	t_lifespan.connect("timeout", _on_lifespan_timeout )
 	t_lifespan.one_shot = true

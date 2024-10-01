@@ -36,6 +36,7 @@ func _process(_delta: float) -> void:
 			t_recoil.start()
 			character.set_player_velocity(Vector2.ZERO)
 
+
 func shoot(bullet: PackedScene, position_modifier: int) -> void:
 	assert(bullet, "bruh its missing")
 	var bul_instance: Bullet = bullet.instantiate()

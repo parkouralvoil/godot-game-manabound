@@ -31,6 +31,17 @@ func _process(delta: float) -> void:
 			decay_charge(delta)
 		character.wpn.modulate = Color(1, 1, 1)
 
+
+func _physics_process(delta: float) -> void:
+	if !character.enabled or character.is_dead:
+		return
+	
+	if PlayerInfo.input_ult:
+		character.wpn.position = Vector2(3, 16) + Vector2(
+				randf_range(-0.6, 0.6), randf_range(-0.9, 0.9))
+	else:
+		character.wpn.position = Vector2(3, 16)
+
 func shoot(bullet: PackedScene, direction: Vector2) -> void:
 	assert(bullet, "missing ref")
 	

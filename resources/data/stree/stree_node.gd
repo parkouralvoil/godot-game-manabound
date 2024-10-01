@@ -7,7 +7,9 @@ var name: String
 var description: String = "description"
 var lvl: int = 0:
 	set(val):
-		lvl = val
+		lvl = max(val, 0)
+		if lvl == 0:
+			active = false
 		node_updated.emit()
 var max_lvl: int = 0:
 	set(val):

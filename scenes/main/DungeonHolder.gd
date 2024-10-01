@@ -5,26 +5,34 @@ this handles the ff:
 	- loading levels of dungeon data
 """
 
+@export_category("Main hub")
+@export var main_hub_path: PackedScene
+
 signal previous_level_cleaned_up
 signal next_level_loaded(starting_pos: Vector2)
-
-@onready var main_hub: MainHub = $MainHub
 
 var dungeon_data: DungeonData ## given by main
 
 ## for now its Dungeon Manager -> Level Manager
 ## but later it might become Dungeon Manager -> Area Manager -> Level Manager
 
+var main_hub: MainHub = null
 var current_level: LevelManager
 
 @onready var main: Main = owner
 
 ## load the main hub
 func initialize_main_hub() -> void:
+	main_hub = main_hub_path.instantiate()
+	add_child(main_hub)
 	next_level_loaded.emit(main_hub.starting_pos)
 	dungeon_data.main_hub_loaded.emit()
 	main_hub.main_hub_departed.connect(initialize_dungeon)
 
+func _on_returned_to_mainhub() -> void:
+	await remove_previous_lvl()
+	initialize_main_hub()
+	await main.fade_in()
 
 ## Initialize dungeon before loading the first level
 func initialize_dungeon() -> void: ## called by main
@@ -40,6 +48,7 @@ func initialize_dungeon() -> void: ## called by main
 func _ready() -> void:
 	EventBus.level_cleared.connect(_on_level_cleared) # emitted by level
 	EventBus.exit_door_interacted.connect(_on_exit_door_interacted) # emitted by exit door
+	EventBus.returned_to_mainhub.connect(_on_returned_to_mainhub) # emitted by gameover
 
 
 func remove_previous_lvl() -> void:

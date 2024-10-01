@@ -20,6 +20,7 @@ var impact_created: bool = false
 
 func _ready() -> void:
 	assert(bullet_impact, "missing bullet impact")
+	EventBus.returned_to_mainhub.connect(queue_free)
 
 func _physics_process(delta: float) -> void:
 	var distance: float = speed * delta

@@ -15,6 +15,8 @@ class_name PlayerInfoResource
 ## I CANT MAKE THIS "script signal" ONLY, CUZ I NEED THE RESOURCE FOR SIGNALS
 signal changed_buff_raw_atk
 signal player_got_hit
+signal drank_hp_potion
+signal character_died(downed_char: DownedCharacter)
 
 enum States {
 	IDLE,
@@ -55,8 +57,8 @@ var displayed_ammo: int
 var displayed_MAX_AMMO: int
 var displayed_charge: float
 var displayed_MAX_CHARGE: float
-var displayed_HP: float
-var displayed_MAX_HP: float
+var displayed_HP: int
+var displayed_MAX_HP: int
 
 ## player to character:
 var current_anim: String = "idle"
@@ -72,4 +74,10 @@ var buff_raw_atk: float = 0:
 		buff_raw_atk = value
 		changed_buff_raw_atk.emit()
 
-## READY FUNCTIONS DONT WORK HERE, cuz its a resource nto a node
+## Team Status (all team alive, last person dead), set by character manager of player
+var team_size: int
+var team_alive: int:
+	set(val):
+		team_alive = max(0, val)
+
+## READY FUNCTIONS DONT WORK HERE, cuz its a resource not a node

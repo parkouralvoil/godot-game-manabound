@@ -92,6 +92,15 @@ func _ready() -> void:
 	PlayerInfo.changed_buff_raw_atk.connect(update_damage)
 	stats.stats_changed.connect(update_damage)
 	update_damage()
+	EventBus.returned_to_mainhub.connect(reset_ability_manager)
+
+func reset_ability_manager() -> void:
+	for i in range(1, StreeModel.left_nodes.size() - 1):
+		StreeModel.left_nodes[i].lvl = 0
+	for i in range(1, StreeModel.right_nodes.size() - 1):
+		StreeModel.right_nodes[i].lvl = 0
+	initialize_model()
+	update_damage()
 
 
 func update_skills() -> void:

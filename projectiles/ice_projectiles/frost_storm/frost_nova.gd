@@ -5,6 +5,9 @@ class_name FrostStorm
 @export var bullet_impact: PackedScene
 
 @onready var t_spawn_cd: Timer = $spawn_cd
+@onready var crystal: Sprite2D = $Sprite2D_crystal
+#@onready var circle: Sprite2D = $Sprite2D_circle
+@onready var rng := RandomNumberGenerator.new()
 
 var ep: float = 0
 var radius: float = 60
@@ -14,18 +17,26 @@ var size: float = 1
 
 var damage: float = 10
 var debuff: CombatManager.Debuffs = CombatManager.Debuffs.NONE
-@onready var rng := RandomNumberGenerator.new()
 
+var despawn_set: bool = false
+var rotation_speed: float = 2
 
 func _ready() -> void:
 	assert(bullet_impact, "missing")
+	rotation_speed += float(max_spawn_counter/30.0)
+	crystal.scale = crystal.scale * size
 	EventBus.clear_abilities.connect(queue_free)
 
 
 func _physics_process(_delta: float) -> void:
 	#_time += _delta
-	if spawn_counter >= max_spawn_counter:
+	crystal.rotate(rotation_speed * _delta)
+	if spawn_counter >= max_spawn_counter and not despawn_set:
 		#print("Time ended: %f" % _time)
+		despawn_set = true
+		var t := create_tween()
+		t.tween_property(self, "modulate", Color(1, 1, 1, 0), 0.7)
+		await t.finished
 		queue_free()
 
 

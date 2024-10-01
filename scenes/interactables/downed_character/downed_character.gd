@@ -1,6 +1,9 @@
 extends CharacterBody2D ## needs to extend from interactable class
 class_name DownedCharacter
 
+#@export var PlayerInfo: PlayerInfoResource ## to allow the camera to follow this downed char
+## no need, character scene will manage this instead
+
 ## set by character.tscn when this is instantiated
 var linked_character: Character 
 var texture: Texture
@@ -41,6 +44,7 @@ when char dies,
 """
 
 func _ready() -> void:
+	interactable.set_color(self)
 	if texture:
 		sprite.texture = texture
 	velocity = Vector2(200 * -x_direction, -100)
@@ -51,15 +55,17 @@ func _ready() -> void:
 	EventBus.interactable_detected.connect(toggle_info)
 	EventBus.level_cleared.connect(revive_char.unbind(1)) ## to revive everyone immediately
 	EventBus.exit_door_interacted.connect(revive_char) ## if im skipping_lvl thru console
+	EventBus.returned_to_mainhub.connect(queue_free)
 
 
-func _process(delta: float) -> void:
-	if Input.is_action_pressed("interact") and can_revive:
+func _process(delta: float) -> void: ## I NEED DELTA so dont chagne to input function
+	if EventBus.interacting and can_revive:
 		revive_progress = clampf(revive_progress + revive_speed * delta,
 				0,
 				max_revive)
 		if revive_progress >= max_revive:
 			revive_char()
+			EventBus.interacting = false
 	else:
 		revive_progress = 0
 
@@ -99,5 +105,4 @@ func toggle_info(event_bus_interactable: Interactable) -> void:
 	else:
 		tip.hide()
 		progress_bar.hide()
-		tip.hide()
 		can_revive = false

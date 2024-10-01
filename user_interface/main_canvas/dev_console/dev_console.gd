@@ -147,6 +147,7 @@ func restart_main() -> String:
 func give_mana_orbs(num: int) -> String:
 	if inventory:
 		inventory.mana_orbs += num
+		print_debug(inventory.mana_orbs)
 		return "{function}\n\t[color=#7FFFD4]- {msg}[/color]".format({
 				"function":"give_mana_orbs(%d)" % num,
 				"msg":"Received %d orbs." % num,

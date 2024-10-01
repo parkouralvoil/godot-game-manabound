@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://c35wulwk6e3b4"]
+[gd_scene load_steps=38 format=3 uid="uid://c35wulwk6e3b4"]
 
 [ext_resource type="Script" path="res://scenes/player.gd" id="1_ob8fa"]
 [ext_resource type="Script" path="res://scripts/player_components/HurtboxComponent_player.gd" id="2_w8hq5"]
@@ -24,6 +24,7 @@
 [ext_resource type="Resource" uid="uid://cw7j4j6w6f1yk" path="res://resources/data/selected_team_info/selected_team_info.tres" id="16_fh5ne"]
 [ext_resource type="Script" path="res://scripts/player_states/PlayerMove.gd" id="17_btrsq"]
 [ext_resource type="Script" path="res://scripts/player_states/PlayerStance.gd" id="18_f66as"]
+[ext_resource type="Script" path="res://scripts/player_states/PlayerInteract.gd" id="25_alt8i"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_c2x3k"]
 size = Vector2(8, 19)
@@ -151,7 +152,7 @@ shape = SubResource("CircleShape2D_8fkqa")
 debug_color = Color(0.819608, 0.341176, 0.556863, 0.419608)
 
 [node name="UpdateClosest" type="Timer" parent="AreaComponents/Interact"]
-wait_time = 0.5
+wait_time = 0.65
 autostart = true
 
 [node name="Line2D" type="Line2D" parent="AreaComponents/Interact"]
@@ -249,6 +250,10 @@ p = NodePath("../..")
 
 [node name="PlayerStance" type="Node" parent="FSM" node_paths=PackedStringArray("p")]
 script = ExtResource("18_f66as")
+p = NodePath("../..")
+
+[node name="PlayerInteract" type="Node" parent="FSM" node_paths=PackedStringArray("p")]
+script = ExtResource("25_alt8i")
 p = NodePath("../..")
 
 [connection signal="area_entered" from="AreaComponents/TargetLock" to="AreaComponents/TargetLock" method="_on_area_entered"]

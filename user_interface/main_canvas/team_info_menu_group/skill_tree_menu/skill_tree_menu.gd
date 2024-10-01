@@ -3,7 +3,7 @@ class_name SkillTreeMenu
 
 ##@onready var stree_knight: Control = $Stree_Knight
 ## manager shouldnt have to know which stree this is, it just has to be a generic stree
-const inventory: PlayerInventory = preload("res://resources/data/player_inventory/player_inventory.tres")
+var inventory: PlayerInventory = preload("res://resources/data/player_inventory/player_inventory.tres")
 
 @onready var stree_holder: AspectRatioContainer = $MarginContainer/HBoxContainer/StreeHolder
 @onready var skill_info: SkillInfoClass = $MarginContainer/HBoxContainer/MarginContainer/Skill_Info

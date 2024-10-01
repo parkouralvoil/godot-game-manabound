@@ -47,6 +47,7 @@ func update_node_info() -> void:
 	
 	if stree_node.lvl < stree_node.max_lvl:
 		label_cost.text = "%d" % [stree_node.cost]
+		label_cost_panel.show()
 	else:
 		label_cost_panel.hide()
 	

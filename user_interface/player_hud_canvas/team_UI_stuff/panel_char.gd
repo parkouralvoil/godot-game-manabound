@@ -10,6 +10,8 @@ var color_selected := Color(1, 1, 1, 1)
 var color_off_field := Color(1, 1, 1, 0.5)
 var color_dead := Color(1, 0.3, 0.3, 0.8)
 
+var old_hp: int
+
 @onready var sprite_portrait: TextureRect = $CharPortrait
 @onready var char_name: Label = $HBoxContainer/VBoxContainer_info/Label_name
 @onready var health: Label = $HBoxContainer/VBoxContainer_info/Label_health
@@ -21,6 +23,7 @@ func initialize_info(character_data: CharacterResource, index: int) -> void:
 	
 	tracked_char_resource = character_data
 	tracked_stats = character_data.stats
+	old_hp = tracked_stats.HP
 	
 	tracked_char_resource.selected_changed.connect(_update_panel_status)
 	tracked_stats.HP_changed.connect(_update_panel_status)
@@ -40,16 +43,27 @@ func _process(_delta: float) -> void:
 
 
 func update_health() -> void:
-	var format_string: String = "HP: %s/%s"
-	var actual_string: String = format_string % [str(tracked_stats.HP), 
-		str(tracked_stats.MAX_HP)]
+	var red := Color(1, 0.3, 0.3)
+	var green := Color(0.3, 1, 0.3)
+	
+	var format_string: String = "HP: %d/%d"
+	var actual_string: String = format_string % [tracked_stats.HP, tracked_stats.MAX_HP]
+	if old_hp < tracked_stats.HP: ## heal
+		var t := create_tween()
+		t.tween_property(health, "modulate", Color(1, 1, 1), 1).from(green)
+	elif old_hp > tracked_stats.HP: ## got dmg
+		var t := create_tween()
+		t.tween_property(health, "modulate", Color(1, 1, 1), 1).from(red)
 	health.text = actual_string
+	old_hp = tracked_stats.HP
 
 
 func update_ammo() -> void:
 	var format_string: String = "Ammo: %d/%d"
 	var actual_string: String = format_string % [tracked_stats.ammo,
 		tracked_stats.MAX_AMMO]
+	if tracked_stats.HP <= 0:
+		actual_string = "Downed"
 	ammo.text = actual_string
 
 
@@ -85,7 +99,15 @@ func _update_panel_status() -> void:
 	
 	if tracked_stats.HP <= 0:
 		modulate = color_dead
+		health.show()
+		ammo.show()
+		charge.hide()
 	elif tracked_char_resource.selected:
 		modulate = color_selected
+		ammo.show()
+		charge.show()
 	else:
 		modulate = color_off_field
+		health.show()
+		ammo.show()
+		charge.show()

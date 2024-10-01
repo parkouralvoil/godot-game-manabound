@@ -1,0 +1,128 @@
+[gd_scene load_steps=4 format=3 uid="uid://bart8kug765at"]
+
+[ext_resource type="Script" path="res://user_interface/player_hud_canvas/gameover_screen/gameover_screen.gd" id="1_lwes2"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_lhx14"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ss1gb"]
+font_size = 12
+
+[node name="GameoverScreen" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_lwes2")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0431373, 0.0470588, 0.0509804, 0.882353)
+
+[node name="background" type="ColorRect" parent="."]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+offset_left = 164.0
+offset_top = 135.0
+offset_right = 475.0
+offset_bottom = 347.0
+size_flags_vertical = 3
+color = Color(0.329295, 0.111684, 0.127537, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -98.0
+offset_right = 150.0
+offset_bottom = 98.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBox1" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="expedition" type="Label" parent="MarginContainer/VBox1"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+text = "Expedition Failure"
+label_settings = SubResource("LabelSettings_lhx14")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="party_mem" type="Label" parent="MarginContainer/VBox1"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+text = "All party members wiped out."
+label_settings = SubResource("LabelSettings_ss1gb")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="line" type="ColorRect" parent="MarginContainer/VBox1"]
+custom_minimum_size = Vector2(0, 3)
+layout_mode = 2
+color = Color(0.969137, 0.969137, 0.969137, 1)
+
+[node name="progress" type="Label" parent="MarginContainer/VBox1"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+text = "Level reached:"
+label_settings = SubResource("LabelSettings_ss1gb")
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="orbs" type="Label" parent="MarginContainer/VBox1"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+text = "Orbs collected:"
+label_settings = SubResource("LabelSettings_ss1gb")
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="enemies" type="Label" parent="MarginContainer/VBox1"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+text = "Enemies defeated:"
+label_settings = SubResource("LabelSettings_ss1gb")
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="spacer" type="Control" parent="MarginContainer/VBox1"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="return" type="Button" parent="MarginContainer/VBox1"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Return to base"
+
+[connection signal="pressed" from="MarginContainer/VBox1/return" to="." method="_on_return_pressed"]

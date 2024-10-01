@@ -26,7 +26,8 @@ func Update(_delta: float) -> void:
 		return
 	#if p.velocity != Vector2.ZERO:
 	
-	
+	if EventBus.interacting:
+		state_transition.emit(self, "PlayerInteract")
 	if not p.PlayerInfo.basic_attacking:
 		flip_sprite()
 	play_anim()

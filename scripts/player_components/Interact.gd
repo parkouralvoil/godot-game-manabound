@@ -7,6 +7,7 @@ var closest_interactable: Interactable = null
 
 @onready var p: Player = owner # i need disable controls
 @onready var line: Line2D = $Line2D
+@onready var t_update: Timer = $UpdateClosest
 
 func update_nearest_interactable() -> void:
 	closest_interactable = null
@@ -22,21 +23,28 @@ func update_nearest_interactable() -> void:
 			closest_interactable = inter
 
 
-func _physics_process(_delta: float) -> void:
-	if not closest_interactable:
+func _process(_delta: float) -> void:
+	if not closest_interactable or p.PlayerInfo.team_alive == 0:
 		line.hide()
 		return
 	line.show()
 	line.points[0] = Vector2.ZERO
 	line.points[1] = closest_interactable.global_position - global_position
 
+func _physics_process(delta: float) -> void:
+	pass
+	#update arrows
 
 func _unhandled_key_input(event: InputEvent) -> void:
-	if p.controls_disabled or closest_interactable == null:
+	if p.controls_disabled or closest_interactable == null or p.PlayerInfo.team_alive == 0:
+		EventBus.interacting = false
 		return
 	
-	if event.is_action_pressed("interact"):
-		pass
+	if event.is_action_pressed("interact") and closest_interactable:
+		p.velocity = Vector2.ZERO
+		EventBus.interacting = true
+	elif event.is_action_released("interact"):
+		EventBus.interacting = false
 
 
 func _on_area_entered(_area: Area2D) -> void:
@@ -48,8 +56,12 @@ func _on_area_exited(_area: Area2D) -> void:
 
 
 func _on_update_closest_timeout() -> void:
+	if p.PlayerInfo.team_alive == 0:
+		EventBus.interactable_detected.emit(null)
+		return
 	update_nearest_interactable()
 	if closest_interactable:
 		closest_interactable.select_this()
+		t_update.one_shot = false
 	else:
 		EventBus.interactable_detected.emit(null)

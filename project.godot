@@ -23,6 +23,7 @@ resources_spreadsheet_view/context_menu_on_leftclick=false
 config/name="New-tower-bullet-hell"
 run/main_scene="res://scenes/main/main.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
+run/max_fps=120
 config/icon="res://game_icon-export.png"
 
 [autoload]
@@ -63,6 +64,10 @@ folder_colors={
 "res://resources/": "green",
 "res://user_interface/": "purple"
 }
+
+[global_group]
+
+interactable="for exit doors, health pots, downed_chars, upgrade stations"
 
 [input]
 

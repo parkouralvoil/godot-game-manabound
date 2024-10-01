@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://scenes/levels/door/exit_door.gd" id="1_r8jdu"]
 [ext_resource type="Texture2D" uid="uid://cb07f2ey0p54u" path="res://assets/sprite_tilesets/blue scifi doors.png" id="2_44brs"]
 [ext_resource type="StyleBox" uid="uid://dei3nbnn0da3" path="res://resources/label_settings/normal_tips_style_box.tres" id="3_hbx1t"]
+[ext_resource type="PackedScene" uid="uid://ckujvunq0eflb" path="res://scenes/interactables/interactable.tscn" id="3_ryg2v"]
 [ext_resource type="LabelSettings" uid="uid://bo0v4fgba3vq4" path="res://resources/label_settings/tip_label.tres" id="4_bvpe7"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ko17m"]
@@ -12,9 +13,6 @@ region = Rect2(0, 80, 32, 48)
 [sub_resource type="AtlasTexture" id="AtlasTexture_7vsuj"]
 atlas = ExtResource("2_44brs")
 region = Rect2(48, 80, 32, 48)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_mrjlk"]
-size = Vector2(221, 101)
 
 [node name="ExitDoor" type="Node2D"]
 z_index = -1
@@ -28,20 +26,7 @@ texture = SubResource("AtlasTexture_ko17m")
 position = Vector2(4, -5)
 texture = SubResource("AtlasTexture_7vsuj")
 
-[node name="Area2D_playercheck" type="Area2D" parent="."]
-collision_layer = 0
-collision_mask = 3
-monitorable = false
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D_playercheck"]
-position = Vector2(0.5, -30.5)
-shape = SubResource("RectangleShape2D_mrjlk")
-
-[node name="Line2D_interact" type="Line2D" parent="."]
-z_index = 2
-points = PackedVector2Array(0, 0, 0, 0)
-width = 1.0
-default_color = Color(0.901961, 0.901961, 0.901961, 0.701961)
+[node name="Interactable" parent="." instance=ExtResource("3_ryg2v")]
 
 [node name="Label" type="Label" parent="."]
 offset_left = -56.0
@@ -56,6 +41,3 @@ label_settings = ExtResource("4_bvpe7")
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
-
-[connection signal="body_entered" from="Area2D_playercheck" to="." method="_on_area_2d_playercheck_body_entered"]
-[connection signal="body_exited" from="Area2D_playercheck" to="." method="_on_area_2d_playercheck_body_exited"]

@@ -5,6 +5,7 @@
 [ext_resource type="LabelSettings" uid="uid://buthhqor0rds0" path="res://resources/label_settings/font_system_desc.tres" id="3_ele2s"]
 
 [node name="Panel_Char1" type="PanelContainer"]
+custom_minimum_size = Vector2(0, 60)
 offset_right = 93.0
 offset_bottom = 59.0
 size_flags_horizontal = 0

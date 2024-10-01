@@ -18,7 +18,10 @@ func _process(_delta: float) -> void:
 		t_ammo_regen.wait_time = character.stats.reload_time
 		t_ammo_regen.start()
 	
-	if character.stats.ammo >= character.stats.MAX_AMMO or (PlayerInfo.basic_attacking and character.enabled):
+	if (character.stats.ammo >= character.stats.MAX_AMMO or 
+			(PlayerInfo.basic_attacking and character.enabled) or
+			character.is_dead
+	):
 		t_ammo_regen.stop()
 
 

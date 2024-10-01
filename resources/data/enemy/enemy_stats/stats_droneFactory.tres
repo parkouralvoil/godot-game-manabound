@@ -6,4 +6,4 @@
 script = ExtResource("1_ndmok")
 health = 200.0
 mana_orbs = 100.0
-default_reload_time = 0.1
+default_reload_time = 0.8

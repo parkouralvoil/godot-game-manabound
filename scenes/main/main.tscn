@@ -28,8 +28,7 @@ main_player_inventory = ExtResource("4_gevh3")
 [node name="DungeonHolder" type="Node2D" parent="."]
 process_mode = 1
 script = ExtResource("2_j78xc")
-
-[node name="MainHub" parent="DungeonHolder" instance=ExtResource("6_aqqlm")]
+main_hub_path = ExtResource("6_aqqlm")
 
 [node name="PlayerHudCanvas" parent="." instance=ExtResource("4_43gs0")]
 
