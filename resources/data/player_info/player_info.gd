@@ -39,8 +39,9 @@ var input_ult: bool = false
 ## logic for recoil, stance stuff
 var basic_attacking: bool = false # replaces "is_firing"
 		## should rename this to (do recoil)
-var can_charge: bool = true # for passive charge chars to set it false
+var can_charge: bool = true # SET BY player.gd, determines if charactre can use ult/charge ult
 var charging: bool = false # for ult
+var ult_animation_playing: bool = false # stay in stance state (not moving) if char has ult anim
 
 ## set by player
 var auto_aim: bool = true
@@ -73,6 +74,7 @@ var buff_raw_atk: float = 0:
 	set(value):
 		buff_raw_atk = value
 		changed_buff_raw_atk.emit()
+		print_debug("emitted")
 
 ## Team Status (all team alive, last person dead), set by character manager of player
 var team_size: int

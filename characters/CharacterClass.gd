@@ -130,23 +130,26 @@ func sprite_look_at(direction: Vector2) -> void:
 
 func arm_updater() -> void:
 	## arm rotation
-	if PlayerInfo.basic_attacking or PlayerInfo.input_ult:
+	if PlayerInfo.ult_animation_playing:
+		pass
+	elif PlayerInfo.basic_attacking or PlayerInfo.input_ult:
 		if PlayerInfo.aim_direction.x > 0:
 			arm.rotation = PlayerInfo.aim_direction.angle() - PI/2
 		else:
 			arm.rotation = -(PlayerInfo.aim_direction.angle() - (PI/2))
+	else:
+		arm.rotation = 0
 		
 	if (anim_sprite.animation == "fall" 
 			or anim_sprite.animation == "air"
 			or (PlayerInfo.melee_character and PlayerInfo.basic_attacking)):
 		arm.hide()
 		wpn.hide()
-	elif PlayerInfo.basic_attacking or PlayerInfo.input_ult:
+	elif PlayerInfo.basic_attacking or PlayerInfo.input_ult or PlayerInfo.ult_animation_playing:
 		arm.show()
 		wpn.show()
 	else:
 		arm.show()
-		arm.rotation = 0
 		wpn.hide()
 
 
@@ -167,3 +170,7 @@ func update_PlayerInfo_sprite() -> void:
 	var curr_frame := anim_sprite.get_frame()
 	var spriteframes := anim_sprite.sprite_frames
 	PlayerInfo.char_current_sprite = spriteframes.get_frame_texture(curr_anim, curr_frame)
+
+
+func set_ult_animation(input: bool) -> void:
+	PlayerInfo.ult_animation_playing = input

@@ -79,14 +79,26 @@ func _ready() -> void:
 	Ultimate.PlayerInfo = character.PlayerInfo
 	Ammo.PlayerInfo = character.PlayerInfo
 	
-	initialize_model()
+	EventBus.returned_to_mainhub.connect(_reset_ability_manager)
+	## unique to rogue
+	EventBus.energy_gen_from_enemy_got_hit.connect(energy_production)
+	EventBus.energy_gen_from_skills.connect(energy_production)
+	
 	StreeModel.skill_node_bought.connect(update_skills)
 	PlayerInfo.changed_buff_raw_atk.connect(update_damage)
 	stats.stats_changed.connect(update_damage)
-	update_damage()
 	
-	EventBus.energy_gen_from_enemy_got_hit.connect(energy_production)
-	EventBus.energy_gen_from_skills.connect(energy_production)
+	initialize_model()
+	update_damage()
+
+func _reset_ability_manager() -> void:
+	for i in range(1, StreeModel.left_nodes.size()):
+		StreeModel.left_nodes[i].lvl = 0
+	for i in range(1, StreeModel.right_nodes.size()):
+		StreeModel.right_nodes[i].lvl = 0
+	initialize_model()
+	update_damage()
+	update_skills()
 
 
 func update_skills() -> void:

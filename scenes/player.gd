@@ -36,6 +36,7 @@ var controls_disabled: int = false ## when character dies and respawning, set th
 @onready var char_manager: CharacterManager = $CharacterManager
 
 func _ready() -> void:
+	EventBus.returned_to_mainhub.connect(_reset_player_inventory)
 	var boost_node: Node2D = $BoostSpecialEffects
 	char_manager.change_character(0)
 	
@@ -104,3 +105,7 @@ func _on_buff_particles() -> void:
 		buff_particles.emitting = true
 	else:
 		buff_particles.emitting = false
+
+
+func _reset_player_inventory() -> void:
+	inventory.reset_inventory()

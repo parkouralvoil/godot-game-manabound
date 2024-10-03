@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://dyb83ujyxhk2b"]
+[gd_scene load_steps=20 format=3 uid="uid://dyb83ujyxhk2b"]
 
 [ext_resource type="Script" path="res://characters/CharacterClass.gd" id="1_h1y8r"]
 [ext_resource type="Script" path="res://characters/rogue/scripts/rogue_AbilityManager.gd" id="2_hppn7"]
@@ -14,6 +14,21 @@
 [ext_resource type="Script" path="res://characters/rogue/scripts/rogue_AmmoComponent.gd" id="9_1qn3a"]
 [ext_resource type="Script" path="res://characters/rogue/scripts/rogue_UltimateComponent.gd" id="10_s5uqh"]
 [ext_resource type="PackedScene" uid="uid://cxo81uwgev1mg" path="res://projectiles/fire_projectiles/eruption/flame_repulsion_dmg_impact.tscn" id="11_5arbq"]
+
+[sub_resource type="Animation" id="Animation_gpksw"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("melee_arm/melee_wpn:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_7xdh8"]
 resource_name = "downward_swing"
@@ -42,6 +57,46 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [0.785398, 0.785398, 2.35619]
+}
+
+[sub_resource type="Animation" id="Animation_7icej"]
+resource_name = "ult_preview"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("melee_arm:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.366667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 6.28319]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("melee_arm/melee_wpn:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(-0.0333333, 0.366667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.785398, 0.785398]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("melee_arm/melee_wpn:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.133333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 0.384314, 0.372549, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_a55dm"]
@@ -74,7 +129,9 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_t1hal"]
 _data = {
+"RESET": SubResource("Animation_gpksw"),
 "downward_swing": SubResource("Animation_7xdh8"),
+"ult_preview": SubResource("Animation_7icej"),
 "upward_swinga": SubResource("Animation_a55dm")
 }
 
@@ -88,16 +145,17 @@ sprite_frames = ExtResource("3_kwca4")
 animation = &"stance"
 
 [node name="arm" type="Sprite2D" parent="CharacterAnimationSprite"]
-z_index = 2
+visible = false
 position = Vector2(-5, 2)
 texture = ExtResource("3_p6yb1")
 offset = Vector2(5, -2)
 
 [node name="weapon" type="Sprite2D" parent="CharacterAnimationSprite/arm"]
-z_index = -1
-position = Vector2(1, 16)
+show_behind_parent = true
+position = Vector2(1.14489, 4.62489)
 rotation = 2.35619
 texture = ExtResource("5_x463i")
+offset = Vector2(8.1459, -7.94092)
 
 [node name="AbilityManager" type="Node2D" parent="."]
 script = ExtResource("2_hppn7")
@@ -118,15 +176,15 @@ libraries = {
 }
 
 [node name="melee_arm" type="Sprite2D" parent="AbilityManager/BasicAttack"]
-z_index = 2
 position = Vector2(-5, 2)
+rotation = -6.28319
 texture = ExtResource("3_p6yb1")
 offset = Vector2(5, -2)
 
 [node name="melee_wpn" type="Sprite2D" parent="AbilityManager/BasicAttack/melee_arm"]
-z_index = -1
+show_behind_parent = true
 position = Vector2(1.4, 4)
-rotation = 2.35619
+rotation = 0.785398
 texture = ExtResource("5_x463i")
 offset = Vector2(8.82934, -8.08328)
 

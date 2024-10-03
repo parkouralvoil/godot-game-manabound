@@ -5,6 +5,7 @@ class_name CharacterStats
 @export var initial_MAX_HP: int = 5
 @export var initial_ATK: float = 10
 @export var initial_EP: float = 0 ## Elemental Profiency
+@export var initial_MAX_AMMO: int = 5
 @export_category("Base Charge Rate (scaled by CHR)")
 @export var base_charge_rate: float = 25 ## base charge rate, 
 var initial_CHR: float = 100
@@ -47,7 +48,7 @@ var MAX_CHARGE: float = 50:
 		MAX_CHARGE = (50 * (tier+1))
 		max_charge_changed.emit()
 
-@export var MAX_AMMO: int = 7:
+var MAX_AMMO: int = initial_MAX_AMMO:
 	set(value):
 		MAX_AMMO = value
 		max_ammo_changed.emit()
@@ -82,6 +83,7 @@ func reset_stats() -> void: ## called by character scene
 	ATK = initial_ATK
 	EP = initial_EP
 	CHR = initial_CHR
+	MAX_AMMO = initial_MAX_AMMO
 	ammo = MAX_AMMO
 #signal ATK_changed ## might need this afterall
 #signal EP_changed

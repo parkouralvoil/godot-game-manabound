@@ -77,11 +77,23 @@ func _ready() -> void:
 	Ultimate.PlayerInfo = character.PlayerInfo
 	Ammo.PlayerInfo = character.PlayerInfo
 	
-	initialize_model()
+	EventBus.returned_to_mainhub.connect(_reset_ability_manager)
 	StreeModel.skill_node_bought.connect(update_skills)
 	PlayerInfo.changed_buff_raw_atk.connect(update_damage)
 	stats.stats_changed.connect(update_damage)
+	
+	initialize_model()
 	update_damage()
+
+
+func _reset_ability_manager() -> void:
+	for i in range(1, StreeModel.left_nodes.size()):
+		StreeModel.left_nodes[i].lvl = 0
+	for i in range(1, StreeModel.right_nodes.size()):
+		StreeModel.right_nodes[i].lvl = 0
+	initialize_model()
+	update_damage()
+	update_skills()
 
 
 func update_skills() -> void:

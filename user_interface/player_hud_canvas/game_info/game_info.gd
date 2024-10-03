@@ -29,13 +29,13 @@ Level translate it as:
 """
 @onready var label_preset: Label = $VBox/MainInfo/MarginContainer/HBox/Preset
 
-@onready var inventory_info: PanelContainer = $VBox/InventoryInfo
-@onready var upgrade_stats_button: Button = $VBox/InventoryInfo/MarginContainer/VBox/UpgradeStatsButton
+@onready var rune_info: VBoxContainer = $VBox/InventoryInfo/MarginContainer/VBox/VBox
+@onready var upgrade_stats_button: Button = $VBox/InventoryInfo/MarginContainer/VBox/VBox/UpgradeStatsButton
 
-@onready var label_hp_rune: Label = $VBox/InventoryInfo/MarginContainer/VBox/GridContainer/num_hp
-@onready var label_atk_rune: Label = $VBox/InventoryInfo/MarginContainer/VBox/GridContainer/num_atk
-@onready var label_ep_rune: Label = $VBox/InventoryInfo/MarginContainer/VBox/GridContainer/num_ep
-@onready var label_chr_rune: Label = $VBox/InventoryInfo/MarginContainer/VBox/GridContainer/num_chr
+@onready var label_hp_rune: Label = $VBox/InventoryInfo/MarginContainer/VBox/VBox/GridContainer/num_hp
+@onready var label_atk_rune: Label = $VBox/InventoryInfo/MarginContainer/VBox/VBox/GridContainer/num_atk
+@onready var label_ep_rune: Label = $VBox/InventoryInfo/MarginContainer/VBox/VBox/GridContainer/num_ep
+@onready var label_chr_rune: Label = $VBox/InventoryInfo/MarginContainer/VBox/VBox/GridContainer/num_chr
 
 @onready var line_1: ColorRect = $VBox/MainInfo/MarginContainer/HBox/line
 @onready var line_2: ColorRect = $VBox/OtherInfo/MarginContainer/HBox/line2
@@ -62,9 +62,9 @@ func _process(_delta: float) -> void:
 
 func try_show_inventory() -> void:
 	if not dungeon_data.state_in_combat:
-		inventory_info.show()
+		rune_info.show()
 	else:
-		inventory_info.hide()
+		rune_info.hide()
 
 
 func _update_cycle_room() -> void:
@@ -88,7 +88,7 @@ func _on_upgrade_stats_pressed() -> void:
 
 
 func _on_main_hub_loaded() -> void:
-	inventory_info.hide()
+	rune_info.hide()
 	line_1.hide()
 	label_cycle_room.hide()
 	line_2.hide()

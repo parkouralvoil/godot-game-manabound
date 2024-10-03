@@ -81,26 +81,29 @@ var skill_basicAtk_double: bool = false ## right node 2A
 			level_ult_chargeRate = level
 			stats.CHR += scale_CHR
 
-
+## TODO: make these 2 functions common to all ability managers
 func _ready() -> void:
 	BasicAttack.PlayerInfo = character.PlayerInfo
 	Ultimate.PlayerInfo = character.PlayerInfo
 	Ammo.PlayerInfo = character.PlayerInfo
 	
-	initialize_model()
+	EventBus.returned_to_mainhub.connect(_reset_ability_manager)
 	StreeModel.skill_node_bought.connect(update_skills)
 	PlayerInfo.changed_buff_raw_atk.connect(update_damage)
 	stats.stats_changed.connect(update_damage)
+	
+	initialize_model()
 	update_damage()
-	EventBus.returned_to_mainhub.connect(reset_ability_manager)
 
-func reset_ability_manager() -> void:
-	for i in range(1, StreeModel.left_nodes.size() - 1):
+
+func _reset_ability_manager() -> void:
+	for i in range(1, StreeModel.left_nodes.size()):
 		StreeModel.left_nodes[i].lvl = 0
-	for i in range(1, StreeModel.right_nodes.size() - 1):
+	for i in range(1, StreeModel.right_nodes.size()):
 		StreeModel.right_nodes[i].lvl = 0
 	initialize_model()
 	update_damage()
+	update_skills()
 
 
 func update_skills() -> void:
@@ -181,6 +184,7 @@ func initialize_model() -> void:
 
 
 func update_damage() -> void:
+	print_debug("updated dmg")
 	damage_lightning_bolt = AbilityHelper.compute_damage(base_percent_lightning_bolt, 
 			scale_percent_lightning_bolt, level_basicAtk_burst, stats)
 		

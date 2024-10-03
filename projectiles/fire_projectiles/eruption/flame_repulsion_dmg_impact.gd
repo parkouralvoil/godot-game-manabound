@@ -2,6 +2,12 @@ extends DamageImpact
 
 var can_generate_extra_energy: bool = false
 
+@onready var particles: GPUParticles2D = $explosion_particles
+
+func _ready() -> void:
+	super()
+	particles.restart()
+
 ## has to clear all projectiles within the explosion
 func _on_area_entered(hurtbox: Area2D) -> void:
 	if hurtbox is HurtboxComponent:

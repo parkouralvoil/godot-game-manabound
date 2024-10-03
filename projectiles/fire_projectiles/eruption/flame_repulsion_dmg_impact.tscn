@@ -1,7 +1,25 @@
-[gd_scene load_steps=5 format=3 uid="uid://cxo81uwgev1mg"]
+[gd_scene load_steps=8 format=3 uid="uid://cxo81uwgev1mg"]
 
 [ext_resource type="Script" path="res://projectiles/fire_projectiles/eruption/flame_repulsion_dmg_impact.gd" id="1_wwsg4"]
 [ext_resource type="Texture2D" uid="uid://b2gagvgpvrjud" path="res://assets/sprite_projectiles/bullet_pixel_BrightRed.png" id="2_1p85v"]
+
+[sub_resource type="Curve" id="Curve_r6nqj"]
+_data = [Vector2(0, 1), 0.0, -1.0, 0, 1, Vector2(1, 0), -1.0, 0.0, 1, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_sdrxf"]
+curve = SubResource("Curve_r6nqj")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_yrmff"]
+particle_flag_disable_z = true
+spread = 180.0
+initial_velocity_min = 268.29
+initial_velocity_max = 385.36
+gravity = Vector3(0, 0, 0)
+scale_min = 2.0
+scale_max = 4.0
+scale_curve = SubResource("CurveTexture_sdrxf")
+color = Color(1, 0.717647, 0.65098, 1)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hbiax"]
 atlas = ExtResource("2_1p85v")
@@ -21,6 +39,15 @@ opaqueness = 0.7
 wait_time = 0.15
 one_shot = true
 autostart = true
+
+[node name="explosion_particles" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 50
+process_material = SubResource("ParticleProcessMaterial_yrmff")
+lifetime = 0.4
+one_shot = true
+explosiveness = 0.7
+randomness = 0.2
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(0.909804, 0.439216, 0.698039, 0.352941)

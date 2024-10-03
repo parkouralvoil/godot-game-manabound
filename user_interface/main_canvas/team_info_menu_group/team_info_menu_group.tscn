@@ -1,8 +1,12 @@
-[gd_scene load_steps=4 format=3 uid="uid://lieb5rtvgudj"]
+[gd_scene load_steps=6 format=3 uid="uid://lieb5rtvgudj"]
 
 [ext_resource type="Script" path="res://user_interface/main_canvas/team_info_menu_group/team_info_menu_group.gd" id="1_iqaa8"]
 [ext_resource type="PackedScene" uid="uid://6dikqxysux0p" path="res://user_interface/main_canvas/team_info_menu_group/skill_tree_menu/skill_tree_menu.tscn" id="2_icl2l"]
 [ext_resource type="PackedScene" uid="uid://brfpdmoe2l0uu" path="res://user_interface/main_canvas/team_info_menu_group/character_status_menu/character_status_menu.tscn" id="3_sb7mf"]
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_dajsb"]
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_jhvd2"]
 
 [node name="TeamInfoMenuGroup" type="Control"]
 layout_mode = 3
@@ -65,6 +69,8 @@ layout_mode = 2
 visible = false
 custom_minimum_size = Vector2(114, 0)
 layout_mode = 2
+toggle_mode = true
+button_group = SubResource("ButtonGroup_dajsb")
 text = "Knight"
 clip_text = true
 
@@ -72,6 +78,8 @@ clip_text = true
 visible = false
 custom_minimum_size = Vector2(114, 0)
 layout_mode = 2
+toggle_mode = true
+button_group = SubResource("ButtonGroup_dajsb")
 text = "Witch"
 clip_text = true
 
@@ -79,6 +87,8 @@ clip_text = true
 visible = false
 custom_minimum_size = Vector2(114, 0)
 layout_mode = 2
+toggle_mode = true
+button_group = SubResource("ButtonGroup_dajsb")
 text = "Rogue"
 clip_text = true
 
@@ -101,10 +111,14 @@ layout_mode = 2
 
 [node name="SkillTrees" type="Button" parent="MarginContainer/VBox/HBox2"]
 layout_mode = 2
+toggle_mode = true
+button_group = SubResource("ButtonGroup_jhvd2")
 text = "Skill Trees"
 
 [node name="CharacterStats" type="Button" parent="MarginContainer/VBox/HBox2"]
 layout_mode = 2
+toggle_mode = true
+button_group = SubResource("ButtonGroup_jhvd2")
 text = "Character Stats"
 
 [node name="spacer2" type="Control" parent="MarginContainer/VBox/HBox2"]

@@ -50,10 +50,3 @@ func update_current_charge() -> void:
 		charge_label.modulate = Color(1, 1, 1, 0.8)
 	else:
 		charge_label.modulate = Color(0.6, 0.6, 0.6, 0.8)
-
-
-#func trigger_blood_overlay() -> void:
-	#var color_transparent: Color = Color(1, 1, 1, 0)
-	#var color_visible: Color = Color(1, 1, 1, 1)
-	#var tween: Tween = create_tween()
-	#tween.tween_property(blood_overlay, "modulate", color_transparent, 1).from(color_visible)

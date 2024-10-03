@@ -116,12 +116,12 @@ func _on_character_died() -> void:
 
 func _on_returned_to_mainhub() -> void:
 	for i in range(stored_chars.size()):
-		var char: Character = stored_chars[i]
-		if not char:
+		var c: Character = stored_chars[i]
+		if not c:
 			continue ## null check
-		if char.is_dead:
-			char.revive()
-			char.stats.reset_stats()
+		if c.is_dead:
+			c.revive()
+			c.stats.reset_stats()
 	p.global_position = Vector2(1000, 1000) ## to hide player hehe
 	p.controls_disabled = false
 	change_character(0)

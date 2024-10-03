@@ -29,7 +29,7 @@ func Update(_delta: float) -> void:
 	play_anim()
 
 
-func Physics_Update(delta: float) -> void:
+func Physics_Update(_delta: float) -> void:
 	if !p:
 		return
 	p.velocity = Vector2.ZERO

@@ -111,11 +111,14 @@ layout_mode = 2
 size_flags_vertical = 3
 mouse_filter = 2
 
-[node name="InventoryInfo" type="PanelContainer" parent="VBox"]
+[node name="InventoryInfo" type="MarginContainer" parent="VBox"]
 layout_mode = 2
 size_flags_horizontal = 0
-size_flags_vertical = 8
-mouse_filter = 2
+size_flags_vertical = 0
+
+[node name="ColorRect" type="ColorRect" parent="VBox/InventoryInfo"]
+layout_mode = 2
+color = Color(0.119818, 0.165262, 0.245239, 0.631373)
 
 [node name="MarginContainer" type="MarginContainer" parent="VBox/InventoryInfo"]
 layout_mode = 2
@@ -145,77 +148,79 @@ layout_mode = 2
 text = "Orbs: 99999"
 label_settings = ExtResource("2_8oro1")
 
-[node name="line2" type="ColorRect" parent="VBox/InventoryInfo/MarginContainer/VBox"]
+[node name="VBox" type="VBoxContainer" parent="VBox/InventoryInfo/MarginContainer/VBox"]
+layout_mode = 2
+
+[node name="line2" type="ColorRect" parent="VBox/InventoryInfo/MarginContainer/VBox/VBox"]
 custom_minimum_size = Vector2(0, 3)
 layout_mode = 2
 color = Color(0.4, 0.4, 0.4, 0.670588)
 
-[node name="runes" type="Label" parent="VBox/InventoryInfo/MarginContainer/VBox"]
+[node name="runes" type="Label" parent="VBox/InventoryInfo/MarginContainer/VBox/VBox"]
 layout_mode = 2
 text = "Runes:"
 label_settings = ExtResource("2_8oro1")
 
-[node name="GridContainer" type="GridContainer" parent="VBox/InventoryInfo/MarginContainer/VBox"]
+[node name="GridContainer" type="GridContainer" parent="VBox/InventoryInfo/MarginContainer/VBox/VBox"]
 layout_mode = 2
 size_flags_horizontal = 0
 columns = 2
 
-[node name="HP" type="TextureRect" parent="VBox/InventoryInfo/MarginContainer/VBox/GridContainer"]
+[node name="HP" type="TextureRect" parent="VBox/InventoryInfo/MarginContainer/VBox/VBox/GridContainer"]
 layout_mode = 2
 texture = SubResource("AtlasTexture_lefp4")
 expand_mode = 2
 stretch_mode = 5
 
-[node name="num_hp" type="Label" parent="VBox/InventoryInfo/MarginContainer/VBox/GridContainer"]
+[node name="num_hp" type="Label" parent="VBox/InventoryInfo/MarginContainer/VBox/VBox/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
 text = "x0"
 label_settings = ExtResource("2_8oro1")
 
-[node name="ATK" type="TextureRect" parent="VBox/InventoryInfo/MarginContainer/VBox/GridContainer"]
+[node name="ATK" type="TextureRect" parent="VBox/InventoryInfo/MarginContainer/VBox/VBox/GridContainer"]
 layout_mode = 2
 texture = SubResource("AtlasTexture_hdesh")
 expand_mode = 2
 stretch_mode = 5
 
-[node name="num_atk" type="Label" parent="VBox/InventoryInfo/MarginContainer/VBox/GridContainer"]
+[node name="num_atk" type="Label" parent="VBox/InventoryInfo/MarginContainer/VBox/VBox/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
 text = "x0"
 label_settings = ExtResource("2_8oro1")
 
-[node name="EP" type="TextureRect" parent="VBox/InventoryInfo/MarginContainer/VBox/GridContainer"]
+[node name="EP" type="TextureRect" parent="VBox/InventoryInfo/MarginContainer/VBox/VBox/GridContainer"]
 layout_mode = 2
 texture = SubResource("AtlasTexture_pkc00")
 expand_mode = 2
 stretch_mode = 5
 
-[node name="num_ep" type="Label" parent="VBox/InventoryInfo/MarginContainer/VBox/GridContainer"]
+[node name="num_ep" type="Label" parent="VBox/InventoryInfo/MarginContainer/VBox/VBox/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
 text = "x0"
 label_settings = ExtResource("2_8oro1")
 
-[node name="CHR" type="TextureRect" parent="VBox/InventoryInfo/MarginContainer/VBox/GridContainer"]
+[node name="CHR" type="TextureRect" parent="VBox/InventoryInfo/MarginContainer/VBox/VBox/GridContainer"]
 layout_mode = 2
 texture = SubResource("AtlasTexture_siwc1")
 expand_mode = 2
 stretch_mode = 5
 
-[node name="num_chr" type="Label" parent="VBox/InventoryInfo/MarginContainer/VBox/GridContainer"]
+[node name="num_chr" type="Label" parent="VBox/InventoryInfo/MarginContainer/VBox/VBox/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
 text = "x0"
 label_settings = ExtResource("2_8oro1")
 
-[node name="UpgradeStatsButton" type="Button" parent="VBox/InventoryInfo/MarginContainer/VBox"]
-modulate = Color(0.388235, 0.698039, 0.858824, 1)
+[node name="UpgradeStatsButton" type="Button" parent="VBox/InventoryInfo/MarginContainer/VBox/VBox"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 12
 text = "LEVEL UP"
 
-[connection signal="pressed" from="VBox/InventoryInfo/MarginContainer/VBox/UpgradeStatsButton" to="." method="_on_upgrade_stats_pressed"]
+[connection signal="pressed" from="VBox/InventoryInfo/MarginContainer/VBox/VBox/UpgradeStatsButton" to="." method="_on_upgrade_stats_pressed"]

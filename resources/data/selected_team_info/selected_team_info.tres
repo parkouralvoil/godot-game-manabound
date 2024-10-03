@@ -1,10 +1,11 @@
-[gd_resource type="Resource" script_class="SelectedTeamInfo" load_steps=5 format=3 uid="uid://cw7j4j6w6f1yk"]
+[gd_resource type="Resource" script_class="SelectedTeamInfo" load_steps=6 format=3 uid="uid://cw7j4j6w6f1yk"]
 
 [ext_resource type="Resource" uid="uid://bt57r35hpevcb" path="res://characters/knight/knight_char_data.tres" id="1_ivpt3"]
 [ext_resource type="Script" path="res://resources/data/selected_team_info/selected_team_info.gd" id="1_od00v"]
 [ext_resource type="Script" path="res://characters/CharacterResource.gd" id="1_rsjbl"]
 [ext_resource type="Resource" uid="uid://c85jly26hwn1j" path="res://characters/witch/witch_char_data.tres" id="3_cwyee"]
+[ext_resource type="Resource" uid="uid://c11fmdv1k7omo" path="res://characters/rogue/rogue_char_data.tres" id="4_sct0k"]
 
 [resource]
 script = ExtResource("1_od00v")
-TEMP_char_data_array = Array[ExtResource("1_rsjbl")]([ExtResource("1_ivpt3"), ExtResource("3_cwyee")])
+TEMP_char_data_array = Array[ExtResource("1_rsjbl")]([ExtResource("1_ivpt3"), ExtResource("3_cwyee"), ExtResource("4_sct0k")])

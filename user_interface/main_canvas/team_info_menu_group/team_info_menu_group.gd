@@ -20,10 +20,16 @@ var current_index: int = 0
 @onready var char_3: Button = $MarginContainer/VBox/HBox1/Char3
 @onready var char_buttons: Array[Button] = [char_1, char_2, char_3]
 
+@onready var stree_button: Button = $MarginContainer/VBox/HBox2/SkillTrees
+
 
 func initialize_team_info(team_info: SelectedTeamInfo) -> void:
 	visibility_changed.connect(_switch_sub_menu.bind(stree_menu))
 	_update_char_buttons(team_info.char_data_array)
+
+
+func _ready() -> void:
+	visibility_changed.connect(_return_to_default_view)
 
 
 func _switch_sub_menu(menu: Control) -> void:
@@ -77,3 +83,11 @@ func _on_skill_trees_pressed() -> void:
 func _on_character_stats_pressed() -> void:
 	_switch_sub_menu(char_stats_menu)
 	label_current_menu.text = char_stats_menu.show_specific_menu(current_index)
+
+func _return_to_default_view() -> void:
+	char_buttons[0].button_pressed = true
+	stree_button.button_pressed = true
+	_switch_sub_menu(stree_menu)
+	current_menu.show_specific_menu(0)
+	current_index = 0
+	

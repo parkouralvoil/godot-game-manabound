@@ -30,6 +30,13 @@ var CHR_increase: int = 10
 ## TEMP: gonna have inventory handle upgrading stats for now
 ## ideally, it'd be responsibility of UpgradeModel, but im still thinkin
 
+func reset_inventory() -> void:
+	mana_orbs = 0
+	rune_ATK = 0
+	rune_CHR = 0
+	rune_EP = 0
+	rune_HP = 0
+
 func use_rune_HP(stats: CharacterStats) -> void:
 	assert(stats, "PlayerInventory: Missing stats param")
 	if rune_HP > 0:

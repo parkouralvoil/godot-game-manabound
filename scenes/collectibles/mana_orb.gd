@@ -27,6 +27,7 @@ var go_towards_player: bool = false
 func _ready() -> void:
 	current_trail.hide()
 	EnemyAiManager.call_attract_orbs.connect(attract_orb)
+	EventBus.returned_to_mainhub.connect(queue_free)
 	match tier:
 		possible_tiers.SMALL:
 			texture = texture_small

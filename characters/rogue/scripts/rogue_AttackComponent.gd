@@ -124,7 +124,7 @@ func do_swing_animation(downwards: bool) -> void:
 	var duration: float
 	var anim_slash_rot: float
 	
-	get_parent().scale = character.anim_sprite.scale ## this is so budots
+	scale = character.anim_sprite.scale ## this is so budots
 	## swing sword downwards
 	if downwards:
 		if PlayerInfo.aim_direction.x > 0:

@@ -32,7 +32,7 @@ func _process(delta: float) -> void:
 		character.wpn.modulate = Color(1, 1, 1)
 
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if !character.enabled or character.is_dead:
 		return
 	

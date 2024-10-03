@@ -31,7 +31,7 @@ func _ready() -> void:
 		open()
 
 
-func _input(event: InputEvent) -> void:
+func _input(_event: InputEvent) -> void:
 	if EventBus.interacting and player_nearby:
 		if is_open and not pressed:
 			#line_interact.hide()

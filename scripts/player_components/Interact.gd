@@ -31,10 +31,6 @@ func _process(_delta: float) -> void:
 	line.points[0] = Vector2.ZERO
 	line.points[1] = closest_interactable.global_position - global_position
 
-func _physics_process(delta: float) -> void:
-	pass
-	#update arrows
-
 func _unhandled_key_input(event: InputEvent) -> void:
 	if p.controls_disabled or closest_interactable == null or p.PlayerInfo.team_alive == 0:
 		EventBus.interacting = false

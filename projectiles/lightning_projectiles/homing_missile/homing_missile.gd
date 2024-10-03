@@ -27,7 +27,7 @@ func _physics_process(delta: float) -> void:
 		disappear()
 
 func get_nearest_enemy() -> HurtboxComponent:
-	var nearest_enemy: HurtboxComponent
+	var nearest_enemy: HurtboxComponent = null
 	for enemy in enemy_detector.get_overlapping_areas():
 			var dist: float = position.distance_squared_to(enemy.global_position)
 			if not nearest_enemy:

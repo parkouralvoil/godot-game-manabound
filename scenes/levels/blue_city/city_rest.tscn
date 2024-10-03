@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=4 uid="uid://dg8mvmb7h5m4t"]
+[gd_scene load_steps=10 format=4 uid="uid://dg8mvmb7h5m4t"]
 
 [ext_resource type="Script" path="res://scenes/levels/blue_city/level_manager.gd" id="1_spgcc"]
 [ext_resource type="PackedScene" uid="uid://d23s3ceqy66ry" path="res://scenes/levels/test/test_parallax.tscn" id="2_odiln"]
@@ -7,9 +7,11 @@
 [ext_resource type="Script" path="res://scenes/levels/holders/enemy_holder.gd" id="6_j1c72"]
 [ext_resource type="PackedScene" uid="uid://cievadvfmo3xd" path="res://scenes/levels/level_world_environment.tscn" id="7_t4ktx"]
 [ext_resource type="PackedScene" uid="uid://cc327ml5lr825" path="res://scenes/levels/door/exit_door.tscn" id="8_jjrnb"]
+[ext_resource type="Texture2D" uid="uid://drjybtwhhlmfk" path="res://assets/sprite_interactables/upgrade_station.png" id="9_ilhk1"]
 [ext_resource type="PackedScene" uid="uid://ik5ko0nytiss" path="res://scenes/levels/door/start_door.tscn" id="9_qlajw"]
 
 [node name="city_rest" type="Node2D"]
+position = Vector2(-11, 371)
 script = ExtResource("1_spgcc")
 
 [node name="ParallaxBackground" parent="." instance=ExtResource("2_odiln")]
@@ -84,3 +86,7 @@ position = Vector2(340, -52)
 
 [node name="StartingPos" type="Marker2D" parent="."]
 position = Vector2(333, -75)
+
+[node name="upgrade" type="Sprite2D" parent="."]
+position = Vector2(208, -112)
+texture = ExtResource("9_ilhk1")

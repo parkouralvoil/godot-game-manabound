@@ -25,7 +25,6 @@ sprite_frames = ExtResource("3_gmwro")
 animation = &"stance"
 
 [node name="arm" type="Sprite2D" parent="CharacterAnimationSprite"]
-z_index = 2
 position = Vector2(-5, 2)
 texture = ExtResource("9_khmxg")
 offset = Vector2(5, -2)

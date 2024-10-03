@@ -32,11 +32,15 @@ func Update(_delta: float) -> void:
 		return
 	#if p.velocity != Vector2.ZERO:
 	
-	if p.controls_disabled:
-		state_transition.emit(self, "PlayerIdle")
-	
 	flip_sprite()
 	play_anim()
+	if p.PlayerInfo.ult_animation_playing:
+		return
+	
+	if p.controls_disabled:
+		state_transition.emit(self, "PlayerIdle")
+	if not Input.is_action_pressed("right_click"):
+		state_transition.emit(self, "PlayerIdle")
 
 
 func Physics_Update(_delta: float) -> void:
@@ -51,9 +55,6 @@ func Physics_Update(_delta: float) -> void:
 	
 	p.circle_indicator.show()
 	
-	
-	if !Input.is_action_pressed("right_click"):
-		state_transition.emit(self, "PlayerIdle")
 	p.move_and_slide()
 
 
