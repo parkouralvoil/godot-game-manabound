@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=4 uid="uid://bdn5claftvmgn"]
+[gd_scene load_steps=22 format=4 uid="uid://bdn5claftvmgn"]
 
 [ext_resource type="Script" path="res://scenes/levels/main_hub/main_hub.gd" id="1_no8mj"]
 [ext_resource type="PackedScene" uid="uid://baksvorn8xwwc" path="res://scenes/levels/parallax_backgrounds/mountain_sky_tree.tscn" id="2_ggshg"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://dsdu11io064xj" path="res://assets/sprite_characters/rogue_spritesheet.png" id="8_knvnu"]
 [ext_resource type="Texture2D" uid="uid://d0b5yrantkkqm" path="res://characters/rogue/visuals/rogue_arm.tres" id="9_qngvn"]
 [ext_resource type="PackedScene" uid="uid://bkle7qrwjpj8o" path="res://scenes/interactables/health_potion/health_potion.tscn" id="10_eh2s7"]
+[ext_resource type="PackedScene" uid="uid://dubh6cpng3iu2" path="res://scenes/interactables/upgrade_station/upgrade_station.tscn" id="10_pbl8k"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nuxn5"]
 atlas = ExtResource("5_b6f4k")
@@ -199,3 +200,6 @@ texture = ExtResource("9_qngvn")
 
 [node name="HealthPotion" parent="." instance=ExtResource("10_eh2s7")]
 position = Vector2(427, -95)
+
+[node name="UpgradeStation" parent="." instance=ExtResource("10_pbl8k")]
+position = Vector2(165, -96)

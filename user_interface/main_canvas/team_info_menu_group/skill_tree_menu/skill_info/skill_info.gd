@@ -3,14 +3,18 @@ class_name SkillInfoClass
 
 signal buy_button_pressed
 
+var _current_node: SkillTreeNode = null
+var allow_buy: bool = false
+
 @onready var icon: TextureRect = $MarginContainer/VBox/SkillIcon
 @onready var skill_name: Label = $MarginContainer/VBox/name
 @onready var skill_desc: Label = $MarginContainer/VBox/ScrollContainer/description
-@onready var skill_lvl: Label = $MarginContainer/VBox/lvl
-@onready var skill_cost: Label = $MarginContainer/VBox/cost
-@onready var buy_button: Button = $MarginContainer/VBox/Buy_Button
 
-var _current_node: SkillTreeNode = null
+@onready var buy_details: VBoxContainer = $MarginContainer/VBox/VBox
+@onready var skill_lvl: Label = $MarginContainer/VBox/VBox/lvl
+@onready var skill_cost: Label = $MarginContainer/VBox/VBox/cost
+@onready var buy_button: Button = $MarginContainer/VBox/VBox/Buy_Button
+@onready var tip_station: Label = $MarginContainer/VBox/requires_station
 
 func _ready() -> void:
 	## show first node's info instead
@@ -32,6 +36,14 @@ func show_selected_skill(node_button: SkillTreeNodeButton) -> void:
 	icon.flip_h = node_button.flip_h
 	
 	_current_node = node_button.stree_node
+	if _current_node.lvl == _current_node.max_lvl:
+		tip_station.hide()
+	elif not allow_buy:
+		buy_details.hide()
+		tip_station.show()
+	else:
+		buy_details.show()
+		tip_station.hide()
 	_update_displayed_info()
 
 

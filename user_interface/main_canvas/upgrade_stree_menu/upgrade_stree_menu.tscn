@@ -1,0 +1,106 @@
+[gd_scene load_steps=6 format=3 uid="uid://764f7ksfh0sl"]
+
+[ext_resource type="PackedScene" uid="uid://dblvtepnyt1hx" path="res://user_interface/main_canvas/team_info_menu_group/skill_tree_menu/stree_specific/stree_knight.tscn" id="1_jwkqn"]
+[ext_resource type="Script" path="res://user_interface/main_canvas/upgrade_stree_menu/upgrade_stree_menu.gd" id="1_ybdk0"]
+[ext_resource type="PackedScene" uid="uid://cbv6l6ryqhw1x" path="res://user_interface/main_canvas/team_info_menu_group/skill_tree_menu/stree_specific/stree_witch.tscn" id="2_iixpp"]
+[ext_resource type="PackedScene" uid="uid://cybp0skh3c672" path="res://user_interface/main_canvas/team_info_menu_group/skill_tree_menu/stree_specific/stree_rogue.tscn" id="3_eb5af"]
+[ext_resource type="PackedScene" uid="uid://ynd4jyc4neao" path="res://user_interface/main_canvas/team_info_menu_group/skill_tree_menu/skill_info/skill_info.tscn" id="4_idy6i"]
+
+[node name="UpgradeStreeMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ybdk0")
+
+[node name="background" type="ColorRect" parent="."]
+z_index = -10
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.173245, 0.304892, 0.262511, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 10
+
+[node name="HBox" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Margin1" type="MarginContainer" parent="MarginContainer/HBox"]
+layout_mode = 2
+theme_override_constants/margin_bottom = 30
+
+[node name="StreeHolder" type="TabContainer" parent="MarginContainer/HBox/Margin1"]
+self_modulate = Color(0.976471, 0.976471, 0.976471, 0.419608)
+z_index = -2
+layout_mode = 2
+mouse_filter = 2
+current_tab = 0
+
+[node name="Knight" parent="MarginContainer/HBox/Margin1/StreeHolder" instance=ExtResource("1_jwkqn")]
+z_index = 2
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="Witch" parent="MarginContainer/HBox/Margin1/StreeHolder" instance=ExtResource("2_iixpp")]
+visible = false
+z_index = 2
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="Rogue" parent="MarginContainer/HBox/Margin1/StreeHolder" instance=ExtResource("3_eb5af")]
+visible = false
+z_index = 2
+layout_mode = 2
+metadata/_tab_index = 2
+
+[node name="Spacer" type="Control" parent="MarginContainer/HBox"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+
+[node name="Margin2" type="MarginContainer" parent="MarginContainer/HBox"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_top = 31
+theme_override_constants/margin_bottom = 30
+
+[node name="Skill_Info" parent="MarginContainer/HBox/Margin2" instance=ExtResource("4_idy6i")]
+layout_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="OrbsDisplay" type="Label" parent="."]
+layout_mode = 0
+offset_left = 46.0
+offset_top = 399.0
+offset_right = 86.0
+offset_bottom = 422.0
+text = "Mana Orbs: 9"
+
+[node name="Return" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -76.0
+offset_top = 10.0
+offset_right = -15.0
+offset_bottom = 41.0
+grow_horizontal = 0
+text = "Return"
+
+[connection signal="pressed" from="Return" to="." method="_on_return_pressed"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://ynd4jyc4neao"]
+[gd_scene load_steps=8 format=3 uid="uid://ynd4jyc4neao"]
 
 [ext_resource type="Script" path="res://user_interface/main_canvas/team_info_menu_group/skill_tree_menu/skill_info/skill_info.gd" id="1_o0ofg"]
 [ext_resource type="Texture2D" uid="uid://h46xv64l4n2u" path="res://assets/sprite_UI/AbilityIcons0.png" id="2_5g4pe"]
@@ -11,6 +11,9 @@ region = Rect2(48, 48, 16, 16)
 
 [sub_resource type="LabelSettings" id="LabelSettings_27joy"]
 font_size = 11
+
+[sub_resource type="LabelSettings" id="LabelSettings_loi2t"]
+font_size = 10
 
 [node name="Skill_Info" type="PanelContainer"]
 anchors_preset = 15
@@ -66,7 +69,10 @@ label_settings = SubResource("LabelSettings_27joy")
 autowrap_mode = 3
 justification_flags = 160
 
-[node name="lvl" type="Label" parent="MarginContainer/VBox"]
+[node name="VBox" type="VBoxContainer" parent="MarginContainer/VBox"]
+layout_mode = 2
+
+[node name="lvl" type="Label" parent="MarginContainer/VBox/VBox"]
 custom_minimum_size = Vector2(140, 0)
 layout_mode = 2
 text = "Level: "
@@ -74,7 +80,7 @@ label_settings = ExtResource("5_w32p4")
 autowrap_mode = 3
 justification_flags = 160
 
-[node name="cost" type="Label" parent="MarginContainer/VBox"]
+[node name="cost" type="Label" parent="MarginContainer/VBox/VBox"]
 custom_minimum_size = Vector2(140, 0)
 layout_mode = 2
 text = "Cost: "
@@ -82,10 +88,18 @@ label_settings = ExtResource("5_w32p4")
 autowrap_mode = 3
 justification_flags = 160
 
-[node name="Buy_Button" type="Button" parent="MarginContainer/VBox"]
+[node name="Buy_Button" type="Button" parent="MarginContainer/VBox/VBox"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
 text = "Unlock Skill"
 
-[connection signal="pressed" from="MarginContainer/VBox/Buy_Button" to="." method="_on_buy_button_pressed"]
+[node name="requires_station" type="Label" parent="MarginContainer/VBox"]
+visible = false
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+text = "Requires Upgrade Station to unlock/upgrade skill."
+label_settings = SubResource("LabelSettings_loi2t")
+autowrap_mode = 3
+
+[connection signal="pressed" from="MarginContainer/VBox/VBox/Buy_Button" to="." method="_on_buy_button_pressed"]

@@ -16,6 +16,8 @@ signal returned_to_mainhub
 signal interactable_detected(component: Interactable)
 var interacting: bool = false ## erm this is not a signal but whatevar
 
+signal interacted_upgraded_station
+
 ## UI and UI
 signal upgrade_stats_pressed()
 

@@ -21,6 +21,7 @@ script = ExtResource("2_pvbba")
 [node name="Line2D" type="Line2D" parent="."]
 process_mode = 3
 visible = false
+show_behind_parent = true
 top_level = true
 z_index = -1
 points = PackedVector2Array(0, 0, 0, 0)

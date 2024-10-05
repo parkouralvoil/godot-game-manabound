@@ -184,7 +184,6 @@ func initialize_model() -> void:
 
 
 func update_damage() -> void:
-	print_debug("updated dmg")
 	damage_lightning_bolt = AbilityHelper.compute_damage(base_percent_lightning_bolt, 
 			scale_percent_lightning_bolt, level_basicAtk_burst, stats)
 		

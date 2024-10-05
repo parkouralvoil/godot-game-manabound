@@ -36,17 +36,21 @@ theme_override_constants/margin_top = 20
 [node name="TabContainer" type="TabContainer" parent="MarginContainer"]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_ufjtm")
+current_tab = 0
 
 [node name="UpgradeStatsTab" parent="MarginContainer/TabContainer" instance=ExtResource("2_3h8qe")]
 layout_mode = 2
+metadata/_tab_index = 0
 
 [node name="UpgradeStatsTab2" parent="MarginContainer/TabContainer" instance=ExtResource("2_3h8qe")]
 visible = false
 layout_mode = 2
+metadata/_tab_index = 1
 
 [node name="UpgradeStatsTab3" parent="MarginContainer/TabContainer" instance=ExtResource("2_3h8qe")]
 visible = false
 layout_mode = 2
+metadata/_tab_index = 2
 
 [node name="Return" type="Button" parent="."]
 layout_mode = 0

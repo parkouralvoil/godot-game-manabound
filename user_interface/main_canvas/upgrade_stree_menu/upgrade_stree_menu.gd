@@ -1,12 +1,15 @@
 extends Control
-class_name SkillTreeMenu
+class_name UpgradeStreeMenu
+
+
+signal exit_menu
 
 ##@onready var stree_knight: Control = $Stree_Knight
 ## manager shouldnt have to know which stree this is, it just has to be a generic stree
 var inventory: PlayerInventory = preload("res://resources/data/player_inventory/player_inventory.tres")
 
-@onready var stree_holder: AspectRatioContainer = $MarginContainer/HBoxContainer/StreeHolder
-@onready var skill_info: SkillInfoClass = $MarginContainer/HBoxContainer/MarginContainer/Skill_Info
+@onready var stree_holder: TabContainer = $MarginContainer/HBox/Margin1/StreeHolder
+@onready var skill_info: SkillInfoClass = $MarginContainer/HBox/Margin2/Skill_Info
 @onready var orbs_display: Label = $OrbsDisplay
 @onready var current_stree: SkillTreeSpecific = null
 
@@ -34,7 +37,7 @@ func _ready() -> void:
 	visibility_changed.connect(retrieve_stree_info.bind(current_stree.root_node_button, current_stree))
 	current_stree.show()
 	
-	skill_info.allow_buy = false ## NOTE: this menu cannot upgrade stree
+	skill_info.allow_buy = true
 
 func retrieve_stree_info(_button: SkillTreeNodeButton, _stree: SkillTreeSpecific) -> void:
 	current_stree = _stree
@@ -69,3 +72,7 @@ func show_specific_menu(index: int) -> String:
 	else:
 		OS.alert("Called (show_specific_menu) on %s with OOB index: %d" % [name, index])
 	return stree_array[index].name
+
+
+func _on_return_pressed() -> void:
+	exit_menu.emit()

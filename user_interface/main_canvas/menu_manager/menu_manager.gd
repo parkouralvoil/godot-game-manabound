@@ -9,6 +9,7 @@ var level_up_available: bool
 @onready var team_info: TeamInfoMenuGroup = $TeamInfoMenuGroup
 @onready var preset_choice_window: ChoosePresetMenu = $PresetChoiceWindow
 @onready var upgrade_stats_menu: UpgradeStatsMenu = $UpgradeStatsMenu
+@onready var upgrade_stree_menu: UpgradeStreeMenu = $UpgradeStreeMenu
 
 ## (eventually need to redo TeamInfoMenuGrp using tab containers....)
 
@@ -25,10 +26,12 @@ func initialize_menus(dungeon: DungeonData,
 
 func _ready() -> void:
 	EventBus.upgrade_stats_pressed.connect(switch_current_menu.bind(upgrade_stats_menu))
+	EventBus.interacted_upgraded_station.connect(switch_current_menu.bind(upgrade_stree_menu))
 	
 	team_info.hide()
 	team_info.exit_menu.connect(close_menu)
 	upgrade_stats_menu.exit_menu.connect(close_menu)
+	upgrade_stree_menu.exit_menu.connect(close_menu)
 	preset_choice_window.hide()
 
 
