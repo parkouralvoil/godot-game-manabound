@@ -6,10 +6,13 @@ class_name MenuManager
 var current_menu_opened: Control = null
 var level_up_available: bool
 
+@onready var pause_menu: PauseMenu = $PauseMenu
 @onready var team_info: TeamInfoMenuGroup = $TeamInfoMenuGroup
 @onready var preset_choice_window: ChoosePresetMenu = $PresetChoiceWindow
 @onready var upgrade_stats_menu: UpgradeStatsMenu = $UpgradeStatsMenu
 @onready var upgrade_stree_menu: UpgradeStreeMenu = $UpgradeStreeMenu
+
+@onready var screen_buttons: HBoxContainer = $HBox_ScreenButtons
 
 ## (eventually need to redo TeamInfoMenuGrp using tab containers....)
 
@@ -29,6 +32,7 @@ func _ready() -> void:
 	EventBus.interacted_upgraded_station.connect(switch_current_menu.bind(upgrade_stree_menu))
 	
 	team_info.hide()
+	pause_menu.exit_menu.connect(close_menu)
 	team_info.exit_menu.connect(close_menu)
 	upgrade_stats_menu.exit_menu.connect(close_menu)
 	upgrade_stree_menu.exit_menu.connect(close_menu)
@@ -43,8 +47,11 @@ func _unhandled_input(event: InputEvent) -> void:
 	
 	## opening lvl menu is done thru button
 	
-	if event.is_action_pressed("esc") and current_menu_opened:
-		close_menu()
+	if event.is_action_pressed("esc"):
+		if current_menu_opened:
+			close_menu()
+		else:
+			switch_current_menu(pause_menu)
 		
 	if event.is_action_pressed("console"):
 		DevConsole.visible = not DevConsole.visible
@@ -55,12 +62,14 @@ func switch_current_menu(_menu: Control) -> void:
 		current_menu_opened.hide()
 	current_menu_opened = _menu
 	current_menu_opened.show()
+	screen_buttons.hide()
 	pause_game()
 
 
 func close_menu() -> void:
 	current_menu_opened.hide()
 	unpause_game()
+	screen_buttons.show()
 	current_menu_opened = null
 
 

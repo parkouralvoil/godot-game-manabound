@@ -4,7 +4,7 @@ class_name TeamInfoMenuGroup
 signal exit_menu
 
 var color_stree := Color(0.25, 0.28, 0.37) #40475e
-var color_char_stats := Color(0.18, 0.32, 0.26)
+#var color_char_stats := Color(0.18, 0.32, 0.26)
 
 var current_index: int = 0
 
@@ -30,6 +30,7 @@ func initialize_team_info(team_info: SelectedTeamInfo) -> void:
 
 func _ready() -> void:
 	visibility_changed.connect(_return_to_default_view)
+	background.color = color_stree
 
 
 func _switch_sub_menu(menu: Control) -> void:
@@ -37,12 +38,12 @@ func _switch_sub_menu(menu: Control) -> void:
 		stree_menu.show()
 		current_menu = stree_menu
 		char_stats_menu.hide()
-		background.color = color_stree
+		#background.color = color_stree
 	elif menu == char_stats_menu:
 		char_stats_menu.show()
 		current_menu = char_stats_menu
 		stree_menu.hide()
-		background.color = color_char_stats
+		#background.color = color_char_stats
 
 
 func _update_char_buttons(data: Array[CharacterResource]) -> void:

@@ -16,6 +16,7 @@ var x_direction: int = 1
 ## specific logic variables
 var falling: bool = true
 var can_revive: bool = true
+var interacting: bool = false
 
 ## revive properties:
 var revive_speed: float = 80
@@ -58,14 +59,26 @@ func _ready() -> void:
 	EventBus.returned_to_mainhub.connect(queue_free)
 
 
+func try_interact() -> void: ## called by interactable
+	if can_revive and not interacting:
+		interacting = true
+		EventBus.interactable_held.emit()
+
+
+func try_release() -> void:
+	if interacting:
+		interacting = false
+		EventBus.interactable_finished.emit()
+
+
 func _process(delta: float) -> void: ## I NEED DELTA so dont chagne to input function
-	if EventBus.interacting and can_revive:
+	if interacting:
 		revive_progress = clampf(revive_progress + revive_speed * delta,
 				0,
 				max_revive)
 		if revive_progress >= max_revive:
-			revive_char()
-			EventBus.interacting = false
+			EventBus.interactable_finished.emit()
+			revive_char() ## HAS QUEUE FREE
 	else:
 		revive_progress = 0
 

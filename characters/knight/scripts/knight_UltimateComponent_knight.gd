@@ -10,6 +10,8 @@ class_name Knight_UltimateComponent
 @onready var PlayerInfo: PlayerInfoResource ## given by AM
 @onready var AM: Knight_AbilityManager = get_parent()
 
+@onready var charge_particles: GPUParticles2D = $charge_particles
+
 var charge_tier: int = 0
 
 func _ready() -> void:
@@ -17,6 +19,7 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	if !character.enabled or character.is_dead:
+		charge_particles.emitting = false
 		decay_charge(delta)
 		return
 	
@@ -24,7 +27,9 @@ func _process(delta: float) -> void:
 		PlayerInfo.ult_recoil = true
 		raise_charge(delta)
 		character.sprite_look_at(PlayerInfo.mouse_direction)
+		charge_particles.emitting = true
 	else:
+		charge_particles.emitting = false
 		if character.stats.charge >= 50:
 			spend_charge()
 		else:

@@ -16,10 +16,9 @@ func _ready() -> void:
 	EventBus.interactable_detected.connect(_on_interactable_detected)
 
 
-func _unhandled_key_input(_event: InputEvent) -> void:
-	if EventBus.interacting and player_nearby:
+func try_interact() -> void:
+	if player_nearby:
 		EventBus.interacted_upgraded_station.emit()
-		EventBus.interacting = false
 
 
 func _on_interactable_detected(event_bus_interactable: Interactable) -> void:

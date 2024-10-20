@@ -85,8 +85,8 @@ func fix_lines_pos() -> void:
 	
 	if get_parent() is TextureButton:
 		var parent: TextureButton = get_parent()
-		line_2D.points[0] = (global_position + size/2)
-		line_2D.points[1] = (parent.global_position + size/2)
+		line_2D.points[0] = (size/2)
+		line_2D.points[1] = (parent.global_position - global_position) + size/2
 
 
 func _on_pressed() -> void:

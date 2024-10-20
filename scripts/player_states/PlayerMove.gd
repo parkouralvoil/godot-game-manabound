@@ -9,6 +9,9 @@ var slow_speed: float = 20
 
 var boost_afterimages: int = 1
 
+func _ready() -> void: 
+	EventBus.interactable_held.connect(func(): state_transition.emit(self, "PlayerInteract"))
+
 func Enter() -> void:
 	if !p:
 		return

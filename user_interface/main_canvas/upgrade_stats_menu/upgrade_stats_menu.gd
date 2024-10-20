@@ -32,5 +32,5 @@ func initialize_stats_menu(_selected_team_info: SelectedTeamInfo,
 		printerr("Upgrade Stats Menu: possible error in initialize_stats_menu()")
 
 
-func _on_return_pressed() -> void:
+func _on_exit_button_pressed() -> void:
 	exit_menu.emit()

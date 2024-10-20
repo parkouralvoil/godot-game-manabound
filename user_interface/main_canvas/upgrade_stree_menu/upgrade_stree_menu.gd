@@ -18,6 +18,7 @@ var stree_array: Array[SkillTreeSpecific]
 
 func initialize_stree_menu() -> void:
 	assert(stree_array[0], "missing stree at scene: %s" % name)
+	print_debug("is this called")
 	current_stree = stree_array[0] ## NOTE: ORDER OF ARRAY IS IMPORTANT, 
 	## it must align with order of characters in the team
 
@@ -57,7 +58,7 @@ func stree_perform_buy() -> void:
 	orbs_display.text = "Mana Orbs: %d" % inventory.mana_orbs
 
 
-func _switch_stree(stree: SkillTreeSpecific) -> void:
+func _switch_stree(stree: SkillTreeSpecific) -> void: ## tab container is not doing this
 	for t in stree_array:
 		if not t == stree:
 			t.hide()
@@ -73,6 +74,5 @@ func show_specific_menu(index: int) -> String:
 		OS.alert("Called (show_specific_menu) on %s with OOB index: %d" % [name, index])
 	return stree_array[index].name
 
-
-func _on_return_pressed() -> void:
+func _on_exit_button_pressed() -> void:
 	exit_menu.emit()

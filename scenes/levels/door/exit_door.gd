@@ -31,13 +31,11 @@ func _ready() -> void:
 		open()
 
 
-func _input(_event: InputEvent) -> void:
-	if EventBus.interacting and player_nearby:
-		if is_open and not pressed:
-			#line_interact.hide()
+func try_interact() -> void:
+	if player_nearby:
+		if is_open and not pressed: ## to avoid spamming this
 			local_exit_door_interacted.emit()
 			pressed = true
-		EventBus.interacting = false
 
 
 func open() -> void:

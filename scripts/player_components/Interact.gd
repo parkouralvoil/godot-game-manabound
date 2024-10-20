@@ -33,15 +33,15 @@ func _process(_delta: float) -> void:
 
 func _unhandled_key_input(event: InputEvent) -> void:
 	if p.controls_disabled or closest_interactable == null or p.PlayerInfo.team_alive == 0:
-		EventBus.interacting = false
 		return
 	
-	if event.is_action_pressed("interact") and closest_interactable:
-		p.velocity = Vector2.ZERO
-		EventBus.interacting = true
+	if event.is_action_pressed("interact"):
+		if closest_interactable:
+			closest_interactable.interact()
 	elif event.is_action_released("interact"):
-		EventBus.interacting = false
-
+		print_debug("why here")
+		if closest_interactable:
+			closest_interactable.release()
 
 func _on_area_entered(_area: Area2D) -> void:
 	_on_update_closest_timeout()

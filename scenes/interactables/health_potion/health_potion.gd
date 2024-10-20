@@ -16,8 +16,8 @@ func _ready() -> void:
 	EventBus.interactable_detected.connect(_on_interactable_detected)
 
 
-func _input(_event: InputEvent) -> void:
-	if EventBus.interacting and player_nearby:
+func try_interact() -> void: ## called by interactable
+	if player_nearby:
 		PlayerInfo.drank_hp_potion.emit()
 		queue_free()
 

@@ -7,6 +7,9 @@ class_name PlayerStance
 var recoil_speed: float = 200
 var slow_speed: float = 20
 
+func _ready() -> void: 
+	EventBus.interactable_held.connect(func(): state_transition.emit(self, "PlayerInteract"))
+
 func Enter() -> void:
 	if !p:
 		return

@@ -1,0 +1,93 @@
+[gd_scene load_steps=2 format=3 uid="uid://ds55x55vctxxh"]
+
+[ext_resource type="Texture2D" uid="uid://k11ouf4r01us" path="res://icon.svg" id="1_qareg"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.241156, 0.241156, 0.241156, 1)
+
+[node name="TabContainer" type="TabContainer" parent="."]
+layout_mode = 0
+offset_left = 85.0
+offset_top = 76.0
+offset_right = 435.0
+offset_bottom = 327.0
+current_tab = 1
+
+[node name="Control" type="Control" parent="TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="Button" type="Button" parent="TabContainer/Control"]
+layout_mode = 0
+offset_left = 47.0
+offset_top = 51.0
+offset_right = 111.0
+offset_bottom = 82.0
+text = "yoyoyo"
+
+[node name="Line2D" type="Line2D" parent="TabContainer/Control/Button"]
+show_behind_parent = true
+position = Vector2(32, 15)
+points = PackedVector2Array(46, 52, 0, 0)
+
+[node name="Button2" type="Button" parent="TabContainer/Control/Button"]
+layout_mode = 0
+offset_left = 47.0
+offset_top = 50.0
+offset_right = 111.0
+offset_bottom = 81.0
+text = "yoyoyo"
+
+[node name="Control2" type="Control" parent="TabContainer"]
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="TextureButton" type="TextureButton" parent="TabContainer/Control2"]
+show_behind_parent = true
+layout_mode = 0
+offset_left = 40.0
+offset_top = 25.0
+offset_right = 99.0
+offset_bottom = 83.0
+texture_normal = ExtResource("1_qareg")
+ignore_texture_size = true
+stretch_mode = 4
+
+[node name="TextureButton" type="TextureButton" parent="TabContainer/Control2/TextureButton"]
+show_behind_parent = true
+offset_left = 74.0
+offset_top = 54.0
+offset_right = 133.0
+offset_bottom = 112.0
+texture_normal = ExtResource("1_qareg")
+ignore_texture_size = true
+stretch_mode = 4
+
+[node name="TextureButton2" type="TextureButton" parent="TabContainer/Control2/TextureButton/TextureButton"]
+show_behind_parent = true
+offset_left = 9.0
+offset_top = -72.0
+offset_right = 68.0
+offset_bottom = -14.0
+texture_normal = ExtResource("1_qareg")
+ignore_texture_size = true
+stretch_mode = 4
+
+[node name="Line2D" type="Line2D" parent="TabContainer/Control2/TextureButton/TextureButton/TextureButton2"]
+show_behind_parent = true
+points = PackedVector2Array(17, 97, 28, 35, 27, 33)

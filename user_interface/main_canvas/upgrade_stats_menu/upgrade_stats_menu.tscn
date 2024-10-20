@@ -22,13 +22,52 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.125126, 0.170598, 0.370774, 1)
+color = Color(0.195774, 0.173633, 0.2711, 1)
+
+[node name="TopPart" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 58.0
+grow_horizontal = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 10
+
+[node name="CenterContainer" type="CenterContainer" parent="TopPart"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="TopPart/CenterContainer"]
+layout_mode = 2
+text = "Level up menu"
+
+[node name="VBox" type="VBoxContainer" parent="TopPart"]
+layout_mode = 2
+
+[node name="HBox1" type="HBoxContainer" parent="TopPart/VBox"]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="TopPart/VBox/HBox1"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ExitButton" type="Button" parent="TopPart/VBox/HBox1"]
+layout_mode = 2
+text = "Return"
+metadata/_edit_use_anchors_ = true
+
+[node name="line" type="ColorRect" parent="TopPart/VBox"]
+custom_minimum_size = Vector2(0, 3)
+layout_mode = 2
+color = Color(0.431373, 0.431373, 0.431373, 1)
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = 34.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/margin_top = 20
@@ -52,12 +91,4 @@ visible = false
 layout_mode = 2
 metadata/_tab_index = 2
 
-[node name="Return" type="Button" parent="."]
-layout_mode = 0
-offset_left = 563.0
-offset_top = 11.0
-offset_right = 624.0
-offset_bottom = 42.0
-text = "Return"
-
-[connection signal="pressed" from="Return" to="." method="_on_return_pressed"]
+[connection signal="pressed" from="TopPart/VBox/HBox1/ExitButton" to="." method="_on_exit_button_pressed"]

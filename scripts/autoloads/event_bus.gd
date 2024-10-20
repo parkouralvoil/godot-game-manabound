@@ -14,7 +14,10 @@ signal returned_to_mainhub
 
 ## interactable
 signal interactable_detected(component: Interactable)
-var interacting: bool = false ## erm this is not a signal but whatevar
+
+signal interactable_held
+signal interactable_finished
+	## for "hold E to ..." like downed char, this stops player
 
 signal interacted_upgraded_station
 

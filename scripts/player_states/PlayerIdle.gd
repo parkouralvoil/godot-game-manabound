@@ -7,6 +7,9 @@ class_name PlayerIdle
 var air_deaccel: float = 200 #deacceleration
 var recoil_speed: float = 10000
 
+func _ready() -> void: 
+	EventBus.interactable_held.connect(func(): state_transition.emit(self, "PlayerInteract"))
+
 func Enter() -> void:
 	if !p:
 		return
@@ -25,11 +28,9 @@ func Update(_delta: float) -> void:
 	if !p:
 		return
 	#if p.velocity != Vector2.ZERO:
-	
-	if EventBus.interacting:
-		state_transition.emit(self, "PlayerInteract")
 	if not p.PlayerInfo.basic_attacking:
 		flip_sprite()
+	handle_inputs()
 	play_anim()
 
 
@@ -58,7 +59,7 @@ func Physics_Update(delta: float) -> void:
 	# slow down player's speed xd
 
 
-func _unhandled_input(event: InputEvent) -> void: ## since control UIs need to take click
+func handle_inputs() -> void: ## since control UIs need to take click
 	if p.controls_disabled:
 		return
 	
@@ -66,15 +67,13 @@ func _unhandled_input(event: InputEvent) -> void: ## since control UIs need to t
 		state_transition.emit(self, "PlayerMove")
 		p.PlayerInfo.basic_attacking = false
 		p.circle_indicator.show()
-		p.PlayerInfo.input_attack = false
 	
-	if event.is_action_pressed("left_click") and not Input.is_action_pressed("space"):
+	if Input.is_action_pressed("left_click") and not Input.is_action_pressed("space"):
 		p.PlayerInfo.input_attack = true
-	
-	if event.is_action_released("left_click"):
+	else:
 		p.PlayerInfo.input_attack = false
 	
-	if event.is_action_pressed("right_click") and p.PlayerInfo.can_charge:
+	if Input.is_action_pressed("right_click") and p.PlayerInfo.can_charge:
 		state_transition.emit(self, "PlayerStance")
 
 

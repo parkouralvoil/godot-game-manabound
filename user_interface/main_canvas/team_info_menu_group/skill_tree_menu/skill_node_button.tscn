@@ -10,6 +10,7 @@ region = Rect2(32, 32, 16, 16)
 
 [node name="SkillNodeButton" type="TextureButton"]
 process_mode = 3
+show_behind_parent = true
 custom_minimum_size = Vector2(50, 50)
 offset_right = 50.0
 offset_bottom = 50.0
@@ -22,8 +23,6 @@ script = ExtResource("2_pvbba")
 process_mode = 3
 visible = false
 show_behind_parent = true
-top_level = true
-z_index = -1
 points = PackedVector2Array(0, 0, 0, 0)
 width = 5.0
 default_color = Color(0.196078, 0.203922, 0.270588, 1)

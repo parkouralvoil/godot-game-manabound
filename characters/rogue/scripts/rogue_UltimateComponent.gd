@@ -16,9 +16,9 @@ var sword_explosion_color := Color(2, 0.2, 0.2)
 func _process(_delta: float) -> void:
 	if not character.enabled:
 		return
-	
+	#character.stats.charge = 100 ## HACK 
 	PlayerInfo.ult_recoil = false
-	if character.stats.charge <= character.stats.MAX_CHARGE:
+	if character.stats.charge >= character.stats.MAX_CHARGE:
 		if PlayerInfo.input_ult:
 			character.sprite_look_at(PlayerInfo.mouse_direction)
 		if Input.is_action_just_released("right_click") and not PlayerInfo.ult_animation_playing:

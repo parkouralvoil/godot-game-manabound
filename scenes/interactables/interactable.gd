@@ -9,6 +9,20 @@ func select_this() -> void:
 	EventBus.interactable_detected.emit(self)
 
 
+func interact() -> void: ## pressed E, used by ALL interactables
+	var parent: Node2D = get_parent()
+	if parent.has_method("try_interact"):
+		parent.try_interact()
+	else:
+		print_debug("possible error for %s, lacks try_interact() method" % parent.name)
+
+
+func release() -> void: ## released E, used by interactables requiring HOLD input
+	var parent: Node2D = get_parent()
+	if parent.has_method("try_release"):
+		parent.try_release()
+
+
 func _physics_process(_delta: float) -> void:
 	var target_pos := EnemyAiManager.player_position
 	if global_position.distance_squared_to(target_pos) <= 10000:

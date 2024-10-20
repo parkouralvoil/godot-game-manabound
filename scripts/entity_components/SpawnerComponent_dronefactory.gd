@@ -4,6 +4,7 @@ class_name SpawnerComponent
 @export var smalldrone_scene: PackedScene
 
 @onready var e: Enemy_DroneFactory = owner
+@onready var holder: EnemyHolder = owner.get_parent().get_parent() ## dronefactory to marker to enemyholder
 
 @onready var markers: Array[Marker2D] = [$Marker2D]
 @onready var t_spawn: Timer = $spawn_timer
@@ -41,7 +42,9 @@ func spawn(drone: PackedScene, pos: Vector2) -> void:
 		drone_instance.global_position = pos
 		drone_instance.spawned_runtime = true
 		drone_instance.top_level = true
-		add_child(drone_instance)
+		owner.get_parent().add_child(drone_instance) 
+		## drones shouldnt be destroyed 
+		## if their factory is destroyed
 	elif drone_instance == null:
 		pass # print(drone)
 

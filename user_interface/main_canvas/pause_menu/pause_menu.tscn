@@ -1,0 +1,165 @@
+[gd_scene load_steps=4 format=3 uid="uid://c337bocqumywo"]
+
+[ext_resource type="Script" path="res://user_interface/main_canvas/pause_menu/pause_menu.gd" id="1_x6scr"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_sjd45"]
+font_size = 24
+
+[sub_resource type="LabelSettings" id="LabelSettings_uyndo"]
+font_size = 12
+
+[node name="PauseMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_x6scr")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.174537, 0.169284, 0.191538, 0.729412)
+
+[node name="Center1" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -160.0
+offset_bottom = -126.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Center1"]
+layout_mode = 2
+text = "Game Paused"
+label_settings = SubResource("LabelSettings_sjd45")
+horizontal_alignment = 1
+
+[node name="Center2" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBox_main" type="VBoxContainer" parent="Center2"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Resume" type="Button" parent="Center2/VBox_main"]
+layout_mode = 2
+text = "Resume"
+
+[node name="Settings" type="Button" parent="Center2/VBox_main"]
+layout_mode = 2
+text = "Settings WIP"
+
+[node name="ReturnToBase" type="Button" parent="Center2/VBox_main"]
+layout_mode = 2
+text = "Return to Base"
+
+[node name="ExitGame" type="Button" parent="Center2/VBox_main"]
+layout_mode = 2
+text = "Exit Game"
+
+[node name="VBox_confirm_base" type="VBoxContainer" parent="Center2"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+
+[node name="heading" type="Label" parent="Center2/VBox_confirm_base"]
+layout_mode = 2
+text = "Are you sure you want to return to base?"
+horizontal_alignment = 1
+
+[node name="explain" type="Label" parent="Center2/VBox_confirm_base"]
+layout_mode = 2
+text = "This will fail the expedition."
+label_settings = SubResource("LabelSettings_uyndo")
+horizontal_alignment = 1
+
+[node name="spacer" type="Control" parent="Center2/VBox_confirm_base"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="CenterContainer" type="CenterContainer" parent="Center2/VBox_confirm_base"]
+layout_mode = 2
+
+[node name="HBox" type="HBoxContainer" parent="Center2/VBox_confirm_base/CenterContainer"]
+layout_mode = 2
+
+[node name="confirm_return" type="Button" parent="Center2/VBox_confirm_base/CenterContainer/HBox"]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+text = "Confirm"
+
+[node name="spacer" type="Control" parent="Center2/VBox_confirm_base/CenterContainer/HBox"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="cancel_return" type="Button" parent="Center2/VBox_confirm_base/CenterContainer/HBox"]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+text = "Cancel"
+
+[node name="VBox_confirm_exit" type="VBoxContainer" parent="Center2"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+
+[node name="heading" type="Label" parent="Center2/VBox_confirm_exit"]
+layout_mode = 2
+text = "Are you sure you want to exit the game?"
+horizontal_alignment = 1
+
+[node name="explain" type="Label" parent="Center2/VBox_confirm_exit"]
+layout_mode = 2
+text = "Current progress in this run will not be saved."
+label_settings = SubResource("LabelSettings_uyndo")
+horizontal_alignment = 1
+
+[node name="spacer" type="Control" parent="Center2/VBox_confirm_exit"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="CenterContainer" type="CenterContainer" parent="Center2/VBox_confirm_exit"]
+layout_mode = 2
+
+[node name="HBox" type="HBoxContainer" parent="Center2/VBox_confirm_exit/CenterContainer"]
+layout_mode = 2
+
+[node name="confirm_exit" type="Button" parent="Center2/VBox_confirm_exit/CenterContainer/HBox"]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+text = "Confirm"
+
+[node name="spacer" type="Control" parent="Center2/VBox_confirm_exit/CenterContainer/HBox"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="cancel_exit" type="Button" parent="Center2/VBox_confirm_exit/CenterContainer/HBox"]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+text = "Cancel"
+
+[connection signal="pressed" from="Center2/VBox_main/Resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="Center2/VBox_main/Settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="Center2/VBox_main/ReturnToBase" to="." method="_on_return_to_base_pressed"]
+[connection signal="pressed" from="Center2/VBox_main/ExitGame" to="." method="_on_exit_game_pressed"]
+[connection signal="pressed" from="Center2/VBox_confirm_base/CenterContainer/HBox/confirm_return" to="." method="_on_confirm_return_pressed"]
+[connection signal="pressed" from="Center2/VBox_confirm_base/CenterContainer/HBox/cancel_return" to="." method="_on_cancel_return_pressed"]
+[connection signal="pressed" from="Center2/VBox_confirm_exit/CenterContainer/HBox/confirm_exit" to="." method="_on_confirm_exit_pressed"]
+[connection signal="pressed" from="Center2/VBox_confirm_exit/CenterContainer/HBox/cancel_exit" to="." method="_on_cancel_exit_pressed"]

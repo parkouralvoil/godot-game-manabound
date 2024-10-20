@@ -121,7 +121,7 @@ func do_swing_animation(downwards: bool) -> void:
 	await get_tree().physics_frame
 	var iniital_rot: float
 	var aim_angle: float = PlayerInfo.aim_direction.angle()
-	var duration: float
+	var duration: float = t_firerate.wait_time/2
 	var anim_slash_rot: float
 	
 	scale = character.anim_sprite.scale ## this is so budots
@@ -134,16 +134,13 @@ func do_swing_animation(downwards: bool) -> void:
 			iniital_rot = aim_angle + deg_to_rad(180)
 			anim_slash_rot = aim_angle + deg_to_rad(20)
 		var t: Tween = create_tween()
-		t.set_ease(Tween.EASE_OUT)
-		duration = t_firerate.wait_time/2
 		t.tween_property(melee_arm, "global_rotation", anim_slash_rot, duration).from(iniital_rot)
 		t.parallel().tween_property(melee_wpn, "rotation", deg_to_rad(135), duration).from(deg_to_rad(45))
 		await t.finished
 		var t2: Tween = create_tween()
-		t2.set_ease(Tween.EASE_OUT)
 		melee_hit(RogueMeleeHitDown)
 		fire_projectile()
-		t2.tween_property(melee_arm, "global_rotation", aim_angle, duration).from(anim_slash_rot)
+		t2.tween_property(melee_arm, "global_rotation", aim_angle, duration/2).from(anim_slash_rot)
 	## swing sword upwards
 	else:
 		var final_rot: float
@@ -156,13 +153,10 @@ func do_swing_animation(downwards: bool) -> void:
 			final_rot = aim_angle + deg_to_rad(180)
 			anim_slash_rot = aim_angle + deg_to_rad(160)
 		var t: Tween = create_tween()
-		t.set_ease(Tween.EASE_OUT)
-		duration = t_firerate.wait_time/2
 		t.tween_property(melee_arm, "global_rotation", anim_slash_rot, duration).from(iniital_rot)
 		t.parallel().tween_property(melee_wpn, "rotation", deg_to_rad(135), duration).from(deg_to_rad(165))
 		await t.finished
 		var t2: Tween = create_tween()
-		t2.set_ease(Tween.EASE_OUT)
 		melee_hit(RogueMeleeHitUp)
 		fire_projectile()
-		t2.tween_property(melee_arm, "global_rotation", final_rot, duration).from(anim_slash_rot)
+		t2.tween_property(melee_arm, "global_rotation", final_rot, duration/2).from(anim_slash_rot)

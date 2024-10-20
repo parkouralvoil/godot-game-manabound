@@ -34,7 +34,7 @@ layout_mode = 2
 
 [node name="UpgradeStats" type="Label" parent="MarginContainer/VBox"]
 layout_mode = 2
-text = "Upgrade Stats"
+text = "Raise stats"
 horizontal_alignment = 1
 
 [node name="line2" type="ColorRect" parent="MarginContainer/VBox"]
@@ -44,7 +44,7 @@ color = Color(0.556863, 0.556863, 0.556863, 1)
 
 [node name="RunesLeft" type="Label" parent="MarginContainer/VBox"]
 layout_mode = 2
-text = "Use runes to upgrade stats"
+text = "Use runes to increase stats"
 label_settings = ExtResource("1_4evtm")
 horizontal_alignment = 1
 
@@ -183,7 +183,7 @@ color = Color(0.556863, 0.556863, 0.556863, 1)
 
 [node name="BaseStats" type="Label" parent="MarginContainer/VBox"]
 layout_mode = 2
-text = "Base Stats:"
+text = "Current base stats:"
 label_settings = ExtResource("1_4evtm")
 horizontal_alignment = 1
 
