@@ -1,38 +1,19 @@
-extends Control
+extends SkillTreeMenu
 class_name UpgradeStreeMenu
-
 
 signal exit_menu
 
-##@onready var stree_knight: Control = $Stree_Knight
-## manager shouldnt have to know which stree this is, it just has to be a generic stree
-var inventory: PlayerInventory = preload("res://resources/data/player_inventory/player_inventory.tres")
-
-@onready var stree_holder: TabContainer = $MarginContainer/HBox/Margin1/StreeHolder
-@onready var skill_info: SkillInfoClass = $MarginContainer/HBox/Margin2/Skill_Info
-@onready var orbs_display: Label = $OrbsDisplay
-@onready var current_stree: SkillTreeSpecific = null
-
-var stree_array: Array[SkillTreeSpecific]
-
-
-func initialize_stree_menu() -> void:
-	assert(stree_array[0], "missing stree at scene: %s" % name)
-	print_debug("is this called")
-	current_stree = stree_array[0] ## NOTE: ORDER OF ARRAY IS IMPORTANT, 
-	## it must align with order of characters in the team
-
-
-func _ready() -> void:
-	for child in stree_holder.get_children():
-		if not child is SkillTreeSpecific:
-			continue
-		var stree: SkillTreeSpecific = child
+func initialize_stree_menu(_selected_team_info: SelectedTeamInfo) -> void:
+	var char_resource_array := _selected_team_info.char_data_array
+	for char_resource in char_resource_array:
+		var stree: SkillTreeSpecific = char_resource.skill_tree_scene.instantiate()
 		stree.tree_button_pressed.connect(retrieve_stree_info)
+		stree.name = "%s" % char_resource.char_name
 		stree_array.append(stree)
+		stree_holder.add_child(stree)
 		stree.hide()
 	
-	initialize_stree_menu()
+	current_stree = stree_array[0]
 	
 	skill_info.buy_button_pressed.connect(stree_perform_buy)
 	visibility_changed.connect(retrieve_stree_info.bind(current_stree.root_node_button, current_stree))
@@ -40,39 +21,9 @@ func _ready() -> void:
 	
 	skill_info.allow_buy = true
 
-func retrieve_stree_info(_button: SkillTreeNodeButton, _stree: SkillTreeSpecific) -> void:
-	current_stree = _stree
-	current_stree.call_update_node_info()
-	skill_info.show_selected_skill(_button)
-	orbs_display.text = "Mana Orbs: %d" % inventory.mana_orbs
-	
-	var node: SkillTreeNode = _button.stree_node
-	skill_info.buy_button.disabled = not _stree.skill_tree_model.check_if_can_buy(node)
-
-
-func stree_perform_buy() -> void:
-	if not current_stree: ## HACK
-		OS.alert("Stree is somehow not present in (stree_perform_buy) inside %s" % name)
-	
-	current_stree.call_attempt_buy_node()
-	orbs_display.text = "Mana Orbs: %d" % inventory.mana_orbs
-
-
-func _switch_stree(stree: SkillTreeSpecific) -> void: ## tab container is not doing this
-	for t in stree_array:
-		if not t == stree:
-			t.hide()
-	stree.show()
-	retrieve_stree_info(stree.root_node_button, stree)
-	current_stree = stree
-
-
-func show_specific_menu(index: int) -> String:
-	if index >= 0 and index < 3:
-		_switch_stree(stree_array[index])
-	else:
-		OS.alert("Called (show_specific_menu) on %s with OOB index: %d" % [name, index])
-	return stree_array[index].name
-
 func _on_exit_button_pressed() -> void:
 	exit_menu.emit()
+
+
+func _on_stree_holder_tab_changed(tab: int) -> void:
+	_switch_stree(stree_array[tab])

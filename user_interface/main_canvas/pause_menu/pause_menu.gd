@@ -11,7 +11,7 @@ signal exit_menu
 ## unnecessary, MenuManager pauses game when any menu is opened
 
 func _ready() -> void:
-	visibility_changed.connect(func(): show_specific_vbox(vbox_main))
+	visibility_changed.connect(func() -> void: show_specific_vbox(vbox_main))
 
 
 func show_specific_vbox(specific_vbox: VBoxContainer) -> void:

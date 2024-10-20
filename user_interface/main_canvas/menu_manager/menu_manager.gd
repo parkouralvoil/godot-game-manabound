@@ -24,6 +24,7 @@ func initialize_menus(dungeon: DungeonData,
 	team_info.initialize_team_info(selected_team_info)
 	preset_choice_window.initialize_preset_window(dungeon)
 	upgrade_stats_menu.initialize_stats_menu(selected_team_info, inv)
+	upgrade_stree_menu.initialize_stree_menu(selected_team_info)
 	print_debug("MenuManager: initialize menu done")
 
 

@@ -8,7 +8,7 @@ var air_deaccel: float = 200 #deacceleration
 var recoil_speed: float = 10000
 
 func _ready() -> void: 
-	EventBus.interactable_held.connect(func(): state_transition.emit(self, "PlayerInteract"))
+	EventBus.interactable_held.connect(func() -> void: state_transition.emit(self, "PlayerInteract"))
 
 func Enter() -> void:
 	if !p:

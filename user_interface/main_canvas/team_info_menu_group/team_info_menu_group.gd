@@ -25,6 +25,7 @@ var current_index: int = 0
 
 func initialize_team_info(team_info: SelectedTeamInfo) -> void:
 	visibility_changed.connect(_switch_sub_menu.bind(stree_menu))
+	stree_menu.initialize_stree_menu(team_info)
 	_update_char_buttons(team_info.char_data_array)
 
 
@@ -89,6 +90,6 @@ func _return_to_default_view() -> void:
 	char_buttons[0].button_pressed = true
 	stree_button.button_pressed = true
 	_switch_sub_menu(stree_menu)
-	current_menu.show_specific_menu(0)
+	label_current_menu.text = current_menu.show_specific_menu(0)
 	current_index = 0
 	

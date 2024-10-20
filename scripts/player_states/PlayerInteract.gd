@@ -8,7 +8,7 @@ var air_deaccel: float = 200 #deacceleration
 var recoil_speed: float = 10000
 
 func _ready() -> void: 
-	EventBus.interactable_finished.connect(func(): state_transition.emit(self, "PlayerIdle"))
+	EventBus.interactable_finished.connect(func() -> void: state_transition.emit(self, "PlayerIdle"))
 
 
 func Enter() -> void:
@@ -32,7 +32,7 @@ func Update(_delta: float) -> void:
 	play_anim()
 
 
-func Physics_Update(delta: float) -> void:
+func Physics_Update(_delta: float) -> void:
 	if !p:
 		return
 	p.velocity = Vector2.ZERO

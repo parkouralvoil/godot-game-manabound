@@ -1,40 +1,51 @@
 extends Control
 class_name SkillTreeMenu
 
-##@onready var stree_knight: Control = $Stree_Knight
-## manager shouldnt have to know which stree this is, it just has to be a generic stree
-var inventory: PlayerInventory = preload("res://resources/data/player_inventory/player_inventory.tres")
+## DYNAMICALLY ADDS CHILDREN TO "Skill_Info
 
-@onready var stree_holder: AspectRatioContainer = $MarginContainer/HBoxContainer/StreeHolder
-@onready var skill_info: SkillInfoClass = $MarginContainer/HBoxContainer/MarginContainer/Skill_Info
+## external data
+var inventory: PlayerInventory = preload("res://resources/data/player_inventory/player_inventory.tres") ## for mana orbs
+
+## internal data
+var stree_array: Array[SkillTreeSpecific]
+
+@onready var stree_holder: Container = %StreeHolder
+@onready var skill_info: SkillInfoClass = %Skill_Info
 @onready var orbs_display: Label = $OrbsDisplay
 @onready var current_stree: SkillTreeSpecific = null
 
-var stree_array: Array[SkillTreeSpecific]
-
-
-func initialize_stree_menu() -> void:
-	assert(stree_array[0], "missing stree at scene: %s" % name)
-	current_stree = stree_array[0] ## NOTE: ORDER OF ARRAY IS IMPORTANT, 
-	## it must align with order of characters in the team
-
-
-func _ready() -> void:
-	for child in stree_holder.get_children():
-		if not child is SkillTreeSpecific:
-			continue
-		var stree: SkillTreeSpecific = child
+func initialize_stree_menu(_selected_team_info: SelectedTeamInfo) -> void:
+	var char_resource_array := _selected_team_info.char_data_array
+	for char_resource in char_resource_array:
+		var stree: SkillTreeSpecific = char_resource.skill_tree_scene.instantiate()
 		stree.tree_button_pressed.connect(retrieve_stree_info)
+		stree.name = "%s Skill Tree" % char_resource.char_name
 		stree_array.append(stree)
+		stree_holder.add_child(stree)
 		stree.hide()
 	
-	initialize_stree_menu()
+	current_stree = stree_array[0]
 	
 	skill_info.buy_button_pressed.connect(stree_perform_buy)
 	visibility_changed.connect(retrieve_stree_info.bind(current_stree.root_node_button, current_stree))
 	current_stree.show()
 	
 	skill_info.allow_buy = false ## NOTE: this menu cannot upgrade stree
+
+#func _ready() -> void:
+	#for child in stree_holder.get_children():
+		#if not child is SkillTreeSpecific:
+			#continue
+		#var stree: SkillTreeSpecific = child
+		#stree.tree_button_pressed.connect(retrieve_stree_info)
+		#stree_array.append(stree)
+		#stree.hide()
+	#
+	#skill_info.buy_button_pressed.connect(stree_perform_buy)
+	#visibility_changed.connect(retrieve_stree_info.bind(current_stree.root_node_button, current_stree))
+	#current_stree.show()
+	#
+	#skill_info.allow_buy = false ## NOTE: this menu cannot upgrade stree
 
 func retrieve_stree_info(_button: SkillTreeNodeButton, _stree: SkillTreeSpecific) -> void:
 	current_stree = _stree

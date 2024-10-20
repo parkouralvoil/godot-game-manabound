@@ -43,21 +43,23 @@ layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -173.0
+offset_left = -125.0
 offset_bottom = 31.0
 grow_horizontal = 0
 
 [node name="team_menu" type="Button" parent="HBox_ScreenButtons"]
 layout_mode = 2
+size_flags_horizontal = 10
 theme_override_font_sizes/font_size = 9
 text = "Team Menu"
 
 [node name="spacer" type="Control" parent="HBox_ScreenButtons"]
-custom_minimum_size = Vector2(50, 0)
+custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
-size_flags_horizontal = 3
+size_flags_horizontal = 10
 
 [node name="pause" type="Button" parent="HBox_ScreenButtons"]
 layout_mode = 2
+size_flags_horizontal = 10
 theme_override_font_sizes/font_size = 10
 text = "Pause"

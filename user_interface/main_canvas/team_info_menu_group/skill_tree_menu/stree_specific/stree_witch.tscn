@@ -44,7 +44,7 @@ region = Rect2(32, 16, 16, 16)
 atlas = SubResource("CompressedTexture2D_1yk67")
 region = Rect2(80, 16, 16, 16)
 
-[node name="StreeWtich" type="Control"]
+[node name="StreeWitch" type="Control"]
 custom_minimum_size = Vector2(350, 300)
 layout_mode = 3
 anchors_preset = 15

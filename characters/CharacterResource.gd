@@ -11,7 +11,7 @@ signal selected_changed()
 @export var sprite_arm: Texture
 
 @export_category("For Panel_Char and UIs")
-@export var skill_tree_scene: PackedScene
+@export var skill_tree_scene: PackedScene ## FOR SKILL TREES (and upgrade stree)
 @export var sprite_portrait: Texture
 @export var sprite_window: Texture
 
