@@ -22,7 +22,5 @@ spread = 30.0
 initial_velocity_min = 150.0
 initial_velocity_max = 150.0
 gravity = Vector3(0, 0, 0)
-scale_min = 2.0
-scale_max = 2.0
 scale_curve = SubResource("CurveTexture_k0503")
 color_ramp = SubResource("GradientTexture1D_bswsb")

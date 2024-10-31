@@ -11,7 +11,7 @@ resource_local_to_scene = true
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4am2d"]
 atlas = ExtResource("3_3sktt")
-region = Rect2(231, 7, 4, 3)
+region = Rect2(231, 7, 3, 3)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xsojq"]
 atlas = ExtResource("3_12el5")
@@ -36,7 +36,7 @@ shape = SubResource("SegmentShape2D_2rc1a")
 
 [node name="CastingParticle" type="GPUParticles2D" parent="."]
 emitting = false
-amount = 30
+amount = 10
 process_material = ExtResource("2_gdktj")
 texture = SubResource("AtlasTexture_4am2d")
 lifetime = 0.4
@@ -47,5 +47,10 @@ amount = 20
 process_material = ExtResource("2_wvfa3")
 texture = SubResource("AtlasTexture_xsojq")
 lifetime = 0.2
+
+[node name="cast_duration" type="Timer" parent="."]
+process_callback = 0
+wait_time = 2.0
+one_shot = true
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]

@@ -18,7 +18,7 @@ func _ready() -> void:
 	initialize_hud_children()
 	print_debug("%s: initialize_hud_children done" % name)
 	player_info.character_died.connect(_on_character_died.unbind(1))
-	
+
 
 func initialize_hud_children() -> void:
 	blood_overlay.initialize(player_info)
@@ -29,4 +29,4 @@ func initialize_hud_children() -> void:
 func _on_character_died() -> void:
 	if player_info.team_alive == 0:
 		await get_tree().create_timer(0.8).timeout
-		gameover.show_gameover()
+		gameover.show_gameover_characters_dead()

@@ -80,3 +80,10 @@ func pause_game() -> void:
 
 func unpause_game() -> void:
 	get_tree().paused = false
+
+
+func _on_team_menu_pressed() -> void:
+	switch_current_menu(team_info)
+
+func _on_open_pause_menu_pressed() -> void:
+	switch_current_menu(pause_menu)

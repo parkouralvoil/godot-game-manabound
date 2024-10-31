@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="RoomPreset" load_steps=2 format=3 uid="uid://dj6atd3nolqdf"]
+
+[ext_resource type="Script" path="res://resources/data/dungeon_managers/room_preset.gd" id="1_4j2vx"]
+
+[resource]
+script = ExtResource("1_4j2vx")
+preset_name = "Bowless"
+info1 = "Average enemy density"
+info2 = "Only lasers and blue orbs spawn"
+info3 = ""
+num_of_enemies = 6
+autobow = 0.0
+orb = 3.0
+laser = 3.0
+dronefactory = 0.0
+num_of_elites = 0
+machinegun = 1.0
+HP_potion_present = false

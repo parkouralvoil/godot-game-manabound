@@ -3,16 +3,22 @@ class_name BaseEnemy
 
 signal health_changed(new_health: float)
 signal reload_time_changed(new_reload_time: float)
+signal attack_interrupted()
 
+@export_category("Enemy Stats")
 @export var stats: EnemyStats
+@export var interruptable: bool = true
+@export_category("Visuals")
 @export var bullet_impact_scene: PackedScene # im recycling this for enemy's death explosion sfx
 @export var enemy_dead_texture: AtlasTexture
 @export var impact_scale: Vector2 = Vector2(3, 3)
 
+var damage_number: PackedScene = preload("res://user_interface/UI_attached_to_enemies/label_dmg_num.tscn")
+var rng := RandomNumberGenerator.new()
+
 # debuff vars:
 #var debuff_by_superconduct: bool = false
 ## im against this ^ this "reload_time_changed" signal alrdy indicates it
-## TODO: overload's interrupt effect against laser_crystals and blue_orbs
 
 var max_health: float = 50.0
 var default_reload_time: float = 5.0
@@ -66,17 +72,22 @@ func _ready() -> void:
 		await get_tree().create_timer(0.5).timeout
 		process_mode = Node.PROCESS_MODE_INHERIT
 
-
+## called by HealthComponent
 func take_damage(damage: float, element: CombatManager.Elements, ep: float = 0) -> void:
 	if health_component:
 		health_component.damage_received(damage, element, ep)
 
-
+## called by HealthComponent
 func take_debuff(debuff: CombatManager.Debuffs, ep: float = 0) -> void:
 	if health_component:
 		health_component.apply_debuff(debuff, ep)
 
+## called by HealthComponent
+func try_attack_interrupted() -> void:
+	if interruptable:
+		attack_interrupted.emit()
 
+## called by HealthComponent
 func make_impact() -> void:
 	var imp_instance: BulletImpact = bullet_impact_scene.instantiate()
 	imp_instance.global_position = global_position
@@ -93,3 +104,31 @@ func _set_stats() -> void:
 	
 	health_component.set_healthbar_properties(stats.health)
 	mana_orbs_dropped = max_health
+
+
+func spawn_dmg_number(effect: String, color: Color) -> void:
+	var pos_variance: Vector2
+	var label_inst: LabelCombatText = damage_number.instantiate()
+	
+	label_inst.text = effect
+	label_inst.modulate = color
+	
+	if effect.is_valid_int():
+		pos_variance = Vector2(rng.randf_range(-10, 10), rng.randf_range(-5, 5) )
+	else:
+		label_inst.speed = -20
+		label_inst.duration = 1.2
+		if effect == "Superconduct":
+			pos_variance = Vector2(-33,-20)
+		elif effect == "Melt":
+			pos_variance = Vector2(-11,-20)
+		elif effect == "Overload":
+			pos_variance = Vector2(-21.5,-20)
+		elif effect == "INTERRUPTED!":
+			pos_variance = Vector2(-35,20)
+			label_inst.speed = 0
+		else:
+			pos_variance = Vector2(-37,-20)
+	
+	label_inst.global_position = self.global_position + pos_variance
+	get_tree().root.call_deferred("add_child", label_inst)

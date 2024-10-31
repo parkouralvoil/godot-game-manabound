@@ -5,6 +5,7 @@ class_name EnemyAttackComponent_EnergizedOrb
 @onready var spawner: OrbExplosionSpawn = $orb_explosion_spawn
 @onready var line: Line2D = $Line2D
 @onready var e: BaseEnemy = owner
+@onready var charging_particles: GPUParticles2D = $charging_particles
 
 var can_fire: bool
 var vision_range: float = 1000
@@ -16,7 +17,7 @@ var ammo: int = max_ammo
 
 var firing_offset: bool = true
 
-var og_color: Color = Color(0.9, 0.9, 1, 0.7)
+var line_og_color: Color = Color(0.9, 0.9, 1, 0.7)
 
 func _ready() -> void:
 	e.reload_time_changed.connect(update_reload)
@@ -25,14 +26,20 @@ func _ready() -> void:
 	var probability: float = rng.randf_range(0.1, 5)
 	await get_tree().create_timer(probability).timeout
 	firing_offset = false
+	e.attack_interrupted.connect(interrupt_attack)
 
 
 func _physics_process(_delta: float) -> void:
 	if firing_offset:
+		charging_particles.emitting = false
+		e.sprite_main.modulate = Color(0.6, 0.6, 0.6)
 		return
+	
 	if not spawner.attack_done:
 		can_fire = false
+		charging_particles.emitting = true
 	else:
+		charging_particles.emitting = false
 		line.hide()
 		can_fire = (EnemyAiManager.player_position - global_position).length() < vision_range
 		if t_reload.is_stopped() and ammo <= 0:
@@ -52,9 +59,9 @@ func attack() -> void:
 	spawner.prepare_impact(target_pos)
 	line.show()
 	var tween: Tween = create_tween()
-	tween.tween_property(line, "default_color", Color(0.5, 0.5, 0.6, 0), 0.8).from(og_color)
+	tween.tween_property(line, "default_color", Color(0.5, 0.5, 0.6, 0), 0.8).from(line_og_color)
 	line.points[1] = to_local(target_pos)
-	ammo -= 1
+	ammo = 0
 
 
 func _on_reload_timeout() -> void:
@@ -64,3 +71,9 @@ func _on_reload_timeout() -> void:
 
 func update_reload(new_reload: float) -> void:
 	t_reload.wait_time = new_reload
+
+
+func interrupt_attack() -> void:
+	if not spawner.attack_done:
+		spawner.interrupt_impact()
+		e.spawn_dmg_number("INTERRUPTED!", Color(0.9, 0.9, 0.9))

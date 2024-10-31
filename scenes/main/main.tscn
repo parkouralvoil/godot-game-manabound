@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://bfigo4q6at8d8"]
+[gd_scene load_steps=20 format=3 uid="uid://bfigo4q6at8d8"]
 
 [ext_resource type="Script" path="res://scenes/main/main.gd" id="1_fwn4r"]
 [ext_resource type="Script" path="res://scenes/main/DungeonHolder.gd" id="2_j78xc"]
@@ -17,6 +17,8 @@
 [ext_resource type="Material" uid="uid://bhwosssphve8" path="res://resources/particles/laser_casting_particles.tres" id="8_6k147"]
 [ext_resource type="Material" uid="uid://c8r5m4n7colab" path="res://resources/particles/laser_impact_particles.tres" id="9_sarm2"]
 [ext_resource type="AudioStream" uid="uid://nm3appge6che" path="res://assets/audio/music/DUNGEON002 (haven).mp3" id="10_6bqnx"]
+[ext_resource type="PackedScene" uid="uid://csqsr7eo05kdl" path="res://scenes/main/level_summary.tscn" id="11_5utcx"]
+[ext_resource type="Script" path="res://scenes/main/level_summary.gd" id="12_sjol1"]
 
 [node name="Main" type="Node2D"]
 process_mode = 3
@@ -40,9 +42,8 @@ position_smoothing_enabled = false
 [node name="PlayerHolder" parent="." instance=ExtResource("4_p316a")]
 process_mode = 1
 
-[node name="level_summary" type="Node" parent="."]
-
-[node name="HTTPRequest" type="HTTPRequest" parent="level_summary"]
+[node name="LevelSummary" parent="." instance=ExtResource("11_5utcx")]
+script = ExtResource("12_sjol1")
 
 [node name="particle_preloader_for_web" type="Node2D" parent="."]
 process_mode = 1

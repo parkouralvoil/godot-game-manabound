@@ -14,6 +14,7 @@ var ammo: int = 0
 
 func _ready() -> void:
 	t_reload.start()
+	e.attack_interrupted.connect(interrupt_attack)
 
 
 func _physics_process(_delta: float) -> void:
@@ -34,4 +35,12 @@ func _on_laser_duration_timeout() -> void:
 	t_reload.start()
 	ammo = 0
 	e.sprite_main.self_modulate = Color(0.6, 0.6, 0.6)
-	
+
+
+func interrupt_attack() -> void:
+	if laser[0].is_casting:
+		for l in laser:
+			l.is_casting = false
+		e.spawn_dmg_number("INTERRUPTED!", Color(1, 0.9, 0.9))
+		t_duration.stop()
+		_on_laser_duration_timeout()

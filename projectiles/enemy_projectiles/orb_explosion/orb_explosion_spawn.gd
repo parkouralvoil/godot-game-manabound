@@ -9,6 +9,7 @@ const orb_explosion_scene: PackedScene = preload("res://projectiles/enemy_projec
 var final_scale: Vector2 = Vector2(0.15, 0.15)
 var time_before_explosion: float = 2
 var attack_done: bool = true
+var interrupted: bool = false
 
 func prepare_impact(initial_pos: Vector2) -> void:
 	global_position = initial_pos
@@ -18,11 +19,24 @@ func prepare_impact(initial_pos: Vector2) -> void:
 	tween.tween_property(red_circle, "scale", final_scale, 
 			time_before_explosion).from(Vector2.ZERO)
 	await tween.finished
-	spawn_impact(global_position)
+	_attempt_fire()
+
+
+func interrupt_impact() -> void:
+	interrupted = true
 	attack_done = true
 	hide()
 
-func spawn_impact(pos: Vector2) -> void:
+
+func _attempt_fire() -> void:
+	if not interrupted:
+		_spawn_impact(global_position)
+	attack_done = true
+	interrupted = false
+	hide()
+
+
+func _spawn_impact(pos: Vector2) -> void:
 	var instance: DamageImpact = orb_explosion_scene.instantiate()
 	instance.global_position = pos
 	instance.damage = 1.0

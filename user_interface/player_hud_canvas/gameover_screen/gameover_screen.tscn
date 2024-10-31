@@ -70,7 +70,8 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
 
-[node name="party_mem" type="Label" parent="MarginContainer/VBox1"]
+[node name="reason" type="Label" parent="MarginContainer/VBox1"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 size_flags_horizontal = 6
@@ -87,16 +88,18 @@ layout_mode = 2
 color = Color(0.969137, 0.969137, 0.969137, 1)
 
 [node name="progress" type="Label" parent="MarginContainer/VBox1"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 6
-text = "Level reached:"
+text = "Rooms explored:"
 label_settings = SubResource("LabelSettings_ss1gb")
 vertical_alignment = 1
 autowrap_mode = 3
 
 [node name="orbs" type="Label" parent="MarginContainer/VBox1"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 size_flags_horizontal = 6
@@ -107,6 +110,7 @@ vertical_alignment = 1
 autowrap_mode = 3
 
 [node name="enemies" type="Label" parent="MarginContainer/VBox1"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 size_flags_horizontal = 6

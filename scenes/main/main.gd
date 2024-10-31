@@ -19,6 +19,7 @@ var opaque := Color(0,0,0,1)
 
 @onready var black_screen: ColorRect = $MainCanvas/Blackscreen
 @onready var menu_manager: MenuManager = $MainCanvas/MenuManager
+@onready var level_summary: LevelSumamry = $LevelSummary
 
 
 func _ready() -> void:
@@ -83,6 +84,7 @@ func _update_children_data() -> void:
 	if menu_manager:
 		menu_manager.initialize_menus(main_dungeon_data, main_selected_team_info,
 				main_player_inventory) 
+	level_summary.initialize_level_summary(main_player_inventory)
 	DevConsole.dungeon_data = main_dungeon_data
 	DevConsole.selected_team_info = main_selected_team_info
 	DevConsole.inventory = main_player_inventory

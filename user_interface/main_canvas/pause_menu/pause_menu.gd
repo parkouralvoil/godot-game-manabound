@@ -39,7 +39,8 @@ func _on_exit_game_pressed() -> void:
 
 func _on_confirm_return_pressed() -> void:
 	## return to base
-	pass # Replace with function body.
+	EventBus.return_to_base_pressed.emit()
+	exit_menu.emit()
 
 
 func _on_cancel_return_pressed() -> void:

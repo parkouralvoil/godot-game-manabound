@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bhqkl7kraifkd"]
+[gd_scene load_steps=14 format=3 uid="uid://bhqkl7kraifkd"]
 
 [ext_resource type="Script" path="res://scenes/enemies/stationary_enemies/energizedOrb/enemy_energized_orb.gd" id="1_cgshh"]
 [ext_resource type="PackedScene" uid="uid://ccfj5qan8stdb" path="res://projectiles/bullet_impact.tscn" id="2_1kbps"]
@@ -17,6 +17,14 @@ region = Rect2(15, 13, 18, 22)
 [sub_resource type="CircleShape2D" id="CircleShape2D_dlwob"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ppbf0"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ny1f4"]
+particle_flag_disable_z = true
+spread = 180.0
+initial_velocity_min = 50.0
+initial_velocity_max = 50.0
+gravity = Vector3(0, 0, 0)
+color = Color(0.54902, 0.901961, 0.956863, 1)
 
 [node name="enemy_energizedOrb" type="CharacterBody2D"]
 collision_layer = 2
@@ -59,5 +67,10 @@ visible = false
 points = PackedVector2Array(0, 0, 0, 0)
 width = 1.0
 default_color = Color(0.203922, 0.32549, 0.596078, 0.615686)
+
+[node name="charging_particles" type="GPUParticles2D" parent="AttackComponent"]
+amount = 15
+process_material = SubResource("ParticleProcessMaterial_ny1f4")
+lifetime = 0.6
 
 [connection signal="timeout" from="AttackComponent/reload" to="AttackComponent" method="_on_reload_timeout"]

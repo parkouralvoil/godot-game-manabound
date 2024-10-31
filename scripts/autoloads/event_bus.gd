@@ -10,7 +10,8 @@ signal level_cleared(is_combat_room: bool) # emitted by level_manager || used by
 signal exit_door_interacted() # emitted by level_manager || used by DungeonHolder, UI
 
 ## game over
-signal returned_to_mainhub
+signal return_to_base_pressed ## emitted by PauseMenu || used by gameover_screen
+signal returned_to_mainhub ## final state of gameover
 
 ## interactable
 signal interactable_detected(component: Interactable)
@@ -25,7 +26,7 @@ signal interacted_upgraded_station
 signal upgrade_stats_pressed()
 
 ## enemies
-signal enemy_died() # emitted by enemies || used by level_manager
+signal enemy_died(e: BaseEnemy) # emitted by enemies || used by level_manager
 
 ## energy generation (rn for Rogue)
 signal energy_gen_from_enemy_got_hit(procs: float)

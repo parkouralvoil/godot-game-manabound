@@ -2,8 +2,17 @@ extends Resource
 class_name PlayerInventory
 
 signal number_of_runes_changed
+signal total_orbs_changed ## for level summary
 
-var mana_orbs: int = 0 #50000
+var total_orbs_collected: int = 0:
+	set(val):
+		total_orbs_collected = val
+		total_orbs_changed.emit() ## for level summary
+var mana_orbs: int = 0:
+	set(val):
+		if val > mana_orbs:
+			total_orbs_collected += (val - mana_orbs)
+		mana_orbs = val
 
 var rune_HP: int = 0:
 	set(val):

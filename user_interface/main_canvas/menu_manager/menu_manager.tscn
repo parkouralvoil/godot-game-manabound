@@ -58,8 +58,11 @@ custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 size_flags_horizontal = 10
 
-[node name="pause" type="Button" parent="HBox_ScreenButtons"]
+[node name="open_pause_menu" type="Button" parent="HBox_ScreenButtons"]
 layout_mode = 2
 size_flags_horizontal = 10
 theme_override_font_sizes/font_size = 10
 text = "Pause"
+
+[connection signal="pressed" from="HBox_ScreenButtons/team_menu" to="." method="_on_team_menu_pressed"]
+[connection signal="pressed" from="HBox_ScreenButtons/open_pause_menu" to="." method="_on_open_pause_menu_pressed"]

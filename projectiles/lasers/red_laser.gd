@@ -1,11 +1,6 @@
 extends Area2D
 class_name Laser
 
-@onready var raycast: RayCast2D = $RayCast2D
-@onready var line: Line2D = $Line2D
-@onready var collision_shape: CollisionShape2D = $CollisionShape2D
-@onready var casting_particle: GPUParticles2D = $CastingParticle
-@onready var impact_particle: GPUParticles2D = $ImpactParticle
 var segment: SegmentShape2D
 var blink: float = 0.5
 var duration: float = 0.5
@@ -13,6 +8,13 @@ var duration: float = 0.5
 var width: float = 5
 var element: CombatManager.Elements = CombatManager.Elements.NONE
 var damage: float = 1
+
+@onready var raycast: RayCast2D = $RayCast2D
+@onready var line: Line2D = $Line2D
+@onready var collision_shape: CollisionShape2D = $CollisionShape2D
+@onready var casting_particle: GPUParticles2D = $CastingParticle
+@onready var impact_particle: GPUParticles2D = $ImpactParticle
+@onready var t_cast: Timer = $cast_duration
 
 var is_casting: bool = false :
 	set(value):
@@ -69,10 +71,12 @@ func appear() -> void:
 	var blink_start: Color = Color(0.5, 0.1, 0.1, 1)
 	var blink_end: Color = Color(0.5, 0.1, 0.1, 0.2)
 	show()
+	casting_particle.emitting = true
 	line.show()
 	line.width = 2
 	line.modulate = initial
-	await get_tree().create_timer(2).timeout
+	t_cast.start()
+	await t_cast.timeout
 	line.width = 5
 	var tween: Tween = create_tween()
 	tween.set_ease(Tween.EASE_OUT)
@@ -87,7 +91,6 @@ func emit() -> void:
 	set_deferred("monitoring", true)
 	set_physics_process(true)
 	update_particles()
-	casting_particle.emitting = true
 	if raycast.is_colliding():
 		impact_particle.emitting = true
 	
@@ -114,6 +117,7 @@ func disappear() -> void:
 	# raycast disabled
 	# line disappears
 	# after await, finish
+	t_cast.stop()
 	var tween: Tween = create_tween()
 	casting_particle.emitting = false
 	impact_particle.emitting = false

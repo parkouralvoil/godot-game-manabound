@@ -1,7 +1,6 @@
 extends Node2D
 class_name EnemyHealthComponent
 
-@export var damage_number: PackedScene
 @export var enemy_explosion_sfx: AudioStream
 @export var explosion_volume: float = -15
 
@@ -12,7 +11,6 @@ class_name EnemyHealthComponent
 	## but once i add ways to change reaction effects
 	## they need to be relagated to debuff resources
 
-var rng := RandomNumberGenerator.new()
 var element_initial: CombatManager.Elements = CombatManager.Elements.NONE
 var is_dead: bool = false
 
@@ -27,8 +25,9 @@ var color_tier3 := Color(0.87, 0, 1)
 @onready var healthbar: ProgressBar = $Healthbar
 @onready var HBox: HBoxContainer = $HBoxContainer
 
-func _ready() -> void:
-	assert(damage_number, "forgot to export")
+## damage number moved to baseEnemy, since atk component needs it too
+#func _ready() -> void:
+	#assert(damage_number, "forgot to export") 
 
 #region Health Component
 func damage_received(damage: float, new_elem: CombatManager.Elements, ep: float = 0) -> void:
@@ -45,7 +44,7 @@ func damage_received(damage: float, new_elem: CombatManager.Elements, ep: float 
 			damage = damage * (2 + ep/100)
 	
 	if damage > 0:
-		spawn_dmg_number(str(round(damage)), CombatManager.params[new_elem])
+		e.spawn_dmg_number(str(round(damage)), CombatManager.params[new_elem])
 	
 	if e.health - damage > 0:
 		e.health -= damage
@@ -71,43 +70,19 @@ func produce_energy(procs: float) -> void:
 	EventBus.energy_gen_from_enemy_got_hit.emit(procs)
 
 
-func spawn_dmg_number(effect: String, color: Color) -> void:
-	var pos_variance: Vector2
-	var label_inst: LabelCombatText = damage_number.instantiate()
-	
-	label_inst.text = effect
-	label_inst.modulate = color
-	
-	if effect.is_valid_int():
-		pos_variance = Vector2(rng.randf_range(-10, 10), rng.randf_range(-5, 5) )
-	else:
-		label_inst.speed = -20
-		if effect == "Superconduct":
-			pos_variance = Vector2(-33,-20)
-		elif effect == "Melt":
-			pos_variance = Vector2(-11,-20)
-		elif effect == "Overload":
-			pos_variance = Vector2(-21.5,-20)
-		else:
-			pos_variance = Vector2(-37,-20)
-	
-	label_inst.global_position = self.global_position + pos_variance
-	get_tree().root.call_deferred("add_child", label_inst)
-
-
 func apply_reaction(new_elem: CombatManager.Elements, ep: float) -> CombatManager.Reactions:
 	#print(CombatManager.Elements.keys()[element_initial] + " ||NEW: " 
 	#+ CombatManager.Elements.keys()[new_elem])
 	var reaction: CombatManager.Reactions = CombatManager.determine_reaction(element_initial, new_elem)
 	match reaction:
 		CombatManager.Reactions.MELT:
-			spawn_dmg_number("Melt", CombatManager.params["melt"])
+			e.spawn_dmg_number("Melt", CombatManager.params["melt"])
 			## double damage dealt
 		CombatManager.Reactions.SUPERCONDUCT:
 			apply_debuff(CombatManager.Debuffs.SUPERCONDUCT, ep)
-			spawn_dmg_number("Superconduct", CombatManager.params["superconduct"])
+			e.spawn_dmg_number("Superconduct", CombatManager.params["superconduct"])
 		CombatManager.Reactions.OVERLOAD:
-			spawn_dmg_number("Overload", CombatManager.params["overload"])
+			e.spawn_dmg_number("Overload", CombatManager.params["overload"])
 			spawn_overload_impact(global_position, ep)
 			## interrupt enemy charging attack (LASER, ORB)
 				## enemy is interrupted by cancelling current fire cycle and
@@ -126,6 +101,7 @@ func spawn_overload_impact(pos: Vector2, ep: float) -> void:
 	var ep_dmg: float = ep * 1.5
 	var overload_dmg: float = base_dmg + ep_dmg
 	
+	e.try_attack_interrupted()
 	inst.global_position = pos
 	inst.damage = overload_dmg
 	inst.element = CombatManager.Elements.NONE
