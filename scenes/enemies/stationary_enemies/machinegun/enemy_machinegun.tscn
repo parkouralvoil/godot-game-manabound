@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://cucqth4r8k7y3"]
+[gd_scene load_steps=22 format=3 uid="uid://cucqth4r8k7y3"]
 
 [ext_resource type="Script" path="res://scenes/enemies/stationary_enemies/machinegun/enemy_machinegun.gd" id="1_4ftxf"]
 [ext_resource type="Resource" uid="uid://bd8yd78nv85uf" path="res://resources/data/enemy/enemy_stats/stats_machineGun.tres" id="2_eql8e"]
@@ -11,14 +11,41 @@
 [ext_resource type="Texture2D" uid="uid://d00dr80w0uslf" path="res://assets/sprite_enemies/turret enemy v1/mg ammo.png" id="7_p7erf"]
 [ext_resource type="Script" path="res://scripts/entity_components/HurtboxComponent_enemy.gd" id="7_w38ps"]
 [ext_resource type="PackedScene" uid="uid://bx54isqpe5u3x" path="res://scenes/enemies/enemies_components/HealthComponent_enemy.tscn" id="8_lvnqj"]
+[ext_resource type="Material" uid="uid://b1hyqx5c4ut8u" path="res://resources/debuffs/crystalize/crystalized_particles.tres" id="10_om6tq"]
+[ext_resource type="Texture2D" uid="uid://bsx8as4ra0ieo" path="res://resources/debuffs/crystalize/crystalized_texture.tres" id="11_ar7u1"]
+[ext_resource type="Script" path="res://resources/debuffs/crystalize/crystalized.gd" id="12_cmfod"]
+[ext_resource type="Material" uid="uid://bccvk3vgyafgq" path="res://resources/debuffs/superconduct/superconduct_particles.tres" id="13_murgj"]
+[ext_resource type="Texture2D" uid="uid://dm5mfus5ewtdb" path="res://resources/debuffs/superconduct/superconduct_texture.tres" id="14_gosjf"]
+[ext_resource type="Script" path="res://resources/debuffs/superconduct/superconduct.gd" id="15_r1i5y"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_dlwob"]
 radius = 20.0
 
+[sub_resource type="Resource" id="Resource_lpfa6"]
+resource_local_to_scene = true
+script = ExtResource("12_cmfod")
+duration = 1.5
+particles_process_mat = ExtResource("10_om6tq")
+particles_textures = ExtResource("11_ar7u1")
+one_shot = true
+amount = 1
+explosiveness = 0.6
+lifetime = 0.6
+
+[sub_resource type="Resource" id="Resource_qfm0w"]
+resource_local_to_scene = true
+script = ExtResource("15_r1i5y")
+particles_process_mat = ExtResource("13_murgj")
+particles_textures = ExtResource("14_gosjf")
+one_shot = true
+amount = 30
+explosiveness = 1.0
+lifetime = 0.7
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_ppbf0"]
 radius = 22.0
 
-[node name="enemy_machinegun" type="CharacterBody2D"]
+[node name="enemy_machinegun" type="StaticBody2D"]
 collision_layer = 2
 collision_mask = 0
 script = ExtResource("1_4ftxf")
@@ -32,15 +59,12 @@ texture = ExtResource("4_aux6u")
 [node name="Sprite2D_main" type="Sprite2D" parent="."]
 texture = ExtResource("5_gt8rf")
 
-[node name="ammo_sprite_container" type="Node2D" parent="Sprite2D_main"]
-script = ExtResource("3_rk0t3")
-
-[node name="Sprite2D_ammo1" type="Sprite2D" parent="Sprite2D_main/ammo_sprite_container"]
-texture = ExtResource("7_p7erf")
-
-[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Sprite2D_main"]
+[node name="BulletOriginTransform" type="RemoteTransform2D" parent="Sprite2D_main"]
 position = Vector2(0, 16)
 remote_path = NodePath("../../AttackComponent/bullet_origin")
+
+[node name="AmmoRemoteTransform" type="RemoteTransform2D" parent="Sprite2D_main"]
+remote_path = NodePath("../../AttackComponent/AmmoSpriteContainer")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_dlwob")
@@ -48,6 +72,8 @@ shape = SubResource("CircleShape2D_dlwob")
 [node name="HealthComponent" parent="." instance=ExtResource("8_lvnqj")]
 position = Vector2(0, 19)
 explosion_volume = -18.0
+crystalize_effect = SubResource("Resource_lpfa6")
+superconduct_effect = SubResource("Resource_qfm0w")
 
 [node name="HurtboxComponent" type="Area2D" parent="."]
 collision_layer = 8
@@ -72,6 +98,12 @@ one_shot = true
 [node name="before_first_shot" type="Timer" parent="AttackComponent"]
 wait_time = 0.1
 one_shot = true
+
+[node name="AmmoSpriteContainer" type="Node2D" parent="AttackComponent"]
+script = ExtResource("3_rk0t3")
+
+[node name="ammo1" type="Sprite2D" parent="AttackComponent/AmmoSpriteContainer"]
+texture = ExtResource("7_p7erf")
 
 [connection signal="timeout" from="AttackComponent/reload" to="AttackComponent" method="_on_reload_timeout"]
 [connection signal="timeout" from="AttackComponent/before_first_shot" to="AttackComponent" method="_on_before_first_shot_timeout"]

@@ -15,6 +15,9 @@ var bullet_color: Color = Color(1, 0.7, 0.7)
 var aim_angle: float
 var rotation_speed: float = 0.75
 
+var max_ammo: int = 1
+var ammo: int = max_ammo
+
 func _ready() -> void:
 	e.reload_time_changed.connect(update_reload)
 	rotation = PI/2 # to account for the sprite's initial rotation
@@ -22,7 +25,7 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	# slowly rotates towards player, not instant rotation
 	if (e.can_fire 
-	and e.ammo == e.max_ammo
+	and ammo == max_ammo
 	and t_first_shot.is_stopped()):
 		t_first_shot.start()
 
@@ -56,7 +59,7 @@ func shoot(projectile: PackedScene, direction: Vector2) -> void:
 
 func burst_shoot() -> void:
 	shoot(ProjectileScene, Vector2.RIGHT.rotated(aim_angle))
-	e.ammo -= 1
+	ammo -= 1
 	if t_reload.is_stopped():
 		t_reload.start()
 
@@ -66,7 +69,7 @@ func update_reload(new_reload: float) -> void:
 
 
 func _on_reload_timeout() -> void: # CHANGE RELOAD WAIT TIME IN THE ENEMY NODE (OWNER)
-	e.ammo = e.max_ammo
+	ammo = max_ammo
 
 
 func _on_before_first_shot_timeout() -> void:

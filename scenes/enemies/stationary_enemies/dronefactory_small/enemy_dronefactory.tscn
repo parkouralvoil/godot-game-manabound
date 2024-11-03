@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://c7kau2srmy78i"]
+[gd_scene load_steps=23 format=3 uid="uid://c7kau2srmy78i"]
 
 [ext_resource type="Script" path="res://scripts/entity_components/SpawnerComponent_dronefactory.gd" id="1_bovej"]
 [ext_resource type="Script" path="res://scenes/enemies/stationary_enemies/dronefactory_small/enemy_dronefactory.gd" id="1_os3qv"]
@@ -10,14 +10,20 @@
 [ext_resource type="Texture2D" uid="uid://br4q05747i10h" path="res://assets/sprite_enemies/drone_factory_v2.png" id="6_oyvuu"]
 [ext_resource type="Script" path="res://scenes/enemies/stationary_enemies/dronefactory_small/sprite_lights.gd" id="7_wfkg7"]
 [ext_resource type="PackedScene" uid="uid://bx54isqpe5u3x" path="res://scenes/enemies/enemies_components/HealthComponent_enemy.tscn" id="8_kxp28"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_pxl8n"]
-atlas = ExtResource("6_oyvuu")
-region = Rect2(2, 5, 28, 23)
+[ext_resource type="Material" uid="uid://b1hyqx5c4ut8u" path="res://resources/debuffs/crystalize/crystalized_particles.tres" id="11_b0jx4"]
+[ext_resource type="Texture2D" uid="uid://bsx8as4ra0ieo" path="res://resources/debuffs/crystalize/crystalized_texture.tres" id="12_e0d6i"]
+[ext_resource type="Script" path="res://resources/debuffs/crystalize/crystalized.gd" id="13_8ssuk"]
+[ext_resource type="Material" uid="uid://bccvk3vgyafgq" path="res://resources/debuffs/superconduct/superconduct_particles.tres" id="14_psrdv"]
+[ext_resource type="Texture2D" uid="uid://dm5mfus5ewtdb" path="res://resources/debuffs/superconduct/superconduct_texture.tres" id="15_rajqv"]
+[ext_resource type="Script" path="res://resources/debuffs/superconduct/superconduct.gd" id="16_7vuls"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_oego0"]
 atlas = ExtResource("6_oyvuu")
 region = Rect2(29, 29, 2, 2)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pxl8n"]
+atlas = ExtResource("6_oyvuu")
+region = Rect2(2, 5, 28, 23)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bfqw3"]
 size = Vector2(22, 15)
@@ -25,11 +31,31 @@ size = Vector2(22, 15)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gdgdi"]
 size = Vector2(22, 17)
 
-[node name="enemy_dronefactory" type="CharacterBody2D" node_paths=PackedStringArray("spawner_comp")]
+[sub_resource type="Resource" id="Resource_cswqs"]
+resource_local_to_scene = true
+script = ExtResource("13_8ssuk")
+duration = 1.5
+particles_process_mat = ExtResource("11_b0jx4")
+particles_textures = ExtResource("12_e0d6i")
+one_shot = true
+amount = 1
+explosiveness = 0.6
+lifetime = 0.6
+
+[sub_resource type="Resource" id="Resource_x21tp"]
+resource_local_to_scene = true
+script = ExtResource("16_7vuls")
+particles_process_mat = ExtResource("14_psrdv")
+particles_textures = ExtResource("15_rajqv")
+one_shot = true
+amount = 30
+explosiveness = 1.0
+lifetime = 0.7
+
+[node name="enemy_dronefactory" type="StaticBody2D"]
 collision_layer = 2
 collision_mask = 0
 script = ExtResource("1_os3qv")
-spawner_comp = NodePath("SpawnerComponent")
 stats = ExtResource("2_1rb6u")
 bullet_impact_scene = ExtResource("2_p64pg")
 enemy_dead_texture = ExtResource("3_djpu2")
@@ -43,43 +69,46 @@ position = Vector2(0, -13)
 
 [node name="spawn_timer" type="Timer" parent="SpawnerComponent"]
 
-[node name="Sprite2D_main" type="Sprite2D" parent="."]
-texture = SubResource("AtlasTexture_pxl8n")
-
-[node name="AmmoComponent" type="Node2D" parent="Sprite2D_main"]
+[node name="AmmoComponent" type="Node2D" parent="SpawnerComponent"]
 script = ExtResource("7_wfkg7")
 
-[node name="Sprite2D" type="Sprite2D" parent="Sprite2D_main/AmmoComponent"]
+[node name="ammo1" type="Sprite2D" parent="SpawnerComponent/AmmoComponent"]
 position = Vector2(-9, 4.5)
 texture = SubResource("AtlasTexture_oego0")
 
-[node name="Sprite2D2" type="Sprite2D" parent="Sprite2D_main/AmmoComponent"]
+[node name="ammo2" type="Sprite2D" parent="SpawnerComponent/AmmoComponent"]
 position = Vector2(-9, 1.5)
 texture = SubResource("AtlasTexture_oego0")
 
-[node name="Sprite2D3" type="Sprite2D" parent="Sprite2D_main/AmmoComponent"]
+[node name="ammo3" type="Sprite2D" parent="SpawnerComponent/AmmoComponent"]
 position = Vector2(-9, -1.5)
 texture = SubResource("AtlasTexture_oego0")
 
-[node name="Sprite2D4" type="Sprite2D" parent="Sprite2D_main/AmmoComponent"]
+[node name="ammo4" type="Sprite2D" parent="SpawnerComponent/AmmoComponent"]
 position = Vector2(-9, -4.5)
 texture = SubResource("AtlasTexture_oego0")
 
-[node name="Sprite2D5" type="Sprite2D" parent="Sprite2D_main/AmmoComponent"]
+[node name="ammo5" type="Sprite2D" parent="SpawnerComponent/AmmoComponent"]
 position = Vector2(9, 4.5)
 texture = SubResource("AtlasTexture_oego0")
 
-[node name="Sprite2D6" type="Sprite2D" parent="Sprite2D_main/AmmoComponent"]
+[node name="ammo6" type="Sprite2D" parent="SpawnerComponent/AmmoComponent"]
 position = Vector2(9, 1.5)
 texture = SubResource("AtlasTexture_oego0")
 
-[node name="Sprite2D7" type="Sprite2D" parent="Sprite2D_main/AmmoComponent"]
+[node name="ammo7" type="Sprite2D" parent="SpawnerComponent/AmmoComponent"]
 position = Vector2(9, -1.5)
 texture = SubResource("AtlasTexture_oego0")
 
-[node name="Sprite2D8" type="Sprite2D" parent="Sprite2D_main/AmmoComponent"]
+[node name="ammo8" type="Sprite2D" parent="SpawnerComponent/AmmoComponent"]
 position = Vector2(9, -4.5)
 texture = SubResource("AtlasTexture_oego0")
+
+[node name="Sprite2D_main" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_pxl8n")
+
+[node name="AmmoRemoteTransform" type="RemoteTransform2D" parent="Sprite2D_main"]
+remote_path = NodePath("../../SpawnerComponent/AmmoComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 1.5)
@@ -98,5 +127,7 @@ debug_color = Color(0.694118, 0.47451, 0.4, 0.419608)
 
 [node name="HealthComponent" parent="." instance=ExtResource("8_kxp28")]
 explosion_volume = -20.0
+crystalize_effect = SubResource("Resource_cswqs")
+superconduct_effect = SubResource("Resource_x21tp")
 
 [connection signal="timeout" from="SpawnerComponent/spawn_timer" to="SpawnerComponent" method="_on_spawn_timer_timeout"]

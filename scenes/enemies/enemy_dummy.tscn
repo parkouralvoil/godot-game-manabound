@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bmqu3gpnmomg0"]
+[gd_scene load_steps=20 format=3 uid="uid://bmqu3gpnmomg0"]
 
 [ext_resource type="Script" path="res://scenes/enemies/BaseEnemy.gd" id="1_qibg1"]
 [ext_resource type="Script" path="res://resources/data/enemy/enemy_stats/enemy_stats.gd" id="2_d88mc"]
@@ -7,6 +7,12 @@
 [ext_resource type="Texture2D" uid="uid://b5uv1u6y5momf" path="res://assets/sprite_enemies/bsf autobow.png" id="4_xjw5w"]
 [ext_resource type="PackedScene" uid="uid://bx54isqpe5u3x" path="res://scenes/enemies/enemies_components/HealthComponent_enemy.tscn" id="6_0yksb"]
 [ext_resource type="Script" path="res://scripts/entity_components/HurtboxComponent_enemy.gd" id="7_0xhqn"]
+[ext_resource type="Material" uid="uid://b1hyqx5c4ut8u" path="res://resources/debuffs/crystalize/crystalized_particles.tres" id="7_g5m00"]
+[ext_resource type="Texture2D" uid="uid://bsx8as4ra0ieo" path="res://resources/debuffs/crystalize/crystalized_texture.tres" id="8_nd6t5"]
+[ext_resource type="Script" path="res://resources/debuffs/crystalize/crystalized.gd" id="9_hvi3d"]
+[ext_resource type="Material" uid="uid://bccvk3vgyafgq" path="res://resources/debuffs/superconduct/superconduct_particles.tres" id="10_5ro8g"]
+[ext_resource type="Texture2D" uid="uid://dm5mfus5ewtdb" path="res://resources/debuffs/superconduct/superconduct_texture.tres" id="11_bk1nd"]
+[ext_resource type="Script" path="res://resources/debuffs/superconduct/superconduct.gd" id="12_bslia"]
 
 [sub_resource type="Resource" id="Resource_qfkh4"]
 script = ExtResource("2_d88mc")
@@ -20,9 +26,30 @@ region = Rect2(15, 13, 18, 22)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_dlwob"]
 
+[sub_resource type="Resource" id="Resource_4chnr"]
+resource_local_to_scene = true
+script = ExtResource("9_hvi3d")
+duration = 1.5
+particles_process_mat = ExtResource("7_g5m00")
+particles_textures = ExtResource("8_nd6t5")
+one_shot = true
+amount = 1
+explosiveness = 0.6
+lifetime = 0.6
+
+[sub_resource type="Resource" id="Resource_n6811"]
+resource_local_to_scene = true
+script = ExtResource("12_bslia")
+particles_process_mat = ExtResource("10_5ro8g")
+particles_textures = ExtResource("11_bk1nd")
+one_shot = true
+amount = 30
+explosiveness = 1.0
+lifetime = 0.7
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_ppbf0"]
 
-[node name="enemy_dummy" type="CharacterBody2D"]
+[node name="enemy_dummy" type="StaticBody2D"]
 collision_layer = 2
 collision_mask = 0
 script = ExtResource("1_qibg1")
@@ -37,6 +64,8 @@ texture = SubResource("AtlasTexture_w0hsw")
 shape = SubResource("CircleShape2D_dlwob")
 
 [node name="HealthComponent" parent="." instance=ExtResource("6_0yksb")]
+crystalize_effect = SubResource("Resource_4chnr")
+superconduct_effect = SubResource("Resource_n6811")
 
 [node name="HurtboxComponent" type="Area2D" parent="."]
 collision_layer = 8

@@ -53,7 +53,7 @@ lifetime = 0.7
 atlas = ExtResource("1_fyovm")
 region = Rect2(40, 39, 2, 2)
 
-[node name="enemy_autobow" type="CharacterBody2D"]
+[node name="enemy_autobow" type="StaticBody2D"]
 collision_layer = 2
 collision_mask = 0
 script = ExtResource("1_7v7ie")

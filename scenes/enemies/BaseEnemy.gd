@@ -1,4 +1,4 @@
-extends CharacterBody2D
+extends StaticBody2D
 class_name BaseEnemy
 
 signal health_changed(new_health: float)

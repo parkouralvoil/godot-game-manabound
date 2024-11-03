@@ -7,10 +7,6 @@ var vision_range: float = 750.0
 var can_fire: bool = false
 var aim_direction: Vector2 = Vector2.ZERO
 
-#attack component and ammo container:
-var max_ammo: int = 1
-var ammo: int = max_ammo
-
 func _physics_process(_delta: float) -> void:
 	# handles vision
 	target_pos = EnemyAiManager.player_position

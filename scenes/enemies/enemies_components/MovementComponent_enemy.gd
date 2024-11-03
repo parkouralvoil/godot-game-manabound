@@ -1,4 +1,4 @@
-extends Node2D
+extends CharacterBody2D
 class_name EnemyMovementComponent
 
 var max_speed: float = 40
@@ -14,6 +14,7 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
+	e.global_position = self.global_position
 	# movement and vision
 	var vision_range := nav_agent.target_desired_distance
 	var target_pos: Vector2 = e.target_pos
@@ -43,15 +44,15 @@ func _physics_process(delta: float) -> void:
 		return
 	
 	nav_agent.set_velocity(intended_velocity)
-	e.move_and_slide()
+	move_and_slide()
 
 
 func _on_navigation_agent_2d_velocity_computed(safe_velocity: Vector2) -> void:
 	if speed == 0 and e.can_fire:
-		e.velocity = Vector2.ZERO
+		velocity = Vector2.ZERO
 	else:
-		e.velocity = safe_velocity
-	e.move_and_slide()
+		velocity = safe_velocity
+	move_and_slide()
 
 
 func _on_update_path_timeout() -> void:

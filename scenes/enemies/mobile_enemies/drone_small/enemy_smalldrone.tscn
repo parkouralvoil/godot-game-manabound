@@ -43,18 +43,21 @@ lifetime = 0.7
 [sub_resource type="CircleShape2D" id="CircleShape2D_xcfmu"]
 radius = 7.0
 
-[node name="enemy_smalldrone" type="CharacterBody2D"]
-collision_layer = 64
-collision_mask = 65
-motion_mode = 1
-wall_min_slide_angle = 0.0
+[node name="enemy_smalldrone" type="StaticBody2D"]
+collision_layer = 2
+collision_mask = 0
 script = ExtResource("1_0q3x6")
 stats = ExtResource("2_u040i")
 bullet_impact_scene = ExtResource("2_0ja26")
 enemy_dead_texture = ExtResource("3_qkuvi")
 impact_scale = Vector2(0.5, 0.5)
 
-[node name="MovementComponent" type="Node2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_6cq2t")
+
+[node name="MovementComponent" type="CharacterBody2D" parent="."]
+collision_layer = 64
+collision_mask = 65
 script = ExtResource("5_h1tt8")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="MovementComponent"]
@@ -72,12 +75,12 @@ autostart = true
 [node name="Raycast_toPlayer" type="RayCast2D" parent="MovementComponent"]
 position = Vector2(0, -2)
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MovementComponent"]
+shape = SubResource("CircleShape2D_6cq2t")
+
 [node name="Sprite2D_main" type="Sprite2D" parent="."]
 scale = Vector2(2, 2)
 texture = ExtResource("2_4y6fh")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_6cq2t")
 
 [node name="HealthComponent" parent="." instance=ExtResource("5_mrnqf")]
 explosion_volume = -25.0

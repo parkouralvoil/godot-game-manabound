@@ -1,16 +1,16 @@
 extends Node2D
 
-@onready var e: Enemy_MachineGun = owner
-@onready var sprite_ammo: Sprite2D = $Sprite2D_ammo1
+@onready var atk_comp: EnemyAttackComponent_Machinegun = get_parent()
+@onready var sprite_ammo: Sprite2D = $ammo1
 
 var current_ammo: int
 
 func _ready() -> void:
-	current_ammo = e.ammo
+	current_ammo = atk_comp.ammo
 
 func _process(_delta: float) -> void:
-	if current_ammo != e.ammo:
-		current_ammo = e.ammo
+	if current_ammo != atk_comp.ammo:
+		current_ammo = atk_comp.ammo
 		match current_ammo:
 			1:
 				sprite_ammo.show()

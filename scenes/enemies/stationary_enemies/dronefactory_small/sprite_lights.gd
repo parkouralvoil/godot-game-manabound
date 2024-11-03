@@ -7,7 +7,6 @@ var lights_on: int = 0 : ## lights is ammo, full lights mean drone can spawn
 		lights_on = value
 		turn_on_light()
 
-@onready var e: Enemy_DroneFactory = owner
 @onready var lights: Array[Sprite2D] = []
 
 func _ready() -> void:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bhqkl7kraifkd"]
+[gd_scene load_steps=22 format=3 uid="uid://bhqkl7kraifkd"]
 
 [ext_resource type="Script" path="res://scenes/enemies/stationary_enemies/energizedOrb/enemy_energized_orb.gd" id="1_cgshh"]
 [ext_resource type="PackedScene" uid="uid://ccfj5qan8stdb" path="res://projectiles/bullet_impact.tscn" id="2_1kbps"]
@@ -9,12 +9,39 @@
 [ext_resource type="Script" path="res://scenes/enemies/stationary_enemies/energizedOrb/AttackComponent_energizedOrb.gd" id="5_modtn"]
 [ext_resource type="PackedScene" uid="uid://bokmrko2cf2sb" path="res://projectiles/enemy_projectiles/orb_explosion/orb_explosion_spawn.tscn" id="6_g81kv"]
 [ext_resource type="Script" path="res://scripts/entity_components/HurtboxComponent_enemy.gd" id="6_vusb1"]
+[ext_resource type="Material" uid="uid://b1hyqx5c4ut8u" path="res://resources/debuffs/crystalize/crystalized_particles.tres" id="7_c6vi8"]
+[ext_resource type="Texture2D" uid="uid://bsx8as4ra0ieo" path="res://resources/debuffs/crystalize/crystalized_texture.tres" id="8_8css0"]
+[ext_resource type="Script" path="res://resources/debuffs/crystalize/crystalized.gd" id="9_1hqhy"]
+[ext_resource type="Material" uid="uid://bccvk3vgyafgq" path="res://resources/debuffs/superconduct/superconduct_particles.tres" id="10_vg6sk"]
+[ext_resource type="Texture2D" uid="uid://dm5mfus5ewtdb" path="res://resources/debuffs/superconduct/superconduct_texture.tres" id="11_75jtk"]
+[ext_resource type="Script" path="res://resources/debuffs/superconduct/superconduct.gd" id="12_yu5rf"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_w0hsw"]
 atlas = ExtResource("4_msriy")
 region = Rect2(15, 13, 18, 22)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_dlwob"]
+
+[sub_resource type="Resource" id="Resource_p1ajd"]
+resource_local_to_scene = true
+script = ExtResource("9_1hqhy")
+duration = 1.5
+particles_process_mat = ExtResource("7_c6vi8")
+particles_textures = ExtResource("8_8css0")
+one_shot = true
+amount = 1
+explosiveness = 0.6
+lifetime = 0.6
+
+[sub_resource type="Resource" id="Resource_bs3bg"]
+resource_local_to_scene = true
+script = ExtResource("12_yu5rf")
+particles_process_mat = ExtResource("10_vg6sk")
+particles_textures = ExtResource("11_75jtk")
+one_shot = true
+amount = 30
+explosiveness = 1.0
+lifetime = 0.7
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ppbf0"]
 
@@ -26,7 +53,7 @@ initial_velocity_max = 50.0
 gravity = Vector3(0, 0, 0)
 color = Color(0.54902, 0.901961, 0.956863, 1)
 
-[node name="enemy_energizedOrb" type="CharacterBody2D"]
+[node name="enemy_energizedOrb" type="StaticBody2D"]
 collision_layer = 2
 collision_mask = 0
 script = ExtResource("1_cgshh")
@@ -42,6 +69,8 @@ shape = SubResource("CircleShape2D_dlwob")
 
 [node name="HealthComponent" parent="." instance=ExtResource("5_d6l82")]
 explosion_volume = -20.0
+crystalize_effect = SubResource("Resource_p1ajd")
+superconduct_effect = SubResource("Resource_bs3bg")
 
 [node name="HurtboxComponent" type="Area2D" parent="."]
 collision_layer = 8
