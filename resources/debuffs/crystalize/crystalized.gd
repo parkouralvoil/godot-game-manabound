@@ -12,84 +12,64 @@ class_name Crystalized
 @export var explosiveness: float = 0.6
 @export var lifetime: float = 0.6
 
-class EnemyInfo:
-	var crystal_stacks: int = 0
-	var accumulated_dmg: float = 0
-	var timer: Timer
+var e_health: EnemyHealthComponent = null
+var crystal_stacks: int = 0
+var accumulated_dmg: float = 0
+var _debuff_timer: Timer
 
-var scale_damage: float = 0.2 # PERCENTAGE!!
-var stack_detonate: int = 9
-
-var enemy_ref: Dictionary = {}
-
-func get_info(HealthComp: EnemyHealthComponent) -> int:
-	if enemy_ref.has(HealthComp):
-		return enemy_ref[HealthComp].crystal_stacks
-	else:
-		return 0
-
+#var _scale_damage: float = 0.2 # PERCENTAGE!!
+var _stack_detonate: int = 9
 
 func apply_effect(HealthComp: EnemyHealthComponent, ep: float) -> void:
-	if not enemy_ref.has(HealthComp):
-		var info: EnemyInfo = EnemyInfo.new()
-		info.crystal_stacks = 0
-		info.timer = Timer.new()
-		info.timer.one_shot = true
-		info.timer.autostart = false
-		info.timer.wait_time = duration
-		info.timer.timeout.connect(detonate_crystalize.bind(HealthComp))
-		HealthComp.add_child(info.timer)
-		enemy_ref[HealthComp] = info
+	if not e_health:
+		e_health = HealthComp
+		crystal_stacks = 0
+		_debuff_timer = Timer.new()
+		_debuff_timer.one_shot = true
+		_debuff_timer.autostart = false
+		_debuff_timer.wait_time = duration
+		_debuff_timer.timeout.connect(detonate_crystalize)
+		e_health.add_child(_debuff_timer)
 	
-	if enemy_ref.has(HealthComp):
-		var current_e: EnemyInfo = enemy_ref[HealthComp]
-		current_e.crystal_stacks += 1
-		current_e.accumulated_dmg += ep
-		if current_e.timer.is_stopped():
-			current_e.timer.start()
-		if enemy_ref[HealthComp].crystal_stacks >= stack_detonate:
-			detonate_crystalize(HealthComp)
+	if e_health:
+		crystal_stacks += 1
+		accumulated_dmg += ep
+		if _debuff_timer.is_stopped():
+			_debuff_timer.start()
+		if crystal_stacks >= _stack_detonate:
+			detonate_crystalize()
 
 
-func detonate_crystalize(HealthComp: EnemyHealthComponent) -> void:
-	if not HealthComp:
-		enemy_ref.erase(HealthComp)
+func detonate_crystalize() -> void:
+	if not e_health:
 		return
 	
-	enemy_ref[HealthComp].timer.stop()
+	_debuff_timer.stop()
 	
-	var final_dmg: float = damage_equation(enemy_ref[HealthComp])
+	var final_dmg: float = damage_equation()
 	ParticlesQueueNode.set_property_restart(particles_process_mat,
 			particles_textures,
 			one_shot,
-			amount * max(enemy_ref[HealthComp].crystal_stacks, 1),
+			amount * max(crystal_stacks, 1),
 			explosiveness,
 			lifetime,
-			HealthComp.global_position,)
-	if enemy_ref.has(HealthComp):
-		enemy_ref[HealthComp].crystal_stacks = 0
-		enemy_ref[HealthComp].accumulated_dmg = 0
+			e_health.global_position,)
 	
-	var text: String = "Crystalize x" + str(enemy_ref[HealthComp].crystal_stacks)
-	HealthComp.spawn_dmg_number(text, CombatManager.params[CombatManager.Elements.ICE])
-	HealthComp.debuff_indicator.current_debuff = CombatManager.Debuffs.NONE
+	var text: String = "Crystalize x" + str(crystal_stacks)
+	var color: Color = CombatManager.params[CombatManager.Elements.ICE]
+	e_health.spawn_dmg_number(text, color)
 	
-	HealthComp.damage_received(final_dmg, CombatManager.Elements.NONE)
-
-func delete_ref(HealthComp: EnemyHealthComponent) -> void:
-	enemy_ref.erase(HealthComp)
+	if e_health:
+		crystal_stacks = 0
+		accumulated_dmg = 0
+		e_health.debuff_indicator.current_debuff = CombatManager.Debuffs.NONE
+		e_health.damage_received(final_dmg, CombatManager.Elements.NONE)
 
 
-func damage_equation(crystalized_info: EnemyInfo) -> float:
-	var stacks: int = crystalized_info.crystal_stacks
-	var base_dmg: float = crystalized_info.accumulated_dmg/3
-	
+func damage_equation() -> float:
+	var base_dmg: float = accumulated_dmg/3
 	@warning_ignore("integer_division")
-	var dmg_multiplier: float = 1 + 0.25 * int(stacks/3)
-	
+	var dmg_multiplier: float = 1 + 0.25 * int(crystal_stacks/3)
 	## accumulated_dmg = value of EP for stack
 	## final dmg = base * 1.5 at 9 stacks
-	
 	return base_dmg * max(1, dmg_multiplier)
-	
-	

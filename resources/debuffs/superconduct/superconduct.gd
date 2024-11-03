@@ -13,31 +13,26 @@ var base_dmg: float = 15
 @export var explosiveness: float = 1
 @export var lifetime: float = 0.7
 
-class EnemyInfo:
-	var timer: Timer
-
-var enemy_ref: Dictionary = {}
+var e_health: EnemyHealthComponent
+var _debuff_timer: Timer
 var color_sc: Color = Color(0.8, 0.5, 1)
-
-func get_info(_enemy_HealthComp: EnemyHealthComponent) -> int:
-	return 0
 
 
 func apply_effect(HealthComp: EnemyHealthComponent, ep: float) -> void:
-	if not enemy_ref.has(HealthComp):
-		var info: EnemyInfo = EnemyInfo.new()
-		info.timer = Timer.new()
-		info.timer.one_shot = true
-		info.timer.autostart = false
-		info.timer.wait_time = duration
-		info.timer.timeout.connect(superconduct_ended.bind(HealthComp.e))
-		HealthComp.add_child(info.timer) ## wtf i just realized i add a timer, but this works since it only adds it once
-		enemy_ref[HealthComp] = info ## and the timer gets cleared when the enemy dies (gets freed)
+	if not e_health:
+		e_health = HealthComp
+		_debuff_timer = Timer.new()
+		_debuff_timer.one_shot = true
+		_debuff_timer.autostart = false
+		_debuff_timer.wait_time = duration
+		_debuff_timer.timeout.connect(superconduct_ended.bind(HealthComp.e))
+		HealthComp.add_child(_debuff_timer) 
+		## wtf i just realized i add a timer, but this works since it only adds it once
 	
-	if enemy_ref.has(HealthComp):
-		var current_e: EnemyInfo = enemy_ref[HealthComp]
-		receive_superconduct(HealthComp.e, ep)
-		current_e.timer.start()
+	if e_health:
+		var enemy_node: BaseEnemy = e_health.e
+		receive_superconduct(enemy_node, ep)
+		_debuff_timer.start()
 
 
 func receive_superconduct(enemy: BaseEnemy, ep: float) -> void:
@@ -65,7 +60,3 @@ func damage_equation(ep: float) -> float:
 func superconduct_ended(enemy: BaseEnemy) -> void:
 	enemy.reload_time = enemy.default_reload_time
 	enemy.sprite_main.modulate = enemy.default_color
-
-
-func delete_ref(HealthComp: EnemyHealthComponent) -> void:
-	enemy_ref.erase(HealthComp)

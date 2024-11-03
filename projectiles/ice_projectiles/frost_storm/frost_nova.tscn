@@ -25,6 +25,7 @@ gravity = Vector3(0, 40, 0)
 scale_curve = SubResource("CurveTexture_nwfwr")
 
 [node name="FrostNova" type="Marker2D"]
+z_index = 4
 script = ExtResource("1_dxavq")
 bullet_impact = ExtResource("2_gmbiq")
 

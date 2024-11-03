@@ -1,4 +1,5 @@
 extends Node2D
+class_name AttackComponent_Autobow
 
 var ProjectileScene: PackedScene = load("res://projectiles/bullet.tscn")
 
@@ -15,7 +16,7 @@ var reload_reset: bool = false # only reverts back to false after superconduct c
 func _ready() -> void:
 	e.reload_time_changed.connect(update_reload)
 
-func _process(_delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if (e.can_fire 
 	and e.ammo == e.max_ammo 
 	and t_firerate.is_stopped() 

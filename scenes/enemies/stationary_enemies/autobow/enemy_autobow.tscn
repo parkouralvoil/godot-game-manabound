@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://cg2ravjhx4yud"]
+[gd_scene load_steps=23 format=3 uid="uid://cg2ravjhx4yud"]
 
 [ext_resource type="Script" path="res://scenes/enemies/stationary_enemies/autobow/enemy_autobow.gd" id="1_7v7ie"]
 [ext_resource type="Texture2D" uid="uid://b5uv1u6y5momf" path="res://assets/sprite_enemies/bsf autobow.png" id="1_fyovm"]
@@ -9,6 +9,12 @@
 [ext_resource type="Resource" uid="uid://bnjdhefenp486" path="res://resources/data/enemy/enemy_stats/stats_autobow.tres" id="4_wenyq"]
 [ext_resource type="Script" path="res://scripts/entity_components/attack_components_specific/AttackComponent_Autobow.gd" id="5_ylnjd"]
 [ext_resource type="PackedScene" uid="uid://bx54isqpe5u3x" path="res://scenes/enemies/enemies_components/HealthComponent_enemy.tscn" id="6_if5fd"]
+[ext_resource type="Material" uid="uid://b1hyqx5c4ut8u" path="res://resources/debuffs/crystalize/crystalized_particles.tres" id="8_1ewsm"]
+[ext_resource type="Texture2D" uid="uid://bsx8as4ra0ieo" path="res://resources/debuffs/crystalize/crystalized_texture.tres" id="9_w15to"]
+[ext_resource type="Script" path="res://resources/debuffs/crystalize/crystalized.gd" id="10_kn02s"]
+[ext_resource type="Material" uid="uid://bccvk3vgyafgq" path="res://resources/debuffs/superconduct/superconduct_particles.tres" id="11_elke8"]
+[ext_resource type="Texture2D" uid="uid://dm5mfus5ewtdb" path="res://resources/debuffs/superconduct/superconduct_texture.tres" id="12_gkxbg"]
+[ext_resource type="Script" path="res://resources/debuffs/superconduct/superconduct.gd" id="13_0wuug"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dpic6"]
 atlas = ExtResource("1_fyovm")
@@ -18,13 +24,34 @@ region = Rect2(4, 36, 8, 8)
 atlas = ExtResource("1_fyovm")
 region = Rect2(15, 13, 18, 22)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_dlwob"]
+
+[sub_resource type="Resource" id="Resource_yedxa"]
+resource_local_to_scene = true
+script = ExtResource("10_kn02s")
+duration = 1.5
+particles_process_mat = ExtResource("8_1ewsm")
+particles_textures = ExtResource("9_w15to")
+one_shot = true
+amount = 1
+explosiveness = 0.6
+lifetime = 0.6
+
+[sub_resource type="Resource" id="Resource_bb2hi"]
+resource_local_to_scene = true
+script = ExtResource("13_0wuug")
+particles_process_mat = ExtResource("11_elke8")
+particles_textures = ExtResource("12_gkxbg")
+one_shot = true
+amount = 30
+explosiveness = 1.0
+lifetime = 0.7
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ppbf0"]
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_14l55"]
 atlas = ExtResource("1_fyovm")
 region = Rect2(40, 39, 2, 2)
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_dlwob"]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_ppbf0"]
 
 [node name="enemy_autobow" type="CharacterBody2D"]
 collision_layer = 2
@@ -41,26 +68,16 @@ texture = SubResource("AtlasTexture_dpic6")
 [node name="Sprite2D_main" type="Sprite2D" parent="."]
 texture = SubResource("AtlasTexture_w0hsw")
 
-[node name="ammo_sprite_container" type="Node2D" parent="Sprite2D_main" node_paths=PackedStringArray("e")]
-script = ExtResource("3_8d36t")
-e = NodePath("../..")
-
-[node name="Sprite2D_ammo1" type="Sprite2D" parent="Sprite2D_main/ammo_sprite_container"]
-texture = SubResource("AtlasTexture_14l55")
-
-[node name="Sprite2D_ammo2" type="Sprite2D" parent="Sprite2D_main/ammo_sprite_container"]
-position = Vector2(0, -3)
-texture = SubResource("AtlasTexture_14l55")
-
-[node name="Sprite2D_ammo3" type="Sprite2D" parent="Sprite2D_main/ammo_sprite_container"]
-position = Vector2(0, -6)
-texture = SubResource("AtlasTexture_14l55")
+[node name="AmmoRemoteTransform" type="RemoteTransform2D" parent="Sprite2D_main"]
+remote_path = NodePath("../../AttackComponent/AmmoSpriteContainer")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_dlwob")
 
 [node name="HealthComponent" parent="." instance=ExtResource("6_if5fd")]
 explosion_volume = -20.0
+crystalize_effect = SubResource("Resource_yedxa")
+superconduct_effect = SubResource("Resource_bb2hi")
 
 [node name="HurtboxComponent" type="Area2D" parent="."]
 collision_layer = 8
@@ -85,6 +102,20 @@ one_shot = true
 [node name="before_first_shot" type="Timer" parent="AttackComponent"]
 wait_time = 0.4
 one_shot = true
+
+[node name="AmmoSpriteContainer" type="Node2D" parent="AttackComponent"]
+script = ExtResource("3_8d36t")
+
+[node name="Sprite2D_ammo1" type="Sprite2D" parent="AttackComponent/AmmoSpriteContainer"]
+texture = SubResource("AtlasTexture_14l55")
+
+[node name="Sprite2D_ammo2" type="Sprite2D" parent="AttackComponent/AmmoSpriteContainer"]
+position = Vector2(0, -3)
+texture = SubResource("AtlasTexture_14l55")
+
+[node name="Sprite2D_ammo3" type="Sprite2D" parent="AttackComponent/AmmoSpriteContainer"]
+position = Vector2(0, -6)
+texture = SubResource("AtlasTexture_14l55")
 
 [connection signal="timeout" from="AttackComponent/firerate" to="AttackComponent" method="_on_firerate_timeout"]
 [connection signal="timeout" from="AttackComponent/reload" to="AttackComponent" method="_on_reload_timeout"]

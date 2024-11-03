@@ -199,7 +199,7 @@ position = Vector2(0, -1)
 texture = ExtResource("9_qngvn")
 
 [node name="HealthPotion" parent="." instance=ExtResource("10_eh2s7")]
-position = Vector2(427, -95)
+position = Vector2(169, -281)
 
 [node name="UpgradeStation" parent="." instance=ExtResource("10_pbl8k")]
 position = Vector2(165, -96)

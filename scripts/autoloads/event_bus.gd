@@ -6,7 +6,7 @@ signal camera_shake(strength: int) # emitted by player i think || used by camera
 
 ## UI and levels
 signal level_loaded() # emitted by main || used by game_info
-signal level_cleared(is_combat_room: bool) # emitted by level_manager || used by DungeonHolder, popup_indicator
+signal level_cleared(message: String) # emitted by level_manager || used by DungeonHolder, popup_indicator
 signal exit_door_interacted() # emitted by level_manager || used by DungeonHolder, UI
 
 ## game over
@@ -27,6 +27,10 @@ signal upgrade_stats_pressed()
 
 ## enemies
 signal enemy_died(e: BaseEnemy) # emitted by enemies || used by level_manager
+
+## boss
+signal boss_fight_started(boss_node: Node2D) ## emitted by RailgunBoss || used by game UI
+signal boss_fight_ended()
 
 ## energy generation (rn for Rogue)
 signal energy_gen_from_enemy_got_hit(procs: float)

@@ -79,7 +79,7 @@ func load_next_lvl() -> void: ## needs a parameter to see which map got chosen
 	next_level_loaded.emit(current_level.starting_pos)
 
 
-func _on_level_cleared(_is_combat_room: bool) -> void:
+func _on_level_cleared(_msg: String) -> void:
 	await get_tree().create_timer(0.15).timeout
 	EnemyAiManager.call_attract_orbs.emit()
 	dungeon_data.state_in_combat = false

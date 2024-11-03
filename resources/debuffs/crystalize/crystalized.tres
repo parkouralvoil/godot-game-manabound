@@ -5,11 +5,12 @@
 [ext_resource type="Texture2D" uid="uid://bsx8as4ra0ieo" path="res://resources/debuffs/crystalize/crystalized_texture.tres" id="2_tmbre"]
 
 [resource]
+resource_local_to_scene = true
 script = ExtResource("1_h32h2")
-duration = 1.5
+duration = null
 particles_process_mat = ExtResource("1_maiyo")
 particles_textures = ExtResource("2_tmbre")
-one_shot = true
-amount = 1
-explosiveness = 0.6
-lifetime = 0.6
+one_shot = null
+amount = null
+explosiveness = null
+lifetime = null

@@ -29,12 +29,18 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ColorRect" type="ColorRect" parent="CenterContainer"]
-custom_minimum_size = Vector2(300, 80)
+[node name="PanelContainer" type="PanelContainer" parent="CenterContainer"]
 layout_mode = 2
-color = Color(0.0156863, 0.0352941, 0.0941176, 0.615686)
 
-[node name="LevelCleared" type="Label" parent="CenterContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="CenterContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 10
+
+[node name="LevelCleared" type="Label" parent="CenterContainer/PanelContainer/MarginContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "ALL ENEMIES DEFEATED"
 label_settings = SubResource("LabelSettings_ggscm")

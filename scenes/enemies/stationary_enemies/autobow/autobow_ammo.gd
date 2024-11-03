@@ -1,6 +1,6 @@
 extends Node2D
 
-@export var e: Enemy_Autobow
+@onready var e: Enemy_Autobow = owner
 @onready var sprite_ammo: Array[Sprite2D] = [$Sprite2D_ammo1, $Sprite2D_ammo2, $Sprite2D_ammo3]
 
 var current_ammo: int

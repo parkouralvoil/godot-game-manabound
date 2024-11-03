@@ -11,6 +11,7 @@ region = Rect2(481, 231, 29, 19)
 radius = 22.0227
 
 [node name="rogue_melee_hit" type="Area2D"]
+z_index = 4
 collision_layer = 0
 collision_mask = 8
 monitorable = false

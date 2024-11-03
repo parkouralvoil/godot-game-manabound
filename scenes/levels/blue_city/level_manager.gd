@@ -5,8 +5,14 @@ class_name LevelManager
 #signal level_cleared ## this is for the state when the last enemy dies
 #signal exit_door_interacted ## this is state for when player goes through exit door
 ## emitted by exit door
+enum RoomType {
+	Normal, ## default room type, enemies present
+	Rest, ## safe zone, upgrade station
+	Boss, ## special room, boss present
+	Other, ## for other room types
+}
 
-@export var combat_room: bool = true
+@export var room_type: RoomType = RoomType.Normal
 
 var room_preset: RoomPreset = null:
 	set(val):
@@ -49,7 +55,7 @@ func _ready() -> void:
 	exit_door.local_exit_door_interacted.connect(_on_local_exit_door_interacted)
 	
 	await get_tree().physics_frame
-	if BaseEnemy.enemies_alive <= 0:
+	if BaseEnemy.enemies_alive <= 0 and room_type != RoomType.Boss:
 		_level_is_cleared()
 
 
@@ -64,7 +70,15 @@ func _enemy_dead(type: BaseEnemy) -> void:
 func _level_is_cleared() -> void:
 	exit_door.open()
 	chest_rune_holder.open_all_chest_rune()
-	EventBus.level_cleared.emit(combat_room)
+	match room_type:
+		RoomType.Normal:
+			EventBus.level_cleared.emit("All Enemies Cleared")
+		RoomType.Rest: 
+			EventBus.level_cleared.emit("Entered Safezone")
+		RoomType.Boss: 
+			EventBus.level_cleared.emit("BOSS DEFEATED")
+		_: 
+			EventBus.level_cleared.emit("Level Cleared")
 
 
 func _on_local_exit_door_interacted() -> void:

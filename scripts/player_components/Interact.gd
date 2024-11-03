@@ -39,7 +39,7 @@ func _unhandled_key_input(event: InputEvent) -> void:
 		if closest_interactable:
 			closest_interactable.interact()
 	elif event.is_action_released("interact"):
-		print_debug("why here")
+		#print_debug("why here")
 		if closest_interactable:
 			closest_interactable.release()
 

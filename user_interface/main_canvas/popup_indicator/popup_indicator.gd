@@ -1,15 +1,15 @@
 extends Control
 class_name PopupIndicator
 
+@onready var label_lvlcleared: Label = %LevelCleared
 
 func _ready() -> void:
 	hide()
 	EventBus.level_cleared.connect(_on_level_cleared)
 	EventBus.exit_door_interacted.connect(_exit_door_interacted)
 
-func _on_level_cleared(is_combat_room: bool) -> void:
-	if not is_combat_room:
-		return
+func _on_level_cleared(msg: String) -> void:
+	label_lvlcleared.text = msg
 	show()
 	modulate = Color(1, 1, 1, 1)
 	await get_tree().create_timer(2).timeout

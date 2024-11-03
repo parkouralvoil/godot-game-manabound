@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://cnrrjvflykcui"]
+[gd_scene load_steps=12 format=3 uid="uid://cnrrjvflykcui"]
 
 [ext_resource type="Script" path="res://user_interface/player_hud_canvas/game_info/game_info.gd" id="1_tvrhp"]
 [ext_resource type="LabelSettings" uid="uid://2ltl51gdr4g6" path="res://user_interface/main_canvas/team_info_menu_group/character_status_menu/char_status_label.tres" id="2_8oro1"]
 [ext_resource type="Texture2D" uid="uid://1r2e47in58kt" path="res://assets/sprite_items/stat_runes.png" id="3_twxwh"]
+[ext_resource type="FontFile" uid="uid://b7bhxk05x7pwi" path="res://assets/fonts/aseprite-remix.ttf" id="4_4p5ej"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lefp4"]
 atlas = ExtResource("3_twxwh")
@@ -19,6 +20,16 @@ region = Rect2(24, 24, 24, 24)
 [sub_resource type="AtlasTexture" id="AtlasTexture_siwc1"]
 atlas = ExtResource("3_twxwh")
 region = Rect2(0, 24, 24, 24)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e8kus"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_teu81"]
+bg_color = Color(0.823921, 0.160846, 0.185811, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_sagh5"]
+font = ExtResource("4_4p5ej")
+font_size = 9
 
 [node name="GameInfo" type="Control"]
 process_mode = 1
@@ -222,5 +233,40 @@ label_settings = ExtResource("2_8oro1")
 layout_mode = 2
 theme_override_font_sizes/font_size = 12
 text = "LEVEL UP"
+
+[node name="BossInfo" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -300.0
+offset_top = 36.0
+offset_right = 300.0
+offset_bottom = 99.0
+grow_horizontal = 2
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_right = 100
+
+[node name="VBox" type="VBoxContainer" parent="BossInfo"]
+layout_mode = 2
+
+[node name="BossHP" type="ProgressBar" parent="BossInfo/VBox"]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0.6)
+custom_minimum_size = Vector2(400, 15)
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_e8kus")
+theme_override_styles/fill = SubResource("StyleBoxFlat_teu81")
+value = 100.0
+show_percentage = false
+
+[node name="HBox" type="HBoxContainer" parent="BossInfo/VBox"]
+layout_mode = 2
+
+[node name="BossName" type="Label" parent="BossInfo/VBox/HBox"]
+layout_mode = 2
+text = "Divided Guardian"
+label_settings = SubResource("LabelSettings_sagh5")
+horizontal_alignment = 1
 
 [connection signal="pressed" from="VBox/InventoryInfo/MarginContainer/VBox/VBox/UpgradeStatsButton" to="." method="_on_upgrade_stats_pressed"]

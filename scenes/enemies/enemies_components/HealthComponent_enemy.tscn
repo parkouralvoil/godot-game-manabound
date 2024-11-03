@@ -1,7 +1,6 @@
-[gd_scene load_steps=9 format=3 uid="uid://bx54isqpe5u3x"]
+[gd_scene load_steps=8 format=3 uid="uid://bx54isqpe5u3x"]
 
 [ext_resource type="Script" path="res://scenes/enemies/enemies_components/HealthComponent_enemy.gd" id="1_c8uh4"]
-[ext_resource type="PackedScene" uid="uid://rdeieo07v8gt" path="res://user_interface/UI_attached_to_enemies/label_dmg_num.tscn" id="2_stj50"]
 [ext_resource type="Resource" uid="uid://dcu6q2sy4u3fj" path="res://resources/debuffs/crystalize/crystalized.tres" id="3_3eaof"]
 [ext_resource type="AudioStream" uid="uid://dl7jjtk1psmvx" path="res://assets/audio/sfx/enemy_explosion.mp3" id="3_x2b3c"]
 [ext_resource type="Resource" uid="uid://c1kncqtjwfxj" path="res://resources/debuffs/superconduct/superconduct.tres" id="4_kby8h"]
@@ -11,7 +10,6 @@
 
 [node name="HealthComponent" type="Node2D"]
 script = ExtResource("1_c8uh4")
-damage_number = ExtResource("2_stj50")
 enemy_explosion_sfx = ExtResource("3_x2b3c")
 crystalize_effect = ExtResource("3_3eaof")
 superconduct_effect = ExtResource("4_kby8h")

@@ -25,7 +25,6 @@ signal preset_selected(preset: RoomPreset) # for loading next level with selecte
 @export_category("Debug Exports")
 @export var force_test_preset: bool = false
 @export var test_preset: RoomPreset
-@export var force_lvl_index: int = 99
 
 @export_category("Dungeon")
 @export var dungeon_name: String = "Region"
@@ -137,11 +136,6 @@ func get_level() -> PackedScene:
 		return chosen_preset.room
 	
 	var lvl_available: Array[PackedScene] = area.NormalRooms.duplicate(false)
-	## TODO: available rooms shuold remove the last room in NormalROoms
-	if force_lvl_index < area.NormalRooms.size():
-		print_debug("FORCE LVL INDEX ON")
-		previous_level = area.NormalRooms[force_lvl_index]
-		return area.NormalRooms[force_lvl_index]
 	
 	if area.NormalRooms.size() > 1 and previous_level != null:
 		lvl_available.erase(previous_level)

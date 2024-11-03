@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://wb7yfjqhq458"]
+[gd_scene load_steps=20 format=3 uid="uid://wb7yfjqhq458"]
 
 [ext_resource type="Script" path="res://scenes/enemies/mobile_enemies/drone_small/enemy_smalldrone.gd" id="1_0q3x6"]
 [ext_resource type="PackedScene" uid="uid://ccfj5qan8stdb" path="res://projectiles/bullet_impact.tscn" id="2_0ja26"]
@@ -7,10 +7,38 @@
 [ext_resource type="Texture2D" uid="uid://mnqy6onwpiay" path="res://resources/textures/impacts/enemy_dead.tres" id="3_qkuvi"]
 [ext_resource type="Script" path="res://scripts/entity_components/HurtboxComponent_enemy.gd" id="3_st8q1"]
 [ext_resource type="Script" path="res://scripts/entity_components/attack_components_specific/AttackComponent_Drone.gd" id="4_nuqg1"]
+[ext_resource type="Script" path="res://scenes/enemies/enemies_components/MovementComponent_enemy.gd" id="5_h1tt8"]
 [ext_resource type="PackedScene" uid="uid://bx54isqpe5u3x" path="res://scenes/enemies/enemies_components/HealthComponent_enemy.tscn" id="5_mrnqf"]
+[ext_resource type="Material" uid="uid://b1hyqx5c4ut8u" path="res://resources/debuffs/crystalize/crystalized_particles.tres" id="8_e02i8"]
+[ext_resource type="Texture2D" uid="uid://bsx8as4ra0ieo" path="res://resources/debuffs/crystalize/crystalized_texture.tres" id="9_kjol5"]
+[ext_resource type="Script" path="res://resources/debuffs/crystalize/crystalized.gd" id="10_clgv4"]
+[ext_resource type="Material" uid="uid://bccvk3vgyafgq" path="res://resources/debuffs/superconduct/superconduct_particles.tres" id="11_l0mmn"]
+[ext_resource type="Texture2D" uid="uid://dm5mfus5ewtdb" path="res://resources/debuffs/superconduct/superconduct_texture.tres" id="12_4te12"]
+[ext_resource type="Script" path="res://resources/debuffs/superconduct/superconduct.gd" id="13_i8s1q"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_6cq2t"]
 radius = 3.0
+
+[sub_resource type="Resource" id="Resource_un1dt"]
+resource_local_to_scene = true
+script = ExtResource("10_clgv4")
+duration = 1.5
+particles_process_mat = ExtResource("8_e02i8")
+particles_textures = ExtResource("9_kjol5")
+one_shot = true
+amount = 1
+explosiveness = 0.6
+lifetime = 0.6
+
+[sub_resource type="Resource" id="Resource_mxaol"]
+resource_local_to_scene = true
+script = ExtResource("13_i8s1q")
+particles_process_mat = ExtResource("11_l0mmn")
+particles_textures = ExtResource("12_4te12")
+one_shot = true
+amount = 30
+explosiveness = 1.0
+lifetime = 0.7
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xcfmu"]
 radius = 7.0
@@ -26,14 +54,10 @@ bullet_impact_scene = ExtResource("2_0ja26")
 enemy_dead_texture = ExtResource("3_qkuvi")
 impact_scale = Vector2(0.5, 0.5)
 
-[node name="Sprite2D_main" type="Sprite2D" parent="."]
-scale = Vector2(2, 2)
-texture = ExtResource("2_4y6fh")
+[node name="MovementComponent" type="Node2D" parent="."]
+script = ExtResource("5_h1tt8")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_6cq2t")
-
-[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="MovementComponent"]
 target_desired_distance = 50.0
 path_postprocessing = 1
 simplify_path = true
@@ -41,12 +65,24 @@ avoidance_enabled = true
 neighbor_distance = 150.0
 max_neighbors = 9
 
-[node name="updatePath" type="Timer" parent="."]
+[node name="UpdatePath" type="Timer" parent="MovementComponent"]
 wait_time = 0.2
 autostart = true
 
+[node name="Raycast_toPlayer" type="RayCast2D" parent="MovementComponent"]
+position = Vector2(0, -2)
+
+[node name="Sprite2D_main" type="Sprite2D" parent="."]
+scale = Vector2(2, 2)
+texture = ExtResource("2_4y6fh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_6cq2t")
+
 [node name="HealthComponent" parent="." instance=ExtResource("5_mrnqf")]
 explosion_volume = -25.0
+crystalize_effect = SubResource("Resource_un1dt")
+superconduct_effect = SubResource("Resource_mxaol")
 
 [node name="HurtboxComponent" type="Area2D" parent="."]
 collision_layer = 8
@@ -67,9 +103,6 @@ position = Vector2(0.5, 2)
 [node name="firerate" type="Timer" parent="AttackComponent"]
 one_shot = true
 
-[node name="Raycast_toPlayer" type="RayCast2D" parent="."]
-position = Vector2(0, -2)
-
-[connection signal="velocity_computed" from="NavigationAgent2D" to="." method="_on_navigation_agent_2d_velocity_computed"]
-[connection signal="timeout" from="updatePath" to="." method="_on_updatePath_timeout"]
+[connection signal="velocity_computed" from="MovementComponent/NavigationAgent2D" to="MovementComponent" method="_on_navigation_agent_2d_velocity_computed"]
+[connection signal="timeout" from="MovementComponent/UpdatePath" to="MovementComponent" method="_on_update_path_timeout"]
 [connection signal="timeout" from="AttackComponent/firerate" to="AttackComponent" method="_on_firerate_timeout"]

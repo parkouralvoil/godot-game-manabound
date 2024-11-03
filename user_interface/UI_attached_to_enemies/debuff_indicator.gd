@@ -28,7 +28,7 @@ func _on_debuff_applied(new_debuff: CombatManager.Debuffs) -> CombatManager.Debu
 
 
 func update_info() -> void:
-	debuff_counts[CombatManager.Debuffs.CRYSTALIZED] = HC.crystalize_effect.get_info(HC) # might be better as a signal
+	debuff_counts[CombatManager.Debuffs.CRYSTALIZED] = HC.crystalize_effect.crystal_stacks # might be better as a signal
 	if debuff_counts[CombatManager.Debuffs.CRYSTALIZED] <= 0:
 		hide()
 	else:

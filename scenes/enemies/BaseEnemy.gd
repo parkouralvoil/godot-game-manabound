@@ -75,7 +75,7 @@ func _ready() -> void:
 ## called by HealthComponent
 func take_damage(damage: float, element: CombatManager.Elements, ep: float = 0) -> void:
 	if health_component:
-		health_component.damage_received(damage, element, ep)
+		health_component.raw_damage_received(damage, element, ep)
 
 ## called by HealthComponent
 func take_debuff(debuff: CombatManager.Debuffs, ep: float = 0) -> void:

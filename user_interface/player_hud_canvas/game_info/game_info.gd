@@ -14,6 +14,7 @@ var dungeon_data: DungeonData: ## given by main
 			dungeon_data.combat_state_changed.connect(try_show_inventory)
 			dungeon_data.main_hub_loaded.connect(_on_main_hub_loaded)
 
+var boss_present: bool = false
 
 @onready var label_fps: Label = $VBox/OtherInfo/MarginContainer/HBox/FPS
 @onready var label_enemies: Label = $VBox/OtherInfo/MarginContainer/HBox/Enemies
@@ -40,6 +41,9 @@ Level translate it as:
 @onready var line_1: ColorRect = $VBox/MainInfo/MarginContainer/HBox/line
 @onready var line_2: ColorRect = $VBox/OtherInfo/MarginContainer/HBox/line2
 
+@onready var boss_info: MarginContainer = $BossInfo
+@onready var boss_HP_bar: ProgressBar = %BossHP
+
 ## TODO: lmao i have two ways of doing initialize, either function or i just assign values xd
 ## ig in the longrun doing function is better since i can get the type hints from the function
 func initialize(new_inventory: PlayerInventory, new_dungeon_data: DungeonData) -> void:
@@ -50,6 +54,8 @@ func initialize(new_inventory: PlayerInventory, new_dungeon_data: DungeonData) -
 func _ready() -> void:
 	EventBus.level_loaded.connect(_update_cycle_room)
 	EventBus.level_loaded.connect(_on_game_started)
+	EventBus.boss_fight_started.connect(_on_boss_fight_started)
+	boss_info.hide()
 
 
 func _process(_delta: float) -> void:
@@ -58,6 +64,14 @@ func _process(_delta: float) -> void:
 	label_fps.text = "FPS: " + str(Engine.get_frames_per_second())
 	label_orbs.text = "Orbs: " + str(inventory.mana_orbs)
 	label_enemies.text = "Enemies left: %d" % BaseEnemy.enemies_alive
+
+
+func _on_boss_fight_started(boss_node: Node2D) -> void:
+	boss_node.boss_HP_bar = boss_HP_bar
+	
+	await get_tree().physics_frame ## this is HACK
+	boss_info.show()
+	label_enemies.hide()
 
 
 func try_show_inventory() -> void:

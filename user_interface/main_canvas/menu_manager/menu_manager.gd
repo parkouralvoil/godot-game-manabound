@@ -48,7 +48,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	
 	## opening lvl menu is done thru button
 	
-	if event.is_action_pressed("esc"):
+	if event.is_action_pressed("esc") and not preset_choice_window.visible:
 		if current_menu_opened:
 			close_menu()
 		else:

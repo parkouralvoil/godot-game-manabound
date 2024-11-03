@@ -110,8 +110,6 @@ func _on_character_died() -> void:
 			change_character(i)
 			p.controls_disabled = false
 			return
-	
-	print_debug("TODO: add gameover when no remaining character is alive.")
 
 
 func _on_returned_to_mainhub() -> void:
