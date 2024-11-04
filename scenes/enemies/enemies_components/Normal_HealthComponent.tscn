@@ -1,0 +1,42 @@
+[gd_scene load_steps=8 format=3 uid="uid://bx54isqpe5u3x"]
+
+[ext_resource type="Script" path="res://scenes/enemies/enemies_components/NormalEnemyHealth.gd" id="1_vny83"]
+[ext_resource type="AudioStream" uid="uid://dl7jjtk1psmvx" path="res://assets/audio/sfx/enemy_explosion.mp3" id="2_s02oq"]
+[ext_resource type="Resource" uid="uid://dcu6q2sy4u3fj" path="res://resources/debuffs/crystalize/crystalized.tres" id="3_lioae"]
+[ext_resource type="Resource" uid="uid://c1kncqtjwfxj" path="res://resources/debuffs/superconduct/superconduct.tres" id="4_ijm0q"]
+[ext_resource type="PackedScene" uid="uid://dlecin0ht7e7l" path="res://user_interface/UI_attached_to_enemies/healthbar.tscn" id="5_cwfi5"]
+[ext_resource type="PackedScene" uid="uid://c1mef3esxg5jh" path="res://user_interface/UI_attached_to_enemies/element_indicator.tscn" id="6_chj5q"]
+[ext_resource type="PackedScene" uid="uid://oml2t17eroh7" path="res://user_interface/UI_attached_to_enemies/debuff_indicator.tscn" id="7_2ck7s"]
+
+[node name="HealthComponent" type="Node2D"]
+script = ExtResource("1_vny83")
+enemy_explosion_sfx = ExtResource("2_s02oq")
+crystalize_effect = ExtResource("3_lioae")
+superconduct_effect = ExtResource("4_ijm0q")
+
+[node name="Healthbar" parent="." instance=ExtResource("5_cwfi5")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_right = 0.0
+grow_horizontal = 2
+grow_vertical = 2
+allow_lesser = true
+
+[node name="Box" type="HBoxContainer" parent="."]
+offset_left = -12.0
+offset_top = 20.0
+offset_right = 23.0
+offset_bottom = 29.0
+theme_override_constants/separation = 1
+
+[node name="element_indicator" parent="Box" instance=ExtResource("6_chj5q")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="debuff_indicator" parent="Box" instance=ExtResource("7_2ck7s")]
+unique_name_in_owner = true
+layout_mode = 2

@@ -1,82 +1,82 @@
 [gd_scene load_steps=21 format=3 uid="uid://dvwkbfdq1hht"]
 
-[ext_resource type="PackedScene" uid="uid://d23s3ceqy66ry" path="res://scenes/levels/test/test_parallax.tscn" id="1_5byf3"]
-[ext_resource type="Texture2D" uid="uid://w1wl3cu0m68q" path="res://assets/sprite_enemies/boss_1/boss_1_preview.png" id="1_k3fyo"]
-[ext_resource type="Texture2D" uid="uid://dd0lsdktyrf7l" path="res://assets/sprite_enemies/boss_1/boss_1_base.png" id="2_722xx"]
-[ext_resource type="Texture2D" uid="uid://cbv77pbdr0av1" path="res://assets/sprite_enemies/boss_1/boss_1_railgun.png" id="3_s4ybr"]
-[ext_resource type="Texture2D" uid="uid://jii325ldusy6" path="res://assets/sprite_enemies/boss_1/boss_1_modegun.png" id="4_ajauo"]
-[ext_resource type="Texture2D" uid="uid://c5ipy57ikn0bw" path="res://assets/sprite_enemies/boss_1/boss_1_components.png" id="5_mihq7"]
-[ext_resource type="Texture2D" uid="uid://cijtprins5kyu" path="res://assets/sprite_enemies/boss_1/boss_1_modebow.png" id="6_fljyb"]
-[ext_resource type="Texture2D" uid="uid://bm71lln6lsmlc" path="res://assets/sprite_characters/knight_spritesheet.png" id="8_rackx"]
-[ext_resource type="Texture2D" uid="uid://b5uv1u6y5momf" path="res://assets/sprite_enemies/bsf autobow.png" id="9_vfonq"]
-[ext_resource type="Texture2D" uid="uid://cv8m0tgd2djtm" path="res://assets/sprite_enemies/bsf wisp.png" id="10_evvdo"]
-[ext_resource type="Texture2D" uid="uid://cibbdxug5cih7" path="res://assets/sprite_enemies/bsf crystal.png" id="11_4raxc"]
-[ext_resource type="Texture2D" uid="uid://8j2pf5jxcgbw" path="res://assets/sprite_enemies/turret enemy v2/turret_enemy v2 pivot.png" id="12_pxjm5"]
-[ext_resource type="Texture2D" uid="uid://kkdwqtkdrsfo" path="res://assets/sprite_enemies/turret enemy v2/turret_enemy v2 turret.png" id="13_vgkvi"]
-[ext_resource type="Texture2D" uid="uid://d00dr80w0uslf" path="res://assets/sprite_enemies/turret enemy v1/mg ammo.png" id="14_gmkq3"]
+[ext_resource type="PackedScene" uid="uid://d23s3ceqy66ry" path="res://scenes/levels/test/test_parallax.tscn" id="1_55owr"]
+[ext_resource type="Texture2D" uid="uid://w1wl3cu0m68q" path="res://assets/sprite_enemies/boss_1/boss_1_preview.png" id="2_8vsbt"]
+[ext_resource type="Texture2D" uid="uid://dd0lsdktyrf7l" path="res://assets/sprite_enemies/boss_1/boss_1_base.png" id="3_3fow1"]
+[ext_resource type="Texture2D" uid="uid://cbv77pbdr0av1" path="res://assets/sprite_enemies/boss_1/boss_1_railgun.png" id="4_o88un"]
+[ext_resource type="Texture2D" uid="uid://jii325ldusy6" path="res://assets/sprite_enemies/boss_1/boss_1_modegun.png" id="5_rqf8x"]
+[ext_resource type="Texture2D" uid="uid://c5ipy57ikn0bw" path="res://assets/sprite_enemies/boss_1/boss_1_components.png" id="6_v7hsm"]
+[ext_resource type="Texture2D" uid="uid://cijtprins5kyu" path="res://assets/sprite_enemies/boss_1/boss_1_modebow.png" id="7_vjo8s"]
+[ext_resource type="Texture2D" uid="uid://bm71lln6lsmlc" path="res://assets/sprite_characters/knight_spritesheet.png" id="8_2a11m"]
+[ext_resource type="Texture2D" uid="uid://b5uv1u6y5momf" path="res://assets/sprite_enemies/bsf autobow.png" id="9_2625o"]
+[ext_resource type="Texture2D" uid="uid://cv8m0tgd2djtm" path="res://assets/sprite_enemies/bsf wisp.png" id="10_qkxan"]
+[ext_resource type="Texture2D" uid="uid://cibbdxug5cih7" path="res://assets/sprite_enemies/bsf crystal.png" id="11_0cn2t"]
+[ext_resource type="Texture2D" uid="uid://8j2pf5jxcgbw" path="res://assets/sprite_enemies/turret enemy v2/turret_enemy v2 pivot.png" id="12_i8ttb"]
+[ext_resource type="Texture2D" uid="uid://kkdwqtkdrsfo" path="res://assets/sprite_enemies/turret enemy v2/turret_enemy v2 turret.png" id="13_t6idn"]
+[ext_resource type="Texture2D" uid="uid://d00dr80w0uslf" path="res://assets/sprite_enemies/turret enemy v1/mg ammo.png" id="14_hfe8m"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_sfggh"]
-atlas = ExtResource("8_rackx")
+atlas = ExtResource("8_2a11m")
 region = Rect2(7, 103, 16, 24)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_t7h0l"]
-atlas = ExtResource("9_vfonq")
+atlas = ExtResource("9_2625o")
 region = Rect2(4, 36, 8, 8)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6pgnu"]
-atlas = ExtResource("9_vfonq")
+atlas = ExtResource("9_2625o")
 region = Rect2(15, 13, 18, 22)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hhfbh"]
-atlas = ExtResource("9_vfonq")
+atlas = ExtResource("9_2625o")
 region = Rect2(40, 39, 2, 2)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_oadj4"]
-atlas = ExtResource("10_evvdo")
+atlas = ExtResource("10_qkxan")
 region = Rect2(15, 13, 18, 22)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2qany"]
-atlas = ExtResource("11_4raxc")
+atlas = ExtResource("11_0cn2t")
 region = Rect2(15, 13, 18, 22)
 
 [node name="Preview" type="Node2D"]
 position = Vector2(-206, 472)
 
-[node name="ParallaxBackground" parent="." instance=ExtResource("1_5byf3")]
+[node name="ParallaxBackground" parent="." instance=ExtResource("1_55owr")]
 
 [node name="boss_preview" type="Sprite2D" parent="."]
 position = Vector2(470, -221)
 scale = Vector2(2, 2)
-texture = ExtResource("1_k3fyo")
+texture = ExtResource("2_8vsbt")
 
 [node name="base" type="Sprite2D" parent="."]
 position = Vector2(524, -377)
 scale = Vector2(2, 2)
-texture = ExtResource("2_722xx")
+texture = ExtResource("3_3fow1")
 
 [node name="rail" type="Sprite2D" parent="base"]
 rotation = 1.88496
-texture = ExtResource("3_s4ybr")
+texture = ExtResource("4_o88un")
 
 [node name="gun" type="Sprite2D" parent="base"]
 rotation = 1.88496
-texture = ExtResource("4_ajauo")
+texture = ExtResource("5_rqf8x")
 
 [node name="components" type="Sprite2D" parent="."]
 position = Vector2(705, -305)
 scale = Vector2(2, 2)
-texture = ExtResource("5_mihq7")
+texture = ExtResource("6_v7hsm")
 
 [node name="base2" type="Sprite2D" parent="components"]
-texture = ExtResource("2_722xx")
+texture = ExtResource("3_3fow1")
 
 [node name="rail" type="Sprite2D" parent="components/base2"]
 rotation = 0.71733
-texture = ExtResource("3_s4ybr")
+texture = ExtResource("4_o88un")
 
 [node name="gun" type="Sprite2D" parent="components/base2"]
 rotation = 0.71733
-texture = ExtResource("6_fljyb")
+texture = ExtResource("7_vjo8s")
 
 [node name="character" type="Sprite2D" parent="."]
 position = Vector2(366, -141)
@@ -118,12 +118,12 @@ texture = SubResource("AtlasTexture_2qany")
 position = Vector2(285, -165)
 
 [node name="Sprite2D_pivot" type="Sprite2D" parent="machinegun"]
-texture = ExtResource("12_pxjm5")
+texture = ExtResource("12_i8ttb")
 
 [node name="Sprite2D_main" type="Sprite2D" parent="machinegun"]
-texture = ExtResource("13_vgkvi")
+texture = ExtResource("13_t6idn")
 
 [node name="ammo_sprite_container" type="Node2D" parent="machinegun/Sprite2D_main"]
 
 [node name="Sprite2D_ammo1" type="Sprite2D" parent="machinegun/Sprite2D_main/ammo_sprite_container"]
-texture = ExtResource("14_gmkq3")
+texture = ExtResource("14_hfe8m")

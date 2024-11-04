@@ -1,6 +1,6 @@
 extends Node2D
 
-@onready var e: Enemy_Autobow = owner
+@onready var e: AttackComponent_Autobow = get_parent()
 @onready var sprite_ammo: Array[Sprite2D] = [$Sprite2D_ammo1, $Sprite2D_ammo2, $Sprite2D_ammo3]
 
 var current_ammo: int
@@ -8,7 +8,7 @@ var current_ammo: int
 func _ready() -> void:
 	current_ammo = e.ammo
 
-func _process(_delta: float) -> void:
+func _process(_delta: float) -> void: ## should just use signals...
 	if current_ammo != e.ammo:
 		current_ammo = e.ammo
 		match current_ammo:

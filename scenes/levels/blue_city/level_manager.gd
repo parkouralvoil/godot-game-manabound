@@ -55,15 +55,16 @@ func _ready() -> void:
 	exit_door.local_exit_door_interacted.connect(_on_local_exit_door_interacted)
 	
 	await get_tree().physics_frame
-	if BaseEnemy.enemies_alive <= 0 and room_type != RoomType.Boss:
+	if EnemyAiManager.enemies_alive <= 0 and room_type != RoomType.Boss:
 		_level_is_cleared()
 
 
 func _enemy_dead(type: BaseEnemy) -> void:
-	BaseEnemy.enemies_alive -= 1
-	if type is Enemy_SmallDrone:
-		BaseEnemy.small_drones -= 1
-	if BaseEnemy.enemies_alive <= 0:
+	EnemyAiManager.enemies_alive -= 1
+	if type is NormalEnemy:
+		if type.is_small_drone:
+			EnemyAiManager.small_drones -= 1
+	if EnemyAiManager.enemies_alive <= 0:
 		_level_is_cleared()
 
 

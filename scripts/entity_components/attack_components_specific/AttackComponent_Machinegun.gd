@@ -3,7 +3,7 @@ class_name EnemyAttackComponent_Machinegun
 
 var ProjectileScene: PackedScene = load("res://projectiles/enemy_projectiles/bullet_machinegun.tscn")
 
-@onready var e: Enemy_MachineGun = owner
+@onready var e: NormalEnemy = owner
 @onready var t_reload: Timer = $reload
 @onready var t_first_shot: Timer = $before_first_shot
 @onready var bullet_origin: Marker2D = $bullet_origin
@@ -32,11 +32,21 @@ func _process(_delta: float) -> void:
 
 func _physics_process(delta: float) -> void:
 	# to slowly pivot
+	_update_vision()
 	var target_direction: Vector2 = EnemyAiManager.player_position - global_position
 	var angle_to: float = self.transform.x.angle_to(target_direction)
 	aim_angle = rotation
 	e.sprite_main.rotation = rotation - PI/2
 	self.rotate(sign(angle_to) * min(delta * rotation_speed, abs(angle_to)))
+
+
+func _update_vision() -> void:
+	e.target_pos = EnemyAiManager.player_position
+	e.can_fire = (e.target_pos - global_position).length() < e.vision_range
+
+	if e.can_fire:
+		e.aim_direction = Vector2.ZERO.direction_to(e.target_pos 
+			- self.global_position).normalized()
 
 
 func shoot(projectile: PackedScene, direction: Vector2) -> void:

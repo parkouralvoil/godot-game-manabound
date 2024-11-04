@@ -1,47 +1,18 @@
-[gd_scene load_steps=21 format=3 uid="uid://dvuibymoxfgrl"]
+[gd_scene load_steps=11 format=3 uid="uid://dvuibymoxfgrl"]
 
-[ext_resource type="Script" path="res://scenes/enemies/stationary_enemies/laser_crystal/enemy_laser_crystal.gd" id="1_5ysu6"]
-[ext_resource type="PackedScene" uid="uid://ccfj5qan8stdb" path="res://projectiles/bullet_impact.tscn" id="2_3hu74"]
+[ext_resource type="Script" path="res://scenes/enemies/NormalEnemy.gd" id="1_pb112"]
 [ext_resource type="Texture2D" uid="uid://cibbdxug5cih7" path="res://assets/sprite_enemies/bsf crystal.png" id="2_2864i"]
 [ext_resource type="Resource" uid="uid://cep86amo13a6c" path="res://resources/data/enemy/enemy_stats/stats_laserCrystal.tres" id="2_j7isp"]
-[ext_resource type="Texture2D" uid="uid://mnqy6onwpiay" path="res://resources/textures/impacts/enemy_dead.tres" id="3_h2x0x"]
 [ext_resource type="Script" path="res://scenes/enemies/stationary_enemies/laser_crystal/AttackComponent_laser_crystal.gd" id="5_fvndy"]
-[ext_resource type="PackedScene" uid="uid://bx54isqpe5u3x" path="res://scenes/enemies/enemies_components/HealthComponent_enemy.tscn" id="5_ixnv0"]
+[ext_resource type="PackedScene" uid="uid://bx54isqpe5u3x" path="res://scenes/enemies/enemies_components/Normal_HealthComponent.tscn" id="5_ixnv0"]
 [ext_resource type="Script" path="res://scripts/entity_components/HurtboxComponent_enemy.gd" id="6_hya6t"]
-[ext_resource type="Material" uid="uid://b1hyqx5c4ut8u" path="res://resources/debuffs/crystalize/crystalized_particles.tres" id="7_k8tei"]
 [ext_resource type="PackedScene" uid="uid://bmke88h6lebel" path="res://projectiles/lasers/red_laser.tscn" id="8_fhqp7"]
-[ext_resource type="Texture2D" uid="uid://bsx8as4ra0ieo" path="res://resources/debuffs/crystalize/crystalized_texture.tres" id="8_tmt7b"]
-[ext_resource type="Script" path="res://resources/debuffs/crystalize/crystalized.gd" id="9_y6n1e"]
-[ext_resource type="Material" uid="uid://bccvk3vgyafgq" path="res://resources/debuffs/superconduct/superconduct_particles.tres" id="10_jojxn"]
-[ext_resource type="Texture2D" uid="uid://dm5mfus5ewtdb" path="res://resources/debuffs/superconduct/superconduct_texture.tres" id="11_k8vlb"]
-[ext_resource type="Script" path="res://resources/debuffs/superconduct/superconduct.gd" id="12_7mnsd"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_w0hsw"]
 atlas = ExtResource("2_2864i")
 region = Rect2(15, 13, 18, 22)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_dlwob"]
-
-[sub_resource type="Resource" id="Resource_jiwki"]
-resource_local_to_scene = true
-script = ExtResource("9_y6n1e")
-duration = 1.5
-particles_process_mat = ExtResource("7_k8tei")
-particles_textures = ExtResource("8_tmt7b")
-one_shot = true
-amount = 1
-explosiveness = 0.6
-lifetime = 0.6
-
-[sub_resource type="Resource" id="Resource_n7tdy"]
-resource_local_to_scene = true
-script = ExtResource("12_7mnsd")
-particles_process_mat = ExtResource("10_jojxn")
-particles_textures = ExtResource("11_k8vlb")
-one_shot = true
-amount = 30
-explosiveness = 1.0
-lifetime = 0.7
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ppbf0"]
 radius = 9.0
@@ -50,10 +21,8 @@ radius = 9.0
 z_index = 1
 collision_layer = 2
 collision_mask = 0
-script = ExtResource("1_5ysu6")
+script = ExtResource("1_pb112")
 stats = ExtResource("2_j7isp")
-bullet_impact_scene = ExtResource("2_3hu74")
-enemy_dead_texture = ExtResource("3_h2x0x")
 
 [node name="Sprite2D_main" type="Sprite2D" parent="."]
 texture = SubResource("AtlasTexture_w0hsw")
@@ -62,9 +31,9 @@ texture = SubResource("AtlasTexture_w0hsw")
 shape = SubResource("CircleShape2D_dlwob")
 
 [node name="HealthComponent" parent="." instance=ExtResource("5_ixnv0")]
-explosion_volume = -20.0
-crystalize_effect = SubResource("Resource_jiwki")
-superconduct_effect = SubResource("Resource_n7tdy")
+enemy_explosion_sfx = null
+crystalize_effect = null
+superconduct_effect = null
 
 [node name="HurtboxComponent" type="Area2D" parent="."]
 collision_layer = 8

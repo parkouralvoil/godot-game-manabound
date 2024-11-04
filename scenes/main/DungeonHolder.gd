@@ -41,7 +41,8 @@ func initialize_dungeon() -> void: ## called by main
 		dungeon_data.start_room() ## sets room_num to 1
 		dungeon_data.game_started.emit()
 		dungeon_data.state_in_combat = true
-		dungeon_data.preset_selected.connect(_on_preset_selected)
+		if not dungeon_data.preset_selected.is_connected(_on_preset_selected):
+			dungeon_data.preset_selected.connect(_on_preset_selected)
 	else:
 		push_error("(%s): Dungeon data is null" % name)
 
@@ -55,6 +56,7 @@ func remove_previous_lvl() -> void:
 	await main.fade_out()
 	await get_tree().create_timer(0.5).timeout ## to collect mana orbs
 	EventBus.clear_abilities.emit()
+	EnemyAiManager.reset_enemies()
 	if current_level:
 		remove_child(current_level)
 		current_level.queue_free()

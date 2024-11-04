@@ -1,171 +1,38 @@
-[gd_scene load_steps=21 format=3 uid="uid://vql57oe3t6n7"]
+[gd_scene load_steps=8 format=3 uid="uid://vql57oe3t6n7"]
 
-[ext_resource type="Texture2D" uid="uid://c5ipy57ikn0bw" path="res://assets/sprite_enemies/boss_1/boss_1_components.png" id="1_6j7pu"]
 [ext_resource type="Script" path="res://scenes/bosses/boss_1.gd" id="1_wqb58"]
-[ext_resource type="Texture2D" uid="uid://cbv77pbdr0av1" path="res://assets/sprite_enemies/boss_1/boss_1_railgun.png" id="2_psxm8"]
-[ext_resource type="PackedScene" uid="uid://s0uqul2uakbe" path="res://scenes/bosses/sidepart_hurtbox.tscn" id="2_vl3qq"]
-[ext_resource type="Script" path="res://scenes/bosses/main_gun.gd" id="3_6b7t0"]
-[ext_resource type="Texture2D" uid="uid://cijtprins5kyu" path="res://assets/sprite_enemies/boss_1/boss_1_modebow.png" id="3_bu4na"]
-[ext_resource type="Script" path="res://scenes/bosses/sidepart.gd" id="4_0s7a6"]
-[ext_resource type="Script" path="res://scenes/bosses/sidepart_health.gd" id="5_3mj04"]
-[ext_resource type="Texture2D" uid="uid://jii325ldusy6" path="res://assets/sprite_enemies/boss_1/boss_1_modegun.png" id="6_kxwp3"]
+[ext_resource type="PackedScene" uid="uid://d34txndalmepx" path="res://scenes/bosses/sideparts/laser_left.tscn" id="2_tvaij"]
+[ext_resource type="PackedScene" uid="uid://cm58shlolaeyy" path="res://scenes/bosses/sideparts/laser_right.tscn" id="3_2qw8u"]
+[ext_resource type="PackedScene" uid="uid://blre7nbnddapj" path="res://scenes/bosses/sideparts/orb_top.tscn" id="4_a11k6"]
+[ext_resource type="PackedScene" uid="uid://81bywsqtve7q" path="res://scenes/bosses/sideparts/orb_bot.tscn" id="5_int6i"]
+[ext_resource type="PackedScene" uid="uid://tk4do2uswg4u" path="res://scenes/bosses/main_gun.tscn" id="6_12lta"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_23ihu"]
-radius = 20.2562
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_wicsr"]
-atlas = ExtResource("1_6j7pu")
-region = Rect2(0, 24, 32, 80)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_0xclr"]
-size = Vector2(26, 46)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_5swl7"]
-size = Vector2(15, 9)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_b8cbh"]
-atlas = ExtResource("1_6j7pu")
-region = Rect2(96, 24, 32, 80)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_4ilgp"]
-atlas = ExtResource("1_6j7pu")
-region = Rect2(24, 0, 80, 40)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ay7oc"]
-size = Vector2(35.5, 32)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_dt1w1"]
-size = Vector2(14, 16.5)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_mxry1"]
-atlas = ExtResource("1_6j7pu")
-region = Rect2(24, 88, 80, 40)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_6nfv0"]
-atlas = ExtResource("1_6j7pu")
-region = Rect2(40, 40, 48, 48)
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_3n4i1"]
-radius = 24.5815
+radius = 34.2646
 
 [node name="RailgunBoss" type="Node2D"]
 position = Vector2(406, -343)
-scale = Vector2(2, 2)
 script = ExtResource("1_wqb58")
 
-[node name="StaticBody_CollisionBox" type="StaticBody2D" parent="."]
+[node name="MiddleWorldCollisionBox" type="StaticBody2D" parent="."]
 collision_mask = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody_CollisionBox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MiddleWorldCollisionBox"]
 z_index = 10
 position = Vector2(-15.25, 1)
 shape = SubResource("CircleShape2D_23ihu")
-debug_color = Color(0.895752, 0.27876, 0.401802, 0.42)
+debug_color = Color(0.652364, 0.512942, 0.217287, 0.42)
 
-[node name="LaserLeft" type="Sprite2D" parent="."]
-position = Vector2(-45, 2)
-texture = SubResource("AtlasTexture_wicsr")
+[node name="LaserLeft" parent="." instance=ExtResource("2_tvaij")]
+position = Vector2(-75, 2)
 
-[node name="BossHurtbox" parent="LaserLeft" instance=ExtResource("2_vl3qq")]
-position = Vector2(-1, 0.5)
+[node name="LaserRight" parent="." instance=ExtResource("3_2qw8u")]
+position = Vector2(45, 2)
 
-[node name="Main" type="CollisionShape2D" parent="LaserLeft/BossHurtbox"]
-position = Vector2(0, -0.5)
-shape = SubResource("RectangleShape2D_0xclr")
+[node name="OrbTop" parent="." instance=ExtResource("4_a11k6")]
+position = Vector2(-15, -58)
 
-[node name="Bot" type="CollisionShape2D" parent="LaserLeft/BossHurtbox"]
-position = Vector2(-5.5, 27)
-shape = SubResource("RectangleShape2D_5swl7")
+[node name="OrbBot" parent="." instance=ExtResource("5_int6i")]
+position = Vector2(-15, 62)
 
-[node name="Top" type="CollisionShape2D" parent="LaserLeft/BossHurtbox"]
-position = Vector2(-5.5, -28)
-shape = SubResource("RectangleShape2D_5swl7")
-
-[node name="LaserAttackComponent" type="Node2D" parent="LaserLeft"]
-
-[node name="Reload" type="Timer" parent="LaserLeft/LaserAttackComponent"]
-
-[node name="LaserRight" type="Sprite2D" parent="."]
-position = Vector2(15, 2)
-texture = SubResource("AtlasTexture_b8cbh")
-
-[node name="sidepart_hurtbox" parent="LaserRight" instance=ExtResource("2_vl3qq")]
-position = Vector2(2.5, 0.5)
-
-[node name="Main" type="CollisionShape2D" parent="LaserRight/sidepart_hurtbox"]
-position = Vector2(-1.5, -0.5)
-shape = SubResource("RectangleShape2D_0xclr")
-
-[node name="Bot" type="CollisionShape2D" parent="LaserRight/sidepart_hurtbox"]
-position = Vector2(4, 27)
-shape = SubResource("RectangleShape2D_5swl7")
-
-[node name="Top" type="CollisionShape2D" parent="LaserRight/sidepart_hurtbox"]
-position = Vector2(4, -28)
-shape = SubResource("RectangleShape2D_5swl7")
-
-[node name="OrbTop" type="Sprite2D" parent="."]
-position = Vector2(-15, -28)
-texture = SubResource("AtlasTexture_4ilgp")
-
-[node name="BossHurtbox" parent="OrbTop" instance=ExtResource("2_vl3qq")]
-position = Vector2(0, -2)
-
-[node name="Main" type="CollisionShape2D" parent="OrbTop/BossHurtbox"]
-position = Vector2(-0.25, 0.5)
-shape = SubResource("RectangleShape2D_ay7oc")
-
-[node name="Left" type="CollisionShape2D" parent="OrbTop/BossHurtbox"]
-position = Vector2(-25, 0.25)
-shape = SubResource("RectangleShape2D_dt1w1")
-
-[node name="Right" type="CollisionShape2D" parent="OrbTop/BossHurtbox"]
-position = Vector2(24.5, 0.25)
-shape = SubResource("RectangleShape2D_dt1w1")
-
-[node name="OrbBot" type="Sprite2D" parent="."]
-position = Vector2(-15, 32)
-texture = SubResource("AtlasTexture_mxry1")
-script = ExtResource("4_0s7a6")
-
-[node name="SidepartHealth" type="Node2D" parent="OrbBot"]
-script = ExtResource("5_3mj04")
-
-[node name="BossHurtbox" parent="OrbBot" instance=ExtResource("2_vl3qq")]
-position = Vector2(0, 2)
-
-[node name="Main" type="CollisionShape2D" parent="OrbBot/BossHurtbox"]
-position = Vector2(-0.25, 0.5)
-shape = SubResource("RectangleShape2D_ay7oc")
-
-[node name="Left" type="CollisionShape2D" parent="OrbBot/BossHurtbox"]
-position = Vector2(-25, 0.25)
-shape = SubResource("RectangleShape2D_dt1w1")
-
-[node name="Right" type="CollisionShape2D" parent="OrbBot/BossHurtbox"]
-position = Vector2(24.5, 0.25)
-shape = SubResource("RectangleShape2D_dt1w1")
-
-[node name="MainGun" type="Sprite2D" parent="."]
-position = Vector2(-15, 2)
-texture = SubResource("AtlasTexture_6nfv0")
-script = ExtResource("3_6b7t0")
-
-[node name="MainBossHurtbox" parent="MainGun" instance=ExtResource("2_vl3qq")]
-unique_name_in_owner = true
-position = Vector2(0.5, 0)
-
-[node name="Main" type="CollisionShape2D" parent="MainGun/MainBossHurtbox"]
-position = Vector2(-0.5, 0.5)
-shape = SubResource("CircleShape2D_3n4i1")
-
-[node name="rail" type="Sprite2D" parent="MainGun"]
-rotation = -1.43641
-texture = ExtResource("2_psxm8")
-
-[node name="bow" type="Sprite2D" parent="MainGun/rail"]
-texture = ExtResource("3_bu4na")
-
-[node name="gun" type="Sprite2D" parent="MainGun/rail"]
-visible = false
-texture = ExtResource("6_kxwp3")
+[node name="MainGun" parent="." instance=ExtResource("6_12lta")]

@@ -1,0 +1,73 @@
+[gd_scene load_steps=14 format=3 uid="uid://tk4do2uswg4u"]
+
+[ext_resource type="Script" path="res://scenes/bosses/main_gun.gd" id="1_goihn"]
+[ext_resource type="Resource" uid="uid://c28ueyt3xnyss" path="res://scenes/bosses/main_gun_stats.tres" id="2_v1kc1"]
+[ext_resource type="Texture2D" uid="uid://c5ipy57ikn0bw" path="res://assets/sprite_enemies/boss_1/boss_1_components.png" id="3_kpbbb"]
+[ext_resource type="Texture2D" uid="uid://cbv77pbdr0av1" path="res://assets/sprite_enemies/boss_1/boss_1_railgun.png" id="4_ylubb"]
+[ext_resource type="Texture2D" uid="uid://cijtprins5kyu" path="res://assets/sprite_enemies/boss_1/boss_1_modebow.png" id="5_w7ma5"]
+[ext_resource type="Texture2D" uid="uid://jii325ldusy6" path="res://assets/sprite_enemies/boss_1/boss_1_modegun.png" id="6_ati3w"]
+[ext_resource type="PackedScene" uid="uid://s0uqul2uakbe" path="res://scenes/bosses/sideparts/sidepart_hurtbox.tscn" id="7_mwwo1"]
+[ext_resource type="Script" path="res://scenes/bosses/main_boss1_health.gd" id="8_3odab"]
+[ext_resource type="PackedScene" uid="uid://c1mef3esxg5jh" path="res://user_interface/UI_attached_to_enemies/element_indicator.tscn" id="9_83g7f"]
+[ext_resource type="PackedScene" uid="uid://oml2t17eroh7" path="res://user_interface/UI_attached_to_enemies/debuff_indicator.tscn" id="10_34yfc"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6nfv0"]
+atlas = ExtResource("3_kpbbb")
+region = Rect2(40, 40, 48, 48)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3n4i1"]
+radius = 46.0027
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_h8eon"]
+radius = 30.0
+
+[node name="MainGun" type="StaticBody2D"]
+position = Vector2(-15, 2)
+script = ExtResource("1_goihn")
+stats = ExtResource("2_v1kc1")
+
+[node name="base" type="Sprite2D" parent="."]
+scale = Vector2(2, 2)
+texture = SubResource("AtlasTexture_6nfv0")
+
+[node name="Sprite2D_main" type="Sprite2D" parent="."]
+rotation = -1.43641
+scale = Vector2(2, 2)
+texture = ExtResource("4_ylubb")
+
+[node name="bow" type="Sprite2D" parent="Sprite2D_main"]
+texture = ExtResource("5_w7ma5")
+
+[node name="gun" type="Sprite2D" parent="Sprite2D_main"]
+visible = false
+texture = ExtResource("6_ati3w")
+
+[node name="BossHurtbox" parent="." instance=ExtResource("7_mwwo1")]
+unique_name_in_owner = true
+position = Vector2(0.5, 0)
+
+[node name="Main" type="CollisionShape2D" parent="BossHurtbox"]
+position = Vector2(-0.5, 0.5)
+shape = SubResource("CircleShape2D_3n4i1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_h8eon")
+debug_color = Color(0.766121, 0.413966, 0.463493, 0.42)
+
+[node name="HealthComponent" type="Node2D" parent="."]
+script = ExtResource("8_3odab")
+
+[node name="Box" type="VBoxContainer" parent="HealthComponent"]
+offset_left = -54.0
+offset_top = -58.0
+offset_right = -45.0
+offset_bottom = -39.0
+theme_override_constants/separation = 1
+
+[node name="element_indicator" parent="HealthComponent/Box" instance=ExtResource("9_83g7f")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="debuff_indicator" parent="HealthComponent/Box" instance=ExtResource("10_34yfc")]
+unique_name_in_owner = true
+layout_mode = 2

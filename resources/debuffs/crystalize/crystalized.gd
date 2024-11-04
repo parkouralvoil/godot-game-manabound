@@ -63,7 +63,7 @@ func detonate_crystalize() -> void:
 		crystal_stacks = 0
 		accumulated_dmg = 0
 		e_health.debuff_indicator.current_debuff = CombatManager.Debuffs.NONE
-		e_health.damage_received(final_dmg, CombatManager.Elements.NONE)
+		e_health.raw_damage_received(final_dmg, CombatManager.Elements.NONE)
 
 
 func damage_equation() -> float:

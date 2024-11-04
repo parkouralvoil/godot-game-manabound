@@ -1,0 +1,83 @@
+[gd_scene load_steps=15 format=3 uid="uid://cm58shlolaeyy"]
+
+[ext_resource type="Script" path="res://scenes/bosses/sideparts/sidepart.gd" id="1_3bnxc"]
+[ext_resource type="Texture2D" uid="uid://c5ipy57ikn0bw" path="res://assets/sprite_enemies/boss_1/boss_1_components.png" id="1_luqt5"]
+[ext_resource type="Resource" uid="uid://b72ma1xssesiq" path="res://scenes/bosses/sideparts/sidepart_laser_stats.tres" id="2_oijfj"]
+[ext_resource type="PackedScene" uid="uid://s0uqul2uakbe" path="res://scenes/bosses/sideparts/sidepart_hurtbox.tscn" id="2_rkq4m"]
+[ext_resource type="Script" path="res://scenes/bosses/sideparts/sidepart_boss1_health.gd" id="3_f0p71"]
+[ext_resource type="Resource" uid="uid://dcu6q2sy4u3fj" path="res://resources/debuffs/crystalize/crystalized.tres" id="4_g6uuq"]
+[ext_resource type="Resource" uid="uid://c1kncqtjwfxj" path="res://resources/debuffs/superconduct/superconduct.tres" id="5_m8rbo"]
+[ext_resource type="PackedScene" uid="uid://dgxe7byv8tjvu" path="res://scenes/bosses/sideparts/sidepart_healthbar.tscn" id="6_vqvvx"]
+[ext_resource type="PackedScene" uid="uid://c1mef3esxg5jh" path="res://user_interface/UI_attached_to_enemies/element_indicator.tscn" id="7_eeg4v"]
+[ext_resource type="PackedScene" uid="uid://oml2t17eroh7" path="res://user_interface/UI_attached_to_enemies/debuff_indicator.tscn" id="8_e0qp6"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b8cbh"]
+atlas = ExtResource("1_luqt5")
+region = Rect2(96, 24, 32, 80)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5cgkw"]
+size = Vector2(50, 89)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cfyde"]
+size = Vector2(29.5, 18.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_klki1"]
+size = Vector2(36, 82)
+
+[node name="LaserRight" type="StaticBody2D"]
+position = Vector2(64, 2)
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("1_3bnxc")
+stats = ExtResource("2_oijfj")
+
+[node name="Sprite2D_main" type="Sprite2D" parent="."]
+scale = Vector2(2, 2)
+texture = SubResource("AtlasTexture_b8cbh")
+
+[node name="sidepart_hurtbox" parent="." instance=ExtResource("2_rkq4m")]
+position = Vector2(2.5, 0.5)
+
+[node name="Main" type="CollisionShape2D" parent="sidepart_hurtbox"]
+position = Vector2(0.5, -2)
+shape = SubResource("RectangleShape2D_5cgkw")
+
+[node name="Bot" type="CollisionShape2D" parent="sidepart_hurtbox"]
+position = Vector2(10.5, 52.5)
+shape = SubResource("RectangleShape2D_cfyde")
+
+[node name="Top" type="CollisionShape2D" parent="sidepart_hurtbox"]
+position = Vector2(10.5, -56.5)
+shape = SubResource("RectangleShape2D_cfyde")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, -2)
+shape = SubResource("RectangleShape2D_klki1")
+debug_color = Color(0.850082, 0.328254, 0.468246, 0.42)
+
+[node name="HealthComponent" type="Node2D" parent="."]
+script = ExtResource("3_f0p71")
+crystalize_effect = ExtResource("4_g6uuq")
+superconduct_effect = ExtResource("5_m8rbo")
+
+[node name="Healthbar" parent="HealthComponent" instance=ExtResource("6_vqvvx")]
+offset_left = 33.0
+offset_top = -58.0
+offset_right = 40.0
+offset_bottom = 55.0
+fill_mode = 2
+
+[node name="Box" type="VBoxContainer" parent="HealthComponent"]
+offset_left = 45.0
+offset_top = -58.0
+offset_right = 54.0
+offset_bottom = -39.0
+theme_override_constants/separation = 1
+
+[node name="element_indicator" parent="HealthComponent/Box" instance=ExtResource("7_eeg4v")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="debuff_indicator" parent="HealthComponent/Box" instance=ExtResource("8_e0qp6")]
+unique_name_in_owner = true
+layout_mode = 2

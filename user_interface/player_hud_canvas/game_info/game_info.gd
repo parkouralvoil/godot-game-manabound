@@ -63,7 +63,7 @@ func _process(_delta: float) -> void:
 		return
 	label_fps.text = "FPS: " + str(Engine.get_frames_per_second())
 	label_orbs.text = "Orbs: " + str(inventory.mana_orbs)
-	label_enemies.text = "Enemies left: %d" % BaseEnemy.enemies_alive
+	label_enemies.text = "Enemies left: %d" % EnemyAiManager.enemies_alive
 
 
 func _on_boss_fight_started(boss_node: Node2D) -> void:

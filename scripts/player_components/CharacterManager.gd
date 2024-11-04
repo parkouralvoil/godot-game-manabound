@@ -100,6 +100,8 @@ func apply_player_cam_shake(strength: int) -> void:
 
 func _on_character_died() -> void:
 	p.controls_disabled = true
+	p.PlayerInfo.basic_attacking = false
+	p.PlayerInfo.input_ult = false
 	t_change_char.start()
 	await t_change_char.timeout
 	

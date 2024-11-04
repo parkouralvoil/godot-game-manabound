@@ -3,7 +3,7 @@ class_name AttackComponent_Autobow
 
 var ProjectileScene: PackedScene = load("res://projectiles/bullet.tscn")
 
-@onready var e: Enemy_Autobow = owner
+@onready var e: NormalEnemy = owner
 @onready var t_firerate: Timer = $firerate
 @onready var t_reload: Timer = $reload
 @onready var t_first_shot: Timer = $before_first_shot
@@ -13,12 +13,27 @@ var bullet_color: Color = Color(1, 0.4, 0.2)
 var last_aim_direction: Vector2 = Vector2.ZERO
 var reload_reset: bool = false # only reverts back to false after superconduct clear
 
+var max_ammo: int = 3
+var ammo: int = max_ammo
+
 func _ready() -> void:
 	e.reload_time_changed.connect(update_reload)
 
+
+func _update_vision() -> void:
+	## handles vision
+	e.target_pos = EnemyAiManager.player_position
+	e.can_fire = (e.target_pos - global_position).length() < e.vision_range
+	
+	if e.can_fire:
+		e.aim_direction = Vector2.ZERO.direction_to(e.target_pos 
+			- self.global_position).normalized()
+
+
 func _physics_process(_delta: float) -> void:
+	_update_vision()
 	if (e.can_fire 
-	and e.ammo == e.max_ammo 
+	and ammo == max_ammo 
 	and t_firerate.is_stopped() 
 	and t_first_shot.is_stopped()):
 		e.sprite_main.rotation = (e.aim_direction as Vector2).angle() - PI/2
@@ -43,14 +58,14 @@ func shoot(projectile: PackedScene, direction: Vector2) -> void:
 		print(projectile)
 
 func _on_firerate_timeout() -> void:
-	if e.ammo > 0:
+	if ammo > 0:
 		burst_shoot()
 		t_firerate.start()
 	elif t_reload.is_stopped():
 		t_reload.start()
 
 func burst_shoot() -> void:
-	e.ammo -= 1
+	ammo -= 1
 	shoot(ProjectileScene, last_aim_direction)
 	#shoot(ProjectileScene, last_aim_direction.rotated(PI/16) )
 	#shoot(ProjectileScene, last_aim_direction.rotated(-PI/16) )
@@ -59,7 +74,7 @@ func update_reload(new_reload: float) -> void:
 	t_reload.wait_time = new_reload
 
 func _on_reload_timeout() -> void:
-	e.ammo = e.max_ammo
+	ammo = max_ammo
 
 
 func _on_before_first_shot_timeout() -> void:

@@ -1,16 +1,14 @@
-[gd_scene load_steps=22 format=3 uid="uid://cucqth4r8k7y3"]
+[gd_scene load_steps=20 format=3 uid="uid://cucqth4r8k7y3"]
 
-[ext_resource type="Script" path="res://scenes/enemies/stationary_enemies/machinegun/enemy_machinegun.gd" id="1_4ftxf"]
+[ext_resource type="Script" path="res://scenes/enemies/NormalEnemy.gd" id="1_pwbt7"]
 [ext_resource type="Resource" uid="uid://bd8yd78nv85uf" path="res://resources/data/enemy/enemy_stats/stats_machineGun.tres" id="2_eql8e"]
-[ext_resource type="PackedScene" uid="uid://ccfj5qan8stdb" path="res://projectiles/bullet_impact.tscn" id="2_oai8o"]
-[ext_resource type="Texture2D" uid="uid://mnqy6onwpiay" path="res://resources/textures/impacts/enemy_dead.tres" id="3_af3ky"]
 [ext_resource type="Script" path="res://scenes/enemies/stationary_enemies/machinegun/machinegun_ammo.gd" id="3_rk0t3"]
 [ext_resource type="Texture2D" uid="uid://8j2pf5jxcgbw" path="res://assets/sprite_enemies/turret enemy v2/turret_enemy v2 pivot.png" id="4_aux6u"]
 [ext_resource type="Texture2D" uid="uid://kkdwqtkdrsfo" path="res://assets/sprite_enemies/turret enemy v2/turret_enemy v2 turret.png" id="5_gt8rf"]
 [ext_resource type="Script" path="res://scripts/entity_components/attack_components_specific/AttackComponent_Machinegun.gd" id="6_rikjp"]
 [ext_resource type="Texture2D" uid="uid://d00dr80w0uslf" path="res://assets/sprite_enemies/turret enemy v1/mg ammo.png" id="7_p7erf"]
 [ext_resource type="Script" path="res://scripts/entity_components/HurtboxComponent_enemy.gd" id="7_w38ps"]
-[ext_resource type="PackedScene" uid="uid://bx54isqpe5u3x" path="res://scenes/enemies/enemies_components/HealthComponent_enemy.tscn" id="8_lvnqj"]
+[ext_resource type="PackedScene" uid="uid://bx54isqpe5u3x" path="res://scenes/enemies/enemies_components/Normal_HealthComponent.tscn" id="8_lvnqj"]
 [ext_resource type="Material" uid="uid://b1hyqx5c4ut8u" path="res://resources/debuffs/crystalize/crystalized_particles.tres" id="10_om6tq"]
 [ext_resource type="Texture2D" uid="uid://bsx8as4ra0ieo" path="res://resources/debuffs/crystalize/crystalized_texture.tres" id="11_ar7u1"]
 [ext_resource type="Script" path="res://resources/debuffs/crystalize/crystalized.gd" id="12_cmfod"]
@@ -48,10 +46,9 @@ radius = 22.0
 [node name="enemy_machinegun" type="StaticBody2D"]
 collision_layer = 2
 collision_mask = 0
-script = ExtResource("1_4ftxf")
+script = ExtResource("1_pwbt7")
 stats = ExtResource("2_eql8e")
-bullet_impact_scene = ExtResource("2_oai8o")
-enemy_dead_texture = ExtResource("3_af3ky")
+impact_scale = Vector2(5, 5)
 
 [node name="Sprite2D_pivot" type="Sprite2D" parent="."]
 texture = ExtResource("4_aux6u")

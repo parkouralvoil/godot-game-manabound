@@ -5,12 +5,17 @@ signal health_changed(new_health: float)
 signal reload_time_changed(new_reload_time: float)
 signal attack_interrupted()
 
+## these should probs be made more elegant
+var _default_impact_scene: PackedScene = preload("res://projectiles/bullet_impact.tscn")
+var _default_dead_texture: AtlasTexture = preload("res://resources/textures/impacts/enemy_dead.tres")
+
 @export_category("Enemy Stats")
-@export var stats: EnemyStats
+@export var stats: EnemyStats ## SET ENEMY STATS
 @export var interruptable: bool = true
 @export_category("Visuals")
-@export var bullet_impact_scene: PackedScene # im recycling this for enemy's death explosion sfx
-@export var enemy_dead_texture: AtlasTexture
+# im recycling this for enemy's death explosion sfx
+@export var bullet_impact_scene: PackedScene ## can be null
+@export var enemy_dead_texture: AtlasTexture ## can be null
 @export var impact_scale: Vector2 = Vector2(3, 3)
 
 var damage_number: PackedScene = preload("res://user_interface/UI_attached_to_enemies/label_dmg_num.tscn")
@@ -25,15 +30,6 @@ var default_reload_time: float = 5.0
 var mana_orbs_dropped: float
 
 var HP_multiplier: float = 1 ## affected by area scaling during instantiation
-
-## I moved these from EnemyAIManager to here
-static var enemies_alive: int = 0:
-	set(val):
-		enemies_alive = max(val, 0)
-static var small_drones: int = 0:
-	set(val):
-		small_drones = max(val, 0)
-static var max_drones: int = 20
 
 var health: float = max_health:
 	set(value):
@@ -51,20 +47,23 @@ var spawned_runtime: bool = false ## for spawned enemies like Small Drone
 ## now replaced by stats.health, since it has the initial HP before area scaling
 
 
-@onready var health_component: EnemyHealthComponent = $HealthComponent # now combined health and debuff
+# now combined health and debuff
+@onready var health_component: EnemyHealthComponent = $HealthComponent
 @onready var sprite_main: Sprite2D = $Sprite2D_main
 
 
 func _ready() -> void:
 	assert(stats, "missing enemy_stats on %s" % name)
 	assert(health_component, "missing health comp")
-	assert(bullet_impact_scene, "missing ref to bullet_impact scene")
-	assert(enemy_dead_texture, "missing ref to enemy_dead_texture")
+	if not bullet_impact_scene:
+		bullet_impact_scene = _default_impact_scene
+	if not enemy_dead_texture:
+		enemy_dead_texture = _default_dead_texture
 	
 	_set_stats()
 	health = max_health
 	reload_time = default_reload_time
-	BaseEnemy.enemies_alive += 1
+	EnemyAiManager.enemies_alive += 1
 	
 	default_color = sprite_main.modulate
 	if not spawned_runtime:
@@ -101,9 +100,6 @@ func make_impact() -> void:
 func _set_stats() -> void:
 	max_health = stats.health * HP_multiplier
 	default_reload_time = stats.default_reload_time
-	
-	health_component.set_healthbar_properties(stats.health)
-	mana_orbs_dropped = max_health
 
 
 func spawn_dmg_number(effect: String, color: Color) -> void:

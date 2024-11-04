@@ -1,11 +1,9 @@
-[gd_scene load_steps=22 format=3 uid="uid://bhqkl7kraifkd"]
+[gd_scene load_steps=20 format=3 uid="uid://bhqkl7kraifkd"]
 
-[ext_resource type="Script" path="res://scenes/enemies/stationary_enemies/energizedOrb/enemy_energized_orb.gd" id="1_cgshh"]
-[ext_resource type="PackedScene" uid="uid://ccfj5qan8stdb" path="res://projectiles/bullet_impact.tscn" id="2_1kbps"]
+[ext_resource type="Script" path="res://scenes/enemies/NormalEnemy.gd" id="1_ytpyj"]
 [ext_resource type="Resource" uid="uid://dj581exf47q50" path="res://resources/data/enemy/enemy_stats/stats_energyOrb.tres" id="2_nktuf"]
-[ext_resource type="Texture2D" uid="uid://mnqy6onwpiay" path="res://resources/textures/impacts/enemy_dead.tres" id="3_1qe5k"]
 [ext_resource type="Texture2D" uid="uid://cv8m0tgd2djtm" path="res://assets/sprite_enemies/bsf wisp.png" id="4_msriy"]
-[ext_resource type="PackedScene" uid="uid://bx54isqpe5u3x" path="res://scenes/enemies/enemies_components/HealthComponent_enemy.tscn" id="5_d6l82"]
+[ext_resource type="PackedScene" uid="uid://bx54isqpe5u3x" path="res://scenes/enemies/enemies_components/Normal_HealthComponent.tscn" id="5_d6l82"]
 [ext_resource type="Script" path="res://scenes/enemies/stationary_enemies/energizedOrb/AttackComponent_energizedOrb.gd" id="5_modtn"]
 [ext_resource type="PackedScene" uid="uid://bokmrko2cf2sb" path="res://projectiles/enemy_projectiles/orb_explosion/orb_explosion_spawn.tscn" id="6_g81kv"]
 [ext_resource type="Script" path="res://scripts/entity_components/HurtboxComponent_enemy.gd" id="6_vusb1"]
@@ -56,10 +54,8 @@ color = Color(0.54902, 0.901961, 0.956863, 1)
 [node name="enemy_energizedOrb" type="StaticBody2D"]
 collision_layer = 2
 collision_mask = 0
-script = ExtResource("1_cgshh")
+script = ExtResource("1_ytpyj")
 stats = ExtResource("2_nktuf")
-bullet_impact_scene = ExtResource("2_1kbps")
-enemy_dead_texture = ExtResource("3_1qe5k")
 
 [node name="Sprite2D_main" type="Sprite2D" parent="."]
 texture = SubResource("AtlasTexture_w0hsw")

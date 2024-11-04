@@ -39,14 +39,7 @@ func spawn_enemies(info_array: Array[RoomPreset.SpawnInfo]) -> void: ## called b
 
 
 func _instantiate_enemy(info: RoomPreset.SpawnInfo) -> BaseEnemy:
-	var inst: BaseEnemy
-	match info.scene:
-		RoomPreset.LasercrystalScene:
-			inst = (info.scene).instantiate() as Enemy_LaserCrystal
-			if RNG.roll_probability(0.4):
-				inst.horizontal = true
-		_:
-			inst = (info.scene).instantiate()
+	var inst: BaseEnemy = info.scene.instantiate()
 	inst.HP_multiplier *= hp_scaling
 	return inst
 

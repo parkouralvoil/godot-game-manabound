@@ -45,7 +45,8 @@
     "res://resources/data/collectibles/runes/rune_datas/",
     "res://characters/knight/",
     "res://characters/",
-    "res://resources/data/enemy/enemy_stats/"
+    "res://resources/data/enemy/enemy_stats/",
+    "res://scenes/enemies/stationary_enemies/"
   ],
   "table_functions": {
     "filter": [
