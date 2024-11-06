@@ -1,6 +1,8 @@
 extends Area2D
 class_name HurtboxComponent
 
+@export var detectable_by_autoaim: bool = true ## for sideparts of railgun to set false at phase 1
+
 @onready var entity: Node
 
 # projectile was hitting player smh
@@ -14,8 +16,10 @@ func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_PAUSABLE
 	if owner is BaseEnemy:
 		entity = owner
+		print_debug("if: %s" % entity.name)
 	else: ## sideparts/boss
 		entity = get_parent()
+		print_debug("else: %s" % entity.name)
 
 
 func hit(damage: float, element: CombatManager.Elements, ep: float = 0) -> void:

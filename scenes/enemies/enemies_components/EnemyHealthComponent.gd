@@ -16,12 +16,18 @@ var element_initial: CombatManager.Elements = CombatManager.Elements.NONE
 var is_dead: bool = false
 
 @onready var e: BaseEnemy = get_parent()
-@onready var element_indicator: ElementIndicator = $Box/element_indicator
-@onready var debuff_indicator: DebuffIndicator = $Box/debuff_indicator
+@onready var box: Container
+@onready var element_indicator: ElementIndicator
+@onready var debuff_indicator: DebuffIndicator
 
-## damage number moved to baseEnemy, since atk component needs it too
-#func _ready() -> void:
-	#assert(damage_number, "forgot to export") 
+func _ready() -> void:
+	assert(box, "fix ready function of health comp to assign box for indicators: %s" % e.name)
+	element_indicator = box.get_node("element_indicator")
+	debuff_indicator = box.get_node("debuff_indicator")
+	
+	assert(enemy_explosion_sfx, "missing sfx export: %s" % e.name)
+	assert(crystalize_effect, "missing crystalize export: %s" % e.name)
+	assert(superconduct_effect, "missing superconduct export: %s" % e.name)
 
 #region Health Component
 func raw_damage_received(damage: float, new_elem: CombatManager.Elements, ep: float = 0) -> void:
@@ -111,9 +117,11 @@ func apply_debuff(new_debuff: CombatManager.Debuffs, ep: float) -> void:
 		CombatManager.Debuffs.SUPERCONDUCT:
 			if superconduct_effect:
 				superconduct_effect.apply_effect(self, ep)
+			debuff_indicator.notify_debuff(new_debuff)
 		CombatManager.Debuffs.CRYSTALIZED:
+			var count: int = crystalize_effect.crystal_stacks
 			if crystalize_effect:
 				crystalize_effect.apply_effect(self, ep)
+			debuff_indicator.notify_debuff(new_debuff, count)
 		_:
 			pass
-	debuff_indicator.current_debuff = new_debuff

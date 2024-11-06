@@ -3,32 +3,27 @@ class_name DebuffIndicator
 
 @export var crystalized: AtlasTexture
 
-@onready var HC: EnemyHealthComponent = get_parent().get_parent()
 @onready var label_stack: Label = $Label_stacks
 var debuff_counts: Array[int] = []
 
-var current_debuff: CombatManager.Debuffs = CombatManager.Debuffs.NONE :
-	set(value):
-		current_debuff = _on_debuff_applied(value)
 
 func _ready() -> void:
 	debuff_counts.resize(CombatManager.Debuffs.size() )
 	label_stack.text = "x" + str(debuff_counts[CombatManager.Debuffs.CRYSTALIZED])
 	hide()
 
-func _on_debuff_applied(new_debuff: CombatManager.Debuffs) -> CombatManager.Debuffs:
+func notify_debuff(new_debuff: CombatManager.Debuffs, count: int = 0) -> void:
 	match new_debuff:
 		CombatManager.Debuffs.CRYSTALIZED:
-			update_info()
+			update_crystalized_info(count)
 		CombatManager.Debuffs.SUPERCONDUCT:
 			pass
 		_:
-			update_info()
-	return new_debuff
+			pass
 
 
-func update_info() -> void:
-	debuff_counts[CombatManager.Debuffs.CRYSTALIZED] = HC.crystalize_effect.crystal_stacks # might be better as a signal
+func update_crystalized_info(crystal_stacks: int) -> void:
+	debuff_counts[CombatManager.Debuffs.CRYSTALIZED] = crystal_stacks # might be better as a signal
 	if debuff_counts[CombatManager.Debuffs.CRYSTALIZED] <= 0:
 		hide()
 	else:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://tk4do2uswg4u"]
+[gd_scene load_steps=15 format=3 uid="uid://tk4do2uswg4u"]
 
 [ext_resource type="Script" path="res://scenes/bosses/main_gun.gd" id="1_goihn"]
 [ext_resource type="Resource" uid="uid://c28ueyt3xnyss" path="res://scenes/bosses/main_gun_stats.tres" id="2_v1kc1"]
@@ -8,8 +8,9 @@
 [ext_resource type="Texture2D" uid="uid://jii325ldusy6" path="res://assets/sprite_enemies/boss_1/boss_1_modegun.png" id="6_ati3w"]
 [ext_resource type="PackedScene" uid="uid://s0uqul2uakbe" path="res://scenes/bosses/sideparts/sidepart_hurtbox.tscn" id="7_mwwo1"]
 [ext_resource type="Script" path="res://scenes/bosses/main_boss1_health.gd" id="8_3odab"]
-[ext_resource type="PackedScene" uid="uid://c1mef3esxg5jh" path="res://user_interface/UI_attached_to_enemies/element_indicator.tscn" id="9_83g7f"]
-[ext_resource type="PackedScene" uid="uid://oml2t17eroh7" path="res://user_interface/UI_attached_to_enemies/debuff_indicator.tscn" id="10_34yfc"]
+[ext_resource type="AudioStream" uid="uid://dl7jjtk1psmvx" path="res://assets/audio/sfx/enemy_explosion.mp3" id="9_d42an"]
+[ext_resource type="Resource" uid="uid://dcu6q2sy4u3fj" path="res://resources/debuffs/crystalize/crystalized.tres" id="10_bqyrq"]
+[ext_resource type="Resource" uid="uid://c1kncqtjwfxj" path="res://resources/debuffs/superconduct/superconduct.tres" id="11_cua0n"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6nfv0"]
 atlas = ExtResource("3_kpbbb")
@@ -19,10 +20,12 @@ region = Rect2(40, 40, 48, 48)
 radius = 46.0027
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_h8eon"]
-radius = 30.0
+radius = 41.0122
 
 [node name="MainGun" type="StaticBody2D"]
 position = Vector2(-15, 2)
+collision_layer = 512
+collision_mask = 0
 script = ExtResource("1_goihn")
 stats = ExtResource("2_v1kc1")
 
@@ -44,7 +47,6 @@ texture = ExtResource("6_ati3w")
 
 [node name="BossHurtbox" parent="." instance=ExtResource("7_mwwo1")]
 unique_name_in_owner = true
-position = Vector2(0.5, 0)
 
 [node name="Main" type="CollisionShape2D" parent="BossHurtbox"]
 position = Vector2(-0.5, 0.5)
@@ -56,18 +58,6 @@ debug_color = Color(0.766121, 0.413966, 0.463493, 0.42)
 
 [node name="HealthComponent" type="Node2D" parent="."]
 script = ExtResource("8_3odab")
-
-[node name="Box" type="VBoxContainer" parent="HealthComponent"]
-offset_left = -54.0
-offset_top = -58.0
-offset_right = -45.0
-offset_bottom = -39.0
-theme_override_constants/separation = 1
-
-[node name="element_indicator" parent="HealthComponent/Box" instance=ExtResource("9_83g7f")]
-unique_name_in_owner = true
-layout_mode = 2
-
-[node name="debuff_indicator" parent="HealthComponent/Box" instance=ExtResource("10_34yfc")]
-unique_name_in_owner = true
-layout_mode = 2
+enemy_explosion_sfx = ExtResource("9_d42an")
+crystalize_effect = ExtResource("10_bqyrq")
+superconduct_effect = ExtResource("11_cua0n")

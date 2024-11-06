@@ -20,16 +20,21 @@ var boss_HP_bar: ProgressBar:
 		boss_HP_bar = val
 		if val:
 			boss_HP_bar.value = boss_HP_bar.max_value
+var boss_box: Container
 
-@onready var main_boss_hurtbox: HurtboxComponent = $MainGun/BossHurtbox
+#@onready var main_boss_hurtbox: HurtboxComponent = $MainGun/BossHurtbox
+@onready var main_boss_health_comp: MainRailgun_Health = $MainGun/HealthComponent
 
 func initialize_phase_one() -> void:
-	main_boss_hurtbox.monitorable = false
+	pass
 
 
 func _ready() -> void:
 	initialize_phase_one()
 	EventBus.boss_fight_started.emit(self)  ## healthbar is assigned thru this, tho kinda spaghetty
+	assert(boss_box, "fix boss box passing")
+	main_boss_health_comp.initialize_main_health_comp(boss_box)
+	main_boss_health_comp.main_part_damaged.connect(take_boss_damage)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

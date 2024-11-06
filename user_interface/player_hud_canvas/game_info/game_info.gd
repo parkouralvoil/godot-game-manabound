@@ -43,6 +43,7 @@ Level translate it as:
 
 @onready var boss_info: MarginContainer = $BossInfo
 @onready var boss_HP_bar: ProgressBar = %BossHP
+@onready var boss_box: Container = $BossInfo/VBox/HBox/Box
 
 ## TODO: lmao i have two ways of doing initialize, either function or i just assign values xd
 ## ig in the longrun doing function is better since i can get the type hints from the function
@@ -68,6 +69,7 @@ func _process(_delta: float) -> void:
 
 func _on_boss_fight_started(boss_node: Node2D) -> void:
 	boss_node.boss_HP_bar = boss_HP_bar
+	boss_node.boss_box = boss_box
 	
 	await get_tree().physics_frame ## this is HACK
 	boss_info.show()

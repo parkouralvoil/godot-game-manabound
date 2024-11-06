@@ -85,7 +85,7 @@ scale_curve = SubResource("CurveTexture_gh1r7")
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("direction_indicator", "circle_indicator", "target_lock_component", "player_hit_comp", "afterimage_comp")]
 collision_layer = 2
-collision_mask = 129
+collision_mask = 641
 script = ExtResource("1_ob8fa")
 direction_indicator = NodePath("DirectionIndicator")
 circle_indicator = NodePath("circle")

@@ -31,9 +31,6 @@ texture = SubResource("AtlasTexture_w0hsw")
 shape = SubResource("CircleShape2D_dlwob")
 
 [node name="HealthComponent" parent="." instance=ExtResource("5_ixnv0")]
-enemy_explosion_sfx = null
-crystalize_effect = null
-superconduct_effect = null
 
 [node name="HurtboxComponent" type="Area2D" parent="."]
 collision_layer = 8

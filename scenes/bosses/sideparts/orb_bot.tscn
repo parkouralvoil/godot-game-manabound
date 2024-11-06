@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://81bywsqtve7q"]
+[gd_scene load_steps=16 format=3 uid="uid://81bywsqtve7q"]
 
 [ext_resource type="Script" path="res://scenes/bosses/sideparts/sidepart.gd" id="1_c8333"]
 [ext_resource type="Resource" uid="uid://b3p1puamygwo8" path="res://scenes/bosses/sideparts/sidepart_orb_stats.tres" id="2_oc7oa"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://s0uqul2uakbe" path="res://scenes/bosses/sideparts/sidepart_hurtbox.tscn" id="4_3cfsx"]
 [ext_resource type="Script" path="res://scenes/bosses/sideparts/sidepart_boss1_health.gd" id="5_dw3fa"]
 [ext_resource type="Resource" uid="uid://dcu6q2sy4u3fj" path="res://resources/debuffs/crystalize/crystalized.tres" id="6_0s5a2"]
+[ext_resource type="AudioStream" uid="uid://dl7jjtk1psmvx" path="res://assets/audio/sfx/enemy_explosion.mp3" id="6_01r7m"]
 [ext_resource type="Resource" uid="uid://c1kncqtjwfxj" path="res://resources/debuffs/superconduct/superconduct.tres" id="7_rofml"]
 [ext_resource type="PackedScene" uid="uid://dgxe7byv8tjvu" path="res://scenes/bosses/sideparts/sidepart_healthbar.tscn" id="8_ifmvs"]
 [ext_resource type="PackedScene" uid="uid://c1mef3esxg5jh" path="res://user_interface/UI_attached_to_enemies/element_indicator.tscn" id="9_7d2c8"]
@@ -26,7 +27,7 @@ size = Vector2(75, 34)
 
 [node name="OrbBot" type="StaticBody2D"]
 position = Vector2(-15, 32)
-collision_layer = 2
+collision_layer = 512
 collision_mask = 0
 script = ExtResource("1_c8333")
 stats = ExtResource("2_oc7oa")
@@ -38,6 +39,7 @@ texture = SubResource("AtlasTexture_mxry1")
 
 [node name="BossHurtbox" parent="." instance=ExtResource("4_3cfsx")]
 position = Vector2(0, 2)
+detectable_by_autoaim = false
 
 [node name="Main" type="CollisionShape2D" parent="BossHurtbox"]
 position = Vector2(0, 3)
@@ -58,6 +60,7 @@ debug_color = Color(0.828275, 0.363511, 0.416475, 0.42)
 
 [node name="HealthComponent" type="Node2D" parent="."]
 script = ExtResource("5_dw3fa")
+enemy_explosion_sfx = ExtResource("6_01r7m")
 crystalize_effect = ExtResource("6_0s5a2")
 superconduct_effect = ExtResource("7_rofml")
 

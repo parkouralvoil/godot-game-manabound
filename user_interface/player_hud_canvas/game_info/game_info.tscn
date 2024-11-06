@@ -1,9 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://cnrrjvflykcui"]
+[gd_scene load_steps=14 format=3 uid="uid://cnrrjvflykcui"]
 
 [ext_resource type="Script" path="res://user_interface/player_hud_canvas/game_info/game_info.gd" id="1_tvrhp"]
 [ext_resource type="LabelSettings" uid="uid://2ltl51gdr4g6" path="res://user_interface/main_canvas/team_info_menu_group/character_status_menu/char_status_label.tres" id="2_8oro1"]
 [ext_resource type="Texture2D" uid="uid://1r2e47in58kt" path="res://assets/sprite_items/stat_runes.png" id="3_twxwh"]
 [ext_resource type="FontFile" uid="uid://b7bhxk05x7pwi" path="res://assets/fonts/aseprite-remix.ttf" id="4_4p5ej"]
+[ext_resource type="PackedScene" uid="uid://c1mef3esxg5jh" path="res://user_interface/UI_attached_to_enemies/element_indicator.tscn" id="5_yh2f5"]
+[ext_resource type="PackedScene" uid="uid://oml2t17eroh7" path="res://user_interface/UI_attached_to_enemies/debuff_indicator.tscn" id="6_pubu8"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lefp4"]
 atlas = ExtResource("3_twxwh")
@@ -268,5 +270,17 @@ layout_mode = 2
 text = "Divided Guardian"
 label_settings = SubResource("LabelSettings_sagh5")
 horizontal_alignment = 1
+
+[node name="Box" type="HBoxContainer" parent="BossInfo/VBox/HBox"]
+layout_mode = 2
+theme_override_constants/separation = 1
+
+[node name="element_indicator" parent="BossInfo/VBox/HBox/Box" instance=ExtResource("5_yh2f5")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="debuff_indicator" parent="BossInfo/VBox/HBox/Box" instance=ExtResource("6_pubu8")]
+unique_name_in_owner = true
+layout_mode = 2
 
 [connection signal="pressed" from="VBox/InventoryInfo/MarginContainer/VBox/VBox/UpgradeStatsButton" to="." method="_on_upgrade_stats_pressed"]

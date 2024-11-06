@@ -4,10 +4,6 @@ class_name RailgunMainGun
 var target_pos: Vector2
 var aim_direction: Vector2
 
-func take_damage(damage: float, element: CombatManager.Elements, ep: float = 0) -> void:
-	print_debug("test maingun take_damage")
-
-
 func _physics_process(_delta: float) -> void:
 	# handles vision
 	

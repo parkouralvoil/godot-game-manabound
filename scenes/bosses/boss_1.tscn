@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://vql57oe3t6n7"]
+[gd_scene load_steps=7 format=3 uid="uid://vql57oe3t6n7"]
 
 [ext_resource type="Script" path="res://scenes/bosses/boss_1.gd" id="1_wqb58"]
 [ext_resource type="PackedScene" uid="uid://d34txndalmepx" path="res://scenes/bosses/sideparts/laser_left.tscn" id="2_tvaij"]
@@ -7,21 +7,9 @@
 [ext_resource type="PackedScene" uid="uid://81bywsqtve7q" path="res://scenes/bosses/sideparts/orb_bot.tscn" id="5_int6i"]
 [ext_resource type="PackedScene" uid="uid://tk4do2uswg4u" path="res://scenes/bosses/main_gun.tscn" id="6_12lta"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_23ihu"]
-radius = 34.2646
-
 [node name="RailgunBoss" type="Node2D"]
 position = Vector2(406, -343)
 script = ExtResource("1_wqb58")
-
-[node name="MiddleWorldCollisionBox" type="StaticBody2D" parent="."]
-collision_mask = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="MiddleWorldCollisionBox"]
-z_index = 10
-position = Vector2(-15.25, 1)
-shape = SubResource("CircleShape2D_23ihu")
-debug_color = Color(0.652364, 0.512942, 0.217287, 0.42)
 
 [node name="LaserLeft" parent="." instance=ExtResource("2_tvaij")]
 position = Vector2(-75, 2)

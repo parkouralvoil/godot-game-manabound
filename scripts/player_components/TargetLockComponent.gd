@@ -36,14 +36,18 @@ func _update_target() -> void:
 		for enemy in get_overlapping_areas():
 			raycast_can_hit.target_position = enemy.global_position - global_position
 			raycast_can_hit.force_raycast_update()
-			if raycast_can_hit.is_colliding():
+			## check for walls
+			if raycast_can_hit.is_colliding(): ## BECAUSE OF THIS OHHHHH
 				if closest_target == enemy:
 					closest_target = null
+			## skip "hidden" hurtboxes
+			elif not enemy.detectable_by_autoaim:
 				continue
-			if closest_target == null:
+			elif closest_target == null:
 				closest_target = enemy
 			elif (closest_target.global_position - p.global_position).length_squared() > (enemy.global_position - 
 					p.global_position).length_squared():
+				#a
 				closest_target = enemy
 		if is_instance_valid(closest_target):
 			p.selected_target = closest_target
@@ -52,3 +56,4 @@ func _update_target() -> void:
 
 func _on_update_target_timeout() -> void:
 	_update_target()
+	print_debug(get_overlapping_areas())

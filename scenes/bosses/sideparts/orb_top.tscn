@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://blre7nbnddapj"]
+[gd_scene load_steps=16 format=3 uid="uid://blre7nbnddapj"]
 
 [ext_resource type="Texture2D" uid="uid://c5ipy57ikn0bw" path="res://assets/sprite_enemies/boss_1/boss_1_components.png" id="1_8yqkq"]
 [ext_resource type="Script" path="res://scenes/bosses/sideparts/sidepart.gd" id="1_kgw0x"]
@@ -8,6 +8,7 @@
 [ext_resource type="Resource" uid="uid://dcu6q2sy4u3fj" path="res://resources/debuffs/crystalize/crystalized.tres" id="4_tkghs"]
 [ext_resource type="Resource" uid="uid://c1kncqtjwfxj" path="res://resources/debuffs/superconduct/superconduct.tres" id="5_2hrs6"]
 [ext_resource type="PackedScene" uid="uid://dgxe7byv8tjvu" path="res://scenes/bosses/sideparts/sidepart_healthbar.tscn" id="6_3r43b"]
+[ext_resource type="AudioStream" uid="uid://dl7jjtk1psmvx" path="res://assets/audio/sfx/enemy_explosion.mp3" id="6_8hpef"]
 [ext_resource type="PackedScene" uid="uid://c1mef3esxg5jh" path="res://user_interface/UI_attached_to_enemies/element_indicator.tscn" id="7_v8lse"]
 [ext_resource type="PackedScene" uid="uid://oml2t17eroh7" path="res://user_interface/UI_attached_to_enemies/debuff_indicator.tscn" id="8_ljwfb"]
 
@@ -22,13 +23,15 @@ size = Vector2(80, 59)
 size = Vector2(21, 33)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jeu53"]
+size = Vector2(76, 41)
 
 [node name="OrbTop" type="StaticBody2D"]
 position = Vector2(-15, -28)
-collision_layer = 2
+collision_layer = 512
 collision_mask = 0
 script = ExtResource("1_kgw0x")
 stats = ExtResource("2_xnkvt")
+impact_scale = Vector2(6, 6)
 
 [node name="Sprite2D_main" type="Sprite2D" parent="."]
 scale = Vector2(2, 2)
@@ -36,6 +39,7 @@ texture = SubResource("AtlasTexture_4ilgp")
 
 [node name="BossHurtbox" parent="." instance=ExtResource("2_vqc4y")]
 position = Vector2(0, -2)
+detectable_by_autoaim = false
 
 [node name="Main" type="CollisionShape2D" parent="BossHurtbox"]
 position = Vector2(0, -4.5)
@@ -50,11 +54,13 @@ position = Vector2(51, -1)
 shape = SubResource("RectangleShape2D_dt1w1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -5.5)
 shape = SubResource("RectangleShape2D_jeu53")
 debug_color = Color(0.828275, 0.363511, 0.416475, 0.42)
 
 [node name="HealthComponent" type="Node2D" parent="."]
 script = ExtResource("3_cqlxw")
+enemy_explosion_sfx = ExtResource("6_8hpef")
 crystalize_effect = ExtResource("4_tkghs")
 superconduct_effect = ExtResource("5_2hrs6")
 
