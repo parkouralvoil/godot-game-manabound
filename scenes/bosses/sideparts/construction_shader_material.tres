@@ -1,0 +1,8 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://bs34yeolna80o"]
+
+[ext_resource type="Shader" path="res://resources/shaders/forcefield.gdshader" id="1_a2p36"]
+
+[resource]
+resource_local_to_scene = true
+shader = ExtResource("1_a2p36")
+shader_parameter/color = Color(0.500485, 0.71222, 0.893222, 1)

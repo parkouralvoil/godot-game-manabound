@@ -17,6 +17,8 @@ var e_health: EnemyHealthComponent
 var _debuff_timer: Timer
 var color_sc: Color = Color(0.8, 0.5, 1)
 
+var sprite_tween: Tween
+
 
 func apply_effect(HealthComp: EnemyHealthComponent, ep: float) -> void:
 	if not e_health:
@@ -36,7 +38,6 @@ func apply_effect(HealthComp: EnemyHealthComponent, ep: float) -> void:
 
 
 func receive_superconduct(enemy: BaseEnemy, ep: float) -> void:
-	var tween: Tween = enemy.create_tween()
 	ParticlesQueueNode.set_property_restart(particles_process_mat,
 			particles_textures,
 			one_shot,
@@ -48,7 +49,8 @@ func receive_superconduct(enemy: BaseEnemy, ep: float) -> void:
 	enemy.take_damage(final_dmg, CombatManager.Elements.NONE)
 	enemy.reload_time = enemy.default_reload_time + 1
 	
-	tween.tween_property(enemy.sprite_main, "modulate", 
+	sprite_tween = enemy.create_tween()
+	sprite_tween.tween_property(enemy.sprite_main, "modulate", 
 			enemy.default_color, duration).from(color_sc)
 
 
@@ -58,5 +60,16 @@ func damage_equation(ep: float) -> float:
 
 
 func superconduct_ended(enemy: BaseEnemy) -> void:
+	if sprite_tween:
+		sprite_tween.kill()
+		#print_debug("tween running: ", sprite_tween.is_running())
+		sprite_tween = null
 	enemy.reload_time = enemy.default_reload_time
 	enemy.sprite_main.modulate = enemy.default_color
+
+
+func clear() -> void:
+	if e_health:
+		superconduct_ended(e_health.e)
+	if _debuff_timer:
+		_debuff_timer.stop()

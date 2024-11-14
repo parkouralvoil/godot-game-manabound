@@ -46,6 +46,7 @@ func raw_damage_received(damage: float, new_elem: CombatManager.Elements, ep: fl
 	if damage > 0:
 		spawn_dmg_number(str(round(damage)), CombatManager.params[new_elem])
 	_final_damage_received(damage)
+	call_deferred("update_debuff_indicator")
 
 
 func _final_damage_received(final_dmg: float) -> void:
@@ -125,3 +126,8 @@ func apply_debuff(new_debuff: CombatManager.Debuffs, ep: float) -> void:
 			debuff_indicator.notify_debuff(new_debuff, count)
 		_:
 			pass
+
+
+func update_debuff_indicator() -> void:
+	var count: int = crystalize_effect.crystal_stacks
+	debuff_indicator.notify_debuff(CombatManager.Debuffs.CRYSTALIZED, count)

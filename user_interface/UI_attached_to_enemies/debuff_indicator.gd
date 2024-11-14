@@ -1,6 +1,7 @@
 extends TextureRect
 class_name DebuffIndicator
 
+## textures
 @export var crystalized: AtlasTexture
 
 @onready var label_stack: Label = $Label_stacks
@@ -23,7 +24,7 @@ func notify_debuff(new_debuff: CombatManager.Debuffs, count: int = 0) -> void:
 
 
 func update_crystalized_info(crystal_stacks: int) -> void:
-	debuff_counts[CombatManager.Debuffs.CRYSTALIZED] = crystal_stacks # might be better as a signal
+	debuff_counts[CombatManager.Debuffs.CRYSTALIZED] = crystal_stacks
 	if debuff_counts[CombatManager.Debuffs.CRYSTALIZED] <= 0:
 		hide()
 	else:

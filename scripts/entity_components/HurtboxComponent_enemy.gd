@@ -16,10 +16,10 @@ func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_PAUSABLE
 	if owner is BaseEnemy:
 		entity = owner
-		print_debug("if: %s" % entity.name)
+		#print_debug("if: %s" % entity.name)
 	else: ## sideparts/boss
 		entity = get_parent()
-		print_debug("else: %s" % entity.name)
+		#print_debug("else: %s" % entity.name)
 
 
 func hit(damage: float, element: CombatManager.Elements, ep: float = 0) -> void:

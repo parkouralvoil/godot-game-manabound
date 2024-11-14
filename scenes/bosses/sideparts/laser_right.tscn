@@ -1,16 +1,23 @@
-[gd_scene load_steps=16 format=3 uid="uid://cm58shlolaeyy"]
+[gd_scene load_steps=21 format=3 uid="uid://cm58shlolaeyy"]
 
 [ext_resource type="Script" path="res://scenes/bosses/sideparts/sidepart.gd" id="1_3bnxc"]
 [ext_resource type="Texture2D" uid="uid://c5ipy57ikn0bw" path="res://assets/sprite_enemies/boss_1/boss_1_components.png" id="1_luqt5"]
+[ext_resource type="Material" uid="uid://bs34yeolna80o" path="res://scenes/bosses/sideparts/construction_shader_material.tres" id="1_tujlb"]
 [ext_resource type="Resource" uid="uid://b72ma1xssesiq" path="res://scenes/bosses/sideparts/sidepart_laser_stats.tres" id="2_oijfj"]
 [ext_resource type="PackedScene" uid="uid://s0uqul2uakbe" path="res://scenes/bosses/sideparts/sidepart_hurtbox.tscn" id="2_rkq4m"]
 [ext_resource type="Script" path="res://scenes/bosses/sideparts/sidepart_boss1_health.gd" id="3_f0p71"]
+[ext_resource type="Texture2D" uid="uid://8xtemsicre7s" path="res://assets/sprite_enemies/boss_1/boss_1_construction.png" id="3_mdqmi"]
 [ext_resource type="Resource" uid="uid://dcu6q2sy4u3fj" path="res://resources/debuffs/crystalize/crystalized.tres" id="4_g6uuq"]
+[ext_resource type="Material" uid="uid://d3ixmweu08c8k" path="res://scenes/bosses/sideparts/main_shader_material.tres" id="5_dyklt"]
 [ext_resource type="Resource" uid="uid://c1kncqtjwfxj" path="res://resources/debuffs/superconduct/superconduct.tres" id="5_m8rbo"]
 [ext_resource type="AudioStream" uid="uid://dl7jjtk1psmvx" path="res://assets/audio/sfx/enemy_explosion.mp3" id="6_kwwd7"]
 [ext_resource type="PackedScene" uid="uid://dgxe7byv8tjvu" path="res://scenes/bosses/sideparts/sidepart_healthbar.tscn" id="6_vqvvx"]
 [ext_resource type="PackedScene" uid="uid://c1mef3esxg5jh" path="res://user_interface/UI_attached_to_enemies/element_indicator.tscn" id="7_eeg4v"]
 [ext_resource type="PackedScene" uid="uid://oml2t17eroh7" path="res://user_interface/UI_attached_to_enemies/debuff_indicator.tscn" id="8_e0qp6"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_580vi"]
+atlas = ExtResource("3_mdqmi")
+region = Rect2(96, 24, 32, 80)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_b8cbh"]
 atlas = ExtResource("1_luqt5")
@@ -25,7 +32,11 @@ size = Vector2(29.5, 18.5)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_klki1"]
 size = Vector2(40, 82)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_owhuy"]
+size = Vector2(47, 99)
+
 [node name="LaserRight" type="StaticBody2D"]
+material = ExtResource("1_tujlb")
 position = Vector2(64, 2)
 collision_layer = 512
 collision_mask = 0
@@ -33,23 +44,29 @@ script = ExtResource("1_3bnxc")
 stats = ExtResource("2_oijfj")
 impact_scale = Vector2(6, 6)
 
+[node name="Sprite2D_construction" type="Sprite2D" parent="."]
+material = ExtResource("1_tujlb")
+scale = Vector2(2, 2)
+texture = SubResource("AtlasTexture_580vi")
+
 [node name="Sprite2D_main" type="Sprite2D" parent="."]
+material = ExtResource("5_dyklt")
 scale = Vector2(2, 2)
 texture = SubResource("AtlasTexture_b8cbh")
 
-[node name="sidepart_hurtbox" parent="." instance=ExtResource("2_rkq4m")]
+[node name="BossHurtbox" parent="." instance=ExtResource("2_rkq4m")]
 position = Vector2(2.5, 0.5)
 detectable_by_autoaim = false
 
-[node name="Main" type="CollisionShape2D" parent="sidepart_hurtbox"]
+[node name="Main" type="CollisionShape2D" parent="BossHurtbox"]
 position = Vector2(0.5, -2)
 shape = SubResource("RectangleShape2D_5cgkw")
 
-[node name="Bot" type="CollisionShape2D" parent="sidepart_hurtbox"]
+[node name="Bot" type="CollisionShape2D" parent="BossHurtbox"]
 position = Vector2(10.5, 52.5)
 shape = SubResource("RectangleShape2D_cfyde")
 
-[node name="Top" type="CollisionShape2D" parent="sidepart_hurtbox"]
+[node name="Top" type="CollisionShape2D" parent="BossHurtbox"]
 position = Vector2(10.5, -56.5)
 shape = SubResource("RectangleShape2D_cfyde")
 
@@ -85,3 +102,16 @@ layout_mode = 2
 [node name="debuff_indicator" parent="HealthComponent/Box" instance=ExtResource("8_e0qp6")]
 unique_name_in_owner = true
 layout_mode = 2
+
+[node name="ReviveCheck" type="Timer" parent="."]
+wait_time = 0.5
+
+[node name="PlayerCheck" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerCheck"]
+position = Vector2(0.5, -1.5)
+shape = SubResource("RectangleShape2D_owhuy")
+debug_color = Color(0.606793, 0.501625, 0.552073, 0.42)

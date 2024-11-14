@@ -24,6 +24,11 @@ var boss_box: Container
 
 #@onready var main_boss_hurtbox: HurtboxComponent = $MainGun/BossHurtbox
 @onready var main_boss_health_comp: MainRailgun_Health = $MainGun/HealthComponent
+@onready var laser_left: SidepartRailgun = $LaserLeft
+@onready var laser_right: SidepartRailgun = $LaserRight
+@onready var orb_top: SidepartRailgun = $OrbTop
+@onready var orb_bot: SidepartRailgun = $OrbBot
+@onready var components: Array[SidepartRailgun] = [laser_left, laser_right, orb_top, orb_bot]
 
 func initialize_phase_one() -> void:
 	pass
@@ -49,3 +54,12 @@ func take_boss_damage(damage: float):
 func update_healthbar() -> void:
 	if boss_HP_bar:
 		boss_HP_bar.value = (current_HP/current_MAX_HP) * boss_HP_bar.max_value
+
+
+func begin_phase_two() -> void:
+	for c in components:
+		"""
+		if c is dead
+		reconstruct c
+		"""
+		c.disable_reconstruct()

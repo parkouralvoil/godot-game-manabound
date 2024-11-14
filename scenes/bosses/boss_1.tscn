@@ -1,11 +1,17 @@
-[gd_scene load_steps=7 format=3 uid="uid://vql57oe3t6n7"]
+[gd_scene load_steps=9 format=3 uid="uid://vql57oe3t6n7"]
 
 [ext_resource type="Script" path="res://scenes/bosses/boss_1.gd" id="1_wqb58"]
 [ext_resource type="PackedScene" uid="uid://d34txndalmepx" path="res://scenes/bosses/sideparts/laser_left.tscn" id="2_tvaij"]
 [ext_resource type="PackedScene" uid="uid://cm58shlolaeyy" path="res://scenes/bosses/sideparts/laser_right.tscn" id="3_2qw8u"]
 [ext_resource type="PackedScene" uid="uid://blre7nbnddapj" path="res://scenes/bosses/sideparts/orb_top.tscn" id="4_a11k6"]
+[ext_resource type="Shader" path="res://resources/shaders/forcefield.gdshader" id="4_dc4w2"]
 [ext_resource type="PackedScene" uid="uid://81bywsqtve7q" path="res://scenes/bosses/sideparts/orb_bot.tscn" id="5_int6i"]
 [ext_resource type="PackedScene" uid="uid://tk4do2uswg4u" path="res://scenes/bosses/main_gun.tscn" id="6_12lta"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_uu7yy"]
+resource_local_to_scene = true
+shader = ExtResource("4_dc4w2")
+shader_parameter/color = Color(0.500485, 0.71222, 0.893222, 1)
 
 [node name="RailgunBoss" type="Node2D"]
 position = Vector2(406, -343)
@@ -15,6 +21,7 @@ script = ExtResource("1_wqb58")
 position = Vector2(-75, 2)
 
 [node name="LaserRight" parent="." instance=ExtResource("3_2qw8u")]
+material = SubResource("ShaderMaterial_uu7yy")
 position = Vector2(45, 2)
 
 [node name="OrbTop" parent="." instance=ExtResource("4_a11k6")]

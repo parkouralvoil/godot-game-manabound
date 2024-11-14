@@ -56,4 +56,4 @@ func _update_target() -> void:
 
 func _on_update_target_timeout() -> void:
 	_update_target()
-	print_debug(get_overlapping_areas())
+	#print_debug(get_overlapping_areas())

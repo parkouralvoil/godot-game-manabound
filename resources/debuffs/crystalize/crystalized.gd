@@ -62,7 +62,6 @@ func detonate_crystalize() -> void:
 	if e_health:
 		crystal_stacks = 0
 		accumulated_dmg = 0
-		e_health.debuff_indicator.current_debuff = CombatManager.Debuffs.NONE
 		e_health.raw_damage_received(final_dmg, CombatManager.Elements.NONE)
 
 
@@ -73,3 +72,13 @@ func damage_equation() -> float:
 	## accumulated_dmg = value of EP for stack
 	## final dmg = base * 1.5 at 9 stacks
 	return base_dmg * max(1, dmg_multiplier)
+
+
+func clear() -> void: ## clear is used if enemy can "respawn" itself (ie sideparts reconstruction)
+	crystal_stacks = 0
+	accumulated_dmg = 0
+	if _debuff_timer:
+		print_debug("TARGET:::::::::::")
+		print_debug(_debuff_timer.is_stopped())
+		_debuff_timer.stop()
+		print_debug(_debuff_timer.is_stopped())

@@ -1,16 +1,23 @@
-[gd_scene load_steps=16 format=3 uid="uid://blre7nbnddapj"]
+[gd_scene load_steps=21 format=3 uid="uid://blre7nbnddapj"]
 
 [ext_resource type="Texture2D" uid="uid://c5ipy57ikn0bw" path="res://assets/sprite_enemies/boss_1/boss_1_components.png" id="1_8yqkq"]
 [ext_resource type="Script" path="res://scenes/bosses/sideparts/sidepart.gd" id="1_kgw0x"]
 [ext_resource type="PackedScene" uid="uid://s0uqul2uakbe" path="res://scenes/bosses/sideparts/sidepart_hurtbox.tscn" id="2_vqc4y"]
 [ext_resource type="Resource" uid="uid://b3p1puamygwo8" path="res://scenes/bosses/sideparts/sidepart_orb_stats.tres" id="2_xnkvt"]
+[ext_resource type="Material" uid="uid://bs34yeolna80o" path="res://scenes/bosses/sideparts/construction_shader_material.tres" id="3_0nv40"]
 [ext_resource type="Script" path="res://scenes/bosses/sideparts/sidepart_boss1_health.gd" id="3_cqlxw"]
+[ext_resource type="Texture2D" uid="uid://8xtemsicre7s" path="res://assets/sprite_enemies/boss_1/boss_1_construction.png" id="3_oluvy"]
 [ext_resource type="Resource" uid="uid://dcu6q2sy4u3fj" path="res://resources/debuffs/crystalize/crystalized.tres" id="4_tkghs"]
 [ext_resource type="Resource" uid="uid://c1kncqtjwfxj" path="res://resources/debuffs/superconduct/superconduct.tres" id="5_2hrs6"]
+[ext_resource type="Material" uid="uid://d3ixmweu08c8k" path="res://scenes/bosses/sideparts/main_shader_material.tres" id="5_kr7ty"]
 [ext_resource type="PackedScene" uid="uid://dgxe7byv8tjvu" path="res://scenes/bosses/sideparts/sidepart_healthbar.tscn" id="6_3r43b"]
 [ext_resource type="AudioStream" uid="uid://dl7jjtk1psmvx" path="res://assets/audio/sfx/enemy_explosion.mp3" id="6_8hpef"]
 [ext_resource type="PackedScene" uid="uid://c1mef3esxg5jh" path="res://user_interface/UI_attached_to_enemies/element_indicator.tscn" id="7_v8lse"]
 [ext_resource type="PackedScene" uid="uid://oml2t17eroh7" path="res://user_interface/UI_attached_to_enemies/debuff_indicator.tscn" id="8_ljwfb"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4hhl1"]
+atlas = ExtResource("3_oluvy")
+region = Rect2(24, 0, 80, 40)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4ilgp"]
 atlas = ExtResource("1_8yqkq")
@@ -25,6 +32,9 @@ size = Vector2(21, 33)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jeu53"]
 size = Vector2(76, 41)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1ofn6"]
+size = Vector2(94, 48)
+
 [node name="OrbTop" type="StaticBody2D"]
 position = Vector2(-15, -28)
 collision_layer = 512
@@ -33,7 +43,13 @@ script = ExtResource("1_kgw0x")
 stats = ExtResource("2_xnkvt")
 impact_scale = Vector2(6, 6)
 
+[node name="Sprite2D_construction" type="Sprite2D" parent="."]
+material = ExtResource("3_0nv40")
+scale = Vector2(2, 2)
+texture = SubResource("AtlasTexture_4hhl1")
+
 [node name="Sprite2D_main" type="Sprite2D" parent="."]
+material = ExtResource("5_kr7ty")
 scale = Vector2(2, 2)
 texture = SubResource("AtlasTexture_4ilgp")
 
@@ -82,3 +98,16 @@ layout_mode = 2
 
 [node name="debuff_indicator" parent="HealthComponent/Box" instance=ExtResource("8_ljwfb")]
 layout_mode = 2
+
+[node name="ReviveCheck" type="Timer" parent="."]
+wait_time = 0.5
+
+[node name="PlayerCheck" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerCheck"]
+position = Vector2(1, -7)
+shape = SubResource("RectangleShape2D_1ofn6")
+debug_color = Color(0.606793, 0.501625, 0.552073, 0.42)
