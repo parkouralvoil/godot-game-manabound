@@ -16,5 +16,5 @@ laser = 3.0
 dronefactory = 1.0
 num_of_elites = 0
 machinegun = 1.0
-HP_potion_present = false
+HP_potion_present = true
 room = ExtResource("1_hlgnt")

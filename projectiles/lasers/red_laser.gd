@@ -28,7 +28,7 @@ var is_casting: bool = false :
 
 
 func _ready() -> void:
-	set_physics_process(false)
+	set_physics_process(true)
 	set_deferred("monitoring", false)
 	line.hide()
 	segment = SegmentShape2D.new()

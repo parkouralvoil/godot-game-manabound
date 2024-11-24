@@ -1,0 +1,75 @@
+[gd_scene load_steps=5 format=3 uid="uid://b1oov8mcofu10"]
+
+[ext_resource type="Script" path="res://user_interface/main_canvas/select_expedition_menu/select_expedition_menu.gd" id="1_7ugde"]
+[ext_resource type="LabelSettings" uid="uid://6y7111xwu3do" path="res://resources/label_settings/font_system_big.tres" id="1_msr36"]
+[ext_resource type="FontFile" uid="uid://bbkhj4uknd5uk" path="res://assets/fonts/PFDinTextPro-Light.ttf" id="2_x7q5g"]
+[ext_resource type="PackedScene" uid="uid://djwhqa2ut3une" path="res://user_interface/main_canvas/select_expedition_menu/details_blue_city.tscn" id="3_ryls1"]
+
+[node name="SelectExpeditionMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_7ugde")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0352941, 0.0352941, 0.0352941, 0.803922)
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="background" type="ColorRect" parent="CenterContainer"]
+custom_minimum_size = Vector2(475, 320)
+layout_mode = 2
+color = Color(0.330844, 0.255647, 0.216017, 1)
+
+[node name="HBox" type="HBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+
+[node name="VBox" type="VBoxContainer" parent="CenterContainer/HBox"]
+layout_mode = 2
+
+[node name="expeditions" type="Label" parent="CenterContainer/HBox/VBox"]
+layout_mode = 2
+text = "Expeditions:"
+label_settings = ExtResource("1_msr36")
+
+[node name="novice" type="Button" parent="CenterContainer/HBox/VBox"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_x7q5g")
+theme_override_font_sizes/font_size = 14
+text = "Novice Plains (Tutorial)"
+alignment = 0
+
+[node name="blue_city" type="Button" parent="CenterContainer/HBox/VBox"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_x7q5g")
+theme_override_font_sizes/font_size = 14
+text = "Auma Luine City"
+alignment = 0
+
+[node name="Spacer" type="Control" parent="CenterContainer/HBox/VBox"]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="line" type="ColorRect" parent="CenterContainer/HBox"]
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+color = Color(0.585062, 0.585062, 0.585062, 1)
+
+[node name="Details_BlueCity" parent="CenterContainer/HBox" instance=ExtResource("3_ryls1")]
+layout_mode = 2

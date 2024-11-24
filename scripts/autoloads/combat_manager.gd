@@ -16,7 +16,7 @@ enum Debuffs {
 	NONE,
 	CRYSTALIZED,
 	SUPERCONDUCT,
-	# BURNING # fire DoT
+	# BURNING # fire DoT or spawn lava impact
 }
 
 enum Reactions {
@@ -25,7 +25,7 @@ enum Reactions {
 	SUPERCONDUCT, # ice + lightning
 	OVERLOAD, # fire + lightning
 }
-
+## TODO: put effect_type here (interrupted, reaction, debuff)
 # parameters
 var params: Dictionary = {
 	Elements.NONE : Color(1, 1, 1)

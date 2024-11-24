@@ -57,9 +57,12 @@ func _ready() -> void:
 	await get_tree().physics_frame
 	if EnemyAiManager.enemies_alive <= 0 and room_type != RoomType.Boss:
 		_level_is_cleared()
+	if room_type == RoomType.Boss:
+		EventBus.boss_fight_ended.connect(_level_is_cleared)
 
 
 func _enemy_dead(type: BaseEnemy) -> void:
+	print_debug("called this")
 	EnemyAiManager.enemies_alive -= 1
 	if type is NormalEnemy:
 		if type.is_small_drone:
@@ -73,13 +76,13 @@ func _level_is_cleared() -> void:
 	chest_rune_holder.open_all_chest_rune()
 	match room_type:
 		RoomType.Normal:
-			EventBus.level_cleared.emit("All Enemies Cleared")
+			EventBus.level_cleared.emit("ENEMIES CLEARED")
 		RoomType.Rest: 
-			EventBus.level_cleared.emit("Entered Safezone")
+			EventBus.level_cleared.emit("SAFEZONE")
 		RoomType.Boss: 
 			EventBus.level_cleared.emit("BOSS DEFEATED")
 		_: 
-			EventBus.level_cleared.emit("Level Cleared")
+			EventBus.level_cleared.emit("DOOR OPEN")
 
 
 func _on_local_exit_door_interacted() -> void:

@@ -11,12 +11,19 @@ class_name SidepartRailgun
 
 var can_reconstruct: bool = true ## set by main RailgunBoss
 var player_blocking_construction: bool = false ## if player is at construction area
-var invulnerable: bool = false
+
+var invulnerable: bool = true
+var fight_started: bool = false : ## after intro "cutscene"
+	set(val):
+		fight_started = val
+		if fight_started:
+			health_component.show()
 
 var hit_tween: Tween
 
 func _ready() -> void:
 	super()
+	health_component.hide()
 	sprite_construction.modulate = Color(1, 1, 1, 0.7)
 	t_revive_check.timeout.connect(_on_revive_check_timeout)
 
@@ -29,8 +36,9 @@ func take_damage(damage: float, element: CombatManager.Elements, ep: float = 0) 
 		hit_tween.tween_property(sprite_main, "material:shader_parameter/flashState", 0, 0.2).from(0.4)
 
 
-func disable_reconstruct() -> void:
-	can_reconstruct = false
+func boss_defeated() -> void:
+	make_impact()
+	queue_free()
 
 
 func sidepart_destroyed() -> void:

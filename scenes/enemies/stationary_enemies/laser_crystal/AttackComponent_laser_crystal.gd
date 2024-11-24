@@ -17,7 +17,7 @@ var target: Array[Vector2] = [Vector2.DOWN, Vector2.UP]
 func _ready() -> void:
 	t_reload.start()
 	e.attack_interrupted.connect(interrupt_attack)
-	await e.NOTIFICATION_READY
+	##e.NOTIFICATION_READY
 	if RNG.roll_probability(0.5) and e.sprite_main:
 		e.sprite_main.rotation = PI/2
 		target[0] = Vector2.LEFT

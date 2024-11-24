@@ -121,7 +121,7 @@ func _on_returned_to_mainhub() -> void:
 			continue ## null check
 		if c.is_dead:
 			c.revive()
-			c.stats.reset_stats()
+		c.stats.reset_stats()
 	p.global_position = Vector2(1000, 1000) ## to hide player hehe
 	p.controls_disabled = false
 	change_character(0)

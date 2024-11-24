@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://tk4do2uswg4u"]
+[gd_scene load_steps=26 format=3 uid="uid://tk4do2uswg4u"]
 
 [ext_resource type="Script" path="res://scenes/bosses/main_gun.gd" id="1_goihn"]
 [ext_resource type="Resource" uid="uid://c28ueyt3xnyss" path="res://scenes/bosses/main_gun_stats.tres" id="2_v1kc1"]
@@ -12,17 +12,60 @@
 [ext_resource type="AudioStream" uid="uid://dl7jjtk1psmvx" path="res://assets/audio/sfx/enemy_explosion.mp3" id="9_d42an"]
 [ext_resource type="Resource" uid="uid://dcu6q2sy4u3fj" path="res://resources/debuffs/crystalize/crystalized.tres" id="10_bqyrq"]
 [ext_resource type="Resource" uid="uid://c1kncqtjwfxj" path="res://resources/debuffs/superconduct/superconduct.tres" id="11_cua0n"]
-[ext_resource type="Script" path="res://scenes/bosses/MainGun_AtkComp.gd" id="13_lqiip"]
+[ext_resource type="Script" path="res://scenes/bosses/MainGun_AttackComponent.gd" id="13_lqiip"]
+[ext_resource type="PackedScene" uid="uid://c3cu4hjfxxvdr" path="res://projectiles/enemy_projectiles/bullet_shotgun.tscn" id="14_2s7hx"]
+[ext_resource type="PackedScene" uid="uid://lie60wtj8e4h" path="res://projectiles/enemy_projectiles/bullet_widespread.tscn" id="15_t87v7"]
+[ext_resource type="PackedScene" uid="uid://dx1mh5sh2ppm5" path="res://projectiles/enemy_projectiles/bullet_railgun/bullet_railgun.tscn" id="16_on545"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6nfv0"]
 atlas = ExtResource("3_kpbbb")
 region = Rect2(40, 40, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ero54"]
+atlas = ExtResource("4_ylubb")
+region = Rect2(48, 16, 32, 96)
+
+[sub_resource type="Gradient" id="Gradient_rg34f"]
+colors = PackedColorArray(0.976471, 0.968627, 1, 1, 1, 1, 1, 0.305882)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_xgxvd"]
+gradient = SubResource("Gradient_rg34f")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_6581h"]
+particle_flag_disable_z = true
+angle_min = 1.07288e-05
+angle_max = 360.0
+spread = 180.0
+initial_velocity_min = 200.0
+initial_velocity_max = 200.0
+gravity = Vector3(0, 0, 0)
+scale_min = 2.0
+scale_max = 2.0
+color = Color(1, 1, 0.992157, 1)
+color_ramp = SubResource("GradientTexture1D_xgxvd")
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_3n4i1"]
 radius = 46.0027
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_h8eon"]
 radius = 41.0122
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_grfp6"]
+particle_flag_disable_z = true
+angle_min = 1.07288e-05
+angle_max = 360.0
+spread = 180.0
+initial_velocity_min = 200.0
+initial_velocity_max = 200.0
+gravity = Vector3(0, 0, 0)
+scale_min = 4.0
+scale_max = 4.0
+color = Color(1, 0.768627, 0.137255, 1)
+color_ramp = SubResource("GradientTexture1D_xgxvd")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mm4ab"]
+atlas = ExtResource("4_ylubb")
+region = Rect2(112, 112, 16, 16)
 
 [node name="MainGun" type="StaticBody2D"]
 position = Vector2(-15, 2)
@@ -38,9 +81,8 @@ texture = SubResource("AtlasTexture_6nfv0")
 
 [node name="Sprite2D_main" type="Sprite2D" parent="."]
 material = ExtResource("4_v7ppp")
-rotation = -1.43641
 scale = Vector2(2, 2)
-texture = ExtResource("4_ylubb")
+texture = SubResource("AtlasTexture_ero54")
 
 [node name="bow" type="Sprite2D" parent="Sprite2D_main"]
 use_parent_material = true
@@ -50,6 +92,21 @@ texture = ExtResource("5_w7ma5")
 visible = false
 use_parent_material = true
 texture = ExtResource("6_ati3w")
+
+[node name="BulletOrigin" type="Marker2D" parent="Sprite2D_main"]
+position = Vector2(0, 22.5)
+scale = Vector2(0.5, 0.5)
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Sprite2D_main"]
+remote_path = NodePath("../../AttackComponent/AmmoSpriteContainer")
+
+[node name="ChangeModeParticles" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 30
+process_material = SubResource("ParticleProcessMaterial_6581h")
+lifetime = 0.6
+one_shot = true
+explosiveness = 0.8
 
 [node name="BossHurtbox" parent="." instance=ExtResource("7_mwwo1")]
 unique_name_in_owner = true
@@ -68,5 +125,38 @@ enemy_explosion_sfx = ExtResource("9_d42an")
 crystalize_effect = ExtResource("10_bqyrq")
 superconduct_effect = ExtResource("11_cua0n")
 
-[node name="AttackComponent" type="Node2D" parent="."]
+[node name="AttackComponent" type="Node2D" parent="." node_paths=PackedStringArray("bullet_origin")]
 script = ExtResource("13_lqiip")
+bullet_origin = NodePath("../Sprite2D_main/BulletOrigin")
+ShotgunBulletPath = ExtResource("14_2s7hx")
+WidespreadBulletPath = ExtResource("15_t87v7")
+RailgunBulletPath = ExtResource("16_on545")
+
+[node name="ChargingAttack" type="GPUParticles2D" parent="AttackComponent"]
+emitting = false
+amount = 60
+process_material = SubResource("ParticleProcessMaterial_grfp6")
+lifetime = 0.6
+
+[node name="firerate" type="Timer" parent="AttackComponent"]
+wait_time = 0.3
+one_shot = true
+
+[node name="reload" type="Timer" parent="AttackComponent"]
+wait_time = 1.6
+one_shot = true
+
+[node name="AmmoSpriteContainer" type="Node2D" parent="AttackComponent"]
+scale = Vector2(2, 2)
+
+[node name="ammo1" type="Sprite2D" parent="AttackComponent/AmmoSpriteContainer"]
+material = ExtResource("4_v7ppp")
+position = Vector2(0, -9)
+texture = SubResource("AtlasTexture_mm4ab")
+
+[node name="ammo2" type="Sprite2D" parent="AttackComponent/AmmoSpriteContainer"]
+material = ExtResource("4_v7ppp")
+position = Vector2(0, -1)
+texture = SubResource("AtlasTexture_mm4ab")
+
+[connection signal="timeout" from="AttackComponent/reload" to="AttackComponent" method="_on_reload_timeout"]

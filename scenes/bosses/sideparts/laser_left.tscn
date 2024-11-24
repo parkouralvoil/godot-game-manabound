@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://d34txndalmepx"]
+[gd_scene load_steps=23 format=3 uid="uid://d34txndalmepx"]
 
 [ext_resource type="PackedScene" uid="uid://s0uqul2uakbe" path="res://scenes/bosses/sideparts/sidepart_hurtbox.tscn" id="1_lg1xm"]
 [ext_resource type="Script" path="res://scenes/bosses/sideparts/sidepart.gd" id="1_sunx7"]
@@ -14,6 +14,8 @@
 [ext_resource type="PackedScene" uid="uid://dgxe7byv8tjvu" path="res://scenes/bosses/sideparts/sidepart_healthbar.tscn" id="6_lftpr"]
 [ext_resource type="PackedScene" uid="uid://c1mef3esxg5jh" path="res://user_interface/UI_attached_to_enemies/element_indicator.tscn" id="7_7e1lj"]
 [ext_resource type="PackedScene" uid="uid://oml2t17eroh7" path="res://user_interface/UI_attached_to_enemies/debuff_indicator.tscn" id="8_bggps"]
+[ext_resource type="Script" path="res://scenes/bosses/sideparts/LaserPart_AttackComponent.gd" id="8_njxtm"]
+[ext_resource type="PackedScene" uid="uid://bmke88h6lebel" path="res://projectiles/lasers/red_laser.tscn" id="9_vjvnf"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_s1qa5"]
 atlas = ExtResource("4_ptb07")
@@ -30,7 +32,7 @@ size = Vector2(49, 90)
 size = Vector2(27.5, 17.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3q6eg"]
-size = Vector2(34, 86)
+size = Vector2(41, 105)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hspih"]
 size = Vector2(54, 112)
@@ -41,6 +43,7 @@ collision_layer = 512
 collision_mask = 0
 script = ExtResource("1_sunx7")
 stats = ExtResource("2_hov1l")
+interruptable = false
 impact_scale = Vector2(6, 6)
 
 [node name="Sprite2D_construction" type="Sprite2D" parent="."]
@@ -70,13 +73,9 @@ position = Vector2(-12, -54.5)
 shape = SubResource("RectangleShape2D_5swl7")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-2, -1)
+position = Vector2(1.5, -1.5)
 shape = SubResource("RectangleShape2D_3q6eg")
 debug_color = Color(0.850082, 0.328254, 0.468246, 0.42)
-
-[node name="LaserAttackComponent" type="Node2D" parent="."]
-
-[node name="Reload" type="Timer" parent="LaserAttackComponent"]
 
 [node name="HealthComponent" type="Node2D" parent="."]
 script = ExtResource("3_3ula8")
@@ -106,6 +105,23 @@ layout_mode = 2
 unique_name_in_owner = true
 layout_mode = 2
 
+[node name="AttackComponent" type="Node2D" parent="."]
+show_behind_parent = true
+script = ExtResource("8_njxtm")
+
+[node name="reload" type="Timer" parent="AttackComponent"]
+wait_time = 3.0
+one_shot = true
+
+[node name="laser_duration" type="Timer" parent="AttackComponent"]
+wait_time = 5.5
+one_shot = true
+
+[node name="red_laser" parent="AttackComponent" instance=ExtResource("9_vjvnf")]
+show_behind_parent = true
+z_index = 1
+position = Vector2(12, 0)
+
 [node name="ReviveCheck" type="Timer" parent="."]
 wait_time = 0.5
 
@@ -118,3 +134,6 @@ monitorable = false
 position = Vector2(-2, -2)
 shape = SubResource("RectangleShape2D_hspih")
 debug_color = Color(0.606793, 0.501625, 0.552073, 0.42)
+
+[connection signal="timeout" from="AttackComponent/reload" to="AttackComponent" method="_on_reload_timeout"]
+[connection signal="timeout" from="AttackComponent/laser_duration" to="AttackComponent" method="_on_laser_duration_timeout"]

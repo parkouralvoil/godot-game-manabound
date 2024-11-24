@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://vql57oe3t6n7"]
+[gd_scene load_steps=14 format=3 uid="uid://vql57oe3t6n7"]
 
 [ext_resource type="Script" path="res://scenes/bosses/boss_1.gd" id="1_wqb58"]
 [ext_resource type="PackedScene" uid="uid://d34txndalmepx" path="res://scenes/bosses/sideparts/laser_left.tscn" id="2_tvaij"]
@@ -7,27 +7,57 @@
 [ext_resource type="Shader" path="res://resources/shaders/forcefield.gdshader" id="4_dc4w2"]
 [ext_resource type="PackedScene" uid="uid://81bywsqtve7q" path="res://scenes/bosses/sideparts/orb_bot.tscn" id="5_int6i"]
 [ext_resource type="PackedScene" uid="uid://tk4do2uswg4u" path="res://scenes/bosses/main_gun.tscn" id="6_12lta"]
+[ext_resource type="Texture2D" uid="uid://b2gagvgpvrjud" path="res://assets/sprite_projectiles/bullet_pixel_BrightRed.png" id="8_jyqi6"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_uu7yy"]
 resource_local_to_scene = true
 shader = ExtResource("4_dc4w2")
 shader_parameter/color = Color(0.500485, 0.71222, 0.893222, 1)
 
+[sub_resource type="Curve" id="Curve_ekova"]
+_data = [Vector2(0, 1), 0.0, -1.0, 0, 1, Vector2(1, 0), -1.0, 0.0, 1, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_lruuk"]
+curve = SubResource("Curve_ekova")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_qh1ms"]
+particle_flag_disable_z = true
+spread = 180.0
+initial_velocity_min = 206.23
+initial_velocity_max = 287.95
+gravity = Vector3(0, 0, 0)
+scale_max = 1.5
+scale_curve = SubResource("CurveTexture_lruuk")
+color = Color(0.972549, 0.898039, 0.458824, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rtm6k"]
+atlas = ExtResource("8_jyqi6")
+region = Rect2(176, 0, 16, 16)
+
 [node name="RailgunBoss" type="Node2D"]
-position = Vector2(406, -343)
 script = ExtResource("1_wqb58")
+Phase1_HP = 100.0
 
 [node name="LaserLeft" parent="." instance=ExtResource("2_tvaij")]
-position = Vector2(-75, 2)
+position = Vector2(-59, 0)
 
 [node name="LaserRight" parent="." instance=ExtResource("3_2qw8u")]
 material = SubResource("ShaderMaterial_uu7yy")
-position = Vector2(45, 2)
+position = Vector2(61, 0)
 
 [node name="OrbTop" parent="." instance=ExtResource("4_a11k6")]
-position = Vector2(-15, -58)
+position = Vector2(1, -60)
 
 [node name="OrbBot" parent="." instance=ExtResource("5_int6i")]
-position = Vector2(-15, 62)
+position = Vector2(1, 60)
 
 [node name="MainGun" parent="." instance=ExtResource("6_12lta")]
+position = Vector2(1, 0)
+
+[node name="DeathParticles" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 100
+process_material = SubResource("ParticleProcessMaterial_qh1ms")
+texture = SubResource("AtlasTexture_rtm6k")
+lifetime = 0.4

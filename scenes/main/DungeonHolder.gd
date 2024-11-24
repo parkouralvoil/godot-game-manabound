@@ -27,7 +27,6 @@ func initialize_main_hub() -> void:
 	add_child(main_hub)
 	next_level_loaded.emit(main_hub.starting_pos)
 	dungeon_data.main_hub_loaded.emit()
-	main_hub.main_hub_departed.connect(initialize_dungeon)
 
 func _on_returned_to_mainhub() -> void:
 	await remove_previous_lvl()
@@ -35,14 +34,11 @@ func _on_returned_to_mainhub() -> void:
 	await main.fade_in()
 
 ## Initialize dungeon before loading the first level
-func initialize_dungeon() -> void: ## called by main
+func initialize_dungeon(selected_expedition: AreaData) -> void: ## called by main
 	if dungeon_data:
-		dungeon_data.start_cycle() ## sets cycle to 1
-		dungeon_data.start_room() ## sets room_num to 1
-		dungeon_data.game_started.emit()
-		dungeon_data.state_in_combat = true
 		if not dungeon_data.preset_selected.is_connected(_on_preset_selected):
 			dungeon_data.preset_selected.connect(_on_preset_selected)
+		dungeon_data.start_cycle(selected_expedition) ## sets cycle to 1
 	else:
 		push_error("(%s): Dungeon data is null" % name)
 
@@ -50,6 +46,7 @@ func _ready() -> void:
 	EventBus.level_cleared.connect(_on_level_cleared) # emitted by level
 	EventBus.exit_door_interacted.connect(_on_exit_door_interacted) # emitted by exit door
 	EventBus.returned_to_mainhub.connect(_on_returned_to_mainhub) # emitted by gameover
+	EventBus.mainhub_departed.connect(initialize_dungeon) # emitted by signboard details
 
 
 func remove_previous_lvl() -> void:
@@ -94,12 +91,12 @@ func _on_exit_door_interacted() -> void:
 
 func _on_preset_selected(preset_from_UI: RoomPreset) -> void:
 	await remove_previous_lvl()
-	
 	if has_node("MainHub"):
 		remove_child(main_hub)
 	dungeon_data.go_next_room(preset_from_UI) ## this updates room number, 
 	## which can update cycle
 	load_next_lvl()
+	#print_debug("should be here now")
 
 
 func _select_normal_room() -> void:

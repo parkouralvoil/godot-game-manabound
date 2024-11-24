@@ -22,6 +22,11 @@ signal interactable_finished
 
 signal interacted_upgraded_station
 
+signal interacted_signboard ## emitted by signboard, used by menu manager
+
+## emitted by details in signboard, used by DungoenHolder
+signal mainhub_departed(selected_expedition: AreaData)
+
 ## UI and UI
 signal upgrade_stats_pressed()
 

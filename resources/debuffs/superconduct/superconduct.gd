@@ -49,9 +49,11 @@ func receive_superconduct(enemy: BaseEnemy, ep: float) -> void:
 	enemy.take_damage(final_dmg, CombatManager.Elements.NONE)
 	enemy.reload_time = enemy.default_reload_time + 1
 	
+	## TODO: sprites with materials (shaders) have their modulate overwritten by material.
 	sprite_tween = enemy.create_tween()
 	sprite_tween.tween_property(enemy.sprite_main, "modulate", 
 			enemy.default_color, duration).from(color_sc)
+	#print_debug(enemy.sprite_main.modulate)
 
 
 func damage_equation(ep: float) -> float:
@@ -66,6 +68,7 @@ func superconduct_ended(enemy: BaseEnemy) -> void:
 		sprite_tween = null
 	enemy.reload_time = enemy.default_reload_time
 	enemy.sprite_main.modulate = enemy.default_color
+	#print_debug("sc ended")
 
 
 func clear() -> void:

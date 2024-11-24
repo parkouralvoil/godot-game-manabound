@@ -1,7 +1,7 @@
-[gd_scene load_steps=21 format=3 uid="uid://81bywsqtve7q"]
+[gd_scene load_steps=23 format=3 uid="uid://81bywsqtve7q"]
 
 [ext_resource type="Script" path="res://scenes/bosses/sideparts/sidepart.gd" id="1_c8333"]
-[ext_resource type="Resource" uid="uid://b3p1puamygwo8" path="res://scenes/bosses/sideparts/sidepart_orb_stats.tres" id="2_oc7oa"]
+[ext_resource type="Resource" uid="uid://b3p1puamygwo8" path="res://scenes/bosses/sideparts/sidepart_orb_stats.tres" id="2_jdpwt"]
 [ext_resource type="Texture2D" uid="uid://8xtemsicre7s" path="res://assets/sprite_enemies/boss_1/boss_1_construction.png" id="3_1v6m3"]
 [ext_resource type="Material" uid="uid://bs34yeolna80o" path="res://scenes/bosses/sideparts/construction_shader_material.tres" id="3_q88rg"]
 [ext_resource type="Texture2D" uid="uid://c5ipy57ikn0bw" path="res://assets/sprite_enemies/boss_1/boss_1_components.png" id="3_xfoqf"]
@@ -14,6 +14,8 @@
 [ext_resource type="PackedScene" uid="uid://dgxe7byv8tjvu" path="res://scenes/bosses/sideparts/sidepart_healthbar.tscn" id="8_ifmvs"]
 [ext_resource type="PackedScene" uid="uid://c1mef3esxg5jh" path="res://user_interface/UI_attached_to_enemies/element_indicator.tscn" id="9_7d2c8"]
 [ext_resource type="PackedScene" uid="uid://oml2t17eroh7" path="res://user_interface/UI_attached_to_enemies/debuff_indicator.tscn" id="10_rlyjt"]
+[ext_resource type="Script" path="res://scenes/bosses/sideparts/OrbPart_AttackComponent.gd" id="15_r5kgi"]
+[ext_resource type="PackedScene" uid="uid://bokmrko2cf2sb" path="res://projectiles/enemy_projectiles/orb_explosion/orb_explosion_spawn.tscn" id="16_xdqng"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7thxm"]
 atlas = ExtResource("3_1v6m3")
@@ -30,17 +32,18 @@ size = Vector2(76, 64)
 size = Vector2(21, 34)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jeu53"]
-size = Vector2(75, 34)
+size = Vector2(114, 46)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rceqa"]
-size = Vector2(94, 48)
+size = Vector2(118, 56)
 
 [node name="OrbBot" type="StaticBody2D"]
 position = Vector2(-15, 32)
 collision_layer = 512
 collision_mask = 0
 script = ExtResource("1_c8333")
-stats = ExtResource("2_oc7oa")
+stats = ExtResource("2_jdpwt")
+interruptable = false
 impact_scale = Vector2(6, 6)
 
 [node name="Sprite2D_construction" type="Sprite2D" parent="."]
@@ -70,7 +73,7 @@ position = Vector2(49, 3)
 shape = SubResource("RectangleShape2D_dt1w1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0.5, 7)
+position = Vector2(0, -2)
 shape = SubResource("RectangleShape2D_jeu53")
 debug_color = Color(0.828275, 0.363511, 0.416475, 0.42)
 
@@ -110,6 +113,23 @@ collision_mask = 2
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerCheck"]
-position = Vector2(1, 5)
+position = Vector2(0, 1)
 shape = SubResource("RectangleShape2D_rceqa")
 debug_color = Color(0.606793, 0.501625, 0.552073, 0.42)
+
+[node name="AttackComponent" type="Node2D" parent="."]
+script = ExtResource("15_r5kgi")
+
+[node name="reload" type="Timer" parent="AttackComponent"]
+one_shot = true
+
+[node name="orb_explosion_spawn" parent="AttackComponent" instance=ExtResource("16_xdqng")]
+visible = false
+top_level = true
+
+[node name="Line2D" type="Line2D" parent="AttackComponent"]
+points = PackedVector2Array(0, 0, 0, 0)
+width = 1.0
+default_color = Color(0.203922, 0.32549, 0.596078, 0.615686)
+
+[connection signal="timeout" from="AttackComponent/reload" to="AttackComponent" method="_on_reload_timeout"]

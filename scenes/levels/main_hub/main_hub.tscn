@@ -1,19 +1,14 @@
-[gd_scene load_steps=22 format=4 uid="uid://bdn5claftvmgn"]
+[gd_scene load_steps=20 format=4 uid="uid://bdn5claftvmgn"]
 
 [ext_resource type="Script" path="res://scenes/levels/main_hub/main_hub.gd" id="1_no8mj"]
 [ext_resource type="PackedScene" uid="uid://baksvorn8xwwc" path="res://scenes/levels/parallax_backgrounds/mountain_sky_tree.tscn" id="2_ggshg"]
 [ext_resource type="TileSet" uid="uid://bq4bd7di0pjwo" path="res://resources/tilemaps/blue_scifi.tres" id="4_6d053"]
-[ext_resource type="Texture2D" uid="uid://cr1neufwt66rv" path="res://assets/sprite_tilesets/castle/signboard.png" id="5_b6f4k"]
-[ext_resource type="PackedScene" uid="uid://cc327ml5lr825" path="res://scenes/levels/door/exit_door.tscn" id="5_yodbg"]
+[ext_resource type="PackedScene" uid="uid://35bmq6pxx41q" path="res://scenes/interactables/signboard.tscn" id="4_tdi5r"]
 [ext_resource type="Texture2D" uid="uid://ug68u46641al" path="res://assets/sprite_characters/witch_spritesheet.png" id="7_uq1b8"]
 [ext_resource type="Texture2D" uid="uid://dsdu11io064xj" path="res://assets/sprite_characters/rogue_spritesheet.png" id="8_knvnu"]
 [ext_resource type="Texture2D" uid="uid://d0b5yrantkkqm" path="res://characters/rogue/visuals/rogue_arm.tres" id="9_qngvn"]
 [ext_resource type="PackedScene" uid="uid://bkle7qrwjpj8o" path="res://scenes/interactables/health_potion/health_potion.tscn" id="10_eh2s7"]
 [ext_resource type="PackedScene" uid="uid://dubh6cpng3iu2" path="res://scenes/interactables/upgrade_station/upgrade_station.tscn" id="10_pbl8k"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_nuxn5"]
-atlas = ExtResource("5_b6f4k")
-region = Rect2(0, 32, 80, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xq1pv"]
 atlas = ExtResource("7_uq1b8")
@@ -161,23 +156,8 @@ color = Color(0, 0, 0, 1)
 [node name="StartingPos" type="Marker2D" parent="."]
 position = Vector2(502, -202)
 
-[node name="ExitDoor" parent="." instance=ExtResource("5_yodbg")]
-position = Vector2(360, -99)
-starts_open = true
-closed_text = "door closed?"
-open_text = "Press E to begin game"
-
-[node name="signboard" type="Sprite2D" parent="."]
+[node name="signboard" parent="." instance=ExtResource("4_tdi5r")]
 position = Vector2(536, -112)
-texture = SubResource("AtlasTexture_nuxn5")
-
-[node name="Label" type="Label" parent="signboard"]
-visible = false
-offset_left = -79.0
-offset_top = -60.0
-offset_right = 90.0
-offset_bottom = -37.0
-text = "Press E to select level "
 
 [node name="decor" type="Node2D" parent="."]
 

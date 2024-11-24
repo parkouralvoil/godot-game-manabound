@@ -28,7 +28,7 @@ func _process(_delta: float) -> void:
 	elif t_recoil.is_stopped() or !can_shoot:
 		PlayerInfo.basic_attacking = false
 	
-	if PlayerInfo.input_attack and character.stats.ammo > 0 and can_shoot:
+	if PlayerInfo.input_attack and character.stats.ammo > 0 and can_shoot and not character.is_dead:
 		if t_firerate.is_stopped():
 			basic_atk()
 			t_firerate.start()

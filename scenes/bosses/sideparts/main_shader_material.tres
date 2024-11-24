@@ -5,5 +5,5 @@
 [resource]
 resource_local_to_scene = true
 shader = ExtResource("1_yp4ur")
-shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/color = Color(0.99558, 0.99558, 0.99558, 1)
 shader_parameter/flashState = 0.0

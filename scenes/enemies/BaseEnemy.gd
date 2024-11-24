@@ -114,13 +114,13 @@ func spawn_dmg_number(effect: String, color: Color) -> void:
 	else:
 		label_inst.speed = -20
 		label_inst.duration = 1.2
-		if effect == "Superconduct":
+		if effect == "Superconduct": ## HEALTH COMPONENT is for these effects
 			pos_variance = Vector2(-33,-20)
 		elif effect == "Melt":
 			pos_variance = Vector2(-11,-20)
 		elif effect == "Overload":
 			pos_variance = Vector2(-21.5,-20)
-		elif effect == "INTERRUPTED!":
+		elif effect == "INTERRUPTED!": ## ATTACK COMPONENT DOES THIS!!!
 			pos_variance = Vector2(-35,20)
 			label_inst.speed = 0
 		else:

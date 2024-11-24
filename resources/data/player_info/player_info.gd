@@ -74,7 +74,7 @@ var buff_raw_atk: float = 0:
 	set(value):
 		buff_raw_atk = value
 		changed_buff_raw_atk.emit()
-		print_debug("emitted")
+		#print_debug("emitted")
 
 ## Team Status (all team alive, last person dead), set by character manager of player
 var team_size: int

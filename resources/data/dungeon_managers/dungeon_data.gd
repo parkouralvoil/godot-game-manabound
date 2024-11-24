@@ -17,7 +17,7 @@ class_name DungeonData
 signal combat_state_changed() # for show lvl up button
 signal exit_door_interacted() # for showing preset menu after battle
 signal main_hub_loaded() # to tell certain UIs to change when at main hub
-signal game_started() # to show preset menu at start/load
+signal game_started(starting_preset: RoomPreset) # to begin game
 
 ## UI -> DungeonHolder
 signal preset_selected(preset: RoomPreset) # for loading next level with selected preset
@@ -36,13 +36,13 @@ var available_presets: Array[RoomPreset]
 var chosen_preset: RoomPreset
 
 
-var current_cycle: int:
+var current_area_index: int:
 	set(val):
-		current_cycle = maxi(0, val)
+		current_area_index = maxi(0, val)
 var current_room: int = 0:
 	set(val):
 		current_room = maxi(0, val)
-var previous_level: PackedScene
+var previous_room: PackedScene
 
 
 var enemy_HP_scaling: float = 0
@@ -65,53 +65,47 @@ var state_in_combat: bool = false:
 
 
 #region Cycle Functions
-func start_cycle() -> void:
+func start_cycle(selected_expedition: AreaData) -> void:
+	state_in_combat = true
 	assert(area_datas.size() > 0)
-	area = area_datas[0]
-	available_presets = area.EasyPresets
-	current_cycle = 1
-	game_started.emit()
+	area = selected_expedition
+	chosen_preset = area.EasyPresets[0]
+	preset_selected.emit(chosen_preset)
+	start_room()
 
 
 func _update_cycle_info() -> void: ## inside setter of cycle
 	#print("cycle updated")
-	if current_cycle <= 1: ## Tutorial and first cycle/area
-		min_chest_spawns = 1
-		max_chest_spawns = 3
-		enemy_HP_scaling = 1
-	elif current_cycle == 2:
-		min_chest_spawns = 3
-		max_chest_spawns = 5
-		enemy_HP_scaling = 3
-	else: ## Cycle 3 and above
-		min_chest_spawns = 7
-		max_chest_spawns = 9
-		enemy_HP_scaling = 5
+	#if current_area_index <= 1: ## Tutorial and first cycle/area
+	min_chest_spawns = 2
+	max_chest_spawns = 3
+	enemy_HP_scaling = 1
+	#elif current_area_index == 2:
+		#min_chest_spawns = 3
+		#max_chest_spawns = 5
+		#enemy_HP_scaling = 3
+	#else: ## Cycle 3 and above
+		#min_chest_spawns = 7
+		#max_chest_spawns = 9
+		#enemy_HP_scaling = 5
 #endregion
 
 
 #region Room functions
 func start_room() -> void:
-	current_room = 0
+	current_room = 0 ## since the code adds 1 every time go next room is called
+	print_debug("i was called")
 
 
 func go_next_room(new_preset: RoomPreset) -> void:
-	if current_room >= area.boss_lvl: ## go to next area
-		current_cycle += 1
-		current_room = 1
+	if chosen_preset and chosen_preset in area.BossPreset:
+		if area == area_datas[1]: ## area city
+			pass ## game is finished
+		else:
+			pass ## tutorial done
 	else:
 		current_room += 1
-	print_debug("current room: %d" % current_room)
-	var next_room: int = current_room + 1 ## available presets is for the next room
-	if next_room < area.rest_lvl:
-		available_presets = area.EasyPresets
-	elif next_room == area.rest_lvl or next_room == area.rest_lvl * 2:
-		available_presets = area.RestPresets
-	else:
-		available_presets = area.HardPresets
-	
-	#if current_room == 10:
-	#	available_presets = BossPreset
+	available_presets = area.update_available_presets(current_room)
 	
 	chosen_preset = new_preset ## must be set after cycle is updated
 	_update_cycle_info()
@@ -129,20 +123,20 @@ func _update_preset(_preset: RoomPreset) -> void:
 
 
 func get_level() -> PackedScene:
-	## elif current lvl is 4 or 9, return rest room
-	## chosen preset will handle boss, since boss is a preset
 	assert(area, "dungeon_data has no area_data")
-	if chosen_preset.room:
+	if chosen_preset.room: ## if preset has specific room, go there
 		return chosen_preset.room
 	
-	var lvl_available: Array[PackedScene] = area.NormalRooms.duplicate(false)
+	var rooms_available: Array[PackedScene] = area.NormalRooms.duplicate(false)
+	var selected_room: PackedScene = null
 	
-	if area.NormalRooms.size() > 1 and previous_level != null:
-		lvl_available.erase(previous_level)
-		previous_level = lvl_available.pick_random()
+	if area.NormalRooms.size() > 1 and previous_room != null:
+		rooms_available.erase(previous_room)
+		selected_room = rooms_available.pick_random()
 	else:
-		previous_level = lvl_available.pick_random()
-	return previous_level
+		selected_room = rooms_available.pick_random()
+	previous_room = selected_room
+	return selected_room
 
 
 func get_preset_choices() -> Array[RoomPreset]: ## always return array of size 2

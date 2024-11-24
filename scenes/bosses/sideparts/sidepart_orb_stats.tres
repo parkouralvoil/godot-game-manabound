@@ -4,6 +4,6 @@
 
 [resource]
 script = ExtResource("1_v6v6o")
-health = 200.0
+health = 800.0
 mana_orbs = 0.0
-default_reload_time = 4.0
+default_reload_time = 4.5

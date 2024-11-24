@@ -11,6 +11,7 @@ var level_up_available: bool
 @onready var preset_choice_window: ChoosePresetMenu = $PresetChoiceWindow
 @onready var upgrade_stats_menu: UpgradeStatsMenu = $UpgradeStatsMenu
 @onready var upgrade_stree_menu: UpgradeStreeMenu = $UpgradeStreeMenu
+@onready var select_expedition_menu: SelectExpeditionMenu = $SelectExpeditionMenu
 
 @onready var screen_buttons: HBoxContainer = $HBox_ScreenButtons
 
@@ -31,6 +32,8 @@ func initialize_menus(dungeon: DungeonData,
 func _ready() -> void:
 	EventBus.upgrade_stats_pressed.connect(switch_current_menu.bind(upgrade_stats_menu))
 	EventBus.interacted_upgraded_station.connect(switch_current_menu.bind(upgrade_stree_menu))
+	EventBus.interacted_signboard.connect(switch_current_menu.bind(select_expedition_menu))
+	EventBus.mainhub_departed.connect(close_menu.unbind(1))
 	
 	team_info.hide()
 	pause_menu.exit_menu.connect(close_menu)
@@ -48,11 +51,15 @@ func _unhandled_input(event: InputEvent) -> void:
 	
 	## opening lvl menu is done thru button
 	
-	if event.is_action_pressed("esc") and not preset_choice_window.visible:
-		if current_menu_opened:
-			close_menu()
+	if event.is_action_pressed("esc"):
+		if not preset_choice_window.visible:
+			if current_menu_opened:
+				close_menu()
+			else:
+				switch_current_menu(pause_menu)
 		else:
-			switch_current_menu(pause_menu)
+			preset_choice_window.hide()
+			unpause_game()
 		
 	if event.is_action_pressed("console"):
 		DevConsole.visible = not DevConsole.visible

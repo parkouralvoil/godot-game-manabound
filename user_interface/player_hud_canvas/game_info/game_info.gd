@@ -56,6 +56,7 @@ func _ready() -> void:
 	EventBus.level_loaded.connect(_update_cycle_room)
 	EventBus.level_loaded.connect(_on_game_started)
 	EventBus.boss_fight_started.connect(_on_boss_fight_started)
+	EventBus.boss_fight_ended.connect(_on_boss_fight_ended)
 	boss_info.hide()
 
 
@@ -76,6 +77,10 @@ func _on_boss_fight_started(boss_node: Node2D) -> void:
 	label_enemies.hide()
 
 
+func _on_boss_fight_ended() -> void:
+	boss_info.hide()
+
+
 func try_show_inventory() -> void:
 	if not dungeon_data.state_in_combat:
 		rune_info.show()
@@ -84,10 +89,11 @@ func try_show_inventory() -> void:
 
 
 func _update_cycle_room() -> void:
-	label_cycle_room.text = "Level: %d-%d" % [dungeon_data.current_cycle, 
+	label_cycle_room.text = "Level: %d-%d" % [dungeon_data.current_area_index + 1, 
 				dungeon_data.current_room]
 	if dungeon_data.chosen_preset:
 		label_preset.text = "Room: %s" % dungeon_data.chosen_preset.preset_name
+	boss_info.hide()
 
 
 func _update_rune_number() -> void:
@@ -110,6 +116,7 @@ func _on_main_hub_loaded() -> void:
 	line_2.hide()
 	label_enemies.hide()
 	label_preset.text = "Room: Hub"
+	boss_info.hide()
 
 
 func _on_game_started() -> void:
