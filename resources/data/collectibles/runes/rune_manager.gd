@@ -10,6 +10,7 @@ class_name RuneManager
 ## ok fuck it id rather have RuneData as its own thing
 
 @export var runes_data_array: Array[RuneData]
+@export var rune_data_HP: RuneData ## for rest room
 
 
 ## since theres only 4 runes with 99% identical functionality (increase a stat),
@@ -39,3 +40,7 @@ func pick_random_rune() -> RuneData:
 			break
 		pity += rune_probability
 	return picked_rune
+
+
+func pick_HP_rune() -> RuneData:
+	return rune_data_HP

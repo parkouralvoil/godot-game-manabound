@@ -8,14 +8,16 @@ var data_array: Array[CharacterResource] = [null, null, null] ## the resource
 var stored_chars: Array[Character] = [null, null, null] ## the scene, which has AbilityManager
 
 var current_char: Character
-
 var can_change_char: bool = true
+var tutorial_restriction: int = 3
+var tutorial_immortality: bool = false
 
 @onready var p: Player = owner
 @onready var t_change_char: Timer = $change_char_cd
 
 func _ready() -> void:
 	EventBus.returned_to_mainhub.connect(_on_returned_to_mainhub)
+	EventBus.tutorial_team_restriction_set.connect(_update_tutorial_restriction)
 	data_array = selected_team_info.char_data_array
 	for i in range(data_array.size()):
 		stored_chars[i] = data_array[i].character_scene.instantiate()
@@ -29,6 +31,8 @@ func _ready() -> void:
 
 
 func take_damage(damage: int) -> void:
+	if tutorial_immortality and current_char.stats.HP <= 1:
+		return
 	if current_char.stats.HP - damage > 0:
 		current_char.stats.HP -= damage
 	else:
@@ -43,9 +47,9 @@ func _process(_delta: float) -> void:
 	if can_change_char:
 		if Input.is_action_just_pressed("1"):
 			input_change_char(0)
-		elif Input.is_action_just_pressed("2"):
+		elif Input.is_action_just_pressed("2") and tutorial_restriction >= 2:
 			input_change_char(1)
-		elif Input.is_action_just_pressed("3"):
+		elif Input.is_action_just_pressed("3") and tutorial_restriction >= 3:
 			input_change_char(2)
 
 
@@ -125,3 +129,13 @@ func _on_returned_to_mainhub() -> void:
 	p.global_position = Vector2(1000, 1000) ## to hide player hehe
 	p.controls_disabled = false
 	change_character(0)
+
+
+func _update_tutorial_restriction(tutorial_level: int) -> void:
+	input_change_char(0) ## always return to knight
+	tutorial_restriction = tutorial_level
+	if tutorial_restriction <= 2:
+		tutorial_immortality = true
+	else:
+		tutorial_immortality = false
+	#print_debug("tutorial_restriction: ", tutorial_restriction)

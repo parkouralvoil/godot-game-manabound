@@ -47,6 +47,10 @@ func give_children_room_preset(preset: RoomPreset) -> void: ## assigned by dunge
 	
 	enemy_holder.spawn_enemies(preset.normal_enemies_info)
 	elite_holder.spawn_enemies(preset.elite_enemies_info)
+	
+	#print_debug("initialized done for %s" % name)
+	if room_type == RoomType.Rest:
+		chest_rune_holder.change_chests_to_HP()
 
 
 func _ready() -> void:
@@ -62,7 +66,7 @@ func _ready() -> void:
 
 
 func _enemy_dead(type: BaseEnemy) -> void:
-	print_debug("called this")
+	#print_debug("called this")
 	EnemyAiManager.enemies_alive -= 1
 	if type is NormalEnemy:
 		if type.is_small_drone:

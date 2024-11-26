@@ -111,9 +111,10 @@ func update_skills() -> void:
 func initialize_model() -> void:
 	## description of char
 	StreeModel.root_node.name = "Apprentice Witch"
-	StreeModel.root_node.description = """A student from Mana Haven, trained in the magic of Frost Art. 
-\nFrost Art is a mystic art of mana imparted to the witches by the elves of the north. 
-\nElement: Ice"""
+	StreeModel.root_node.description = "A student from Mana Haven, trained in the magic of Frost Art." \
+	+ "\n\nNorthern sages imparted their arts and teachings to the witches" \
+	+ " to aid them in rebuilding a great empire felled by a colossal spear of sky-rock.\n\nElement: Ice"
+
 	
 	## char's basic atk nodes
 	StreeModel.left_nodes[0].name = "Apprentice's Icestaff"

@@ -15,7 +15,7 @@ var z_axis: float = 0.0 # simulate the arc
 var is_launch: bool = false
 
 func _ready() -> void:
-	_change_texture_based_on_type()
+	pass
 	#launch_rune_from_chest(global_position, Vector2.RIGHT, 20, 80)
 
 
@@ -47,10 +47,6 @@ func launch_rune_from_chest(from_pos: Vector2,
 	
 	z_axis = 0
 	is_launch = true
-
-
-func _change_texture_based_on_type() -> void:
-	pass
 
 
 func _on_lifetime_timeout() -> void:

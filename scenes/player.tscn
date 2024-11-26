@@ -224,6 +224,7 @@ selected_team_info = ExtResource("16_fh5ne")
 [node name="change_char_cd" type="Timer" parent="CharacterManager"]
 wait_time = 0.7
 one_shot = true
+autostart = true
 
 [node name="DirectionIndicator" type="Sprite2D" parent="." node_paths=PackedStringArray("p")]
 modulate = Color(0.9, 0.9, 0.9, 1)

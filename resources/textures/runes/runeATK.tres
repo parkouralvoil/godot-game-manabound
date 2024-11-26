@@ -1,7 +1,7 @@
 [gd_resource type="AtlasTexture" load_steps=2 format=3 uid="uid://bb3lpehyybypd"]
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ctfa6"]
+[ext_resource type="Texture2D" uid="uid://1r2e47in58kt" path="res://assets/sprite_items/stat_runes.png" id="1_vgnjg"]
 
 [resource]
-atlas = SubResource("CompressedTexture2D_ctfa6")
+atlas = ExtResource("1_vgnjg")
 region = Rect2(24, 0, 24, 24)

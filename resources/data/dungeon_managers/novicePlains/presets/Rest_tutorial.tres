@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="RoomPreset" load_steps=3 format=3 uid="uid://da6simf833od7"]
+
+[ext_resource type="PackedScene" uid="uid://d0r0tvcf2d2n1" path="res://scenes/levels/novice_plains/novice_4.tscn" id="1_covnh"]
+[ext_resource type="Script" path="res://resources/data/dungeon_managers/room_preset.gd" id="2_jcwvh"]
+
+[resource]
+script = ExtResource("2_jcwvh")
+preset_name = "Safe Zone"
+info1 = "HP Potion guaranteed"
+info2 = "Use the Upgrade Station to unlock new abilities."
+info3 = ""
+num_of_enemies = 0
+autobow = 1.0
+orb = 0.0
+laser = 0.0
+dronefactory = 0.0
+num_of_elites = 1
+machinegun = 1.0
+HP_potion_present = true
+room = ExtResource("1_covnh")

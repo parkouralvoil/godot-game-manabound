@@ -122,9 +122,12 @@ func update_skills() -> void:
 func initialize_model() -> void:
 	## description of char
 	StreeModel.root_node.name = "Infantry Knight" ## more detailed name purely for stree
-	StreeModel.root_node.description = """A soldier wielding an sophisticated crossbow.
-\nHailing from the City of Light, these knights pave the way for technology in a world dominated by magic.
-\nElement: Lightning"""
+	StreeModel.root_node.description = "A soldier wielding a sophisticated crossbow inspired by" \
++ " the Spacefarers' non-magic weaponry." \
++ "\n\nHailing from the City of Light, these knights pave the way for technology in a world " \
++ "they deem too dependent on magic." \
++ "\n\nElement: Lightning"
+
 	
 	## char's basic atk nodes -----------------------------------------------------
 	StreeModel.left_nodes[0].name = _basic_atk_name

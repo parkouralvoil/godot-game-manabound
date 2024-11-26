@@ -23,7 +23,7 @@ func _ready() -> void:
 		target[0] = Vector2.LEFT
 		target[1] = Vector2.RIGHT
 	elif not e.sprite_main:
-		print_debug(e.get_node("Sprite2D_main"))
+		pass #print_debug(e.get_node("Sprite2D_main"))
 	for i in range(2):
 		laser[i].raycast.target_position = target[i] * max_range
 		laser[i].update()

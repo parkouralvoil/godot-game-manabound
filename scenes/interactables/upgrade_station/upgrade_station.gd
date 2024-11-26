@@ -1,8 +1,6 @@
 extends Sprite2D
 class_name UpgradeStation
 
-@export var PlayerInfo: PlayerInfoResource
-
 var player_nearby: bool = false
 
 @onready var tip: Label = $Tip

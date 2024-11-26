@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cb07f2ey0p54u"
-path="res://.godot/imported/blue scifi doors.png-ffd16b1f10c38f268d56773d8ed677bd.ctex"
+uid="uid://cohr55ycn0qfm"
+path="res://.godot/imported/blue_tileset_godot.png-7dea495c44a8bd00d34e8037b98a1fc8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprite_tilesets/blue scifi doors.png"
-dest_files=["res://.godot/imported/blue scifi doors.png-ffd16b1f10c38f268d56773d8ed677bd.ctex"]
+source_file="res://assets/sprite_tilesets/blue_city/blue_tileset_godot.png"
+dest_files=["res://.godot/imported/blue_tileset_godot.png-7dea495c44a8bd00d34e8037b98a1fc8.ctex"]
 
 [params]
 

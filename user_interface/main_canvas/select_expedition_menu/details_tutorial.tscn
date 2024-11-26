@@ -1,29 +1,29 @@
-[gd_scene load_steps=8 format=3 uid="uid://djwhqa2ut3une"]
+[gd_scene load_steps=8 format=3 uid="uid://bhjbfjlthe4yk"]
 
-[ext_resource type="Script" path="res://user_interface/main_canvas/select_expedition_menu/details.gd" id="1_odijy"]
-[ext_resource type="LabelSettings" uid="uid://6y7111xwu3do" path="res://resources/label_settings/font_system_big.tres" id="1_vgk60"]
-[ext_resource type="Resource" uid="uid://jmm8hearhswm" path="res://resources/data/dungeon_managers/blueCity/areas/area_city.tres" id="2_h1eee"]
-[ext_resource type="LabelSettings" uid="uid://buthhqor0rds0" path="res://resources/label_settings/font_system_desc.tres" id="2_v5j6x"]
-[ext_resource type="Texture2D" uid="uid://35esyf53xnmg" path="res://assets/background/City Background.png" id="3_xagul"]
-[ext_resource type="FontFile" uid="uid://bbkhj4uknd5uk" path="res://assets/fonts/PFDinTextPro-Light.ttf" id="4_et8k7"]
+[ext_resource type="Script" path="res://user_interface/main_canvas/select_expedition_menu/details.gd" id="1_nichc"]
+[ext_resource type="Resource" uid="uid://c35c3xanuhgmc" path="res://resources/data/dungeon_managers/novicePlains/area/area_tutorial.tres" id="2_t01mm"]
+[ext_resource type="LabelSettings" uid="uid://6y7111xwu3do" path="res://resources/label_settings/font_system_big.tres" id="3_nr5hv"]
+[ext_resource type="LabelSettings" uid="uid://buthhqor0rds0" path="res://resources/label_settings/font_system_desc.tres" id="4_h5iqa"]
+[ext_resource type="Texture2D" uid="uid://ci584hcs8g0e2" path="res://assets/background/summer 4_cloud/Summer4.png" id="5_ebfm2"]
+[ext_resource type="FontFile" uid="uid://bbkhj4uknd5uk" path="res://assets/fonts/PFDinTextPro-Light.ttf" id="6_dbqxh"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_jkmkb"]
 line_spacing = 1.0
-font = ExtResource("4_et8k7")
+font = ExtResource("6_dbqxh")
 font_size = 12
 font_color = Color(0.901961, 0.901961, 0.901961, 0.901961)
 
-[node name="Details_BlueCity" type="AspectRatioContainer"]
-script = ExtResource("1_odijy")
-area_resource = ExtResource("2_h1eee")
+[node name="Details_Tutorial" type="AspectRatioContainer"]
+script = ExtResource("1_nichc")
+area_resource = ExtResource("2_t01mm")
 
 [node name="VBox2" type="VBoxContainer" parent="."]
 layout_mode = 2
 
 [node name="name" type="Label" parent="VBox2"]
 layout_mode = 2
-text = "Auma Luine City"
-label_settings = ExtResource("1_vgk60")
+text = "Novice Plains (Tutorial)"
+label_settings = ExtResource("3_nr5hv")
 
 [node name="HBox" type="HBoxContainer" parent="VBox2"]
 layout_mode = 2
@@ -32,7 +32,7 @@ layout_mode = 2
 unique_name_in_owner = true
 layout_mode = 2
 text = "Completed: No"
-label_settings = ExtResource("2_v5j6x")
+label_settings = ExtResource("4_h5iqa")
 
 [node name="spacer" type="Control" parent="VBox2/HBox"]
 layout_mode = 2
@@ -40,13 +40,13 @@ size_flags_horizontal = 3
 
 [node name="difficulty" type="Label" parent="VBox2/HBox"]
 layout_mode = 2
-text = "Difficulty: Medium"
-label_settings = ExtResource("2_v5j6x")
+text = "Difficulty: Easy"
+label_settings = ExtResource("4_h5iqa")
 
 [node name="expedition_image" type="TextureRect" parent="VBox2"]
 custom_minimum_size = Vector2(300, 100)
 layout_mode = 2
-texture = ExtResource("3_xagul")
+texture = ExtResource("5_ebfm2")
 expand_mode = 1
 stretch_mode = 6
 
@@ -63,11 +63,11 @@ theme_override_constants/margin_bottom = 5
 [node name="description" type="Label" parent="VBox2/PanelContainer/MarginContainer"]
 custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
-text = "A dead city filled with lost magitech. Only inhabited by aumatons hostile to all. A colossal railbow guards the center, warding off large armies from investigating the city.
+text = "An introductory expedition to train new adventurers in mastery of aerial mobility and of elemental-based combat.
 
-Yet its architecture bares a striking resemblance to our buildings, suggesting that our people may have once lived here.
+Learn to proc reactions with fire, lightning, and ice to turn the tides against your foes. 
 
-Reach the city center and uncover the history of this place."
+Balance the team's charge, mana, and energy to cast powerful attacks."
 label_settings = SubResource("LabelSettings_jkmkb")
 autowrap_mode = 2
 

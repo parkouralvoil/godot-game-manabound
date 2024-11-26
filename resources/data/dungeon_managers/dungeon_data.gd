@@ -46,7 +46,7 @@ var previous_room: PackedScene
 
 
 var enemy_HP_scaling: float = 0
-var min_chest_spawns: int = 1:
+var min_chest_spawns: int = 2:
 	set(value):
 		min_chest_spawns = max(value, 0)
 		if max_chest_spawns < min_chest_spawns:
@@ -67,8 +67,12 @@ var state_in_combat: bool = false:
 #region Cycle Functions
 func start_cycle(selected_expedition: AreaData) -> void:
 	state_in_combat = true
-	assert(area_datas.size() > 0)
 	area = selected_expedition
+	if area is AreaTutorialData:
+		EventBus.tutorial_team_restriction_set.emit(1)
+	else:
+		EventBus.tutorial_team_restriction_set.emit(3)
+	assert(area.EasyPresets.size() >= 1)
 	chosen_preset = area.EasyPresets[0]
 	preset_selected.emit(chosen_preset)
 	start_room()

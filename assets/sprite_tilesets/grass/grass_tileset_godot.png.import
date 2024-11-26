@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bsm42x1ah73iu"
-path="res://.godot/imported/blue scifi tilemap.png-9e28feab506b166d603f6fcd37df46b2.ctex"
+uid="uid://bll0rr2lso5yh"
+path="res://.godot/imported/grass_tileset_godot.png-540777a1145af45593db45f8ca99dc1f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprite_tilesets/blue scifi tilemap.png"
-dest_files=["res://.godot/imported/blue scifi tilemap.png-9e28feab506b166d603f6fcd37df46b2.ctex"]
+source_file="res://assets/sprite_tilesets/grass/grass_tileset_godot.png"
+dest_files=["res://.godot/imported/grass_tileset_godot.png-540777a1145af45593db45f8ca99dc1f.ctex"]
 
 [params]
 

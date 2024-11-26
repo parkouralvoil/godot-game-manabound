@@ -27,6 +27,9 @@ signal interacted_signboard ## emitted by signboard, used by menu manager
 ## emitted by details in signboard, used by DungoenHolder
 signal mainhub_departed(selected_expedition: AreaData)
 
+## emitted by area_tutorial, used by character character_manager, player_input, team_hud
+signal tutorial_team_restriction_set(level: int) 
+
 ## UI and UI
 signal upgrade_stats_pressed()
 

@@ -114,9 +114,10 @@ func update_skills() -> void:
 func initialize_model() -> void:
 	## description of char
 	StreeModel.root_node.name = "Cinder Rogue" ## more detailed name purely for stree
-	StreeModel.root_node.description = """A spellblade from Flameheart Volcano, equipped with a burning sword.
-\nDenizens of the Flameheart utilize both weapon and magic in their fighting style to imitate the dance of fire.
-\nElement: Fire"""
+	StreeModel.root_node.description = "A spellblade from Flameheart Volcano, equipped with a burning sword." \
++ "\n\nDenizens of Flameheart utilize both weapon and magic in their fighting style to imitate the dance" \
++ " of the extinct Draconis." \
++ "\n\nElement: Fire"
 	
 	## char's basic atk nodes -----------------------------------------------------
 	StreeModel.left_nodes[0].name = _basic_atk_name

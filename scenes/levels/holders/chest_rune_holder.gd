@@ -28,8 +28,16 @@ func initialize_chests() -> void: ## called by level manager
 		#open_all_chest_rune()
 
 func open_all_chest_rune() -> void: ## called by level manager
+	#print_debug("called open chests: ", chest_array)
 	for chest in chest_array:
 		chest.open_chest_rune()
+
+
+func change_chests_to_HP() -> void:
+	#print_debug("called change chests: ", chest_array)
+	for chest in chest_array:
+		#print_debug("inside loop")
+		chest.drop_HP_rune = true
 
 
 ## chest rune holder purpose:

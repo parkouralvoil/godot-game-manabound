@@ -5,7 +5,7 @@
 [ext_resource type="TileSet" uid="uid://bq4bd7di0pjwo" path="res://resources/tilemaps/blue_scifi.tres" id="3_bcsgq"]
 [ext_resource type="Script" path="res://scenes/levels/holders/enemy_holder.gd" id="4_cja48"]
 [ext_resource type="PackedScene" uid="uid://cc327ml5lr825" path="res://scenes/levels/door/exit_door.tscn" id="5_1h6rf"]
-[ext_resource type="Texture2D" uid="uid://cb07f2ey0p54u" path="res://assets/sprite_tilesets/blue scifi doors.png" id="6_dgscs"]
+[ext_resource type="Texture2D" uid="uid://cb07f2ey0p54u" path="res://assets/sprite_tilesets/blue_city/blue scifi doors.png" id="6_dgscs"]
 
 [sub_resource type="Environment" id="Environment_2st5j"]
 background_mode = 3

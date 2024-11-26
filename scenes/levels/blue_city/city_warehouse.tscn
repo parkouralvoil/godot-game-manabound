@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dvekt06510ha5"]
+[gd_scene load_steps=12 format=3 uid="uid://dvekt06510ha5"]
 
 [ext_resource type="Script" path="res://scenes/levels/blue_city/level_manager.gd" id="1_uo5gf"]
 [ext_resource type="PackedScene" uid="uid://d23s3ceqy66ry" path="res://scenes/levels/test/test_parallax.tscn" id="2_wu8is"]
@@ -9,6 +9,12 @@
 [ext_resource type="PackedScene" uid="uid://cievadvfmo3xd" path="res://scenes/levels/level_world_environment.tscn" id="7_sktvl"]
 [ext_resource type="PackedScene" uid="uid://cc327ml5lr825" path="res://scenes/levels/door/exit_door.tscn" id="8_rrxsk"]
 [ext_resource type="PackedScene" uid="uid://ik5ko0nytiss" path="res://scenes/levels/door/start_door.tscn" id="9_ruuhq"]
+[ext_resource type="Texture2D" uid="uid://cb07f2ey0p54u" path="res://assets/sprite_tilesets/blue_city/blue scifi doors.png" id="10_o1m81"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_848qh"]
+resource_local_to_scene = true
+atlas = ExtResource("10_o1m81")
+region = Rect2(0, 40, 32, 40)
 
 [node name="city_warehouse" type="Node2D"]
 script = ExtResource("1_uo5gf")
@@ -122,6 +128,7 @@ gizmo_extents = 40.0
 position = Vector2(156, -67)
 
 [node name="StartDoor" parent="." instance=ExtResource("9_ruuhq")]
+texture = SubResource("AtlasTexture_848qh")
 
 [node name="StartingPos" type="Marker2D" parent="."]
 position = Vector2(1022, -92)

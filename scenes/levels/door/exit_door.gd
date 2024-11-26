@@ -3,16 +3,20 @@ class_name ExitDoor
 
 signal local_exit_door_interacted
 
+@export var starts_open: bool ## for rest rooms/ main hub
+@export var closed_text: String = "ENEMIES STILL ALIVE!"
+@export var open_text: String = "Press E to enter"
+@export_category("Textures")
+## by default it's city door
+@export var door_texture: Texture
+
 var player_nearby: bool = false
 var is_open: bool = false
 var pressed: bool = false
 
-@export var starts_open: bool ## for rest rooms/ main hub
-@export var closed_text: String = "ENEMIES STILL ALIVE!"
-@export var open_text: String = "Press E to enter"
-
 @onready var label: Label = $Label
 @onready var opened_door: Sprite2D = $opened_door
+@onready var closed_door: Sprite2D = $closed_door
 @onready var interactable: Interactable = $Interactable
 
 func _ready() -> void:
@@ -21,6 +25,10 @@ func _ready() -> void:
 	label.visible = false
 	opened_door.hide()
 	EventBus.interactable_detected.connect(toggle_info)
+	if door_texture:
+		opened_door.texture.atlas = door_texture
+		closed_door.texture.atlas = door_texture
+		
 	if starts_open:
 		open()
 

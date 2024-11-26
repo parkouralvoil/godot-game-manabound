@@ -11,6 +11,7 @@ const opened: AtlasTexture = preload("res://resources/textures/interactables/che
 @export var is_open: bool = false
 
 var rune: RuneData
+var drop_HP_rune: bool = false ## set to true by level if level is a rest_preset
 
 
 func _ready() -> void: ## JUST FOR TESTING
@@ -25,6 +26,7 @@ func spawn_rune() -> void: ## THE RUNE DROP IS JUST FOR SHOW,
 	rune_drop.texture = rune.texture
 	
 	add_child(rune_drop) ## chest is not gonna move anyway
+	#print_debug("rune spawned: ", rune_drop.texture)
 	var angle: float = RNG.random_float(75, 80)
 	var dist: float = RNG.random_float(10, 20)
 	var direction: Vector2 = Vector2.RIGHT
@@ -36,7 +38,11 @@ func spawn_rune() -> void: ## THE RUNE DROP IS JUST FOR SHOW,
 func open_chest_rune() -> void:
 	if not visible:
 		return
-	rune = rune_manager.pick_random_rune()
+	#print_debug(drop_HP_rune)
+	if drop_HP_rune:
+		rune = rune_manager.pick_HP_rune()
+	else:
+		rune = rune_manager.pick_random_rune()
 	texture = opened
 	if rune:
 		spawn_rune()

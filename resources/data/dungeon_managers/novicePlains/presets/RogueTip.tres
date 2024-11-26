@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="RoomPreset" load_steps=3 format=3 uid="uid://b5opfsmepy2gq"]
+
+[ext_resource type="PackedScene" uid="uid://emswj51sq2al" path="res://scenes/levels/novice_plains/novice_3.tscn" id="1_2qoa1"]
+[ext_resource type="Script" path="res://resources/data/dungeon_managers/room_preset.gd" id="2_2xo6q"]
+
+[resource]
+script = ExtResource("2_2xo6q")
+preset_name = "Fire Tutorial"
+info1 = "Rogue will be added to the party"
+info2 = "Learn how to interrupt enemy charge attacks"
+info3 = ""
+num_of_enemies = 3
+autobow = 0.0
+orb = 0.0
+laser = 5.0
+dronefactory = 0.0
+num_of_elites = 0
+machinegun = 1.0
+HP_potion_present = false
+room = ExtResource("1_2qoa1")

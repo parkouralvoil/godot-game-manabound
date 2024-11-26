@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://cc327ml5lr825"]
 
 [ext_resource type="Script" path="res://scenes/levels/door/exit_door.gd" id="1_r8jdu"]
-[ext_resource type="Texture2D" uid="uid://cb07f2ey0p54u" path="res://assets/sprite_tilesets/blue scifi doors.png" id="2_44brs"]
+[ext_resource type="Texture2D" uid="uid://cb07f2ey0p54u" path="res://assets/sprite_tilesets/blue_city/blue scifi doors.png" id="2_44brs"]
 [ext_resource type="StyleBox" uid="uid://dei3nbnn0da3" path="res://resources/label_settings/normal_tips_style_box.tres" id="3_hbx1t"]
 [ext_resource type="PackedScene" uid="uid://ckujvunq0eflb" path="res://scenes/interactables/interactable.tscn" id="3_ryg2v"]
 [ext_resource type="LabelSettings" uid="uid://bo0v4fgba3vq4" path="res://resources/label_settings/tip_label.tres" id="4_bvpe7"]
@@ -11,6 +11,7 @@ atlas = ExtResource("2_44brs")
 region = Rect2(0, 80, 32, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7vsuj"]
+resource_local_to_scene = true
 atlas = ExtResource("2_44brs")
 region = Rect2(48, 80, 32, 48)
 

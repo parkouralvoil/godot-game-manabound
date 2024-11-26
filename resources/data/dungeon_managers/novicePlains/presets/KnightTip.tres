@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="RoomPreset" load_steps=3 format=3 uid="uid://c373sjaxeb1ff"]
+
+[ext_resource type="PackedScene" uid="uid://b2bs4026b3eb7" path="res://scenes/levels/novice_plains/novice_1.tscn" id="1_fwfcq"]
+[ext_resource type="Script" path="res://resources/data/dungeon_managers/room_preset.gd" id="1_v8jwf"]
+
+[resource]
+script = ExtResource("1_v8jwf")
+preset_name = "Basic Level"
+info1 = ""
+info2 = ""
+info3 = ""
+num_of_enemies = 2
+autobow = 10.0
+orb = 0.0
+laser = 0.0
+dronefactory = 0.0
+num_of_elites = 0
+machinegun = 1.0
+HP_potion_present = false
+room = ExtResource("1_fwfcq")
