@@ -47,11 +47,3 @@ func change_chests_to_HP() -> void:
 	- holder is responsible of doing RNG to decide which rune is assigned to the chest
 	- chest will spawn the rune and make it "pop out"
 """
-
-## TODO: after chest and runes work,
-"""
-1. inventory (model)
-2. upgrade stats menu (view)
-	- thru button that only shows after combat done
-3. check if dmg is updated properly
-"""

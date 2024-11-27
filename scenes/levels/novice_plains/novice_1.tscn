@@ -1,10 +1,11 @@
-[gd_scene load_steps=12 format=4 uid="uid://b2bs4026b3eb7"]
+[gd_scene load_steps=13 format=4 uid="uid://b2bs4026b3eb7"]
 
 [ext_resource type="Script" path="res://scenes/levels/blue_city/level_manager.gd" id="1_gppjs"]
 [ext_resource type="TileSet" uid="uid://bq4bd7di0pjwo" path="res://resources/tilemaps/blue_scifi.tres" id="2_axch8"]
 [ext_resource type="PackedScene" uid="uid://baksvorn8xwwc" path="res://scenes/levels/parallax_backgrounds/mountain_sky_tree.tscn" id="3_cl7mv"]
 [ext_resource type="Script" path="res://scenes/levels/holders/chest_rune_holder.gd" id="4_1nq4p"]
 [ext_resource type="Script" path="res://scenes/levels/holders/enemy_holder.gd" id="6_5sv0i"]
+[ext_resource type="Script" path="res://scenes/levels/holders/item_holder.gd" id="6_ao8ko"]
 [ext_resource type="Texture2D" uid="uid://61m5yyhtnkp1" path="res://assets/sprite_tilesets/grass/grass_doors.png" id="7_uiev7"]
 [ext_resource type="PackedScene" uid="uid://cc327ml5lr825" path="res://scenes/levels/door/exit_door.tscn" id="8_3e3nw"]
 [ext_resource type="StyleBox" uid="uid://dei3nbnn0da3" path="res://resources/label_settings/normal_tips_style_box.tres" id="8_ulboe"]
@@ -87,6 +88,9 @@ position = Vector2(423, -535)
 
 [node name="spawn2" type="Marker2D" parent="NormalEnemyHolder"]
 position = Vector2(974, -181)
+
+[node name="ItemHolder" type="Node2D" parent="."]
+script = ExtResource("6_ao8ko")
 
 [node name="EliteEnemyHolder" type="Node2D" parent="."]
 script = ExtResource("6_5sv0i")

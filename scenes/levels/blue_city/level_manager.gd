@@ -13,6 +13,7 @@ enum RoomType {
 }
 
 @export var room_type: RoomType = RoomType.Normal
+@export var end_game_after_clear: bool = false ## for area transition rooms or final rooms
 
 var room_preset: RoomPreset = null:
 	set(val):
@@ -28,6 +29,7 @@ var children_given_preset: bool = false
 @onready var chest_rune_holder: ChestRuneHolder = $ChestRuneHolder
 @onready var enemy_holder: EnemyHolder = $NormalEnemyHolder
 @onready var elite_holder: EnemyHolder = $EliteEnemyHolder
+@onready var item_holder: ItemHolder = $ItemHolder
 
 @onready var starting_pos_marker: Marker2D = $StartingPos
 @onready var starting_pos: Vector2 = starting_pos_marker.global_position
@@ -48,8 +50,11 @@ func give_children_room_preset(preset: RoomPreset) -> void: ## assigned by dunge
 	enemy_holder.spawn_enemies(preset.normal_enemies_info)
 	elite_holder.spawn_enemies(preset.elite_enemies_info)
 	
+	if preset.HP_potion_present:
+		item_holder.spawn_HP_item()
+	
 	#print_debug("initialized done for %s" % name)
-	if room_type == RoomType.Rest:
+	if room_type == RoomType.Rest or room_type == RoomType.Boss:
 		chest_rune_holder.change_chests_to_HP()
 
 

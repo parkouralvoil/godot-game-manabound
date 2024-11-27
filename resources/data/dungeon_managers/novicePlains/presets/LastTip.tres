@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="RoomPreset" load_steps=3 format=3 uid="uid://qgykj5quspb4"]
+
+[ext_resource type="PackedScene" uid="uid://bokp56a4bhtv2" path="res://scenes/levels/novice_plains/novice_5.tscn" id="1_kwh1y"]
+[ext_resource type="Script" path="res://resources/data/dungeon_managers/room_preset.gd" id="2_sesr0"]
+
+[resource]
+script = ExtResource("2_sesr0")
+preset_name = "Novice Graduation"
+info1 = "Final tutorial level"
+info2 = "Average enemy density"
+info3 = ""
+num_of_enemies = 6
+autobow = 4.0
+orb = 2.0
+laser = 2.0
+dronefactory = 0.0
+num_of_elites = 1
+machinegun = 1.0
+HP_potion_present = false
+room = ExtResource("1_kwh1y")

@@ -96,10 +96,10 @@ script = ExtResource("6_pmbrx")
 script = ExtResource("7_ax1ba")
 
 [node name="item_spawn1" type="Marker2D" parent="ItemHolder"]
-position = Vector2(547, -128)
+position = Vector2(547, -108)
 
 [node name="ExitDoor" parent="." instance=ExtResource("7_lot40")]
-position = Vector2(1002, -292)
+position = Vector2(1002, -291)
 door_texture = ExtResource("8_xlmfu")
 
 [node name="StartingPos" type="Marker2D" parent="."]

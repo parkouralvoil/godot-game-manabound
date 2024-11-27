@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=4 uid="uid://c85h4ilrtjwq7"]
+[gd_scene load_steps=13 format=4 uid="uid://c85h4ilrtjwq7"]
 
 [ext_resource type="Script" path="res://scenes/levels/blue_city/level_manager.gd" id="1_g5rk6"]
 [ext_resource type="PackedScene" uid="uid://d23s3ceqy66ry" path="res://scenes/levels/test/test_parallax.tscn" id="2_5kct8"]
@@ -6,9 +6,16 @@
 [ext_resource type="Script" path="res://scenes/levels/holders/chest_rune_holder.gd" id="4_wj5vi"]
 [ext_resource type="Script" path="res://scenes/levels/holders/enemy_holder.gd" id="5_tuj0m"]
 [ext_resource type="PackedScene" uid="uid://cievadvfmo3xd" path="res://scenes/levels/level_world_environment.tscn" id="6_p6se3"]
+[ext_resource type="Script" path="res://scenes/levels/holders/item_holder.gd" id="7_c5voq"]
 [ext_resource type="PackedScene" uid="uid://cc327ml5lr825" path="res://scenes/levels/door/exit_door.tscn" id="7_lq8bw"]
 [ext_resource type="PackedScene" uid="uid://ik5ko0nytiss" path="res://scenes/levels/door/start_door.tscn" id="8_abkdb"]
 [ext_resource type="PackedScene" uid="uid://vql57oe3t6n7" path="res://scenes/bosses/boss_1.tscn" id="9_i2k7n"]
+[ext_resource type="Texture2D" uid="uid://cb07f2ey0p54u" path="res://assets/sprite_tilesets/blue_city/blue scifi doors.png" id="11_iouak"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_udf36"]
+resource_local_to_scene = true
+atlas = ExtResource("11_iouak")
+region = Rect2(0, 40, 32, 40)
 
 [node name="city_boss1" type="Node2D"]
 script = ExtResource("1_g5rk6")
@@ -79,6 +86,9 @@ script = ExtResource("5_tuj0m")
 [node name="EliteEnemyHolder" type="Node2D" parent="."]
 script = ExtResource("5_tuj0m")
 
+[node name="ItemHolder" type="Node2D" parent="."]
+script = ExtResource("7_c5voq")
+
 [node name="LevelWorldEnvironment" parent="." instance=ExtResource("6_p6se3")]
 
 [node name="ExitDoor" parent="." instance=ExtResource("7_lq8bw")]
@@ -86,6 +96,7 @@ position = Vector2(104, -51)
 
 [node name="StartDoor" parent="." instance=ExtResource("8_abkdb")]
 position = Vector2(643, -52)
+texture = SubResource("AtlasTexture_udf36")
 
 [node name="StartingPos" type="Marker2D" parent="."]
 position = Vector2(644, -70)

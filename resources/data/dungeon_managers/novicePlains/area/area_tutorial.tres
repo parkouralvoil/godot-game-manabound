@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="AreaTutorialData" load_steps=7 format=3 uid="uid://c35c3xanuhgmc"]
+[gd_resource type="Resource" script_class="AreaTutorialData" load_steps=8 format=3 uid="uid://c35c3xanuhgmc"]
 
 [ext_resource type="Script" path="res://resources/data/dungeon_managers/room_preset.gd" id="1_4mfk8"]
 [ext_resource type="Script" path="res://resources/data/dungeon_managers/novicePlains/area/area_tutorial_data.gd" id="2_jhkyw"]
@@ -6,6 +6,7 @@
 [ext_resource type="Resource" uid="uid://ctgcppwa1s6m3" path="res://resources/data/dungeon_managers/novicePlains/presets/WitchTip.tres" id="3_d65iq"]
 [ext_resource type="Resource" uid="uid://b5opfsmepy2gq" path="res://resources/data/dungeon_managers/novicePlains/presets/RogueTip.tres" id="4_31iay"]
 [ext_resource type="Resource" uid="uid://da6simf833od7" path="res://resources/data/dungeon_managers/novicePlains/presets/Rest_tutorial.tres" id="5_30tg6"]
+[ext_resource type="Resource" uid="uid://qgykj5quspb4" path="res://resources/data/dungeon_managers/novicePlains/presets/LastTip.tres" id="5_h1x8l"]
 
 [resource]
 script = ExtResource("2_jhkyw")
@@ -16,4 +17,4 @@ boss_lvl = 5
 RestPresets = Array[ExtResource("1_4mfk8")]([ExtResource("5_30tg6")])
 EasyPresets = Array[ExtResource("1_4mfk8")]([ExtResource("2_x17we"), ExtResource("3_d65iq"), ExtResource("4_31iay")])
 HardPresets = Array[ExtResource("1_4mfk8")]([])
-BossPreset = Array[ExtResource("1_4mfk8")]([])
+BossPreset = Array[ExtResource("1_4mfk8")]([ExtResource("5_h1x8l")])

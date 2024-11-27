@@ -14,4 +14,4 @@ func update_available_presets(current_lvl: int) -> Array[RoomPreset]:
 		EventBus.tutorial_team_restriction_set.emit(3)
 		return RestPresets
 	else:
-		return BossPreset
+		return BossPreset ## last level, needs to be here to tell dungeon_data "last level"

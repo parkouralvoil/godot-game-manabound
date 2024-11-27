@@ -67,6 +67,7 @@ func load_next_lvl() -> void: ## needs a parameter to see which map got chosen
 	
 	## TODO: implement going to rest room
 	var lvl_scene: PackedScene = dungeon_data.get_level()
+	assert(lvl_scene, "Array[NormalRooms] of AreaData has nothing")
 	current_level = lvl_scene.instantiate()
 	current_level.room_preset = dungeon_data.chosen_preset
 	
@@ -86,7 +87,10 @@ func _on_level_cleared(_msg: String) -> void:
 
 func _on_exit_door_interacted() -> void:
 	## show preset options
-	dungeon_data.exit_door_interacted.emit()
+	if current_level.end_game_after_clear:
+		dungeon_data.end_expedition()
+	else:
+		dungeon_data.exit_door_interacted.emit()
 
 
 func _on_preset_selected(preset_from_UI: RoomPreset) -> void:
@@ -97,7 +101,3 @@ func _on_preset_selected(preset_from_UI: RoomPreset) -> void:
 	## which can update cycle
 	load_next_lvl()
 	#print_debug("should be here now")
-
-
-func _select_normal_room() -> void:
-	pass

@@ -1,7 +1,7 @@
 [gd_scene load_steps=20 format=3 uid="uid://bfigo4q6at8d8"]
 
 [ext_resource type="Script" path="res://scenes/main/main.gd" id="1_fwn4r"]
-[ext_resource type="Script" path="res://scenes/main/DungeonHolder.gd" id="2_j78xc"]
+[ext_resource type="Script" path="res://scenes/main/dungeon_holder.gd" id="2_j78xc"]
 [ext_resource type="Resource" uid="uid://cnqflwm13q5h2" path="res://resources/data/dungeon_managers/blueCity/dungeon_blueCity.tres" id="3_4q3ef"]
 [ext_resource type="PackedScene" uid="uid://quvfsmagt2h1" path="res://scenes/levels/PlayerCamera.tscn" id="3_b3eh2"]
 [ext_resource type="Resource" uid="uid://cw7j4j6w6f1yk" path="res://resources/data/selected_team_info/selected_team_info.tres" id="3_x1j0k"]

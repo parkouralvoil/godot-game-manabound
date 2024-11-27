@@ -68,7 +68,7 @@ func _process(_delta: float) -> void:
 	label_enemies.text = "Enemies left: %d" % EnemyAiManager.enemies_alive
 
 
-func _on_boss_fight_started(boss_node: Node2D) -> void:
+func _on_boss_fight_started(boss_node: RailgunBoss) -> void:
 	boss_node.boss_HP_bar = boss_HP_bar
 	boss_node.boss_box = boss_box
 	

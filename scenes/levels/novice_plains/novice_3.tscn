@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=4 uid="uid://emswj51sq2al"]
+[gd_scene load_steps=14 format=4 uid="uid://emswj51sq2al"]
 
 [ext_resource type="Script" path="res://scenes/levels/blue_city/level_manager.gd" id="1_tm8yx"]
 [ext_resource type="TileSet" uid="uid://bq4bd7di0pjwo" path="res://resources/tilemaps/blue_scifi.tres" id="2_5j18c"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://scenes/levels/holders/enemy_holder.gd" id="5_qes58"]
 [ext_resource type="PackedScene" uid="uid://cc327ml5lr825" path="res://scenes/levels/door/exit_door.tscn" id="6_vuya2"]
 [ext_resource type="Texture2D" uid="uid://61m5yyhtnkp1" path="res://assets/sprite_tilesets/grass/grass_doors.png" id="7_xobcs"]
+[ext_resource type="Script" path="res://scenes/levels/holders/item_holder.gd" id="7_ykeqs"]
 [ext_resource type="PackedScene" uid="uid://ik5ko0nytiss" path="res://scenes/levels/door/start_door.tscn" id="8_4chuk"]
 [ext_resource type="StyleBox" uid="uid://dei3nbnn0da3" path="res://resources/label_settings/normal_tips_style_box.tres" id="9_iq136"]
 [ext_resource type="LabelSettings" uid="uid://bo0v4fgba3vq4" path="res://resources/label_settings/tip_label.tres" id="10_564kj"]
@@ -100,6 +101,9 @@ position = Vector2(369, -469)
 
 [node name="EliteEnemyHolder" type="Node2D" parent="."]
 script = ExtResource("5_qes58")
+
+[node name="ItemHolder" type="Node2D" parent="."]
+script = ExtResource("7_ykeqs")
 
 [node name="ExitDoor" parent="." instance=ExtResource("6_vuya2")]
 position = Vector2(870, -483)

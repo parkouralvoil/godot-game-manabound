@@ -101,12 +101,21 @@ func start_room() -> void:
 	print_debug("i was called")
 
 
+func end_expedition() -> void: ## called by dungeon_holder
+	if area is AreaTutorialData: ## tutorial
+		var msg := "You have finished the tutorial. Nice!"
+		EventBus.expedition_completed.emit(msg)
+	else:
+		var msg := "It's not yet the end for this expedition.\nTo be continued..."
+		EventBus.expedition_completed.emit(msg)
+
+
 func go_next_room(new_preset: RoomPreset) -> void:
 	if chosen_preset and chosen_preset in area.BossPreset:
-		if area == area_datas[1]: ## area city
-			pass ## game is finished
+		if area is AreaTutorialData: ## tutorial
+			return
 		else:
-			pass ## tutorial done
+			return
 	else:
 		current_room += 1
 	available_presets = area.update_available_presets(current_room)

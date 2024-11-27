@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://c88sdm1pehvym"]
+[gd_scene load_steps=12 format=3 uid="uid://c88sdm1pehvym"]
 
 [ext_resource type="Script" path="res://user_interface/player_hud_canvas/player_hud_canvas.gd" id="1_imfh2"]
 [ext_resource type="Resource" uid="uid://cnqflwm13q5h2" path="res://resources/data/dungeon_managers/blueCity/dungeon_blueCity.tres" id="2_8yjwh"]
@@ -10,6 +10,7 @@
 [ext_resource type="Resource" uid="uid://cw7j4j6w6f1yk" path="res://resources/data/selected_team_info/selected_team_info.tres" id="5_jw52t"]
 [ext_resource type="PackedScene" uid="uid://b3cfd23wes4l7" path="res://user_interface/main_canvas/popup_indicator/popup_indicator.tscn" id="9_tft8f"]
 [ext_resource type="PackedScene" uid="uid://bart8kug765at" path="res://user_interface/player_hud_canvas/gameover_screen/gameover_screen.tscn" id="10_1w06m"]
+[ext_resource type="PackedScene" uid="uid://cebhdii3ts6xg" path="res://user_interface/player_hud_canvas/victory_screen/victory_screen.tscn" id="11_txbu7"]
 
 [node name="PlayerHudCanvas" type="CanvasLayer"]
 process_mode = 1
@@ -30,4 +31,7 @@ visible = false
 mouse_filter = 2
 
 [node name="GameoverScreen" parent="." instance=ExtResource("10_1w06m")]
+visible = false
+
+[node name="VictoryScreen" parent="." instance=ExtResource("11_txbu7")]
 visible = false

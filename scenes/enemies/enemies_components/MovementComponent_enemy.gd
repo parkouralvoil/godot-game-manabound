@@ -40,7 +40,7 @@ func _physics_process(delta: float) -> void:
 	e.aim_direction = desired_direction
 	var intended_velocity: Vector2 = desired_direction.normalized() * speed
 	
-	owner.global_position = global_position
+	e.global_position = global_position
 	if nav_agent.is_navigation_finished() and e.can_fire:
 		return
 	

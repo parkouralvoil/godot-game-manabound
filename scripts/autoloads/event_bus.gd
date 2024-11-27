@@ -30,6 +30,9 @@ signal mainhub_departed(selected_expedition: AreaData)
 ## emitted by area_tutorial, used by character character_manager, player_input, team_hud
 signal tutorial_team_restriction_set(level: int) 
 
+## Emitted by dungeon_data | used by victory_screen
+signal expedition_completed(msg: String)
+
 ## UI and UI
 signal upgrade_stats_pressed()
 
