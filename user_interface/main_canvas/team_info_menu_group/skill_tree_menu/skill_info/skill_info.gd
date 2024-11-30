@@ -8,7 +8,7 @@ var allow_buy: bool = false
 
 @onready var icon: TextureRect = $MarginContainer/VBox/SkillIcon
 @onready var skill_name: Label = $MarginContainer/VBox/name
-@onready var skill_desc: Label = $MarginContainer/VBox/ScrollContainer/description
+@onready var skill_desc: Label = %description
 
 @onready var buy_details: VBoxContainer = $MarginContainer/VBox/VBox
 @onready var skill_lvl: Label = $MarginContainer/VBox/VBox/lvl

@@ -71,11 +71,13 @@ func switch_current_menu(_menu: Control) -> void:
 	current_menu_opened = _menu
 	current_menu_opened.show()
 	screen_buttons.hide()
+	SoundPlayer.lower_volume()
 	pause_game()
 
 
 func close_menu() -> void:
 	current_menu_opened.hide()
+	SoundPlayer.normal_volume()
 	unpause_game()
 	screen_buttons.show()
 	current_menu_opened = null

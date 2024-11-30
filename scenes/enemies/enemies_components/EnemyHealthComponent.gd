@@ -8,6 +8,7 @@ class_name EnemyHealthComponent
 @export_category("Debuff Effects")
 @export var crystalize_effect: Crystalized
 @export var superconduct_effect: Superconduct
+var overload_sfx: AudioStream = preload("res://assets/audio/sfx/EM_FIRE_CAST_01.mp3")
 ## OVERLOAD and MELT are builtin for now, 
 	## but once i add ways to change reaction effects
 	## they need to be relagated to debuff resources
@@ -106,6 +107,7 @@ func spawn_overload_impact(pos: Vector2, ep: float) -> void:
 	var ep_dmg: float = ep * 1.5
 	var overload_dmg: float = base_dmg + ep_dmg
 	
+	SoundPlayer.play_sound_2D(global_position, overload_sfx, -9, 1.2)
 	e.try_attack_interrupted()
 	inst.global_position = pos
 	inst.damage = overload_dmg

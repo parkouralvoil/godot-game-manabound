@@ -55,7 +55,10 @@ func _process(_delta: float) -> void:
 	PlayerInfo.mouse_direction = Vector2.ZERO.direction_to(dist_to_mouse).normalized()
 	
 	## for slow hover
-	move_direction = PlayerInfo.mouse_direction if dist_to_mouse.length() < 40 else Vector2.ZERO
+	if Settings.inverted_hover:
+		move_direction = Vector2.ZERO if dist_to_mouse.length() < 40 else PlayerInfo.mouse_direction
+	else:
+		move_direction = PlayerInfo.mouse_direction if dist_to_mouse.length() < 40 else Vector2.ZERO
 	
 	if (PlayerInfo.auto_aim 
 			and selected_target != null 

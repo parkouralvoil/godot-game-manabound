@@ -1,14 +1,9 @@
 extends Node2D
 class_name EnemyAttackComponent_Machinegun
 
+@export var machinegun_sfx: AudioStream
+
 var ProjectileScene: PackedScene = load("res://projectiles/enemy_projectiles/bullet_machinegun.tscn")
-
-@onready var e: NormalEnemy = owner
-@onready var t_reload: Timer = $reload
-@onready var t_first_shot: Timer = $before_first_shot
-@onready var bullet_origin: Marker2D = $bullet_origin
-
-@onready var rng := RandomNumberGenerator.new()
 
 var bullet_color: Color = Color(1, 0.7, 0.7)
 
@@ -17,6 +12,11 @@ var rotation_speed: float = 0.75
 
 var max_ammo: int = 1
 var ammo: int = max_ammo
+
+@onready var e: NormalEnemy = owner
+@onready var t_reload: Timer = $reload
+@onready var t_first_shot: Timer = $before_first_shot
+@onready var bullet_origin: Marker2D = $bullet_origin
 
 func _ready() -> void:
 	e.reload_time_changed.connect(update_reload)
@@ -68,6 +68,7 @@ func shoot(projectile: PackedScene, direction: Vector2) -> void:
 
 
 func burst_shoot() -> void:
+	SoundPlayer.play_sound_2D(global_position, machinegun_sfx, -15, 0.5)
 	shoot(ProjectileScene, Vector2.RIGHT.rotated(aim_angle))
 	ammo -= 1
 	if t_reload.is_stopped():

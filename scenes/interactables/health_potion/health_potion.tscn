@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://bkle7qrwjpj8o"]
+[gd_scene load_steps=9 format=3 uid="uid://bkle7qrwjpj8o"]
 
 [ext_resource type="Texture2D" uid="uid://bgqcrhowpqdbp" path="res://assets/sprite_items/health_potion.png" id="1_e3lmd"]
 [ext_resource type="Script" path="res://scenes/interactables/health_potion/health_potion.gd" id="2_pxgcp"]
 [ext_resource type="PackedScene" uid="uid://ckujvunq0eflb" path="res://scenes/interactables/interactable.tscn" id="3_330uy"]
 [ext_resource type="Resource" uid="uid://6renh852kiei" path="res://resources/data/player_info/player_info.tres" id="3_hy4uc"]
 [ext_resource type="StyleBox" uid="uid://dei3nbnn0da3" path="res://resources/label_settings/normal_tips_style_box.tres" id="4_1jcx6"]
+[ext_resource type="AudioStream" uid="uid://baq0hwpnmrsfc" path="res://assets/audio/sfx/mixkit-game-magical-potion-drink-2828.wav" id="4_s7u8y"]
 [ext_resource type="LabelSettings" uid="uid://bo0v4fgba3vq4" path="res://resources/label_settings/tip_label.tres" id="5_qnlbm"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dk5pv"]
@@ -15,6 +16,7 @@ region = Rect2(0, 0, 16, 16)
 texture = SubResource("AtlasTexture_dk5pv")
 script = ExtResource("2_pxgcp")
 PlayerInfo = ExtResource("3_hy4uc")
+heal_sfx = ExtResource("4_s7u8y")
 
 [node name="Interactable" parent="." instance=ExtResource("3_330uy")]
 

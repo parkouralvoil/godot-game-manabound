@@ -33,7 +33,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="background" type="ColorRect" parent="CenterContainer"]
-custom_minimum_size = Vector2(475, 320)
+custom_minimum_size = Vector2(500, 320)
 layout_mode = 2
 color = Color(0.258824, 0.258824, 0.301961, 0.8)
 
@@ -45,23 +45,32 @@ layout_mode = 2
 
 [node name="expeditions" type="Label" parent="CenterContainer/HBox/VBox"]
 layout_mode = 2
-text = "Expeditions:"
+text = "Expeditions"
 label_settings = ExtResource("1_msr36")
+horizontal_alignment = 1
 
 [node name="novice" type="Button" parent="CenterContainer/HBox/VBox"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_x7q5g")
 theme_override_font_sizes/font_size = 14
-text = "Novice Plains (Tutorial)"
+text = "1) Novice Plains (Tutorial)"
 
 [node name="blue_city" type="Button" parent="CenterContainer/HBox/VBox"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_x7q5g")
 theme_override_font_sizes/font_size = 14
-text = "Auma Luine City"
+text = "2) Auma Luine City"
+alignment = 0
+
+[node name="future" type="Button" parent="CenterContainer/HBox/VBox"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_x7q5g")
+theme_override_font_sizes/font_size = 14
+disabled = true
+text = "-- More to come soon --"
 
 [node name="Spacer" type="Control" parent="CenterContainer/HBox/VBox"]
-custom_minimum_size = Vector2(0, 230)
+custom_minimum_size = Vector2(0, 200)
 layout_mode = 2
 size_flags_vertical = 3
 

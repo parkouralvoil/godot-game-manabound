@@ -1,7 +1,10 @@
 extends Control
 class_name GameOver
 
+@export var gameover_sfx: AudioStream
+
 var _already_pressed: bool = false
+
 @onready var label_reason: Label = %reason
 @onready var label_progress: Label = %progress
 @onready var label_orbs: Label = %orbs
@@ -30,8 +33,9 @@ func _show_gameover() -> void:
 	modulate = Color(1,1,1,0)
 	show()
 	var t := create_tween()
-	t.tween_property(self, "modulate", Color(1, 1, 1, 1), 1)
+	t.tween_property(self, "modulate", Color(1, 1, 1, 1), 0.5)
 	await t.finished
+	SoundPlayer.play_notification_sound(gameover_sfx, -5)
 	get_tree().paused = true
 
 

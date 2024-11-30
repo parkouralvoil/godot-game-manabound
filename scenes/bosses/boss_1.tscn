@@ -1,6 +1,7 @@
-[gd_scene load_steps=14 format=3 uid="uid://vql57oe3t6n7"]
+[gd_scene load_steps=15 format=3 uid="uid://vql57oe3t6n7"]
 
 [ext_resource type="Script" path="res://scenes/bosses/boss_1.gd" id="1_wqb58"]
+[ext_resource type="AudioStream" uid="uid://dl7jjtk1psmvx" path="res://assets/audio/sfx/enemy_explosion.mp3" id="2_31mcu"]
 [ext_resource type="PackedScene" uid="uid://d34txndalmepx" path="res://scenes/bosses/sideparts/laser_left.tscn" id="2_tvaij"]
 [ext_resource type="PackedScene" uid="uid://cm58shlolaeyy" path="res://scenes/bosses/sideparts/laser_right.tscn" id="3_2qw8u"]
 [ext_resource type="PackedScene" uid="uid://blre7nbnddapj" path="res://scenes/bosses/sideparts/orb_top.tscn" id="4_a11k6"]
@@ -37,7 +38,8 @@ region = Rect2(176, 0, 16, 16)
 
 [node name="RailgunBoss" type="Node2D"]
 script = ExtResource("1_wqb58")
-Phase1_HP = 100.0
+Phase1_HP = 15000.0
+enemy_explosion_sfx = ExtResource("2_31mcu")
 
 [node name="LaserLeft" parent="." instance=ExtResource("2_tvaij")]
 position = Vector2(-59, 0)

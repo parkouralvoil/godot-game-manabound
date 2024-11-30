@@ -2,6 +2,7 @@ extends Sprite2D
 class_name HealthPotionDrop
 
 @export var PlayerInfo: PlayerInfoResource
+@export var heal_sfx: AudioStream
 
 var player_nearby: bool = false
 
@@ -18,6 +19,7 @@ func _ready() -> void:
 
 func try_interact() -> void: ## called by interactable
 	if player_nearby:
+		SoundPlayer.play_sound(heal_sfx, -15)
 		PlayerInfo.drank_hp_potion.emit()
 		queue_free()
 

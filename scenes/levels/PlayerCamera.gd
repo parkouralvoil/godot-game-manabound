@@ -35,7 +35,8 @@ func _ready() -> void:
 
 
 func apply_noise_shake(strength: int) -> void: # 1 for weakest (60), 3 for strongest (180)
-	shake_strength = NOISE_SHAKE_STRENGTH * strength
+	if Settings.camera_shake:
+		shake_strength = NOISE_SHAKE_STRENGTH * strength
 
 
 func _process(delta: float) -> void:

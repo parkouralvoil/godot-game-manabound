@@ -14,13 +14,13 @@ var melee_size: float = melee_size_base # final
 
 var melee_extra_energy_enabled: bool = false
 
-var base_melee_dmg: float = 1 ## percentages
+var base_melee_dmg: float = 1.5 ## percentages
 var melee_dmg: float # final
 
 var ranged_max_distance: float = 275
 var bullet_speed: float = 400
 
-var base_ranged_dmg: float = 0.5
+var base_ranged_dmg: float = 1
 var ranged_dmg: float # final
 
 var zero_ammo_atk_enabled: bool = false # stree node
@@ -37,7 +37,7 @@ var ult_extra_energy_enabled: bool = false ## stree node
 var base_ult_dmg: float = 3
 var ult_dmg: float # final
 
-var ult_atk_buff_base: float = 0.4
+var ult_atk_buff_base: float = 0.75
 var ult_atk_buff_scale: float = 0.2
 var ult_atk_buff: float # final
 
@@ -51,14 +51,13 @@ var ult_atk_buff: float # final
 @onready var Ammo: Rogue_AmmoComponent = $Ammo
 
 ## Stats scaling
-@onready var base_atk: float = stats.ATK
 var scale_atk: float = 4
 
 ## variables to make skill tree easier to track:
 @onready var lvl_basicAtk_size_atk: int:
 	set(lvl):
 		lvl_basicAtk_size_atk = lvl
-		stats.ATK = base_atk + (scale_atk * lvl)
+		stats.ATK = stats.initial_ATK + (scale_atk * lvl)
 		update_damage() ## should probably signal this...
 		melee_size = melee_size_base + (melee_size_scale * lvl)
 

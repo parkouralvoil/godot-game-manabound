@@ -5,6 +5,15 @@ class_name Rogue_AttackComponent
 @export var RogueMeleeHitDown: PackedScene
 @export var RogueMeleeHitUp: PackedScene
 
+@export var sfx_hasAmmoMeleeSwing: AudioStream
+@export var sfx_noAmmoMeleeSwing: AudioStream
+
+var melee_combo: int = 0
+var max_melee_combo: int = 1
+
+var meleeing: bool = false
+var default_firerate_time: float
+
 @onready var character: Character = owner
 @onready var PlayerInfo: PlayerInfoResource ## given by AM
 @onready var AM: Rogue_AbilityManager = get_parent()
@@ -12,12 +21,6 @@ class_name Rogue_AttackComponent
 @onready var t_firerate: Timer = $firerate
 @onready var melee_arm: Sprite2D = $melee_arm
 @onready var melee_wpn: Sprite2D = $melee_arm/melee_wpn
-
-var melee_combo: int = 0
-var max_melee_combo: int = 1
-
-var meleeing: bool = false
-var default_firerate_time: float
 
 func _ready() -> void:
 	melee_arm.hide()
@@ -88,6 +91,10 @@ func melee_hit(melee: PackedScene) -> void:
 func basic_atk() -> void: ## swing sword
 	default_firerate_time = (1/character.stats.firerate)
 	character.apply_player_cam_shake(1)
+	if character.stats.ammo > 0 or AM.zero_ammo_atk_enabled:
+		SoundPlayer.play_sound(sfx_hasAmmoMeleeSwing, -10, 1.1)
+	else:
+		SoundPlayer.play_sound(sfx_noAmmoMeleeSwing, -10, 1.1)
 	
 	## BIG ISSUE:
 		## IF melee attacks can shoot projectiles (terraria melee)

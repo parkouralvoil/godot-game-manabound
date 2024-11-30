@@ -19,6 +19,7 @@ region = Rect2(0, 40, 32, 40)
 
 [node name="novice_5" type="Node2D"]
 script = ExtResource("1_ojx1e")
+associated_area = 0
 end_game_after_clear = true
 
 [node name="tilemap_plains_5" type="Node2D" parent="."]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://cucqth4r8k7y3"]
+[gd_scene load_steps=21 format=3 uid="uid://cucqth4r8k7y3"]
 
 [ext_resource type="Script" path="res://scenes/enemies/NormalEnemy.gd" id="1_pwbt7"]
 [ext_resource type="Resource" uid="uid://bd8yd78nv85uf" path="res://resources/data/enemy/enemy_stats/stats_machineGun.tres" id="2_eql8e"]
@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://bsx8as4ra0ieo" path="res://resources/debuffs/crystalize/crystalized_texture.tres" id="11_ar7u1"]
 [ext_resource type="Script" path="res://resources/debuffs/crystalize/crystalized.gd" id="12_cmfod"]
 [ext_resource type="Material" uid="uid://bccvk3vgyafgq" path="res://resources/debuffs/superconduct/superconduct_particles.tres" id="13_murgj"]
+[ext_resource type="AudioStream" uid="uid://bt3supt8x6j3q" path="res://assets/audio/sfx/boss1_sfx/machinegun_fire.mp3" id="14_cx3xm"]
 [ext_resource type="Texture2D" uid="uid://dm5mfus5ewtdb" path="res://resources/debuffs/superconduct/superconduct_texture.tres" id="14_gosjf"]
 [ext_resource type="Script" path="res://resources/debuffs/superconduct/superconduct.gd" id="15_r1i5y"]
 
@@ -84,6 +85,7 @@ debug_color = Color(0.901961, 0.282353, 0.337255, 0.419608)
 
 [node name="AttackComponent" type="Node2D" parent="."]
 script = ExtResource("6_rikjp")
+machinegun_sfx = ExtResource("14_cx3xm")
 
 [node name="bullet_origin" type="Marker2D" parent="AttackComponent"]
 position = Vector2(0, 16)

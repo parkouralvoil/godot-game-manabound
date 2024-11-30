@@ -16,7 +16,7 @@
 [ext_resource type="Script" path="res://scripts/player_components/TargetLockComponent.gd" id="9_616gv"]
 [ext_resource type="Texture2D" uid="uid://onw8pmqbytda" path="res://assets/sprite_UI/Aim indicator.png" id="10_1g6d3"]
 [ext_resource type="Texture2D" uid="uid://df4r12vpxwua7" path="res://assets/sprite_UI/DashDirectionIndicator.png" id="10_pcbep"]
-[ext_resource type="AudioStream" uid="uid://cgvlbkvq11os4" path="res://assets/audio/sfx/sound_effects/zapsplat_cartoon_whoosh_swipe_fast_grab_dash_003_74744.mp3" id="11_ut6yg"]
+[ext_resource type="AudioStream" uid="uid://cgvlbkvq11os4" path="res://assets/audio/sfx/zapsplat_cartoon_whoosh_swipe_fast_grab_dash_003_74744.mp3" id="11_ut6yg"]
 [ext_resource type="Script" path="res://scripts/player_components/DirectionIndicator.gd" id="11_vqh4r"]
 [ext_resource type="Texture2D" uid="uid://dy3hkciev768l" path="res://assets/sprite_UI/red_circle.png" id="12_i87yh"]
 [ext_resource type="Script" path="res://scripts/StateMachine.gd" id="15_mooub"]

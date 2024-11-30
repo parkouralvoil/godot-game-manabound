@@ -15,6 +15,7 @@ var damage: float = 1
 @onready var casting_particle: GPUParticles2D = $CastingParticle
 @onready var impact_particle: GPUParticles2D = $ImpactParticle
 @onready var t_cast: Timer = $cast_duration
+@onready var sfx_player: AudioStreamPlayer2D = $MicrowaveLaser
 
 var is_casting: bool = false :
 	set(value):
@@ -91,6 +92,7 @@ func emit() -> void:
 	set_deferred("monitoring", true)
 	set_physics_process(true)
 	update_particles()
+	sfx_player.play()
 	if raycast.is_colliding():
 		impact_particle.emitting = true
 	
@@ -118,6 +120,7 @@ func disappear() -> void:
 	# line disappears
 	# after await, finish
 	t_cast.stop()
+	sfx_player.stop()
 	var tween: Tween = create_tween()
 	casting_particle.emitting = false
 	impact_particle.emitting = false

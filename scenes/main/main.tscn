@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://bfigo4q6at8d8"]
+[gd_scene load_steps=19 format=3 uid="uid://bfigo4q6at8d8"]
 
 [ext_resource type="Script" path="res://scenes/main/main.gd" id="1_fwn4r"]
 [ext_resource type="Script" path="res://scenes/main/dungeon_holder.gd" id="2_j78xc"]
@@ -16,7 +16,6 @@
 [ext_resource type="Material" uid="uid://cyq64d3nqou5u" path="res://resources/particles/bolt_impact_particles.tres" id="7_dlauh"]
 [ext_resource type="Material" uid="uid://bhwosssphve8" path="res://resources/particles/laser_casting_particles.tres" id="8_6k147"]
 [ext_resource type="Material" uid="uid://c8r5m4n7colab" path="res://resources/particles/laser_impact_particles.tres" id="9_sarm2"]
-[ext_resource type="AudioStream" uid="uid://nm3appge6che" path="res://assets/audio/music/DUNGEON002 (haven).mp3" id="10_6bqnx"]
 [ext_resource type="PackedScene" uid="uid://csqsr7eo05kdl" path="res://scenes/main/level_summary.tscn" id="11_5utcx"]
 [ext_resource type="Script" path="res://scenes/main/level_summary.gd" id="12_sjol1"]
 
@@ -53,6 +52,5 @@ par_array = Array[ParticleProcessMaterial]([ExtResource("5_lx26c"), ExtResource(
 
 [node name="music" type="AudioStreamPlayer" parent="."]
 process_mode = 3
-stream = ExtResource("10_6bqnx")
 volume_db = -60.0
 autoplay = true

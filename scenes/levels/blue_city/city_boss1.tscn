@@ -20,6 +20,7 @@ region = Rect2(0, 40, 32, 40)
 [node name="city_boss1" type="Node2D"]
 script = ExtResource("1_g5rk6")
 room_type = 2
+end_game_after_clear = true
 
 [node name="ParallaxBackground" parent="." instance=ExtResource("2_5kct8")]
 

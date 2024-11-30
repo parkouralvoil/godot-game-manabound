@@ -19,6 +19,7 @@ region = Rect2(0, 40, 32, 40)
 
 [node name="novice_2" type="Node2D"]
 script = ExtResource("1_fwol0")
+associated_area = 0
 
 [node name="tilemap_plains_2" type="Node2D" parent="."]
 
@@ -110,10 +111,10 @@ offset_bottom = 40.0
 
 [node name="tip1" type="Label" parent="Tips"]
 layout_mode = 0
-offset_left = 537.0
-offset_top = -562.0
-offset_right = 677.0
-offset_bottom = -535.0
+offset_left = 545.0
+offset_top = -557.0
+offset_right = 685.0
+offset_bottom = -530.0
 size_flags_horizontal = 6
 size_flags_vertical = 6
 theme_override_styles/normal = ExtResource("9_duy75")
@@ -140,9 +141,9 @@ autowrap_mode = 3
 
 [node name="tip3" type="Label" parent="Tips"]
 layout_mode = 0
-offset_left = 852.0
+offset_left = 859.0
 offset_top = -557.0
-offset_right = 976.0
+offset_right = 983.0
 offset_bottom = -530.0
 size_flags_horizontal = 6
 size_flags_vertical = 6
@@ -164,5 +165,23 @@ size_flags_vertical = 6
 theme_override_styles/normal = ExtResource("9_duy75")
 text = "Mana characters gain mana overtime. Press right click once mana is full to cast the Witch's ultimate."
 label_settings = ExtResource("10_ldgis")
+horizontal_alignment = 3
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="tip5" type="Label" parent="Tips"]
+layout_mode = 0
+offset_left = 239.0
+offset_top = -240.0
+offset_right = 363.0
+offset_bottom = -177.0
+size_flags_horizontal = 6
+size_flags_vertical = 6
+theme_override_styles/normal = ExtResource("9_duy75")
+text = "While pressing space, move the cursor near the character to \"hover\" slowly.
+
+This can be used for precise movements."
+label_settings = ExtResource("10_ldgis")
+horizontal_alignment = 3
 vertical_alignment = 1
 autowrap_mode = 3

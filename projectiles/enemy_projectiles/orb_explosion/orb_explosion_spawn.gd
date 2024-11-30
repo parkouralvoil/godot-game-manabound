@@ -2,6 +2,7 @@ extends Node2D
 class_name OrbExplosionSpawn
 
 const orb_explosion_scene: PackedScene = preload("res://projectiles/enemy_projectiles/orb_explosion/orb_explosion.tscn")
+var explosion_sfx: AudioStream = preload("res://assets/audio/sfx/EM_FIRE_CAST_01.mp3")
 
 @onready var blue_circle: Sprite2D = $blue_circle
 @onready var red_circle: Sprite2D = $red_circle
@@ -40,5 +41,6 @@ func _spawn_impact(pos: Vector2) -> void:
 	var instance: DamageImpact = orb_explosion_scene.instantiate()
 	instance.global_position = pos
 	instance.damage = 1.0
+	SoundPlayer.play_sound_2D(pos, explosion_sfx, -7, 1.15)
 	instance.set_collision_mask_value(3, true) # look for player
 	get_tree().root.call_deferred("add_child", instance)

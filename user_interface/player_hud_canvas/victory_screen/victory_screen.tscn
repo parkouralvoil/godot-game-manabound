@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://cebhdii3ts6xg"]
+[gd_scene load_steps=5 format=3 uid="uid://cebhdii3ts6xg"]
 
 [ext_resource type="Script" path="res://user_interface/player_hud_canvas/victory_screen/victory_screen.gd" id="1_nknvi"]
+[ext_resource type="AudioStream" uid="uid://bohh6inhufjbm" path="res://assets/audio/sfx/mixkit-arcade-bonus-alert-767.wav" id="2_g0scx"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_lhx14"]
 
@@ -18,6 +19,7 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("1_nknvi")
+victory_sfx = ExtResource("2_g0scx")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1
@@ -121,8 +123,8 @@ vertical_alignment = 1
 autowrap_mode = 3
 
 [node name="spacer" type="Control" parent="MarginContainer/VBox1"]
-custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
+size_flags_vertical = 3
 
 [node name="return" type="Button" parent="MarginContainer/VBox1"]
 layout_mode = 2

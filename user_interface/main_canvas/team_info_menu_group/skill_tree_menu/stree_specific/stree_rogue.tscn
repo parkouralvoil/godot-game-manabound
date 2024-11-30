@@ -1,10 +1,15 @@
-[gd_scene load_steps=16 format=3 uid="uid://cybp0skh3c672"]
+[gd_scene load_steps=18 format=3 uid="uid://cybp0skh3c672"]
 
 [ext_resource type="Script" path="res://user_interface/main_canvas/team_info_menu_group/skill_tree_menu/stree.gd" id="1_jiwgc"]
 [ext_resource type="Resource" uid="uid://bgrm2mw54yfjo" path="res://characters/rogue/rogue_stree_model.tres" id="2_t2dsw"]
 [ext_resource type="PackedScene" uid="uid://dh3baopxmjcc8" path="res://user_interface/main_canvas/team_info_menu_group/skill_tree_menu/stree_panel.tscn" id="3_24uif"]
 [ext_resource type="PackedScene" uid="uid://ckobamacrfgq1" path="res://user_interface/main_canvas/team_info_menu_group/skill_tree_menu/skill_node_button.tscn" id="3_fdi86"]
 [ext_resource type="Texture2D" uid="uid://h46xv64l4n2u" path="res://assets/sprite_UI/AbilityIcons0.png" id="4_2rm6s"]
+[ext_resource type="Texture2D" uid="uid://pe08pshvkut3" path="res://assets/sprite_characters/character_tree_portrait.png" id="5_10wd4"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n3kun"]
+atlas = ExtResource("5_10wd4")
+region = Rect2(32, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cqs56"]
 atlas = ExtResource("4_2rm6s")
@@ -30,7 +35,7 @@ region = Rect2(96, 32, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ycotj"]
 atlas = SubResource("CompressedTexture2D_seawk")
-region = Rect2(48, 32, 16, 16)
+region = Rect2(0, 80, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3tmk8"]
 atlas = SubResource("CompressedTexture2D_seawk")
@@ -38,11 +43,11 @@ region = Rect2(112, 96, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dl120"]
 atlas = SubResource("CompressedTexture2D_1yk67")
-region = Rect2(0, 80, 16, 16)
+region = Rect2(48, 32, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0r3o6"]
 atlas = SubResource("CompressedTexture2D_1yk67")
-region = Rect2(80, 112, 16, 16)
+region = Rect2(32, 32, 16, 16)
 
 [node name="StreeRogue" type="Control"]
 custom_minimum_size = Vector2(350, 300)
@@ -72,6 +77,7 @@ offset_bottom = 62.0
 grow_horizontal = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
+texture_normal = SubResource("AtlasTexture_n3kun")
 
 [node name="left_root" parent="root" instance=ExtResource("3_fdi86")]
 layout_mode = 0

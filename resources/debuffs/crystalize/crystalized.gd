@@ -12,6 +12,7 @@ class_name Crystalized
 @export var explosiveness: float = 0.6
 @export var lifetime: float = 0.6
 
+var crystalize_sfx: AudioStream = preload("res://assets/audio/sfx/crystalize_proc.mp3")
 var e_health: EnemyHealthComponent = null
 var crystal_stacks: int = 0
 var accumulated_dmg: float = 0
@@ -58,7 +59,7 @@ func detonate_crystalize() -> void:
 	var text: String = "Crystalize x" + str(crystal_stacks)
 	var color: Color = CombatManager.params[CombatManager.Elements.ICE]
 	e_health.spawn_dmg_number(text, color)
-	
+	SoundPlayer.play_sound_2D(e_health.global_position, crystalize_sfx, -12, 1.1)
 	if e_health:
 		crystal_stacks = 0
 		accumulated_dmg = 0
@@ -78,7 +79,4 @@ func clear() -> void: ## clear is used if enemy can "respawn" itself (ie sidepar
 	crystal_stacks = 0
 	accumulated_dmg = 0
 	if _debuff_timer:
-		print_debug("TARGET:::::::::::")
-		print_debug(_debuff_timer.is_stopped())
 		_debuff_timer.stop()
-		print_debug(_debuff_timer.is_stopped())

@@ -1,9 +1,34 @@
-[gd_scene load_steps=2 format=3 uid="uid://crg6ldyk0n8jy"]
+[gd_scene load_steps=10 format=3 uid="uid://crg6ldyk0n8jy"]
 
 [ext_resource type="Script" path="res://scenes/autoload_scene/sound_player.gd" id="1_t2mt3"]
+[ext_resource type="AudioStream" uid="uid://cuqwhxrotqotl" path="res://assets/audio/music/Magicatale_DUNGEON_001_95_968.mp3" id="2_k2lhl"]
+[ext_resource type="AudioStream" uid="uid://drbvwlmsm5q8c" path="res://assets/audio/music/DUNGEON001_128_2.mp3" id="3_4mcy5"]
+[ext_resource type="AudioStream" uid="uid://kh0wkboue1" path="res://assets/audio/music/DUNGEON002 (haven)_68_982.mp3" id="4_uxxii"]
+[ext_resource type="AudioStream" uid="uid://cye87jvdcam48" path="res://assets/audio/music/DUNGEON007B (no alarm).mp3" id="5_g6pm5"]
+[ext_resource type="AudioStream" uid="uid://dn2r4hyxj48rh" path="res://assets/audio/music/BATTLE_NORMAL001_120_755.mp3" id="6_wtrrs"]
+[ext_resource type="AudioStream" uid="uid://c5ulyrpji4fju" path="res://assets/audio/sfx/character_sfx/sword_impact1.mp3" id="7_5snep"]
+[ext_resource type="AudioStream" uid="uid://bohh6inhufjbm" path="res://assets/audio/sfx/mixkit-arcade-bonus-alert-767.wav" id="7_r1dxq"]
+[ext_resource type="AudioStream" uid="uid://bqskh357ijaqw" path="res://assets/audio/sfx/character_sfx/sword_impact2.mp3" id="8_hx4vc"]
 
 [node name="SoundPlayer" type="Node2D"]
 script = ExtResource("1_t2mt3")
+music_base = ExtResource("2_k2lhl")
+music_tutorial = ExtResource("3_4mcy5")
+music_aumaLuineCombat = ExtResource("4_uxxii")
+music_aumaLuineRest = ExtResource("5_g6pm5")
+music_railgun = ExtResource("6_wtrrs")
+sword_hits = Array[AudioStream]([ExtResource("7_5snep"), ExtResource("8_hx4vc")])
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
+process_mode = 3
+volume_db = -20.0
+bus = &"Music"
+
+[node name="NotificationPlayer" type="AudioStreamPlayer" parent="."]
+process_mode = 3
+stream = ExtResource("7_r1dxq")
+volume_db = -20.0
+bus = &"Sound"
 
 [node name="ShortPositionalQueue" type="Node2D" parent="."]
 
@@ -16,6 +41,62 @@ script = ExtResource("1_t2mt3")
 [node name="AudioStreamPlayer2D4" type="AudioStreamPlayer2D" parent="ShortPositionalQueue"]
 
 [node name="AudioStreamPlayer2D5" type="AudioStreamPlayer2D" parent="ShortPositionalQueue"]
+
+[node name="AudioStreamPlayer2D6" type="AudioStreamPlayer2D" parent="ShortPositionalQueue"]
+
+[node name="AudioStreamPlayer2D7" type="AudioStreamPlayer2D" parent="ShortPositionalQueue"]
+
+[node name="AudioStreamPlayer2D8" type="AudioStreamPlayer2D" parent="ShortPositionalQueue"]
+
+[node name="AudioStreamPlayer2D9" type="AudioStreamPlayer2D" parent="ShortPositionalQueue"]
+
+[node name="AudioStreamPlayer2D10" type="AudioStreamPlayer2D" parent="ShortPositionalQueue"]
+
+[node name="AudioStreamPlayer2D11" type="AudioStreamPlayer2D" parent="ShortPositionalQueue"]
+
+[node name="AudioStreamPlayer2D12" type="AudioStreamPlayer2D" parent="ShortPositionalQueue"]
+
+[node name="AudioStreamPlayer2D13" type="AudioStreamPlayer2D" parent="ShortPositionalQueue"]
+
+[node name="AudioStreamPlayer2D14" type="AudioStreamPlayer2D" parent="ShortPositionalQueue"]
+
+[node name="AudioStreamPlayer2D15" type="AudioStreamPlayer2D" parent="ShortPositionalQueue"]
+
+[node name="AudioStreamPlayer2D16" type="AudioStreamPlayer2D" parent="ShortPositionalQueue"]
+
+[node name="AudioStreamPlayer2D17" type="AudioStreamPlayer2D" parent="ShortPositionalQueue"]
+
+[node name="AudioStreamPlayer2D18" type="AudioStreamPlayer2D" parent="ShortPositionalQueue"]
+
+[node name="AudioStreamPlayer2D19" type="AudioStreamPlayer2D" parent="ShortPositionalQueue"]
+
+[node name="AudioStreamPlayer2D20" type="AudioStreamPlayer2D" parent="ShortPositionalQueue"]
+
+[node name="AudioStreamPlayer2D21" type="AudioStreamPlayer2D" parent="ShortPositionalQueue"]
+
+[node name="AudioStreamPlayer2D22" type="AudioStreamPlayer2D" parent="ShortPositionalQueue"]
+
+[node name="AudioStreamPlayer2D23" type="AudioStreamPlayer2D" parent="ShortPositionalQueue"]
+
+[node name="AudioStreamPlayer2D24" type="AudioStreamPlayer2D" parent="ShortPositionalQueue"]
+
+[node name="AudioStreamPlayer2D25" type="AudioStreamPlayer2D" parent="ShortPositionalQueue"]
+
+[node name="AudioStreamPlayer2D26" type="AudioStreamPlayer2D" parent="ShortPositionalQueue"]
+
+[node name="AudioStreamPlayer2D27" type="AudioStreamPlayer2D" parent="ShortPositionalQueue"]
+
+[node name="AudioStreamPlayer2D28" type="AudioStreamPlayer2D" parent="ShortPositionalQueue"]
+
+[node name="AudioStreamPlayer2D29" type="AudioStreamPlayer2D" parent="ShortPositionalQueue"]
+
+[node name="AudioStreamPlayer2D30" type="AudioStreamPlayer2D" parent="ShortPositionalQueue"]
+
+[node name="AudioStreamPlayer2D31" type="AudioStreamPlayer2D" parent="ShortPositionalQueue"]
+
+[node name="AudioStreamPlayer2D32" type="AudioStreamPlayer2D" parent="ShortPositionalQueue"]
+
+[node name="AudioStreamPlayer2D33" type="AudioStreamPlayer2D" parent="ShortPositionalQueue"]
 
 [node name="PositionalQueue" type="Node2D" parent="."]
 
@@ -48,6 +129,10 @@ max_distance = 1000.0
 attenuation = 2.0
 
 [node name="AudioStreamPlayer2D8" type="AudioStreamPlayer2D" parent="PositionalQueue"]
+max_distance = 1000.0
+attenuation = 2.0
+
+[node name="AudioStreamPlayer2D9" type="AudioStreamPlayer2D" parent="PositionalQueue"]
 max_distance = 1000.0
 attenuation = 2.0
 

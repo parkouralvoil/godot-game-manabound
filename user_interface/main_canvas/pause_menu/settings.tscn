@@ -1,0 +1,263 @@
+[gd_scene load_steps=6 format=3 uid="uid://ctn0hvgi3121h"]
+
+[ext_resource type="Script" path="res://user_interface/main_canvas/pause_menu/settings.gd" id="1_0lto5"]
+[ext_resource type="Script" path="res://user_interface/main_canvas/pause_menu/settings_video.gd" id="1_ovwm4"]
+[ext_resource type="Script" path="res://user_interface/main_canvas/pause_menu/settings_audio.gd" id="2_t6yrl"]
+[ext_resource type="FontFile" uid="uid://bbkhj4uknd5uk" path="res://assets/fonts/PFDinTextPro-Light.ttf" id="4_0beah"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_4olrg"]
+font = ExtResource("4_0beah")
+font_size = 18
+
+[node name="Settings" type="VBoxContainer"]
+script = ExtResource("1_0lto5")
+
+[node name="TabContainer" type="TabContainer" parent="."]
+modulate = Color(1, 1, 0.996078, 1)
+custom_minimum_size = Vector2(350, 0)
+layout_mode = 2
+size_flags_vertical = 3
+current_tab = 1
+
+[node name="Video" type="MarginContainer" parent="TabContainer"]
+visible = false
+custom_minimum_size = Vector2(300, 200)
+layout_mode = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+metadata/_tab_index = 0
+
+[node name="video_settings" type="HBoxContainer" parent="TabContainer/Video"]
+layout_mode = 2
+script = ExtResource("1_ovwm4")
+
+[node name="VBox" type="VBoxContainer" parent="TabContainer/Video/video_settings"]
+layout_mode = 2
+
+[node name="fullscreen" type="Label" parent="TabContainer/Video/video_settings/VBox"]
+layout_mode = 2
+text = "Fullscreen:"
+
+[node name="vsync" type="Label" parent="TabContainer/Video/video_settings/VBox"]
+layout_mode = 2
+text = "VSync"
+
+[node name="VBox2" type="VBoxContainer" parent="TabContainer/Video/video_settings"]
+layout_mode = 2
+
+[node name="fullscreen" type="CheckBox" parent="TabContainer/Video/video_settings/VBox2"]
+layout_mode = 2
+
+[node name="vsync" type="OptionButton" parent="TabContainer/Video/video_settings/VBox2"]
+layout_mode = 2
+selected = 1
+item_count = 4
+popup/item_0/text = "Disabled"
+popup/item_1/text = "Enabled"
+popup/item_1/id = 1
+popup/item_2/text = "Adaptive"
+popup/item_2/id = 2
+popup/item_3/text = "Mailbox"
+popup/item_3/id = 3
+
+[node name="Audio" type="MarginContainer" parent="TabContainer"]
+custom_minimum_size = Vector2(300, 200)
+layout_mode = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+metadata/_tab_index = 1
+
+[node name="audio_settings" type="GridContainer" parent="TabContainer/Audio"]
+layout_mode = 2
+size_flags_vertical = 4
+columns = 2
+script = ExtResource("2_t6yrl")
+
+[node name="master" type="Label" parent="TabContainer/Audio/audio_settings"]
+layout_mode = 2
+text = "Master"
+
+[node name="master2" type="HSlider" parent="TabContainer/Audio/audio_settings"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+max_value = 1.0
+step = 0.05
+value = 1.0
+
+[node name="music" type="Label" parent="TabContainer/Audio/audio_settings"]
+layout_mode = 2
+text = "Music"
+
+[node name="music2" type="HSlider" parent="TabContainer/Audio/audio_settings"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+max_value = 1.0
+step = 0.05
+value = 1.0
+
+[node name="sound" type="Label" parent="TabContainer/Audio/audio_settings"]
+layout_mode = 2
+text = "Sound"
+
+[node name="sound2" type="HSlider" parent="TabContainer/Audio/audio_settings"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+max_value = 1.0
+step = 0.05
+value = 1.0
+
+[node name="Controls" type="MarginContainer" parent="TabContainer"]
+visible = false
+custom_minimum_size = Vector2(300, 200)
+layout_mode = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+metadata/_tab_index = 2
+
+[node name="HBox" type="HBoxContainer" parent="TabContainer/Controls"]
+layout_mode = 2
+
+[node name="VBox" type="VBoxContainer" parent="TabContainer/Controls/HBox"]
+layout_mode = 2
+
+[node name="move" type="Label" parent="TabContainer/Controls/HBox/VBox"]
+layout_mode = 2
+text = "Move:"
+label_settings = SubResource("LabelSettings_4olrg")
+
+[node name="aim" type="Label" parent="TabContainer/Controls/HBox/VBox"]
+layout_mode = 2
+text = "Toggle aim:"
+label_settings = SubResource("LabelSettings_4olrg")
+
+[node name="atk" type="Label" parent="TabContainer/Controls/HBox/VBox"]
+layout_mode = 2
+text = "Attack:"
+label_settings = SubResource("LabelSettings_4olrg")
+
+[node name="ult" type="Label" parent="TabContainer/Controls/HBox/VBox"]
+layout_mode = 2
+text = "Cast/Charge Ult:   "
+label_settings = SubResource("LabelSettings_4olrg")
+
+[node name="swap" type="Label" parent="TabContainer/Controls/HBox/VBox"]
+layout_mode = 2
+text = "Swap characters:"
+label_settings = SubResource("LabelSettings_4olrg")
+
+[node name="interact" type="Label" parent="TabContainer/Controls/HBox/VBox"]
+layout_mode = 2
+text = "Interact/Revive:"
+label_settings = SubResource("LabelSettings_4olrg")
+
+[node name="team" type="Label" parent="TabContainer/Controls/HBox/VBox"]
+layout_mode = 2
+text = "Open team menu:"
+label_settings = SubResource("LabelSettings_4olrg")
+
+[node name="esc" type="Label" parent="TabContainer/Controls/HBox/VBox"]
+layout_mode = 2
+text = "Return/Pause"
+label_settings = SubResource("LabelSettings_4olrg")
+
+[node name="Control" type="Control" parent="TabContainer/Controls/HBox"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+
+[node name="VBox2" type="VBoxContainer" parent="TabContainer/Controls/HBox"]
+layout_mode = 2
+
+[node name="key" type="Label" parent="TabContainer/Controls/HBox/VBox2"]
+layout_mode = 2
+text = "Space"
+label_settings = SubResource("LabelSettings_4olrg")
+
+[node name="key8" type="Label" parent="TabContainer/Controls/HBox/VBox2"]
+layout_mode = 2
+text = "Q"
+label_settings = SubResource("LabelSettings_4olrg")
+
+[node name="key2" type="Label" parent="TabContainer/Controls/HBox/VBox2"]
+layout_mode = 2
+text = "Left Click"
+label_settings = SubResource("LabelSettings_4olrg")
+
+[node name="key3" type="Label" parent="TabContainer/Controls/HBox/VBox2"]
+layout_mode = 2
+text = "Right Click"
+label_settings = SubResource("LabelSettings_4olrg")
+
+[node name="key4" type="Label" parent="TabContainer/Controls/HBox/VBox2"]
+layout_mode = 2
+text = "1, 2, 3"
+label_settings = SubResource("LabelSettings_4olrg")
+
+[node name="key5" type="Label" parent="TabContainer/Controls/HBox/VBox2"]
+layout_mode = 2
+text = "E"
+label_settings = SubResource("LabelSettings_4olrg")
+
+[node name="key6" type="Label" parent="TabContainer/Controls/HBox/VBox2"]
+layout_mode = 2
+text = "B"
+label_settings = SubResource("LabelSettings_4olrg")
+
+[node name="key7" type="Label" parent="TabContainer/Controls/HBox/VBox2"]
+layout_mode = 2
+text = "Esc"
+label_settings = SubResource("LabelSettings_4olrg")
+
+[node name="Other" type="MarginContainer" parent="TabContainer"]
+visible = false
+custom_minimum_size = Vector2(300, 200)
+layout_mode = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+metadata/_tab_index = 3
+
+[node name="GridContainer" type="GridContainer" parent="TabContainer/Other"]
+layout_mode = 2
+columns = 2
+
+[node name="camera" type="Label" parent="TabContainer/Other/GridContainer"]
+layout_mode = 2
+text = "Camera Shake:"
+
+[node name="camera2" type="CheckBox" parent="TabContainer/Other/GridContainer"]
+layout_mode = 2
+button_pressed = true
+
+[node name="invert" type="Label" parent="TabContainer/Other/GridContainer"]
+layout_mode = 2
+text = "Invert mouse hover distance: "
+
+[node name="invert2" type="CheckBox" parent="TabContainer/Other/GridContainer"]
+layout_mode = 2
+
+[node name="Return" type="Button" parent="."]
+layout_mode = 2
+size_flags_horizontal = 8
+text = " Return "
+
+[connection signal="toggled" from="TabContainer/Video/video_settings/VBox2/fullscreen" to="TabContainer/Video/video_settings" method="_on_fullscreen_toggled"]
+[connection signal="item_selected" from="TabContainer/Video/video_settings/VBox2/vsync" to="TabContainer/Video/video_settings" method="_on_vsync_item_selected"]
+[connection signal="value_changed" from="TabContainer/Audio/audio_settings/master2" to="TabContainer/Audio/audio_settings" method="_on_master_value_changed"]
+[connection signal="value_changed" from="TabContainer/Audio/audio_settings/music2" to="TabContainer/Audio/audio_settings" method="_on_music_value_changed"]
+[connection signal="value_changed" from="TabContainer/Audio/audio_settings/sound2" to="TabContainer/Audio/audio_settings" method="_on_sound_value_changed"]
+[connection signal="toggled" from="TabContainer/Other/GridContainer/camera2" to="." method="_on_camera_toggled"]
+[connection signal="toggled" from="TabContainer/Other/GridContainer/invert2" to="." method="_on_invert_2_toggled"]
+[connection signal="pressed" from="Return" to="." method="_on_return_pressed"]

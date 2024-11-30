@@ -9,6 +9,7 @@ enum PHASE {
 ## no more phase 2, ill save it for "willpower bosses"
 ## machine/structure bosses strictly follow their programming
 @export var Phase1_HP: float = 4000 ## will update stats.HP of main gun to have this
+@export var enemy_explosion_sfx: AudioStream
 
 var _default_impact_scene: PackedScene = preload("res://projectiles/bullet_impact.tscn")
 var _default_dead_texture: AtlasTexture = preload("res://resources/textures/impacts/enemy_dead.tres")
@@ -138,13 +139,15 @@ func _destroy_boss() -> void:
 	var explosion_times: int = 15
 	var orbs_dropped: int = 4000/explosion_times
 	for i in range(explosion_times):
-		var offset := Vector2(1, 1) * RNG.random_float(-25, 25)
+		var offset := Vector2(RNG.random_float(-25, 25), RNG.random_float(-25, 25))
 		var size_int := RNG.random_float(3, 8)
 		make_impact(_default_impact_scene, offset, size_int)
 		main_gun.show_hit_flash()
-		EnemyAiManager.spawn_orbs(global_position, orbs_dropped)
-		await get_tree().create_timer(0.15).timeout
+		EnemyAiManager.spawn_orbs(global_position + offset, orbs_dropped)
+		SoundPlayer.play_sound_2D(global_position, enemy_explosion_sfx, -10, 1.05)
+		await get_tree().create_timer(0.2).timeout
 	await get_tree().create_timer(0.5).timeout
+	SoundPlayer.play_sound_2D(global_position, enemy_explosion_sfx, 2, 0.8)
 	make_impact(_default_impact_scene, Vector2.ZERO, 15)
 	EventBus.boss_fight_ended.emit()
 	queue_free()

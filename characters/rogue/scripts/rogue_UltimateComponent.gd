@@ -2,6 +2,7 @@ extends Node2D
 class_name Rogue_UltimateComponent
 
 @export var FlameEruption: PackedScene
+@export var sfx_ult: AudioStream
 
 var sword_default_color := Color(1, 1, 1)
 var sword_explosion_color := Color(2, 0.2, 0.2)
@@ -49,7 +50,7 @@ func spend_charge() -> void:
 	
 	character.arm.rotation_degrees = 0
 	character.wpn.rotation_degrees = 45
-
+	
 	var dur := 0.22
 	var t := create_tween()
 	t.set_ease(Tween.EASE_OUT)
@@ -61,6 +62,7 @@ func spend_charge() -> void:
 	t.tween_property(character.arm, "rotation_degrees",
 			360, dur).from(0)#.set_delay(0.1)
 	await t.finished
+	SoundPlayer.play_sound(sfx_ult, -15, 1.02)
 	
 	character.arm.rotation_degrees = 0
 	character.wpn.rotation_degrees = 135

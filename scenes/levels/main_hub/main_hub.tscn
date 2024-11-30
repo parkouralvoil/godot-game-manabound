@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=4 uid="uid://bdn5claftvmgn"]
+[gd_scene load_steps=21 format=4 uid="uid://bdn5claftvmgn"]
 
 [ext_resource type="Script" path="res://scenes/levels/main_hub/main_hub.gd" id="1_no8mj"]
 [ext_resource type="PackedScene" uid="uid://baksvorn8xwwc" path="res://scenes/levels/parallax_backgrounds/mountain_sky_tree.tscn" id="2_ggshg"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://dsdu11io064xj" path="res://assets/sprite_characters/rogue_spritesheet.png" id="8_knvnu"]
 [ext_resource type="Texture2D" uid="uid://d0b5yrantkkqm" path="res://characters/rogue/visuals/rogue_arm.tres" id="9_qngvn"]
 [ext_resource type="PackedScene" uid="uid://bkle7qrwjpj8o" path="res://scenes/interactables/health_potion/health_potion.tscn" id="10_eh2s7"]
+[ext_resource type="PackedScene" uid="uid://bmqu3gpnmomg0" path="res://scenes/enemies/_enemy_dummy.tscn" id="10_eorhu"]
 [ext_resource type="PackedScene" uid="uid://dubh6cpng3iu2" path="res://scenes/interactables/upgrade_station/upgrade_station.tscn" id="10_pbl8k"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xq1pv"]
@@ -157,6 +158,7 @@ color = Color(0, 0, 0, 1)
 position = Vector2(502, -202)
 
 [node name="signboard" parent="." instance=ExtResource("4_tdi5r")]
+z_index = -2
 position = Vector2(536, -112)
 
 [node name="decor" type="Node2D" parent="."]
@@ -183,3 +185,6 @@ position = Vector2(169, -281)
 
 [node name="UpgradeStation" parent="." instance=ExtResource("10_pbl8k")]
 position = Vector2(165, -96)
+
+[node name="enemy_dummy" parent="." instance=ExtResource("10_eorhu")]
+position = Vector2(376, -138)

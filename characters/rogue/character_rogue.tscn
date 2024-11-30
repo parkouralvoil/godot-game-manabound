@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://dyb83ujyxhk2b"]
+[gd_scene load_steps=23 format=3 uid="uid://dyb83ujyxhk2b"]
 
 [ext_resource type="Script" path="res://characters/CharacterClass.gd" id="1_h1y8r"]
 [ext_resource type="Script" path="res://characters/rogue/scripts/rogue_AbilityManager.gd" id="2_hppn7"]
@@ -14,6 +14,9 @@
 [ext_resource type="Script" path="res://characters/rogue/scripts/rogue_AmmoComponent.gd" id="9_1qn3a"]
 [ext_resource type="Script" path="res://characters/rogue/scripts/rogue_UltimateComponent.gd" id="10_s5uqh"]
 [ext_resource type="PackedScene" uid="uid://cxo81uwgev1mg" path="res://projectiles/fire_projectiles/eruption/flame_repulsion_dmg_impact.tscn" id="11_5arbq"]
+[ext_resource type="AudioStream" uid="uid://clvudafkh3psa" path="res://assets/audio/sfx/character_sfx/sword_slash_fire.mp3" id="12_f2soj"]
+[ext_resource type="AudioStream" uid="uid://cq4rwlp8udfmy" path="res://assets/audio/sfx/character_sfx/mixkit-fast-sword-whoosh-2792.mp3" id="12_hl0fx"]
+[ext_resource type="AudioStream" uid="uid://bekxkx30lv5tu" path="res://assets/audio/sfx/character_sfx/rogue_ult.mp3" id="16_wniay"]
 
 [sub_resource type="Animation" id="Animation_gpksw"]
 length = 0.001
@@ -165,6 +168,8 @@ script = ExtResource("4_u8b7v")
 FireBladeProjectile = ExtResource("5_ua7bq")
 RogueMeleeHitDown = ExtResource("6_6r5ov")
 RogueMeleeHitUp = ExtResource("7_ng5em")
+sfx_hasAmmoMeleeSwing = ExtResource("12_f2soj")
+sfx_noAmmoMeleeSwing = ExtResource("12_hl0fx")
 
 [node name="firerate" type="Timer" parent="AbilityManager/BasicAttack"]
 wait_time = 0.25
@@ -191,6 +196,7 @@ offset = Vector2(8.82934, -8.08328)
 [node name="Ultimate" type="Node2D" parent="AbilityManager"]
 script = ExtResource("10_s5uqh")
 FlameEruption = ExtResource("11_5arbq")
+sfx_ult = ExtResource("16_wniay")
 
 [node name="buff_duration" type="Timer" parent="AbilityManager/Ultimate"]
 wait_time = 10.0

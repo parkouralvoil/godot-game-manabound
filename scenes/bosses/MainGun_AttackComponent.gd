@@ -6,6 +6,11 @@ extends Node2D
 @export var WidespreadBulletPath: PackedScene
 @export var RailgunBulletPath: PackedScene
 
+@export_category("Attack SFX")
+@export var shotgun_sfx: AudioStream
+@export var machinegun_sfx: AudioStream
+@export var railgun_fire_sfx: AudioStream
+
 enum ATK_MODE {
 	BOW,
 	GUN,
@@ -44,6 +49,7 @@ var interrupted: bool = false
 @onready var e: RailgunMainGun = owner
 @onready var sprite_ammo: Array[Sprite2D] = [$AmmoSpriteContainer/ammo1, $AmmoSpriteContainer/ammo2]
 @onready var charge_particles: GPUParticles2D = $ChargingAttack
+@onready var charging_player: AudioStreamPlayer2D = $ChargingSound
 # Called when the node enters the scene tree for the first time.
 
 func _ready() -> void:
@@ -127,15 +133,14 @@ func attack_spreadshot() -> void:
 	var speed := 320
 	for i in range(2):
 		rotation_speed = default_rotation_speed/2
-		for offset in range(-2, 3):
-			var angle := aim_angle + deg_to_rad(spread * offset)
-			shoot(ShotgunBulletPath, Vector2.RIGHT.rotated(angle), speed)
-		t_firerate.start(0.15)
-		await t_firerate.timeout
+		for j in range(2):
+			SoundPlayer.play_sound_2D(global_position, shotgun_sfx, -5, 1.1)
+			for offset in range(-2, 3):
+				var angle := aim_angle + deg_to_rad(spread * offset)
+				shoot(ShotgunBulletPath, Vector2.RIGHT.rotated(angle), speed)
+			t_firerate.start(0.15)
+			await t_firerate.timeout
 		rotation_speed = default_rotation_speed
-		for offset in range(-2, 3):
-			var angle := aim_angle + deg_to_rad(spread * offset)
-			shoot(ShotgunBulletPath, Vector2.RIGHT.rotated(angle), speed)
 		ammo -= 1
 		t_firerate.start(0.3)
 		await t_firerate.timeout
@@ -150,6 +155,7 @@ func attack_widespread() -> void:
 	var slight_offset := 0
 	
 	for i in range(2):
+		SoundPlayer.play_sound_2D(global_position, shotgun_sfx, -3, 0.85)
 		for offset in range(-4, 5):
 			var angle := aim_angle + deg_to_rad(spread * offset + slight_offset)
 			shoot(WidespreadBulletPath, Vector2.RIGHT.rotated(angle), speed)
@@ -174,6 +180,7 @@ func attack_rapid() -> void:
 	for i in range(2): ## 16 shots total
 		rotation_speed = default_rotation_speed/2
 		for j in range(8):
+			SoundPlayer.play_sound_2D(global_position, machinegun_sfx, -6, 1.1)
 			shoot(ShotgunBulletPath, Vector2.RIGHT.rotated(aim_angle), speed)
 			t_firerate.start(0.2)
 			await t_firerate.timeout
@@ -191,9 +198,13 @@ func attack_charged() -> void:
 		interrupted = false
 		charge_particles.emitting = true
 		t_firerate.start(4)
+		if not charging_player.playing:
+			charging_player.play()
 		await t_firerate.timeout
 		
+		charging_player.stop()
 		if not interrupted:
+			SoundPlayer.play_sound_2D(global_position, railgun_fire_sfx, -4, 1.1)
 			shoot(RailgunBulletPath, Vector2.RIGHT.rotated(aim_angle), speed)
 		charge_particles.emitting = false
 		charging = false
@@ -206,6 +217,7 @@ func attack_charged() -> void:
 
 func charged_attack_interrupt() -> void:
 	if charging:
+		charging_player.stop()
 		e.spawn_dmg_number("INTERRUPTED!", Color(0.9, 0.9, 0.9)) ## bruh
 		charging = false
 		interrupted = true

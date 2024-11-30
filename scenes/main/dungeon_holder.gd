@@ -29,6 +29,7 @@ func initialize_main_hub() -> void:
 	dungeon_data.main_hub_loaded.emit()
 
 func _on_returned_to_mainhub() -> void:
+	EventBus.tutorial_team_restriction_set.emit(3)
 	await remove_previous_lvl()
 	initialize_main_hub()
 	await main.fade_in()

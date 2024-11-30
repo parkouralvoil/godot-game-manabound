@@ -47,7 +47,7 @@ func sidepart_destroyed() -> void:
 	hurtbox.monitorable = false
 	collisionbox.set_deferred("disabled", true)
 	## wait 4 seconds
-	await get_tree().create_timer(8).timeout
+	await get_tree().create_timer(12).timeout
 	#print_debug("sidepart destroyed")
 	t_revive_check.start()
 
@@ -58,7 +58,7 @@ func begin_reconstruction() -> void:
 	hurtbox.monitorable = true
 	
 	## forcefield
-	for i in range(4): 
+	for i in range(3): 
 		var t1: Tween = create_tween()
 		t1.tween_property(sprite_construction, "material:shader_parameter/color", Color(0.4, 0.4, 1), 0.5)
 		t1.tween_property(sprite_construction, "material:shader_parameter/color", Color(0.8, 0.8, 1), 0.5)

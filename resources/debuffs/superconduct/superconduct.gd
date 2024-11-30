@@ -12,6 +12,7 @@ var base_dmg: float = 15
 @export var amount: int = 30
 @export var explosiveness: float = 1
 @export var lifetime: float = 0.7
+var superconduct_sfx: AudioStream = preload("res://assets/audio/sfx/EM_LIGHT_IMPACT.mp3")
 
 var e_health: EnemyHealthComponent
 var _debuff_timer: Timer
@@ -50,6 +51,7 @@ func receive_superconduct(enemy: BaseEnemy, ep: float) -> void:
 	enemy.reload_time = enemy.default_reload_time + 1
 	
 	## TODO: sprites with materials (shaders) have their modulate overwritten by material.
+	SoundPlayer.play_sound_2D(enemy.global_position, superconduct_sfx, -8, 1.05)
 	sprite_tween = enemy.create_tween()
 	sprite_tween.tween_property(enemy.sprite_main, "modulate", 
 			enemy.default_color, duration).from(color_sc)

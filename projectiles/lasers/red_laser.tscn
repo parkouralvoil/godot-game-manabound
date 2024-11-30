@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://bmke88h6lebel"]
+[gd_scene load_steps=10 format=3 uid="uid://bmke88h6lebel"]
 
 [ext_resource type="Script" path="res://projectiles/lasers/red_laser.gd" id="1_kbcaq"]
 [ext_resource type="Material" uid="uid://bhwosssphve8" path="res://resources/particles/laser_casting_particles.tres" id="2_gdktj"]
 [ext_resource type="Material" uid="uid://c8r5m4n7colab" path="res://resources/particles/laser_impact_particles.tres" id="2_wvfa3"]
 [ext_resource type="Texture2D" uid="uid://b2gagvgpvrjud" path="res://assets/sprite_projectiles/bullet_pixel_BrightRed.png" id="3_3sktt"]
 [ext_resource type="Texture2D" uid="uid://pvrjdm745q8m" path="res://assets/sprite_projectiles/bullet_pixel_DarkRed.png" id="3_12el5"]
+[ext_resource type="AudioStream" uid="uid://ceqkjrqlfxfau" path="res://assets/audio/sfx/enemy_atk_sfx/microwave_laser.mp3" id="6_xwf01"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_2rc1a"]
 resource_local_to_scene = true
@@ -52,5 +53,12 @@ lifetime = 0.2
 process_callback = 0
 wait_time = 2.0
 one_shot = true
+
+[node name="MicrowaveLaser" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_xwf01")
+volume_db = -10.0
+pitch_scale = 1.1
+max_distance = 1000.0
+attenuation = 2.0
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]

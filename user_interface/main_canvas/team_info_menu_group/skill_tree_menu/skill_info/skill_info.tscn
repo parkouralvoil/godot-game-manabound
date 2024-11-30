@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://ynd4jyc4neao"]
+[gd_scene load_steps=9 format=3 uid="uid://ynd4jyc4neao"]
 
 [ext_resource type="Script" path="res://user_interface/main_canvas/team_info_menu_group/skill_tree_menu/skill_info/skill_info.gd" id="1_o0ofg"]
 [ext_resource type="Texture2D" uid="uid://h46xv64l4n2u" path="res://assets/sprite_UI/AbilityIcons0.png" id="2_5g4pe"]
 [ext_resource type="LabelSettings" uid="uid://6y7111xwu3do" path="res://resources/label_settings/font_system_big.tres" id="3_2f8wp"]
+[ext_resource type="FontFile" uid="uid://bbkhj4uknd5uk" path="res://assets/fonts/PFDinTextPro-Light.ttf" id="4_w4xp2"]
 [ext_resource type="LabelSettings" uid="uid://buthhqor0rds0" path="res://resources/label_settings/font_system_desc.tres" id="5_w32p4"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fbmtq"]
@@ -10,7 +11,8 @@ atlas = ExtResource("2_5g4pe")
 region = Rect2(48, 48, 16, 16)
 
 [sub_resource type="LabelSettings" id="LabelSettings_27joy"]
-font_size = 11
+font = ExtResource("4_w4xp2")
+font_size = 14
 
 [sub_resource type="LabelSettings" id="LabelSettings_loi2t"]
 font_size = 10
@@ -61,6 +63,7 @@ layout_mode = 2
 size_flags_vertical = 3
 
 [node name="description" type="Label" parent="MarginContainer/VBox/ScrollContainer"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(140, 0)
 layout_mode = 2
 size_flags_horizontal = 3

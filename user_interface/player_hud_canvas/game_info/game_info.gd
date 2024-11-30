@@ -115,7 +115,7 @@ func _on_main_hub_loaded() -> void:
 	label_cycle_room.hide()
 	line_2.hide()
 	label_enemies.hide()
-	label_preset.text = "Room: Hub"
+	label_preset.text = "Room: Base"
 	boss_info.hide()
 
 

@@ -12,6 +12,12 @@ enum RoomType {
 	Other, ## for other room types
 }
 
+enum Areas {
+	NovicePlains,
+	AumaLuine,
+}
+
+@export var associated_area: Areas = Areas.AumaLuine
 @export var room_type: RoomType = RoomType.Normal
 @export var end_game_after_clear: bool = false ## for area transition rooms or final rooms
 
@@ -64,6 +70,7 @@ func _ready() -> void:
 	exit_door.local_exit_door_interacted.connect(_on_local_exit_door_interacted)
 	
 	await get_tree().physics_frame
+	_select_music_then_play()
 	if EnemyAiManager.enemies_alive <= 0 and room_type != RoomType.Boss:
 		_level_is_cleared()
 	if room_type == RoomType.Boss:
@@ -96,3 +103,18 @@ func _level_is_cleared() -> void:
 
 func _on_local_exit_door_interacted() -> void:
 	EventBus.exit_door_interacted.emit()
+
+
+func _select_music_then_play() -> void:
+	match associated_area:
+		Areas.AumaLuine:
+			if room_type == RoomType.Normal:
+				SoundPlayer.play_music(SoundPlayer.music_aumaLuineCombat)
+			elif room_type == RoomType.Rest:
+				SoundPlayer.play_music(SoundPlayer.music_aumaLuineRest)
+			elif room_type == RoomType.Boss:
+				SoundPlayer.stop_music()
+				await get_tree().create_timer(4.5).timeout
+				SoundPlayer.play_music(SoundPlayer.music_railgun)
+		Areas.NovicePlains:
+			SoundPlayer.play_music(SoundPlayer.music_tutorial)

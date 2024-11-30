@@ -3,11 +3,6 @@ class_name AttackComponent_Autobow
 
 var ProjectileScene: PackedScene = load("res://projectiles/bullet.tscn")
 
-@onready var e: NormalEnemy = owner
-@onready var t_firerate: Timer = $firerate
-@onready var t_reload: Timer = $reload
-@onready var t_first_shot: Timer = $before_first_shot
-
 var bullet_color: Color = Color(1, 0.4, 0.2)
 
 var last_aim_direction: Vector2 = Vector2.ZERO
@@ -15,6 +10,11 @@ var reload_reset: bool = false # only reverts back to false after superconduct c
 
 var max_ammo: int = 3
 var ammo: int = max_ammo
+
+@onready var e: NormalEnemy = owner
+@onready var t_firerate: Timer = $firerate
+@onready var t_reload: Timer = $reload
+@onready var t_first_shot: Timer = $before_first_shot
 
 func _ready() -> void:
 	e.reload_time_changed.connect(update_reload)
