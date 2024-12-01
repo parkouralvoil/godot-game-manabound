@@ -4,7 +4,6 @@
 [ext_resource type="Texture2D" uid="uid://h46xv64l4n2u" path="res://assets/sprite_UI/AbilityIcons0.png" id="2_5g4pe"]
 [ext_resource type="LabelSettings" uid="uid://6y7111xwu3do" path="res://resources/label_settings/font_system_big.tres" id="3_2f8wp"]
 [ext_resource type="FontFile" uid="uid://bbkhj4uknd5uk" path="res://assets/fonts/PFDinTextPro-Light.ttf" id="4_w4xp2"]
-[ext_resource type="LabelSettings" uid="uid://buthhqor0rds0" path="res://resources/label_settings/font_system_desc.tres" id="5_w32p4"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fbmtq"]
 atlas = ExtResource("2_5g4pe")
@@ -14,7 +13,14 @@ region = Rect2(48, 48, 16, 16)
 font = ExtResource("4_w4xp2")
 font_size = 14
 
+[sub_resource type="LabelSettings" id="LabelSettings_pgtms"]
+line_spacing = 1.0
+font = ExtResource("4_w4xp2")
+font_size = 14
+font_color = Color(0.901961, 0.901961, 0.901961, 0.901961)
+
 [sub_resource type="LabelSettings" id="LabelSettings_loi2t"]
+font = ExtResource("4_w4xp2")
 font_size = 10
 
 [node name="Skill_Info" type="PanelContainer"]
@@ -79,7 +85,7 @@ layout_mode = 2
 custom_minimum_size = Vector2(140, 0)
 layout_mode = 2
 text = "Level: "
-label_settings = ExtResource("5_w32p4")
+label_settings = SubResource("LabelSettings_pgtms")
 autowrap_mode = 3
 justification_flags = 160
 
@@ -87,7 +93,7 @@ justification_flags = 160
 custom_minimum_size = Vector2(140, 0)
 layout_mode = 2
 text = "Cost: "
-label_settings = ExtResource("5_w32p4")
+label_settings = SubResource("LabelSettings_pgtms")
 autowrap_mode = 3
 justification_flags = 160
 

@@ -63,7 +63,12 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	if not dungeon_data and not inventory:
 		return
-	label_fps.text = "FPS: " + str(Engine.get_frames_per_second())
+	if Settings.show_fps:
+		label_fps.show()
+		label_fps.text = "FPS: " + str(Engine.get_frames_per_second())
+	else:
+		label_fps.hide()
+		line_2.hide()
 	label_orbs.text = "Orbs: " + str(inventory.mana_orbs)
 	label_enemies.text = "Enemies left: %d" % EnemyAiManager.enemies_alive
 

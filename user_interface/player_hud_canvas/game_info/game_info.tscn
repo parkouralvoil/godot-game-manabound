@@ -1,7 +1,7 @@
 [gd_scene load_steps=14 format=3 uid="uid://cnrrjvflykcui"]
 
 [ext_resource type="Script" path="res://user_interface/player_hud_canvas/game_info/game_info.gd" id="1_tvrhp"]
-[ext_resource type="LabelSettings" uid="uid://2ltl51gdr4g6" path="res://user_interface/main_canvas/team_info_menu_group/character_status_menu/char_status_label.tres" id="2_8oro1"]
+[ext_resource type="LabelSettings" uid="uid://frs5gj5moe0e" path="res://user_interface/player_hud_canvas/hud_label.tres" id="2_1rcyy"]
 [ext_resource type="Texture2D" uid="uid://1r2e47in58kt" path="res://assets/sprite_items/stat_runes.png" id="3_twxwh"]
 [ext_resource type="FontFile" uid="uid://b7bhxk05x7pwi" path="res://assets/fonts/aseprite-remix.ttf" id="4_4p5ej"]
 [ext_resource type="PackedScene" uid="uid://c1mef3esxg5jh" path="res://user_interface/UI_attached_to_enemies/element_indicator.tscn" id="5_yh2f5"]
@@ -72,7 +72,7 @@ layout_mode = 2
 [node name="CycleRoom" type="Label" parent="VBox/MainInfo/MarginContainer/HBox"]
 layout_mode = 2
 text = "Level: 1-4"
-label_settings = ExtResource("2_8oro1")
+label_settings = ExtResource("2_1rcyy")
 
 [node name="line" type="ColorRect" parent="VBox/MainInfo/MarginContainer/HBox"]
 custom_minimum_size = Vector2(2, 0)
@@ -82,7 +82,7 @@ color = Color(0.4, 0.4, 0.4, 0.670588)
 [node name="Preset" type="Label" parent="VBox/MainInfo/MarginContainer/HBox"]
 layout_mode = 2
 text = "Room: Calm"
-label_settings = ExtResource("2_8oro1")
+label_settings = ExtResource("2_1rcyy")
 
 [node name="OtherInfo" type="PanelContainer" parent="VBox"]
 layout_mode = 2
@@ -106,7 +106,7 @@ mouse_filter = 2
 custom_minimum_size = Vector2(55, 0)
 layout_mode = 2
 text = "FPS: 9999"
-label_settings = ExtResource("2_8oro1")
+label_settings = ExtResource("2_1rcyy")
 
 [node name="line2" type="ColorRect" parent="VBox/OtherInfo/MarginContainer/HBox"]
 custom_minimum_size = Vector2(2, 0)
@@ -116,7 +116,7 @@ color = Color(0.4, 0.4, 0.4, 0.670588)
 [node name="Enemies" type="Label" parent="VBox/OtherInfo/MarginContainer/HBox"]
 layout_mode = 2
 text = "Enemies left: 15"
-label_settings = ExtResource("2_8oro1")
+label_settings = ExtResource("2_1rcyy")
 
 [node name="Spacer" type="Control" parent="VBox"]
 custom_minimum_size = Vector2(0, 10)
@@ -148,7 +148,7 @@ size_flags_horizontal = 0
 [node name="inventory" type="Label" parent="VBox/InventoryInfo/MarginContainer/VBox"]
 layout_mode = 2
 text = "Inventory"
-label_settings = ExtResource("2_8oro1")
+label_settings = ExtResource("2_1rcyy")
 horizontal_alignment = 1
 
 [node name="line" type="ColorRect" parent="VBox/InventoryInfo/MarginContainer/VBox"]
@@ -159,7 +159,7 @@ color = Color(0.4, 0.4, 0.4, 0.670588)
 [node name="ManaOrbs" type="Label" parent="VBox/InventoryInfo/MarginContainer/VBox"]
 layout_mode = 2
 text = "Orbs: 99999"
-label_settings = ExtResource("2_8oro1")
+label_settings = ExtResource("2_1rcyy")
 
 [node name="VBox" type="VBoxContainer" parent="VBox/InventoryInfo/MarginContainer/VBox"]
 layout_mode = 2
@@ -172,7 +172,7 @@ color = Color(0.4, 0.4, 0.4, 0.670588)
 [node name="runes" type="Label" parent="VBox/InventoryInfo/MarginContainer/VBox/VBox"]
 layout_mode = 2
 text = "Runes:"
-label_settings = ExtResource("2_8oro1")
+label_settings = ExtResource("2_1rcyy")
 
 [node name="GridContainer" type="GridContainer" parent="VBox/InventoryInfo/MarginContainer/VBox/VBox"]
 layout_mode = 2
@@ -190,7 +190,7 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
 text = "x0"
-label_settings = ExtResource("2_8oro1")
+label_settings = ExtResource("2_1rcyy")
 
 [node name="ATK" type="TextureRect" parent="VBox/InventoryInfo/MarginContainer/VBox/VBox/GridContainer"]
 layout_mode = 2
@@ -203,7 +203,7 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
 text = "x0"
-label_settings = ExtResource("2_8oro1")
+label_settings = ExtResource("2_1rcyy")
 
 [node name="EP" type="TextureRect" parent="VBox/InventoryInfo/MarginContainer/VBox/VBox/GridContainer"]
 layout_mode = 2
@@ -216,7 +216,7 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
 text = "x0"
-label_settings = ExtResource("2_8oro1")
+label_settings = ExtResource("2_1rcyy")
 
 [node name="CHR" type="TextureRect" parent="VBox/InventoryInfo/MarginContainer/VBox/VBox/GridContainer"]
 layout_mode = 2
@@ -229,7 +229,7 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
 text = "x0"
-label_settings = ExtResource("2_8oro1")
+label_settings = ExtResource("2_1rcyy")
 
 [node name="UpgradeStatsButton" type="Button" parent="VBox/InventoryInfo/MarginContainer/VBox/VBox"]
 layout_mode = 2

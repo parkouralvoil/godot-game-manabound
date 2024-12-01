@@ -1,5 +1,6 @@
-[gd_scene format=3 uid="uid://csqsr7eo05kdl"]
+[gd_scene load_steps=2 format=3 uid="uid://csqsr7eo05kdl"]
+
+[ext_resource type="Script" path="res://scenes/main/level_summary.gd" id="1_6msmd"]
 
 [node name="LevelSummary" type="Node"]
-
-[node name="HTTPRequest" type="HTTPRequest" parent="."]
+script = ExtResource("1_6msmd")

@@ -38,7 +38,7 @@ region = Rect2(176, 0, 16, 16)
 
 [node name="RailgunBoss" type="Node2D"]
 script = ExtResource("1_wqb58")
-Phase1_HP = 15000.0
+Phase1_HP = 12000.0
 enemy_explosion_sfx = ExtResource("2_31mcu")
 
 [node name="LaserLeft" parent="." instance=ExtResource("2_tvaij")]

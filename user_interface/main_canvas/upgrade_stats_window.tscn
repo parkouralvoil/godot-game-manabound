@@ -1,8 +1,12 @@
-[gd_scene load_steps=8 format=3 uid="uid://bsyp187e5wn0w"]
+[gd_scene load_steps=9 format=3 uid="uid://bsyp187e5wn0w"]
 
-[ext_resource type="LabelSettings" uid="uid://2ltl51gdr4g6" path="res://user_interface/main_canvas/team_info_menu_group/character_status_menu/char_status_label.tres" id="1_4evtm"]
 [ext_resource type="Script" path="res://user_interface/main_canvas/upgrade_stats_window.gd" id="1_q1hu2"]
+[ext_resource type="FontFile" uid="uid://bbkhj4uknd5uk" path="res://assets/fonts/PFDinTextPro-Light.ttf" id="2_74q8p"]
 [ext_resource type="Texture2D" uid="uid://1r2e47in58kt" path="res://assets/sprite_items/stat_runes.png" id="2_e7lie"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_e8cuv"]
+font = ExtResource("2_74q8p")
+font_size = 14
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_yqom6"]
 atlas = ExtResource("2_e7lie")
@@ -45,7 +49,7 @@ color = Color(0.556863, 0.556863, 0.556863, 1)
 [node name="RunesLeft" type="Label" parent="MarginContainer/VBox"]
 layout_mode = 2
 text = "Use runes to increase stats"
-label_settings = ExtResource("1_4evtm")
+label_settings = SubResource("LabelSettings_e8cuv")
 horizontal_alignment = 1
 
 [node name="HP_rune" type="HBoxContainer" parent="MarginContainer/VBox"]
@@ -56,7 +60,7 @@ size_flags_vertical = 4
 [node name="name" type="Label" parent="MarginContainer/VBox/HP_rune"]
 layout_mode = 2
 text = "HP Rune:"
-label_settings = ExtResource("1_4evtm")
+label_settings = SubResource("LabelSettings_e8cuv")
 
 [node name="Spacer" type="Control" parent="MarginContainer/VBox/HP_rune"]
 custom_minimum_size = Vector2(0, 15)
@@ -72,7 +76,7 @@ stretch_mode = 5
 [node name="amt" type="Label" parent="MarginContainer/VBox/HP_rune"]
 layout_mode = 2
 text = "x0"
-label_settings = ExtResource("1_4evtm")
+label_settings = SubResource("LabelSettings_e8cuv")
 horizontal_alignment = 1
 
 [node name="HPRuneUse" type="Button" parent="MarginContainer/VBox/HP_rune"]
@@ -88,7 +92,7 @@ size_flags_vertical = 4
 [node name="name" type="Label" parent="MarginContainer/VBox/ATK_rune"]
 layout_mode = 2
 text = "ATK Rune:"
-label_settings = ExtResource("1_4evtm")
+label_settings = SubResource("LabelSettings_e8cuv")
 
 [node name="Spacer" type="Control" parent="MarginContainer/VBox/ATK_rune"]
 custom_minimum_size = Vector2(0, 15)
@@ -104,7 +108,7 @@ stretch_mode = 5
 [node name="amt" type="Label" parent="MarginContainer/VBox/ATK_rune"]
 layout_mode = 2
 text = "x0"
-label_settings = ExtResource("1_4evtm")
+label_settings = SubResource("LabelSettings_e8cuv")
 horizontal_alignment = 1
 
 [node name="ATKRuneUse" type="Button" parent="MarginContainer/VBox/ATK_rune"]
@@ -120,7 +124,7 @@ size_flags_vertical = 4
 [node name="name" type="Label" parent="MarginContainer/VBox/EP_rune"]
 layout_mode = 2
 text = "EP Rune:"
-label_settings = ExtResource("1_4evtm")
+label_settings = SubResource("LabelSettings_e8cuv")
 
 [node name="Spacer" type="Control" parent="MarginContainer/VBox/EP_rune"]
 custom_minimum_size = Vector2(0, 15)
@@ -136,7 +140,7 @@ stretch_mode = 5
 [node name="amt" type="Label" parent="MarginContainer/VBox/EP_rune"]
 layout_mode = 2
 text = "x0"
-label_settings = ExtResource("1_4evtm")
+label_settings = SubResource("LabelSettings_e8cuv")
 horizontal_alignment = 1
 
 [node name="EPRuneUse" type="Button" parent="MarginContainer/VBox/EP_rune"]
@@ -152,7 +156,7 @@ size_flags_vertical = 4
 [node name="name" type="Label" parent="MarginContainer/VBox/CHR_rune"]
 layout_mode = 2
 text = "CHR Rune:"
-label_settings = ExtResource("1_4evtm")
+label_settings = SubResource("LabelSettings_e8cuv")
 
 [node name="Spacer" type="Control" parent="MarginContainer/VBox/CHR_rune"]
 custom_minimum_size = Vector2(0, 15)
@@ -168,7 +172,7 @@ stretch_mode = 5
 [node name="amt" type="Label" parent="MarginContainer/VBox/CHR_rune"]
 layout_mode = 2
 text = "x0"
-label_settings = ExtResource("1_4evtm")
+label_settings = SubResource("LabelSettings_e8cuv")
 horizontal_alignment = 1
 
 [node name="CHRRuneUse" type="Button" parent="MarginContainer/VBox/CHR_rune"]
@@ -184,7 +188,7 @@ color = Color(0.556863, 0.556863, 0.556863, 1)
 [node name="BaseStats" type="Label" parent="MarginContainer/VBox"]
 layout_mode = 2
 text = "Current base stats:"
-label_settings = ExtResource("1_4evtm")
+label_settings = SubResource("LabelSettings_e8cuv")
 horizontal_alignment = 1
 
 [node name="HP_stat" type="HBoxContainer" parent="MarginContainer/VBox"]
@@ -194,7 +198,7 @@ size_flags_vertical = 4
 [node name="name" type="Label" parent="MarginContainer/VBox/HP_stat"]
 layout_mode = 2
 text = "HP:"
-label_settings = ExtResource("1_4evtm")
+label_settings = SubResource("LabelSettings_e8cuv")
 
 [node name="Spacer" type="Control" parent="MarginContainer/VBox/HP_stat"]
 custom_minimum_size = Vector2(0, 15)
@@ -204,7 +208,7 @@ size_flags_horizontal = 3
 [node name="amt" type="Label" parent="MarginContainer/VBox/HP_stat"]
 layout_mode = 2
 text = "5"
-label_settings = ExtResource("1_4evtm")
+label_settings = SubResource("LabelSettings_e8cuv")
 horizontal_alignment = 1
 
 [node name="ATK_stat" type="HBoxContainer" parent="MarginContainer/VBox"]
@@ -214,7 +218,7 @@ size_flags_vertical = 4
 [node name="name" type="Label" parent="MarginContainer/VBox/ATK_stat"]
 layout_mode = 2
 text = "ATK:"
-label_settings = ExtResource("1_4evtm")
+label_settings = SubResource("LabelSettings_e8cuv")
 
 [node name="Spacer" type="Control" parent="MarginContainer/VBox/ATK_stat"]
 custom_minimum_size = Vector2(0, 15)
@@ -224,7 +228,7 @@ size_flags_horizontal = 3
 [node name="amt" type="Label" parent="MarginContainer/VBox/ATK_stat"]
 layout_mode = 2
 text = "10"
-label_settings = ExtResource("1_4evtm")
+label_settings = SubResource("LabelSettings_e8cuv")
 horizontal_alignment = 1
 
 [node name="EP_stat" type="HBoxContainer" parent="MarginContainer/VBox"]
@@ -234,7 +238,7 @@ size_flags_vertical = 4
 [node name="name" type="Label" parent="MarginContainer/VBox/EP_stat"]
 layout_mode = 2
 text = "EP:"
-label_settings = ExtResource("1_4evtm")
+label_settings = SubResource("LabelSettings_e8cuv")
 
 [node name="Spacer" type="Control" parent="MarginContainer/VBox/EP_stat"]
 custom_minimum_size = Vector2(0, 15)
@@ -244,7 +248,7 @@ size_flags_horizontal = 3
 [node name="amt" type="Label" parent="MarginContainer/VBox/EP_stat"]
 layout_mode = 2
 text = "0"
-label_settings = ExtResource("1_4evtm")
+label_settings = SubResource("LabelSettings_e8cuv")
 horizontal_alignment = 1
 
 [node name="CHR_stat" type="HBoxContainer" parent="MarginContainer/VBox"]
@@ -254,7 +258,7 @@ size_flags_vertical = 4
 [node name="name" type="Label" parent="MarginContainer/VBox/CHR_stat"]
 layout_mode = 2
 text = "CHR:"
-label_settings = ExtResource("1_4evtm")
+label_settings = SubResource("LabelSettings_e8cuv")
 
 [node name="Spacer" type="Control" parent="MarginContainer/VBox/CHR_stat"]
 custom_minimum_size = Vector2(0, 15)
@@ -264,7 +268,7 @@ size_flags_horizontal = 3
 [node name="amt" type="Label" parent="MarginContainer/VBox/CHR_stat"]
 layout_mode = 2
 text = "35"
-label_settings = ExtResource("1_4evtm")
+label_settings = SubResource("LabelSettings_e8cuv")
 horizontal_alignment = 1
 
 [connection signal="pressed" from="MarginContainer/VBox/HP_rune/HPRuneUse" to="." method="_on_hp_rune_use_pressed"]

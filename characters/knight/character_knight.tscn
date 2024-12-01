@@ -64,7 +64,6 @@ script = ExtResource("2_e4ef6")
 script = ExtResource("4_k4d5v")
 BasicBoltScene = ExtResource("5_jahx0")
 LightningBoltScene = ExtResource("6_oe7nv")
-sfx_gunshot = ExtResource("7_khu4f")
 
 [node name="firerate" type="Timer" parent="AbilityManager/BasicAttack"]
 wait_time = 0.15
@@ -73,6 +72,16 @@ one_shot = true
 [node name="recoil" type="Timer" parent="AbilityManager/BasicAttack"]
 wait_time = 0.16
 one_shot = true
+
+[node name="gunshotPlayer1" type="AudioStreamPlayer" parent="AbilityManager/BasicAttack"]
+stream = ExtResource("7_khu4f")
+volume_db = -15.0
+pitch_scale = 0.9
+
+[node name="gunshotPlayer2" type="AudioStreamPlayer" parent="AbilityManager/BasicAttack"]
+stream = ExtResource("7_khu4f")
+volume_db = -15.0
+pitch_scale = 0.9
 
 [node name="Ultimate" type="Node2D" parent="AbilityManager"]
 script = ExtResource("7_hkru2")

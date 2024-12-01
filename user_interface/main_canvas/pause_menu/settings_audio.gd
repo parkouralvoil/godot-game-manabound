@@ -1,5 +1,7 @@
 extends Control
 
+func _ready() -> void:
+	_on_master_value_changed(0.5)
 
 func _on_master_value_changed(value: float) -> void:
 	set_volume(0, value)

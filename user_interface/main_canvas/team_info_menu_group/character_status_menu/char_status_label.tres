@@ -1,4 +1,7 @@
-[gd_resource type="LabelSettings" format=3 uid="uid://2ltl51gdr4g6"]
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://2ltl51gdr4g6"]
+
+[ext_resource type="FontFile" uid="uid://bbkhj4uknd5uk" path="res://assets/fonts/PFDinTextPro-Light.ttf" id="1_5xhb1"]
 
 [resource]
-font_size = 12
+font = ExtResource("1_5xhb1")
+font_size = 14

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="AreaData" load_steps=13 format=3 uid="uid://jmm8hearhswm"]
+[gd_resource type="Resource" script_class="AreaData" load_steps=17 format=3 uid="uid://jmm8hearhswm"]
 
 [ext_resource type="Resource" uid="uid://dh0s11cxw5qqb" path="res://resources/data/dungeon_managers/blueCity/presets/Calm.tres" id="1_1gn1v"]
 [ext_resource type="Script" path="res://resources/data/dungeon_managers/area_data.gd" id="1_el6li"]
@@ -12,11 +12,15 @@
 [ext_resource type="PackedScene" uid="uid://bt83dqwnea6g6" path="res://scenes/levels/blue_city/city_twofloors.tscn" id="6_2udg3"]
 [ext_resource type="PackedScene" uid="uid://dvekt06510ha5" path="res://scenes/levels/blue_city/city_warehouse.tscn" id="7_xpyr5"]
 [ext_resource type="Resource" uid="uid://bt31wp1frvhxs" path="res://resources/data/dungeon_managers/blueCity/presets/CityRest.tres" id="8_v2es5"]
+[ext_resource type="PackedScene" uid="uid://cba6jnamrr7mi" path="res://scenes/levels/blue_city/city_funnel.tscn" id="11_e8mmr"]
+[ext_resource type="PackedScene" uid="uid://brsf8arr5xegx" path="res://scenes/levels/blue_city/city_mall.tscn" id="12_67j35"]
+[ext_resource type="PackedScene" uid="uid://c6adokomyn6rg" path="res://scenes/levels/blue_city/city_road.tscn" id="13_122nj"]
+[ext_resource type="PackedScene" uid="uid://bguekngfq8bb5" path="res://scenes/levels/blue_city/city_corner.tscn" id="14_8i0so"]
 
 [resource]
 script = ExtResource("1_el6li")
 area_name = "City"
-NormalRooms = Array[PackedScene]([ExtResource("6_2udg3"), ExtResource("7_xpyr5")])
+NormalRooms = Array[PackedScene]([ExtResource("6_2udg3"), ExtResource("7_xpyr5"), ExtResource("11_e8mmr"), ExtResource("12_67j35"), ExtResource("13_122nj"), ExtResource("14_8i0so")])
 rest_lvl = 5
 boss_lvl = 11
 RestPresets = Array[ExtResource("1_nlfjy")]([ExtResource("8_v2es5")])

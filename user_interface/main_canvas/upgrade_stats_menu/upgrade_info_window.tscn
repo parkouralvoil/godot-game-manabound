@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://dx4c1ljwj71uk"]
 
-[ext_resource type="LabelSettings" uid="uid://2ltl51gdr4g6" path="res://user_interface/main_canvas/team_info_menu_group/character_status_menu/char_status_label.tres" id="1_31grs"]
+[ext_resource type="LabelSettings" uid="uid://buthhqor0rds0" path="res://resources/label_settings/font_system_desc.tres" id="1_lroe5"]
 
 [node name="UpgradeInfoWindow" type="PanelContainer"]
 anchors_preset = 15
@@ -41,7 +41,7 @@ size_flags_vertical = 3
 [node name="rune_effects" type="Label" parent="MarginContainer/VBox/ScrollContainer/SubVBox"]
 layout_mode = 2
 text = "Rune Effects:"
-label_settings = ExtResource("1_31grs")
+label_settings = ExtResource("1_lroe5")
 
 [node name="Separator" type="Control" parent="MarginContainer/VBox/ScrollContainer/SubVBox"]
 custom_minimum_size = Vector2(0, 10)
@@ -51,7 +51,7 @@ layout_mode = 2
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 text = "Using runes increases the corresponding stat by a flat amount."
-label_settings = ExtResource("1_31grs")
+label_settings = ExtResource("1_lroe5")
 autowrap_mode = 3
 
 [node name="effect of runes" type="Label" parent="MarginContainer/VBox/ScrollContainer/SubVBox"]
@@ -61,7 +61,7 @@ text = "- HP rune gives +1 max HP
 - ATK rune gives +3 ATK
 - EP rune gives +5 EP
 - CHR rune gives +2 CHR"
-label_settings = ExtResource("1_31grs")
+label_settings = ExtResource("1_lroe5")
 autowrap_mode = 3
 
 [node name="Separator2" type="Control" parent="MarginContainer/VBox/ScrollContainer/SubVBox"]
@@ -72,7 +72,7 @@ layout_mode = 2
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 text = "ATK and EP runes are more common than HP and CHR runes."
-label_settings = ExtResource("1_31grs")
+label_settings = ExtResource("1_lroe5")
 autowrap_mode = 3
 
 [node name="Separator3" type="Control" parent="MarginContainer/VBox/ScrollContainer/SubVBox"]
@@ -88,7 +88,7 @@ color = Color(0.556863, 0.556863, 0.556863, 1)
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 text = "Recommended usage of runes:"
-label_settings = ExtResource("1_31grs")
+label_settings = ExtResource("1_lroe5")
 autowrap_mode = 3
 
 [node name="Separator4" type="Control" parent="MarginContainer/VBox/ScrollContainer/SubVBox"]
@@ -102,5 +102,5 @@ text = "Characters that primarily damage using abilities prefer ATK runes.
 
 Characters that rely on inflicting elemental reactions or debuffs benefit from EP runes.
 "
-label_settings = ExtResource("1_31grs")
+label_settings = ExtResource("1_lroe5")
 autowrap_mode = 3

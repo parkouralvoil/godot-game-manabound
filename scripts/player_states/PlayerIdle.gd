@@ -30,7 +30,6 @@ func Update(_delta: float) -> void:
 	#if p.velocity != Vector2.ZERO:
 	if not p.PlayerInfo.basic_attacking:
 		flip_sprite()
-	handle_inputs()
 	play_anim()
 
 
@@ -58,6 +57,8 @@ func Physics_Update(delta: float) -> void:
 	p.move_and_slide()
 	# slow down player's speed xd
 
+func _unhandled_input(_event: InputEvent) -> void:
+	handle_inputs()
 
 func handle_inputs() -> void: ## since control UIs need to take click
 	if p.controls_disabled:

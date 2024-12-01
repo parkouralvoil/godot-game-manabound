@@ -1,7 +1,7 @@
-[gd_resource type="AtlasTexture" load_steps=2 format=3 uid="uid://dwkkeflj1gmgf"]
+[gd_resource type="AtlasTexture" load_steps=2 format=3 uid="uid://b526hy6m06fei"]
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_70iyv"]
+[ext_resource type="Texture2D" uid="uid://c36f5r6cnvwpu" path="res://assets/sprite_projectiles/bullet_pixel_Blue.png" id="1_lqypy"]
 
 [resource]
-atlas = SubResource("CompressedTexture2D_70iyv")
-region = Rect2(196, 101, 7, 7)
+atlas = ExtResource("1_lqypy")
+region = Rect2(196, 132, 8, 8)

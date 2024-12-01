@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://bfigo4q6at8d8"]
+[gd_scene load_steps=18 format=3 uid="uid://bfigo4q6at8d8"]
 
 [ext_resource type="Script" path="res://scenes/main/main.gd" id="1_fwn4r"]
 [ext_resource type="Script" path="res://scenes/main/dungeon_holder.gd" id="2_j78xc"]
@@ -17,7 +17,6 @@
 [ext_resource type="Material" uid="uid://bhwosssphve8" path="res://resources/particles/laser_casting_particles.tres" id="8_6k147"]
 [ext_resource type="Material" uid="uid://c8r5m4n7colab" path="res://resources/particles/laser_impact_particles.tres" id="9_sarm2"]
 [ext_resource type="PackedScene" uid="uid://csqsr7eo05kdl" path="res://scenes/main/level_summary.tscn" id="11_5utcx"]
-[ext_resource type="Script" path="res://scenes/main/level_summary.gd" id="12_sjol1"]
 
 [node name="Main" type="Node2D"]
 process_mode = 3
@@ -41,16 +40,10 @@ position_smoothing_enabled = false
 [node name="PlayerHolder" parent="." instance=ExtResource("4_p316a")]
 process_mode = 1
 
-[node name="LevelSummary" parent="." instance=ExtResource("11_5utcx")]
-script = ExtResource("12_sjol1")
-
 [node name="particle_preloader_for_web" type="Node2D" parent="."]
 process_mode = 1
-position = Vector2(-126, 135)
+position = Vector2(-789, -77)
 script = ExtResource("4_j1irx")
 par_array = Array[ParticleProcessMaterial]([ExtResource("5_lx26c"), ExtResource("6_omtpx"), ExtResource("7_dlauh"), ExtResource("8_6k147"), ExtResource("9_sarm2")])
 
-[node name="music" type="AudioStreamPlayer" parent="."]
-process_mode = 3
-volume_db = -60.0
-autoplay = true
+[node name="LevelSummary" parent="." instance=ExtResource("11_5utcx")]

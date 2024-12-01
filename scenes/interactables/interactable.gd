@@ -37,11 +37,11 @@ func _physics_process(_delta: float) -> void:
 func set_color(parent: Node) -> void:
 	if parent is ExitDoor:
 		arrow.modulate = Color(0, 1, 0)
+	elif parent is MainHub_SignBoard:
+		arrow.modulate = Color(0, 1, 0)
 	elif parent is DownedCharacter:
 		arrow.modulate = Color(1, 0.5, 0)
 	elif parent is UpgradeStation:
 		arrow.modulate = Color(1, 0.84, 0)
 	else: ## assume its exit door color
-		arrow.modulate = Color(0, 1, 0)
-	#elif parent is TreeStation:
-	#	arrow.modulate = Color(0, 0, 1)
+		arrow.modulate = Color(1, 1, 1)

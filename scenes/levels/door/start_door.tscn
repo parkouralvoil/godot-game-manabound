@@ -8,4 +8,6 @@ atlas = ExtResource("1_shye6")
 region = Rect2(0, 40, 32, 40)
 
 [node name="StartDoor" type="Sprite2D"]
+z_index = -1
+z_as_relative = false
 texture = SubResource("AtlasTexture_c5p3c")

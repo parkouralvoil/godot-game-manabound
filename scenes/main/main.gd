@@ -27,18 +27,18 @@ func _ready() -> void:
 	assert(main_selected_team_info)
 	assert(main_player_inventory)
 	_update_children_data()
-	
 	player_hud.hide()
 	
 	dungeon_holder.previous_level_cleaned_up.connect(_remove_player_holder)
 	dungeon_holder.next_level_loaded.connect(_enter_next_lvl)
 	
 	dungeon_holder.initialize_main_hub()
-	#dungeon_holder.load_next_lvl()
+	await fade_in()
 	## STEPS: dungeon.load_next_lvl -> _enter_next_lvl -> fade in
 
 
 func fade_in() -> void: ## black screen go away
+	black_screen.show()
 	var t: Tween = create_tween()
 	t.set_ease(Tween.EASE_OUT)
 	t.tween_property(black_screen, "color", transparent, 0.7).from(opaque)

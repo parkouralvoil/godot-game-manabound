@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://c25whdi1vpp8c"]
+[gd_scene load_steps=6 format=3 uid="uid://c25whdi1vpp8c"]
 
 [ext_resource type="Script" path="res://projectiles/fire_projectiles/rogue_melee_combo/rogue_melee_hit.gd" id="1_5cgec"]
 [ext_resource type="Texture2D" uid="uid://b2gagvgpvrjud" path="res://assets/sprite_projectiles/bullet_pixel_BrightRed.png" id="2_mk5q7"]
+[ext_resource type="Material" uid="uid://jcnbe5fsra1p" path="res://resources/particles/sword_impact_particles.tres" id="2_nn411"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kb0sb"]
 atlas = ExtResource("2_mk5q7")
@@ -16,6 +17,7 @@ collision_layer = 0
 collision_mask = 8
 monitorable = false
 script = ExtResource("1_5cgec")
+sword_impact_particle = ExtResource("2_nn411")
 
 [node name="hitbox_lifespan" type="Timer" parent="."]
 wait_time = 0.1

@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://ditj78b8rkpnw"]
 
 [ext_resource type="Script" path="res://user_interface/player_hud_canvas/team_UI_stuff/team_hud.gd" id="1_2n4q7"]
+[ext_resource type="LabelSettings" uid="uid://cc4naicdvluqg" path="res://user_interface/player_hud_canvas/team_hud_label.tres" id="2_xj3y4"]
 [ext_resource type="PackedScene" uid="uid://cdc6lfjuxxbia" path="res://user_interface/player_hud_canvas/team_UI_stuff/panel_char..tscn" id="3_fcocw"]
-[ext_resource type="LabelSettings" uid="uid://2ltl51gdr4g6" path="res://user_interface/main_canvas/team_info_menu_group/character_status_menu/char_status_label.tres" id="4_civsu"]
 
 [node name="TeamHud" type="VBoxContainer"]
 anchors_preset = 6
@@ -18,17 +18,19 @@ grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
 mouse_filter = 2
-theme_override_constants/separation = 5
+theme_override_constants/separation = 15
 script = ExtResource("1_2n4q7")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 2
 
 [node name="AutoAim" type="Label" parent="PanelContainer"]
+custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
 text = "Aim: Manual"
-label_settings = ExtResource("4_civsu")
+label_settings = ExtResource("2_xj3y4")
 horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Panel_Char1" parent="." instance=ExtResource("3_fcocw")]
 layout_mode = 2

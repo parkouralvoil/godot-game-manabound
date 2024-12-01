@@ -72,32 +72,6 @@ bus = &"Sound"
 
 [node name="AudioStreamPlayer2D20" type="AudioStreamPlayer2D" parent="ShortPositionalQueue"]
 
-[node name="AudioStreamPlayer2D21" type="AudioStreamPlayer2D" parent="ShortPositionalQueue"]
-
-[node name="AudioStreamPlayer2D22" type="AudioStreamPlayer2D" parent="ShortPositionalQueue"]
-
-[node name="AudioStreamPlayer2D23" type="AudioStreamPlayer2D" parent="ShortPositionalQueue"]
-
-[node name="AudioStreamPlayer2D24" type="AudioStreamPlayer2D" parent="ShortPositionalQueue"]
-
-[node name="AudioStreamPlayer2D25" type="AudioStreamPlayer2D" parent="ShortPositionalQueue"]
-
-[node name="AudioStreamPlayer2D26" type="AudioStreamPlayer2D" parent="ShortPositionalQueue"]
-
-[node name="AudioStreamPlayer2D27" type="AudioStreamPlayer2D" parent="ShortPositionalQueue"]
-
-[node name="AudioStreamPlayer2D28" type="AudioStreamPlayer2D" parent="ShortPositionalQueue"]
-
-[node name="AudioStreamPlayer2D29" type="AudioStreamPlayer2D" parent="ShortPositionalQueue"]
-
-[node name="AudioStreamPlayer2D30" type="AudioStreamPlayer2D" parent="ShortPositionalQueue"]
-
-[node name="AudioStreamPlayer2D31" type="AudioStreamPlayer2D" parent="ShortPositionalQueue"]
-
-[node name="AudioStreamPlayer2D32" type="AudioStreamPlayer2D" parent="ShortPositionalQueue"]
-
-[node name="AudioStreamPlayer2D33" type="AudioStreamPlayer2D" parent="ShortPositionalQueue"]
-
 [node name="PositionalQueue" type="Node2D" parent="."]
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="PositionalQueue"]
@@ -133,6 +107,38 @@ max_distance = 1000.0
 attenuation = 2.0
 
 [node name="AudioStreamPlayer2D9" type="AudioStreamPlayer2D" parent="PositionalQueue"]
+max_distance = 1000.0
+attenuation = 2.0
+
+[node name="AudioStreamPlayer2D10" type="AudioStreamPlayer2D" parent="PositionalQueue"]
+max_distance = 1000.0
+attenuation = 2.0
+
+[node name="AudioStreamPlayer2D11" type="AudioStreamPlayer2D" parent="PositionalQueue"]
+max_distance = 1000.0
+attenuation = 2.0
+
+[node name="AudioStreamPlayer2D12" type="AudioStreamPlayer2D" parent="PositionalQueue"]
+max_distance = 1000.0
+attenuation = 2.0
+
+[node name="AudioStreamPlayer2D13" type="AudioStreamPlayer2D" parent="PositionalQueue"]
+max_distance = 1000.0
+attenuation = 2.0
+
+[node name="AudioStreamPlayer2D14" type="AudioStreamPlayer2D" parent="PositionalQueue"]
+max_distance = 1000.0
+attenuation = 2.0
+
+[node name="AudioStreamPlayer2D15" type="AudioStreamPlayer2D" parent="PositionalQueue"]
+max_distance = 1000.0
+attenuation = 2.0
+
+[node name="AudioStreamPlayer2D16" type="AudioStreamPlayer2D" parent="PositionalQueue"]
+max_distance = 1000.0
+attenuation = 2.0
+
+[node name="AudioStreamPlayer2D17" type="AudioStreamPlayer2D" parent="PositionalQueue"]
 max_distance = 1000.0
 attenuation = 2.0
 

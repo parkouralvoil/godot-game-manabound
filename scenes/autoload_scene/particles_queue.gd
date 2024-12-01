@@ -12,12 +12,12 @@ func _ready() -> void:
 		#add_child(particle_scene.instantiate() )
 
 
-func get_next_particle() -> GPUParticles2D:
+func _get_next_particle() -> GPUParticles2D:
 	return get_child(index)
 
 
-func trigger() -> void:
-	get_next_particle().restart()
+func _trigger() -> void:
+	_get_next_particle().restart()
 	index = (index + 1) % queue_count
 
 
@@ -27,8 +27,11 @@ func set_property_restart(process_mat: ParticleProcessMaterial,
 		amt: int,
 		explosiveness: float,
 		lifetime: float,
-		pos: Vector2) -> void:
-	var p: GPUParticles2D = get_next_particle()
+		pos: Vector2,
+		direction: Vector2 = Vector2.ZERO) -> void:
+	var p: GPUParticles2D = _get_next_particle()
+	if direction != Vector2.ZERO:
+		process_mat.direction = Vector3(direction.x, direction.y, 0)
 	p.process_material = process_mat
 	p.texture = texture
 	p.one_shot = one_shot
@@ -36,4 +39,4 @@ func set_property_restart(process_mat: ParticleProcessMaterial,
 	p.explosiveness = explosiveness
 	p.lifetime = lifetime
 	p.global_position = pos
-	trigger()
+	_trigger()

@@ -85,7 +85,6 @@ debug_color = Color(0.901961, 0.282353, 0.337255, 0.419608)
 
 [node name="AttackComponent" type="Node2D" parent="."]
 script = ExtResource("6_rikjp")
-machinegun_sfx = ExtResource("14_cx3xm")
 
 [node name="bullet_origin" type="Marker2D" parent="AttackComponent"]
 position = Vector2(0, 16)
@@ -103,6 +102,14 @@ script = ExtResource("3_rk0t3")
 
 [node name="ammo1" type="Sprite2D" parent="AttackComponent/AmmoSpriteContainer"]
 texture = ExtResource("7_p7erf")
+
+[node name="MachinegunPlayer" type="AudioStreamPlayer2D" parent="AttackComponent"]
+stream = ExtResource("14_cx3xm")
+volume_db = -12.0
+pitch_scale = 0.75
+max_distance = 1000.0
+attenuation = 2.0
+bus = &"Sound"
 
 [connection signal="timeout" from="AttackComponent/reload" to="AttackComponent" method="_on_reload_timeout"]
 [connection signal="timeout" from="AttackComponent/before_first_shot" to="AttackComponent" method="_on_before_first_shot_timeout"]

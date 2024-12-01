@@ -113,7 +113,7 @@ func initialize_model() -> void:
 	StreeModel.root_node.name = "Apprentice Witch"
 	StreeModel.root_node.description = "A student from Mana Haven, trained in the magic of Frost Art." \
 	+ "\n\nNorthern sages imparted their arts and teachings to the witches" \
-	+ " to aid them in rebuilding a great empire felled by a colossal spear of sky-rock.\n\nElement: Ice"
+	+ " to aid them in rebuilding a great empire ruined by spears of sky-rock.\n\nElement: Ice"
 
 	
 	## char's basic atk nodes

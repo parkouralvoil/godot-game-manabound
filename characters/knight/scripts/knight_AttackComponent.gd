@@ -12,7 +12,8 @@ var burst_counter: int = 0
 @onready var t_firerate: Timer = $firerate
 @onready var t_recoil: Timer = $recoil
 
-@export var sfx_gunshot: AudioStream
+@onready var gunshot_player1: AudioStreamPlayer = $gunshotPlayer1
+@onready var gunshot_player2: AudioStreamPlayer = $gunshotPlayer2
 
 func _ready() -> void:
 	pass
@@ -65,13 +66,16 @@ func basic_atk() -> void:
 	p_scene = BasicBoltScene if burst_counter < 2 else LightningBoltScene
 	
 	if AM.skill_basicAtk_double:
+		gunshot_player1.pitch_scale = 0.8
+		gunshot_player2.pitch_scale = 0.8
 		shoot(p_scene, 4)
 		shoot(p_scene, -4)
-		SoundPlayer.play_sound(sfx_gunshot, -15, 0.8)
-		SoundPlayer.play_sound(sfx_gunshot, -15, 0.8)
+		gunshot_player1.play()
+		gunshot_player2.play()
 	else:
 		shoot(p_scene, 0)
-		SoundPlayer.play_sound(sfx_gunshot, -15, 0.9)
+		gunshot_player1.pitch_scale = 0.9
+		gunshot_player1.play()
 	
 	if AM.level_basicAtk_burst > 0:
 		burst_counter = (burst_counter + 1) % 3

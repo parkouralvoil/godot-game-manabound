@@ -49,7 +49,8 @@ var interrupted: bool = false
 @onready var e: RailgunMainGun = owner
 @onready var sprite_ammo: Array[Sprite2D] = [$AmmoSpriteContainer/ammo1, $AmmoSpriteContainer/ammo2]
 @onready var charge_particles: GPUParticles2D = $ChargingAttack
-@onready var charging_player: AudioStreamPlayer2D = $ChargingSound
+@onready var charging_player: AudioStreamPlayer2D = $ChargingSoundPlayer
+@onready var rapid_player: AudioStreamPlayer2D =  $RapidSoundPlayer
 # Called when the node enters the scene tree for the first time.
 
 func _ready() -> void:
@@ -180,12 +181,13 @@ func attack_rapid() -> void:
 	for i in range(2): ## 16 shots total
 		rotation_speed = default_rotation_speed/2
 		for j in range(8):
-			SoundPlayer.play_sound_2D(global_position, machinegun_sfx, -6, 1.1)
+			rapid_player.play()
 			shoot(ShotgunBulletPath, Vector2.RIGHT.rotated(aim_angle), speed)
 			t_firerate.start(0.2)
 			await t_firerate.timeout
 		ammo -= 1
 	rotation_speed = default_rotation_speed
+	rapid_player.stop()
 	attack_finished(ATK_MODE.GUN)
 
 func attack_charged() -> void:

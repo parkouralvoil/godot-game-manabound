@@ -33,7 +33,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="background" type="ColorRect" parent="CenterContainer"]
-custom_minimum_size = Vector2(500, 320)
+custom_minimum_size = Vector2(500, 340)
 layout_mode = 2
 color = Color(0.258824, 0.258824, 0.301961, 0.8)
 
@@ -70,7 +70,7 @@ disabled = true
 text = "-- More to come soon --"
 
 [node name="Spacer" type="Control" parent="CenterContainer/HBox/VBox"]
-custom_minimum_size = Vector2(0, 200)
+custom_minimum_size = Vector2(0, 220)
 layout_mode = 2
 size_flags_vertical = 3
 
@@ -81,11 +81,11 @@ color = Color(0.585062, 0.585062, 0.585062, 1)
 
 [node name="Details_BlueCity" parent="CenterContainer/HBox" instance=ExtResource("3_ryls1")]
 unique_name_in_owner = true
-visible = false
 layout_mode = 2
 
 [node name="Details_Tutorial" parent="CenterContainer/HBox" instance=ExtResource("5_yywr1")]
 unique_name_in_owner = true
+visible = false
 layout_mode = 2
 
 [connection signal="pressed" from="CenterContainer/HBox/VBox/novice" to="." method="_on_novice_pressed"]

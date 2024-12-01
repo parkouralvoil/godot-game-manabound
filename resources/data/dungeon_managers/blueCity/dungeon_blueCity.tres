@@ -1,7 +1,5 @@
-[gd_resource type="Resource" script_class="DungeonData" load_steps=5 format=3 uid="uid://cnqflwm13q5h2"]
+[gd_resource type="Resource" script_class="DungeonData" load_steps=3 format=3 uid="uid://cnqflwm13q5h2"]
 
-[ext_resource type="Script" path="res://resources/data/dungeon_managers/area_data.gd" id="1_8eoct"]
-[ext_resource type="Resource" uid="uid://jmm8hearhswm" path="res://resources/data/dungeon_managers/blueCity/areas/area_city.tres" id="1_ofhcx"]
 [ext_resource type="Resource" uid="uid://cc7kn8pkqiq0c" path="res://resources/data/dungeon_managers/blueCity/presets/Boss1.tres" id="4_iw051"]
 [ext_resource type="Script" path="res://resources/data/dungeon_managers/dungeon_data.gd" id="4_pfx3o"]
 
@@ -10,4 +8,3 @@ script = ExtResource("4_pfx3o")
 force_test_preset = true
 test_preset = ExtResource("4_iw051")
 dungeon_name = "Region"
-area_datas = Array[ExtResource("1_8eoct")]([ExtResource("1_ofhcx"), ExtResource("1_ofhcx")])

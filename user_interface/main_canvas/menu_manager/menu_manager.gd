@@ -12,6 +12,7 @@ var level_up_available: bool
 @onready var upgrade_stats_menu: UpgradeStatsMenu = $UpgradeStatsMenu
 @onready var upgrade_stree_menu: UpgradeStreeMenu = $UpgradeStreeMenu
 @onready var select_expedition_menu: SelectExpeditionMenu = $SelectExpeditionMenu
+@onready var credits_menu: CreditsMenu = $CreditsMenu
 
 @onready var screen_buttons: HBoxContainer = $HBox_ScreenButtons
 
@@ -33,6 +34,7 @@ func _ready() -> void:
 	EventBus.upgrade_stats_pressed.connect(switch_current_menu.bind(upgrade_stats_menu))
 	EventBus.interacted_upgraded_station.connect(switch_current_menu.bind(upgrade_stree_menu))
 	EventBus.interacted_signboard.connect(switch_current_menu.bind(select_expedition_menu))
+	EventBus.interacted_credits.connect(switch_current_menu.bind(credits_menu))
 	EventBus.mainhub_departed.connect(close_menu.unbind(1))
 	
 	team_info.hide()
@@ -40,6 +42,7 @@ func _ready() -> void:
 	team_info.exit_menu.connect(close_menu)
 	upgrade_stats_menu.exit_menu.connect(close_menu)
 	upgrade_stree_menu.exit_menu.connect(close_menu)
+	credits_menu.exit_menu.connect(close_menu)
 	preset_choice_window.hide()
 
 
@@ -76,7 +79,8 @@ func switch_current_menu(_menu: Control) -> void:
 
 
 func close_menu() -> void:
-	current_menu_opened.hide()
+	if current_menu_opened:
+		current_menu_opened.hide()
 	SoundPlayer.normal_volume()
 	unpause_game()
 	screen_buttons.show()

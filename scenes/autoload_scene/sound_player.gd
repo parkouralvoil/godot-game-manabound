@@ -29,6 +29,7 @@ var _current_music: AudioStream = null
 @onready var notification_player: AudioStreamPlayer = $NotificationPlayer
 
 func _ready() -> void:
+	short_pos_size = short_pos_q.get_children().size()
 	pos_size = pos_q.get_children().size()
 	non_pos_size = non_pos_q.get_children().size()
 
@@ -41,7 +42,7 @@ func _trigger_short_pos(pos: Vector2, sound: AudioStream, volume_change: float, 
 	audio_node.volume_db = volume_change # 0 means default volume
 	audio_node.pitch_scale = pitch
 	audio_node.play(0)
-	pos_index = (pos_index + 1) % pos_size
+	short_pos_index = (short_pos_index + 1) % short_pos_size
 
 
 func _trigger_pos(pos: Vector2, sound: AudioStream, volume_change: float, pitch: float) -> void:
@@ -54,7 +55,7 @@ func _trigger_pos(pos: Vector2, sound: AudioStream, volume_change: float, pitch:
 	pos_index = (pos_index + 1) % pos_size
 
 func play_sound_2D(pos: Vector2, sound: AudioStream, volume_change: float = 0, pitch: float = 1) -> void:
-	if sound.get_length() > 2: # longer than 2 seconds
+	if sound.get_length() > 4: # longer than 2 seconds
 		_trigger_pos(pos, sound, volume_change, pitch)
 	else:
 		_trigger_short_pos(pos, sound, volume_change, pitch)
@@ -94,7 +95,7 @@ func play_music(music: AudioStream) -> void:
 			_current_music = music
 			music_player.stream = music
 			music_player.play()
-	print_debug("called this")
+	#print_debug("called this")
 
 func stop_music() -> void:
 	_current_music = null
@@ -115,4 +116,4 @@ func play_notification_sound(sound: AudioStream, vol: float) -> void:
 ## doing this here incase the sword swing is queue'd freed or smthg
 func play_sword_impact_sound() -> void:
 	var chosen_impact: AudioStream = sword_hits.pick_random()
-	play_sound(chosen_impact, -10, 0.85)
+	play_sound(chosen_impact, -17, 1.1)

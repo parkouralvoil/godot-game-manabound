@@ -56,8 +56,9 @@ var scale_atk: float = 4
 ## variables to make skill tree easier to track:
 @onready var lvl_basicAtk_size_atk: int:
 	set(lvl):
+		var base_atk: float = stats.ATK - scale_atk * lvl_basicAtk_size_atk
 		lvl_basicAtk_size_atk = lvl
-		stats.ATK = stats.initial_ATK + (scale_atk * lvl)
+		stats.ATK = base_atk + (scale_atk * lvl)
 		update_damage() ## should probably signal this...
 		melee_size = melee_size_base + (melee_size_scale * lvl)
 

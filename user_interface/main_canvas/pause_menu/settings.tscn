@@ -17,7 +17,7 @@ modulate = Color(1, 1, 0.996078, 1)
 custom_minimum_size = Vector2(350, 0)
 layout_mode = 2
 size_flags_vertical = 3
-current_tab = 1
+current_tab = 3
 
 [node name="Video" type="MarginContainer" parent="TabContainer"]
 visible = false
@@ -63,6 +63,7 @@ popup/item_3/text = "Mailbox"
 popup/item_3/id = 3
 
 [node name="Audio" type="MarginContainer" parent="TabContainer"]
+visible = false
 custom_minimum_size = Vector2(300, 200)
 layout_mode = 2
 theme_override_constants/margin_left = 30
@@ -88,7 +89,7 @@ size_flags_horizontal = 4
 size_flags_vertical = 6
 max_value = 1.0
 step = 0.05
-value = 1.0
+value = 0.5
 
 [node name="music" type="Label" parent="TabContainer/Audio/audio_settings"]
 layout_mode = 2
@@ -220,7 +221,6 @@ text = "Esc"
 label_settings = SubResource("LabelSettings_4olrg")
 
 [node name="Other" type="MarginContainer" parent="TabContainer"]
-visible = false
 custom_minimum_size = Vector2(300, 200)
 layout_mode = 2
 theme_override_constants/margin_left = 30
@@ -248,6 +248,13 @@ text = "Invert mouse hover distance: "
 [node name="invert2" type="CheckBox" parent="TabContainer/Other/GridContainer"]
 layout_mode = 2
 
+[node name="fps" type="Label" parent="TabContainer/Other/GridContainer"]
+layout_mode = 2
+text = "Show FPS:"
+
+[node name="fps2" type="CheckBox" parent="TabContainer/Other/GridContainer"]
+layout_mode = 2
+
 [node name="Return" type="Button" parent="."]
 layout_mode = 2
 size_flags_horizontal = 8
@@ -260,4 +267,5 @@ text = " Return "
 [connection signal="value_changed" from="TabContainer/Audio/audio_settings/sound2" to="TabContainer/Audio/audio_settings" method="_on_sound_value_changed"]
 [connection signal="toggled" from="TabContainer/Other/GridContainer/camera2" to="." method="_on_camera_toggled"]
 [connection signal="toggled" from="TabContainer/Other/GridContainer/invert2" to="." method="_on_invert_2_toggled"]
+[connection signal="toggled" from="TabContainer/Other/GridContainer/fps2" to="." method="_on_fps_toggled"]
 [connection signal="pressed" from="Return" to="." method="_on_return_pressed"]

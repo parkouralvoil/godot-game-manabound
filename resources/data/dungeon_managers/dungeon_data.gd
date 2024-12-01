@@ -28,8 +28,6 @@ signal preset_selected(preset: RoomPreset) # for loading next level with selecte
 
 @export_category("Dungeon")
 @export var dungeon_name: String = "Region"
-@export_category("Area Datas")
-@export var area_datas: Array[AreaData]
 var area: AreaData
 
 var available_presets: Array[RoomPreset]
@@ -42,7 +40,6 @@ var current_area_index: int:
 var current_room: int = 0:
 	set(val):
 		current_room = maxi(0, val)
-var previous_room: PackedScene
 
 
 var enemy_HP_scaling: float = 0
@@ -72,6 +69,7 @@ func start_cycle(selected_expedition: AreaData) -> void:
 		EventBus.tutorial_team_restriction_set.emit(1)
 	else:
 		EventBus.tutorial_team_restriction_set.emit(3)
+		area.shuffle_room_array()
 	assert(area.EasyPresets.size() >= 1)
 	chosen_preset = area.EasyPresets[0]
 	preset_selected.emit(chosen_preset)
@@ -98,10 +96,11 @@ func _update_cycle_info() -> void: ## inside setter of cycle
 #region Room functions
 func start_room() -> void:
 	current_room = 0 ## since the code adds 1 every time go next room is called
-	print_debug("i was called")
+	#print_debug("i was called")
 
 
 func end_expedition() -> void: ## called by dungeon_holder
+	area.completed = true
 	if area is AreaTutorialData: ## tutorial
 		var msg := "You have finished the tutorial. Nice!"
 		EventBus.expedition_completed.emit(msg)
@@ -140,16 +139,7 @@ func get_level() -> PackedScene:
 	if chosen_preset.room: ## if preset has specific room, go there
 		return chosen_preset.room
 	
-	var rooms_available: Array[PackedScene] = area.NormalRooms.duplicate(false)
-	var selected_room: PackedScene = null
-	
-	if area.NormalRooms.size() > 1 and previous_room != null:
-		rooms_available.erase(previous_room)
-		selected_room = rooms_available.pick_random()
-	else:
-		selected_room = rooms_available.pick_random()
-	previous_room = selected_room
-	return selected_room
+	return area.get_normal_room()
 
 
 func get_preset_choices() -> Array[RoomPreset]: ## always return array of size 2

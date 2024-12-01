@@ -64,9 +64,6 @@ func remove_previous_lvl() -> void:
 
 
 func load_next_lvl() -> void: ## needs a parameter to see which map got chosen
-	## TODO: implement selecting random maps
-	
-	## TODO: implement going to rest room
 	var lvl_scene: PackedScene = dungeon_data.get_level()
 	assert(lvl_scene, "Array[NormalRooms] of AreaData has nothing")
 	current_level = lvl_scene.instantiate()

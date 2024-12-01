@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://user_interface/player_hud_canvas/team_UI_stuff/panel_char.gd" id="1_n0l6s"]
 [ext_resource type="Texture2D" uid="uid://ci6hb127q6kmh" path="res://characters/knight/visuals/knight_portrait.tres" id="2_34r3i"]
-[ext_resource type="LabelSettings" uid="uid://buthhqor0rds0" path="res://resources/label_settings/font_system_desc.tres" id="3_ele2s"]
+[ext_resource type="LabelSettings" uid="uid://cc4naicdvluqg" path="res://user_interface/player_hud_canvas/team_hud_label.tres" id="3_ma53d"]
 
 [node name="Panel_Char1" type="PanelContainer"]
 custom_minimum_size = Vector2(0, 60)
@@ -35,22 +35,22 @@ theme_override_constants/separation = 1
 layout_mode = 2
 theme_override_font_sizes/font_size = 10
 text = "[1] Knight"
-label_settings = ExtResource("3_ele2s")
+label_settings = ExtResource("3_ma53d")
 
 [node name="Label_health" type="Label" parent="HBoxContainer/VBoxContainer_info"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 10
 text = "HP: 50/50"
-label_settings = ExtResource("3_ele2s")
+label_settings = ExtResource("3_ma53d")
 
 [node name="Label_ammo" type="Label" parent="HBoxContainer/VBoxContainer_info"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 10
 text = "Ammo: 9/9 "
-label_settings = ExtResource("3_ele2s")
+label_settings = ExtResource("3_ma53d")
 
 [node name="Label_charge" type="Label" parent="HBoxContainer/VBoxContainer_info"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 10
 text = "Charge: 0/100"
-label_settings = ExtResource("3_ele2s")
+label_settings = ExtResource("3_ma53d")

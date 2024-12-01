@@ -32,8 +32,8 @@ var rune_CHR: int = 0:
 		number_of_runes_changed.emit()
 
 var HP_increase: int = 1
-var ATK_increase: int = 3
-var EP_increase: int = 5
+var ATK_increase: int = 1
+var EP_increase: int = 3
 var CHR_increase: int = 10
 
 ## TEMP: gonna have inventory handle upgrading stats for now

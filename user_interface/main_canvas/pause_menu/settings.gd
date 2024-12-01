@@ -6,6 +6,7 @@ class_name Settings
 
 static var camera_shake: bool = true
 static var inverted_hover: bool = false
+static var show_fps: bool = false
 
 signal settings_return_pressed()
 
@@ -20,3 +21,7 @@ func _on_camera_toggled(toggled_on: bool) -> void:
 
 func _on_invert_2_toggled(toggled_on: bool) -> void:
 	inverted_hover = toggled_on
+
+
+func _on_fps_toggled(toggled_on: bool) -> void:
+	show_fps = toggled_on

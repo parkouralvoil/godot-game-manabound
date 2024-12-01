@@ -21,10 +21,11 @@ resources_spreadsheet_view/context_menu_on_leftclick=false
 [application]
 
 config/name="New-tower-bullet-hell"
-run/main_scene="res://scenes/main/main.tscn"
+run/main_scene="res://user_interface/title_screen/title_screen.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
 run/max_fps=120
 config/icon="res://game_icon-export.png"
+config/windows_native_icon="res://game_icon-export.ico"
 
 [autoload]
 

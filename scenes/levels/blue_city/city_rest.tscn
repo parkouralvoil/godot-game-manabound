@@ -1,9 +1,10 @@
-[gd_scene load_steps=13 format=4 uid="uid://dg8mvmb7h5m4t"]
+[gd_scene load_steps=14 format=4 uid="uid://dg8mvmb7h5m4t"]
 
 [ext_resource type="Script" path="res://scenes/levels/blue_city/level_manager.gd" id="1_spgcc"]
 [ext_resource type="PackedScene" uid="uid://d23s3ceqy66ry" path="res://scenes/levels/test/test_parallax.tscn" id="2_odiln"]
 [ext_resource type="TileSet" uid="uid://bq4bd7di0pjwo" path="res://resources/tilemaps/blue_scifi.tres" id="3_77j1d"]
 [ext_resource type="Script" path="res://scenes/levels/holders/chest_rune_holder.gd" id="4_d8s8o"]
+[ext_resource type="PackedScene" uid="uid://b4cdpgn1inhqq" path="res://scenes/interactables/chest_rune.tscn" id="5_dfnn6"]
 [ext_resource type="Script" path="res://scenes/levels/holders/item_holder.gd" id="6_fyxg2"]
 [ext_resource type="Script" path="res://scenes/levels/holders/enemy_holder.gd" id="6_j1c72"]
 [ext_resource type="PackedScene" uid="uid://cievadvfmo3xd" path="res://scenes/levels/level_world_environment.tscn" id="7_t4ktx"]
@@ -76,6 +77,9 @@ color = Color(0, 0, 0, 1)
 
 [node name="ChestRuneHolder" type="Node2D" parent="."]
 script = ExtResource("4_d8s8o")
+
+[node name="ChestRune1" parent="ChestRuneHolder" instance=ExtResource("5_dfnn6")]
+position = Vector2(375, -43)
 
 [node name="NormalEnemyHolder" type="Node2D" parent="."]
 script = ExtResource("6_j1c72")
