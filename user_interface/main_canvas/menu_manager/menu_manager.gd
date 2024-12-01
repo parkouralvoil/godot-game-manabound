@@ -1,7 +1,7 @@
 extends Control
 class_name MenuManager
 
-@export var dev_console_enabled: bool = true
+@export var _dev_console_enabled: bool = false
 
 var current_menu_opened: Control = null
 var level_up_available: bool
@@ -65,7 +65,10 @@ func _unhandled_input(event: InputEvent) -> void:
 			unpause_game()
 		
 	if event.is_action_pressed("console"):
-		DevConsole.visible = not DevConsole.visible
+		if _dev_console_enabled:
+			DevConsole.visible = not DevConsole.visible
+		else:
+			DevConsole.visible = false
 
 
 func switch_current_menu(_menu: Control) -> void:

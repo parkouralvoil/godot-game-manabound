@@ -10,6 +10,15 @@ font = ExtResource("4_0beah")
 font_size = 18
 
 [node name="Settings" type="VBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 127.0
+offset_top = 117.0
+offset_right = -136.0
+offset_bottom = -95.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_0lto5")
 
 [node name="TabContainer" type="TabContainer" parent="."]
@@ -17,10 +26,9 @@ modulate = Color(1, 1, 0.996078, 1)
 custom_minimum_size = Vector2(350, 0)
 layout_mode = 2
 size_flags_vertical = 3
-current_tab = 3
+current_tab = 0
 
 [node name="Video" type="MarginContainer" parent="TabContainer"]
-visible = false
 custom_minimum_size = Vector2(300, 200)
 layout_mode = 2
 theme_override_constants/margin_left = 30
@@ -221,6 +229,7 @@ text = "Esc"
 label_settings = SubResource("LabelSettings_4olrg")
 
 [node name="Other" type="MarginContainer" parent="TabContainer"]
+visible = false
 custom_minimum_size = Vector2(300, 200)
 layout_mode = 2
 theme_override_constants/margin_left = 30
@@ -238,6 +247,7 @@ layout_mode = 2
 text = "Camera Shake:"
 
 [node name="camera2" type="CheckBox" parent="TabContainer/Other/GridContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 button_pressed = true
 
@@ -246,6 +256,7 @@ layout_mode = 2
 text = "Invert mouse hover distance: "
 
 [node name="invert2" type="CheckBox" parent="TabContainer/Other/GridContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 
 [node name="fps" type="Label" parent="TabContainer/Other/GridContainer"]
@@ -253,6 +264,7 @@ layout_mode = 2
 text = "Show FPS:"
 
 [node name="fps2" type="CheckBox" parent="TabContainer/Other/GridContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 
 [node name="Return" type="Button" parent="."]

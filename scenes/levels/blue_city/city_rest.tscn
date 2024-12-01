@@ -49,6 +49,7 @@ offset_left = -498.0
 offset_top = -11.0
 offset_right = 950.0
 offset_bottom = 266.0
+mouse_filter = 2
 color = Color(0, 0, 0, 1)
 
 [node name="black2" type="ColorRect" parent="tilemap_cityRest/BlackScreens"]
@@ -57,6 +58,7 @@ offset_left = -495.0
 offset_top = -655.0
 offset_right = 900.0
 offset_bottom = -388.0
+mouse_filter = 2
 color = Color(0, 0, 0, 1)
 
 [node name="black3" type="ColorRect" parent="tilemap_cityRest/BlackScreens"]
@@ -65,6 +67,7 @@ offset_left = -672.0
 offset_top = -400.0
 offset_right = 24.0
 offset_bottom = 13.0
+mouse_filter = 2
 color = Color(0, 0, 0, 1)
 
 [node name="black4" type="ColorRect" parent="tilemap_cityRest/BlackScreens"]
@@ -73,6 +76,7 @@ offset_left = 545.0
 offset_top = -410.0
 offset_right = 1122.0
 offset_bottom = -7.0
+mouse_filter = 2
 color = Color(0, 0, 0, 1)
 
 [node name="ChestRuneHolder" type="Node2D" parent="."]

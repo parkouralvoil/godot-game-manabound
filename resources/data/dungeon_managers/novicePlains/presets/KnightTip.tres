@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("1_v8jwf")
-preset_name = "Basic Level"
+preset_name = "Movement Tutorial"
 info1 = ""
 info2 = ""
 info3 = ""

@@ -101,11 +101,14 @@ func start_room() -> void:
 
 func end_expedition() -> void: ## called by dungeon_holder
 	area.completed = true
+	
 	if area is AreaTutorialData: ## tutorial
 		var msg := "You have finished the tutorial. Nice!"
+		ConfigFileHandler.save_area_completed("tutorial", true) ## this is not gaming
 		EventBus.expedition_completed.emit(msg)
 	else:
 		var msg := "It's not yet the end for this expedition.\nTo be continued..."
+		ConfigFileHandler.save_area_completed("blue_city", true)
 		EventBus.expedition_completed.emit(msg)
 
 

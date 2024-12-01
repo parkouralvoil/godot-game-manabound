@@ -35,6 +35,7 @@ EventBus="*res://scripts/autoloads/event_bus.gd"
 ParticlesQueueNode="*res://scenes/autoload_scene/particles_queue.tscn"
 SoundPlayer="*res://scenes/autoload_scene/sound_player.tscn"
 DevConsole="*res://user_interface/main_canvas/dev_console/dev_console.tscn"
+ConfigFileHandler="*res://scripts/autoloads/config_file_handler.gd"
 
 [debug]
 
@@ -210,6 +211,7 @@ _dev_console_autocomplete={
 textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="mobile"
 renderer/rendering_method.web="mobile"
+textures/vram_compression/import_etc2_astc=true
 anti_aliasing/screen_space_roughness_limiter/enabled=false
 environment/glow/upscale_mode=0
 environment/defaults/default_clear_color=Color(0, 0, 0, 1)

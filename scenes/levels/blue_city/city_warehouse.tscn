@@ -53,6 +53,7 @@ offset_left = -213.0
 offset_top = -20.0
 offset_right = 1354.0
 offset_bottom = 175.0
+mouse_filter = 2
 color = Color(0, 0, 0, 1)
 
 [node name="black2" type="ColorRect" parent="tilemap_warehouse/BlackScreens"]
@@ -61,6 +62,7 @@ offset_left = -213.0
 offset_top = -946.0
 offset_right = 1354.0
 offset_bottom = -748.0
+mouse_filter = 2
 color = Color(0, 0, 0, 1)
 
 [node name="black3" type="ColorRect" parent="tilemap_warehouse/BlackScreens"]
@@ -69,6 +71,7 @@ offset_left = -275.0
 offset_top = -946.0
 offset_right = 164.0
 offset_bottom = -169.0
+mouse_filter = 2
 color = Color(0, 0, 0, 1)
 
 [node name="black4" type="ColorRect" parent="tilemap_warehouse/BlackScreens"]
@@ -77,6 +80,7 @@ offset_left = 986.0
 offset_top = -946.0
 offset_right = 1427.0
 offset_bottom = -169.0
+mouse_filter = 2
 color = Color(0, 0, 0, 1)
 
 [node name="black5" type="ColorRect" parent="tilemap_warehouse/BlackScreens"]
@@ -85,6 +89,7 @@ offset_left = 1132.0
 offset_top = -181.0
 offset_right = 1427.0
 offset_bottom = 18.0
+mouse_filter = 2
 color = Color(0, 0, 0, 1)
 
 [node name="black6" type="ColorRect" parent="tilemap_warehouse/BlackScreens"]
@@ -93,6 +98,7 @@ offset_left = -277.0
 offset_top = -181.0
 offset_right = 21.0
 offset_bottom = 18.0
+mouse_filter = 2
 color = Color(0, 0, 0, 1)
 
 [node name="ChestRuneHolder" type="Node2D" parent="."]

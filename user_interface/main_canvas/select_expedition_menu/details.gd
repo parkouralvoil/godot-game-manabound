@@ -12,6 +12,8 @@ func _ready() -> void:
 	begin_button.pressed.connect(emit_mainhub_departed)
 	area_resource.area_completed.connect(update_completion)
 	
+	update_completion()
+	
 	if area_resource is AreaTutorialData and not area_resource.completed:
 		await get_tree().create_timer(1.0).timeout
 		emit_mainhub_departed()

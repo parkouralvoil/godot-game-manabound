@@ -138,6 +138,7 @@ layout_mode = 0
 offset_top = 125.0
 offset_right = 965.0
 offset_bottom = 363.0
+mouse_filter = 2
 color = Color(0, 0, 0, 1)
 
 [node name="blackscreen2" type="ColorRect" parent="tilemap_mainhub/Control"]
@@ -145,6 +146,7 @@ layout_mode = 0
 offset_top = -813.0
 offset_right = 965.0
 offset_bottom = -549.0
+mouse_filter = 2
 color = Color(0, 0, 0, 1)
 
 [node name="blackscreen5" type="ColorRect" parent="tilemap_mainhub/Control"]
@@ -153,6 +155,7 @@ offset_left = 247.0
 offset_top = -603.0
 offset_right = 1212.0
 offset_bottom = -339.0
+mouse_filter = 2
 color = Color(0, 0, 0, 1)
 
 [node name="blackscreen3" type="ColorRect" parent="tilemap_mainhub/Control"]
@@ -161,6 +164,7 @@ offset_left = -871.0
 offset_top = -1053.0
 offset_right = 36.0
 offset_bottom = 361.0
+mouse_filter = 2
 color = Color(0, 0, 0, 1)
 
 [node name="blackscreen4" type="ColorRect" parent="tilemap_mainhub/Control"]
@@ -169,6 +173,7 @@ offset_left = 680.0
 offset_top = -1053.0
 offset_right = 1470.0
 offset_bottom = 361.0
+mouse_filter = 2
 color = Color(0, 0, 0, 1)
 
 [node name="StartingPos" type="Marker2D" parent="."]

@@ -51,6 +51,7 @@ offset_left = -213.0
 offset_top = -20.0
 offset_right = 1354.0
 offset_bottom = 292.0
+mouse_filter = 2
 color = Color(0, 0, 0, 1)
 
 [node name="black2" type="ColorRect" parent="tilemap_plains_5/BlackScreens"]
@@ -59,6 +60,7 @@ offset_left = -372.0
 offset_top = -997.0
 offset_right = 1536.0
 offset_bottom = -664.0
+mouse_filter = 2
 color = Color(0, 0, 0, 1)
 
 [node name="black3" type="ColorRect" parent="tilemap_plains_5/BlackScreens"]
@@ -67,6 +69,7 @@ offset_left = -411.0
 offset_top = -943.0
 offset_right = 214.0
 offset_bottom = 4.0
+mouse_filter = 2
 color = Color(0, 0, 0, 1)
 
 [node name="black4" type="ColorRect" parent="tilemap_plains_5/BlackScreens"]
@@ -75,6 +78,7 @@ offset_left = 1161.0
 offset_top = -943.0
 offset_right = 1602.0
 offset_bottom = 34.0
+mouse_filter = 2
 color = Color(0, 0, 0, 1)
 
 [node name="MountainSkyTree" parent="." instance=ExtResource("3_4dpfd")]

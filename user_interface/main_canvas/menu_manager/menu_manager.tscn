@@ -19,7 +19,6 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_6gycy")
-dev_console_enabled = false
 
 [node name="PauseMenu" parent="." instance=ExtResource("2_lhenv")]
 visible = false
