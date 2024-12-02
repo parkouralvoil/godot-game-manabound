@@ -27,7 +27,6 @@ selected_team_info = ExtResource("5_jw52t")
 [node name="TeamHud" parent="." instance=ExtResource("3_w0rs6")]
 
 [node name="Popup_indicator" parent="." instance=ExtResource("9_tft8f")]
-visible = false
 mouse_filter = 2
 
 [node name="GameoverScreen" parent="." instance=ExtResource("10_1w06m")]
