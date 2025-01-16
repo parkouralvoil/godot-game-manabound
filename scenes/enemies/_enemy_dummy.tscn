@@ -16,7 +16,7 @@
 
 [sub_resource type="Resource" id="Resource_qfkh4"]
 script = ExtResource("2_d88mc")
-health = 5000.0
+health = 50000.0
 mana_orbs = 50.0
 default_reload_time = 1.0
 

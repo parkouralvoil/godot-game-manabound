@@ -41,12 +41,3 @@ func update_current_charge() -> void:
 	
 	var format_string: String = "%s: %d/%d"
 	charge_label.text = format_string % [type, snapped(info.displayed_charge, 1), info.displayed_MAX_CHARGE]
-	
-	if info.displayed_charge >= 100:
-		charge_label.modulate = Color(1, 0.2, 0.2)
-	elif info.displayed_charge >= 50:
-		charge_label.modulate = Color(1, 1, 0.2)
-	elif info.displayed_charge >= 1:
-		charge_label.modulate = Color(1, 1, 1, 0.8)
-	else:
-		charge_label.modulate = Color(0.6, 0.6, 0.6, 0.8)

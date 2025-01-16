@@ -12,11 +12,11 @@ var color_dead := Color(1, 0.3, 0.3, 0.8)
 
 var old_hp: int
 
-@onready var sprite_portrait: TextureRect = $CharPortrait
+@onready var sprite_portrait: TextureRect = %CharPortrait
 @onready var char_name: Label = $HBoxContainer/VBoxContainer_info/Label_name
 @onready var health: Label = $HBoxContainer/VBoxContainer_info/Label_health
 @onready var ammo: Label = $HBoxContainer/VBoxContainer_info/Label_ammo
-@onready var charge: Label = $HBoxContainer/VBoxContainer_info/Label_charge
+@onready var energy_bar: TextureProgressBar = %Energy
 
 func initialize_info(character_data: CharacterResource, index: int) -> void:
 	sprite_portrait.texture = character_data.sprite_portrait
@@ -68,29 +68,30 @@ func update_ammo() -> void:
 
 
 func update_charge() -> void:
-	var type: String = "Charge"
-	match tracked_stats.charge_type:
-		PlayerInfoResource.ChargeTypes.CHARGE:
-			type = "Charge"
-		PlayerInfoResource.ChargeTypes.ENERGY:
-			type = "Energy"
-		PlayerInfoResource.ChargeTypes.MANA:
-			type = "Mana"
+	var yellow := Color(1, 1, 0)
+	var blue := Color(0.3, 0.3, 1)
+	var red := Color(1, 0.3, 0.3)
+	var gray := Color(0.4, 0.5, 0.4)
+	var elem := tracked_stats.element
+	var charge := tracked_stats.charge
+	var tier1_max_charge := tracked_stats.MAX_CHARGE / tracked_stats.charge_tier
+	#print_debug(tier1_max_charge)
+	energy_bar.value = (charge / tier1_max_charge) * energy_bar.max_value
 	
-	var format_string: String = "%s: %d/%d"
-	var actual_string: String = format_string % [type, 
-		snapped(tracked_stats.charge, 1), 
-		tracked_stats.MAX_CHARGE]
-	charge.text = actual_string
+	match elem:
+			CombatManager.Elements.LIGHTNING:
+				energy_bar.modulate = yellow
+			CombatManager.Elements.FIRE:
+				energy_bar.modulate = red
+			CombatManager.Elements.ICE:
+				energy_bar.modulate = blue
+			_:
+				energy_bar.modulate = yellow
 	
-	if tracked_stats.charge >= 100:
-		charge.modulate = Color(1, 0.2, 0.2)
-	elif tracked_stats.charge >= 50:
-		charge.modulate = Color(1, 1, 0.2)
-	elif tracked_stats.charge >= 1:
-		charge.modulate = Color(1, 1, 1, 0.8)
+	if charge >= tier1_max_charge:
+		energy_bar.tint_progress = Color(1, 1, 1)
 	else:
-		charge.modulate = Color(0.6, 0.6, 0.6, 0.8)
+		energy_bar.tint_progress = gray
 
 
 func _update_panel_status() -> void:
@@ -101,13 +102,13 @@ func _update_panel_status() -> void:
 		modulate = color_dead
 		health.show()
 		ammo.show()
-		charge.hide()
+		energy_bar.hide()
 	elif tracked_char_resource.selected:
 		modulate = color_selected
 		ammo.show()
-		charge.show()
+		energy_bar.show()
 	else:
 		modulate = color_off_field
 		health.show()
 		ammo.show()
-		charge.show()
+		energy_bar.show()

@@ -4,7 +4,7 @@ class_name PlayerIdle
 # can transition to all states
 @export var p: Player
 
-var air_deaccel: float = 200 #deacceleration
+var air_deaccel: float = 50 #deacceleration
 var recoil_speed: float = 10000
 
 func _ready() -> void: 
@@ -43,7 +43,7 @@ func Physics_Update(delta: float) -> void:
 	
 	if not p.PlayerInfo.basic_attacking:
 		if !p.is_on_floor():
-			p.velocity.y = min(p.velocity.y + p.gravity * delta, p.gravity/1.25) ## gravity when player has no input
+			p.velocity.y = min(p.velocity.y + p.gravity * 0.626 * delta, p.gravity/1.5) ## gravity when player has no input
 		if not Input.is_action_pressed("space"):
 			p.circle_indicator.hide()
 	else:
@@ -97,7 +97,9 @@ func play_anim() -> void:
 
 
 func horizontal_deaccel(_delta: float) -> void:
+	var multiplier: float = 1 if not p.is_on_floor() else 10
 	if p.velocity.x >= 0:
-		p.velocity.x = max(p.velocity.x - air_deaccel * 1 * _delta, 0)
+		p.velocity.x = max(p.velocity.x - air_deaccel * multiplier * _delta, 0)
+	
 	if p.velocity.x < 0:
-		p.velocity.x = min(p.velocity.x - air_deaccel * -1 * _delta, 0)
+		p.velocity.x = min(p.velocity.x - air_deaccel * -multiplier * _delta, 0)

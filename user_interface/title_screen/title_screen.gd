@@ -11,15 +11,15 @@ func _ready() -> void:
 	SoundPlayer.play_music(SoundPlayer.music_base)
 	black_screen.hide()
 
-func _unhandled_key_input(_event: InputEvent) -> void:
+func _unhandled_input(_event: InputEvent) -> void:
 	if not pressed:
 		pressed = true
 		switch_to_game()
 
 
 func switch_to_game() -> void:
-	var t := create_tween()
-	black_screen.show()
-	t.tween_property(black_screen, "modulate", Color(0,0,0,1), 1).from(Color(0,0,0,0))
-	await t.finished
+	#var t := create_tween()
+	#black_screen.show()
+	#t.tween_property(black_screen, "modulate", Color(0,0,0,1), 1).from(Color(0,0,0,0))
+	#await t.finished
 	get_tree().change_scene_to_packed(main_scene)

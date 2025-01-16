@@ -91,6 +91,7 @@ HomingMissileScene = ExtResource("5_1iwx0")
 sfx_grand_ballista = ExtResource("11_n0ocq")
 
 [node name="charge_particles" type="GPUParticles2D" parent="AbilityManager/Ultimate"]
+emitting = false
 amount = 20
 process_material = SubResource("ParticleProcessMaterial_waotk")
 lifetime = 0.6

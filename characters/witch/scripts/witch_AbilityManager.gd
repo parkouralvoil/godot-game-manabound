@@ -77,6 +77,10 @@ func _ready() -> void:
 	Ultimate.PlayerInfo = character.PlayerInfo
 	Ammo.PlayerInfo = character.PlayerInfo
 	
+	## unique to rogue
+	EventBus.energy_gen_from_enemy_got_hit.connect(energy_production)
+	EventBus.energy_gen_from_skills.connect(energy_production)
+	
 	EventBus.returned_to_mainhub.connect(_reset_ability_manager)
 	StreeModel.skill_node_bought.connect(update_skills)
 	PlayerInfo.changed_buff_raw_atk.connect(update_damage)
@@ -187,3 +191,16 @@ func update_damage() -> void:
 	
 	frost_storm_dmg =  AbilityHelper.compute_damage(base_ult_percent,
 			0, 0, stats)
+
+
+func energy_production(procs: float) -> void:
+	if not character:
+		push_error("ERROR ON %s AM" % name)
+		return
+	
+	#var base_energy_prod: float = 1 + stats.CHR/50
+	#print("procs = %0.2f" % (base_energy_prod * procs))
+	var s: CharacterStats = character.stats
+	s.charge = clampf(s.charge + s.base_charge_rate * (s.CHR/100) * procs,
+			0,
+			s.MAX_CHARGE)

@@ -6,9 +6,9 @@ class_name CharacterStats
 @export var initial_ATK: float = 10
 @export var initial_EP: float = 0 ## Elemental Profiency
 @export var initial_MAX_AMMO: int = 5
-@export_category("Base Charge Rate (scaled by CHR)")
-@export var base_charge_rate: float = 25 ## base charge rate, 
-var initial_CHR: float = 100
+
+var base_charge_rate: float = 2
+@export var initial_CHR: float = 100
 
 var MAX_HP: int = initial_MAX_HP:
 	set(value):
@@ -37,16 +37,17 @@ var ammo: int
 var charge: float = 0
 
 @export_category("Unique Stats")
-var MAX_CHARGE: float = 50:
-	set(value):
-		MAX_CHARGE = value
-		max_HP_changed.emit()
+@export var initial_MAX_CHARGE: float = 50
 
-@export var charge_tier: charge_tiers = charge_tiers.ONE:
-	set(tier):
-		charge_tier = tier
-		MAX_CHARGE = (50 * (tier+1))
+var MAX_CHARGE: float = initial_MAX_CHARGE:
+	set(value):
+		MAX_CHARGE = clamp(value, 0, INF)
 		max_charge_changed.emit()
+
+@export var charge_tier: int = 1:
+	set(tier):
+		charge_tier = clampi(tier, 1, 2)
+		MAX_CHARGE = (initial_MAX_CHARGE * tier)
 
 var MAX_AMMO: int = initial_MAX_AMMO:
 	set(value):
@@ -61,12 +62,6 @@ var MAX_AMMO: int = initial_MAX_AMMO:
 @export var charge_type: PlayerInfoResource.ChargeTypes = PlayerInfoResource.ChargeTypes.CHARGE
 @export var element: CombatManager.Elements = CombatManager.Elements.LIGHTNING
 @export var melee: bool = false
-
-enum charge_tiers{
-	ONE,
-	TWO,
-	THREE,
-}
 
 ## signals to connect for playerinfo
 # commented lines indicate "no need cuz it updates properly na

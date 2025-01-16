@@ -26,7 +26,10 @@ func _ready() -> void:
 	melee_arm.hide()
 
 func _process(_delta: float) -> void:
-	var can_shoot: bool = PlayerInfo.current_state == PlayerInfo.States.IDLE
+	var can_shoot: bool = (
+		PlayerInfo.current_state == PlayerInfo.States.IDLE
+		and character.stats.ammo > 0 ## or settings allow melee at 0 ammo
+	)
 	
 	if not character.enabled:
 		melee_arm.hide()

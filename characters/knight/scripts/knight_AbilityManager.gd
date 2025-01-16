@@ -68,12 +68,14 @@ var skill_basicAtk_double: bool = false ## right node 2A
 @onready var level_ult_upgrade: int = 0: ## right node 1
 	set(level):
 		level_ult_upgrade = level
-		stats.MAX_CHARGE = 50 + (50 * min(level, 1))
+		stats.MAX_CHARGE = stats.initial_MAX_CHARGE + (
+				stats.initial_MAX_CHARGE * min(level, 1)
+		)
 		update_damage()
 		if level == 1:
-			character.stats.charge_tier = stats.charge_tiers.TWO
+			character.stats.charge_tier = 2
 		else:
-			character.stats.charge_tier = stats.charge_tiers.ONE
+			character.stats.charge_tier = 1
 
 @onready var level_ult_chargeRate: int = 0: ## right node 2B
 	set(level):
@@ -86,6 +88,10 @@ func _ready() -> void:
 	BasicAttack.PlayerInfo = character.PlayerInfo
 	Ultimate.PlayerInfo = character.PlayerInfo
 	Ammo.PlayerInfo = character.PlayerInfo
+	
+	## unique to rogue
+	EventBus.energy_gen_from_enemy_got_hit.connect(energy_production)
+	EventBus.energy_gen_from_skills.connect(energy_production)
 	
 	EventBus.returned_to_mainhub.connect(_reset_ability_manager)
 	StreeModel.skill_node_bought.connect(update_skills)
@@ -195,3 +201,14 @@ func update_damage() -> void:
 	
 	ult_damage_tier1 = AbilityHelper.compute_damage(base_ult_percent_tier1, 
 			0, level_ult_upgrade, stats)
+
+
+func energy_production(procs: float) -> void:
+	if not character:
+		push_error("ERROR ON %s AM" % name)
+		return
+	
+	var s: CharacterStats = character.stats
+	s.charge = clampf(s.charge + s.base_charge_rate * (s.CHR/100) * procs,
+			0,
+			s.MAX_CHARGE)

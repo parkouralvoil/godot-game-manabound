@@ -4,7 +4,7 @@ class_name PlayerMove
 # can transition back to idle after boosting or stance if attacking
 # can acivate shield
 @export var p: Player
-var boost_speed: float = 400
+var boost_speed: float = 300
 var slow_speed: float = 20
 
 var boost_afterimages: int = 1

@@ -52,6 +52,7 @@ var mouse_direction: Vector2
 var melee_character: bool
 var melee_aim_lock: bool
 var ult_recoil: bool
+var ult_need_circle_aim: bool ## witch, deployable ults
 
 ## set by character script, for UI
 var displayed_ammo: int

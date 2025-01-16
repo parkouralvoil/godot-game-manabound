@@ -6,34 +6,48 @@ class_name Knight_UltimateComponent
 @export var HomingMissileScene: PackedScene
 @export var sfx_grand_ballista: AudioStream
 
+## charge tier colors
+var _red_weapon := Color(2, 1, 0.4)
+var _yellow_weapon := Color(2, 2, 0.4)
+
 @onready var character: Character = owner
 @onready var PlayerInfo: PlayerInfoResource ## given by AM
 @onready var AM: Knight_AbilityManager = get_parent()
 
-@onready var charge_particles: GPUParticles2D = $charge_particles
-
-var charge_tier: int = 0
-
-func _ready() -> void:
-	pass
+#@onready var charge_particles: GPUParticles2D = $charge_particles
 
 func _process(delta: float) -> void:
+	#charge_particles.emitting = false
 	if !character.enabled or character.is_dead:
-		charge_particles.emitting = false
-		decay_charge(delta)
+		#decay_charge(delta)
 		return
 	
-	if PlayerInfo.input_ult:
-		PlayerInfo.ult_recoil = true
-		raise_charge(delta)
-		character.sprite_look_at(PlayerInfo.mouse_direction)
-		charge_particles.emitting = true
-	else:
-		charge_particles.emitting = false
-		if character.stats.charge >= 50:
-			spend_charge()
+	#if PlayerInfo.input_ult:
+		#PlayerInfo.ult_recoil = true
+		##raise_charge(delta)
+		#character.sprite_look_at(PlayerInfo.mouse_direction)
+		#charge_particles.emitting = true
+	#else:
+		#charge_particles.emitting = false
+		#if character.stats.charge >= 50:
+			#spend_charge()
+		#else:
+			#decay_charge(delta)
+		#character.wpn.modulate = Color(1, 1, 1)
+	var s := character.stats
+	if s.charge >= s.MAX_CHARGE / s.charge_tier:
+		if s.charge >= s.MAX_CHARGE:
+			character.wpn.modulate = _red_weapon
 		else:
-			decay_charge(delta)
+			character.wpn.modulate = _yellow_weapon
+		if PlayerInfo.input_ult:
+			character.sprite_look_at(PlayerInfo.mouse_direction)
+		if Input.is_action_just_released("right_click"):
+			if s.charge >= s.MAX_CHARGE and s.charge_tier == 2:
+				spend_charge(2)
+			else:
+				spend_charge(1)
+	else:
 		character.wpn.modulate = Color(1, 1, 1)
 
 
@@ -47,7 +61,7 @@ func _physics_process(_delta: float) -> void:
 	else:
 		character.wpn.position = Vector2(3, 16)
 
-func shoot(bullet: PackedScene, direction: Vector2) -> void:
+func shoot(bullet: PackedScene, direction: Vector2, tier: int) -> void:
 	assert(bullet, "missing ref")
 	
 	var bul_instance: Bullet = bullet.instantiate()
@@ -58,16 +72,14 @@ func shoot(bullet: PackedScene, direction: Vector2) -> void:
 	bul_instance.rotation = direction.angle()
 	bul_instance.set_collision_mask_value(4, true)
 	bul_instance.max_distance = AM.ult_max_distance
-	bul_instance.speed = AM.ult_bullet_speed * 1.5 # since scale makes this move slower
+	bul_instance.speed = AM.ult_bullet_speed# since scale makes this move slower
+	bul_instance.scale = Vector2(1, 1)
 	SoundPlayer.play_sound(sfx_grand_ballista, -4, 1.1)
-	match charge_tier:
-		2:
-			bul_instance.scale = Vector2(0.75, 0.75)
-			#bul_instance.piercing = true
-			bul_instance.damage = AM.ult_damage_tier1
-		_:
-			bul_instance.scale = Vector2(0.75, 0.75)
-			bul_instance.damage = AM.ult_damage_tier1
+	if tier == 2:
+		bul_instance.piercing = true
+		bul_instance.damage = AM.ult_damage_tier1
+	else:
+		bul_instance.damage = AM.ult_damage_tier1
 	get_tree().root.add_child(bul_instance)
 
 func shoot_extra(bullet: PackedScene, direction: Vector2) -> void:
@@ -86,58 +98,27 @@ func shoot_extra(bullet: PackedScene, direction: Vector2) -> void:
 	get_tree().root.add_child(bul_instance)
 
 
-func raise_charge(delta: float) -> void:
-	var s: CharacterStats = character.stats
-	s.charge = min(s.MAX_CHARGE, s.charge + (
-			s.base_charge_rate * (s.CHR/100) * delta))
+func spend_charge(tier: int) -> void:
+	character.apply_player_cam_shake(1)
 	
-	if s.charge >= 100:
-		charge_tier = 2
-		character.wpn.modulate = Color(4, 1, 0.4)
-	elif s.charge >= 50:
-		charge_tier = 1
-		character.wpn.modulate = Color(2, 2, 0.4)
+	if tier == 2:
+		character.stats.charge = 0
+		shoot(GrandBoltScene, PlayerInfo.mouse_direction, tier)
+		var _angle: float
+		_angle = -4 * PI/180
+		shoot_extra(LightningBoltScene, PlayerInfo.mouse_direction.rotated(_angle))
+		_angle = 0
+		shoot_extra(LightningBoltScene, PlayerInfo.mouse_direction.rotated(_angle))
+		_angle = 4 * PI/180
+		shoot_extra(LightningBoltScene, PlayerInfo.mouse_direction.rotated(_angle))
+		if AM.skill_ult_missile:
+			shoot_missile(6)
 	else:
-		charge_tier = 0
-		character.wpn.modulate = Color(1, 1, 1)
-
-
-func decay_charge(delta: float) -> void:
-	character.stats.charge = max(0, 
-		character.stats.charge - 6 * delta)
+		character.stats.charge = 0
+		shoot(GrandBoltScene, PlayerInfo.mouse_direction, tier)
 	
-	if character.stats.charge >= 50:
-		charge_tier = 1
-		character.wpn.modulate = Color(2, 2, 0.4)
-	else:
-		charge_tier = 0
-		character.wpn.modulate = Color(2, 2, 0.4)
-
-
-func spend_charge() -> void:
-	character.apply_player_cam_shake(charge_tier * 2)
-	match charge_tier:
-		0:
-			pass
-		1:
-			character.stats.charge = 0
-			shoot(GrandBoltScene, PlayerInfo.mouse_direction)
-			if AM.skill_ult_missile:
-				shoot_missile(3)
-		_:
-			character.stats.charge = 0
-			shoot(GrandBoltScene, PlayerInfo.mouse_direction)
-			#var rng: RandomNumberGenerator = RandomNumberGenerator.new()
-			var _angle: float
-			_angle = -4 * PI/180
-			shoot_extra(LightningBoltScene, PlayerInfo.mouse_direction.rotated(_angle))
-			_angle = 0 #rng.randi_range(-4, 4) * PI/180
-			shoot_extra(LightningBoltScene, PlayerInfo.mouse_direction.rotated(_angle))
-			_angle = 4 * PI/180
-			shoot_extra(LightningBoltScene, PlayerInfo.mouse_direction.rotated(_angle))
-			if AM.skill_ult_missile:
-				shoot_missile(6)
-	charge_tier = 0
+	if AM.skill_ult_missile:
+		shoot_missile(3 * tier)
 
 
 func shoot_missile(num_of_missiles: int) -> void:

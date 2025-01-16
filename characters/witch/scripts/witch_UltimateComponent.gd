@@ -9,20 +9,22 @@ class_name Witch_UltimateComponent
 @onready var AM: Witch_AbilityManager = get_parent()
 
 func _process(delta: float) -> void:
-	raise_charge(delta)
+	#raise_charge(delta)
 	
 	if not character.enabled:
+		PlayerInfo.ult_need_circle_aim = false
 		return
 	
 	if character.stats.charge >= character.stats.MAX_CHARGE:
 		PlayerInfo.ult_recoil = true
+		PlayerInfo.ult_need_circle_aim = true
+		character.wpn.modulate = Color(0.5, 2, 2)
 		if PlayerInfo.input_ult:
 			character.sprite_look_at(PlayerInfo.mouse_direction)
-			character.wpn.modulate = Color(0.5, 2, 2)
 		if Input.is_action_just_released("right_click"): # this the best way
 			spend_charge()
 			character.wpn.modulate = Color(1, 1, 1)
-
+	
 
 func spawn_area_effect(area_effect: PackedScene, target_pos: Vector2) -> void:
 	assert(area_effect, "missing proj")

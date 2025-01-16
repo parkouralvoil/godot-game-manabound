@@ -194,7 +194,7 @@ func update_damage() -> void:
 
 func energy_production(procs: float) -> void:
 	if not character:
-		push_error("ERROR ON ROGUE AM")
+		push_error("ERROR ON %s AM" % name)
 		return
 	
 	#var base_energy_prod: float = 1 + stats.CHR/50

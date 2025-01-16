@@ -17,13 +17,13 @@ offset_bottom = 63.0
 theme_override_constants/separation = 1
 
 [node name="HP" type="Label" parent="Player/VBoxContainer"]
-modulate = Color(1, 1, 1, 0.788235)
+modulate = Color(1, 0.580839, 0.561016, 0.792157)
 layout_mode = 2
 text = "HP: 5/5"
 label_settings = ExtResource("3_ymkom")
 
 [node name="Ammo" type="Label" parent="Player/VBoxContainer"]
-modulate = Color(1, 1, 1, 0.8)
+modulate = Color(1, 0.980392, 0.968627, 0.792157)
 layout_mode = 2
 text = "Ammo: 9/9"
 label_settings = ExtResource("3_ymkom")
