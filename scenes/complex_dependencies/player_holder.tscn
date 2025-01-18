@@ -1,8 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://c7qwpthsv6838"]
+[gd_scene load_steps=5 format=3 uid="uid://c7qwpthsv6838"]
 
 [ext_resource type="Script" path="res://scenes/complex_dependencies/player_holder.gd" id="1_pvica"]
 [ext_resource type="PackedScene" uid="uid://c35wulwk6e3b4" path="res://scenes/player.tscn" id="1_ymobu"]
 [ext_resource type="LabelSettings" uid="uid://cc4naicdvluqg" path="res://user_interface/player_hud_canvas/team_hud_label.tres" id="3_ymkom"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_mm2gr"]
+font_size = 10
 
 [node name="PlayerHolder" type="Node2D"]
 script = ExtResource("1_pvica")
@@ -10,13 +13,14 @@ script = ExtResource("1_pvica")
 [node name="Player" parent="." instance=ExtResource("1_ymobu")]
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Player"]
-offset_left = 5.0
-offset_top = 14.0
-offset_right = 168.0
-offset_bottom = 63.0
+offset_left = 15.0
+offset_top = 20.0
+offset_right = 178.0
+offset_bottom = 69.0
 theme_override_constants/separation = 1
 
 [node name="HP" type="Label" parent="Player/VBoxContainer"]
+visible = false
 modulate = Color(1, 0.580839, 0.561016, 0.792157)
 layout_mode = 2
 text = "HP: 5/5"
@@ -26,10 +30,9 @@ label_settings = ExtResource("3_ymkom")
 modulate = Color(1, 0.980392, 0.968627, 0.792157)
 layout_mode = 2
 text = "Ammo: 9/9"
-label_settings = ExtResource("3_ymkom")
+label_settings = SubResource("LabelSettings_mm2gr")
 
-[node name="Charge" type="Label" parent="Player/VBoxContainer"]
-modulate = Color(1, 1, 1, 0.788235)
-layout_mode = 2
-text = "Charge: 0/50"
-label_settings = ExtResource("3_ymkom")
+[node name="Line2D" type="Line2D" parent="Player"]
+points = PackedVector2Array(15, 21, 0, 0)
+width = 1.0
+default_color = Color(1, 1, 1, 0.357)

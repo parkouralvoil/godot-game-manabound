@@ -31,14 +31,11 @@ func _ready() -> void:
 	assert(stats)
 	assert(character_window)
 	PlayerInfo.drank_hp_potion.connect(_on_drank_hp_potion)
-	stats.max_HP_changed.connect(_on_stats_updated)
-	stats.max_ammo_changed.connect(_on_stats_updated)
-	stats.max_charge_changed.connect(_on_stats_updated)
-	stats.HP_changed.connect(_on_HP_changed)
+	stats.stats_changed.connect(_on_stats_updated)
 	
 	await get_tree().process_frame
 	stats.reset_stats()
-	#print_debug("%s has %0.2f EP" % [name, stats.EP])
+	#print_debug("%s has %0.2f EP" % [name, stats.ep])
 
 
 func _process(_delta: float) -> void:
@@ -46,7 +43,6 @@ func _process(_delta: float) -> void:
 		## since these variables change frequently
 		PlayerInfo.displayed_charge = stats.charge
 		PlayerInfo.displayed_ammo = stats.ammo
-		PlayerInfo.displayed_HP = stats.HP
 		
 		if not is_dead:
 			arm_updater()
@@ -56,20 +52,18 @@ func _process(_delta: float) -> void:
 #region Update Displayed UI
 func _on_stats_updated() -> void:
 	if enabled:
-		PlayerInfo.displayed_MAX_HP = stats.MAX_HP
-		PlayerInfo.displayed_MAX_AMMO = stats.MAX_AMMO
-		PlayerInfo.displayed_MAX_CHARGE = stats.MAX_CHARGE
+		PlayerInfo.displayed_MAX_AMMO = stats.max_ammo
+		PlayerInfo.displayed_MAX_CHARGE = stats.max_charge
 #endregion
 
 
 func update_player_info() -> void: ## called by character manager maybe?
-	PlayerInfo.displayed_MAX_AMMO = stats.MAX_AMMO
-	PlayerInfo.displayed_MAX_HP = stats.MAX_HP
-	PlayerInfo.displayed_MAX_CHARGE = stats.MAX_CHARGE
+	PlayerInfo.displayed_MAX_AMMO = stats.max_ammo
+	PlayerInfo.displayed_MAX_CHARGE = stats.max_charge
 
 
 func _on_HP_changed() -> void:
-	if stats.HP <= 0 and not is_dead:
+	if stats.hp <= 0 and not is_dead:
 		is_dead = true
 		anim_sprite.hide()
 		var downed_char := spawn_downed_char()
@@ -80,7 +74,7 @@ func _on_HP_changed() -> void:
 
 func _on_drank_hp_potion() -> void:
 	if not is_dead:
-		stats.HP = min(stats.HP + 1, stats.MAX_HP)
+		stats.hp = min(stats.hp + 1, stats.max_hp)
 
 
 func spawn_downed_char() -> DownedCharacter:
@@ -99,7 +93,7 @@ func spawn_downed_char() -> DownedCharacter:
 
 func revive() -> void: ## called by downed_char
 	if is_dead:
-		stats.HP = 1
+		stats.hp = 1
 		is_dead = false
 		PlayerInfo.team_alive += 1
 
@@ -119,7 +113,7 @@ func apply_player_cam_shake(strength: int) -> void:
 
 
 func sprite_look_at(direction: Vector2) -> void:
-	if direction.x > 0:
+	if direction.x >= 0:
 		anim_sprite.scale.x = 1
 		PlayerInfo.facing_direction = 1
 	else:
@@ -130,22 +124,22 @@ func sprite_look_at(direction: Vector2) -> void:
 
 func arm_updater() -> void:
 	## arm rotation
-	if PlayerInfo.ult_animation_playing:
+	if PlayerInfo.arm_animation_playing:
 		pass
-	elif PlayerInfo.basic_attacking or PlayerInfo.input_ult:
-		if PlayerInfo.aim_direction.x > 0:
+	elif PlayerInfo.recoiling_from_basic_atk or PlayerInfo.input_ult:
+		if PlayerInfo.aim_direction.x >= 0:
 			arm.rotation = PlayerInfo.aim_direction.angle() - PI/2
 		else:
-			arm.rotation = -(PlayerInfo.aim_direction.angle() - (PI/2))
+			arm.rotation = (PI/2) - PlayerInfo.aim_direction.angle()
 	else:
 		arm.rotation = 0
 		
 	if (anim_sprite.animation == "fall" 
 			or anim_sprite.animation == "air"
-			or (PlayerInfo.melee_character and PlayerInfo.basic_attacking)):
+			or (PlayerInfo.melee_character and PlayerInfo.recoiling_from_basic_atk)):
 		arm.hide()
 		wpn.hide()
-	elif PlayerInfo.basic_attacking or PlayerInfo.input_ult or PlayerInfo.ult_animation_playing:
+	elif PlayerInfo.recoiling_from_basic_atk or PlayerInfo.input_ult or PlayerInfo.arm_animation_playing:
 		arm.show()
 		wpn.show()
 	else:
@@ -173,4 +167,7 @@ func update_PlayerInfo_sprite() -> void:
 
 
 func set_ult_animation(input: bool) -> void:
-	PlayerInfo.ult_animation_playing = input
+	PlayerInfo.arm_animation_playing = input
+
+func spent_charge(used_charge: float) -> void:
+	stats.charge -= used_charge

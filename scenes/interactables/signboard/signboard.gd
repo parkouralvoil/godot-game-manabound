@@ -15,6 +15,7 @@ func _ready() -> void:
 	label.visible = false
 	label.text = info_text
 	EventBus.interactable_detected.connect(toggle_info)
+	interactable.set_opens_ui_true()
 
 
 func try_interact() -> void:

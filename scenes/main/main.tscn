@@ -35,6 +35,7 @@ main_hub_path = ExtResource("6_aqqlm")
 [node name="MainCanvas" parent="." instance=ExtResource("5_jftyw")]
 
 [node name="PlayerCamera" parent="." instance=ExtResource("3_b3eh2")]
+zoom = Vector2(1.25, 1.25)
 position_smoothing_enabled = false
 
 [node name="PlayerHolder" parent="." instance=ExtResource("4_p316a")]

@@ -15,8 +15,7 @@ func _process(delta: float) -> void:
 		PlayerInfo.ult_need_circle_aim = false
 		return
 	
-	if character.stats.charge >= character.stats.MAX_CHARGE:
-		PlayerInfo.ult_recoil = true
+	if character.stats.charge >= character.stats.max_charge:
 		PlayerInfo.ult_need_circle_aim = true
 		character.wpn.modulate = Color(0.5, 2, 2)
 		if PlayerInfo.input_ult:
@@ -35,7 +34,7 @@ func spawn_area_effect(area_effect: PackedScene, target_pos: Vector2) -> void:
 	effect_instance.size = AM.explosion_scale
 	effect_instance.damage = AM.frost_storm_dmg
 	effect_instance.max_spawn_counter = AM.explosion_num
-	effect_instance.ep = character.stats.EP
+	effect_instance.ep = character.stats.ep
 	if AM.skill_ult_crystalize:
 		effect_instance.debuff = CombatManager.Debuffs.CRYSTALIZED
 	
@@ -43,8 +42,8 @@ func spawn_area_effect(area_effect: PackedScene, target_pos: Vector2) -> void:
 
 func raise_charge(delta: float) -> void:
 	var s: CharacterStats = character.stats
-	s.charge = min(s.MAX_CHARGE, s.charge + (
-			s.base_charge_rate * (s.CHR/100) * delta))
+	s.charge = min(s.max_charge, s.charge + (
+			s.base_charge_rate * (s.chr/100) * delta))
 
 
 func spend_charge() -> void:

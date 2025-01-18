@@ -25,6 +25,7 @@ func _ready() -> void:
 	label.visible = false
 	opened_door.hide()
 	EventBus.interactable_detected.connect(toggle_info)
+	interactable.set_opens_ui_true()
 	if door_texture:
 		opened_door.texture.atlas = door_texture
 		closed_door.texture.atlas = door_texture

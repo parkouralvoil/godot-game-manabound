@@ -33,15 +33,12 @@ func _process(_delta: float) -> void:
 	
 	if not character.enabled:
 		melee_arm.hide()
-		PlayerInfo.melee_aim_lock = false
 		return
 	
 	if melee_arm.visible:
-		PlayerInfo.basic_attacking = true
-		PlayerInfo.melee_aim_lock = true
+		PlayerInfo.recoiling_from_basic_atk = true
 	else:
-		PlayerInfo.melee_aim_lock = false
-		PlayerInfo.basic_attacking = false
+		PlayerInfo.recoiling_from_basic_atk = false
 	
 	if PlayerInfo.input_attack and can_shoot:
 		melee_arm.show()
@@ -66,7 +63,7 @@ func shoot(bullet: PackedScene, dmg: float, color: Color) -> void:
 	bul_instance.element = CombatManager.Elements.FIRE
 	bul_instance.modulate = color
 	
-	bul_instance.ep = character.stats.EP
+	bul_instance.ep = character.stats.ep
 	bul_instance.direction = direction
 	bul_instance.rotation = direction.angle()
 	bul_instance.set_collision_mask_value(4, true)
@@ -81,7 +78,7 @@ func melee_hit(melee: PackedScene) -> void:
 	
 	dmg_instance.global_position = global_position #+ position_offset
 	
-	dmg_instance.ep = character.stats.EP
+	dmg_instance.ep = character.stats.ep
 	dmg_instance.damage = AM.melee_dmg
 	dmg_instance.element = CombatManager.Elements.FIRE
 	dmg_instance.can_generate_extra_energy = AM.melee_extra_energy_enabled
@@ -137,7 +134,7 @@ func do_swing_animation(downwards: bool) -> void:
 	scale = character.anim_sprite.scale ## this is so budots
 	## swing sword downwards
 	if downwards:
-		if PlayerInfo.aim_direction.x > 0:
+		if PlayerInfo.aim_direction.x >= 0:
 			iniital_rot = aim_angle - deg_to_rad(180)
 			anim_slash_rot = aim_angle - deg_to_rad(20)
 		else:
@@ -154,7 +151,7 @@ func do_swing_animation(downwards: bool) -> void:
 	## swing sword upwards
 	else:
 		var final_rot: float
-		if PlayerInfo.aim_direction.x > 0:
+		if PlayerInfo.aim_direction.x >= 0:
 			iniital_rot = aim_angle + deg_to_rad(20)
 			final_rot = aim_angle - deg_to_rad(180)
 			anim_slash_rot = aim_angle - deg_to_rad(160)

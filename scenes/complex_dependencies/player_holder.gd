@@ -7,7 +7,7 @@ class_name PlayerHolder
 
 @onready var hp_label: Label = $Player/VBoxContainer/HP
 @onready var ammo_label: Label = $Player/VBoxContainer/Ammo
-@onready var charge_label: Label = $Player/VBoxContainer/Charge
+@onready var line: Line2D = $Player/Line2D
 
 
 func _ready() -> void:
@@ -24,20 +24,6 @@ func _process(_delta: float) -> void:
 	if not p:
 		return
 	## UI attached to player:
-	hp_label.text = "HP: %d/%d" % [info.displayed_HP, info.displayed_MAX_HP]
+	ammo_label.visible = info.input_attack
+	line.visible = info.input_attack
 	ammo_label.text = "Ammo: %d/%d" % [info.displayed_ammo, info.displayed_MAX_AMMO]
-	update_current_charge()
-
-
-func update_current_charge() -> void:
-	var type: String
-	match info.current_charge_type:
-		PlayerInfoResource.ChargeTypes.CHARGE:
-			type = "Charge"
-		PlayerInfoResource.ChargeTypes.MANA:
-			type = "Mana"
-		PlayerInfoResource.ChargeTypes.ENERGY:
-			type = "Energy"
-	
-	var format_string: String = "%s: %d/%d"
-	charge_label.text = format_string % [type, snapped(info.displayed_charge, 1), info.displayed_MAX_CHARGE]

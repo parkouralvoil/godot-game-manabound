@@ -3,11 +3,18 @@ class_name Knight_AttackComponent
 
 @export var BasicBoltScene: PackedScene 
 @export var LightningBoltScene: PackedScene
-var burst_counter: int = 0
+
+var _burst_counter: int = 0
+
+# set by AM
+var basic_bullet_properties := BulletProperties.new()
+var enhanced_bullet_properties := BulletProperties.new()
+
+var enhanced_burst_shot_enabled: bool
+var double_shot_enabled: bool
 
 @onready var character: Character = owner
 @onready var PlayerInfo: PlayerInfoResource ## given by AM
-@onready var AM: Knight_AbilityManager = get_parent()
 
 @onready var t_firerate: Timer = $firerate
 @onready var t_recoil: Timer = $recoil
@@ -26,9 +33,9 @@ func _process(_delta: float) -> void:
 	
 	if !t_recoil.is_stopped():
 		character.sprite_look_at(PlayerInfo.aim_direction)
-		PlayerInfo.basic_attacking = true
+		PlayerInfo.recoiling_from_basic_atk = true
 	elif t_recoil.is_stopped() or !can_shoot:
-		PlayerInfo.basic_attacking = false
+		PlayerInfo.recoiling_from_basic_atk = false
 	
 	if PlayerInfo.input_attack and character.stats.ammo > 0 and can_shoot:
 		if t_firerate.is_stopped():
@@ -40,32 +47,37 @@ func _process(_delta: float) -> void:
 
 func shoot(bullet: PackedScene, position_modifier: int) -> void:
 	assert(bullet, "bruh its missing")
-	var bul_instance: Bullet = bullet.instantiate()
+	var bullet_inst: Bullet = bullet.instantiate()
 	var direction := PlayerInfo.aim_direction
 	
-	bul_instance.global_position = (global_position + 
+	bullet_inst.global_position = (global_position + 
 		direction.rotated(PI/2 * sign(position_modifier))
 		* abs(position_modifier)
 		)
-	bul_instance.ep = character.stats.EP
-	bul_instance.speed = AM.bullet_speed
-	bul_instance.damage = (AM.damage_basic_bolt if bullet == BasicBoltScene 
-		else AM.damage_lightning_bolt)
-	bul_instance.max_distance = AM.max_distance
+	if bullet == BasicBoltScene:
+		bullet_inst.ep 		= basic_bullet_properties.ep
+		bullet_inst.speed 	= basic_bullet_properties.speed
+		bullet_inst.max_distance = basic_bullet_properties.max_distance
+		bullet_inst.damage 	= basic_bullet_properties.final_damage
+	else:
+		bullet_inst.ep 		= enhanced_bullet_properties.ep
+		bullet_inst.speed 	= enhanced_bullet_properties.speed
+		bullet_inst.max_distance = enhanced_bullet_properties.max_distance
+		bullet_inst.damage 	= enhanced_bullet_properties.final_damage
 	
-	bul_instance.direction = direction
-	bul_instance.rotation = direction.angle()
-	bul_instance.set_collision_mask_value(4, true)
-	get_tree().root.add_child(bul_instance)
+	bullet_inst.direction = direction
+	bullet_inst.rotation = direction.angle()
+	bullet_inst.set_collision_mask_value(4, true)
+	get_tree().root.add_child(bullet_inst)
 
 
 func basic_atk() -> void:
 	character.stats.ammo -= 1
 	character.apply_player_cam_shake(1)
 	var p_scene: PackedScene
-	p_scene = BasicBoltScene if burst_counter < 2 else LightningBoltScene
+	p_scene = BasicBoltScene if _burst_counter < 2 else LightningBoltScene
 	
-	if AM.skill_basicAtk_double:
+	if double_shot_enabled:
 		gunshot_player1.pitch_scale = 0.8
 		gunshot_player2.pitch_scale = 0.8
 		shoot(p_scene, 4)
@@ -77,13 +89,15 @@ func basic_atk() -> void:
 		gunshot_player1.pitch_scale = 0.9
 		gunshot_player1.play()
 	
-	if AM.level_basicAtk_burst > 0:
-		burst_counter = (burst_counter + 1) % 3
+	if enhanced_burst_shot_enabled:
+		_burst_counter = (_burst_counter + 1) % 3
 	else:
-		burst_counter = 0
+		_burst_counter = 0
 	
 	t_firerate.wait_time = 1 / character.stats.firerate
-	if t_firerate.wait_time > 0.2: # semi
+	if t_firerate.wait_time > 0.2: 
+		# semi
 		t_recoil.wait_time = 0.15
-	else: # auto
+	else: 
+		# auto
 		t_recoil.wait_time = 0.2

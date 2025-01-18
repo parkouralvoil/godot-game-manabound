@@ -49,27 +49,27 @@ func reset_inventory() -> void:
 func use_rune_HP(stats: CharacterStats) -> void:
 	assert(stats, "PlayerInventory: Missing stats param")
 	if rune_HP > 0:
-		stats.MAX_HP += HP_increase
-		stats.HP += HP_increase
+		stats.max_hp += HP_increase
+		stats.hp += HP_increase
 		rune_HP -= 1
 
 
 func use_rune_ATK(stats: CharacterStats) -> void:
 	assert(stats, "PlayerInventory: Missing stats param")
 	if rune_ATK > 0:
-		stats.ATK += ATK_increase
+		stats.atk += ATK_increase
 		rune_ATK -= 1
 
 
 func use_rune_EP(stats: CharacterStats) -> void:
 	assert(stats, "PlayerInventory: Missing stats param")
 	if rune_EP > 0:
-		stats.EP += EP_increase
+		stats.ep += EP_increase
 		rune_EP -= 1
 
 
 func use_rune_CHR(stats: CharacterStats) -> void:
 	assert(stats, "PlayerInventory: Missing stats param")
 	if rune_CHR > 0:
-		stats.CHR += CHR_increase
+		stats.chr += CHR_increase
 		rune_CHR -= 1

@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://b53veg8003vdg" path="res://projectiles/lightning_projectiles/homing_missile/homing_missile.tscn" id="5_1iwx0"]
 [ext_resource type="PackedScene" uid="uid://durs4s4d2quml" path="res://projectiles/lightning_projectiles/basic_bolt/basic_bolt.tscn" id="5_jahx0"]
 [ext_resource type="PackedScene" uid="uid://bf05bt5n34ymh" path="res://projectiles/lightning_projectiles/lightning_bullet/lightning_bullet.tscn" id="6_oe7nv"]
-[ext_resource type="Script" path="res://characters/knight/scripts/knight_UltimateComponent_knight.gd" id="7_hkru2"]
+[ext_resource type="Script" path="res://characters/knight/scripts/knight_UltimateComponent.gd" id="7_hkru2"]
 [ext_resource type="AudioStream" uid="uid://b1cwrq23fey4t" path="res://assets/audio/sfx/character_sfx/Lightning_gunshot.mp3" id="7_khu4f"]
 [ext_resource type="PackedScene" uid="uid://j2b61v541lds" path="res://projectiles/lightning_projectiles/grand_bolt/grand_bolt.tscn" id="8_3k3pf"]
 [ext_resource type="Script" path="res://characters/knight/scripts/knight_AmmoComponent.gd" id="9_1ohy4"]
@@ -95,6 +95,10 @@ emitting = false
 amount = 20
 process_material = SubResource("ParticleProcessMaterial_waotk")
 lifetime = 0.6
+
+[node name="ult_cooldown" type="Timer" parent="AbilityManager/Ultimate"]
+wait_time = 0.2
+one_shot = true
 
 [node name="Ammo" type="Node2D" parent="AbilityManager"]
 script = ExtResource("9_1ohy4")

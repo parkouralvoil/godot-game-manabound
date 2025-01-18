@@ -1,87 +1,86 @@
 extends Resource
 class_name CharacterStats
 
-@export_category("Scalable Stats")
-@export var initial_MAX_HP: int = 5
-@export var initial_ATK: float = 10
-@export var initial_EP: float = 0 ## Elemental Profiency
-@export var initial_MAX_AMMO: int = 5
+@export_category("Initial Scalable Stats")
+@export var INITIAL_MAX_HP: int = 5
+@export var INITIAL_ATK: float = 10
+@export var INITIAL_EP: float = 0 ## Elemental Profiency
+@export var INITIAL_MAX_AMMO: int = 5
 
-var base_charge_rate: float = 2
-@export var initial_CHR: float = 100
+const base_charge_rate: float = 2 ## change this if u want stronger charge for all chars
+@export var INITIAL_CHR: float = 100
 
-var MAX_HP: int = initial_MAX_HP:
+# TODO
+"""
+make "public accessible functions" that basically return the values
+meanwhile the current variables here should be set to private
+"""
+
+## Scalable stats, have emitters
+var max_hp: int = INITIAL_MAX_HP:
 	set(value):
-		MAX_HP = value
-		max_HP_changed.emit()
+		max_hp = value
 		stats_changed.emit()
-var ATK: float = initial_ATK:
+var atk: float = INITIAL_ATK:
 	set(val):
-		ATK = val
+		atk = val
 		stats_changed.emit()
-var EP: float = initial_EP:
+var ep: float = INITIAL_EP:
 	set(val):
-		EP = val
+		ep = val
 		stats_changed.emit()
-var CHR: float = initial_CHR:
+var chr: float = INITIAL_CHR:
 	set(val):
-		CHR = val
+		chr = val
+		stats_changed.emit()
+var max_ammo: int = INITIAL_MAX_AMMO:
+	set(value):
+		max_ammo = value
 		stats_changed.emit()
 
 ## Dynamic stats, they change frequently
-var HP: int:
+var hp: int:
 	set(val):
-		HP = val
-		HP_changed.emit()
+		hp = val
+		hp_changed.emit()
 var ammo: int
-var charge: float = 0
+var charge: float = 0:
+	set(val):
+		charge = clampf(val, 0, max_charge)
 
-@export_category("Unique Stats")
-@export var initial_MAX_CHARGE: float = 50
+@export_category("Initial Ult Stats")
+@export var INITIAL_MAX_CHARGE: float = 50			## how much charge can be stored
+@export var INITIAL_CHARGE_THRESHOLD: float = 50 	## used for activating ult
+@export var INITIAL_CHARGE_TIER: int = 1			## how many times charge can be spent in one ult activation
 
-var MAX_CHARGE: float = initial_MAX_CHARGE:
+var max_charge: float = INITIAL_MAX_CHARGE:
 	set(value):
-		MAX_CHARGE = clamp(value, 0, INF)
-		max_charge_changed.emit()
-
-@export var charge_tier: int = 1:
+		max_charge = clampf(value, 0, 9999)
+		stats_changed.emit()
+var charge_threshold: float = INITIAL_CHARGE_THRESHOLD:
+	set(value):
+		charge_threshold = clampf(value, 0, max_charge)
+		stats_changed.emit()
+var charge_tier: int = INITIAL_CHARGE_TIER: 
 	set(tier):
-		charge_tier = clampi(tier, 1, 2)
-		MAX_CHARGE = (initial_MAX_CHARGE * tier)
+		charge_tier = clampi(tier, 1, 99)
 
-var MAX_AMMO: int = initial_MAX_AMMO:
-	set(value):
-		MAX_AMMO = value
-		max_ammo_changed.emit()
-
-@export var reload_time: float = 0.5 ## seconds
-@export var SPD: float = 400 ## not yet used
-
-@export_category("Kit Specific") ## export variables in character
+@export_category("Kit Specific") 		## export variables in character
+@export var reload_time: float = 0.5 	## seconds
+@export var SPD: float = 400			## not yet used
 @export var firerate: float = 7
-@export var charge_type: PlayerInfoResource.ChargeTypes = PlayerInfoResource.ChargeTypes.CHARGE
 @export var element: CombatManager.Elements = CombatManager.Elements.LIGHTNING
 @export var melee: bool = false
 
 ## signals to connect for playerinfo
-# commented lines indicate "no need cuz it updates properly na
-signal max_HP_changed
-signal max_charge_changed
-signal max_ammo_changed
-
 signal stats_changed
-signal HP_changed ## to see if char should die
+signal hp_changed 		## to see if char should die
 
-func reset_stats() -> void: ## called by character scene
-	MAX_HP = initial_MAX_HP
-	HP = MAX_HP
-	ATK = initial_ATK
-	EP = initial_EP
-	CHR = initial_CHR
-	MAX_AMMO = initial_MAX_AMMO
-	ammo = MAX_AMMO
-#signal ATK_changed ## might need this afterall
-#signal EP_changed
-#signal reload_time_changed
-#signal firerate_changed
-#signal charge_rate_changed
+func reset_stats() -> void: ## called by character scene, make sure no one else calls this...
+	max_hp = INITIAL_MAX_HP
+	hp = max_hp
+	atk = INITIAL_ATK
+	ep = INITIAL_EP
+	chr = INITIAL_CHR
+	max_ammo = INITIAL_MAX_AMMO
+	ammo = max_ammo

@@ -19,7 +19,6 @@ signal interactable_detected(component: Interactable)
 signal interactable_held
 signal interactable_finished
 	## for "hold E to ..." like downed char, this stops player
-
 signal interacted_upgraded_station
 
 signal interacted_signboard ## emitted by signboard, used by menu manager
@@ -51,3 +50,7 @@ signal energy_gen_from_skills(procs: int)
 ## clear bullets
 signal clear_abilities() # emitted by level_manager || used by projectiles like frost_nova/ice storm
 ## signal auto_collect_orbs()
+
+## for mobile controls
+signal swapped_character(current_index: int, max_index: int) # character manager, used by swap char button
+signal can_ult_changed(can_ult: bool) # from player info.gd, used by ult button

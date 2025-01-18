@@ -4,24 +4,18 @@
 [ext_resource type="LabelSettings" uid="uid://cc4naicdvluqg" path="res://user_interface/player_hud_canvas/team_hud_label.tres" id="2_xj3y4"]
 [ext_resource type="PackedScene" uid="uid://cdc6lfjuxxbia" path="res://user_interface/player_hud_canvas/team_UI_stuff/panel_char..tscn" id="3_fcocw"]
 
-[node name="TeamHud" type="VBoxContainer"]
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -74.0
-offset_top = -29.0
-offset_bottom = 30.0
-grow_horizontal = 0
-grow_vertical = 2
-size_flags_horizontal = 4
+[node name="TeamHud" type="HBoxContainer"]
+offset_left = -3.0
+offset_right = 605.0
+offset_bottom = 65.0
+size_flags_horizontal = 0
 size_flags_vertical = 8
 mouse_filter = 2
-theme_override_constants/separation = 15
+theme_override_constants/separation = 2
 script = ExtResource("1_2n4q7")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
+visible = false
 layout_mode = 2
 
 [node name="AutoAim" type="Label" parent="PanelContainer"]

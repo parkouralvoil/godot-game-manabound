@@ -12,6 +12,7 @@ func _ready() -> void:
 	interactable.set_color(self)
 	tip.hide()
 	EventBus.interactable_detected.connect(_on_interactable_detected)
+	interactable.set_opens_ui_true()
 
 
 func try_interact() -> void:

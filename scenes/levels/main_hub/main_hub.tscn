@@ -3,13 +3,13 @@
 [ext_resource type="Script" path="res://scenes/levels/main_hub/main_hub.gd" id="1_no8mj"]
 [ext_resource type="PackedScene" uid="uid://baksvorn8xwwc" path="res://scenes/levels/parallax_backgrounds/mountain_sky_tree.tscn" id="2_ggshg"]
 [ext_resource type="TileSet" uid="uid://bq4bd7di0pjwo" path="res://resources/tilemaps/blue_scifi.tres" id="4_6d053"]
-[ext_resource type="PackedScene" uid="uid://35bmq6pxx41q" path="res://scenes/interactables/signboard.tscn" id="4_tdi5r"]
-[ext_resource type="PackedScene" uid="uid://iiwhnabrad24" path="res://scenes/interactables/credits_book.tscn" id="6_ir7pg"]
+[ext_resource type="PackedScene" uid="uid://35bmq6pxx41q" path="res://scenes/interactables/signboard/signboard.tscn" id="4_tdi5r"]
+[ext_resource type="PackedScene" uid="uid://iiwhnabrad24" path="res://scenes/interactables/credits_book/credits_book.tscn" id="6_ir7pg"]
 [ext_resource type="Texture2D" uid="uid://ug68u46641al" path="res://assets/sprite_characters/witch_spritesheet.png" id="7_uq1b8"]
 [ext_resource type="Texture2D" uid="uid://dsdu11io064xj" path="res://assets/sprite_characters/rogue_spritesheet.png" id="8_knvnu"]
 [ext_resource type="Texture2D" uid="uid://d0b5yrantkkqm" path="res://characters/rogue/visuals/rogue_arm.tres" id="9_qngvn"]
-[ext_resource type="PackedScene" uid="uid://bmqu3gpnmomg0" path="res://scenes/enemies/_enemy_dummy.tscn" id="9_sa52k"]
 [ext_resource type="PackedScene" uid="uid://cievadvfmo3xd" path="res://scenes/levels/level_world_environment.tscn" id="10_mh3py"]
+[ext_resource type="PackedScene" uid="uid://cg2ravjhx4yud" path="res://scenes/enemies/stationary_enemies/autobow/enemy_autobow.tscn" id="11_8bm1t"]
 [ext_resource type="PackedScene" uid="uid://dubh6cpng3iu2" path="res://scenes/interactables/upgrade_station/upgrade_station.tscn" id="11_bbnti"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xq1pv"]
@@ -208,10 +208,9 @@ autoplay = "default"
 position = Vector2(0, -1)
 texture = ExtResource("9_qngvn")
 
-[node name="enemy_dummy" parent="." instance=ExtResource("9_sa52k")]
-position = Vector2(268, 18)
-
 [node name="LevelWorldEnvironment" parent="." instance=ExtResource("10_mh3py")]
 
 [node name="UpgradeStation" parent="." instance=ExtResource("11_bbnti")]
 position = Vector2(363, 76)
+
+[node name="enemy_autobow" parent="." instance=ExtResource("11_8bm1t")]

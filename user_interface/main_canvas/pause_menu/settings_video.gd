@@ -3,6 +3,9 @@ extends HBoxContainer
 @onready var checkbox_fullscreen: CheckBox = $VBox2/fullscreen
 @onready var select_vsync: OptionButton = $VBox2/vsync
 
+@onready var mobile_controls: bool = \
+		ProjectSettings.get_setting("application/run/MobileControlsEnabled")
+
 func _ready() -> void:
 	var video_settings := ConfigFileHandler.load_video_settings()
 	checkbox_fullscreen.button_pressed = video_settings.fullscreen
@@ -11,6 +14,8 @@ func _ready() -> void:
 
 
 func _on_fullscreen_toggled(toggled_on: bool) -> void:
+	if mobile_controls:
+		return
 	if toggled_on:
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 	else:

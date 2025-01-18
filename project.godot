@@ -22,10 +22,12 @@ resources_spreadsheet_view/context_menu_on_leftclick=false
 
 config/name="New-tower-bullet-hell"
 run/main_scene="res://user_interface/title_screen/title_screen.tscn"
+config/quit_on_go_back=false
 config/features=PackedStringArray("4.3", "GL Compatibility")
 run/max_fps=120
 config/icon="res://game_icon-export.png"
 config/windows_native_icon="res://game_icon-export.ico"
+run/MobileControlsEnabled=true
 
 [autoload]
 
@@ -36,6 +38,7 @@ ParticlesQueueNode="*res://scenes/autoload_scene/particles_queue.tscn"
 SoundPlayer="*res://scenes/autoload_scene/sound_player.tscn"
 DevConsole="*res://user_interface/main_canvas/dev_console/dev_console.tscn"
 ConfigFileHandler="*res://scripts/autoloads/config_file_handler.gd"
+PlayerInput="*res://scripts/autoloads/player_input.gd"
 
 [debug]
 
@@ -45,12 +48,9 @@ gdscript/warnings/unsafe_property_access=1
 
 [display]
 
-window/size/viewport_width=640
-window/size/viewport_height=480
-window/size/window_width_override=1280
-window/size/window_height_override=960
+window/size/viewport_width=780
+window/size/viewport_height=410
 window/stretch/mode="canvas_items"
-window/stretch/aspect="expand"
 window/vsync/vsync_mode=0
 
 [editor_plugins]

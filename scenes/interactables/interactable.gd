@@ -3,11 +3,19 @@ class_name Interactable
 
 signal changed_show(allowed: bool)
 
+var _opens_ui: bool = false
 @onready var arrow: Sprite2D = $arrow
 
 func select_this() -> void:
 	EventBus.interactable_detected.emit(self)
 
+func set_opens_ui_true() -> void:
+	_opens_ui = true
+
+func get_opens_ui() -> bool: # to ensure no one else can change this
+	if _opens_ui:
+		return true
+	return false
 
 func interact() -> void: ## pressed E, used by ALL interactables
 	var parent: Node2D = get_parent()

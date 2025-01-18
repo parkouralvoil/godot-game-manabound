@@ -232,14 +232,14 @@ func set_char_stats(index: int, stat: String, num: int) -> String:
 	var c: CharacterResource = selected_team_info.char_data_array[index]
 	var char_stats: CharacterStats = c.stats
 	if _stat == "ATK":
-		char_stats.ATK = num
+		char_stats.atk = num
 	elif _stat == "EP":
-		char_stats.EP = num
+		char_stats.ep = num
 	elif _stat == "HP":
-		char_stats.MAX_HP = num
-		char_stats.HP = num
+		char_stats.max_hp = num
+		char_stats.hp = num
 	elif _stat == "CHR":
-		char_stats.CHR = num
+		char_stats.chr = num
 	else:
 		return "{function}\n\t[color=red]- {msg}[/color]".format({
 				"function":"set_char_stats(%d, %s, %d)" % [index, _stat, num],
@@ -267,7 +267,7 @@ func kill_char(index: int) -> String:
 	
 	var c: CharacterResource = selected_team_info.char_data_array[index]
 	var char_stats: CharacterStats = c.stats
-	char_stats.HP = 0
+	char_stats.hp = 0
 	return "{function}\n\t[color=#7FFFD4]- {msg}[/color]".format({
 			"function":"kill_char(%d)" % index,
 			"msg":"%s's HP set to 0." % [c.char_name],

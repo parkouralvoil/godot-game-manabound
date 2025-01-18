@@ -124,11 +124,6 @@ layout_mode = 2
 text = "Firerate:"
 label_settings = ExtResource("1_bq655")
 
-[node name="ULT" type="Label" parent="MarginContainer/VBox/special_stats/stat_name"]
-layout_mode = 2
-text = "Ultimate Type:"
-label_settings = ExtResource("1_bq655")
-
 [node name="AMMO" type="Label" parent="MarginContainer/VBox/special_stats/stat_name"]
 layout_mode = 2
 text = "Ammo Capacity:"
@@ -156,12 +151,6 @@ horizontal_alignment = 2
 [node name="firerate" type="Label" parent="MarginContainer/VBox/special_stats/stat_number"]
 layout_mode = 2
 text = "6"
-label_settings = ExtResource("1_bq655")
-horizontal_alignment = 2
-
-[node name="ult" type="Label" parent="MarginContainer/VBox/special_stats/stat_number"]
-layout_mode = 2
-text = "Charge"
 label_settings = ExtResource("1_bq655")
 horizontal_alignment = 2
 

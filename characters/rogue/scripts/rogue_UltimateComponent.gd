@@ -18,11 +18,10 @@ func _process(_delta: float) -> void:
 	if not character.enabled:
 		return
 	#character.stats.charge = 100 ## HACK 
-	PlayerInfo.ult_recoil = false
-	if character.stats.charge >= character.stats.MAX_CHARGE:
+	if character.stats.charge >= character.stats.max_charge:
 		if PlayerInfo.input_ult:
 			character.sprite_look_at(PlayerInfo.mouse_direction)
-		if Input.is_action_just_released("right_click") and not PlayerInfo.ult_animation_playing:
+		if Input.is_action_just_released("right_click") and not PlayerInfo.arm_animation_playing:
 			character.set_ult_animation(true)
 			spend_charge()
 
@@ -30,7 +29,7 @@ func _process(_delta: float) -> void:
 func spawn_impact(dmg_impact: PackedScene) -> void:
 	assert(dmg_impact, "missing rogue impact")
 	var instance: DamageImpact = dmg_impact.instantiate()
-	instance.ep = character.stats.EP
+	instance.ep = character.stats.ep
 	instance.global_position = global_position
 	instance.damage = AM.ult_dmg
 	instance.element = CombatManager.Elements.FIRE
@@ -64,6 +63,8 @@ func spend_charge() -> void:
 	await t.finished
 	SoundPlayer.play_sound(sfx_ult, -15, 1.02)
 	
+
+	## why cant the ult just use its own arm???
 	character.arm.rotation_degrees = 0
 	character.wpn.rotation_degrees = 135
 	character.wpn.modulate = sword_default_color

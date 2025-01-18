@@ -8,7 +8,7 @@ enum PHASE {
 
 ## no more phase 2, ill save it for "willpower bosses"
 ## machine/structure bosses strictly follow their programming
-@export var Phase1_HP: float = 4000 ## will update stats.HP of main gun to have this
+@export var Phase1_HP: float = 4000 ## will update stats.hp of main gun to have this
 @export var enemy_explosion_sfx: AudioStream
 
 var _default_impact_scene: PackedScene = preload("res://projectiles/bullet_impact.tscn")

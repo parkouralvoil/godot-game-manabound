@@ -17,6 +17,9 @@ signal changed_buff_raw_atk
 signal player_got_hit
 signal drank_hp_potion
 signal character_died(downed_char: DownedCharacter)
+signal ult_finished(ult_recoil_dir: Vector2)
+
+signal joystick_released(position: Vector2)
 
 enum States {
 	IDLE,
@@ -25,42 +28,37 @@ enum States {
 }
 var current_state: States = States.IDLE
 
-enum ChargeTypes { ## i wanna rename this UltTypes but too much hassle, CHARGE works alrdy
-	CHARGE, ## previously BURST
-	ENERGY, ## previously ACTIVE
-	MANA ## previously PASSIVE
-}
-var current_charge_type: ChargeTypes = ChargeTypes.CHARGE
-
 ## logic for inputs
 var input_attack: bool = false
 var input_ult: bool = false
 
 ## logic for recoil, stance stuff
-var basic_attacking: bool = false # replaces "is_firing"
+var recoiling_from_basic_atk: bool = false # replaces "is_firing"
 		## should rename this to (do recoil)
-var can_charge: bool = true # SET BY player.gd, determines if charactre can use ult/charge ult
-var charging: bool = false # for ult
-var ult_animation_playing: bool = false # stay in stance state (not moving) if char has ult anim
+var can_use_ult: bool = true: # SET BY player.gd, determines if character can use ult/charge ult
+	set(val):
+		can_use_ult = val
+		EventBus.can_ult_changed.emit(val)
+var arm_animation_playing: bool = false # for chars that affect character arm
 
 ## set by player
 var auto_aim: bool = true
 var aim_direction: Vector2
 var mouse_direction: Vector2
 
+## set by joystick if mobile controls enabled in project settings
+var joystick_want_to_hover: bool
+var joystick_direction: Vector2 
+
 ## set by characters abilities -> Rogue's BasicAtk
 var melee_character: bool
-var melee_aim_lock: bool
-var ult_recoil: bool
 var ult_need_circle_aim: bool ## witch, deployable ults
 
 ## set by character script, for UI
 var displayed_ammo: int
 var displayed_MAX_AMMO: int
-var displayed_charge: float
+var displayed_charge: float    ## REWORK THIS!!! logic is using this...
 var displayed_MAX_CHARGE: float
-var displayed_HP: int
-var displayed_MAX_HP: int
 
 ## player to character:
 var current_anim: String = "idle"
@@ -82,5 +80,7 @@ var team_size: int
 var team_alive: int:
 	set(val):
 		team_alive = max(0, val)
+
+var team_current_index: int = 0 # needed by swap char buttons
 
 ## READY FUNCTIONS DONT WORK HERE, cuz its a resource not a node

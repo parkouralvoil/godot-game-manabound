@@ -1,0 +1,47 @@
+[gd_scene load_steps=4 format=3 uid="uid://cw3v2t75d2arr"]
+
+[ext_resource type="Script" path="res://user_interface/player_hud_canvas/mobile_controls/swap_char_button.gd" id="1_2ncpg"]
+[ext_resource type="Texture2D" uid="uid://cbhwb4006sqik" path="res://assets/sprite_UI/100x100 white circle.png" id="2_dg1so"]
+[ext_resource type="Texture2D" uid="uid://b65jfgw1dlpt5" path="res://assets/sprite_UI/mobile_buttons/left_button.png" id="3_hkl85"]
+
+[node name="SwapCharButton" type="Control"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 30.0
+offset_bottom = 30.0
+size_flags_horizontal = 0
+script = ExtResource("1_2ncpg")
+pressed_color = null
+disabled_color = null
+swap_left = null
+
+[node name="Base" type="TextureRect" parent="."]
+self_modulate = Color(0.309804, 0.309804, 0.309804, 0.788235)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(100, 100)
+mouse_force_pass_scroll_events = false
+texture = ExtResource("2_dg1so")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="CenterContainer" type="CenterContainer" parent="Base"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LeftArrow" type="TextureRect" parent="Base/CenterContainer"]
+unique_name_in_owner = true
+self_modulate = Color(0.593134, 0.593134, 0.593134, 1)
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("3_hkl85")
+expand_mode = 1

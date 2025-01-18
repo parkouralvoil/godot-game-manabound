@@ -16,6 +16,9 @@ var level_up_available: bool
 
 @onready var screen_buttons: HBoxContainer = $HBox_ScreenButtons
 
+@onready var mobile_controls: bool = \
+		ProjectSettings.get_setting("application/run/MobileControlsEnabled")
+
 ## (eventually need to redo TeamInfoMenuGrp using tab containers....)
 
 ## called by main
@@ -47,6 +50,15 @@ func _ready() -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("console"):
+		if _dev_console_enabled:
+			DevConsole.visible = not DevConsole.visible
+		else:
+			DevConsole.visible = false
+	
+	if mobile_controls:
+		return
+
 	if (event.is_action_pressed("shop_key") 
 			and current_menu_opened != team_info
 			and not preset_choice_window.visible):
@@ -55,21 +67,24 @@ func _unhandled_input(event: InputEvent) -> void:
 	## opening lvl menu is done thru button
 	
 	if event.is_action_pressed("esc"):
-		if not preset_choice_window.visible:
-			if current_menu_opened:
-				close_menu()
-			else:
-				switch_current_menu(pause_menu)
-		else:
-			preset_choice_window.hide()
-			unpause_game()
-		
-	if event.is_action_pressed("console"):
-		if _dev_console_enabled:
-			DevConsole.visible = not DevConsole.visible
-		else:
-			DevConsole.visible = false
+		_try_close_menu()
 
+func _notification(what: int) -> void:
+	if not mobile_controls:
+		return
+
+	if what == NOTIFICATION_WM_GO_BACK_REQUEST:
+		_try_close_menu() # default behavior
+
+func _try_close_menu() -> void:
+	if not preset_choice_window.visible:
+		if current_menu_opened:
+			close_menu()
+		else:
+			switch_current_menu(pause_menu)
+	else:
+		preset_choice_window.hide()
+		unpause_game()
 
 func switch_current_menu(_menu: Control) -> void:
 	if current_menu_opened:

@@ -24,9 +24,9 @@ func _process(_delta: float) -> void:
 	
 	if !t_recoil.is_stopped(): 
 		character.sprite_look_at(PlayerInfo.aim_direction)
-		PlayerInfo.basic_attacking = true
+		PlayerInfo.recoiling_from_basic_atk = true
 	elif t_recoil.is_stopped() or !can_shoot:
-		PlayerInfo.basic_attacking = false
+		PlayerInfo.recoiling_from_basic_atk = false
 	
 	if PlayerInfo.input_attack and character.stats.ammo > 0 and can_shoot and not character.is_dead:
 		if t_firerate.is_stopped():
@@ -43,7 +43,7 @@ func shoot(bullet: PackedScene) -> void:
 	var bul_instance: IceSpikeBullet = bullet.instantiate()
 	var direction: Vector2 = PlayerInfo.aim_direction
 	
-	bul_instance.ep = character.stats.EP
+	bul_instance.ep = character.stats.ep
 	bul_instance.global_position = global_position
 	bul_instance.speed = AM.bullet_speed
 	bul_instance.damage = AM.frost_spike_dmg

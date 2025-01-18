@@ -34,6 +34,8 @@ var controls_disabled: int = false ## when character dies and respawning, set th
 
 
 @onready var char_manager: CharacterManager = $CharacterManager
+@onready var mobile_controls: bool = \
+		ProjectSettings.get_setting("application/run/MobileControlsEnabled")
 
 func _ready() -> void:
 	EventBus.returned_to_mainhub.connect(_reset_player_inventory)
@@ -50,33 +52,39 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	EnemyAiManager.player_position = global_position ## this seems too slow?
-	dist_to_mouse = get_global_mouse_position() - self.global_position
 	## for airboost
-	PlayerInfo.mouse_direction = Vector2.ZERO.direction_to(dist_to_mouse).normalized()
-	
-	## for slow hover
-	if Settings.inverted_hover:
-		move_direction = Vector2.ZERO if dist_to_mouse.length() < 40 else PlayerInfo.mouse_direction
+	if mobile_controls:
+		PlayerInfo.mouse_direction = Vector2.ZERO.direction_to(PlayerInfo.joystick_direction).normalized()
 	else:
-		move_direction = PlayerInfo.mouse_direction if dist_to_mouse.length() < 40 else Vector2.ZERO
+		dist_to_mouse = get_global_mouse_position() - self.global_position
+		PlayerInfo.mouse_direction = Vector2.ZERO.direction_to(dist_to_mouse).normalized()
+	## for slow hover
+	if mobile_controls:
+		if PlayerInfo.joystick_want_to_hover:
+			move_direction = PlayerInfo.mouse_direction
+		else:
+			move_direction = Vector2.ZERO
+	else:
+		if Settings.inverted_hover:
+			move_direction = Vector2.ZERO if dist_to_mouse.length() < 40 else PlayerInfo.mouse_direction
+		else:
+			move_direction = PlayerInfo.mouse_direction if dist_to_mouse.length() < 40 else Vector2.ZERO
+	
 	
 	if (PlayerInfo.auto_aim 
 			and selected_target != null 
-			and PlayerInfo.current_state != PlayerInfo.States.STANCE):
+			and (PlayerInfo.current_state != PlayerInfo.States.STANCE
+				or mobile_controls)):
 		PlayerInfo.aim_direction = Vector2.ZERO.direction_to(selected_target.global_position 
 				- self.global_position).normalized()
 	else:
 		PlayerInfo.aim_direction = PlayerInfo.mouse_direction
 	
-	## can_charge setter
-	match PlayerInfo.current_charge_type:
-		PlayerInfoResource.ChargeTypes.CHARGE:
-			PlayerInfo.can_charge = true
-		_:
-			if PlayerInfo.displayed_charge < PlayerInfo.displayed_MAX_CHARGE:
-				PlayerInfo.can_charge = false
-			else:
-				PlayerInfo.can_charge = true
+	## can_use_ult setter
+	if PlayerInfo.displayed_charge < PlayerInfo.displayed_MAX_CHARGE:
+		PlayerInfo.can_use_ult = false
+	else:
+		PlayerInfo.can_use_ult = true
 	
 	if Input.is_action_just_pressed("toggle_aim"):
 		PlayerInfo.auto_aim = !PlayerInfo.auto_aim

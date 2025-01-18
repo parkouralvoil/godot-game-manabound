@@ -137,7 +137,7 @@ theme_override_constants/margin_bottom = 3
 
 [node name="play" type="Label" parent="Control/play/PanelContainer/MarginContainer"]
 layout_mode = 2
-text = "Press any key to play"
+text = "Tap to start"
 label_settings = SubResource("LabelSettings_xn2jq")
 horizontal_alignment = 1
 
@@ -160,7 +160,7 @@ color = Color(0, 0, 0, 0.945098)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(430, -156)
-zoom = Vector2(1.5, 1.5)
+zoom = Vector2(1.4, 1.4)
 metadata/_edit_lock_ = true
 
 [node name="MountainSkyTree" parent="." instance=ExtResource("1_hoq15")]

@@ -56,9 +56,9 @@ var scale_atk: float = 4
 ## variables to make skill tree easier to track:
 @onready var lvl_basicAtk_size_atk: int:
 	set(lvl):
-		var base_atk: float = stats.ATK - scale_atk * lvl_basicAtk_size_atk
+		var base_atk: float = stats.atk - scale_atk * lvl_basicAtk_size_atk
 		lvl_basicAtk_size_atk = lvl
-		stats.ATK = base_atk + (scale_atk * lvl)
+		stats.atk = base_atk + (scale_atk * lvl)
 		update_damage() ## should probably signal this...
 		melee_size = melee_size_base + (melee_size_scale * lvl)
 
@@ -70,7 +70,7 @@ var scale_atk: float = 4
 @onready var lvl_ult_buff: int:
 	set(lvl):
 		lvl_ult_buff = lvl
-		ult_atk_buff = (ult_atk_buff_base + (ult_atk_buff_scale * lvl)) * stats.ATK
+		ult_atk_buff = (ult_atk_buff_base + (ult_atk_buff_scale * lvl)) * stats.atk
 
 
 
@@ -189,7 +189,7 @@ func update_damage() -> void:
 			0, 1, stats)
 	
 	ult_atk_buff = (ult_atk_buff_base + (ult_atk_buff_scale * lvl_ult_buff)
-			) * stats.ATK
+			) * stats.atk
 
 
 func energy_production(procs: float) -> void:
@@ -197,11 +197,11 @@ func energy_production(procs: float) -> void:
 		push_error("ERROR ON %s AM" % name)
 		return
 	
-	#var base_energy_prod: float = 1 + stats.CHR/50
+	#var base_energy_prod: float = 1 + stats.chr/50
 	#print("procs = %0.2f" % (base_energy_prod * procs))
 	var s: CharacterStats = character.stats
-	s.charge = clampf(s.charge + s.base_charge_rate * (s.CHR/100) * procs,
+	s.charge = clampf(s.charge + s.base_charge_rate * (s.chr/100) * procs,
 			0,
-			s.MAX_CHARGE)
+			s.max_charge)
 	## every enemy death gives 3 proc
 	## every enemy hit gives 0.5 proc

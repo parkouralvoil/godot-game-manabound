@@ -7,6 +7,6 @@ static var PlayerInfo: PlayerInfoResource = preload("res://resources/data/player
 ## also TODO: ability helper is accessible outside of abilit managers which is bad
 
 static func compute_damage(base: float, scaling: float, level: int, stats: CharacterStats) -> float:
-	var output: float = (stats.ATK + PlayerInfo.buff_raw_atk) * (base 
+	var output: float = (stats.atk + PlayerInfo.buff_raw_atk) * (base 
 		+ scaling * max(0, level - 1))
 	return output

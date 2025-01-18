@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://c88sdm1pehvym"]
+[gd_scene load_steps=17 format=3 uid="uid://c88sdm1pehvym"]
 
 [ext_resource type="Script" path="res://user_interface/player_hud_canvas/player_hud_canvas.gd" id="1_imfh2"]
 [ext_resource type="Resource" uid="uid://cnqflwm13q5h2" path="res://resources/data/dungeon_managers/blueCity/dungeon_blueCity.tres" id="2_8yjwh"]
@@ -11,6 +11,11 @@
 [ext_resource type="PackedScene" uid="uid://b3cfd23wes4l7" path="res://user_interface/main_canvas/popup_indicator/popup_indicator.tscn" id="9_tft8f"]
 [ext_resource type="PackedScene" uid="uid://bart8kug765at" path="res://user_interface/player_hud_canvas/gameover_screen/gameover_screen.tscn" id="10_1w06m"]
 [ext_resource type="PackedScene" uid="uid://cebhdii3ts6xg" path="res://user_interface/player_hud_canvas/victory_screen/victory_screen.tscn" id="11_txbu7"]
+[ext_resource type="PackedScene" uid="uid://cjioum4km4f43" path="res://user_interface/player_hud_canvas/boss_info/boss_info.tscn" id="12_3m7ka"]
+[ext_resource type="PackedScene" uid="uid://dysxs5ccub5rb" path="res://user_interface/player_hud_canvas/mobile_controls/movement_joystick.tscn" id="13_njctq"]
+[ext_resource type="PackedScene" uid="uid://bc8grlhrs73n4" path="res://user_interface/player_hud_canvas/mobile_controls/attack_or_interact_button.tscn" id="14_haasw"]
+[ext_resource type="PackedScene" uid="uid://cw3v2t75d2arr" path="res://user_interface/player_hud_canvas/mobile_controls/swap_char_button.tscn" id="15_2d2bv"]
+[ext_resource type="PackedScene" uid="uid://cjslpqngk5skn" path="res://user_interface/player_hud_canvas/mobile_controls/ult_button.tscn" id="16_wu6v1"]
 
 [node name="PlayerHudCanvas" type="CanvasLayer"]
 process_mode = 1
@@ -22,9 +27,17 @@ selected_team_info = ExtResource("5_jw52t")
 
 [node name="BloodOverlay" parent="." instance=ExtResource("2_xr203")]
 
-[node name="GameInfoHud" parent="." instance=ExtResource("2_p730a")]
+[node name="VBox" type="VBoxContainer" parent="."]
+offset_right = 469.0
+offset_bottom = 65.0
 
-[node name="TeamHud" parent="." instance=ExtResource("3_w0rs6")]
+[node name="TeamHud" parent="VBox" instance=ExtResource("3_w0rs6")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="GameInfoHud" parent="VBox" instance=ExtResource("2_p730a")]
+unique_name_in_owner = true
+layout_mode = 2
 
 [node name="Popup_indicator" parent="." instance=ExtResource("9_tft8f")]
 mouse_filter = 2
@@ -34,3 +47,63 @@ visible = false
 
 [node name="VictoryScreen" parent="." instance=ExtResource("11_txbu7")]
 visible = false
+
+[node name="BossInfo" parent="." instance=ExtResource("12_3m7ka")]
+
+[node name="MobileControls" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -40.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="MovementJoystick" parent="MobileControls" instance=ExtResource("13_njctq")]
+modulate = Color(0.473976, 0.473976, 0.473976, 0.827)
+offset_left = -376.0
+offset_top = -167.0
+offset_right = -76.0
+offset_bottom = 133.0
+scale = Vector2(0.75, 0.75)
+pressed_color = Color(0.393649, 0.665562, 0.829062, 1)
+
+[node name="ActionButtons" type="Control" parent="MobileControls"]
+layout_mode = 2
+anchors_preset = 0
+offset_left = 283.0
+offset_top = -105.0
+offset_right = 283.0
+offset_bottom = -65.0
+
+[node name="AttackOrInteractButton" parent="MobileControls/ActionButtons" instance=ExtResource("14_haasw")]
+offset_left = 1.0
+offset_top = 15.0
+offset_right = 1.0
+offset_bottom = 15.0
+pressed_color = Color(0.745098, 0.745098, 0.745098, 1)
+
+[node name="HBox" type="HBoxContainer" parent="MobileControls/ActionButtons"]
+layout_mode = 0
+offset_left = 3.0
+offset_top = -47.0
+offset_right = 107.0
+offset_bottom = 3.0
+
+[node name="SwapLeftButton" parent="MobileControls/ActionButtons/HBox" instance=ExtResource("15_2d2bv")]
+layout_mode = 2
+
+[node name="SwapRightButton" parent="MobileControls/ActionButtons/HBox" instance=ExtResource("15_2d2bv")]
+layout_mode = 2
+swap_left = false
+
+[node name="UltButton" parent="MobileControls/ActionButtons" instance=ExtResource("16_wu6v1")]
+offset_left = -62.0
+offset_top = 58.0
+offset_right = -22.0
+offset_bottom = 98.0

@@ -39,7 +39,7 @@ radius = 201.04
 radius = 80.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8fkqa"]
-radius = 96.0469
+radius = 80.0062
 
 [sub_resource type="Gradient" id="Gradient_de2bk"]
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
@@ -222,7 +222,7 @@ script = ExtResource("6_g8flh")
 selected_team_info = ExtResource("16_fh5ne")
 
 [node name="change_char_cd" type="Timer" parent="CharacterManager"]
-wait_time = 0.7
+wait_time = 0.3
 one_shot = true
 autostart = true
 

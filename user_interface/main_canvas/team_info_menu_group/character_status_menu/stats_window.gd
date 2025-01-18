@@ -18,7 +18,6 @@ var tracked_char_resource: CharacterResource = null:
 @onready var spd: Label = $MarginContainer/VBox/special_stats/stat_number/spd
 @onready var rel: Label = $MarginContainer/VBox/special_stats/stat_number/rel
 @onready var firerate: Label = $MarginContainer/VBox/special_stats/stat_number/firerate
-@onready var ult: Label = $MarginContainer/VBox/special_stats/stat_number/ult
 @onready var ammo: Label = $MarginContainer/VBox/special_stats/stat_number/ammo
 
 
@@ -28,29 +27,15 @@ func _ready() -> void:
 
 func change_stats(cr: CharacterResource) -> void:
 	var s: CharacterStats = cr.stats
-	hp.text = str(s.MAX_HP)
-	atk.text = str(s.ATK)
-	ep.text = str(s.EP)
-	chr.text = str(s.CHR) + "%"
+	hp.text = str(s.max_hp)
+	atk.text = str(s.atk)
+	ep.text = str(s.ep)
+	chr.text = str(s.chr) + "%"
 	
 	spd.text = str(s.SPD)
 	rel.text = "%ss" % str(s.reload_time)
 	firerate.text = str(s.firerate)
-	ult.text = _determine_ult_type(s.charge_type)
-	ammo.text = str(s.MAX_AMMO)
-
-
-func _determine_ult_type(type: PlayerInfoResource.ChargeTypes) -> String:
-	match type:
-		PlayerInfoResource.ChargeTypes.CHARGE:
-			return "Charge"
-		PlayerInfoResource.ChargeTypes.ENERGY:
-			return "Energy"
-		PlayerInfoResource.ChargeTypes.MANA:
-			return "Mana"
-		_:
-			return "UNKNOWN"
-
+	ammo.text = str(s.max_ammo)
 
 func update_stats() -> void:
 	if tracked_char_resource:

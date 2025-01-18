@@ -33,7 +33,7 @@ var scale_ult_size: float = 25 # adds to scale
 ## Stats scaling
 @onready var base_reload_time: float = stats.reload_time
 var scale_reload_time: float = 0.1 ## subtracts from base reload time, to speed it up
-@onready var base_charge_rate: float = stats.CHR # for witch, her charge rate remains da same
+@onready var base_charge_rate: float = stats.chr # for witch, her charge rate remains da same
 
 ## Final Computations
 var explosion_num: int = base_ult_explosions
@@ -198,9 +198,9 @@ func energy_production(procs: float) -> void:
 		push_error("ERROR ON %s AM" % name)
 		return
 	
-	#var base_energy_prod: float = 1 + stats.CHR/50
+	#var base_energy_prod: float = 1 + stats.chr/50
 	#print("procs = %0.2f" % (base_energy_prod * procs))
 	var s: CharacterStats = character.stats
-	s.charge = clampf(s.charge + s.base_charge_rate * (s.CHR/100) * procs,
+	s.charge = clampf(s.charge + s.base_charge_rate * (s.chr/100) * procs,
 			0,
-			s.MAX_CHARGE)
+			s.max_charge)

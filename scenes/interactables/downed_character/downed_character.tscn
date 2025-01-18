@@ -60,8 +60,7 @@ grow_vertical = 2
 size_flags_horizontal = 6
 size_flags_vertical = 6
 theme_override_styles/normal = ExtResource("3_c6pvx")
-text = "Hold E 
-to revive"
+text = "Hold to revive"
 label_settings = ExtResource("4_7wq17")
 horizontal_alignment = 1
 vertical_alignment = 1

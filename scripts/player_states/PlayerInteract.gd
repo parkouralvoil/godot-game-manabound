@@ -17,8 +17,8 @@ func Enter() -> void:
 	p.circle_indicator.show()
 	p.PlayerInfo.current_state = PlayerInfoResource.States.IDLE
 	p.PlayerInfo.input_attack = false
+	p.PlayerInfo.input_ult = false
 	
-
 
 func Exit() -> void:
 	if !p:

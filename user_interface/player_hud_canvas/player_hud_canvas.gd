@@ -7,8 +7,8 @@ class_name PlayerHudCanvas
 @export var selected_team_info: SelectedTeamInfo
 
 @onready var blood_overlay: BloodOverlay = $BloodOverlay
-@onready var game_info_hud: GameInfoHud = $GameInfoHud
-@onready var team_hud: TeamHud = $TeamHud
+@onready var game_info_hud: GameInfoHud = %GameInfoHud
+@onready var team_hud: TeamHud = %TeamHud
 @onready var gameover: GameOver = $GameoverScreen
 
 func _ready() -> void:

@@ -33,10 +33,10 @@ var stats: CharacterStats:
 
 
 func _update_stats() -> void:
-	hp.text = "%d" % stats.MAX_HP
-	atk.text = "%d" % stats.ATK
-	ep.text = "%d" % stats.EP
-	chr.text = "%d%%" % stats.CHR
+	hp.text = "%d" % stats.max_hp
+	atk.text = "%d" % stats.atk
+	ep.text = "%d" % stats.ep
+	chr.text = "%d%%" % stats.chr
 
 
 func _update_rune_number() -> void:
