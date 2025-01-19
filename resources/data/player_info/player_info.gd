@@ -45,6 +45,7 @@ var arm_animation_playing: bool = false # for chars that affect character arm
 var auto_aim: bool = true
 var aim_direction: Vector2
 var mouse_direction: Vector2
+var target_position: Vector2 ## for deployable ults, mobile
 
 ## set by joystick if mobile controls enabled in project settings
 var joystick_want_to_hover: bool
@@ -52,13 +53,13 @@ var joystick_direction: Vector2
 
 ## set by characters abilities -> Rogue's BasicAtk
 var melee_character: bool
-var ult_need_circle_aim: bool ## witch, deployable ults
+var ult_need_circle_aim: bool ## witch, deployable ults, but might not be used anymore
 
 ## set by character script, for UI
 var displayed_ammo: int
 var displayed_MAX_AMMO: int
-var displayed_charge: float    ## REWORK THIS!!! logic is using this...
-var displayed_MAX_CHARGE: float
+var current_charge: float    ## REWORK THIS!!! logic is using this...
+var current_charge_threshold: float
 
 ## player to character:
 var current_anim: String = "idle"

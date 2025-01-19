@@ -77,17 +77,19 @@ func _process(_delta: float) -> void:
 				or mobile_controls)):
 		PlayerInfo.aim_direction = Vector2.ZERO.direction_to(selected_target.global_position 
 				- self.global_position).normalized()
+		PlayerInfo.target_position = selected_target.global_position
 	else:
 		PlayerInfo.aim_direction = PlayerInfo.mouse_direction
+		PlayerInfo.target_position = global_position
 	
 	## can_use_ult setter
-	if PlayerInfo.displayed_charge < PlayerInfo.displayed_MAX_CHARGE:
+	if PlayerInfo.current_charge < PlayerInfo.current_charge_threshold:
 		PlayerInfo.can_use_ult = false
 	else:
 		PlayerInfo.can_use_ult = true
 	
 	if Input.is_action_just_pressed("toggle_aim"):
-		PlayerInfo.auto_aim = !PlayerInfo.auto_aim
+		PlayerInfo.auto_aim = not PlayerInfo.auto_aim
 
 
 # cuz each character have their healths in AM

@@ -40,11 +40,15 @@ func _ready() -> void:
 
 
 func take_damage(damage: int) -> void:
+	print_debug("took damage")
 	if _tutorial_immortality and current_char.stats.hp <= 1:
+		print_debug("tutorial immunity?")
 		return
 	if current_char.stats.hp - damage > 0:
+		print_debug("damage received")
 		current_char.stats.hp -= damage
 	else:
+		print_debug("should be dead")
 		current_char.stats.hp = 0
 
 
@@ -100,6 +104,7 @@ func apply_player_cam_shake(strength: int) -> void:
 
 
 func _on_character_died() -> void:
+	print_debug("char died")
 	p.controls_disabled = true
 	p.PlayerInfo.recoiling_from_basic_atk = false
 	p.PlayerInfo.input_ult = false

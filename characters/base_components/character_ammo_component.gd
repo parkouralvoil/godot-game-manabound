@@ -26,5 +26,4 @@ func _process(_delta: float) -> void:
 
 
 func _on_ammo_regen_timeout() -> void:
-	
 	character.stats.ammo += 1

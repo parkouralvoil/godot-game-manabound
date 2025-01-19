@@ -214,3 +214,4 @@ texture = ExtResource("9_qngvn")
 position = Vector2(363, 76)
 
 [node name="enemy_autobow" parent="." instance=ExtResource("11_8bm1t")]
+position = Vector2(330, -13)

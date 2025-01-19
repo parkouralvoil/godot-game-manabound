@@ -1,18 +1,19 @@
-[gd_scene load_steps=21 format=3 uid="uid://despujxox3cs7"]
+[gd_scene load_steps=19 format=3 uid="uid://despujxox3cs7"]
 
 [ext_resource type="Script" path="res://characters/CharacterClass.gd" id="1_2hkjo"]
-[ext_resource type="Script" path="res://characters/knight/scripts/knight_AbilityManager.gd" id="2_e4ef6"]
+[ext_resource type="Script" path="res://characters/knight/scripts/knight_ability_manager.gd" id="2_e4ef6"]
 [ext_resource type="Resource" uid="uid://fbbdhnnk7q74" path="res://characters/knight/knight_stats.tres" id="2_vf3hs"]
 [ext_resource type="Texture2D" uid="uid://yylj6tta24tp" path="res://characters/knight/visuals/knight_window.tres" id="3_6s27s"]
 [ext_resource type="SpriteFrames" uid="uid://n8tavxox3kua" path="res://characters/knight/visuals/knight_spriteframes.tres" id="3_eatwp"]
-[ext_resource type="Script" path="res://characters/knight/scripts/knight_AttackComponent.gd" id="4_k4d5v"]
+[ext_resource type="Script" path="res://characters/knight/scripts/knight_attack_component.gd" id="4_k4d5v"]
 [ext_resource type="PackedScene" uid="uid://b53veg8003vdg" path="res://projectiles/lightning_projectiles/homing_missile/homing_missile.tscn" id="5_1iwx0"]
 [ext_resource type="PackedScene" uid="uid://durs4s4d2quml" path="res://projectiles/lightning_projectiles/basic_bolt/basic_bolt.tscn" id="5_jahx0"]
 [ext_resource type="PackedScene" uid="uid://bf05bt5n34ymh" path="res://projectiles/lightning_projectiles/lightning_bullet/lightning_bullet.tscn" id="6_oe7nv"]
-[ext_resource type="Script" path="res://characters/knight/scripts/knight_UltimateComponent.gd" id="7_hkru2"]
+[ext_resource type="Script" path="res://characters/knight/scripts/knight_ult_component.gd" id="7_hkru2"]
 [ext_resource type="AudioStream" uid="uid://b1cwrq23fey4t" path="res://assets/audio/sfx/character_sfx/Lightning_gunshot.mp3" id="7_khu4f"]
+[ext_resource type="Resource" uid="uid://cqakpeajr2jcy" path="res://characters/knight/knight_stree_model.tres" id="8_3c3au"]
 [ext_resource type="PackedScene" uid="uid://j2b61v541lds" path="res://projectiles/lightning_projectiles/grand_bolt/grand_bolt.tscn" id="8_3k3pf"]
-[ext_resource type="Script" path="res://characters/knight/scripts/knight_AmmoComponent.gd" id="9_1ohy4"]
+[ext_resource type="Script" path="res://characters/knight/scripts/knight_ammo_component.gd" id="9_1ohy4"]
 [ext_resource type="AudioStream" uid="uid://c30ch7gxefbqw" path="res://assets/audio/sfx/character_sfx/lightning_grand_ballista.mp3" id="11_n0ocq"]
 [ext_resource type="Texture2D" uid="uid://bm71lln6lsmlc" path="res://assets/sprite_characters/knight_spritesheet.png" id="11_sbkwl"]
 [ext_resource type="Texture2D" uid="uid://bdxxu1pv6u0hh" path="res://assets/sprite_characters/knight weapon.png" id="12_8ugk7"]
@@ -20,22 +21,6 @@
 [sub_resource type="AtlasTexture" id="AtlasTexture_bls2u"]
 atlas = ExtResource("11_sbkwl")
 region = Rect2(96, 96, 32, 32)
-
-[sub_resource type="Gradient" id="Gradient_e08hl"]
-colors = PackedColorArray(0.937255, 0.760784, 0.266667, 1, 0.901961, 0.729412, 0.14902, 0.0745098)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_5kgux"]
-gradient = SubResource("Gradient_e08hl")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_waotk"]
-particle_flag_disable_z = true
-spread = 180.0
-initial_velocity_min = 75.0
-initial_velocity_max = 75.0
-gravity = Vector3(0, 0, 0)
-scale_min = 2.0
-scale_max = 2.0
-color_ramp = SubResource("GradientTexture1D_5kgux")
 
 [node name="character_knight" type="Node2D"]
 script = ExtResource("1_2hkjo")
@@ -59,6 +44,7 @@ texture = ExtResource("12_8ugk7")
 
 [node name="AbilityManager" type="Node2D" parent="."]
 script = ExtResource("2_e4ef6")
+StreeModel = ExtResource("8_3c3au")
 
 [node name="BasicAttack" type="Node2D" parent="AbilityManager"]
 script = ExtResource("4_k4d5v")
@@ -89,12 +75,6 @@ GrandBoltScene = ExtResource("8_3k3pf")
 LightningBoltScene = ExtResource("6_oe7nv")
 HomingMissileScene = ExtResource("5_1iwx0")
 sfx_grand_ballista = ExtResource("11_n0ocq")
-
-[node name="charge_particles" type="GPUParticles2D" parent="AbilityManager/Ultimate"]
-emitting = false
-amount = 20
-process_material = SubResource("ParticleProcessMaterial_waotk")
-lifetime = 0.6
 
 [node name="ult_cooldown" type="Timer" parent="AbilityManager/Ultimate"]
 wait_time = 0.2

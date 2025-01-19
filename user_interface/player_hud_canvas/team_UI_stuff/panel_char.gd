@@ -67,11 +67,11 @@ func update_ammo() -> void:
 
 
 func update_charge() -> void:
-	var yellow := Color(1, 1, 0)
-	var blue := Color(0.3, 0.3, 1)
-	var red := Color(1, 0.3, 0.3)
-	var gray := Color(0.9, 0.9, 0.9)
-	var elem := tracked_stats.element
+	# var yellow := Color(1, 1, 0)
+	# var blue := Color(0.3, 0.3, 1)
+	# var red := Color(1, 0.3, 0.3)
+	# var gray := Color(0.9, 0.9, 0.9)
+	# var elem := tracked_stats.element
 	var charge := tracked_stats.charge
 	var tier1_max_charge := tracked_stats.charge_threshold
 	#print_debug(tier1_max_charge)

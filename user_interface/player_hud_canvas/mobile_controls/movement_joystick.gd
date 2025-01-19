@@ -28,7 +28,7 @@ func _update_joystick(touch_position: Vector2) -> void:
 	if use_input_actions: ## this should be set off in inspector
 		pass
 
-func _reset():
+func _reset() -> void:
 	is_pressed = false
 	
 	PlayerInfo.joystick_released.emit(output)

@@ -1,4 +1,5 @@
 extends Bullet
+class_name GrandBoltBullet
 
 var piercing: bool = false
 

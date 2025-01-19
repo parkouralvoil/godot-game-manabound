@@ -1,14 +1,13 @@
-extends Node2D
+extends Character_AbilityManager
 class_name Knight_AbilityManager
 
-## AM stores projectile stats and properties
+## public properties used by child components
+var ult_bullet_properties := BulletProperties.new()
+var basic_bullet_properties := BulletProperties.new()
+var enhanced_bullet_properties := BulletProperties.new()
+var missile_bullet_properties := BulletProperties.new()
 
-## single "" include newlines (shift enter's counted as \n)
-## triple """""" allow verbatim newlines (shift enter's are not counted as \n)
-
-var StreeModel: SkillTreeModel = preload("res://characters/knight/knight_stree_model.tres")
-
-## names
+## names, im inconsistent with this bruh
 var _basic_atk_name: String = "Rapidfire Crossbow"
 var _ult_name: String = "Grand Ballista"
 
@@ -24,28 +23,10 @@ var _ult_base_percent: float = 3.5 ## tier 2 gives "shotgun" effect
 var _chr_scale: float = 10 ## charge rate
 var _ammo_scale: int = 2
 
-## public properties used by child components
-var ult_bullet_properties := BulletProperties.new()
-var basic_bullet_properties := BulletProperties.new()
-var enhanced_bullet_properties := BulletProperties.new()
-var missile_bullet_properties := BulletProperties.new()
-
 ## Final Computations
 var _enhanced_bullet_damage: float
 var _basic_bullet_damage: float
 var _ult_damage: float
-
-# var skill_ult_missile: bool = false ## right node 2A
-# var skill_basicAtk_double: bool = false ## right node 2A
-
-@onready var character: Character = owner
-@onready var PlayerInfo: PlayerInfoResource = character.PlayerInfo
-@onready var stats: CharacterStats = character.stats
-
-## components:
-@onready var BasicAttack: Knight_AttackComponent = $BasicAttack
-@onready var Ultimate: Knight_UltimateComponent = $Ultimate
-@onready var Ammo: Knight_AmmoComponent = $Ammo
 
 ## stats scaling (i need += so no more of this)
 
@@ -75,55 +56,20 @@ var _ult_damage: float
 			level_ult_chargeRate = level
 			stats.chr += _chr_scale
 
-## TODO: make these 2 functions common to all ability managers
-func _ready() -> void:
-	BasicAttack.PlayerInfo = character.PlayerInfo
-	Ultimate.PlayerInfo = character.PlayerInfo
-	Ammo.PlayerInfo = character.PlayerInfo
-	
-	## Energy regen
-	EventBus.energy_gen_from_enemy_got_hit.connect(energy_production)
-	EventBus.energy_gen_from_skills.connect(energy_production)
-	
-	EventBus.returned_to_mainhub.connect(_reset_ability_manager)
-	StreeModel.skill_node_bought.connect(_update_skills)
-	PlayerInfo.changed_buff_raw_atk.connect(_update_damage_and_properties)
-	stats.stats_changed.connect(_update_damage_and_properties)
-	
-	Ultimate.charge_spent.connect(_on_charge_spent)
-
-	_initialize_model()
-	_update_skills()
-	_update_damage_and_properties()
-
-
-func _reset_ability_manager() -> void:
-	for i in range(1, StreeModel.left_nodes.size()):
-		StreeModel.left_nodes[i].lvl = 0
-	for i in range(1, StreeModel.right_nodes.size()):
-		StreeModel.right_nodes[i].lvl = 0
-	_initialize_model()
-	_update_skills()
-	_update_damage_and_properties()
-
-func _update_damage_and_properties() -> void:
-	_update_damage()
-	_update_properties()
 
 func _update_skills() -> void:
 	level_basicAtk_ammo = StreeModel.left_nodes[1].lvl
 	level_basicAtk_burst = StreeModel.left_nodes[2].lvl
-	BasicAttack.enhanced_burst_shot_enabled = level_basicAtk_burst
 
 	level_ult_upgrade = StreeModel.right_nodes[1].lvl
 	level_ult_chargeRate = StreeModel.right_nodes[3].lvl
 	
-	# boolean from int, 0 = false, not 0 = true
-	Ultimate.missiles_enabled = StreeModel.right_nodes[2].lvl
-	BasicAttack.double_shot_enabled = StreeModel.left_nodes[3].lvl
+	if Ultimate is Knight_UltComponent and BasicAttack is Knight_AttackComponent:
+		Ultimate.missiles_enabled = StreeModel.right_nodes[2].lvl
+		BasicAttack.double_shot_enabled = StreeModel.left_nodes[3].lvl
+		BasicAttack.enhanced_burst_shot_enabled = level_basicAtk_burst
 
 
-#region Initialize Model
 func _initialize_model() -> void:
 	## description of char
 	StreeModel.root_node.name = "Infantry Knight" ## more detailed name purely for stree
@@ -188,7 +134,7 @@ func _initialize_model() -> void:
 	)
 	StreeModel.right_nodes[3].max_lvl = 3
 	StreeModel.right_nodes[3].cost = 700
-#endregion
+
 
 func _update_properties() -> void:
 	basic_bullet_properties.final_damage = _basic_bullet_damage
@@ -211,29 +157,23 @@ func _update_properties() -> void:
 	missile_bullet_properties.speed = _bullet_speed * 0.5
 	missile_bullet_properties.ep = stats.ep
 
-	Ultimate.enhanced_bullet_properties = enhanced_bullet_properties
-	Ultimate.ult_bullet_properties = ult_bullet_properties
-	Ultimate.missile_bullet_properties = basic_bullet_properties
+	if Ultimate is Knight_UltComponent:
+		var ult_comp: Knight_UltComponent = Ultimate
+		ult_comp.enhanced_bullet_properties = enhanced_bullet_properties
+		ult_comp.ult_bullet_properties = ult_bullet_properties
+		ult_comp.missile_bullet_properties = basic_bullet_properties
 
-	BasicAttack.basic_bullet_properties = basic_bullet_properties
-	BasicAttack.basic_bullet_properties = enhanced_bullet_properties
+	if BasicAttack is Knight_AttackComponent:
+		var atk_comp: Knight_AttackComponent = BasicAttack
+		atk_comp.basic_bullet_properties = basic_bullet_properties
+		atk_comp.enhanced_bullet_properties = enhanced_bullet_properties
+
 
 func _update_damage() -> void:
-	_basic_bullet_damage = AbilityHelper.compute_damage(_basic_bullet_base_percent, 
+	_basic_bullet_damage = _compute_damage(_basic_bullet_base_percent, 
 			0, 1, stats)
-	_enhanced_bullet_damage = AbilityHelper.compute_damage(_enhanced_bullet_base_percent, 
+	_enhanced_bullet_damage = _compute_damage(_enhanced_bullet_base_percent, 
 			_enhanced_bullet_scale_percent, level_basicAtk_burst, stats)	
-	_ult_damage = AbilityHelper.compute_damage(_ult_base_percent, 
+	_ult_damage = _compute_damage(_ult_base_percent, 
 			0, level_ult_upgrade, stats)
 
-func _on_charge_spent(used_charge: float) -> void:
-	stats.charge -= used_charge
-
-func energy_production(procs: float) -> void:
-	if not character:
-		push_error("ERROR ON %s AM" % name)
-		return
-	
-	var new_charge: float = stats.charge + stats.base_charge_rate * (stats.chr/100) * procs
-	stats.charge = new_charge
-	Ultimate.update_charge(stats.charge, stats.charge_threshold, stats.charge_tier)
