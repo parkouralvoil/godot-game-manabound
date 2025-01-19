@@ -1,18 +1,19 @@
-[gd_scene load_steps=23 format=3 uid="uid://dyb83ujyxhk2b"]
+[gd_scene load_steps=24 format=3 uid="uid://dyb83ujyxhk2b"]
 
-[ext_resource type="Script" path="res://characters/CharacterClass.gd" id="1_h1y8r"]
-[ext_resource type="Script" path="res://characters/rogue/scripts/rogue_AbilityManager.gd" id="2_hppn7"]
+[ext_resource type="Script" path="res://characters/character_class.gd" id="1_h1y8r"]
+[ext_resource type="Script" path="res://characters/rogue/scripts/rogue_ability_manager.gd" id="2_hppn7"]
 [ext_resource type="Resource" uid="uid://4m7ffonja3cx" path="res://characters/rogue/rogue_stats.tres" id="2_umd7v"]
 [ext_resource type="Texture2D" uid="uid://cr6dnlf3rjh2u" path="res://characters/rogue/visuals/rogue_window.tres" id="3_ewe3u"]
 [ext_resource type="SpriteFrames" uid="uid://d1jev7rih8fxr" path="res://characters/rogue/visuals/rogue_spriteframes.tres" id="3_kwca4"]
 [ext_resource type="Texture2D" uid="uid://d0b5yrantkkqm" path="res://characters/rogue/visuals/rogue_arm.tres" id="3_p6yb1"]
-[ext_resource type="Script" path="res://characters/rogue/scripts/rogue_AttackComponent.gd" id="4_u8b7v"]
+[ext_resource type="Script" path="res://characters/rogue/scripts/rogue_attack_component.gd" id="4_u8b7v"]
 [ext_resource type="PackedScene" uid="uid://dn3gk3lgb0iqk" path="res://projectiles/fire_projectiles/fire_blade/fire_blade.tscn" id="5_ua7bq"]
 [ext_resource type="Texture2D" uid="uid://xm4il8dlpthl" path="res://assets/sprite_characters/rogue weapon.png" id="5_x463i"]
 [ext_resource type="PackedScene" uid="uid://c0167p4yyhyxe" path="res://projectiles/fire_projectiles/rogue_melee_combo/rogue_melee_hit_down.tscn" id="6_6r5ov"]
 [ext_resource type="PackedScene" uid="uid://c25whdi1vpp8c" path="res://projectiles/fire_projectiles/rogue_melee_combo/rogue_melee_hit_up.tscn" id="7_ng5em"]
-[ext_resource type="Script" path="res://characters/rogue/scripts/rogue_AmmoComponent.gd" id="9_1qn3a"]
-[ext_resource type="Script" path="res://characters/rogue/scripts/rogue_UltimateComponent.gd" id="10_s5uqh"]
+[ext_resource type="Resource" uid="uid://bgrm2mw54yfjo" path="res://characters/rogue/rogue_stree_model.tres" id="8_k4bdi"]
+[ext_resource type="Script" path="res://characters/rogue/scripts/rogue_ammo_component.gd" id="9_1qn3a"]
+[ext_resource type="Script" path="res://characters/rogue/scripts/rogue_ult_component.gd" id="10_s5uqh"]
 [ext_resource type="PackedScene" uid="uid://cxo81uwgev1mg" path="res://projectiles/fire_projectiles/eruption/flame_repulsion_dmg_impact.tscn" id="11_5arbq"]
 [ext_resource type="AudioStream" uid="uid://clvudafkh3psa" path="res://assets/audio/sfx/character_sfx/sword_slash_fire.mp3" id="12_f2soj"]
 [ext_resource type="AudioStream" uid="uid://cq4rwlp8udfmy" path="res://assets/audio/sfx/character_sfx/mixkit-fast-sword-whoosh-2792.mp3" id="12_hl0fx"]
@@ -162,6 +163,7 @@ offset = Vector2(8.1459, -7.94092)
 
 [node name="AbilityManager" type="Node2D" parent="."]
 script = ExtResource("2_hppn7")
+StreeModel = ExtResource("8_k4bdi")
 
 [node name="BasicAttack" type="Node2D" parent="AbilityManager"]
 script = ExtResource("4_u8b7v")
@@ -172,6 +174,10 @@ sfx_hasAmmoMeleeSwing = ExtResource("12_f2soj")
 sfx_noAmmoMeleeSwing = ExtResource("12_hl0fx")
 
 [node name="firerate" type="Timer" parent="AbilityManager/BasicAttack"]
+wait_time = 0.25
+one_shot = true
+
+[node name="recoil" type="Timer" parent="AbilityManager/BasicAttack"]
 wait_time = 0.25
 one_shot = true
 
@@ -200,6 +206,10 @@ sfx_ult = ExtResource("16_wniay")
 
 [node name="buff_duration" type="Timer" parent="AbilityManager/Ultimate"]
 wait_time = 10.0
+one_shot = true
+
+[node name="ult_cooldown" type="Timer" parent="AbilityManager/Ultimate"]
+wait_time = 0.1
 one_shot = true
 
 [node name="Ammo" type="Node2D" parent="AbilityManager"]

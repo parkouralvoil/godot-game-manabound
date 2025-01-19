@@ -1,6 +1,6 @@
 [gd_scene load_steps=19 format=3 uid="uid://despujxox3cs7"]
 
-[ext_resource type="Script" path="res://characters/CharacterClass.gd" id="1_2hkjo"]
+[ext_resource type="Script" path="res://characters/character_class.gd" id="1_2hkjo"]
 [ext_resource type="Script" path="res://characters/knight/scripts/knight_ability_manager.gd" id="2_e4ef6"]
 [ext_resource type="Resource" uid="uid://fbbdhnnk7q74" path="res://characters/knight/knight_stats.tres" id="2_vf3hs"]
 [ext_resource type="Texture2D" uid="uid://yylj6tta24tp" path="res://characters/knight/visuals/knight_window.tres" id="3_6s27s"]

@@ -8,7 +8,7 @@ var ice_spike_bullet_properties := BulletProperties.new()
 ## Basic atk properties
 var _bullet_speed: float = 375
 var _max_distance: float = 260
-var _frost_spear_base_percent: float = 1
+var _ice_spike_base_percent: float = 1
 var _icicle_dmg_scaling: float = 0.3
 
 ## Ult properties
@@ -76,17 +76,17 @@ func _initialize_model() -> void:
 	StreeModel.left_nodes[0].description = """Hold left click to fire ice spikes with %d%% base damage. 
 \nThese spikes explode into icicles that deal %d%% base damage. 
 \nAmmo takes longer to reload.""" % (
-			[_frost_spear_base_percent * 100, _icicle_dmg_scaling * 100]
+			[_ice_spike_base_percent * 100, _icicle_dmg_scaling * 100]
 		)
 	
-	StreeModel.left_nodes[1].name = "Pre-drawn Frost Spikes"
+	StreeModel.left_nodes[1].name = "Pre-drawn Ice Spikes"
 	StreeModel.left_nodes[1].description = """Each level decreases reload time by %.2f seconds""" % (
 			[_scale_reload_time]
 	)
 	StreeModel.left_nodes[1].max_lvl = 3
 	StreeModel.left_nodes[1].cost = 350
 	
-	StreeModel.left_nodes[2].name = "Crystalized Spears"
+	StreeModel.left_nodes[2].name = "Crystalized Spikes"
 	StreeModel.left_nodes[2].description = "Ice Spears and icicles now inflict a stack of crystalized.
 \nCrystalized: Detonates at 9 stack or after 2.5 seconds
 Each stack deals 5 damage, Every 3 stack increases final damage by 30%%"
@@ -148,7 +148,7 @@ func _update_properties() -> void:
 
 
 func _update_damage() -> void:
-	_ice_spike_dmg = _compute_damage(_frost_spear_base_percent, 
+	_ice_spike_dmg = _compute_damage(_ice_spike_base_percent, 
 			0, 0, stats)
 	_ult_dmg = _compute_damage(_ult_base_percent,
 			0, 0, stats)

@@ -1,6 +1,6 @@
 [gd_scene load_steps=16 format=3 uid="uid://dkyhb7voldou1"]
 
-[ext_resource type="Script" path="res://characters/CharacterClass.gd" id="1_j0poo"]
+[ext_resource type="Script" path="res://characters/character_class.gd" id="1_j0poo"]
 [ext_resource type="Script" path="res://characters/witch/scripts/witch_ability_manager.gd" id="2_xnkl8"]
 [ext_resource type="Resource" uid="uid://do0figvykvlcp" path="res://characters/witch/witch_stats.tres" id="2_ygtrj"]
 [ext_resource type="Texture2D" uid="uid://q2syp5evlell" path="res://characters/witch/visuals/witch_window.tres" id="3_2rhuo"]

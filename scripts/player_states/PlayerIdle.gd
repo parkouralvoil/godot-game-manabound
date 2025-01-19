@@ -82,7 +82,7 @@ func _switch_to_interact() -> void:
 	state_transition.emit(self, "PlayerInteract")
 
 func flip_sprite() -> void:
-	if p.velocity.x >= 0:
+	if p.velocity.x > 0:
 		p.PlayerInfo.facing_direction = 1
 	elif p.velocity.x < -0.1:
 		p.PlayerInfo.facing_direction = -1

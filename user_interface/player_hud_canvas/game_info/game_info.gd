@@ -55,7 +55,7 @@ func _on_boss_fight_started(boss_node: RailgunBoss) -> void:
 	label_orbs.hide()
 	upgrade_stats_button.hide()
 
-func _on_boss_fight_ended():
+func _on_boss_fight_ended() -> void:
 	label_orbs.show()
 	try_show_inventory()
 

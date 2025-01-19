@@ -132,6 +132,10 @@ func _on_returned_to_mainhub() -> void:
 	p.controls_disabled = false
 	change_character(0)
 
+func _check_if_char_is_dead(index: int) -> bool:
+	if index < _stored_chars.size():
+		return _stored_chars[index].is_dead
+	return true
 
 func _update_tutorial_restriction(tutorial_level: int) -> void:
 	_input_change_char(0) ## always return to knight
@@ -160,10 +164,14 @@ func _on_character_index_switch(i: int) -> void:
 
 func _on_character_switch_left() -> void:
 	var one_based_index: int = _current_index + 1
-	if one_based_index > 1:
+	if _check_if_char_is_dead(_current_index - 1):
+		_on_character_index_switch(one_based_index - 2)
+	else:
 		_on_character_index_switch(one_based_index - 1)
 
 func _on_character_switch_right() -> void:
 	var one_based_index: int = _current_index + 1
-	if one_based_index < 3:
+	if _check_if_char_is_dead(_current_index + 1):
+		_on_character_index_switch(one_based_index + 2)
+	else:
 		_on_character_index_switch(one_based_index + 1)

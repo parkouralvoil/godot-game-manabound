@@ -20,6 +20,13 @@ func _change_weapon_color_based_on_charge() -> void:
 func _activate_ult(tier: int) -> void:
 	super(tier) ## very important
 	spawn_area_effect(FrostNovaScene, PlayerInfo.target_position)	
+
+func _mobile_activate_ult(tier: int) -> void:	## for mobile controls, no need to aim ult
+	_t_ult_cooldown.start()
+	await _t_ult_cooldown.timeout
+
+	_activate_ult(tier)
+	PlayerInfo.ult_finished.emit(Vector2.ZERO)
 # endregion
 	
 

@@ -15,8 +15,6 @@ signal character_died ## for CM
 @onready var anim_sprite: AnimatedSprite2D = $CharacterAnimationSprite
 @onready var arm: Sprite2D = $CharacterAnimationSprite/arm
 @onready var wpn: Sprite2D = $CharacterAnimationSprite/arm/weapon
-
-## i want the AM to remain universal, the components are the ones who play around with eachother
 @onready var CM: CharacterManager = get_parent()
 
 ## char_manager DOESNT have reference to char_data, 
@@ -24,7 +22,6 @@ signal character_died ## for CM
 
 var enabled: bool = false ## managed by char manager
 var is_dead: bool = false
-
 
 func _ready() -> void:
 	## for current UI, tho honestly i can optimize this by making panel_char give info to current UI noh
