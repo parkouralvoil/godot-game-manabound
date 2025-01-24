@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://ck3k7agcwa5ps"]
+
+[ext_resource type="Texture2D" uid="uid://b526hy6m06fei" path="res://resources/textures/mana_orb/mana_orb_medium.tres" id="1_3k5ht"]
+[ext_resource type="Script" path="res://user_interface/player_hud_canvas/ui_modules/orb_display.gd" id="1_rtiv3"]
+[ext_resource type="Resource" uid="uid://bnybxlb6y58wv" path="res://resources/data/player_inventory/player_inventory.tres" id="2_4k52x"]
+[ext_resource type="LabelSettings" uid="uid://frs5gj5moe0e" path="res://user_interface/player_hud_canvas/hud_label.tres" id="2_lk4la"]
+
+[node name="OrbDisplay" type="HBoxContainer"]
+offset_right = 57.0
+offset_bottom = 18.0
+script = ExtResource("1_rtiv3")
+player_inventory = ExtResource("2_4k52x")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(15, 15)
+layout_mode = 2
+texture = ExtResource("1_3k5ht")
+stretch_mode = 5
+
+[node name="OrbsAmt" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+text = "99999"
+label_settings = ExtResource("2_lk4la")

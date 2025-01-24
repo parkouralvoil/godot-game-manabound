@@ -119,20 +119,22 @@ offset_bottom = 40.0
 
 [node name="tip1" type="Label" parent="Tips"]
 layout_mode = 0
-offset_left = 132.0
-offset_top = -164.0
-offset_right = 244.0
-offset_bottom = -137.0
+offset_left = 123.0
+offset_top = -155.0
+offset_right = 245.0
+offset_bottom = -136.0
 size_flags_horizontal = 6
 size_flags_vertical = 6
 theme_override_styles/normal = ExtResource("8_ulboe")
-text = "Press space to hop towards the direction of your mouse cursor."
+text = "Use the joystick to move.
+Release the joystick to dash."
 label_settings = ExtResource("9_j0cjs")
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
 
 [node name="tip2" type="Label" parent="Tips"]
+visible = false
 layout_mode = 0
 offset_left = 743.0
 offset_top = -264.0
@@ -151,12 +153,12 @@ autowrap_mode = 3
 layout_mode = 0
 offset_left = 477.0
 offset_top = -252.0
-offset_right = 593.0
+offset_right = 577.0
 offset_bottom = -225.0
 size_flags_horizontal = 6
 size_flags_vertical = 6
 theme_override_styles/normal = ExtResource("8_ulboe")
-text = "Hold left click to do a basic attack. These attacks require ammo which reload overtime."
+text = "Tap the shoot button to attack."
 label_settings = ExtResource("9_j0cjs")
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -164,25 +166,26 @@ autowrap_mode = 3
 
 [node name="tip4" type="Label" parent="Tips"]
 layout_mode = 0
-offset_left = 880.0
-offset_top = -493.0
-offset_right = 992.0
-offset_bottom = -456.0
+offset_left = 853.0
+offset_top = -110.0
+offset_right = 956.0
+offset_bottom = -53.0
 size_flags_horizontal = 6
 size_flags_vertical = 6
 theme_override_styles/normal = ExtResource("8_ulboe")
-text = "Hold right click to charge an ultimate attack. Release at 50 charge."
+text = "Gain energy by attacking enemies.
+
+Energy is indicated by the bar below the HP and Ammo counter."
 label_settings = ExtResource("9_j0cjs")
-horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
 
 [node name="tip5" type="Label" parent="Tips"]
 layout_mode = 0
-offset_left = 475.0
-offset_top = -585.0
-offset_right = 592.0
-offset_bottom = -548.0
+offset_left = 502.0
+offset_top = -490.0
+offset_right = 619.0
+offset_bottom = -453.0
 size_flags_horizontal = 6
 size_flags_vertical = 6
 theme_override_styles/normal = ExtResource("8_ulboe")

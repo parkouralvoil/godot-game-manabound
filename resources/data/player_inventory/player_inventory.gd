@@ -3,6 +3,7 @@ class_name PlayerInventory
 
 signal number_of_runes_changed
 signal total_orbs_changed ## for level summary
+signal current_orbs_changed ## for team info menu group
 
 var total_orbs_collected: int = 0:
 	set(val):
@@ -13,6 +14,7 @@ var mana_orbs: int = 0:
 		if val > mana_orbs:
 			total_orbs_collected += (val - mana_orbs)
 		mana_orbs = val
+		current_orbs_changed.emit(val)
 
 var rune_HP: int = 0:
 	set(val):

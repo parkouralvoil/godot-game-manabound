@@ -42,7 +42,7 @@ label_settings = ExtResource("1_boft5")
 [node name="on_base_stats" type="Label" parent="MarginContainer/VBox/ScrollContainer/SubVBox"]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
-text = "Base stats can be upgraded with runes. After clearing a level , you can use runes through the LEVEL UP menu."
+text = "Base stats can be upgraded with runes. After clearing a level , you can use runes to raise your stats."
 label_settings = ExtResource("1_boft5")
 autowrap_mode = 3
 

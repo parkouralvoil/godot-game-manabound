@@ -25,24 +25,24 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.101961, 0.105882, 0.196078, 1)
 
-[node name="CenterContainer" type="CenterContainer" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_bottom = -34.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
 
-[node name="ScrollContainer" type="ScrollContainer" parent="CenterContainer"]
-custom_minimum_size = Vector2(600, 400)
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer"]
+custom_minimum_size = Vector2(300, 300)
 layout_mode = 2
 horizontal_scroll_mode = 0
 
-[node name="PanelContainer" type="PanelContainer" parent="CenterContainer/ScrollContainer"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="CenterContainer/ScrollContainer/PanelContainer"]
+[node name="Label" type="Label" parent="MarginContainer/ScrollContainer"]
 custom_minimum_size = Vector2(500, 500)
 layout_mode = 2
 text = "Credits
@@ -56,7 +56,7 @@ Art assets from online:
 	Skill tree icons:			https://pbarry.itch.io/ability-icons
 Projectiles: https://bdragon1727.itch.io/fire-pixel-bullet-16x16
 
-All other art assets used were made by me.
+All other art assets used are original.
 
 Music from online:
 	https://nousagi-san.itch.io/freebgm
@@ -81,10 +81,10 @@ label_settings = SubResource("LabelSettings_tig0i")
 
 [node name="Close" type="Button" parent="."]
 layout_mode = 0
-offset_left = 563.0
-offset_top = 433.0
-offset_right = 624.0
-offset_bottom = 464.0
+offset_left = 694.0
+offset_top = 365.0
+offset_right = 755.0
+offset_bottom = 396.0
 text = "Close"
 
 [connection signal="pressed" from="Close" to="." method="_on_close_pressed"]

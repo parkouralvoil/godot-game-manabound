@@ -9,6 +9,7 @@ class_name Rogue_AttackComponent
 @export var sfx_noAmmoMeleeSwing: AudioStream
 
 var _melee_combo: int = 0
+
 var can_fire_at_zero_ammo := false
 var zero_ammo_damage_multiplier: float
 var extra_energy_enabled := false
@@ -44,21 +45,19 @@ func _basic_atk() -> void:
 		_: ## upwards swing
 			_do_swing_animation(false)
 			_melee_combo = 0
-			_firerate_modifier = 1.6
+			_firerate_modifier = 1.2
 
 func _check_if_can_shoot() -> bool: ## can be modified if needed
 	return (PlayerInfo.current_state != PlayerInfoResource.States.STANCE 
 			and not PlayerInput.want_to_choose_boost_direction
 			and (character.stats.ammo > 0 or can_fire_at_zero_ammo)
 	)
-#endregion
 
 func _process(_delta: float) -> void:
 	if not character.enabled:
 		_melee_arm.hide()
 	
-	super(_delta)
-	print_debug(_check_if_can_shoot())
+	super(_delta) # very important
 	if _t_firerate.is_stopped():
 		_melee_arm.hide()
 
@@ -68,6 +67,7 @@ func _update_recoil_and_look_at() -> void:
 		PlayerInfo.recoiling_from_basic_atk = true
 	else:
 		PlayerInfo.recoiling_from_basic_atk = false
+#endregion
 
 func _shoot(bullet_scene: PackedScene, bullet_properties: BulletProperties, dmg_multiplier: float, color: Color) -> void:
 	assert(bullet_scene, "bruh its missing")

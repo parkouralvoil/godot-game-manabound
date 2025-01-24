@@ -79,4 +79,4 @@ func _on_energy_gen(procs: float) -> void:
 	
 	var new_charge: float = stats.charge + stats.base_charge_rate * (stats.chr/100) * procs
 	stats.charge = new_charge
-	Ultimate.update_charge(stats.charge, stats.charge_threshold, stats.charge_tier)
+	Ultimate.update_charge(stats.charge, stats.charge_threshold, stats.charge_tiers)

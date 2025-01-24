@@ -33,11 +33,9 @@ func _initialize_team_hud() -> void:
 	var data_array: Array[CharacterResource] = selected_team_info.char_data_array
 	team_size = data_array.size()
 	for i in range(max_team_size):
-		if i == 0:
-			char_box[i].line.hide()
 		if i < team_size:
 			var char_data: CharacterResource = data_array[i]
-			char_box[i].initialize_info(char_data, i + 1)
+			char_box[i].initialize_info(char_data)
 			char_box[i].show()
 		else:
 			char_box[i].hide()

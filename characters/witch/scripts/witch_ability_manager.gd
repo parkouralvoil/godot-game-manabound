@@ -73,9 +73,8 @@ func _initialize_model() -> void:
 	
 	## char's basic atk nodes
 	StreeModel.left_nodes[0].name = "Apprentice's Icestaff"
-	StreeModel.left_nodes[0].description = """Hold left click to fire ice spikes with %d%% base damage. 
-\nThese spikes explode into icicles that deal %d%% base damage. 
-\nAmmo takes longer to reload.""" % (
+	StreeModel.left_nodes[0].description = """Shoot ice spikes with %d%% base damage. 
+\nThese spikes explode into icicles that deal %d%% base damage.""" % (
 			[_ice_spike_base_percent * 100, _icicle_dmg_scaling * 100]
 		)
 	
@@ -99,8 +98,7 @@ Each stack deals 5 damage, Every 3 stack increases final damage by 30%%"
 	
 	# char's ult nodes
 	StreeModel.right_nodes[0].name = "Frost Storm"
-	StreeModel.right_nodes[0].description = "Ultimate Type: Mana
-\nPassively accumulates mana. At 50 mana, press right click to cast a Frost Storm in the target position. 
+	StreeModel.right_nodes[0].description = "Use ultimate to cast a Frost Storm in the target position. 
 \nIce explosions from Frost Storm deals %d%% damage." % (
 			[_ult_base_percent * 100]
 	)

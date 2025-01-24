@@ -9,16 +9,16 @@ var tracked_char_resource: CharacterResource = null:
 			change_stats(val)
 
 ## Basic stats labels
-@onready var hp: Label = $MarginContainer/VBox/base_stats/stat_number/hp
-@onready var atk: Label = $MarginContainer/VBox/base_stats/stat_number/atk
-@onready var ep: Label = $MarginContainer/VBox/base_stats/stat_number/ep
-@onready var chr: Label = $MarginContainer/VBox/base_stats/stat_number/chr
+@onready var hp: Label = %hp
+@onready var atk: Label = %atk
+@onready var ep: Label = %ep
+@onready var chr: Label = %chr
 
 ## Special stats labels
-@onready var spd: Label = $MarginContainer/VBox/special_stats/stat_number/spd
-@onready var rel: Label = $MarginContainer/VBox/special_stats/stat_number/rel
-@onready var firerate: Label = $MarginContainer/VBox/special_stats/stat_number/firerate
-@onready var ammo: Label = $MarginContainer/VBox/special_stats/stat_number/ammo
+@onready var spd: Label = %spd
+@onready var rel: Label = %rel
+@onready var firerate: Label = %firerate
+@onready var ammo: Label = %ammo
 
 
 func _ready() -> void:

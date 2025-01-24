@@ -10,11 +10,11 @@ var allow_buy: bool = false
 @onready var skill_name: Label = $MarginContainer/VBox/name
 @onready var skill_desc: Label = %description
 
-@onready var buy_details: VBoxContainer = $MarginContainer/VBox/VBox
-@onready var skill_lvl: Label = $MarginContainer/VBox/VBox/lvl
-@onready var skill_cost: Label = $MarginContainer/VBox/VBox/cost
-@onready var buy_button: Button = $MarginContainer/VBox/VBox/Buy_Button
-@onready var tip_station: Label = $MarginContainer/VBox/requires_station
+@onready var buy_details: Control = %BuyDetails
+@onready var skill_lvl: Label = %lvl
+@onready var skill_cost: Label = %cost
+@onready var buy_button: Button = %Buy_Button
+@onready var tip_station: Label = %requires_station
 
 func _ready() -> void:
 	## show first node's info instead
@@ -69,7 +69,7 @@ func _update_displayed_info() -> void:
 	else:
 		skill_lvl.show()
 		skill_cost.show()
-		skill_cost.text = "Mana Orbs Cost: ---"
+		skill_cost.text = "Cost: ---"
 		buy_button.show()
 		buy_button.text = "Level Max"
 		buy_button.disabled = true

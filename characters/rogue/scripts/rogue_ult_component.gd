@@ -15,8 +15,8 @@ var ult_atk_buff: float
 @onready var t_buff: Timer = $buff_duration
 
 # region: inherited functions of Character_UltComponent
-func _change_weapon_color_based_on_charge() -> void:
-	if _charge >= _charge_threshold * 1:
+func _change_weapon_color_based_on_charge(old_charge: float, threshold: float) -> void:
+	if old_charge >= threshold * 1:
 		_character.wpn.modulate = _sword_explosion_color
 	else:
 		_character.wpn.modulate = _sword_default_color
@@ -71,10 +71,8 @@ func _play_animation() -> void:
 	t.set_parallel()
 	t.tween_property(_character.wpn, "modulate", 
 			_sword_explosion_color, dur).from(_sword_default_color)
-	#t.tween_property(_character.wpn, "rotation_degrees",
-	#		135, dur).from(45).set_delay(0.1)
 	t.tween_property(_character.arm, "rotation_degrees",
-			360, dur).from(0)#.set_delay(0.1)
+			360, dur).from(0)
 	await t.finished
 
 

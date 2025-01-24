@@ -39,7 +39,7 @@ radius = 201.04
 radius = 80.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8fkqa"]
-radius = 80.0062
+radius = 55.0091
 
 [sub_resource type="Gradient" id="Gradient_de2bk"]
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)

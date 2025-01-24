@@ -48,6 +48,7 @@ var _ult_damage: float
 		stats.max_charge = stats.INITIAL_MAX_CHARGE + (
 				stats.INITIAL_MAX_CHARGE * min(level, 1)
 		)
+		stats.charge_tiers = level + 1
 		_update_damage()
 
 @onready var level_ult_chargeRate: int = 0: ## right node 2B
@@ -74,7 +75,7 @@ func _initialize_model() -> void:
 	## description of char
 	StreeModel.root_node.name = "Infantry Knight" ## more detailed name purely for stree
 	StreeModel.root_node.description = "A soldier wielding a sophisticated crossbow inspired by" \
-+ " the Spacefarers' non-magic weaponry." \
++ " the magic-less weaponry of \"Those who came from the stars\"." \
 + "\n\nHailing from the City of Light, these knights pave the way for technology in a world " \
 + "they deem too dependent on magic." \
 + "\n\nElement: Lightning"
@@ -82,7 +83,7 @@ func _initialize_model() -> void:
 	
 	## char's basic atk nodes -----------------------------------------------------
 	StreeModel.left_nodes[0].name = _basic_atk_name
-	StreeModel.left_nodes[0].description = """Hold left click to fire lightning bolts with %d%% base damage. 
+	StreeModel.left_nodes[0].description = """Fires lightning bolts with %d%% base damage. 
 \nRequires ammo which reloads overtime.""" % (
 		[_basic_bullet_base_percent * 100]
 	)
@@ -110,10 +111,7 @@ func _initialize_model() -> void:
 	
 	## char's ult nodes -----------------------------------------------------
 	StreeModel.right_nodes[0].name = _ult_name
-	StreeModel.right_nodes[0].description = """Ultimate Type: Charge
-\nHold down right click until you reach a charge tier (50, 100) then let go to fire a Grand Bolt with %d%% base damage.
-\nSpeed of charge depends on the character's Charge rate.
-""" % (
+	StreeModel.right_nodes[0].description = "Using ultimate fires a Grand Bolt with %d%% base damage." % (
 		[_ult_base_percent * 100]
 	)
 	

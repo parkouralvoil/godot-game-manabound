@@ -116,16 +116,17 @@ offset_bottom = 40.0
 
 [node name="tip1" type="Label" parent="Tips"]
 layout_mode = 0
-offset_left = 545.0
-offset_top = -557.0
-offset_right = 685.0
-offset_bottom = -530.0
+offset_left = 374.0
+offset_top = -434.0
+offset_right = 491.0
+offset_bottom = -407.0
 size_flags_horizontal = 6
 size_flags_vertical = 6
 theme_override_styles/normal = ExtResource("9_duy75")
-text = "Knight's attacks apply lightning
-Witch's attacls apply applies ice"
+text = "Knight has lightning attacks
+Witch has ice attacks"
 label_settings = ExtResource("10_ldgis")
+horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
 
@@ -134,11 +135,11 @@ layout_mode = 0
 offset_left = 233.0
 offset_top = -561.0
 offset_right = 373.0
-offset_bottom = -534.0
+offset_bottom = -528.0
 size_flags_horizontal = 6
 size_flags_vertical = 6
 theme_override_styles/normal = ExtResource("9_duy75")
-text = "Press (1) and (2) to swap between characters."
+text = "Tap the arrow buttons above the fire button to switch characters."
 label_settings = ExtResource("10_ldgis")
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -146,9 +147,9 @@ autowrap_mode = 3
 
 [node name="tip3" type="Label" parent="Tips"]
 layout_mode = 0
-offset_left = 859.0
+offset_left = 567.0
 offset_top = -557.0
-offset_right = 983.0
+offset_right = 691.0
 offset_bottom = -530.0
 size_flags_horizontal = 6
 size_flags_vertical = 6
@@ -161,32 +162,15 @@ autowrap_mode = 3
 
 [node name="tip4" type="Label" parent="Tips"]
 layout_mode = 0
-offset_left = 548.0
-offset_top = -123.0
-offset_right = 672.0
-offset_bottom = -86.0
+offset_left = 809.0
+offset_top = -575.0
+offset_right = 989.0
+offset_bottom = -530.0
 size_flags_horizontal = 6
 size_flags_vertical = 6
 theme_override_styles/normal = ExtResource("9_duy75")
-text = "Mana characters gain mana overtime. Press right click once mana is full to cast the Witch's ultimate."
+text = "At full energy, activate the character's ultimate by tapping the skill button beside the shoot button."
 label_settings = ExtResource("10_ldgis")
-horizontal_alignment = 3
-vertical_alignment = 1
-autowrap_mode = 3
-
-[node name="tip5" type="Label" parent="Tips"]
-layout_mode = 0
-offset_left = 239.0
-offset_top = -240.0
-offset_right = 363.0
-offset_bottom = -177.0
-size_flags_horizontal = 6
-size_flags_vertical = 6
-theme_override_styles/normal = ExtResource("9_duy75")
-text = "While pressing space, move the cursor near the character to \"hover\" slowly.
-
-This can be used for precise movements."
-label_settings = ExtResource("10_ldgis")
-horizontal_alignment = 3
+horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3

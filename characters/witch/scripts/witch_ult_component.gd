@@ -11,8 +11,8 @@ var can_crystalize: bool = false
 var explosion_count: int = 0
 
 # region: inherited functions of Character_UltComponent
-func _change_weapon_color_based_on_charge() -> void:
-	if _charge >= _charge_threshold * 1:
+func _change_weapon_color_based_on_charge(old_charge: float, threshold: float) -> void:
+	if old_charge >= threshold * 1:
 		_character.wpn.modulate = _blue_color
 	else:
 		_character.wpn.modulate = _default_weapon_color

@@ -82,12 +82,6 @@ func _process(_delta: float) -> void:
 		PlayerInfo.aim_direction = PlayerInfo.mouse_direction
 		PlayerInfo.target_position = global_position
 	
-	## can_use_ult setter
-	if PlayerInfo.current_charge < PlayerInfo.current_charge_threshold:
-		PlayerInfo.can_use_ult = false
-	else:
-		PlayerInfo.can_use_ult = true
-	
 	if Input.is_action_just_pressed("toggle_aim"):
 		PlayerInfo.auto_aim = not PlayerInfo.auto_aim
 

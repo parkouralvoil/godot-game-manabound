@@ -58,8 +58,14 @@ var ult_need_circle_aim: bool ## witch, deployable ults, but might not be used a
 ## set by character script, for UI
 var displayed_ammo: int
 var displayed_MAX_AMMO: int
-var current_charge: float    ## REWORK THIS!!! logic is using this...
-var current_charge_threshold: float
+var current_charge: float: ## REWORK THIS!!! logic is using this...
+	set(val):
+		current_charge = val
+		_update_can_ult()
+var current_charge_threshold: float:
+	set(val):
+		current_charge_threshold = max(0, val)
+		_update_can_ult()
 
 ## player to character:
 var current_anim: String = "idle"
@@ -85,3 +91,9 @@ var team_alive: int:
 var team_current_index: int = 0 # needed by swap char buttons
 
 ## READY FUNCTIONS DONT WORK HERE, cuz its a resource not a node
+
+func _update_can_ult() -> void:
+	if current_charge < current_charge_threshold:
+		can_use_ult = false
+	else:
+		can_use_ult = true

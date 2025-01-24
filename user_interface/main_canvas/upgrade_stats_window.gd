@@ -14,22 +14,22 @@ var stats: CharacterStats:
 			stats.stats_changed.connect(_update_stats)
 
 ## rune amts
-@onready var label_hp_rune: Label = $MarginContainer/VBox/HP_rune/amt
-@onready var label_atk_rune: Label = $MarginContainer/VBox/ATK_rune/amt
-@onready var label_ep_rune: Label = $MarginContainer/VBox/EP_rune/amt
-@onready var label_chr_rune: Label = $MarginContainer/VBox/CHR_rune/amt
+@onready var label_hp_rune: Label = %HPamt
+@onready var label_atk_rune: Label = %ATKamt
+@onready var label_ep_rune: Label = %EPamt
+@onready var label_chr_rune: Label = %CHRamt
 
 ## buttons
-@onready var hp_rune_use: Button = $MarginContainer/VBox/HP_rune/HPRuneUse
-@onready var atk_rune_use: Button = $MarginContainer/VBox/ATK_rune/ATKRuneUse
-@onready var ep_rune_use: Button = $MarginContainer/VBox/EP_rune/EPRuneUse
-@onready var chr_rune_use: Button = $MarginContainer/VBox/CHR_rune/CHRRuneUse
+@onready var hp_rune_use: Button = %HPRuneUse
+@onready var atk_rune_use: Button = %ATKRuneUse
+@onready var ep_rune_use: Button = %EPRuneUse
+@onready var chr_rune_use: Button = %CHRRuneUse
 
 ## stats
-@onready var hp: Label = $MarginContainer/VBox/HP_stat/amt
-@onready var atk: Label = $MarginContainer/VBox/ATK_stat/amt
-@onready var ep: Label = $MarginContainer/VBox/EP_stat/amt
-@onready var chr: Label = $MarginContainer/VBox/CHR_stat/amt
+@onready var hp: Label = %hp_amt_stat
+@onready var atk: Label = %atk_amt_stat
+@onready var ep: Label = %ep_amt_stat
+@onready var chr: Label = %chr_amt_stat
 
 
 func _update_stats() -> void:

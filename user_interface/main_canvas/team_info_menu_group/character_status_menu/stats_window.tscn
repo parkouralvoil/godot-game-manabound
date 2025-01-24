@@ -5,10 +5,13 @@
 
 [node name="StatsWindow" type="PanelContainer"]
 custom_minimum_size = Vector2(165, 0)
+offset_right = 165.0
+offset_bottom = 246.0
 script = ExtResource("1_lapys")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2
+size_flags_vertical = 3
 theme_override_constants/margin_left = 5
 theme_override_constants/margin_right = 5
 
@@ -31,58 +34,67 @@ text = "Base Stats"
 label_settings = ExtResource("1_bq655")
 horizontal_alignment = 1
 
-[node name="base_stats" type="HBoxContainer" parent="MarginContainer/VBox"]
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="base_stats" type="HBoxContainer" parent="MarginContainer/VBox/ScrollContainer"]
 layout_mode = 2
 
-[node name="stat_name" type="VBoxContainer" parent="MarginContainer/VBox/base_stats"]
+[node name="stat_name" type="VBoxContainer" parent="MarginContainer/VBox/ScrollContainer/base_stats"]
 layout_mode = 2
 
-[node name="HP" type="Label" parent="MarginContainer/VBox/base_stats/stat_name"]
+[node name="HP" type="Label" parent="MarginContainer/VBox/ScrollContainer/base_stats/stat_name"]
 layout_mode = 2
 text = "HP:"
 label_settings = ExtResource("1_bq655")
 
-[node name="ATK" type="Label" parent="MarginContainer/VBox/base_stats/stat_name"]
+[node name="ATK" type="Label" parent="MarginContainer/VBox/ScrollContainer/base_stats/stat_name"]
 layout_mode = 2
 text = "ATK:"
 label_settings = ExtResource("1_bq655")
 
-[node name="EP" type="Label" parent="MarginContainer/VBox/base_stats/stat_name"]
+[node name="EP" type="Label" parent="MarginContainer/VBox/ScrollContainer/base_stats/stat_name"]
 layout_mode = 2
 text = "Elemental Profiency:"
 label_settings = ExtResource("1_bq655")
 
-[node name="CHR" type="Label" parent="MarginContainer/VBox/base_stats/stat_name"]
+[node name="CHR" type="Label" parent="MarginContainer/VBox/ScrollContainer/base_stats/stat_name"]
 layout_mode = 2
 text = "Charge Rate:"
 label_settings = ExtResource("1_bq655")
 
-[node name="Separator" type="Control" parent="MarginContainer/VBox/base_stats"]
+[node name="Separator" type="Control" parent="MarginContainer/VBox/ScrollContainer/base_stats"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="stat_number" type="VBoxContainer" parent="MarginContainer/VBox/base_stats"]
+[node name="stat_number" type="VBoxContainer" parent="MarginContainer/VBox/ScrollContainer/base_stats"]
 layout_mode = 2
 
-[node name="hp" type="Label" parent="MarginContainer/VBox/base_stats/stat_number"]
+[node name="hp" type="Label" parent="MarginContainer/VBox/ScrollContainer/base_stats/stat_number"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "5"
 label_settings = ExtResource("1_bq655")
 horizontal_alignment = 2
 
-[node name="atk" type="Label" parent="MarginContainer/VBox/base_stats/stat_number"]
+[node name="atk" type="Label" parent="MarginContainer/VBox/ScrollContainer/base_stats/stat_number"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "10"
 label_settings = ExtResource("1_bq655")
 horizontal_alignment = 2
 
-[node name="ep" type="Label" parent="MarginContainer/VBox/base_stats/stat_number"]
+[node name="ep" type="Label" parent="MarginContainer/VBox/ScrollContainer/base_stats/stat_number"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "0"
 label_settings = ExtResource("1_bq655")
 horizontal_alignment = 2
 
-[node name="chr" type="Label" parent="MarginContainer/VBox/base_stats/stat_number"]
+[node name="chr" type="Label" parent="MarginContainer/VBox/ScrollContainer/base_stats/stat_number"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "3541"
 label_settings = ExtResource("1_bq655")
@@ -103,58 +115,68 @@ text = "Special Stats"
 label_settings = ExtResource("1_bq655")
 horizontal_alignment = 1
 
-[node name="special_stats" type="HBoxContainer" parent="MarginContainer/VBox"]
+[node name="ScrollContainer2" type="ScrollContainer" parent="MarginContainer/VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="special_stats" type="HBoxContainer" parent="MarginContainer/VBox/ScrollContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="stat_name" type="VBoxContainer" parent="MarginContainer/VBox/ScrollContainer2/special_stats"]
 layout_mode = 2
 
-[node name="stat_name" type="VBoxContainer" parent="MarginContainer/VBox/special_stats"]
-layout_mode = 2
-
-[node name="SPD" type="Label" parent="MarginContainer/VBox/special_stats/stat_name"]
+[node name="SPD" type="Label" parent="MarginContainer/VBox/ScrollContainer2/special_stats/stat_name"]
 layout_mode = 2
 text = "Movement Speed:"
 label_settings = ExtResource("1_bq655")
 
-[node name="REL" type="Label" parent="MarginContainer/VBox/special_stats/stat_name"]
+[node name="REL" type="Label" parent="MarginContainer/VBox/ScrollContainer2/special_stats/stat_name"]
 layout_mode = 2
 text = "Reload Time:"
 label_settings = ExtResource("1_bq655")
 
-[node name="FIRERATE" type="Label" parent="MarginContainer/VBox/special_stats/stat_name"]
+[node name="FIRERATE" type="Label" parent="MarginContainer/VBox/ScrollContainer2/special_stats/stat_name"]
 layout_mode = 2
 text = "Firerate:"
 label_settings = ExtResource("1_bq655")
 
-[node name="AMMO" type="Label" parent="MarginContainer/VBox/special_stats/stat_name"]
+[node name="AMMO" type="Label" parent="MarginContainer/VBox/ScrollContainer2/special_stats/stat_name"]
 layout_mode = 2
 text = "Ammo Capacity:"
 label_settings = ExtResource("1_bq655")
 
-[node name="Separator" type="Control" parent="MarginContainer/VBox/special_stats"]
+[node name="Separator" type="Control" parent="MarginContainer/VBox/ScrollContainer2/special_stats"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="stat_number" type="VBoxContainer" parent="MarginContainer/VBox/special_stats"]
+[node name="stat_number" type="VBoxContainer" parent="MarginContainer/VBox/ScrollContainer2/special_stats"]
 layout_mode = 2
 
-[node name="spd" type="Label" parent="MarginContainer/VBox/special_stats/stat_number"]
+[node name="spd" type="Label" parent="MarginContainer/VBox/ScrollContainer2/special_stats/stat_number"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "200"
 label_settings = ExtResource("1_bq655")
 horizontal_alignment = 2
 
-[node name="rel" type="Label" parent="MarginContainer/VBox/special_stats/stat_number"]
+[node name="rel" type="Label" parent="MarginContainer/VBox/ScrollContainer2/special_stats/stat_number"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "0.4s"
 label_settings = ExtResource("1_bq655")
 horizontal_alignment = 2
 
-[node name="firerate" type="Label" parent="MarginContainer/VBox/special_stats/stat_number"]
+[node name="firerate" type="Label" parent="MarginContainer/VBox/ScrollContainer2/special_stats/stat_number"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "6"
 label_settings = ExtResource("1_bq655")
 horizontal_alignment = 2
 
-[node name="ammo" type="Label" parent="MarginContainer/VBox/special_stats/stat_number"]
+[node name="ammo" type="Label" parent="MarginContainer/VBox/ScrollContainer2/special_stats/stat_number"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "9"
 label_settings = ExtResource("1_bq655")

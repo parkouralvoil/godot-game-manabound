@@ -26,7 +26,7 @@ modulate = Color(1, 1, 0.996078, 1)
 custom_minimum_size = Vector2(350, 0)
 layout_mode = 2
 size_flags_vertical = 3
-current_tab = 3
+current_tab = 2
 
 [node name="Video" type="MarginContainer" parent="TabContainer"]
 visible = false
@@ -124,109 +124,6 @@ max_value = 1.0
 step = 0.05
 value = 1.0
 
-[node name="Controls" type="MarginContainer" parent="TabContainer"]
-visible = false
-custom_minimum_size = Vector2(300, 200)
-layout_mode = 2
-theme_override_constants/margin_left = 30
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 10
-metadata/_tab_index = 2
-
-[node name="HBoxPC" type="HBoxContainer" parent="TabContainer/Controls"]
-layout_mode = 2
-
-[node name="VBox" type="VBoxContainer" parent="TabContainer/Controls/HBoxPC"]
-layout_mode = 2
-
-[node name="move" type="Label" parent="TabContainer/Controls/HBoxPC/VBox"]
-layout_mode = 2
-text = "Move:"
-label_settings = SubResource("LabelSettings_4olrg")
-
-[node name="aim" type="Label" parent="TabContainer/Controls/HBoxPC/VBox"]
-layout_mode = 2
-text = "Toggle aim:"
-label_settings = SubResource("LabelSettings_4olrg")
-
-[node name="atk" type="Label" parent="TabContainer/Controls/HBoxPC/VBox"]
-layout_mode = 2
-text = "Attack:"
-label_settings = SubResource("LabelSettings_4olrg")
-
-[node name="ult" type="Label" parent="TabContainer/Controls/HBoxPC/VBox"]
-layout_mode = 2
-text = "Cast/Charge Ult:   "
-label_settings = SubResource("LabelSettings_4olrg")
-
-[node name="swap" type="Label" parent="TabContainer/Controls/HBoxPC/VBox"]
-layout_mode = 2
-text = "Swap characters:"
-label_settings = SubResource("LabelSettings_4olrg")
-
-[node name="interact" type="Label" parent="TabContainer/Controls/HBoxPC/VBox"]
-layout_mode = 2
-text = "Interact/Revive:"
-label_settings = SubResource("LabelSettings_4olrg")
-
-[node name="team" type="Label" parent="TabContainer/Controls/HBoxPC/VBox"]
-layout_mode = 2
-text = "Open team menu:"
-label_settings = SubResource("LabelSettings_4olrg")
-
-[node name="esc" type="Label" parent="TabContainer/Controls/HBoxPC/VBox"]
-layout_mode = 2
-text = "Return/Pause"
-label_settings = SubResource("LabelSettings_4olrg")
-
-[node name="Control" type="Control" parent="TabContainer/Controls/HBoxPC"]
-custom_minimum_size = Vector2(20, 0)
-layout_mode = 2
-
-[node name="VBox2" type="VBoxContainer" parent="TabContainer/Controls/HBoxPC"]
-layout_mode = 2
-
-[node name="key" type="Label" parent="TabContainer/Controls/HBoxPC/VBox2"]
-layout_mode = 2
-text = "Space"
-label_settings = SubResource("LabelSettings_4olrg")
-
-[node name="key8" type="Label" parent="TabContainer/Controls/HBoxPC/VBox2"]
-layout_mode = 2
-text = "Q"
-label_settings = SubResource("LabelSettings_4olrg")
-
-[node name="key2" type="Label" parent="TabContainer/Controls/HBoxPC/VBox2"]
-layout_mode = 2
-text = "Left Click"
-label_settings = SubResource("LabelSettings_4olrg")
-
-[node name="key3" type="Label" parent="TabContainer/Controls/HBoxPC/VBox2"]
-layout_mode = 2
-text = "Right Click"
-label_settings = SubResource("LabelSettings_4olrg")
-
-[node name="key4" type="Label" parent="TabContainer/Controls/HBoxPC/VBox2"]
-layout_mode = 2
-text = "1, 2, 3"
-label_settings = SubResource("LabelSettings_4olrg")
-
-[node name="key5" type="Label" parent="TabContainer/Controls/HBoxPC/VBox2"]
-layout_mode = 2
-text = "E"
-label_settings = SubResource("LabelSettings_4olrg")
-
-[node name="key6" type="Label" parent="TabContainer/Controls/HBoxPC/VBox2"]
-layout_mode = 2
-text = "B"
-label_settings = SubResource("LabelSettings_4olrg")
-
-[node name="key7" type="Label" parent="TabContainer/Controls/HBoxPC/VBox2"]
-layout_mode = 2
-text = "Esc"
-label_settings = SubResource("LabelSettings_4olrg")
-
 [node name="Other" type="MarginContainer" parent="TabContainer"]
 custom_minimum_size = Vector2(300, 200)
 layout_mode = 2
@@ -234,7 +131,7 @@ theme_override_constants/margin_left = 30
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
-metadata/_tab_index = 3
+metadata/_tab_index = 2
 
 [node name="GridContainer" type="GridContainer" parent="TabContainer/Other"]
 layout_mode = 2
@@ -273,6 +170,112 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 8
 text = " Return "
+
+[node name="Controls" type="MarginContainer" parent="."]
+visible = false
+custom_minimum_size = Vector2(300, 200)
+layout_mode = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxPC" type="HBoxContainer" parent="Controls"]
+visible = false
+layout_mode = 2
+
+[node name="VBox" type="VBoxContainer" parent="Controls/HBoxPC"]
+layout_mode = 2
+
+[node name="move" type="Label" parent="Controls/HBoxPC/VBox"]
+layout_mode = 2
+text = "Move:"
+label_settings = SubResource("LabelSettings_4olrg")
+
+[node name="aim" type="Label" parent="Controls/HBoxPC/VBox"]
+layout_mode = 2
+text = "Toggle aim:"
+label_settings = SubResource("LabelSettings_4olrg")
+
+[node name="atk" type="Label" parent="Controls/HBoxPC/VBox"]
+layout_mode = 2
+text = "Attack:"
+label_settings = SubResource("LabelSettings_4olrg")
+
+[node name="ult" type="Label" parent="Controls/HBoxPC/VBox"]
+layout_mode = 2
+text = "Cast/Charge Ult:   "
+label_settings = SubResource("LabelSettings_4olrg")
+
+[node name="swap" type="Label" parent="Controls/HBoxPC/VBox"]
+layout_mode = 2
+text = "Swap characters:"
+label_settings = SubResource("LabelSettings_4olrg")
+
+[node name="interact" type="Label" parent="Controls/HBoxPC/VBox"]
+layout_mode = 2
+text = "Interact/Revive:"
+label_settings = SubResource("LabelSettings_4olrg")
+
+[node name="team" type="Label" parent="Controls/HBoxPC/VBox"]
+layout_mode = 2
+text = "Open team menu:"
+label_settings = SubResource("LabelSettings_4olrg")
+
+[node name="esc" type="Label" parent="Controls/HBoxPC/VBox"]
+layout_mode = 2
+text = "Return/Pause"
+label_settings = SubResource("LabelSettings_4olrg")
+
+[node name="Control" type="Control" parent="Controls/HBoxPC"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+
+[node name="VBox2" type="VBoxContainer" parent="Controls/HBoxPC"]
+layout_mode = 2
+
+[node name="key" type="Label" parent="Controls/HBoxPC/VBox2"]
+layout_mode = 2
+text = "Space"
+label_settings = SubResource("LabelSettings_4olrg")
+
+[node name="key8" type="Label" parent="Controls/HBoxPC/VBox2"]
+layout_mode = 2
+text = "Q"
+label_settings = SubResource("LabelSettings_4olrg")
+
+[node name="key2" type="Label" parent="Controls/HBoxPC/VBox2"]
+layout_mode = 2
+text = "Left Click"
+label_settings = SubResource("LabelSettings_4olrg")
+
+[node name="key3" type="Label" parent="Controls/HBoxPC/VBox2"]
+layout_mode = 2
+text = "Right Click"
+label_settings = SubResource("LabelSettings_4olrg")
+
+[node name="key4" type="Label" parent="Controls/HBoxPC/VBox2"]
+layout_mode = 2
+text = "1, 2, 3"
+label_settings = SubResource("LabelSettings_4olrg")
+
+[node name="key5" type="Label" parent="Controls/HBoxPC/VBox2"]
+layout_mode = 2
+text = "E"
+label_settings = SubResource("LabelSettings_4olrg")
+
+[node name="key6" type="Label" parent="Controls/HBoxPC/VBox2"]
+layout_mode = 2
+text = "B"
+label_settings = SubResource("LabelSettings_4olrg")
+
+[node name="key7" type="Label" parent="Controls/HBoxPC/VBox2"]
+layout_mode = 2
+text = "Esc"
+label_settings = SubResource("LabelSettings_4olrg")
+
+[node name="MobileControlsPicture" type="TextureRect" parent="Controls"]
+layout_mode = 2
 
 [connection signal="toggled" from="TabContainer/Video/video_settings/VBox2/fullscreen" to="TabContainer/Video/video_settings" method="_on_fullscreen_toggled"]
 [connection signal="item_selected" from="TabContainer/Video/video_settings/VBox2/vsync" to="TabContainer/Video/video_settings" method="_on_vsync_item_selected"]

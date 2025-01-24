@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://user_interface/player_hud_canvas/game_info/game_info.gd" id="1_tvrhp"]
 [ext_resource type="LabelSettings" uid="uid://frs5gj5moe0e" path="res://user_interface/player_hud_canvas/hud_label.tres" id="2_1rcyy"]
-[ext_resource type="Texture2D" uid="uid://b526hy6m06fei" path="res://resources/textures/mana_orb/mana_orb_medium.tres" id="3_5fgmp"]
+[ext_resource type="PackedScene" uid="uid://ck3k7agcwa5ps" path="res://user_interface/player_hud_canvas/ui_modules/orb_display.tscn" id="3_b8g6x"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gqc6n"]
 bg_color = Color(0.119602, 0.234308, 0.164021, 1)
@@ -32,22 +32,6 @@ layout_mode = 2
 text = "Enemies left: 10"
 label_settings = ExtResource("2_1rcyy")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="InventoryInfo/VBox"]
-layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="InventoryInfo/VBox/HBoxContainer"]
-custom_minimum_size = Vector2(20, 0)
-layout_mode = 2
-texture = ExtResource("3_5fgmp")
-expand_mode = 2
-stretch_mode = 5
-
-[node name="ManaOrbs" type="Label" parent="InventoryInfo/VBox/HBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-text = "99999"
-label_settings = ExtResource("2_1rcyy")
-
 [node name="AP" type="Label" parent="InventoryInfo/VBox"]
 unique_name_in_owner = true
 visible = false
@@ -55,9 +39,13 @@ layout_mode = 2
 text = "AP: 0"
 label_settings = ExtResource("2_1rcyy")
 
+[node name="OrbDisplay" parent="InventoryInfo/VBox" instance=ExtResource("3_b8g6x")]
+unique_name_in_owner = true
+layout_mode = 2
+
 [node name="UpgradeStatsButton" type="Button" parent="InventoryInfo/VBox"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 20)
+custom_minimum_size = Vector2(100, 20)
 layout_mode = 2
 theme_override_font_sizes/font_size = 12
 theme_override_styles/normal = SubResource("StyleBoxFlat_gqc6n")

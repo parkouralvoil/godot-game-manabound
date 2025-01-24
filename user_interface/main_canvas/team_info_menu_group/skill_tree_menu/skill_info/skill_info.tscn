@@ -78,10 +78,18 @@ label_settings = SubResource("LabelSettings_27joy")
 autowrap_mode = 3
 justification_flags = 160
 
-[node name="VBox" type="VBoxContainer" parent="MarginContainer/VBox"]
+[node name="BuyDetails" type="Control" parent="MarginContainer/VBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 35)
 layout_mode = 2
 
-[node name="lvl" type="Label" parent="MarginContainer/VBox/VBox"]
+[node name="VBox" type="VBoxContainer" parent="MarginContainer/VBox/BuyDetails"]
+layout_mode = 2
+offset_right = 140.0
+offset_bottom = 34.0
+
+[node name="lvl" type="Label" parent="MarginContainer/VBox/BuyDetails/VBox"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(140, 0)
 layout_mode = 2
 text = "Level: "
@@ -89,7 +97,8 @@ label_settings = SubResource("LabelSettings_pgtms")
 autowrap_mode = 3
 justification_flags = 160
 
-[node name="cost" type="Label" parent="MarginContainer/VBox/VBox"]
+[node name="cost" type="Label" parent="MarginContainer/VBox/BuyDetails/VBox"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(140, 0)
 layout_mode = 2
 text = "Cost: "
@@ -97,13 +106,26 @@ label_settings = SubResource("LabelSettings_pgtms")
 autowrap_mode = 3
 justification_flags = 160
 
-[node name="Buy_Button" type="Button" parent="MarginContainer/VBox/VBox"]
-layout_mode = 2
+[node name="Buy_Button" type="Button" parent="MarginContainer/VBox/BuyDetails"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -48.5
+offset_top = -15.5
+offset_right = 48.5
+offset_bottom = 15.5
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
 text = "Unlock Skill"
 
 [node name="requires_station" type="Label" parent="MarginContainer/VBox"]
+unique_name_in_owner = true
 visible = false
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
@@ -111,4 +133,4 @@ text = "Requires Upgrade Station to unlock/upgrade skill."
 label_settings = SubResource("LabelSettings_loi2t")
 autowrap_mode = 3
 
-[connection signal="pressed" from="MarginContainer/VBox/VBox/Buy_Button" to="." method="_on_buy_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBox/BuyDetails/Buy_Button" to="." method="_on_buy_button_pressed"]

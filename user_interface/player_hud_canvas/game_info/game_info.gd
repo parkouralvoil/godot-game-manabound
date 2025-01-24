@@ -24,7 +24,7 @@ Level translate it as:
 	where room is restricted to 1 to 5, so room 6 is Level 2-1
 """
 @onready var label_enemies: Label = %Enemies
-@onready var label_orbs: Label = %ManaOrbs
+@onready var orb_display: UI_OrbDisplay = %OrbDisplay
 #@onready var label_ap: Label = %AP
 
 @onready var upgrade_stats_button: Button = %UpgradeStatsButton
@@ -46,23 +46,22 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	if not dungeon_data and not inventory:
 		return
-	label_orbs.text = str(inventory.mana_orbs)
 	label_enemies.text = "Enemies left: %d" % EnemyAiManager.enemies_alive
 
 
 func _on_boss_fight_started(boss_node: RailgunBoss) -> void:
 	label_enemies.hide()
-	label_orbs.hide()
+	orb_display.hide()
 	upgrade_stats_button.hide()
 
 func _on_boss_fight_ended() -> void:
-	label_orbs.show()
+	orb_display.show()
 	try_show_inventory()
 
 func try_show_inventory() -> void:
 	if not dungeon_data.state_in_combat:
 		label_enemies.hide()
-		label_orbs.show()
+		orb_display.show()
 		var can_use_rune: bool = (inventory.rune_ATK > 0 or
 			inventory.rune_HP > 0 or
 			inventory.rune_EP > 0 or
@@ -71,7 +70,7 @@ func try_show_inventory() -> void:
 		upgrade_stats_button.visible = can_use_rune
 	else:
 		label_enemies.show()
-		label_orbs.hide()
+		orb_display.hide()
 		upgrade_stats_button.hide()
 
 

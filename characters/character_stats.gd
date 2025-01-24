@@ -10,11 +10,10 @@ class_name CharacterStats
 const base_charge_rate: float = 2 ## change this if u want stronger charge for all chars
 @export var INITIAL_CHR: float = 100
 
-# TODO
-"""
-make "public accessible functions" that basically return the values
-meanwhile the current variables here should be set to private
-"""
+## signals to connect for playerinfo
+signal stats_changed
+signal hp_changed 			## to see if char should die
+signal max_charge_changed(new_max: float)	## for energy bar in panel char
 
 ## Scalable stats, have emitters
 var max_hp: int = INITIAL_MAX_HP:
@@ -56,14 +55,14 @@ var charge: float = 0:
 var max_charge: float = INITIAL_MAX_CHARGE:
 	set(value):
 		max_charge = clampf(value, 0, 9999)
-		stats_changed.emit()
+		max_charge_changed.emit(max_charge)
 var charge_threshold: float = INITIAL_CHARGE_THRESHOLD:
 	set(value):
 		charge_threshold = clampf(value, 0, max_charge)
 		stats_changed.emit()
-var charge_tier: int = INITIAL_CHARGE_TIER: 
+var charge_tiers: int = INITIAL_CHARGE_TIER: 
 	set(tier):
-		charge_tier = clampi(tier, 1, 99)
+		charge_tiers = clampi(tier, 1, 99)
 
 @export_category("Kit Specific") 		## export variables in character
 @export var reload_time: float = 0.5 	## seconds
@@ -72,15 +71,15 @@ var charge_tier: int = INITIAL_CHARGE_TIER:
 @export var element: CombatManager.Elements = CombatManager.Elements.LIGHTNING
 @export var melee: bool = false
 
-## signals to connect for playerinfo
-signal stats_changed
-signal hp_changed 		## to see if char should die
-
 func reset_stats() -> void: ## called by character scene, make sure no one else calls this...
 	max_hp = INITIAL_MAX_HP
 	hp = max_hp
 	atk = INITIAL_ATK
 	ep = INITIAL_EP
 	chr = INITIAL_CHR
+	charge = 0
+	max_charge = INITIAL_MAX_CHARGE
+	charge_threshold = INITIAL_CHARGE_THRESHOLD
+	charge_tiers = INITIAL_CHARGE_TIER
 	max_ammo = INITIAL_MAX_AMMO
 	ammo = max_ammo

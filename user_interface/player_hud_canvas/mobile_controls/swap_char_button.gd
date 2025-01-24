@@ -28,6 +28,8 @@ func _ready() -> void:
 		_arrow.flip_h = true
 	
 	EventBus.swapped_character.connect(_on_swapped_character)
+	EventBus.returned_to_mainhub.connect(_on_returned_to_mainhub)
+	EventBus.tutorial_team_restriction_set.connect(_on_tutorial_team_restriction_set)
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventScreenTouch:
@@ -75,3 +77,12 @@ func _update_button_color() -> void:
 	else:
 		_released_color = _default_color if _can_swap_right else disabled_color
 	_base.modulate = _released_color
+
+func _on_returned_to_mainhub() -> void:
+	show()
+
+func _on_tutorial_team_restriction_set(level: int) -> void:
+	if level == 1:
+		hide()
+	else:
+		show()

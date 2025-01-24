@@ -5,7 +5,7 @@ signal local_exit_door_interacted
 
 @export var starts_open: bool ## for rest rooms/ main hub
 @export var closed_text: String = "ENEMIES STILL ALIVE!"
-@export var open_text: String = "Press E to enter"
+@export var open_text: String = "Enter next level"
 @export_category("Textures")
 ## by default it's city door
 @export var door_texture: Texture

@@ -8,8 +8,8 @@
 [ext_resource type="Texture2D" uid="uid://ug68u46641al" path="res://assets/sprite_characters/witch_spritesheet.png" id="7_uq1b8"]
 [ext_resource type="Texture2D" uid="uid://dsdu11io064xj" path="res://assets/sprite_characters/rogue_spritesheet.png" id="8_knvnu"]
 [ext_resource type="Texture2D" uid="uid://d0b5yrantkkqm" path="res://characters/rogue/visuals/rogue_arm.tres" id="9_qngvn"]
+[ext_resource type="PackedScene" uid="uid://bmqu3gpnmomg0" path="res://scenes/enemies/_enemy_dummy.tscn" id="10_6lew3"]
 [ext_resource type="PackedScene" uid="uid://cievadvfmo3xd" path="res://scenes/levels/level_world_environment.tscn" id="10_mh3py"]
-[ext_resource type="PackedScene" uid="uid://dubh6cpng3iu2" path="res://scenes/interactables/upgrade_station/upgrade_station.tscn" id="11_bbnti"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xq1pv"]
 atlas = ExtResource("7_uq1b8")
@@ -209,5 +209,5 @@ texture = ExtResource("9_qngvn")
 
 [node name="LevelWorldEnvironment" parent="." instance=ExtResource("10_mh3py")]
 
-[node name="UpgradeStation" parent="." instance=ExtResource("11_bbnti")]
-position = Vector2(116, 76)
+[node name="enemy_dummy" parent="." instance=ExtResource("10_6lew3")]
+position = Vector2(288, -10)

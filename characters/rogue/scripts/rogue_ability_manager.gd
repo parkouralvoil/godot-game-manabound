@@ -90,9 +90,8 @@ func _initialize_model() -> void:
 	
 	## char's basic atk nodes -----------------------------------------------------
 	StreeModel.left_nodes[0].name = _basic_atk_name
-	StreeModel.left_nodes[0].description = """Hold left click to perform a sword slash with %d%% base damage. 
-\nWhen slashing with ammo, the attack also launches a projectile which deals %d%% base damage.
-\nYou can attack even with 0 ammo, but ammo only regenerates when you're not attacking.""" % (
+	StreeModel.left_nodes[0].description = """Perform a sword slash with %d%% base damage. 
+\nWhen slashing with ammo, the attack also launches a projectile which deals %d%% base damage.""" % (
 		[_melee_base_percent * 100, _ranged_base_percent * 100]
 	)
 	
@@ -116,11 +115,9 @@ func _initialize_model() -> void:
 	
 	## char's ult nodes -----------------------------------------------------
 	StreeModel.right_nodes[0].name = _ult_name
-	StreeModel.right_nodes[0].description = """Ultimate Type: Energy
-\nAt full energy, press right click to unleash an explosion around the character, dealing %d%% damage. 
+	StreeModel.right_nodes[0].description = """Use ultimate to unleash an explosion around the character, dealing %d%% damage. 
 The explosion destroys projectiles and gives a 10 second flat ATK buff for all teammates.
-\nATK buff: %d%% of the Rogue's ATK stat
-\nEnergy is gained by damaging enemies. Charge rate increases the gain in energy.""" % (
+\nATK buff: %d%% of the Rogue's ATK stat""" % (
 		[_ult_base_percent * 100, _ult_base_atk_buff * 100]
 	)
 	

@@ -26,6 +26,12 @@ region = Rect2(0, 24, 24, 24)
 
 [node name="UpgradeStatsWindow" type="PanelContainer"]
 custom_minimum_size = Vector2(180, 0)
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 18.0
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
 script = ExtResource("1_q1hu2")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
@@ -33,245 +39,268 @@ layout_mode = 2
 theme_override_constants/margin_left = 5
 theme_override_constants/margin_right = 5
 
-[node name="VBox" type="VBoxContainer" parent="MarginContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBox" type="VBoxContainer" parent="MarginContainer/ScrollContainer"]
 layout_mode = 2
 
-[node name="UpgradeStats" type="Label" parent="MarginContainer/VBox"]
+[node name="UpgradeStats" type="Label" parent="MarginContainer/ScrollContainer/VBox"]
 layout_mode = 2
 text = "Raise stats"
 horizontal_alignment = 1
 
-[node name="line2" type="ColorRect" parent="MarginContainer/VBox"]
+[node name="line2" type="ColorRect" parent="MarginContainer/ScrollContainer/VBox"]
 custom_minimum_size = Vector2(0, 3)
 layout_mode = 2
 color = Color(0.556863, 0.556863, 0.556863, 1)
 
-[node name="RunesLeft" type="Label" parent="MarginContainer/VBox"]
+[node name="RunesLeft" type="Label" parent="MarginContainer/ScrollContainer/VBox"]
 layout_mode = 2
 text = "Use runes to increase stats"
 label_settings = SubResource("LabelSettings_e8cuv")
 horizontal_alignment = 1
 
-[node name="HP_rune" type="HBoxContainer" parent="MarginContainer/VBox"]
+[node name="runes" type="VBoxContainer" parent="MarginContainer/ScrollContainer/VBox"]
+layout_mode = 2
+
+[node name="HP_rune" type="HBoxContainer" parent="MarginContainer/ScrollContainer/VBox/runes"]
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 size_flags_vertical = 4
 
-[node name="name" type="Label" parent="MarginContainer/VBox/HP_rune"]
+[node name="name" type="Label" parent="MarginContainer/ScrollContainer/VBox/runes/HP_rune"]
 layout_mode = 2
 text = "HP Rune:"
 label_settings = SubResource("LabelSettings_e8cuv")
 
-[node name="Spacer" type="Control" parent="MarginContainer/VBox/HP_rune"]
+[node name="Spacer" type="Control" parent="MarginContainer/ScrollContainer/VBox/runes/HP_rune"]
 custom_minimum_size = Vector2(0, 15)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="rune" type="TextureRect" parent="MarginContainer/VBox/HP_rune"]
+[node name="rune" type="TextureRect" parent="MarginContainer/ScrollContainer/VBox/runes/HP_rune"]
 layout_mode = 2
 texture = SubResource("AtlasTexture_yqom6")
 expand_mode = 2
 stretch_mode = 5
 
-[node name="amt" type="Label" parent="MarginContainer/VBox/HP_rune"]
+[node name="HPamt" type="Label" parent="MarginContainer/ScrollContainer/VBox/runes/HP_rune"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "x0"
 label_settings = SubResource("LabelSettings_e8cuv")
 horizontal_alignment = 1
 
-[node name="HPRuneUse" type="Button" parent="MarginContainer/VBox/HP_rune"]
+[node name="HPRuneUse" type="Button" parent="MarginContainer/ScrollContainer/VBox/runes/HP_rune"]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 12
 text = "Use"
 
-[node name="ATK_rune" type="HBoxContainer" parent="MarginContainer/VBox"]
+[node name="ATK_rune" type="HBoxContainer" parent="MarginContainer/ScrollContainer/VBox/runes"]
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 size_flags_vertical = 4
 
-[node name="name" type="Label" parent="MarginContainer/VBox/ATK_rune"]
+[node name="name" type="Label" parent="MarginContainer/ScrollContainer/VBox/runes/ATK_rune"]
 layout_mode = 2
 text = "ATK Rune:"
 label_settings = SubResource("LabelSettings_e8cuv")
 
-[node name="Spacer" type="Control" parent="MarginContainer/VBox/ATK_rune"]
+[node name="Spacer" type="Control" parent="MarginContainer/ScrollContainer/VBox/runes/ATK_rune"]
 custom_minimum_size = Vector2(0, 15)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="rune" type="TextureRect" parent="MarginContainer/VBox/ATK_rune"]
+[node name="rune" type="TextureRect" parent="MarginContainer/ScrollContainer/VBox/runes/ATK_rune"]
 layout_mode = 2
 texture = SubResource("AtlasTexture_cwn31")
 expand_mode = 2
 stretch_mode = 5
 
-[node name="amt" type="Label" parent="MarginContainer/VBox/ATK_rune"]
+[node name="ATKamt" type="Label" parent="MarginContainer/ScrollContainer/VBox/runes/ATK_rune"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "x0"
 label_settings = SubResource("LabelSettings_e8cuv")
 horizontal_alignment = 1
 
-[node name="ATKRuneUse" type="Button" parent="MarginContainer/VBox/ATK_rune"]
+[node name="ATKRuneUse" type="Button" parent="MarginContainer/ScrollContainer/VBox/runes/ATK_rune"]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 12
 text = "Use"
 
-[node name="EP_rune" type="HBoxContainer" parent="MarginContainer/VBox"]
+[node name="EP_rune" type="HBoxContainer" parent="MarginContainer/ScrollContainer/VBox/runes"]
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 size_flags_vertical = 4
 
-[node name="name" type="Label" parent="MarginContainer/VBox/EP_rune"]
+[node name="name" type="Label" parent="MarginContainer/ScrollContainer/VBox/runes/EP_rune"]
 layout_mode = 2
 text = "EP Rune:"
 label_settings = SubResource("LabelSettings_e8cuv")
 
-[node name="Spacer" type="Control" parent="MarginContainer/VBox/EP_rune"]
+[node name="Spacer" type="Control" parent="MarginContainer/ScrollContainer/VBox/runes/EP_rune"]
 custom_minimum_size = Vector2(0, 15)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="rune" type="TextureRect" parent="MarginContainer/VBox/EP_rune"]
+[node name="rune" type="TextureRect" parent="MarginContainer/ScrollContainer/VBox/runes/EP_rune"]
 layout_mode = 2
 texture = SubResource("AtlasTexture_fiw3l")
 expand_mode = 2
 stretch_mode = 5
 
-[node name="amt" type="Label" parent="MarginContainer/VBox/EP_rune"]
+[node name="EPamt" type="Label" parent="MarginContainer/ScrollContainer/VBox/runes/EP_rune"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "x0"
 label_settings = SubResource("LabelSettings_e8cuv")
 horizontal_alignment = 1
 
-[node name="EPRuneUse" type="Button" parent="MarginContainer/VBox/EP_rune"]
+[node name="EPRuneUse" type="Button" parent="MarginContainer/ScrollContainer/VBox/runes/EP_rune"]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 12
 text = "Use"
 
-[node name="CHR_rune" type="HBoxContainer" parent="MarginContainer/VBox"]
+[node name="CHR_rune" type="HBoxContainer" parent="MarginContainer/ScrollContainer/VBox/runes"]
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 size_flags_vertical = 4
 
-[node name="name" type="Label" parent="MarginContainer/VBox/CHR_rune"]
+[node name="name" type="Label" parent="MarginContainer/ScrollContainer/VBox/runes/CHR_rune"]
 layout_mode = 2
 text = "CHR Rune:"
 label_settings = SubResource("LabelSettings_e8cuv")
 
-[node name="Spacer" type="Control" parent="MarginContainer/VBox/CHR_rune"]
+[node name="Spacer" type="Control" parent="MarginContainer/ScrollContainer/VBox/runes/CHR_rune"]
 custom_minimum_size = Vector2(0, 15)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="rune" type="TextureRect" parent="MarginContainer/VBox/CHR_rune"]
+[node name="rune" type="TextureRect" parent="MarginContainer/ScrollContainer/VBox/runes/CHR_rune"]
 layout_mode = 2
 texture = SubResource("AtlasTexture_gc40w")
 expand_mode = 2
 stretch_mode = 5
 
-[node name="amt" type="Label" parent="MarginContainer/VBox/CHR_rune"]
+[node name="CHRamt" type="Label" parent="MarginContainer/ScrollContainer/VBox/runes/CHR_rune"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "x0"
 label_settings = SubResource("LabelSettings_e8cuv")
 horizontal_alignment = 1
 
-[node name="CHRRuneUse" type="Button" parent="MarginContainer/VBox/CHR_rune"]
+[node name="CHRRuneUse" type="Button" parent="MarginContainer/ScrollContainer/VBox/runes/CHR_rune"]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 12
 text = "Use"
 
-[node name="line" type="ColorRect" parent="MarginContainer/VBox"]
+[node name="line" type="ColorRect" parent="MarginContainer/ScrollContainer/VBox"]
 custom_minimum_size = Vector2(0, 3)
 layout_mode = 2
 color = Color(0.556863, 0.556863, 0.556863, 1)
 
-[node name="BaseStats" type="Label" parent="MarginContainer/VBox"]
+[node name="BaseStats" type="Label" parent="MarginContainer/ScrollContainer/VBox"]
 layout_mode = 2
 text = "Current base stats:"
 label_settings = SubResource("LabelSettings_e8cuv")
 horizontal_alignment = 1
 
-[node name="HP_stat" type="HBoxContainer" parent="MarginContainer/VBox"]
+[node name="stats" type="VBoxContainer" parent="MarginContainer/ScrollContainer/VBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HP_stat" type="HBoxContainer" parent="MarginContainer/ScrollContainer/VBox/stats"]
 layout_mode = 2
 size_flags_vertical = 4
 
-[node name="name" type="Label" parent="MarginContainer/VBox/HP_stat"]
+[node name="name" type="Label" parent="MarginContainer/ScrollContainer/VBox/stats/HP_stat"]
 layout_mode = 2
 text = "HP:"
 label_settings = SubResource("LabelSettings_e8cuv")
 
-[node name="Spacer" type="Control" parent="MarginContainer/VBox/HP_stat"]
+[node name="Spacer" type="Control" parent="MarginContainer/ScrollContainer/VBox/stats/HP_stat"]
 custom_minimum_size = Vector2(0, 15)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="amt" type="Label" parent="MarginContainer/VBox/HP_stat"]
+[node name="hp_amt_stat" type="Label" parent="MarginContainer/ScrollContainer/VBox/stats/HP_stat"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "5"
 label_settings = SubResource("LabelSettings_e8cuv")
 horizontal_alignment = 1
 
-[node name="ATK_stat" type="HBoxContainer" parent="MarginContainer/VBox"]
+[node name="ATK_stat" type="HBoxContainer" parent="MarginContainer/ScrollContainer/VBox/stats"]
 layout_mode = 2
 size_flags_vertical = 4
 
-[node name="name" type="Label" parent="MarginContainer/VBox/ATK_stat"]
+[node name="name" type="Label" parent="MarginContainer/ScrollContainer/VBox/stats/ATK_stat"]
 layout_mode = 2
 text = "ATK:"
 label_settings = SubResource("LabelSettings_e8cuv")
 
-[node name="Spacer" type="Control" parent="MarginContainer/VBox/ATK_stat"]
+[node name="Spacer" type="Control" parent="MarginContainer/ScrollContainer/VBox/stats/ATK_stat"]
 custom_minimum_size = Vector2(0, 15)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="amt" type="Label" parent="MarginContainer/VBox/ATK_stat"]
+[node name="atk_amt_stat" type="Label" parent="MarginContainer/ScrollContainer/VBox/stats/ATK_stat"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "10"
 label_settings = SubResource("LabelSettings_e8cuv")
 horizontal_alignment = 1
 
-[node name="EP_stat" type="HBoxContainer" parent="MarginContainer/VBox"]
+[node name="EP_stat" type="HBoxContainer" parent="MarginContainer/ScrollContainer/VBox/stats"]
 layout_mode = 2
 size_flags_vertical = 4
 
-[node name="name" type="Label" parent="MarginContainer/VBox/EP_stat"]
+[node name="name" type="Label" parent="MarginContainer/ScrollContainer/VBox/stats/EP_stat"]
 layout_mode = 2
 text = "EP:"
 label_settings = SubResource("LabelSettings_e8cuv")
 
-[node name="Spacer" type="Control" parent="MarginContainer/VBox/EP_stat"]
+[node name="Spacer" type="Control" parent="MarginContainer/ScrollContainer/VBox/stats/EP_stat"]
 custom_minimum_size = Vector2(0, 15)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="amt" type="Label" parent="MarginContainer/VBox/EP_stat"]
+[node name="ep_amt_stat" type="Label" parent="MarginContainer/ScrollContainer/VBox/stats/EP_stat"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "0"
 label_settings = SubResource("LabelSettings_e8cuv")
 horizontal_alignment = 1
 
-[node name="CHR_stat" type="HBoxContainer" parent="MarginContainer/VBox"]
+[node name="CHR_stat" type="HBoxContainer" parent="MarginContainer/ScrollContainer/VBox/stats"]
 layout_mode = 2
 size_flags_vertical = 4
 
-[node name="name" type="Label" parent="MarginContainer/VBox/CHR_stat"]
+[node name="name" type="Label" parent="MarginContainer/ScrollContainer/VBox/stats/CHR_stat"]
 layout_mode = 2
 text = "CHR:"
 label_settings = SubResource("LabelSettings_e8cuv")
 
-[node name="Spacer" type="Control" parent="MarginContainer/VBox/CHR_stat"]
+[node name="Spacer" type="Control" parent="MarginContainer/ScrollContainer/VBox/stats/CHR_stat"]
 custom_minimum_size = Vector2(0, 15)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="amt" type="Label" parent="MarginContainer/VBox/CHR_stat"]
+[node name="chr_amt_stat" type="Label" parent="MarginContainer/ScrollContainer/VBox/stats/CHR_stat"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "35"
 label_settings = SubResource("LabelSettings_e8cuv")
 horizontal_alignment = 1
 
-[connection signal="pressed" from="MarginContainer/VBox/HP_rune/HPRuneUse" to="." method="_on_hp_rune_use_pressed"]
-[connection signal="pressed" from="MarginContainer/VBox/ATK_rune/ATKRuneUse" to="." method="_on_atk_rune_use_pressed"]
-[connection signal="pressed" from="MarginContainer/VBox/EP_rune/EPRuneUse" to="." method="_on_ep_rune_use_pressed"]
-[connection signal="pressed" from="MarginContainer/VBox/CHR_rune/CHRRuneUse" to="." method="_on_chr_rune_use_pressed"]
+[connection signal="pressed" from="MarginContainer/ScrollContainer/VBox/runes/HP_rune/HPRuneUse" to="." method="_on_hp_rune_use_pressed"]
+[connection signal="pressed" from="MarginContainer/ScrollContainer/VBox/runes/ATK_rune/ATKRuneUse" to="." method="_on_atk_rune_use_pressed"]
+[connection signal="pressed" from="MarginContainer/ScrollContainer/VBox/runes/EP_rune/EPRuneUse" to="." method="_on_ep_rune_use_pressed"]
+[connection signal="pressed" from="MarginContainer/ScrollContainer/VBox/runes/CHR_rune/CHRRuneUse" to="." method="_on_chr_rune_use_pressed"]

@@ -13,14 +13,13 @@ var current_index: int = 0
 @onready var background: ColorRect = $Background
 
 @onready var current_menu: Control = stree_menu
-@onready var label_current_menu: Label = $CurrentMenu
 
-@onready var char_1: Button = $MarginContainer/VBox/HBox1/Char1
-@onready var char_2: Button = $MarginContainer/VBox/HBox1/Char2
-@onready var char_3: Button = $MarginContainer/VBox/HBox1/Char3
+@onready var char_1: Button = %Char1
+@onready var char_2: Button = %Char2
+@onready var char_3: Button = %Char3
 @onready var char_buttons: Array[Button] = [char_1, char_2, char_3]
 
-@onready var stree_button: Button = $MarginContainer/VBox/HBox2/SkillTrees
+@onready var stree_button: Button = %SkillTreeButton
 
 
 func initialize_team_info(team_info: SelectedTeamInfo) -> void:
@@ -59,17 +58,17 @@ func _update_char_buttons(data: Array[CharacterResource]) -> void:
 
 
 func _on_char_1_pressed() -> void:
-	label_current_menu.text = current_menu.show_specific_menu(0)
+	current_menu.show_specific_menu(0)
 	current_index = 0
 
 
 func _on_char_2_pressed() -> void:
-	label_current_menu.text = current_menu.show_specific_menu(1)
+	current_menu.show_specific_menu(1)
 	current_index = 1
 
 
 func _on_char_3_pressed() -> void:
-	label_current_menu.text = current_menu.show_specific_menu(2)
+	current_menu.show_specific_menu(2)
 	current_index = 2
 
 
@@ -79,17 +78,16 @@ func _on_exit_button_pressed() -> void:
 
 func _on_skill_trees_pressed() -> void:
 	_switch_sub_menu(stree_menu)
-	label_current_menu.text = stree_menu.show_specific_menu(current_index)
-
+	stree_menu.show_specific_menu(current_index)
 
 func _on_character_stats_pressed() -> void:
 	_switch_sub_menu(char_stats_menu)
-	label_current_menu.text = char_stats_menu.show_specific_menu(current_index)
+	char_stats_menu.show_specific_menu(current_index)
 
 func _return_to_default_view() -> void:
 	char_buttons[0].button_pressed = true
 	stree_button.button_pressed = true
 	_switch_sub_menu(stree_menu)
-	label_current_menu.text = current_menu.show_specific_menu(0)
+	current_menu.show_specific_menu(0)
 	current_index = 0
 	

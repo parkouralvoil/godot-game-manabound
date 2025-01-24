@@ -160,7 +160,7 @@ color = Color(0, 0, 0, 0.945098)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(430, -156)
-zoom = Vector2(1.4, 1.4)
+zoom = Vector2(1.3, 1.3)
 metadata/_edit_lock_ = true
 
 [node name="MountainSkyTree" parent="." instance=ExtResource("1_hoq15")]

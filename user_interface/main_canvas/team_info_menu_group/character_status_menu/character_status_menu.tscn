@@ -24,7 +24,7 @@ grow_vertical = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 90
 theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 40
+theme_override_constants/margin_bottom = 10
 
 [node name="HBox" type="HBoxContainer" parent="MarginContainer"]
 layout_mode = 2

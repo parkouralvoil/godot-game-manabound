@@ -18,10 +18,10 @@ var missile_bullet_properties := BulletProperties.new()
 var missiles_enabled: bool
 
 # region: inherited functions of Character_UltComponent
-func _change_weapon_color_based_on_charge() -> void:
-	if _charge >= _charge_threshold * 2:
+func _change_weapon_color_based_on_charge(old_charge: float, threshold: float) -> void:
+	if old_charge >= threshold * 2:
 		_character.wpn.modulate = _red_weapon
-	elif _charge >= _charge_threshold * 1:
+	elif old_charge >= threshold * 1:
 		_character.wpn.modulate = _yellow_weapon
 	else:
 		_character.wpn.modulate = _default_weapon_color
@@ -51,7 +51,7 @@ func _shoot_main(bullet_scene: PackedScene, bullet_properties: BulletProperties,
 	ult_bullet.scale = Vector2(1, 1)
 
 	SoundPlayer.play_sound(sfx_grand_ballista, -4, 1.1)
-	if tier == 2 and ult_bullet.has("piercing"): ## how dafuq do i fix this
+	if tier == 2 and ult_bullet is GrandBoltBullet: ## how dafuq do i fix this
 		ult_bullet.piercing = true
 	get_tree().root.add_child(ult_bullet)
 

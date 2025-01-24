@@ -35,6 +35,10 @@ offset_bottom = 65.0
 unique_name_in_owner = true
 layout_mode = 2
 
+[node name="Control" type="Control" parent="VBox"]
+custom_minimum_size = Vector2(0, 5)
+layout_mode = 2
+
 [node name="GameInfoHud" parent="VBox" instance=ExtResource("2_p730a")]
 unique_name_in_owner = true
 layout_mode = 2
@@ -57,29 +61,36 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -20.0
-offset_top = -40.0
-offset_right = 20.0
 grow_horizontal = 2
 grow_vertical = 0
-metadata/_edit_use_anchors_ = true
 
 [node name="MovementJoystick" parent="MobileControls" instance=ExtResource("13_njctq")]
 modulate = Color(0.473976, 0.473976, 0.473976, 0.827)
-offset_left = -376.0
-offset_top = -167.0
-offset_right = -76.0
-offset_bottom = 133.0
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = -390.0
+offset_top = -224.0
+offset_right = -90.0
+offset_bottom = 76.0
+grow_vertical = 0
 scale = Vector2(0.75, 0.75)
 pressed_color = Color(0.393649, 0.665562, 0.829062, 1)
 
 [node name="ActionButtons" type="Control" parent="MobileControls"]
-layout_mode = 2
-anchors_preset = 0
-offset_left = 283.0
-offset_top = -105.0
-offset_right = 283.0
-offset_bottom = -65.0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 268.0
+offset_top = -143.0
+offset_right = 268.0
+offset_bottom = -143.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="AttackOrInteractButton" parent="MobileControls/ActionButtons" instance=ExtResource("14_haasw")]
 offset_left = 1.0
@@ -97,9 +108,14 @@ offset_bottom = 3.0
 
 [node name="SwapLeftButton" parent="MobileControls/ActionButtons/HBox" instance=ExtResource("15_2d2bv")]
 layout_mode = 2
+pressed_color = Color(0.745098, 0.745098, 0.745098, 1)
+disabled_color = Color(0.1, 0.1, 0.1, 0.5)
+swap_left = true
 
 [node name="SwapRightButton" parent="MobileControls/ActionButtons/HBox" instance=ExtResource("15_2d2bv")]
 layout_mode = 2
+pressed_color = Color(0.745098, 0.745098, 0.745098, 1)
+disabled_color = Color(0.1, 0.1, 0.1, 0.5)
 swap_left = false
 
 [node name="UltButton" parent="MobileControls/ActionButtons" instance=ExtResource("16_wu6v1")]

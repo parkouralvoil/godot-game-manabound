@@ -24,8 +24,6 @@ var _charge_tiers: int
 func _process(_delta: float) -> void:
 	if not _character.enabled or _character.is_dead:
 		return
-	
-	_change_weapon_color_based_on_charge()
 
 	if _charge >= _charge_threshold:
 		if not mobile_controls:
@@ -40,7 +38,7 @@ func _process(_delta: float) -> void:
 				var tier := _spend_charge_to_tier()
 				_mobile_activate_ult(tier)
 
-func _change_weapon_color_based_on_charge() -> void:
+func _change_weapon_color_based_on_charge(old_charge: float, threshold: float) -> void:
 	pass
 
 func _set_bullet_properties(bullet: Bullet, properties: BulletProperties) -> void:
@@ -71,7 +69,7 @@ func _spend_charge_to_tier() -> int:
 	var used_charge: float = 0
 	var tier := 0
 	for _i in _charge_tiers:
-		if used_charge < _charge:
+		if used_charge + _charge_threshold <= _charge:
 			used_charge += _charge_threshold
 			tier += 1
 		else:
@@ -82,6 +80,7 @@ func _spend_charge_to_tier() -> int:
 
 ## public function called by AM
 func update_charge(charge: float, charge_threshold: float, charge_tiers: int) -> void:
+	_change_weapon_color_based_on_charge(charge, charge_threshold)
 	_charge = charge
 	_charge_threshold = charge_threshold
 	_charge_tiers = charge_tiers

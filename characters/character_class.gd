@@ -28,7 +28,6 @@ func _ready() -> void:
 	assert(stats)
 	assert(character_window)
 	PlayerInfo.drank_hp_potion.connect(_on_drank_hp_potion)
-	stats.stats_changed.connect(_on_stats_updated)
 	stats.hp_changed.connect(_on_hp_changed)
 	
 	await get_tree().process_frame
@@ -37,26 +36,21 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
-	if enabled:
-		## since these variables change frequently
-		PlayerInfo.current_charge = stats.charge
-		PlayerInfo.displayed_ammo = stats.ammo
-		
-		if not is_dead:
-			arm_updater()
-			update_anim_sprite()
-			update_PlayerInfo_sprite()
+	if not enabled:
+		return
 
-#region Update Displayed UI
-func _on_stats_updated() -> void:
-	if enabled:
-		update_player_info()
-#endregion
+	update_player_info()
+	if not is_dead:
+		arm_updater()
+		update_anim_sprite()
+		update_PlayerInfo_sprite()
 
 
 func update_player_info() -> void: ## called by character manager
-	PlayerInfo.displayed_MAX_AMMO = stats.max_ammo
+	PlayerInfo.current_charge 		= stats.charge
 	PlayerInfo.current_charge_threshold = stats.charge_threshold
+	PlayerInfo.displayed_ammo 		= stats.ammo
+	PlayerInfo.displayed_MAX_AMMO 	= stats.max_ammo
 
 
 func _on_hp_changed() -> void:
