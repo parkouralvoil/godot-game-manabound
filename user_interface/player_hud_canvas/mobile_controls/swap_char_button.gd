@@ -6,8 +6,6 @@ var is_pressed := false
 
 # PRIVATE VARIABLES
 var _touch_index : int = -1
-var _can_swap_left: bool = true
-var _can_swap_right: bool = true
 
 @export var pressed_color := Color.GRAY
 @export var disabled_color := Color(0.1, 0.1, 0.1, 0.5)
@@ -39,9 +37,9 @@ func _input(event: InputEvent) -> void:
 				_base.modulate = pressed_color
 				if not is_pressed:
 					is_pressed = true
-					if swap_left and _can_swap_left:
+					if swap_left:
 						PlayerInput.character_switch_left.emit()
-					elif not swap_left and _can_swap_right:
+					elif not swap_left:
 						PlayerInput.character_switch_right.emit()
 				get_viewport().set_input_as_handled()
 		elif event.index == _touch_index:
@@ -49,8 +47,6 @@ func _input(event: InputEvent) -> void:
 			get_viewport().set_input_as_handled()
 
 func _on_swapped_character(current_index: int, max_index: int) -> void:
-	_can_swap_left = (current_index != 0)
-	_can_swap_right = (current_index != max_index)
 	if not is_pressed:
 		_update_button_color()
 
@@ -73,9 +69,9 @@ func _reset() -> void:
 
 func _update_button_color() -> void:
 	if swap_left:
-		_released_color = _default_color if _can_swap_left else disabled_color
+		_released_color = _default_color
 	else:
-		_released_color = _default_color if _can_swap_right else disabled_color
+		_released_color = _default_color
 	_base.modulate = _released_color
 
 func _on_returned_to_mainhub() -> void:

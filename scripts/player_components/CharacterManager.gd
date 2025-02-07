@@ -58,11 +58,14 @@ func _process(_delta: float) -> void:
 	_can_change_char = t_change_char.is_stopped() and not PlayerInput.pressing_ult
 
 
-func _input_change_char(num: int) -> void:
-	if (_stored_chars[num] != null 
-			and current_char != _stored_chars[num]
-			and not _stored_chars[num].is_dead):
-		change_character(num)
+func _try_change_char(num: int) -> bool:
+	var zero_based_index := num - 1
+	if (_stored_chars[zero_based_index] != null 
+			and current_char != _stored_chars[zero_based_index]
+			and not _stored_chars[zero_based_index].is_dead):
+		change_character(zero_based_index)
+		return true
+	return false
 
 func change_character(num: int) -> void:
 	if current_char:
@@ -138,7 +141,7 @@ func _check_if_char_is_dead(index: int) -> bool:
 	return true
 
 func _update_tutorial_restriction(tutorial_level: int) -> void:
-	_input_change_char(0) ## always return to knight
+	_try_change_char(0) ## always return to knight
 	_tutorial_restriction = tutorial_level
 	if _tutorial_restriction <= 2:
 		_tutorial_immortality = true
@@ -146,32 +149,56 @@ func _update_tutorial_restriction(tutorial_level: int) -> void:
 		_tutorial_immortality = false
 	#print_debug("_tutorial_restriction: ", _tutorial_restriction)
 
-func _on_character_index_switch(i: int) -> void:
+func _on_character_index_switch(new_index: int, old_index: int) -> void:
 	if not _can_change_char:
 		return
-
-	match i:
+	## indexing here is one based
+	match new_index:
 		1:
-			_input_change_char(0)
+			if _try_change_char(1): ## switch to char 3
+				return
+			else:	## switch to whoever is available
+				for i in range(2, 3+1):
+					if i == old_index:
+						continue
+					if _try_change_char(i):
+						return
 		2:
 			if _tutorial_restriction >= 2:
-				_input_change_char(1)
+				if _try_change_char(2): ## switch to char 3
+					return
+				else:	## switch to whoever is available
+					for i in range(1, 3+1):
+						if i == old_index:
+							continue
+						if _try_change_char(i):
+							return
 		3:
 			if _tutorial_restriction >= 3:
-				_input_change_char(2)
+				if _try_change_char(3): ## switch to char 3
+					return
+				else:	## switch to whoever is available
+					for i in range(1, 2+1):
+						if i == old_index:
+							continue
+						if _try_change_char(i):
+							return
+		4:
+			_on_character_index_switch(1, old_index) ## go back to 1st char
+		0:
+			_on_character_index_switch(3, old_index) ## go to 3rd char
 		_:
 			pass
 
+
+
 func _on_character_switch_left() -> void:
 	var one_based_index: int = _current_index + 1
-	if _check_if_char_is_dead(_current_index - 1):
-		_on_character_index_switch(one_based_index - 2)
-	else:
-		_on_character_index_switch(one_based_index - 1)
+	_on_character_index_switch(one_based_index - 1, one_based_index)
 
 func _on_character_switch_right() -> void:
 	var one_based_index: int = _current_index + 1
-	if _check_if_char_is_dead(_current_index + 1):
-		_on_character_index_switch(one_based_index + 2)
-	else:
-		_on_character_index_switch(one_based_index + 1)
+	# if _check_if_char_is_dead(_current_index + 1):
+	# 	_on_character_index_switch(one_based_index + 2)
+	# else:
+	_on_character_index_switch(one_based_index + 1, one_based_index)

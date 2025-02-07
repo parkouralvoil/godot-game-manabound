@@ -228,6 +228,7 @@ autostart = true
 
 [node name="DirectionIndicator" type="Sprite2D" parent="." node_paths=PackedStringArray("p")]
 modulate = Color(0.9, 0.9, 0.9, 1)
+show_behind_parent = true
 texture = ExtResource("10_pcbep")
 script = ExtResource("11_vqh4r")
 p = NodePath("..")

@@ -12,9 +12,6 @@ offset_right = 30.0
 offset_bottom = 30.0
 size_flags_horizontal = 0
 script = ExtResource("1_2ncpg")
-pressed_color = null
-disabled_color = null
-swap_left = null
 
 [node name="Base" type="TextureRect" parent="."]
 self_modulate = Color(0.309804, 0.309804, 0.309804, 0.788235)
