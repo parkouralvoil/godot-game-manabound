@@ -1,130 +1,133 @@
-[gd_scene load_steps=9 format=3 uid="uid://cdc6lfjuxxbia"]
+[gd_scene load_steps=12 format=3 uid="uid://cdc6lfjuxxbia"]
 
 [ext_resource type="Script" path="res://user_interface/player_hud_canvas/team_UI_stuff/panel_char.gd" id="1_n0l6s"]
-[ext_resource type="Texture2D" uid="uid://dflit2x6som86" path="res://assets/sprite_UI/ui_ninepatch/panel_background.png" id="2_nfw12"]
 [ext_resource type="LabelSettings" uid="uid://cc4naicdvluqg" path="res://user_interface/player_hud_canvas/team_hud_label.tres" id="3_ma53d"]
-[ext_resource type="Texture2D" uid="uid://cx1kg2yu31m5e" path="res://assets/sprite_UI/ui_ninepatch/panel_background_selected.png" id="3_ta7e6"]
-[ext_resource type="Texture2D" uid="uid://bxgj1wqx4mml5" path="res://assets/sprite_UI/progress_bars/energy_bar_empty.png" id="4_31k88"]
-[ext_resource type="Texture2D" uid="uid://dfk82yyu3kqxe" path="res://characters/rogue/visuals/rogue_portrait.tres" id="4_c4ka8"]
-[ext_resource type="Texture2D" uid="uid://c7n26at3nghb5" path="res://assets/sprite_UI/progress_bars/energy_bar_full.png" id="5_o10f3"]
+[ext_resource type="Texture2D" uid="uid://wdp68e4s4u1l" path="res://assets/sprite_UI/panel_char_ui/char_border.png" id="4_0qd12"]
+[ext_resource type="Texture2D" uid="uid://coei1f48oicgc" path="res://assets/sprite_UI/panel_char_ui/char_energy_ready.png" id="4_6xqoq"]
+[ext_resource type="Texture2D" uid="uid://3fl3diuothg" path="res://assets/sprite_UI/panel_char_ui/char_energy_full.png" id="4_7b4ee"]
+[ext_resource type="Texture2D" uid="uid://dhs0tcgsbwnqp" path="res://characters/witch/visuals/witch_portrait.tres" id="5_sf4qm"]
+[ext_resource type="Texture2D" uid="uid://bvtsyfobxb4sc" path="res://assets/sprite_UI/panel_char_ui/char_health_empty.png" id="7_pvhsx"]
+[ext_resource type="Texture2D" uid="uid://bprgjfptfm4y8" path="res://assets/sprite_UI/panel_char_ui/char_health.png" id="8_slb13"]
+[ext_resource type="Texture2D" uid="uid://dl8on2oe2jghj" path="res://assets/sprite_UI/panel_char_ui/char_ammo_empty.png" id="10_b1k6e"]
+[ext_resource type="Texture2D" uid="uid://dfhryvnx8h467" path="res://assets/sprite_UI/panel_char_ui/char_ammo.png" id="11_b7dus"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_c3ulc"]
 font_size = 12
-font_color = Color(0.85358, 0.67806, 0.225574, 1)
 
 [node name="Panel_Char1" type="Control"]
-custom_minimum_size = Vector2(140, 62)
+custom_minimum_size = Vector2(110, 100)
 layout_mode = 3
 anchors_preset = 0
-offset_right = 140.0
+offset_right = 80.0
 offset_bottom = 62.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
 mouse_filter = 2
 script = ExtResource("1_n0l6s")
 
-[node name="background" type="NinePatchRect" parent="."]
-self_modulate = Color(1, 1, 1, 0.492)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_right = 5.0
-offset_bottom = 8.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("2_nfw12")
-patch_margin_left = 20
-patch_margin_top = 20
-patch_margin_right = 20
-patch_margin_bottom = 20
+[node name="Control" type="Control" parent="."]
+anchors_preset = 0
+offset_left = 24.0
+offset_top = 12.0
+offset_right = 64.0
+offset_bottom = 52.0
 
-[node name="outline" type="NinePatchRect" parent="."]
-self_modulate = Color(1, 1, 1, 0.762)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_right = 5.0
-offset_bottom = 8.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("3_ta7e6")
-patch_margin_left = 20
-patch_margin_top = 20
-patch_margin_right = 20
-patch_margin_bottom = 20
+[node name="Outline" type="TextureRect" parent="Control"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = -6.0
+offset_top = -11.0
+offset_right = 74.0
+offset_bottom = 69.0
+texture = ExtResource("4_0qd12")
+stretch_mode = 6
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="."]
+[node name="EnergyReady" type="TextureRect" parent="Control/Outline"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_right = 80.0
+offset_bottom = 80.0
+texture = ExtResource("4_6xqoq")
+
+[node name="Energy" type="TextureProgressBar" parent="Control/Outline"]
+unique_name_in_owner = true
+modulate = Color(0.198683, 0.323109, 0.703652, 1)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -67.0
+offset_left = -28.0
 offset_top = -25.0
-offset_right = 67.0
-offset_bottom = 31.0
+offset_right = 25.0
+offset_bottom = 28.0
 grow_horizontal = 2
 grow_vertical = 2
-size_flags_horizontal = 0
-size_flags_vertical = 4
+value = 100.0
+fill_mode = 3
+nine_patch_stretch = true
+texture_progress = ExtResource("4_7b4ee")
 
-[node name="Control" type="Control" parent="HBoxContainer2"]
-custom_minimum_size = Vector2(50, 0)
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 4
-
-[node name="CharPortrait" type="TextureRect" parent="HBoxContainer2/Control"]
+[node name="CharPortrait" type="TextureRect" parent="Control"]
 unique_name_in_owner = true
 layout_mode = 1
-offset_left = 4.0
-offset_top = -26.0
-offset_right = 52.0
-offset_bottom = 22.0
+offset_left = 6.0
+offset_top = 10.0
+offset_right = 58.0
+offset_bottom = 52.0
 size_flags_horizontal = 8
 size_flags_vertical = 0
-texture = ExtResource("4_c4ka8")
+texture = ExtResource("5_sf4qm")
 stretch_mode = 5
 
-[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer2"]
-custom_minimum_size = Vector2(50, 0)
-layout_mode = 2
-size_flags_vertical = 0
-
-[node name="VBoxContainer_info" type="VBoxContainer" parent="HBoxContainer2/HBoxContainer"]
-custom_minimum_size = Vector2(74, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-mouse_filter = 2
-theme_override_constants/separation = 1
-
-[node name="health" type="Label" parent="HBoxContainer2/HBoxContainer/VBoxContainer_info"]
+[node name="HealthBar" type="TextureProgressBar" parent="Control"]
 unique_name_in_owner = true
-modulate = Color(0.250943, 0.955017, 0.408946, 1)
+custom_minimum_size = Vector2(36, 36)
 layout_mode = 2
+offset_left = -24.0
+offset_top = 51.0
+offset_right = 12.0
+offset_bottom = 87.0
+value = 100.0
+fill_mode = 5
+nine_patch_stretch = true
+texture_under = ExtResource("7_pvhsx")
+texture_progress = ExtResource("8_slb13")
+
+[node name="health" type="Label" parent="Control/HealthBar"]
+unique_name_in_owner = true
+layout_mode = 2
+offset_left = 14.0
+offset_top = 9.0
+offset_right = 22.0
+offset_bottom = 29.0
 theme_override_font_sizes/font_size = 10
-text = "HP: 50/50"
+text = "5"
 label_settings = ExtResource("3_ma53d")
 
-[node name="ammo" type="Label" parent="HBoxContainer2/HBoxContainer/VBoxContainer_info"]
+[node name="AmmoBar" type="TextureProgressBar" parent="Control"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(36, 36)
 layout_mode = 2
-theme_override_font_sizes/font_size = 10
-text = "Ammo: 9/9 "
-label_settings = SubResource("LabelSettings_c3ulc")
-
-[node name="Energy" type="TextureProgressBar" parent="HBoxContainer2/HBoxContainer/VBoxContainer_info"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 18)
-layout_mode = 2
-size_flags_horizontal = 0
+offset_left = 50.0
+offset_top = 51.0
+offset_right = 86.0
+offset_bottom = 87.0
+value = 100.0
+fill_mode = 5
 nine_patch_stretch = true
-stretch_margin_left = 14
-stretch_margin_top = 6
-stretch_margin_right = 6
-stretch_margin_bottom = 14
-texture_under = ExtResource("4_31k88")
-texture_progress = ExtResource("5_o10f3")
+texture_under = ExtResource("10_b1k6e")
+texture_progress = ExtResource("11_b7dus")
+tint_progress = Color(0.741025, 0.459619, 0.105064, 1)
+
+[node name="ammo" type="Label" parent="Control/AmmoBar"]
+unique_name_in_owner = true
+layout_mode = 2
+offset_left = 15.0
+offset_top = 9.0
+offset_right = 22.0
+offset_bottom = 26.0
+theme_override_font_sizes/font_size = 10
+text = "9"
+label_settings = SubResource("LabelSettings_c3ulc")

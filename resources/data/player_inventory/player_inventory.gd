@@ -32,6 +32,11 @@ var rune_CHR: int = 0:
 	set(val):
 		rune_CHR = val
 		number_of_runes_changed.emit()
+	
+var stat_runes: int = 0:
+	set(val):
+		stat_runes = val
+		number_of_runes_changed.emit()
 
 var HP_increase: int = 1
 var ATK_increase: int = 1
@@ -39,7 +44,7 @@ var EP_increase: int = 3
 var CHR_increase: int = 10
 
 ## TEMP: gonna have inventory handle upgrading stats for now
-## ideally, it'd be responsibility of UpgradeModel, but im still thinkin
+## ideally, it'd be responsibility of an UpgradeModel, but im still thinkin
 
 func reset_inventory() -> void:
 	mana_orbs = 0
@@ -75,3 +80,11 @@ func use_rune_CHR(stats: CharacterStats) -> void:
 	if rune_CHR > 0:
 		stats.chr += CHR_increase
 		rune_CHR -= 1
+
+func use_stat_rune(stats: CharacterStats, chosen_stat: String) -> void:
+	if stat_runes <= 0:
+		return
+	stat_runes -= 1
+	match chosen_stat:
+		_:
+			stats.atk += ATK_increase

@@ -36,4 +36,5 @@ custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
 
 [node name="UpgradeInfoWindow" parent="HBox" instance=ExtResource("4_bs28d")]
+visible = false
 layout_mode = 2

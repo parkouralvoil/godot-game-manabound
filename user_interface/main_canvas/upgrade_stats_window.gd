@@ -14,13 +14,13 @@ var stats: CharacterStats:
 			stats.stats_changed.connect(_update_stats)
 
 ## rune amts
-@onready var label_hp_rune: Label = %HPamt
+#@onready var label_hp_rune: Label = %HPamt
 @onready var label_atk_rune: Label = %ATKamt
 @onready var label_ep_rune: Label = %EPamt
 @onready var label_chr_rune: Label = %CHRamt
 
 ## buttons
-@onready var hp_rune_use: Button = %HPRuneUse
+#@onready var hp_rune_use: Button = %HPRuneUse
 @onready var atk_rune_use: Button = %ATKRuneUse
 @onready var ep_rune_use: Button = %EPRuneUse
 @onready var chr_rune_use: Button = %CHRRuneUse
@@ -42,14 +42,14 @@ func _update_stats() -> void:
 func _update_rune_number() -> void:
 	var s: String = "x%d"
 	_try_disable_use_buttons()
-	label_hp_rune.text = s % inventory.rune_HP
+	#label_hp_rune.text = s % inventory.rune_HP
 	label_atk_rune.text = s % inventory.rune_ATK
 	label_ep_rune.text = s % inventory.rune_EP
 	label_chr_rune.text = s % inventory.rune_CHR
 
 
 func _try_disable_use_buttons() -> void:
-	hp_rune_use.disabled = (inventory.rune_HP <= 0)
+	#hp_rune_use.disabled = (inventory.rune_HP <= 0)
 	atk_rune_use.disabled = (inventory.rune_ATK <= 0)
 	ep_rune_use.disabled = (inventory.rune_EP <= 0)
 	chr_rune_use.disabled = (inventory.rune_CHR <= 0)

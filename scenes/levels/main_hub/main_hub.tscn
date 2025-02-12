@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=4 uid="uid://bdn5claftvmgn"]
+[gd_scene load_steps=22 format=4 uid="uid://bdn5claftvmgn"]
 
 [ext_resource type="Script" path="res://scenes/levels/main_hub/main_hub.gd" id="1_no8mj"]
 [ext_resource type="PackedScene" uid="uid://baksvorn8xwwc" path="res://scenes/levels/parallax_backgrounds/mountain_sky_tree.tscn" id="2_ggshg"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://d0b5yrantkkqm" path="res://characters/rogue/visuals/rogue_arm.tres" id="9_qngvn"]
 [ext_resource type="PackedScene" uid="uid://bmqu3gpnmomg0" path="res://scenes/enemies/_enemy_dummy.tscn" id="10_6lew3"]
 [ext_resource type="PackedScene" uid="uid://cievadvfmo3xd" path="res://scenes/levels/level_world_environment.tscn" id="10_mh3py"]
+[ext_resource type="PackedScene" uid="uid://dubh6cpng3iu2" path="res://scenes/interactables/upgrade_station/upgrade_station.tscn" id="11_52jdd"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xq1pv"]
 atlas = ExtResource("7_uq1b8")
@@ -211,3 +212,6 @@ texture = ExtResource("9_qngvn")
 
 [node name="enemy_dummy" parent="." instance=ExtResource("10_6lew3")]
 position = Vector2(288, -10)
+
+[node name="UpgradeStation" parent="." instance=ExtResource("11_52jdd")]
+position = Vector2(286, 76)

@@ -1,0 +1,205 @@
+[gd_scene load_steps=10 format=3 uid="uid://c7h6wwsvf3o8"]
+
+[ext_resource type="Texture2D" uid="uid://pe08pshvkut3" path="res://assets/sprite_characters/character_tree_portrait.png" id="1_fbrdw"]
+[ext_resource type="FontFile" uid="uid://bbkhj4uknd5uk" path="res://assets/fonts/PFDinTextPro-Light.ttf" id="2_44aqw"]
+[ext_resource type="Texture2D" uid="uid://bb3lpehyybypd" path="res://resources/textures/runes/runeATK.tres" id="3_6uuqc"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b3gpi"]
+bg_color = Color(0.0999585, 0.0990454, 0.106402, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_h2nwo"]
+font = ExtResource("2_44aqw")
+font_size = 20
+
+[sub_resource type="LabelSettings" id="LabelSettings_u14qa"]
+font = ExtResource("2_44aqw")
+font_size = 15
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uevta"]
+atlas = ExtResource("1_fbrdw")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="LabelSettings" id="LabelSettings_27swj"]
+font = ExtResource("2_44aqw")
+font_size = 18
+
+[sub_resource type="LabelSettings" id="LabelSettings_7vngo"]
+font = ExtResource("2_44aqw")
+font_size = 15
+
+[node name="UpgradeStatsNew" type="PanelContainer"]
+custom_minimum_size = Vector2(140, 0)
+offset_left = 51.0
+offset_top = 29.0
+offset_right = 275.0
+offset_bottom = 264.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_b3gpi")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxMain" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="HBox" type="HBoxContainer" parent="MarginContainer/VBoxMain"]
+layout_mode = 2
+
+[node name="VBox" type="VBoxContainer" parent="MarginContainer/VBoxMain/HBox"]
+layout_mode = 2
+alignment = 1
+
+[node name="char_name" type="Label" parent="MarginContainer/VBoxMain/HBox/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Knight"
+label_settings = SubResource("LabelSettings_h2nwo")
+
+[node name="element" type="Label" parent="MarginContainer/VBoxMain/HBox/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Lightning"
+label_settings = SubResource("LabelSettings_u14qa")
+
+[node name="spacer" type="Control" parent="MarginContainer/VBoxMain/HBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SpritePicture" type="TextureRect" parent="MarginContainer/VBoxMain/HBox"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = SubResource("AtlasTexture_uevta")
+stretch_mode = 5
+
+[node name="line" type="ColorRect" parent="MarginContainer/VBoxMain"]
+custom_minimum_size = Vector2(0, 7)
+layout_mode = 2
+color = Color(0.597272, 0.623659, 0.668743, 1)
+
+[node name="stats" type="Label" parent="MarginContainer/VBoxMain"]
+layout_mode = 2
+text = "Upgrade Stat Levels"
+label_settings = SubResource("LabelSettings_27swj")
+horizontal_alignment = 1
+
+[node name="HBox2" type="HBoxContainer" parent="MarginContainer/VBoxMain"]
+layout_mode = 2
+
+[node name="atk_stat" type="Label" parent="MarginContainer/VBoxMain/HBox2"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+text = "ATK:"
+label_settings = SubResource("LabelSettings_27swj")
+vertical_alignment = 1
+
+[node name="atk_num" type="Label" parent="MarginContainer/VBoxMain/HBox2"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "1231"
+label_settings = SubResource("LabelSettings_27swj")
+vertical_alignment = 1
+
+[node name="spacer" type="Control" parent="MarginContainer/VBoxMain/HBox2"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="atk_lvl" type="Label" parent="MarginContainer/VBoxMain/HBox2"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Lv. 5"
+label_settings = SubResource("LabelSettings_27swj")
+vertical_alignment = 1
+
+[node name="atk_upgrade" type="Button" parent="MarginContainer/VBoxMain/HBox2"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "^"
+icon_alignment = 1
+
+[node name="atk_cost" type="Label" parent="MarginContainer/VBoxMain/HBox2"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 8
+text = "x4"
+label_settings = SubResource("LabelSettings_7vngo")
+vertical_alignment = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxMain/HBox2"]
+layout_mode = 2
+texture = ExtResource("3_6uuqc")
+stretch_mode = 3
+
+[node name="HBox4" type="HBoxContainer" parent="MarginContainer/VBoxMain"]
+layout_mode = 2
+
+[node name="em_stat" type="Label" parent="MarginContainer/VBoxMain/HBox4"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+text = "EM:"
+label_settings = SubResource("LabelSettings_27swj")
+vertical_alignment = 1
+
+[node name="em_num" type="Label" parent="MarginContainer/VBoxMain/HBox4"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "1231"
+label_settings = SubResource("LabelSettings_27swj")
+vertical_alignment = 1
+
+[node name="spacer" type="Control" parent="MarginContainer/VBoxMain/HBox4"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="em_lvl" type="Label" parent="MarginContainer/VBoxMain/HBox4"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Lv. 3"
+label_settings = SubResource("LabelSettings_27swj")
+vertical_alignment = 1
+
+[node name="em_upgrade" type="Button" parent="MarginContainer/VBoxMain/HBox4"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "^"
+icon_alignment = 1
+
+[node name="HBox5" type="HBoxContainer" parent="MarginContainer/VBoxMain"]
+layout_mode = 2
+
+[node name="chr_stat" type="Label" parent="MarginContainer/VBoxMain/HBox5"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+text = "CHR:"
+label_settings = SubResource("LabelSettings_27swj")
+vertical_alignment = 1
+
+[node name="chr_num" type="Label" parent="MarginContainer/VBoxMain/HBox5"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "1231"
+label_settings = SubResource("LabelSettings_27swj")
+vertical_alignment = 1
+
+[node name="spacer" type="Control" parent="MarginContainer/VBoxMain/HBox5"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="chr_lvl" type="Label" parent="MarginContainer/VBoxMain/HBox5"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Lv. 1"
+label_settings = SubResource("LabelSettings_27swj")
+vertical_alignment = 1
+
+[node name="chr_upgrade" type="Button" parent="MarginContainer/VBoxMain/HBox5"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "^"
+icon_alignment = 1

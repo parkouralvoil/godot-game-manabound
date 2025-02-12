@@ -5,13 +5,11 @@
 [ext_resource type="PackedScene" uid="uid://cdc6lfjuxxbia" path="res://user_interface/player_hud_canvas/team_UI_stuff/panel_char..tscn" id="3_fcocw"]
 
 [node name="TeamHud" type="HBoxContainer"]
-offset_left = -3.0
-offset_right = 605.0
-offset_bottom = 65.0
+offset_right = 608.0
+offset_bottom = 100.0
 size_flags_horizontal = 0
 size_flags_vertical = 8
 mouse_filter = 2
-theme_override_constants/separation = 5
 script = ExtResource("1_2n4q7")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]

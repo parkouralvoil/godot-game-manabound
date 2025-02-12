@@ -66,6 +66,7 @@ horizontal_alignment = 1
 layout_mode = 2
 
 [node name="HP_rune" type="HBoxContainer" parent="MarginContainer/ScrollContainer/VBox/runes"]
+visible = false
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 size_flags_vertical = 4
@@ -217,6 +218,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="HP_stat" type="HBoxContainer" parent="MarginContainer/ScrollContainer/VBox/stats"]
+visible = false
 layout_mode = 2
 size_flags_vertical = 4
 
